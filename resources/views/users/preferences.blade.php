@@ -1,5 +1,5 @@
 <div class="preferences-panel">
-    <form class="auth-form" role="form" method="POST" action="{{ url('/details') }}">
+    <form class="auth-form" role="form" method="POST" action="{{ action('UserController@addDetails') }}">
         {!! csrf_field() !!}
 
         <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">

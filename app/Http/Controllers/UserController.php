@@ -26,32 +26,40 @@ class UserController extends Controller
 	    return view('users.profile', ['user' => $user, 'supported_ideas' => $supported_ideas, 'created_ideas' => $created_ideas]);
 	}
 
-    public function details(Request $request)
+    public function showDetails(Request $request)
 	{
 		$user = Auth::user();
 
-		if ($request->isMethod('get')) {
+		return view('users.details', ['user' => $user]);
+	}
 
-		    return view('users.details', ['user' => $user]);
+	public function addDetails(Request $request)
+	{
+		$user = Auth::user();
+		
+		$validation = ['phone' => 'max:255', 'bio' => 'max:2000'];
 
-		} else if ($request->isMethod('post')) {
-
-		    $this->validate($request, [
-		    	'name' => 'required|max:255',
-	            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-		        'phone' => 'max:255',
-		        'bio' => 'required|max:2000'
-		    ]);
-
+		if (isset($request->name)) {
+			$validation['name'] = 'required|max:255';
 			$user->name = $request->name;
-			$user->email = $request->email;
-			$user->phone = $request->phone;
-			$user->bio = $request->bio;
-			$user->avatar = $request->photo;
-
-			$user->save();
-
-		    return redirect()->action('UserController@profile', $user->id);
 		}
+
+		if (isset($request->email)) {
+			$validation['email'] = 'required|email|max:255|unique:users,email,' . $user->id;
+			$user->email = $request->email;
+		}
+
+		if (isset($request->photo)) {
+			$user->avatar = $request->photo;
+		}
+
+		$this->validate($request, $validation);
+
+		$user->phone = $request->phone;
+		$user->bio = $request->bio;
+
+		$user->save();
+
+	    return redirect()->action('UserController@profile', $user->id);
 	}
 }

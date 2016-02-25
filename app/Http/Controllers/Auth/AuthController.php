@@ -86,7 +86,7 @@ class AuthController extends Controller
      */
     public function getRedirectPath()
     {
-        return ((!strlen(Auth::user()->phone)) || (!strlen(Auth::user()->bio))) ? action('UserController@details') : action('UserController@profile', Auth::user()->id);
+        return ((!strlen(Auth::user()->phone)) || (!strlen(Auth::user()->bio))) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
     }
 
     protected function redirectPath()
