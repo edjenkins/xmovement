@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-    <link href="/css/imports.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
