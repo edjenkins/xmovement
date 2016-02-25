@@ -6,7 +6,6 @@
   },
   "dependencies": {
     "bootstrap-styl": "^5.0.5",
-    "laravel-elixir": "^4.0.0",
-    "masonry-layout": "^4.0.0"
+    "laravel-elixir": "^4.0.0"
   }
 }

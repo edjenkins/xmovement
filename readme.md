@@ -12,8 +12,6 @@ Software included in the App Movement distribution
 ----------------
 Laravel (MIT) by Laravel : [https://github.com/laravel/laravel](https://github.com/laravel/laravel)
 
-Masonry (MIT) by David DeSandro : [https://github.com/desandro/masonry](https://github.com/desandro/masonry)
-
 jQuery File Upload (MIT) by @blueimp : [https://github.com/blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
 
 

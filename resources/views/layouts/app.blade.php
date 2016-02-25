@@ -33,14 +33,5 @@
     <script src='/js/file_uploader/jquery.fileupload.js'></script>
 
     <script src="/js/app.js"></script>
-    <script src="/js/masonry.js"></script>
-
-
-    <script type="text/javascript">
-
-        var $container = $('.panel-body');
-        $container.masonry();
-
-    </script>
 </body>
 </html>
