@@ -38,7 +38,9 @@
         <!-- Photo errors -->
 
         <!-- The container for the uploaded files -->
-        <div id="files" class="files"></div>
+        <div id="files" class="files">
+            <img src="{{ old('photo') }}" />
+        </div>
 
     </div>
 </div>

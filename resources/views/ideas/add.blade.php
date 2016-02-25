@@ -8,11 +8,13 @@
         <h2 class="main-title" id="page-title">Name your idea</h2>
 
     </div>
+    
+
 
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form class="add-idea-form" role="form" method="POST" action="{{ url('/idea') }}">
+                <form class="add-idea-form{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ url('/idea') }}">
                     {!! csrf_field() !!}
 
                     <div class="form-page visible" id="form-page-1">
@@ -37,11 +39,13 @@
                                 <div class="btn btn-primary step-button" data-step="2">Next Step</div>
                             </div>
 
+                            <hr />
+
                         </div>
 
                     </div>
 
-                    <div class="form-page" id="form-page-2">
+                    <div class="form-page <?php if (!$errors->isEmpty()) { echo 'visible'; } ?>" id="form-page-2">
 
                         <div class="form-page-content">
 
@@ -65,15 +69,29 @@
                             
                             <a class="step-button muted-link" data-step="1">Previous Step</a>
 
+                            <hr />
+
                         </div>
 
                     </div>
 
-                    <div class="form-page" id="form-page-3">
+                    <div class="form-page <?php if (!$errors->isEmpty()) { echo 'visible'; } ?>" id="form-page-3">
 
                         <div class="form-page-content">
 
-                            @include('fileupload', ['cc' => true, 'value' => old('photo')])
+                            <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
+                            
+                                <label>Bring some life to your idea by adding a photo</label>
+
+                                @include('fileupload', ['cc' => true, 'value' => old('photo')])
+
+                                @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                @endif
+
+                            </div>
 
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Create Idea</button>
