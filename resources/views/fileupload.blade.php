@@ -4,7 +4,7 @@
         <input name="photo" type="hidden" id="uploaded-photo" value="{{ $value }}">
     
         <!-- The fileinput-button span is used to style the file input field as button -->
-        <span class="btn btn-success fileinput-button" id="fileinput-button">
+        <span class="btn btn-default fileinput-button" id="fileinput-button">
             <span id="upload-button-text">Choose Photo</span>
             <!-- The file input field used as target for the file upload widget -->
             <input id="fileupload" type="file" name="files[]">
@@ -16,9 +16,13 @@
 
             <span class="text-muted" style="margin: 0 10px">or</span>
 
-            <input type="text" name="cc-search-field" id="cc-search-field" placeholder="Search the web for a photo.." />
+            <div id"cc-search-field-wrapper" style="border:#CCC 2px solid; display:inline-block; position:relative;">
 
-            <div class="btn" id="cc-search-button"><i class="fa fa-search"></i></div>
+                <input type="text" name="cc-search-field" id="cc-search-field" placeholder="Search the web for a photo.." />
+
+                <div class="btn" id="cc-search-button"><i class="fa fa-search"></i></div>
+
+            </div>
 
             <ul id="cc-search-results"></ul>
 

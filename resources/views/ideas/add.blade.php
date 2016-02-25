@@ -62,6 +62,8 @@
                             <div class="form-group">
                                 <div class="btn btn-primary step-button" data-step="3">Next Step</div>
                             </div>
+                            
+                            <a class="step-button muted-link" data-step="1">Previous Step</a>
 
                         </div>
 
@@ -76,6 +78,9 @@
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Create Idea</button>
                             </div>
+                            
+                            <a class="step-button muted-link" data-step="2">Previous Step</a>
+
                         </div>
 
                     </div>

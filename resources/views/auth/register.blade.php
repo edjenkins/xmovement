@@ -77,7 +77,7 @@
                                 Register
                             </button>
                             <br />
-                            <a class="btn btn-link login-link" href="{{ url('/login') }}">Already have an account?</a>
+                            <a class="btn btn-link muted-link" href="{{ url('/login') }}">Already have an account?</a>
                         </div>
 
                         <div class="text-linethru">

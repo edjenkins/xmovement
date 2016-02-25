@@ -49,7 +49,7 @@
                             Update
                         </button>
                         <br />
-                        <a class="btn btn-link login-link" href="{{ url('/profile') }}">Skip for now</a>
+                        <a class="btn btn-link muted-link" href="{{ url('/profile') }}">Skip for now</a>
                     </div>
 
                 </form>

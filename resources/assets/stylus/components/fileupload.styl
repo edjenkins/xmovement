@@ -1,6 +1,15 @@
 #fileinput-button
+	background white
+	border #ccc 2px solid  
+	color #999
+	margin 10px 0
 	position relative
 	overflow hidden
+	&:hover
+		background-color main-color
+		border-color main-color 
+		color white 
+		cursor pointer
 	
 #fileinput-button input
 	position absolute
@@ -15,18 +24,24 @@
 	cursor pointer
 	
 #cc-search-field
-	border #e6e6e6 1px solid
-	border-radius 4px
+	border none
+	line-height 24px 
 	outline none
-	margin-top 10px
-	padding 10px 12px
+	padding 12px 20px
 	width 260px
 	
 #cc-search-button
+	position absolute
 	margin 0
+	padding 12px
+	right 0px
+	top 0px 
+	i
+		color #CCC
 	&:hover
-		color success-color
-		
+		i
+			color success-color
+			
 #cc-search-results
 	list-style none
 	margin 40px 0
