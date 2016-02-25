@@ -24,6 +24,8 @@
 	    				{{ $idea->description }}
 	    			</p>
 
+	    			@include('disqus')
+
 	    		</div>
 	    
 	    	</div>
