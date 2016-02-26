@@ -1,7 +1,7 @@
 <div class="input-section">
     <div class="input-wrapper">
         
-        <input name="photo" type="hidden" id="uploaded-photo" value="{{ $value }}">
+        <input name="photo" type="hidden" id="uploaded-photo" value="{{ isset($value) ? $value : "" }}">
     
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-default fileinput-button" id="fileinput-button">
@@ -39,7 +39,9 @@
 
         <!-- The container for the uploaded files -->
         <div id="files" class="files">
-            <img src="{{ old('photo') }}" />
+            @if (isset($value))
+                <img src="{{ $value }}" />
+            @endif
         </div>
 
     </div>
