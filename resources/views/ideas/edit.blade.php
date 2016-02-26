@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    
+
     <div class="page-header">
         
         <h2 class="main-title" id="page-title">Name your idea</h2>
@@ -12,8 +12,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form class="add-idea-form{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ action('IdeaController@store') }}">
+                <form class="add-idea-form{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ action('IdeaController@update', $idea->id) }}">
                     {!! csrf_field() !!}
+
+                    <input type="hidden" name="id" value="{{ $idea->id }}">
 
                     <div class="form-page visible" id="form-page-1">
 
@@ -23,7 +25,7 @@
 
                                 <label>Choose a name that is short but self explanatory e.g. Open Python Class</label>
 
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Idea name">
+                                <input type="text" class="form-control" name="name" value="{{ old('name', $idea->name) }}" placeholder="Idea name">
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -51,7 +53,7 @@
 
                                 <label>Add a short description of your idea, this should include the expected outcomes</label>
 
-                                <textarea name="description" value="{{ old('description') }}" rows="4"></textarea>
+                                <textarea name="description" value="{{ $idea->description }}" rows="4"></textarea>
 
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -81,7 +83,7 @@
                             
                                 <label>Bring some life to your idea by adding a photo</label>
 
-                                @include('fileupload', ['cc' => true, 'value' => old('photo')])
+                                @include('fileupload', ['cc' => true, 'value' => old('photo', $idea->photo)])
 
                                 @if ($errors->has('photo'))
                                     <span class="help-block">
@@ -92,7 +94,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-primary" type="submit">Create Idea</button>
+                                <button class="btn btn-primary" type="submit">Save Changes</button>
                             </div>
                             
                             <a class="step-button muted-link" data-step="2">Previous Step</a>

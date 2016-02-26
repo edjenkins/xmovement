@@ -13,6 +13,10 @@
 	min-height 400px 
 	
 .main-column
+	.section-header
+		font-size 1.4em 
+		font-weight 400 
+		margin-top 40px 
 	.idea-media
 		margin-bottom 20px 
 	p.idea-description
@@ -21,27 +25,69 @@
 		padding 20px
 
 .side-column
-	ul.stats
-		list-style none
-		margin 0 0 20px 0
-		padding 0
-		li
-			list-style none
+	.creator-tile
+		background #f2f2f2
+		border #f2f2f2 2px solid 
+		padding 20px 
+		text-align center
+		transition(all linear 0.2s)
+		.creator-avatar
+			bacground-position center
+			background-size cover
+			background-repeat no-repeat 
+			border-radius 60px
+			margin 5px auto
+			height 120px
+			width 120px
+		h4
+			color #444
+			font-size 1.5em  
+			line-height 20px 
 			margin 0
-			padding 0
-			h3
-				font-size 42px 
-				font-weight bolder
-			h5
-				color #999
-				font-size 16px 
-	.action-button
-		background-color main-color
+			padding 10px 10px
+		h5
+			color #999
+			font-size 16px 
+			margin 0
+			padding 5px 10px
+		
+		&:hover
+			background white
+			border main-color 2px solid 
+			cursor pointer
+
+.action-button
+	.btn
 		border none 
 		color white
 		font-size 16px 
+		margin-bottom 10px 
 		padding 12px 24px
+		width 100% 
+		&:hover
+			cursor pointer
+	.btn-primary
+		background-color main-color
 		&:hover
 			background-color darken(main-color, 10%)
-			cursor pointer
+	.btn-warning
+		background btn-warning-color 
+		&:hover
+			background-color darken(btn-warning-color, 10%)
 		 
+.stats-tile
+	background #f2f2f2 
+	list-style none
+	margin 15px 0
+	padding 20px 20px
+	text-align center
+	h3
+		font-size 42px 
+		font-weight bolder
+		margin 0
+		padding 5px 10px
+	h5
+		color #999
+		font-size 16px 
+		margin 0
+		padding 5px 10px		 

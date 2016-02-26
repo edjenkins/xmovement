@@ -33,6 +33,13 @@ class IdeaController extends Controller
 	    return view('ideas.add');
 	}
 
+    public function edit(Request $request, Idea $idea)
+	{
+	    return view('ideas.edit', [
+	    	'idea' => $idea,
+	    ]);
+	}
+
 	public function store(Request $request)
 	{
 	    $this->validate($request, [
@@ -48,5 +55,24 @@ class IdeaController extends Controller
 	    ]);
 
 		return redirect()->action('IdeaController@index');
+	}
+
+	public function update(Request $request)
+	{
+		$idea = Idea::find($request->id);
+
+	    $this->validate($request, [
+	        'name' => 'required|max:255',
+	        'description' => 'required|max:2000',
+	        'photo' => 'required|max:255',
+	    ]);
+
+        $idea->name = $request->name;
+        $idea->description = $request->description;
+        $idea->photo = $request->photo;
+
+		$idea->save();
+
+		return redirect()->action('IdeaController@view', $idea);
 	}
 }

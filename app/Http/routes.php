@@ -45,8 +45,11 @@ Route::group(['middleware' => ['web']], function () {
 
     // Idea routes
     Route::get('/explore', 'IdeaController@index');
-    Route::get('/create', 'IdeaController@add');
-    Route::post('/idea', 'IdeaController@store');
     Route::get('/idea/{idea}', 'IdeaController@view');
+    Route::get('/idea/create', 'IdeaController@add');
+    Route::get('/idea/edit/{idea}', 'IdeaController@edit');
+    Route::post('/idea/update', 'IdeaController@update');
+    Route::post('/idea/store', 'IdeaController@store');
+    
 
 });

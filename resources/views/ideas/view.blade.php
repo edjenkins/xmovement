@@ -12,7 +12,27 @@
 	<div class="container">
 	    
 	    <div class="row">
-	    	<div class="col-md-8">
+	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
+
+	    		<div class="column side-column">
+
+	    			<div class="creator-tile" onClick="document.location = '{{ action('UserController@profile', $idea->user_id) }}';">
+    					<div class="creator-avatar" style="background-image:url('{{ $idea->user->avatar }}')"></div>
+    					<h4>{{ $idea->user->name }}</h4>
+    					<h5 class="subtitle">Idea Creator</h5>
+	    			</div>
+
+	    			<div class="stats-tile">
+    					<h3>476</h3>
+	    				<h5>Supporters</h5>
+    				</div>
+
+	    			@include('action-button')
+
+	    		</div>
+
+    		</div>
+	    	<div class="col-md-9 col-md-pull-3">
 	    
 	    		<div class="column main-column">
 
@@ -24,31 +44,24 @@
 	    				{{ $idea->description }}
 	    			</p>
 
+	    			<div class="hidden-md hidden-lg">
+    					
+    					<div class="stats-tile">
+	    					<h3>476</h3>
+		    				<h5>Supporters</h5>
+	    				</div>
+	    				
+	    				@include('action-button')
+
+    				</div>
+
+	    			<h2 class="section-header">Discussion</h2>
+
 	    			@include('disqus')
 
 	    		</div>
 	    
 	    	</div>
-	    	<div class="col-md-4">
-
-	    		<div class="column side-column">
-
-	    			<ul class="stats">
-	    				<li>
-	    					<h3>32</h3>
-		    				<h5>Days to go</h5>
-	    				</li>
-	    				<li>
-	    					<h3>476</h3>
-		    				<h5>Supporters</h5>
-	    				</li>
-	    			</ul>
-
-	    			<div class="btn btn-primary">Support this Idea</div>
-
-	    		</div>
-
-    		</div>
 	    </div>
 	</div>
 
