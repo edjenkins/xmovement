@@ -151,8 +151,8 @@ $(function () {
 $('.step-button').click(function() {
 
     var step = $(this).attr('data-step');
-    $('.form-page').removeClass('visible'); $('#form-page-' + step).addClass('visible')
-    var titles = ['Name your event', 'Describe your event', 'Add a photo'];
-    var title = titles[(step-1)];
+    $('.form-page').removeClass('visible');
+    $('#form-page-' + step).addClass('visible')
+    var title = $('#form-page-' + step).attr('data-title');
     $('#page-title').html(title);
 });
