@@ -24,4 +24,12 @@ class Idea extends Model
     {
         return Supporter::where('idea_id', $this->id)->count();
     }
+
+    /**
+     * The supporters of the Idea.
+     */
+    public function supporters()
+    {
+        return $this->belongsToMany(User::class, 'supporters')->withTimestamps();
+    }
 }

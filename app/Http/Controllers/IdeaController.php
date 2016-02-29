@@ -125,7 +125,9 @@ class IdeaController extends Controller
 
 	    if ($resp->isSuccess())
 	    {
-	    	$supporter = Supporter::create(array('user_id' => $request->user_id, 'idea_id' => $request->idea_id));
+	    	$idea = Idea::find($request->idea_id);
+	    	
+			$idea->supporters()->attach($request->user_id);
 
 			$response->meta['success'] = true;
 
