@@ -31,7 +31,24 @@ body.transparent
 	
 a
 	color main-color
-	
+
+.muted-link
+	color #CCC
+	margin 10px 10px 0 10px
+	&:hover
+		color main-color
+		cursor pointer 
+		text-decoration underline
+
+.error-list
+	list-style none
+	margin 0
+	padding 0
+	li
+		color red
+		margin 0
+		padding 0
+		
 .text-linethru
 	padding 10px 
 	width 100% 
@@ -45,14 +62,14 @@ a
 		display inline-block
 		font-size 16px 
 		height 20px
-		line-height 15px  
+		line-height 15px	
 		padding 0 10px 
 		position relative
 		top -10px
 
 .hero-container
 	background-color rgba(50,10,10,1)
-	// background-image url('https://static.pexels.com/photos/5888/garden-sitting-grass-shoes.jpg')
+	// background-image url('https//static.pexels.com/photos/5888/garden-sitting-grass-shoes.jpg')
 	background-size cover
 	background-position center
 	background-repeat no-repeat
@@ -88,7 +105,7 @@ a
 		outline 0
 		padding 8px 26px
 		text-align center
-		&:hover
+		&hover
 			background-color main-color
 			border-color main-color
 
@@ -122,10 +139,7 @@ body.colorful
 				padding 15px
 				text-align left
 				width 100%
-		.forgot-link, .login-link
-			color #999
-			margin 10px 10px 0 10px 
-			text-decoration underline 
+			
 .auth-panel
 	background-color white
 	border-radius 6px
@@ -134,7 +148,7 @@ body.colorful
 	min-width 320px
 	padding 40px 60px 10px 60px 
 	text-align center
-	@media(max-width: 460px)
+	@media(max-width 460px)
 		border-radius 0px
 		padding 40px 30px 10px 30px 
 	.auth-form
@@ -159,7 +173,78 @@ body.colorful
 				padding 15px
 				text-align center
 				width 100%
-		.forgot-link, .login-link
-			color #999
-			margin 10px 10px 0 10px 
-			text-decoration underline 
+				
+
+
+
+
+
+
+// Toggle switch
+
+
+label.toggle-switch
+	z-index 1
+	position relative
+	display block
+	padding 0 10px
+	border-radius 50px
+	overflow hidden
+	width 70px
+	height 40px
+	margin 0 auto
+	-webkit-box-sizing border-box
+	-moz-box-sizing border-box
+	-ms-box-sizing border-box
+	box-sizing border-box
+	cursor pointer
+	background-color #e1e1e1
+
+	.toggle-button
+		position absolute
+		display inline-block
+		padding 0
+		margin 0
+		background transparent
+		box-sizing border-box
+		background-clip padding-box
+		white-space nowrap
+		height 34px
+		width 34px
+		border-radius 30px
+		color #454545
+		background-color white  
+		left 3px
+		top 3px
+		// animation
+		-webkit-transition left 0.1s ease-in-out
+		-moz-transition left 0.1s ease-in-out
+		-o-transition left 0.1s ease-in-out
+		-ms-transition left 0.1s ease-in-out
+		transition left 0.1s ease-in-out
+		&:before
+			z-index -1
+			content ''
+			position absolute
+			width 70px
+			height 40px
+			top -3px
+			left -3px
+			box-sizing border-box
+		
+		&.checked
+			left 32px
+			&:before
+				left -32px
+				background-color main-color
+				background-position 10px 5px
+	input 
+		position absolute
+		overflow hidden
+		clip rect(0 0 0 0)
+		margin 0
+		padding 0
+		border 0
+		-ms-filter unquote("progidDXImageTransform.Microsoft.Alpha(Opacity=0.1)")
+		filter unquote("alpha(opacity=0.1)")
+		opacity 0.001

@@ -27,7 +27,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Idea::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->sentence($nbWords = 4, $variableNbWords = true),
+        'visibility' => $faker->randomElement($array = array('public','private')),
         'description' => $faker->text($maxNbChars = 400),
         'photo' => $faker->imageUrl($width = 1200, $height = 400),
         'created_at' => $faker->dateTimeBetween($startDate = '-4 days', $endDate = '-2 days'),

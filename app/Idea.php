@@ -12,11 +12,24 @@ class Idea extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'photo'
+        'name', 'visibility', 'description', 'photo'
     ];
     
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function supporterCount()
+    {
+        return Supporter::where('idea_id', $this->id)->count();
+    }
+
+    /**
+     * The supporters of the Idea.
+     */
+    public function supporters()
+    {
+        return $this->belongsToMany(User::class, 'supporters')->withTimestamps();
     }
 }

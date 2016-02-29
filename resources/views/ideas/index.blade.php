@@ -12,7 +12,7 @@
                         
         <div class="row">
             @foreach ($ideas as $idea)
-                <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     @include('ideas.tile')
                 </div>
             @endforeach

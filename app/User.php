@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\User;
+use Auth;
+
 class User extends Authenticatable
 {
     /**
@@ -24,8 +27,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * The Ideas the user has created.
+     *
+     * @var array
+     */
     public function ideas()
     {
         return $this->hasMany(Idea::class);
+    }
+
+    /**
+     * The Ideas the user has supported.
+     *
+     * @var array
+     */
+    public function supportedIdeas()
+    {
+        return $this->belongsToMany(Idea::class, 'supporters')->withTimestamps();
     }
 }

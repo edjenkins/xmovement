@@ -58,7 +58,7 @@
 
                         <br />
                         
-                        <a class="btn btn-link forgot-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                        <a class="btn btn-link muted-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                     
                     </div>
                     

@@ -5,8 +5,12 @@
 			{{ trans('profile.supported_ideas') }}
 		</div>
 		<ul class="ideas-list">
-			@if (count($supported_ideas) > 0)
+			@if (count($supported_ideas) > 3)
 			    @foreach ($supported_ideas as $idea)
+	                @include('ideas.mini-tile')
+	            @endforeach
+			@elseif (count($supported_ideas) > 0)
+				@foreach ($supported_ideas as $idea)
 	                @include('ideas.tile')
 	            @endforeach
 			@else
@@ -20,7 +24,11 @@
 			{{ trans('profile.created_ideas') }}
 		</div>
 		<ul class="ideas-list">
-			@if (count($created_ideas) > 0)
+			@if (count($created_ideas) > 3)
+			    @foreach ($created_ideas as $idea)
+	                @include('ideas.mini-tile')
+	            @endforeach
+			@elseif (count($created_ideas) > 0)
 			    @foreach ($created_ideas as $idea)
 	                @include('ideas.tile')
 	            @endforeach
