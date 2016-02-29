@@ -2,11 +2,17 @@
 .tile.idea-tile
 	border border-color 1px solid 
 	display block
+	height 400px 
 	margin 15px auto
 	max-width 400px
+	overflow hidden
 	position relative
+	transition(all linear 0.2s)
+	&.mini-tile
+		height auto 
 	&:hover
 		cursor pointer
+		background #f9f9f9 
 	.tile-image
 		background-color #f1f1f1
 		background-position center
@@ -15,12 +21,19 @@
 		-webkit-background-size cover
 		-o-background-size cover
 		height 0
-		padding-bottom 80%  
+		padding-bottom 60%  
 	.inner-container
-		background white 
-		bottom 0
-		left 0
-		right 0 
-		position absolute  
+		overflow hidden
 		padding 10px 20px
-	 
+		h4
+			color #555
+		p
+			color #999
+	.tile-footer
+		background white
+		bottom 0
+		position absolute
+		width 100% 
+		p
+			margin 0
+			padding 15px 20px

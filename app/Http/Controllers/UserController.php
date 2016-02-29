@@ -20,8 +20,8 @@ class UserController extends Controller
 	{
 		if (is_null($user->id)) { $user = Auth::user(); }
 		
-		$supported_ideas = $user->supportedIdeas->take(4);
-		$created_ideas = $user->ideas->take(4);
+		$supported_ideas = $user->supportedIdeas->take(10);
+		$created_ideas = $user->ideas->take(10);
 
 	    return view('users.profile', ['user' => $user, 'supported_ideas' => $supported_ideas, 'created_ideas' => $created_ideas]);
 	}

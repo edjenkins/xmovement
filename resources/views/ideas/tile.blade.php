@@ -5,6 +5,11 @@
 		    {{ $idea->name }}
 		</h4>
 		<p>
+			{{ $idea->description }}
+		</p>
+	</div>
+	<div class="tile-footer">
+		<p>
 		    Posted by <a href="{{ action('UserController@profile', [$idea->user]) }}">{{ $idea->user->name or $idea->user_id }}</a>
 		</p>
 	</div>
