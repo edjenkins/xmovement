@@ -23,8 +23,8 @@
 	    			</div>
 
 	    			<div class="stats-tile">
-    					<h3>476</h3>
-	    				<h5>Supporters</h5>
+    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
+	    				<h5 class="supporter-subtitle">Supporters</h5>
     				</div>
 
 	    			@include('action-button')
@@ -47,8 +47,8 @@
 	    			<div class="hidden-md hidden-lg">
     					
     					<div class="stats-tile">
-	    					<h3>476</h3>
-		    				<h5>Supporters</h5>
+	    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
+		    				<h5 class="supporter-subtitle">Supporters</h5>
 	    				</div>
 	    				
 	    				@include('action-button')
@@ -64,5 +64,7 @@
 	    	</div>
 	    </div>
 	</div>
+
+	@include('modals/support')
 
 @endsection

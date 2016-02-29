@@ -6,9 +6,25 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Response;
+use Input;
+use Log;
 
-use App\User;
 use App\Idea;
+use App\User;
+use App\Supporter;
+
+class ResponseObject {
+
+    public $meta = array();
+    public $errors = array();
+    public $data = array();
+
+    public function __construct()
+    {
+        $this->meta['success'] = false;
+    }
+}
 
 class IdeaController extends Controller
 {
@@ -23,6 +39,8 @@ class IdeaController extends Controller
 
     public function view(Request $request, Idea $idea)
 	{
+		$request->session()->flash('status', 'Task was successful!');
+
 	    return view('ideas.view', [
 	    	'idea' => $idea,
 	    ]);
@@ -87,5 +105,41 @@ class IdeaController extends Controller
 		$idea->delete();
 
 		return redirect()->action('IdeaController@index', $idea);
+	}
+
+    /**
+     * Make given User a supporter of a given Idea
+     *
+     * @param  int  $user_id
+     * @param  int  $idea_id
+     * @param  string  $captcha
+     * @return ResponseObject $response
+     */
+	public function support(Request $request)
+	{
+		$response = new ResponseObject();
+    	
+	    $recaptcha = new \ReCaptcha\ReCaptcha(getenv('CAPTCHA_SECRET'));
+
+	    $resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
+
+	    if ($resp->isSuccess())
+	    {
+	    	$supporter = Supporter::create(array('user_id' => $request->user_id, 'idea_id' => $request->idea_id));
+
+			$response->meta['success'] = true;
+
+	    } else {
+
+	    	// $resp->getErrorCodes()
+
+	    	array_push($response->errors, 'Please complete the CAPTCHA below');
+
+	    	$response->meta['success'] = false;
+	    }
+
+	    $response->data['supporter_count'] = Supporter::where('idea_id', '=', $request->idea_id)->count();
+
+	    return Response::json($response);
 	}
 }

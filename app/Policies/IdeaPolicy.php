@@ -2,8 +2,10 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Idea;
+use App\User;
+use App\Supporter;
+
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class IdeaPolicy
@@ -19,7 +21,7 @@ class IdeaPolicy
      */
     public function support(User $user, Idea $idea)
     {
-        return true;
+        return !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
     }
 
     /**
@@ -31,7 +33,7 @@ class IdeaPolicy
      */
     public function design(User $user, Idea $idea)
     {
-        return true;
+        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
     }
 
     /**

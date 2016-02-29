@@ -19,4 +19,9 @@ class Idea extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function supporterCount()
+    {
+        return Supporter::where('idea_id', $this->id)->count();
+    }
 }

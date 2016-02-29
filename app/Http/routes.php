@@ -52,4 +52,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/idea/{idea}', 'IdeaController@view');
     Route::delete('/idea/{idea}', 'IdeaController@destroy');
 
+    // API routes
+    Route::post('/api/support', 'IdeaController@support');
 });
