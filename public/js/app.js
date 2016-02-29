@@ -150,9 +150,51 @@ $(function () {
 // Create event
 $('.step-button').click(function() {
 
-    var step = $(this).attr('data-step');
-    $('.form-page').removeClass('visible');
-    $('#form-page-' + step).addClass('visible')
-    var title = $('#form-page-' + step).attr('data-title');
-    $('#page-title').html(title);
+    if ($(this).attr('data-type') == 'next') {
+        nextStep();    
+    } else if ($(this).attr('data-type') == 'previous') {
+        previousStep();
+    }
+    
+
+});
+
+function nextStep()
+{
+    var step = $('.idea-form').attr('data-current-step');
+    step++;
+    showStep(step);
+}
+
+function previousStep()
+{
+    var step = $('.idea-form').attr('data-current-step');
+    step--;
+    showStep(step);
+}
+
+function showStep(step)
+{
+    if ($('#form-page-' + step).length != 0) {
+        $('.idea-form').attr('data-current-step', step);
+        $('.form-page').removeClass('visible');
+        $('#form-page-' + step).addClass('visible')
+        var title = $('#form-page-' + step).attr('data-title');
+        $('#page-title').html(title);
+    }
+}
+
+$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        previousStep();
+        break;
+
+        case 39: // right
+        nextStep();
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
 });

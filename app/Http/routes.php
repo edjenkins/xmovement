@@ -50,6 +50,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/idea/update', 'IdeaController@update');
     Route::post('/idea/store', 'IdeaController@store');
     Route::get('/idea/{idea}', 'IdeaController@view');
-    
+    Route::delete('/idea/{idea}', 'IdeaController@destroy');
 
 });

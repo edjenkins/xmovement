@@ -11,6 +11,7 @@ return [
     'name_label' => 'Choose a name that is short but self explanatory e.g. Open Python Class',
     'description_label' => 'Add a short description of your idea, this should include the expected outcomes',
     'photo_label' => 'Bring some life to your idea by adding a photo',
+    'visibility_label' => 'Do you want this Idea to be public?',
 
     'name_placeholder' => 'Idea name',
 

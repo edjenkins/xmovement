@@ -1,4 +1,4 @@
-<form class="idea-form{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ $editing ? action('IdeaController@update') : action('IdeaController@store') }}">
+<form class="idea-form{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ $editing ? action('IdeaController@update') : action('IdeaController@store') }}" data-current-step="1">
     {!! csrf_field() !!}
 
     @if ($editing)
@@ -23,8 +23,36 @@
             
             </div>
 
+            <div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
+
+                <div class="toggle-switch-wrapper">
+
+                    <label>{{ trans('idea_form.visibility_label') }}</label>
+
+                    <label class="toggle-switch">
+
+                        <input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('visibility', $idea->visibility) : old('visibility') }}">
+                        @if (isset($idea))
+                            <div class="toggle-button{{ (old('visibility', $idea->visibility) == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
+                        @else
+                            <div class="toggle-button{{ (old('visibility') == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
+                        @endif
+                    </label>
+
+                    <div class="clearfloat"></div>
+
+                </div>
+
+                @if ($errors->has('visibility'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('visibility') }}</strong>
+                    </span>
+                @endif
+
+            </div>
+
             <div class="form-group">
-                <div class="btn btn-primary step-button" data-step="2">{{ trans('idea_form.next_step') }}</div>
+                <div class="btn btn-primary step-button" data-type="next">{{ trans('idea_form.next_step') }}</div>
             </div>
 
         </div>
@@ -50,10 +78,10 @@
             </div>
 
             <div class="form-group">
-                <div class="btn btn-primary step-button" data-step="3">{{ trans('idea_form.next_step') }}</div>
+                <div class="btn btn-primary step-button" data-type="next">{{ trans('idea_form.next_step') }}</div>
             </div>
             
-            <a class="step-button muted-link" data-step="1">{{ trans('idea_form.previous_step') }}</a>
+            <a class="step-button muted-link" data-type="previous">{{ trans('idea_form.previous_step') }}</a>
 
         </div>
 
@@ -82,10 +110,10 @@
             </div>
 
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">{{ trans('idea_form.save_changes') }}</button>
+                <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
             </div>
             
-            <a class="step-button muted-link" data-step="2">{{ trans('idea_form.previous_step') }}</a>
+            <a class="step-button muted-link" data-type="previous">{{ trans('idea_form.previous_step') }}</a>
 
         </div>
 

@@ -14,7 +14,7 @@ class IdeaController extends Controller
 {
     public function index(Request $request)
 	{
-	    $ideas = Idea::get();
+	    $ideas = Idea::where('visibility', 'public')->get();
 
 	    return view('ideas.index', [
 	        'ideas' => $ideas,
@@ -41,15 +41,17 @@ class IdeaController extends Controller
 	}
 
 	public function store(Request $request)
-	{
+	{	
 	    $this->validate($request, [
 	        'name' => 'required|max:255',
+	        'visibility' => 'required',
 	        'description' => 'required|max:2000',
 	        'photo' => 'required|max:255',
 	    ]);
 
 	    $request->user()->ideas()->create([
 	        'name' => $request->name,
+	        'visibility' => $request->visibility,
 	        'description' => $request->description,
 	        'photo' => $request->photo,
 	    ]);
@@ -63,16 +65,27 @@ class IdeaController extends Controller
 
 	    $this->validate($request, [
 	        'name' => 'required|max:255',
+	        'visibility' => 'required',
 	        'description' => 'required|max:2000',
 	        'photo' => 'required|max:255',
 	    ]);
 
         $idea->name = $request->name;
+        $idea->visibility = $request->visibility;
         $idea->description = $request->description;
         $idea->photo = $request->photo;
 
 		$idea->save();
 
 		return redirect()->action('IdeaController@view', $idea);
+	}
+
+	public function destroy(Request $request, Idea $idea)
+	{
+	    $this->authorize('destroy', $idea);
+
+		$idea->delete();
+
+		return redirect()->action('IdeaController@index', $idea);
 	}
 }
