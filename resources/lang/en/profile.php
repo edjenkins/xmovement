@@ -6,4 +6,5 @@ return [
 	'supported_ideas' => 'Supported Ideas',
 	'no_ideas' => 'No Ideas',
 	'created_ideas' => 'Created Ideas',
+	'no_bio' => 'You have no bio, why not add one?'
 ];

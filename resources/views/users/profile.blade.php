@@ -4,15 +4,13 @@
 
 	<div class="fluid-row profile-header"></div>
 
-	<div class="container-fluid">
+	<div class="container">
 		
 		<div class="row">
 
-			@include('users.profile-left-column')
+			@include('users.profile-side-column')
 
-			@include('users.profile-center-column')
-
-			@include('users.profile-right-column')
+			@include('users.profile-main-column')
 	
 		</div>
 	
