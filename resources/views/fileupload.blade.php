@@ -46,3 +46,5 @@
 
     </div>
 </div>
+
+<script type="text/javascript" src="{!! asset('js/create-idea.js') !!}"></script>
