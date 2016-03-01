@@ -9,9 +9,10 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
-use Socialite;
 use Auth;
+use Mail;
 use Redirect;
+use Socialite;
 
 class AuthController extends Controller
 {
@@ -57,6 +58,12 @@ class AuthController extends Controller
             return $authUser;
         }
         
+        Mail::later(60, 'emails.welcome', ['facebook' => true, 'user' => $facebookUser], function ($message) use ($facebookUser) {
+
+            $message->to($facebookUser->email)->subject('Welcome to XMovement');
+
+        });
+
         return User::create([
             'facebook_id' => $facebookUser->id,
             'name' => $facebookUser->name,
@@ -127,6 +134,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        Mail::later(60, 'emails.welcome', ['facebook' => false, 'user' => $data], function ($message) use ($data) {
+
+            $message->to($data['email'])->subject('Welcome to XMovement');
+
+        });
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
