@@ -47,7 +47,7 @@
                     <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                         <label class="control-label">Confirm Password</label>
 
-                        <input type="password_confirmation" class="form-control input-field" name="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="Confirm Password">
+                        <input type="password" class="form-control input-field" name="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="Confirm Password">
 
                         @if ($errors->has('password_confirmation'))
                             <span class="help-block">
