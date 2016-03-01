@@ -5,7 +5,7 @@
 		    {{ $idea->name }}
 		</h4>
 		<p>
-			{{ $idea->description }}
+			{{ str_limit($idea->description, $limit = 100, $end = '...') }}
 		</p>
 	</div>
 	<div class="tile-footer">
