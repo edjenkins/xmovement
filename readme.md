@@ -27,7 +27,12 @@ Environment Setup
 Navigate to homestead folder
 
 cd ~/Homestead && vagrant up && vagrant ssh
-cd Code && artisan migrate:refresh --seed
+
+php /home/vagrant/Code/artisan migrate:refresh --seed
+sudo cp /home/vagrant/Code/supervisor/laravel-email-worker.conf /etc/supervisor/conf.d/laravel-email-worker.conf
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start laravel-email-worker:*
 
 Migrate and seed the database
 ----------------

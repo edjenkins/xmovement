@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use App\Jobs\SendWelcomeEmail;
 
 use Auth;
 use Mail;
@@ -57,20 +58,20 @@ class AuthController extends Controller
         if ($authUser = User::where('facebook_id', $facebookUser->id)->first()) {
             return $authUser;
         }
-        
-        Mail::later(60, 'emails.welcome', ['facebook' => true, 'user' => $facebookUser], function ($message) use ($facebookUser) {
 
-            $message->to($facebookUser->email)->subject('Welcome to XMovement');
-
-        });
-
-        return User::create([
+        $user = User::create([
             'facebook_id' => $facebookUser->id,
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'avatar' => $facebookUser->avatar_original,
             'token' => $facebookUser->token
         ]);
+
+        $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
+
+        return $user;
     }
 
     /*
@@ -134,16 +135,16 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        Mail::later(60, 'emails.welcome', ['facebook' => false, 'user' => $data], function ($message) use ($data) {
-
-            $message->to($data['email'])->subject('Welcome to XMovement');
-
-        });
-
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
+
+        return $user;
     }
 }
