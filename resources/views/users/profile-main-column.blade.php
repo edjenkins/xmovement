@@ -6,28 +6,48 @@
 	
 		<p class="user-bio">{{ $user->bio }}</p>
 
-    @elseif ($user->id == Auth::user()->id)
-
-        <p class="user-bio text-muted">{{ trans('profile.no_bio') }}</p>
-
     @else
 
-        <br />
+        @can('editPreferences', $user)
+
+            <p class="user-bio text-muted">{{ trans('profile.no_bio') }}</p>
+
+        @else
+        
+            <br />
+
+        @endcan
 
 	@endif
 
 	@include('users.profile-nav')
 	
 	<div class="tab-content">
-        <div class="tab-pane fade in active" id="newstab">
-            @include('users.news')
-        </div>
-        <div class="tab-pane fade" id="messagestab">
-        	@include('users.messages')
-        </div>
-        <div class="tab-pane fade" id="preferencestab">
-            @include('users.preferences')
-        </div>
+
+        @can('viewNews', $user)
+
+            <div class="tab-pane fade in active" id="newstab">
+                @include('users.news')
+            </div>
+
+        @endcan
+
+        @can('viewMessages', $user)
+            
+            <div class="tab-pane fade" id="messagestab">
+            	@include('users.messages')
+            </div>
+
+        @endcan
+
+        @can('editPreferences', $user)
+
+            <div class="tab-pane fade" id="preferencestab">
+                @include('users.preferences')
+            </div>
+
+        @endcan
+
     </div>
     
 </div>

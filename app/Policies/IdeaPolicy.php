@@ -13,6 +13,18 @@ class IdeaPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine if the given user can invite users to the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function invite(User $user, Idea $idea)
+    {
+        return $user->id === $idea->user_id;
+    }
+
+    /**
      * Determine if the given user can support the given idea.
      *
      * @param  User  $user

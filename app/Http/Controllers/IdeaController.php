@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use Gate;
 use Response;
 use Input;
 use Log;
@@ -120,28 +121,39 @@ class IdeaController extends Controller
 
     public function invite(Request $request, Idea $idea)
 	{
+        if (Gate::denies('invite', $idea)) {
+            return redirect()->action('IdeaController@view', $idea);
+        }
+
 	    return view('ideas.invite', [
 	    	'idea' => $idea,
 	    ]);
 	}
 
-    public function sendInvites(Request $request)
+    public function sendInvites(Request $request, Idea $idea)
 	{
-		$idea = Idea::find($request->id);
-
 		$user = Auth::user();
 
-		$receivers = json_decode($request->data, true);
+        if (Gate::denies('invite', $idea)) {
 
-		foreach ($receivers as $receiver)
-		{
-			$job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
+			Session::flash('flash_message', trans('flash_message.invites_not_sent'));
+			Session::flash('flash_type', 'flash-danger');
+		
+		} else {
+            
+			$receivers = json_decode($request->data, true);
 
-	        $this->dispatch($job);
+			foreach ($receivers as $receiver)
+			{
+				$job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
+
+		        $this->dispatch($job);
+			}
+
+			Session::flash('flash_message', trans('flash_message.invites_sent_successfully'));
+			Session::flash('flash_type', 'flash-success');
+
 		}
-
-		Session::flash('flash_message', trans('flash_message.invites_sent_successfully'));
-		Session::flash('flash_type', 'flash-success');
 
 	    return redirect()->action('IdeaController@view', $idea);
 	}
