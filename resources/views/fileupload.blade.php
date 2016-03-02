@@ -47,4 +47,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{!! asset('js/create-idea.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/ideas/add.js') !!}"></script>

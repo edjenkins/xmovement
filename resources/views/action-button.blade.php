@@ -32,3 +32,5 @@
 	@endcan
 
 </div>
+
+<script src="/js/ideas/action-button.js"></script>
