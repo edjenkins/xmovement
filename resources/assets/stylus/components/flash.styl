@@ -1,0 +1,26 @@
+.flash
+	background main-color
+	color white  
+	font-size 1.2em 
+	padding 10px 10px
+	position fixed
+	text-align center
+	z-index 1000 
+	top 20px
+	border-radius 4px
+	left 20px
+	right 20px
+	&.flash-success
+		background alpha(success-color, 0.8)
+		color white 
+	&.flash-warning
+		background alpha(warning-color, 0.8)
+		color white 
+	&.flash-danger
+		background alpha(danger-color, 0.8)
+		color white
+	@media(min-width:640px)
+		left 50%
+		right auto
+		margin-left -300px 
+		width 600px 

@@ -23,6 +23,14 @@
 
     @include('navbar')
 
+    @if ( Session::has('flash_message') )
+ 
+        <div class="flash {{ Session::get('flash_type') }}">
+            {{ Session::get('flash_message') }}
+        </div>
+      
+    @endif
+
     @yield('content')
 
     @include('footer')

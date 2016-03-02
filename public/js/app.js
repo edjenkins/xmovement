@@ -12,6 +12,9 @@ $(document).ready(function() {
 
 	});
 
+    // Hide flash messages
+    setTimeout(function() { $('.flash').fadeOut() }, 1500);
+
 });
 
 

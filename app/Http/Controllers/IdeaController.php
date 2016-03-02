@@ -10,6 +10,7 @@ use Auth;
 use Response;
 use Input;
 use Log;
+use Session;
 
 use App\Jobs\SendInviteEmail;
 
@@ -42,9 +43,7 @@ class IdeaController extends Controller
 
     public function view(Request $request, Idea $idea)
 	{
-		$request->session()->flash('status', 'Task was successful!');
-
-	    return view('ideas.view', [
+		return view('ideas.view', [
 	    	'idea' => $idea,
 	    ]);
 	}
@@ -101,6 +100,9 @@ class IdeaController extends Controller
 
 		$idea->save();
 
+		Session::flash('flash_message', trans('flash_message.idea_updated'));
+		Session::flash('flash_type', 'flash-success');
+
 		return redirect()->action('IdeaController@view', $idea);
 	}
 
@@ -109,6 +111,9 @@ class IdeaController extends Controller
 	    $this->authorize('destroy', $idea);
 
 		$idea->delete();
+
+		Session::flash('flash_message', trans('flash_message.idea_deleted'));
+		Session::flash('flash_type', 'flash-danger');
 
 		return redirect()->action('IdeaController@index', $idea);
 	}
@@ -134,6 +139,9 @@ class IdeaController extends Controller
 
 	        $this->dispatch($job);
 		}
+
+		Session::flash('flash_message', trans('flash_message.invites_sent_successfully'));
+		Session::flash('flash_type', 'flash-success');
 
 	    return redirect()->action('IdeaController@view', $idea);
 	}

@@ -9,6 +9,7 @@ use App\User;
 use App\Idea;
 use Auth;
 use Input;
+use Session;
 
 use Illuminate\Http\Request;
 
@@ -59,6 +60,9 @@ class UserController extends Controller
 		$user->bio = $request->bio;
 
 		$user->save();
+
+		Session::flash('flash_message', trans('flash_message.profile_updated'));
+		Session::flash('flash_type', 'flash-success');
 
 	    return redirect()->action('UserController@profile', $user->id);
 	}
