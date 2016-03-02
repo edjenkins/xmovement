@@ -20,3 +20,5 @@
     </div>
   </div>
 </div>
+
+<script src="/js/ideas/support.js"></script>
