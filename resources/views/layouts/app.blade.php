@@ -38,6 +38,5 @@
     <script src='/js/file_uploader/jquery.fileupload.js'></script>
 
     <script src="/js/app.js"></script>
-    <script src="/js/action_button.js"></script>
 </body>
 </html>

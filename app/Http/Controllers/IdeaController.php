@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 use Response;
 use Input;
 use Log;
+
+use App\Jobs\SendInviteEmail;
 
 use App\Idea;
 use App\User;
@@ -60,6 +63,7 @@ class IdeaController extends Controller
 
 	public function store(Request $request)
 	{	
+		// Validate the idea
 	    $this->validate($request, [
 	        'name' => 'required|max:255',
 	        'visibility' => 'required',
@@ -67,14 +71,16 @@ class IdeaController extends Controller
 	        'photo' => 'required|max:255',
 	    ]);
 
-	    $request->user()->ideas()->create([
+	    // Create the idea
+	    $idea = $request->user()->ideas()->create([
 	        'name' => $request->name,
 	        'visibility' => $request->visibility,
 	        'description' => $request->description,
 	        'photo' => $request->photo,
 	    ]);
 
-		return redirect()->action('IdeaController@index');
+	    // Redirect to invite view
+		return redirect()->action('IdeaController@invite', $idea);
 	}
 
 	public function update(Request $request)
@@ -105,6 +111,31 @@ class IdeaController extends Controller
 		$idea->delete();
 
 		return redirect()->action('IdeaController@index', $idea);
+	}
+
+    public function invite(Request $request, Idea $idea)
+	{
+	    return view('ideas.invite', [
+	    	'idea' => $idea,
+	    ]);
+	}
+
+    public function sendInvites(Request $request)
+	{
+		$idea = Idea::find($request->id);
+
+		$user = Auth::user();
+
+		$receivers = json_decode($request->data, true);
+
+		foreach ($receivers as $receiver)
+		{
+			$job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
+
+	        $this->dispatch($job);
+		}
+
+	    return redirect()->action('IdeaController@view', $idea);
 	}
 
     /**
