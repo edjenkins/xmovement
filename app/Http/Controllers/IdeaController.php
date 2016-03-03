@@ -56,9 +56,17 @@ class IdeaController extends Controller
 
     public function edit(Request $request, Idea $idea)
 	{
-	    return view('ideas.edit', [
-	    	'idea' => $idea,
-	    ]);
+		if (Gate::denies('update', $idea))
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+			Session::flash('flash_type', 'flash-warning');
+			
+			return view('ideas.view', ['idea' => $idea]);
+		}
+		else
+		{
+			return view('ideas.edit', ['idea' => $idea]);
+		}
 	}
 
 	public function store(Request $request)
@@ -87,60 +95,75 @@ class IdeaController extends Controller
 	{
 		$idea = Idea::find($request->id);
 
-	    $this->validate($request, [
-	        'name' => 'required|max:255',
-	        'visibility' => 'required',
-	        'description' => 'required|max:2000',
-	        'photo' => 'required|max:255',
-	    ]);
+		if (Gate::denies('update', $idea))
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+			Session::flash('flash_type', 'flash-warning');
+		}
+		else
+		{
+		    $this->validate($request, [
+		        'name' => 'required|max:255',
+		        'visibility' => 'required',
+		        'description' => 'required|max:2000',
+		        'photo' => 'required|max:255',
+		    ]);
 
-        $idea->name = $request->name;
-        $idea->visibility = $request->visibility;
-        $idea->description = $request->description;
-        $idea->photo = $request->photo;
+	        $idea->name = $request->name;
+	        $idea->visibility = $request->visibility;
+	        $idea->description = $request->description;
+	        $idea->photo = $request->photo;
 
-		$idea->save();
+			$idea->save();
 
-		Session::flash('flash_message', trans('flash_message.idea_updated'));
-		Session::flash('flash_type', 'flash-success');
+			Session::flash('flash_message', trans('flash_message.idea_updated'));
+			Session::flash('flash_type', 'flash-success');
+		}
 
 		return redirect()->action('IdeaController@view', $idea);
 	}
 
 	public function destroy(Request $request, Idea $idea)
 	{
-	    $this->authorize('destroy', $idea);
+		if (Gate::denies('destroy', $idea))
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+			Session::flash('flash_type', 'flash-warning');
+		}
+		else
+		{
+			$idea->delete();
 
-		$idea->delete();
-
-		Session::flash('flash_message', trans('flash_message.idea_deleted'));
-		Session::flash('flash_type', 'flash-danger');
+			Session::flash('flash_message', trans('flash_message.idea_deleted'));
+			Session::flash('flash_type', 'flash-danger');
+		}
 
 		return redirect()->action('IdeaController@index', $idea);
 	}
 
     public function invite(Request $request, Idea $idea)
 	{
-        if (Gate::denies('invite', $idea)) {
+        if (Gate::denies('invite', $idea))
+        {
             return redirect()->action('IdeaController@view', $idea);
         }
-
-	    return view('ideas.invite', [
-	    	'idea' => $idea,
-	    ]);
+        else
+        {
+        	return view('ideas.invite', ['idea' => $idea]);
+        }
 	}
 
     public function sendInvites(Request $request, Idea $idea)
 	{
 		$user = Auth::user();
 
-        if (Gate::denies('invite', $idea)) {
-
+        if (Gate::denies('invite', $idea))
+        {
 			Session::flash('flash_message', trans('flash_message.invites_not_sent'));
 			Session::flash('flash_type', 'flash-danger');
-		
-		} else {
-            
+		}
+		else
+		{
 			$receivers = json_decode($request->data, true);
 
 			foreach ($receivers as $receiver)
@@ -152,7 +175,6 @@ class IdeaController extends Controller
 
 			Session::flash('flash_message', trans('flash_message.invites_sent_successfully'));
 			Session::flash('flash_type', 'flash-success');
-
 		}
 
 	    return redirect()->action('IdeaController@view', $idea);

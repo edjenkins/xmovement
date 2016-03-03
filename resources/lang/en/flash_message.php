@@ -6,4 +6,5 @@ return [
     'invites_sent_successfully' => 'Invites were sent successfully',
     'invites_not_sent' => 'Failed to send invites',
     'profile_updated' => 'Your profile was updated',
+    'no_permission' => 'You do not have permission to do that'
 ];

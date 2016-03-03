@@ -47,4 +47,18 @@ class UserPolicy
     {
         return $user->id === $profile->id;
     }
+
+    /**
+     * Override all policy restrictions if the user is a super admin
+     *
+     * @param  User  $user
+     * @param  $ability
+     * @return bool
+     */
+    public function before($user, $ability)
+    {
+        if ($user->isSuperAdmin()) {
+            return true;
+        }
+    }
 }

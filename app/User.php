@@ -46,4 +46,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Idea::class, 'supporters')->withTimestamps();
     }
+
+    /**
+     * Check if the user is a super admin
+     *
+     * @var array
+     */
+    public function isSuperAdmin()
+    {
+        return $this->super_admin;
+    }
 }
