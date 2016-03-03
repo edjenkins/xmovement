@@ -2,11 +2,7 @@
 
 <div class="action-buttons">
 
-	@can('support', $idea)
-
-		<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#support-modal">Support this Idea</div>
-
-	@endcan
+	<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#support-modal">Support this Idea</div>
 	
 	@can('design', $idea)
 

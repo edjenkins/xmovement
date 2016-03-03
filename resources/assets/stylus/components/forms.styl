@@ -1,0 +1,110 @@
+.auth-panel
+	background-color white
+	border-radius 6px
+	margin 0 auto
+	max-width 460px
+	min-width 320px
+	padding 40px 60px 10px 60px 
+	text-align center
+	@media(max-width 460px)
+		border-radius 0px
+		padding 40px 30px 10px 30px
+		
+.auth-form
+	position relative
+	left auto
+	right auto
+	top auto
+	bottom auto
+	.form-group
+		margin-bottom 20px !important 
+		.control-label
+			color #888
+			margin-bottom 10px 
+		.form-control
+			border #e1e1e1 1px solid
+			border-radius 4px
+			box-shadow none
+			height auto 
+			font-size 18px
+			margin 0 auto 20px auto
+			max-width 400px 
+			padding 15px
+			text-align center
+			width 100%
+
+.preferences-panel
+	.auth-form
+		margin 20px
+		.form-group
+			.form-control
+				margin 0 0 20px 0
+				text-align left
+				
+// Toggle switch
+
+label.toggle-switch
+	z-index 1
+	position relative
+	display block
+	padding 0 10px
+	border-radius 50px
+	overflow hidden
+	width 70px
+	height 40px
+	margin 0 auto
+	-webkit-box-sizing border-box
+	-moz-box-sizing border-box
+	-ms-box-sizing border-box
+	box-sizing border-box
+	cursor pointer
+	background-color #e1e1e1
+
+	.toggle-button
+		position absolute
+		display inline-block
+		padding 0
+		margin 0
+		background transparent
+		box-sizing border-box
+		background-clip padding-box
+		white-space nowrap
+		height 34px
+		width 34px
+		border-radius 30px
+		color #454545
+		background-color white  
+		left 3px
+		top 3px
+		// animation
+		-webkit-transition left 0.1s ease-in-out
+		-moz-transition left 0.1s ease-in-out
+		-o-transition left 0.1s ease-in-out
+		-ms-transition left 0.1s ease-in-out
+		transition left 0.1s ease-in-out
+		&:before
+			z-index -1
+			content ''
+			position absolute
+			width 70px
+			height 40px
+			top -3px
+			left -3px
+			box-sizing border-box
+		
+		&.checked
+			left 32px
+			&:before
+				left -32px
+				background-color main-color
+				background-position 10px 5px
+	input 
+		position absolute
+		overflow hidden
+		clip rect(0 0 0 0)
+		margin 0
+		padding 0
+		border 0
+		-ms-filter unquote("progidDXImageTransform.Microsoft.Alpha(Opacity=0.1)")
+		filter unquote("alpha(opacity=0.1)")
+		opacity 0.001
