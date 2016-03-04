@@ -12,8 +12,11 @@
 					<h4 class="modal-title" id="support-modal">Confirm Support</h4>
 
 				@else
-
-					<h4 class="modal-title" id="support-modal">Create an Account</h4>
+						
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#register-panel" aria-controls="register-panel" role="tab" data-toggle="tab">{{ 'Register' }}</a></li>
+						<li role="presentation"><a href="#login-panel" aria-controls="login-panel" role="tab" data-toggle="tab">{{ 'Login' }}</a></li>
+					</ul>
 
 				@endcan
 
@@ -35,7 +38,25 @@
 
 				@else
 
-					@include('forms/register', ['type' => 'quick'])
+					<div role="tabpanel">
+					
+						<div class="tab-content">
+							
+							<div role="tabpanel" class="tab-pane active" id="register-panel">
+
+								@include('forms/register', ['type' => 'quick', 'redirect' => action("IdeaController@view", $idea)])
+
+							</div>
+
+							<div role="tabpanel" class="tab-pane" id="login-panel">
+
+								@include('forms/login', ['type' => 'quick', 'redirect' => action("IdeaController@view", $idea)])
+
+							</div>
+
+						</div>
+
+					</div>
 
 				@endcan
 				

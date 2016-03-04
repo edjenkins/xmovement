@@ -1,7 +1,13 @@
 <form class="auth-form" role="form" method="POST" action="{{ url('/register') }}">
     {!! csrf_field() !!}
 
-    <input type="hidden" class="form-control" name="type" value="{{ $type }}">
+    <input type="hidden" name="type" value="{{ $type }}">
+
+    @if (isset($redirect))
+
+        <input type="hidden" name="redirect" value="{{ $redirect }}">
+
+    @endif
 
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
         <label class="control-label">Name</label>
@@ -60,11 +66,18 @@
     @endif
 
     <div class="form-group">
+        
         <button type="submit" class="btn btn-primary">
             Register
         </button>
-        <br />
-        <a class="btn btn-link muted-link" href="{{ url('/login') }}">Already have an account?</a>
+        
+        @if ($type == 'standard')
+        
+            <br />
+            <a class="btn btn-link muted-link" href="{{ url('/login') }}">Already have an account?</a>
+        
+        @endif
+
     </div>
 
     <div class="text-linethru">

@@ -11,9 +11,11 @@ use Illuminate\Http\Request;
 use App\Jobs\SendWelcomeEmail;
 
 use Auth;
+use Log;
 use Mail;
 use Redirect;
 use Socialite;
+use Session;
 
 class AuthController extends Controller
 {
@@ -85,7 +87,11 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins {
+        AuthenticatesAndRegistersUsers::sendFailedLoginResponse as parentSendFailedLoginResponse;
+        AuthenticatesAndRegistersUsers::login as parentLogin;
+        AuthenticatesAndRegistersUsers::register as parentRegister;
+    }
 
     /**
      * Where to redirect users after login / registration.
@@ -94,6 +100,11 @@ class AuthController extends Controller
      */
     public function getRedirectPath()
     {
+        if (Session::has('redirect')) {
+            Session::flash('show_support', true);
+            return Session::pull('redirect');
+        }
+
         return ((!strlen(Auth::user()->phone)) || (!strlen(Auth::user()->bio))) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
     }
 
@@ -148,6 +159,11 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        if (isset($data['redirect']))
+        {
+            Session::flash('redirect', $data['redirect']);
+        }
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -159,5 +175,47 @@ class AuthController extends Controller
         $this->dispatch($job);
 
         return $user;
+    }
+
+
+    public function login(Request $request)
+    {
+        if (isset($data['redirect']))
+        {
+            Session::flash('redirect', action('IdeaController@index'));
+            Session::flash('show_support', true);
+        }
+
+        return $this->parentLogin($request);
+    }
+
+
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        if (isset($request['redirect']))
+        {
+            Session::flash('redirect', $request['redirect']);
+            
+        }
+
+        return $this->parentSendFailedLoginResponse($request);
+    }
+
+
+    public function register(Request $request)
+    {
+        Log::error('$$$$$$$$$');
+
+        Log::error('$$$$$$$$$' . $request);
+
+        if (isset($data['redirect']))
+        {
+            Session::flash('redirect', action('IdeaController@index'));
+            
+        }
+
+        Session::flash('show_support', true);
+
+        return $this->parentRegister($request);
     }
 }
