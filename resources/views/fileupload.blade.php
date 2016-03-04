@@ -48,3 +48,4 @@
 </div>
 
 <script type="text/javascript" src="{!! asset('js/ideas/add.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('js/file_uploader/fileupload.js') !!}"></script>

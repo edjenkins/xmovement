@@ -2,12 +2,20 @@
 
 <div class="action-buttons">
 
-	@can('support', $idea)
+	@if (Auth::check())
 
-		<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#support-modal">Support this Idea</div>
+		@can('support', $idea)
+		
+			<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#support-modal">Support this Idea</div>
 
-	@endcan
-	
+		@endcan
+
+	@else
+
+		<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#auth-modal">Support this Idea</div>
+
+	@endif
+
 	@can('design', $idea)
 
 		<div class="btn btn-primary action-button">Help Design</div>

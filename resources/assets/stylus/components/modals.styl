@@ -10,7 +10,6 @@
 				text-align center
 				padding 20px 
 			.modal-body
-				background white 
 				padding 20px
 				text-align center
 			.modal-footer
@@ -23,4 +22,24 @@
 .modal
 	.g-recaptcha > div > div
 		margin 0 auto
-	// .error-list
+	.nav-tabs
+		border none
+		display inline-block
+		margin 0 auto
+		text-align center
+		li
+			display inline-block
+			a
+				border none
+				font-size 1.3em
+				&:hover
+					background none 
+					border none
+					color darken(main-color, 20%)
+					cursor pointer
+			&.active a
+				font-weight bold 
+				&:hover
+					color #666
+	.tab-content
+		margin-top 10px 

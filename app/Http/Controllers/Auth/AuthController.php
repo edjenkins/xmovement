@@ -11,9 +11,12 @@ use Illuminate\Http\Request;
 use App\Jobs\SendWelcomeEmail;
 
 use Auth;
+use Log;
 use Mail;
 use Redirect;
 use Socialite;
+use Session;
+use URL;
 
 class AuthController extends Controller
 {
@@ -24,6 +27,8 @@ class AuthController extends Controller
      */
     public function redirectToProvider()
     {
+        Session::reflash();
+
         return Socialite::driver('facebook')->redirect();
     }
 
@@ -85,7 +90,10 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins {
+        AuthenticatesAndRegistersUsers::login as parentLogin;
+        AuthenticatesAndRegistersUsers::register as parentRegister;
+    }
 
     /**
      * Where to redirect users after login / registration.
@@ -94,6 +102,12 @@ class AuthController extends Controller
      */
     public function getRedirectPath()
     {
+        if (Session::has('redirect'))
+        {
+            Session::flash('show_support', true);
+            return Session::pull('redirect');
+        }
+
         return ((!strlen(Auth::user()->phone)) || (!strlen(Auth::user()->bio))) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
     }
 
@@ -120,11 +134,24 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        if ($data['type'] == 'quick')
+        {
+            $validator = Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+            ]);
+        }
+        else
+        {
+            $validator = Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
-        ]);
+            ]);
+        }
+
+        return $validator;
     }
 
     /**
@@ -146,5 +173,23 @@ class AuthController extends Controller
         $this->dispatch($job);
 
         return $user;
+    }
+
+    public function login(Request $request)
+    {
+        Session::flash('show_support', true);
+
+        Session::flash('auth_type', 'login');
+
+        return $this->parentLogin($request);
+    }
+
+    public function register(Request $request)
+    {
+        Session::flash('show_support', true);
+        
+        Session::flash('auth_type', 'register');
+
+        return $this->parentRegister($request);
     }
 }

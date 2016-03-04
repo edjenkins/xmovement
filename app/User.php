@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\User;
+use App\Idea;
 use Auth;
 
 class User extends Authenticatable
@@ -45,6 +46,16 @@ class User extends Authenticatable
     public function supportedIdeas()
     {
         return $this->belongsToMany(Idea::class, 'supporters')->withTimestamps();
+    }
+
+    /**
+     * Check if the user has supported the given idea.
+     *
+     * @var array
+     */
+    public function hasSupportedIdea(Idea $idea)
+    {
+        return Supporter::where('user_id', $this->id)->where('idea_id', $idea->id)->exists();
     }
 
     /**
