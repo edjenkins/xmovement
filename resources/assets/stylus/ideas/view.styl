@@ -18,7 +18,8 @@
 		font-weight 400 
 		margin-top 40px 
 	.idea-media
-		margin-bottom 20px 
+		margin-bottom 15px
+		position relative
 	p.idea-description
 		border-left main-color 4px solid
 		font-size 18px
@@ -26,12 +27,12 @@
 
 .side-column
 	.creator-tile
-		background #f2f2f2
-		border #f2f2f2 2px solid 
+		border border-color 1px solid 
 		padding 20px 
 		text-align center
 		transition(all linear 0.2s)
 		.creator-avatar
+			background-color light-grey
 			bacground-position center
 			background-size cover
 			background-repeat no-repeat 
@@ -53,22 +54,32 @@
 		
 		&:hover
 			background white
-			border main-color 2px solid 
+			border-color main-color
 			cursor pointer
 		 
 .stats-tile
-	background #f2f2f2 
+	border border-color 1px solid
 	list-style none
 	margin 15px 0
-	padding 20px 20px
+	padding 0
 	text-align center
 	h3
 		font-size 42px 
 		font-weight bolder
 		margin 0
-		padding 5px 10px
+		padding 20px 20px 5px 20px
 	h5
 		color #999
 		font-size 16px 
 		margin 0
-		padding 5px 10px		 
+		padding 5px 20px 20px 20px
+	.stats-tile-footer
+		background light-grey
+		color #999
+		display none
+		padding 6px 10px
+		&.visible
+			display block 
+		p
+			margin 0
+			padding 0

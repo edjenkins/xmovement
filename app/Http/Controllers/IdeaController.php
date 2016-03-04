@@ -44,8 +44,12 @@ class IdeaController extends Controller
 
     public function view(Request $request, Idea $idea)
 	{
+		// Check if user? is a supporter
+		$supported = (Auth::check()) ? Auth::user()->hasSupportedIdea($idea) : false;
+
 		return view('ideas.view', [
 	    	'idea' => $idea,
+	    	'supported' => $supported
 	    ]);
 	}
 

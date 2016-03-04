@@ -1,12 +1,6 @@
 <form class="auth-form" role="form" method="POST" action="{{ url('/login') }}">
     {!! csrf_field() !!}
 
-    @if (isset($redirect))
-
-        <input type="hidden" name="redirect" value="{{ $redirect }}">
-
-    @endif
-
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
         <label class="control-label">Email Address</label>
 

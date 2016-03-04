@@ -3,12 +3,6 @@
 
     <input type="hidden" name="type" value="{{ $type }}">
 
-    @if (isset($redirect))
-
-        <input type="hidden" name="redirect" value="{{ $redirect }}">
-
-    @endif
-
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
         <label class="control-label">Name</label>
 

@@ -22,9 +22,10 @@
     					<h5 class="subtitle">Idea Creator</h5>
 	    			</div>
 
-	    			<div class="stats-tile">
+	    			<div class="stats-tile supporters-tile">
     					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
 	    				<h5 class="supporter-subtitle">Supporters</h5>
+	    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">You support this idea</div>
     				</div>
 
 	    			@include('action-button')
@@ -46,11 +47,12 @@
 
 	    			<div class="hidden-md hidden-lg">
     					
-    					<div class="stats-tile">
+    					<div class="stats-tile supporters-tile">
 	    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
 		    				<h5 class="supporter-subtitle">Supporters</h5>
+		    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">You support this idea</div>
 	    				</div>
-	    				
+
 	    				@include('action-button')
 
     				</div>
@@ -65,14 +67,22 @@
 	    </div>
 	</div>
 
-	@include('modals/support')
+	@can('support', $idea)
 
-@endsection
+		@include('modals/support')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	@endcan
 
-@if (Session::has('show_support'))
+	<?php Session::flash('redirect', Request::url()); ?>
+
+	<script type="text/javascript">
+
+		var auth_type = '{{ Session::pull("auth_type") }}';
+		var is_authorized = '{{ Auth::check() ? true : false }}';
+		var show_support = '{{ Session::pull("show_support") ? true : false }}';
+
+	</script>
 
 	<script src="/js/ideas/view.js"></script>
 
-@endif
+@endsection

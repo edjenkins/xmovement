@@ -32,7 +32,8 @@ function support(user_id, idea_id)
 	            $('.supporter-count').html(response.data.supporter_count);
 				$('.supporter-subtitle').html(button_text);
 				$('#support-button').html('Supported');
-				$('#support-modal').modal('hide')
+				$('#support-modal').modal('hide');
+                $('.supporters-tile-footer').addClass('visible');
 			}
         	else
         	{

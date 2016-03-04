@@ -37,6 +37,18 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user has supported the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function supported(User $user, Idea $idea)
+    {
+        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+    }
+
+    /**
      * Determine if the given user can design the given idea.
      *
      * @param  User  $user
