@@ -25,7 +25,7 @@
 	    			<div class="stats-tile supporters-tile">
     					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
 	    				<h5 class="supporter-subtitle">Supporters</h5>
-	    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">You support this idea</div>
+	    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">You supported this idea</div>
     				</div>
 
 	    			@include('action-button')
@@ -50,7 +50,7 @@
     					<div class="stats-tile supporters-tile">
 	    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
 		    				<h5 class="supporter-subtitle">Supporters</h5>
-		    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">You support this idea</div>
+		    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">You supported this idea</div>
 	    				</div>
 
 	    				@include('action-button')

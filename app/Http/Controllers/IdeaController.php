@@ -14,6 +14,7 @@ use Log;
 use Session;
 
 use App\Jobs\SendInviteEmail;
+use App\Jobs\SendDidSupportEmail;
 
 use App\Idea;
 use App\User;
@@ -205,6 +206,14 @@ class IdeaController extends Controller
 	    	$idea = Idea::find($request->idea_id);
 	    	
 			$idea->supporters()->attach($request->user_id);
+
+			$receiver = User::find($request->user_id);
+
+			if ($idea->user_id != $receiver->id)
+			{
+				$job = (new SendDidSupportEmail($idea->user, $receiver, $idea))->onQueue('emails');
+		        $this->dispatch($job);
+			}
 
 			$response->meta['success'] = true;
 

@@ -24,7 +24,7 @@ function support(user_id, idea_id)
         processData: false,
         success: function(response) {
         	
-        	// $('#support-errors').html(''); // Clear errors
+        	$('#support-errors').html(''); // Clear errors
 
         	if (response.meta.success)
         	{
@@ -44,7 +44,7 @@ function support(user_id, idea_id)
         	}
         },
         error: function(response) {
-        	alert('Something went wrong!');
+        	$('#support-errors').append('<li>Something went wrong!</li>');
         }
     });
 }
