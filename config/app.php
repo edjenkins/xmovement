@@ -160,6 +160,7 @@ return [
          * Custom Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+        XMovement\Poll\PollServiceProvider::class,
 
     ],
 
@@ -209,6 +210,9 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        
+        'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
+        'Poll' => XMovement\Poll\Poll::class,
 
     ],
 

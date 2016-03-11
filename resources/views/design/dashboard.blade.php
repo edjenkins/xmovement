@@ -36,6 +36,7 @@
 	    		
 	    		<div class="column main-column">
 
+	    			<?php echo Poll::renderTile() ?>
 
 	    		</div>
 	    
