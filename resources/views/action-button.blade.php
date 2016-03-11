@@ -18,7 +18,7 @@
 
 	@can('design', $idea)
 
-		<div class="btn btn-primary action-button">Help Design</div>
+		<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">Help Design</a>
 
 	@endcan
 

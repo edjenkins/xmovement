@@ -55,6 +55,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/idea/{idea}', 'IdeaController@view');
     Route::delete('/idea/{idea}', 'IdeaController@destroy');
 
+    // Design routes
+    Route::get('/design/{idea}', 'DesignController@dashboard');
+
     // API routes
     Route::post('/api/support', 'IdeaController@support');
 });
