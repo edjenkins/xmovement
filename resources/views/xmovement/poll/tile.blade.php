@@ -5,7 +5,13 @@
 	    
 		    <span class="vertically-aligned-text">
 
-		    	<h4>{{ $poll['name'] }}</h4>
+		    	<h4>{{ $module['name'] }}</h4>
+
+	@can('voteOnDesignModule', $module)
+		<h2>yes</h2>
+	@else
+		<h2>no</h2>
+	@endcan
 		    	<p>
 					<i class="fa fa-lightbulb-o"></i>
 		    		{{ $poll->pollOptions->count() }}
@@ -19,7 +25,7 @@
 
 	<div class="tile-footer">
 
-		@if($poll['locked'] == true)
+		@if($module['locked'] == true)
 		
 			<p>
 				<i class="fa fa-lock"></i>

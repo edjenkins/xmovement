@@ -26,8 +26,11 @@ class DesignModulesTableSeeder extends Seeder
             DB::table('design_modules')->insert([
                 'user_id' => $user_id,
                 'idea_id' => $idea_id,
+                'name' => $module_names[($i - 1)],
+                'description' => $faker->sentence($nbWords = 5, $variableNbWords = true),
                 'xmovement_module_id' => $i,
                 'xmovement_module_type' => 'Poll',
+                'locked' => $faker->randomElement($array = array(0, 1)),
                 'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
             ]);
@@ -35,11 +38,8 @@ class DesignModulesTableSeeder extends Seeder
             // Add 10 polls
             DB::table('xmovement_polls')->insert([
                 'user_id' => $faker->numberBetween($min = 1, $max = 50),
-                'name' => $module_names[($i - 1)],
-                'description' => $faker->sentence($nbWords = 5, $variableNbWords = true),
                 'contribution_type' => 'text',
                 'voting_type' => 'standard',
-                'locked' => $faker->randomElement($array = array(0, 1)),
                 'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
             ]);

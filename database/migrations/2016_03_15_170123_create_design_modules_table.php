@@ -16,8 +16,11 @@ class CreateDesignModulesTable extends Migration
             $table->increments('id');
             $table->integer('idea_id')->index();
             $table->integer('user_id')->index();
+            $table->string('name', 200);
+            $table->string('description', 2000);
             $table->integer('xmovement_module_id')->index();
             $table->string('xmovement_module_type', 200);
+            $table->boolean('locked')->default(false);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
 	
 	<div class="page-header">
 	    
-        <h2 class="main-title">Poll - {{ $poll['name'] }}</h2>
+        <h2 class="main-title">Poll - {{ $module['name'] }}</h2>
 
 	</div>
 
@@ -22,8 +22,8 @@
 	    
 	    		<div class="column main-column">
 
-	    			<div class="poll-description">
-	    				{{ $poll->description }}
+	    			<div class="module-description">
+	    				{{ $module->description }}
 	    			</div>
 
 	    			<ul class="poll-options-list">

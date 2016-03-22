@@ -15,11 +15,8 @@ class CreateXmovementPollsTable extends Migration
         Schema::create('xmovement_polls', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
-            $table->string('name', 200);
-            $table->string('description', 2000);
             $table->string('contribution_type', 200);
             $table->string('voting_type', 200);
-            $table->boolean('locked')->default(false);
             $table->timestamps();
         });
     }
