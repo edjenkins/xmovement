@@ -22,6 +22,10 @@
 	    
 	    		<div class="column main-column">
 
+	    			<div class="poll-description">
+	    				{{ $poll->description }}
+	    			</div>
+
 	    			<ul class="poll-options-list">
 
 		    			@foreach ($poll->pollOptions as $pollOption)

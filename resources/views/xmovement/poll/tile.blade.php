@@ -1,18 +1,21 @@
 <div class="xmovement-tile">
 
-    <div class="tile-body" onClick="document.location = '/design/poll/{{ $poll['id'] }}'">
+    <a href="/design/poll/{{ $poll['id'] }}">
+    	<div class="tile-body">
 	    
-	    <span class="vertically-aligned-text">
+		    <span class="vertically-aligned-text">
 
-	    	<h4>{{ $poll['name'] }}</h4>
-	    	<p>
-	    		<i class="fa fa-user"></i>
-	    		32
-	    	</p>
+		    	<h4>{{ $poll['name'] }}</h4>
+		    	<p>
+					<i class="fa fa-lightbulb-o"></i>
+		    		{{ $poll->pollOptions->count() }}
+		    	</p>
 
-	    </span>
+		    </span>
 
-	</div>
+		</div>
+
+	</a>
 
 	<div class="tile-footer">
 
@@ -26,13 +29,13 @@
 		@else
 			
 			<ul class="voting-controls">
-				<li class="vote-up">
+				<li class="vote-button vote-up" data-vote-direction="up" data-design-module-id="{{ $module['id'] }}">
 					<i class="fa fa-2x fa-angle-up"></i>
 				</li>
 				<li class="vote-count">
-					<p>23</p>
+					<p>{{ $module->voteCount() }}</p>
 				</li>
-				<li class="vote-down">
+				<li class="vote-button vote-down" data-vote-direction="down" data-design-module-id="{{ $module['id'] }}">
 					<i class="fa fa-2x fa-angle-down"></i>
 				</li>
 			</ul>

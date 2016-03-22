@@ -8,9 +8,9 @@ class Poll extends Model
 {
     protected $table = 'xmovement_polls';
 
-    public function renderTile()
+    public function renderTile($module)
     {
-    	return view('poll::tile', ['poll' => $this]);
+    	return view('poll::tile', ['poll' => $this, 'module' => $module]);
     }
 
     public function pollOptions()

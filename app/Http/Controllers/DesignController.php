@@ -15,6 +15,19 @@ use Session;
 
 use App\Idea;
 use App\User;
+use App\DesignModuleVote;
+
+class ResponseObject {
+
+    public $meta = array();
+    public $errors = array();
+    public $data = array();
+
+    public function __construct()
+    {
+        $this->meta['success'] = false;
+    }
+}
 
 class DesignController extends Controller
 {
@@ -31,5 +44,26 @@ class DesignController extends Controller
             'idea' => $idea,
             'modules' => $modules,
         ]);
+    }
+
+    public function vote(Request $request)
+    {
+        $response = new ResponseObject();
+
+        $response->meta['success'] = true;
+
+        $value = ($request->vote_direction == 'up') ? 1 : -1;
+
+        // Check user can vote on module
+        // Not locked
+        // Update previous votes
+
+        DesignModuleVote::create([
+            'design_module_id' => $request->design_module_id,
+            'user_id' => Auth::user()->id,
+            'value' => $value
+        ]);
+
+        return Response::json($response);
     }
 }

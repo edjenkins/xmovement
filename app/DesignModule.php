@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\DesignModuleVote;
+
 class DesignModule extends Model
 {
     /**
@@ -23,5 +25,10 @@ class DesignModule extends Model
     public function xmovement_module()
     {
         return $this->morphTo();
+    }
+
+    public function voteCount()
+    {
+        return DesignModuleVote::where('design_module_id', $this->id)->sum('value');
     }
 }

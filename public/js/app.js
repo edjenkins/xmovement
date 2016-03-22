@@ -13,7 +13,7 @@ $(document).ready(function() {
 	});
 
     // Hide flash messages
-    setTimeout(function() { $('.flash').fadeOut() }, 1500);
+    setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 2000);
 
 });
 
@@ -29,4 +29,13 @@ function getURLParam(param)
             return parameterName[1];
         }
     }
+}
+
+function showJSflash(message, type)
+{
+    var flash_message = '<div class="flash ' + type + '">' + message + '</div>';
+
+    $('body').append(flash_message);
+    
+    setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 2000);
 }

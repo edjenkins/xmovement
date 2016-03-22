@@ -49,7 +49,7 @@
 					@foreach ($modules as $module)
 
 						<?php
-						echo $module->xmovement_module->renderTile();
+						echo $module->xmovement_module->renderTile($module);
 						?>
 
 					@endforeach

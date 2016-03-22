@@ -1,5 +1,3 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
 <div class="action-buttons">
 
 	@if (Auth::check())
