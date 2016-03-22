@@ -20,6 +20,16 @@ class Idea extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * The Design Modules for the idea.
+     *
+     * @var array
+     */
+    public function designModules()
+    {
+        return $this->hasMany(DesignModule::class);
+    }
+
     public function supporterCount()
     {
         return Supporter::where('idea_id', $this->id)->count();

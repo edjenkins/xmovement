@@ -3,14 +3,15 @@
 namespace XMovement\Poll;
 
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
  
 class PollController extends Controller
 {
  
-    public static function view()
+    public static function view($poll_id)
     {
-        return view('poll::view');
+    	$poll = Poll::find($poll_id)->with('pollOptions')->get()->first();
+
+        return view('poll::view', ['poll' => $poll]);
     }
 
 }

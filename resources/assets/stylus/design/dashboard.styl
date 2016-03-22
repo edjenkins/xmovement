@@ -1,6 +1,6 @@
 .view-controls-container
 	border-bottom border-color 1px solid 
-	padding 10px 0
+	padding 20px 10px
 	.search-bar-wrapper
 		border border-color 1px solid
 		display inline-block
@@ -24,4 +24,21 @@
 			padding 10px 20px 
 			width 220px
 			&:focus
-				outline 0 
+				outline 0
+				
+	.module-controls
+		float right
+		list-style none 
+		margin 0
+		padding 0
+		.module-control
+			border border-color 1px solid
+			line-height 40px
+			text-align center 
+			width 50px 
+			transition(all 0.2s linear)
+			&:hover
+				background border-color
+				cursor pointer 
+			&.add-module-button
+				color #666

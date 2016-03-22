@@ -32,12 +32,29 @@
 
 	    			</div>
 
+	    			<ul class="module-controls">
+
+	    				<li class="module-control add-module-button">
+
+	    					<i class="fa fa-plus"></i>
+
+	    				</li>
+
+	    			</ul>
+
 	    		</div>
 	    		
 	    		<div class="column main-column">
 
-	    			<?php echo Poll::renderTile() ?>
+					@foreach ($modules as $module)
 
+						<?php
+						echo $module->xmovement_module->renderTile();
+						?>
+
+					@endforeach
+
+	    			<div class="clearfloat"></div>
 	    		</div>
 	    
 	    	</div>

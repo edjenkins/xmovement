@@ -1,2 +1,5 @@
 <?php
-Route::get('design/poll', 'xmovement\poll\PollController@view');
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('design/poll/{module_id}', 'xmovement\poll\PollController@view');
+});
