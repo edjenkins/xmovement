@@ -40,28 +40,26 @@
 		transition(all 0.2s linear)
 		p
 			color #999
-			line-height 45px
+			line-height 40px
 			margin 0
 			padding 0
-		ul.voting-controls
-			list-style none
-			margin 0 
-			padding 0
-			li
+		.vote-container.design-module-vote-container
+			.vote-count
+				display inline
+				line-height 40px 
+				text-align center
+				width 60px 
+			.vote-controls
+				height 80px
+			.vote-button
 				display inline-block
-				line-height 40px
-				margin 0 
-				padding 0 15px
-				p, i
-					color #AAA
-					line-height 40px
+				height 30px
+				width 60px
+				line-height 30px
+				text-align center
 				&.vote-up
-					top -2px
-				&:hover
-					cursor pointer
-					&.vote-up i
-						color success-color
-				&:hover
-					cursor pointer
-					&.vote-down i
-						color danger-color
+					top 10px
+				&.vote-down
+					top 40px
+			
+						

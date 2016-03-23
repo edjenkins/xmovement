@@ -1,0 +1,19 @@
+.vote-container
+	.vote-count
+		color #999
+		font-weight bold
+		&.positive-vote
+			color success-color
+		&.negative-vote
+			color danger-color
+	.vote-button
+		i
+			color #999
+		&:hover
+			cursor pointer
+		&.vote-up
+			&:hover i, &.voted i
+				color success-color
+		&.vote-down
+			&:hover i, &.voted i
+				color danger-color

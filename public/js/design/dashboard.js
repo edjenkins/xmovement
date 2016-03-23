@@ -1,12 +1,13 @@
 $(document).ready(function() {
 
-	$('.vote-button').click(function() {
+	$('.design-module-vote-container .vote-button').click(function() {
 
 		var vote_button = $(this);
-
+		var vote_container = $(this).parents('.vote-controls').parents('.vote-container');
+		
 		var vote_direction = $(this).attr('data-vote-direction');
-
-		var design_module_id = $(this).attr('data-design-module-id');
+		var votable_id = $(this).attr('data-votable-id');
+		var votable_type = $(this).attr('data-votable-type');
 
 		$.ajaxSetup({
 	        headers: {
@@ -17,31 +18,27 @@ $(document).ready(function() {
 
 	    $.ajax({
 	        type:"POST",
-	        url: '/design_module/vote',
+	        url: '/' + votable_type + '/vote',
 	        dataType: "json",
-	        data:  JSON.stringify({design_module_id: design_module_id, vote_direction: vote_direction}),
+	        data:  JSON.stringify({votable_id: votable_id, vote_direction: vote_direction}),
 	        processData: false,
 	        success: function(response) {
 			  
-				// Success
-				console.log(response['data']);
-				
-				var vote_count_element = vote_button.parents('.voting-controls').children('.vote-count').children('p');
-				
-				var vote_count = parseInt(vote_count_element.html());
+				// Success				
+				var vote_count = (vote_direction == 'up') ? (parseInt(vote_container.find('.vote-count').html()) + 1) : (parseInt(vote_container.find('.vote-count').html()) - 1);
 
-				vote_count = (vote_direction == 'up') ? (vote_count + 1) : (vote_count - 1);
+				vote_container.find('.vote-count').html(vote_count);
 
-				vote_count_element.html(vote_count);
+				vote_button.addClass('voted');
 
 				showJSflash('Your vote was successful', 'flash-success');
 	        
 	        },
 	        error: function(response) {
 				
-				// Error	
-				alert( "error" );
-
+				// Error
+				console.log(response);
+				
 				showJSflash('Your vote failed', 'flash-danger');
 
 	        }

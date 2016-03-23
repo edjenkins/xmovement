@@ -59,7 +59,7 @@ class DesignController extends Controller
         // Update previous votes
 
         DesignModuleVote::create([
-            'design_module_id' => $request->design_module_id,
+            'design_module_id' => $request->votable_id,
             'user_id' => Auth::user()->id,
             'value' => $value
         ]);
