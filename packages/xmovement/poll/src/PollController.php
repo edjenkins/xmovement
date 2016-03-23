@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 class PollController extends Controller
 {
  
-    public static function view($poll_id)
+    public static function view($module_id)
     {
-    	$poll = Poll::where('id', $poll_id)->with('pollOptions')->get()->first();
+    	$module = \App\DesignModule::where('id', $module_id)->get()->first();
 
-        return view('poll::view', ['poll' => $poll]);
+    	$poll = $module->xmovement_module;
+
+        return view('poll::view', ['poll' => $poll, 'module' => $module]);
     }
 
 }

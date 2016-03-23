@@ -23,7 +23,7 @@
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				{{ $module->description }}
+	    				{{ $module['description'] }}
 	    			</div>
 
 	    			<ul class="poll-options-list">

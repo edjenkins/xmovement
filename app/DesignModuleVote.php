@@ -12,6 +12,6 @@ class DesignModuleVote extends Model
      * @var array
      */
     protected $fillable = [
-        'xmovement_module_id', 'user_id', 'value'
+        'user_id', 'design_module_id', 'value'
     ];
 }

@@ -1,6 +1,6 @@
 <div class="xmovement-tile">
 
-    <a href="/design/poll/{{ $poll['id'] }}">
+    <a href="/design/poll/{{ $module['id'] }}">
     	<div class="tile-body">
 	    
 		    <span class="vertically-aligned-text">

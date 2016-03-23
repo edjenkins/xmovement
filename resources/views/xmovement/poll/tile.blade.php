@@ -1,17 +1,12 @@
 <div class="xmovement-tile">
 
-    <a href="/design/poll/{{ $poll['id'] }}">
+    <a href="/design/poll/{{ $module['id'] }}">
     	<div class="tile-body">
 	    
 		    <span class="vertically-aligned-text">
 
 		    	<h4>{{ $module['name'] }}</h4>
-
-	@can('voteOnDesignModule', $module)
-		<h2>yes</h2>
-	@else
-		<h2>no</h2>
-	@endcan
+		    	
 		    	<p>
 					<i class="fa fa-lightbulb-o"></i>
 		    		{{ $poll->pollOptions->count() }}
