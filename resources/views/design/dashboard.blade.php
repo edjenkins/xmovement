@@ -32,15 +32,23 @@
 
 	    			</div>
 
-	    			<ul class="module-controls">
+	    			<ul class="module-controls pull-right">
 
-	    				<li class="module-control add-module-button">
+    					<li class="module-control add-module-button">
+    						
+    						<a href="{{ action('DesignController@add', $idea) }}">
 
-	    					<i class="fa fa-plus"></i>
+		    					<i class="fa fa-plus"></i>
+
+		    					Add a Module
+
+		    				</a>
 
 	    				</li>
 
 	    			</ul>
+
+	    			<div class="clearfloat"></div>
 
 	    		</div>
 	    		

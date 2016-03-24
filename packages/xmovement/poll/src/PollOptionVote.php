@@ -4,7 +4,7 @@ namespace XMovement\Poll;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PollOptionVotes extends Model
+class PollOptionVote extends Model
 {
     protected $table = 'xmovement_poll_option_votes';
 

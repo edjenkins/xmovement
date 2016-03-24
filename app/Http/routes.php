@@ -57,9 +57,10 @@ Route::group(['middleware' => ['web']], function () {
 
     // Design routes
     Route::get('/design/{idea}', 'DesignController@dashboard');
+    Route::get('/design/add/{idea}', 'DesignController@add');
 
     // Vote routes (Design module)
-    Route::post('/design_module/vote', 'DesignController@vote');
+    Route::post('/vote/module', 'DesignController@vote');
 
     // API routes
     Route::post('/api/support', 'IdeaController@support');

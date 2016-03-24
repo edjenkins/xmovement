@@ -15,7 +15,7 @@ class Poll extends Model
 
     public function pollOptions()
     {
-        return $this->hasMany(PollOptions::class, 'xmovement_poll_id');
+        return $this->hasMany(PollOption::class, 'xmovement_poll_id');
     }
 
     public function designModule()

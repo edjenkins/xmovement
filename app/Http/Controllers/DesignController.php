@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use DB;
 use Gate;
 use Response;
 use Input;
@@ -15,6 +16,7 @@ use Session;
 
 use App\Idea;
 use App\User;
+use App\DesignModule;
 use App\DesignModuleVote;
 
 class ResponseObject {
@@ -37,7 +39,9 @@ class DesignController extends Controller
 
         foreach ($modules as $index => $module)
         {
-        	$module['xmovement_module'] = $module->xmovement_module;        	
+            $module['xmovement_module'] = $module->xmovement_module;            
+
+            $module['user_vote'] = $module->userVote();
         }
         
         return view('design.dashboard', [
@@ -46,24 +50,26 @@ class DesignController extends Controller
         ]);
     }
 
+    public function add(Request $request, Idea $idea)
+    {
+        return view('design.add', [
+            'idea' => $idea,
+        ]);
+    }
+
     public function vote(Request $request)
     {
         $response = new ResponseObject();
 
-        $response->meta['success'] = true;
-
         $value = ($request->vote_direction == 'up') ? 1 : -1;
 
-        // Check user can vote on module
-        // Not locked
-        // Update previous votes
+        $module = DesignModule::whereId($request->votable_id)->first();
 
-        DesignModuleVote::create([
-            'design_module_id' => $request->votable_id,
-            'user_id' => Auth::user()->id,
-            'value' => $value
-        ]);
-
+        if ($module->addVote($value))
+        {
+            $response->meta['success'] = true;
+        }
+        
         return Response::json($response);
     }
 }

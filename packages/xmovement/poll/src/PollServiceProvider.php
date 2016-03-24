@@ -34,6 +34,10 @@ class PollServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/stylus' => base_path('resources/assets/stylus/xmovement/poll'),
         ], 'public');
+        
+        $this->publishes([
+            __DIR__.'/js' => base_path('public/js/xmovement/poll'),
+        ], 'public');
     }
 
     /**
