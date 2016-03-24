@@ -1,0 +1,56 @@
+.module-description
+	background main-color
+	color white
+	margin-top 20px 
+	padding 20px 
+
+ul.poll-options-list
+	list-style none
+	margin 0
+	padding 0
+	li
+		border-bottom #e1e1e1 1px solid 
+		font-size 15px 
+		line-height 80px
+		margin 0
+		padding 0 20px
+		padding-right 80px 
+		position relative
+		transition(all 0.2s linear)
+		.value
+			color #444
+			font-size 1.2em 
+		.vote-container.poll-option-vote-container
+			line-height 80px  
+			position absolute
+			right 0
+			top 0
+			width 70px 
+			.vote-count
+				line-height 80px 
+				text-align center 
+				position absolute
+				right 40px
+				top 0
+				width 30px 
+			.vote-controls
+				height 80px
+				width 40px
+				position absolute
+				right 0
+				top 0
+				.vote-button
+					height 30px
+					width 40px
+					line-height 30px
+					position absolute
+					text-align center
+					i
+						position relative
+						right 0
+					&:hover
+						cursor pointer
+					&.vote-up
+						top 10px
+					&.vote-down
+						top 40px

@@ -24,7 +24,7 @@
 
 	    			<ul class="module-controls pull-left">
 
-    					<li class="module-control add-module-button">
+    					<li class="module-control">
     						
     						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
 

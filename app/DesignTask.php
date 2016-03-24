@@ -16,7 +16,7 @@ class DesignTask extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'xmovement_task_id', 'xmovement_task_type', 'locked'
+        'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'locked'
     ];
     
     public function idea()
@@ -57,7 +57,7 @@ class DesignTask extends Model
         }
         else
         {
-            DesignTaskVote::insert([
+            DesignTaskVote::create([
                 'design_task_id' => $this->id,
                 'user_id' => Auth::user()->id,
                 'value' => $value

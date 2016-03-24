@@ -66,13 +66,13 @@ class PollController extends Controller
     	$voting_type = $request->voting_type;
     	$contribution_type = $request->contribution_type;
 
-        $poll_id = Poll::insertGetId([
+        $poll_id = Poll::create([
             'user_id' => $user_id,
             'contribution_type' => $contribution_type,
             'voting_type' => $voting_type,
-        ]);
+        ])->id;
 
-        $design_task_id = DesignTask::insertGetId([
+        $design_task_id = DesignTask::create([
             'user_id' => $user_id,
             'idea_id' => $idea_id,
             'name' => $request->name,
@@ -80,7 +80,7 @@ class PollController extends Controller
             'xmovement_task_id' => $poll_id,
             'xmovement_task_type' => 'Poll',
             'locked' => $request->locked,
-        ]);
+        ])->id;
 
 	    // Load the design_task view
 		return $this->view($design_task_id);

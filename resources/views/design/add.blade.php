@@ -38,30 +38,16 @@
 	    		<div class="column main-column">
 
 	    			<ul class="design-module-selector">
+
+		    			@foreach($design_modules as $design_module)
 		    			
-		    			<li class="design-module-tile" data-form-id="#contribution-form">
-		    				Contribution
-		    			</li>
+			    			<li class="design-module-tile" data-form-id="#{{ strtolower($design_module->name) }}-form">
+			    				
+			    				{{ $design_module->name }}
 
-		    			<li class="design-module-tile" data-form-id="#poll-form">
-		    				Poll
-		    			</li>
-
-		    			<li class="design-module-tile" data-form-id="#requirement-form">
-		    				Requirement
-		    			</li>
-
-		    			<li class="design-module-tile" data-form-id="#ice-cube-tray-form">
-		    				Ice Cube Tray
-		    			</li>
-
-		    			<li class="design-module-tile" data-form-id="#external-resource-form">
-		    				External Resource
-		    			</li>
-
-		    			<li class="design-module-tile" data-form-id="#discussion-form">
-		    				Discussion
-		    			</li>
+			    			</li>
+		    			
+		    			@endforeach
 
 		    			<div class="clearfloat"></div>
 
@@ -69,42 +55,15 @@
 
 	    			<div class="design-module-forms">
 
-						<div class="design-module-form" id="contribution-form">
-
-							
-
-						</div>
+		    			@foreach($design_modules as $design_module)
 		    			
-		    			<div class="design-module-form" id="poll-form">
+			    			<li class="design-module-form" id="{{ strtolower($design_module->name) }}-form">
+			    				
+			    				@include('xmovement/' . strtolower($design_module->name) . '/forms/add', ['editing' => false, 'idea' => $idea])
 
-		    				@include('forms/xmovement/poll', ['editing' => false, 'idea' => $idea])
-
-		    			</div>
-
-						<div class="design-module-form" id="requirement-form">
-
-							
-
-						</div>
-
-						<div class="design-module-form" id="ice-cube-tray-form">
-
-							
-
-						</div>
-
-						<div class="design-module-form" id="external-resource-form">
-
-							
-
-						</div>
-
-						<div class="design-module-form" id="discussion-form">
-
-							
-
-						</div>
-
+			    			</li>
+		    			
+		    			@endforeach
 
 	    			</div>
 

@@ -16,6 +16,7 @@ use Session;
 
 use App\Idea;
 use App\User;
+use App\DesignModule;
 use App\DesignTask;
 use App\DesignTaskVote;
 
@@ -52,8 +53,12 @@ class DesignController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
+        // Fetch available design modules
+        $design_modules = DesignModule::get();
+
         return view('design.add', [
             'idea' => $idea,
+            'design_modules' => $design_modules,
         ]);
     }
 

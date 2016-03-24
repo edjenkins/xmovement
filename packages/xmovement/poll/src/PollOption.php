@@ -48,7 +48,7 @@ class PollOption extends Model
         }
         else
         {
-            PollOptionVote::insert([
+            PollOptionVote::create([
                 'xmovement_poll_option_id' => $this->id,
                 'user_id' => Auth::user()->id,
                 'value' => $value

@@ -160,7 +160,10 @@ return [
          * Custom Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+
+        // XMovement Design Modules
         XMovement\Poll\PollServiceProvider::class,
+        XMovement\Discussion\DiscussionServiceProvider::class,
 
     ],
 
@@ -213,6 +216,9 @@ return [
         
         'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
         'Poll' => XMovement\Poll\Poll::class,
+        
+        'DiscussionServiceProvider' => XMovement\Discussion\DiscussionServiceProvider::class,
+        'Discussion' => XMovement\Discussion\Discussion::class,
 
     ],
 

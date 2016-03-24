@@ -1,10 +1,10 @@
 <?php
 
-namespace XMovement\Poll;
+namespace XMovement\Discussion;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Poll extends Model
+class Discussion extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,19 +12,14 @@ class Poll extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'contribution_type', 'voting_type'
+        'user_id'
     ];
 
-    protected $table = 'xmovement_polls';
+    protected $table = 'xmovement_discussions';
 
     public function renderTile($design_task)
     {
-    	return view('poll::tile', ['poll' => $this, 'design_task' => $design_task]);
-    }
-
-    public function pollOptions()
-    {
-        return $this->hasMany(PollOption::class, 'xmovement_poll_id');
+    	return view('discussion::tile', ['discussion' => $this, 'design_task' => $design_task]);
     }
 
     public function designTask()
