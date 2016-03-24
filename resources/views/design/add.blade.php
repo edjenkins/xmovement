@@ -37,6 +37,7 @@
 	    		
 	    		<div class="column main-column">
 
+	    			@include('forms/xmovement/poll', ['editing' => false, 'idea' => $idea])
 
 	    			<div class="clearfloat"></div>
 	    		</div>

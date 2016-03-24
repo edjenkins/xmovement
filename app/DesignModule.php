@@ -16,7 +16,7 @@ class DesignModule extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'xmovement_module_id', 'xmovement_module_type'
+        'idea_id', 'user_id', 'xmovement_module_id', 'xmovement_module_type', 'locked'
     ];
     
     public function idea()
