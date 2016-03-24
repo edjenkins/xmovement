@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Generator;
 
-class DesignModulesTableSeeder extends Seeder
+class DesignTasksTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,22 +14,22 @@ class DesignModulesTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $module_names = array('Venue Name','Primary Speaker','Secondary Speakers','Catering Options');
+        $design_task_names = array('Venue Name','Primary Speaker','Secondary Speakers','Catering Options');
 
-        for ($i=1; $i <= count($module_names); $i++)
+        for ($i=1; $i <= count($design_task_names); $i++)
         {
             $user_id = $faker->numberBetween($min = 1, $max = 50);
             $idea_id = 1;
             $module_id = $i;
 
             // Add 10 design modules
-            DB::table('design_modules')->insert([
+            DB::table('design_tasks')->insert([
                 'user_id' => $user_id,
                 'idea_id' => $idea_id,
-                'name' => $module_names[($i - 1)],
+                'name' => $design_task_names[($i - 1)],
                 'description' => $faker->sentence($nbWords = 5, $variableNbWords = true),
-                'xmovement_module_id' => $i,
-                'xmovement_module_type' => 'Poll',
+                'xmovement_task_id' => $i,
+                'xmovement_task_type' => 'Poll',
                 'locked' => $faker->randomElement($array = array(0, 1)),
                 'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
@@ -54,7 +54,6 @@ class DesignModulesTableSeeder extends Seeder
                     'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
                     'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
                 ]);
-
 
                 // Add poll option votes
                 for ($k=1; $k < $faker->numberBetween($min = 1, $max = 20); $k++)

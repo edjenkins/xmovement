@@ -4,6 +4,7 @@ namespace XMovement\Poll;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Auth;
 use DB;
@@ -15,14 +16,8 @@ use Session;
 
 use App\Idea;
 use App\User;
-use App\DesignModule;
-use App\DesignModuleVote;
-
-
-
-
-use App\Http\Controllers\Controller;
-
+use App\DesignTask;
+use App\DesignTaskVote;
 
 class ResponseObject {
 
@@ -39,13 +34,13 @@ class ResponseObject {
 class PollController extends Controller
 {
  
-    public static function view($module_id)
+    public static function view($design_task_id)
     {
-    	$module = DesignModule::where('id', $module_id)->get()->first();
+    	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
     	
-    	$poll = $module->xmovement_module;
+    	$poll = $design_task->xmovement_task;
 
-        return view('poll::view', ['poll' => $poll, 'module' => $module]);
+        return view('poll::view', ['poll' => $poll, 'design_task' => $design_task]);
     }
 
     public function vote(Request $request)
@@ -77,18 +72,18 @@ class PollController extends Controller
             'voting_type' => $voting_type,
         ]);
 
-        $design_module_id = DesignModule::insertGetId([
+        $design_task_id = DesignTask::insertGetId([
             'user_id' => $user_id,
             'idea_id' => $idea_id,
             'name' => $request->name,
             'description' => $request->description,
-            'xmovement_module_id' => $poll_id,
-            'xmovement_module_type' => 'Poll',
+            'xmovement_task_id' => $poll_id,
+            'xmovement_task_type' => 'Poll',
             'locked' => $request->locked,
         ]);
 
-	    // Load the module view
-		return $this->view($design_module_id);
+	    // Load the design_task view
+		return $this->view($design_task_id);
     }
 
     public function update(Request $request)

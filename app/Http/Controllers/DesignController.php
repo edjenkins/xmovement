@@ -16,8 +16,8 @@ use Session;
 
 use App\Idea;
 use App\User;
-use App\DesignModule;
-use App\DesignModuleVote;
+use App\DesignTask;
+use App\DesignTaskVote;
 
 class ResponseObject {
 
@@ -35,18 +35,18 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
-        $modules = $idea->designModules;
+        $design_tasks = $idea->designTasks;
 
-        foreach ($modules as $index => $module)
+        foreach ($design_tasks as $index => $design_task)
         {
-            $module['xmovement_module'] = $module->xmovement_module;            
+            $design_task['xmovement_task'] = $design_task->xmovement_task;            
 
-            $module['user_vote'] = $module->userVote();
+            $design_task['user_vote'] = $design_task->userVote();
         }
         
         return view('design.dashboard', [
             'idea' => $idea,
-            'modules' => $modules,
+            'design_tasks' => $design_tasks,
         ]);
     }
 
@@ -63,9 +63,9 @@ class DesignController extends Controller
 
         $value = ($request->vote_direction == 'up') ? 1 : -1;
 
-        $module = DesignModule::whereId($request->votable_id)->first();
+        $design_task = DesignTask::whereId($request->votable_id)->first();
 
-        if ($module->addVote($value))
+        if ($design_task->addVote($value))
         {
             $response->meta['success'] = true;
         }

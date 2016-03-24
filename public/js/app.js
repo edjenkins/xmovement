@@ -42,7 +42,7 @@ function showJSflash(message, type)
 
 $(document).ready(function() {
 
-    $('.vote-container.design-module-vote-container .vote-button').click(function() {
+    $('.vote-container.design-task-vote-container .vote-button').click(function() {
 
         var vote_button = $(this);
         var vote_container = $(this).parents('.vote-controls').parents('.vote-container');

@@ -21,13 +21,13 @@ class Idea extends Model
     }
 
     /**
-     * The Design Modules for the idea.
+     * The Design Tasks for the idea.
      *
      * @var array
      */
-    public function designModules()
+    public function designTasks()
     {
-        return $this->hasMany(DesignModule::class);
+        return $this->hasMany(DesignTask::class);
     }
 
     public function supporterCount()

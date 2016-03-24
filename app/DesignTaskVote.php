@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DesignModuleVote extends Model
+class DesignTaskVote extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class DesignModuleVote extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'design_module_id', 'value'
+        'user_id', 'design_task_id', 'value'
     ];
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDesignModuleVotesTable extends Migration
+class CreateDesignTaskVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateDesignModuleVotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('design_module_votes', function (Blueprint $table) {
+        Schema::create('design_task_votes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('design_module_id')->index();
+            $table->integer('design_task_id')->index();
             $table->integer('user_id')->index();
             $table->integer('value');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreateDesignModuleVotesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('design_module_votes');
+        Schema::drop('design_task_votes');
     }
 }

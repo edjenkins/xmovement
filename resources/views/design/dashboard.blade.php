@@ -28,19 +28,19 @@
 	    			<div class="search-bar-wrapper">
 
 	    				<div class="search-bar-button"><i class="fa fa-search"></i></div>
-		    			<input class="search-bar" type="text" placeholder="Search Design Modules">
+		    			<input class="search-bar" type="text" placeholder="Search Design Tasks">
 
 	    			</div>
 
 	    			<ul class="module-controls pull-right">
 
-    					<li class="module-control add-module-button">
+    					<li class="module-control">
     						
     						<a href="{{ action('DesignController@add', $idea) }}">
 
 		    					<i class="fa fa-plus"></i>
 
-		    					Add a Module
+		    					Add Design Task
 
 		    				</a>
 
@@ -54,10 +54,10 @@
 	    		
 	    		<div class="column main-column">
 
-					@foreach ($modules as $module)
+					@foreach ($design_tasks as $design_task)
 
 						<?php
-						echo $module->xmovement_module->renderTile($module);
+						echo $design_task->xmovement_task->renderTile($design_task);
 						?>
 
 					@endforeach

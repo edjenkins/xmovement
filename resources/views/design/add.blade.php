@@ -4,7 +4,7 @@
 	
 	<div class="page-header">
 	    
-        <h2 class="main-title">Add Design Module</h2>
+        <h2 class="main-title">Add Design Task</h2>
 
 	</div>
 
@@ -17,7 +17,7 @@
 
 	    			<ul class="module-controls pull-left">
 
-    					<li class="module-control add-module-button">
+    					<li class="module-control">
     						
     						<a href="{{ action('DesignController@dashboard', $idea) }}">
 

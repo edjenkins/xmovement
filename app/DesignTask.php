@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\DesignModuleVote;
+use App\DesignTaskVote;
 
 use Auth;
 
-class DesignModule extends Model
+class DesignTask extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class DesignModule extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'xmovement_module_id', 'xmovement_module_type', 'locked'
+        'idea_id', 'user_id', 'xmovement_task_id', 'xmovement_task_type', 'locked'
     ];
     
     public function idea()
@@ -24,22 +24,22 @@ class DesignModule extends Model
         return $this->belongsTo(Idea::class);
     }
 
-    public function xmovement_module()
+    public function xmovement_task()
     {
         return $this->morphTo();
     }
 
     public function voteCount()
     {
-        return DesignModuleVote::where('design_module_id', $this->id)->sum('value');
+        return DesignTaskVote::where('design_task_id', $this->id)->sum('value');
     }
 
     public function userVote()
     {
         // Check if user has voted on module
-        $user_vote = DesignModuleVote::where([
+        $user_vote = DesignTaskVote::where([
             ['user_id', Auth::user()->id],
-            ['design_module_id', $this->id],
+            ['design_task_id', $this->id],
         ])->orderBy('created_at')->first();
 
         return $user_vote['value'];
@@ -57,8 +57,8 @@ class DesignModule extends Model
         }
         else
         {
-            DesignModuleVote::insert([
-                'design_module_id' => $this->id,
+            DesignTaskVote::insert([
+                'design_task_id' => $this->id,
                 'user_id' => Auth::user()->id,
                 'value' => $value
             ]);

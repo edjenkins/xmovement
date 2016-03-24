@@ -8,9 +8,9 @@ class Poll extends Model
 {
     protected $table = 'xmovement_polls';
 
-    public function renderTile($module)
+    public function renderTile($design_task)
     {
-    	return view('poll::tile', ['poll' => $this, 'module' => $module]);
+    	return view('poll::tile', ['poll' => $this, 'design_task' => $design_task]);
     }
 
     public function pollOptions()
@@ -18,9 +18,9 @@ class Poll extends Model
         return $this->hasMany(PollOption::class, 'xmovement_poll_id');
     }
 
-    public function designModule()
+    public function designTask()
     {
-        return $this->morphMany('App\DesignModule', 'xmovement_module');
+        return $this->morphMany('App\DesignTask', 'xmovement_task');
     }
 
 }

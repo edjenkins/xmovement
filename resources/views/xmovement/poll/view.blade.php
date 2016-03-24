@@ -4,7 +4,7 @@
 	
 	<div class="page-header">
 	    
-        <h2 class="main-title">Poll - {{ $module['name'] }}</h2>
+        <h2 class="main-title">Poll - {{ $design_task['name'] }}</h2>
 
 	</div>
 
@@ -26,7 +26,7 @@
 
     					<li class="module-control add-module-button">
     						
-    						<a href="{{ action('DesignController@dashboard', $module->idea) }}">
+    						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
 
 		    					<i class="fa fa-chevron-left"></i>
 
@@ -45,7 +45,7 @@
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				{{ $module['description'] }}
+	    				{{ $design_task['description'] }}
 	    			</div>
 
 	    			<ul class="poll-options-list">
