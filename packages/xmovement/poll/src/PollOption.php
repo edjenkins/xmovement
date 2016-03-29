@@ -38,7 +38,7 @@ class PollOption extends Model
 
     public function voteCount()
     {
-        return PollOptionVote::where('xmovement_poll_option_id', $this->id)->sum('value');
+        return PollOptionVote::where([['xmovement_poll_option_id', $this->id], ['latest', true]])->sum('value');
     }
 
     public function userVote()
@@ -47,7 +47,8 @@ class PollOption extends Model
         $user_vote = PollOptionVote::where([
             ['user_id', Auth::user()->id],
             ['xmovement_poll_option_id', $this->id],
-        ])->orderBy('created_at')->first();
+            ['latest', true],
+        ])->orderBy('created_at', -1)->first();
 
         return $user_vote['value'];
     }
@@ -64,10 +65,18 @@ class PollOption extends Model
         }
         else
         {
+            // Set old voted to inactive
+            PollOptionVote::where([
+                'xmovement_poll_option_id' => $this->id,
+                'user_id' => Auth::user()->id,
+            ])->update(['latest' => false]);
+
+            // Add new vote
             PollOptionVote::create([
                 'xmovement_poll_option_id' => $this->id,
                 'user_id' => Auth::user()->id,
-                'value' => $value
+                'value' => $value,
+                'latest' => true
             ]);
 
             return true;

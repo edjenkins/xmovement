@@ -37,6 +37,25 @@
 	    				</li>
 
 	    			</ul>
+					
+					@can('destroy', $design_task)
+
+		    			<ul class="module-controls pull-right">
+
+	    					<li class="module-control">
+
+						        <form action="{{ action('DesignController@destroyTask', $design_task) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
+						            {!! csrf_field() !!}
+						            {!! method_field('DELETE') !!}
+
+									<button type="submit"><i class="fa fa-trash"></i></button>
+						        </form>
+
+		    				</li>
+
+		    			</ul>
+
+	    			@endcan
 
 	    			<div class="clearfloat"></div>
 
@@ -48,11 +67,11 @@
 	    				{{ $design_task['description'] }}
 	    			</div>
 
-	    			<br>
+	    			<div class="discussion-container">
 
-	    			<br>
+		    			@include('disqus')
 
-	    			@include('disqus')
+		    		</div>
 	    			
 	    		</div>
 	    

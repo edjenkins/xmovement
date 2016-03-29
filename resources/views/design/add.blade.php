@@ -39,9 +39,9 @@
 
 	    			<ul class="design-module-selector">
 
-		    			@foreach($design_modules as $design_module)
+		    			@foreach($design_modules as $index => $design_module)
 		    			
-			    			<li class="design-module-tile" data-form-id="#{{ strtolower($design_module->name) }}-form">
+			    			<li class="design-module-tile {{ $index == 0 ? 'active' : '' }}" data-form-id="#{{ strtolower($design_module->name) }}-form">
 			    				
 			    				{{ $design_module->name }}
 
@@ -55,9 +55,9 @@
 
 	    			<div class="design-module-forms">
 
-		    			@foreach($design_modules as $design_module)
+		    			@foreach($design_modules as $index => $design_module)
 		    			
-			    			<li class="design-module-form" id="{{ strtolower($design_module->name) }}-form">
+			    			<li class="design-module-form {{ $index == 0 ? 'active' : '' }}" id="{{ strtolower($design_module->name) }}-form">
 			    				
 			    				@include('xmovement/' . strtolower($design_module->name) . '/forms/add', ['editing' => false, 'idea' => $idea])
 

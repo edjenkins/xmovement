@@ -4,9 +4,13 @@ namespace App\Providers;
 
 use App\Idea;
 use App\User;
+use App\DesignTask;
+use XMovement\Poll\Poll;
 
 use App\Policies\IdeaPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\DesignTaskPolicy;
+use App\Policies\PollPolicy;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -22,6 +26,8 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
         Idea::class => IdeaPolicy::class,
         User::class => UserPolicy::class,
+        DesignTask::class => DesignTaskPolicy::class,
+        Poll::class => PollPolicy::class,
     ];
 
     /**

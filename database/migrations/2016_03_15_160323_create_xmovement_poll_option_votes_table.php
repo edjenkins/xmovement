@@ -17,6 +17,7 @@ class CreateXmovementPollOptionVotesTable extends Migration
             $table->integer('xmovement_poll_option_id');
             $table->integer('user_id');
             $table->integer('value');
+            $table->boolean('latest')->default(true);
             $table->timestamps();
         });
     }

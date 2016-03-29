@@ -17,6 +17,7 @@ class CreateDesignTaskVotesTable extends Migration
             $table->integer('design_task_id')->index();
             $table->integer('user_id')->index();
             $table->integer('value');
+            $table->boolean('latest')->default(true);
             $table->timestamps();
         });
     }

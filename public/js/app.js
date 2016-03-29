@@ -36,8 +36,68 @@ function showJSflash(message, type)
     var flash_message = '<div class="flash ' + type + '">' + message + '</div>';
 
     $('body').append(flash_message);
+
+    $('.flash').show();
     
     setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 2000);
+}
+
+function addVote(vote_button, vote_container, vote_direction, votable_id, votable_type)
+{
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Content-type': 'application/json'
+        }
+    });
+
+    $.ajax({
+        type:"POST",
+        url: '/vote/' + votable_type,
+        dataType: "json",
+        data:  JSON.stringify({votable_id: votable_id, votable_type: votable_type, vote_direction: vote_direction}),
+        processData: false,
+        success: function(response) {
+          
+            if (!response['meta']['success'])
+            {
+                showJSflash('Your vote failed', 'flash-danger');
+            }
+            else
+            {
+                // Success  
+                var vote_count = response['data']['vote_count'];
+
+                vote_container.find('.vote-count').html(vote_count);
+
+                vote_container.removeClass('positive-vote negative-vote')
+
+                if (vote_count < 0)
+                {
+                    vote_container.addClass('negative-vote');
+                }
+                else if (vote_count > 0)
+                {
+                    vote_container.addClass('positive-vote');
+                }
+
+                vote_container.find('.vote-button').removeClass('voted');
+
+                vote_button.addClass('voted');
+
+                showJSflash('Your vote was successful', 'flash-success');
+            }
+        
+        },
+        error: function(response) {
+            
+            // Error
+            console.log(response);
+            
+            showJSflash('Your vote failed', 'flash-danger');
+
+        }
+    });
 }
 
 $(document).ready(function() {
@@ -50,61 +110,8 @@ $(document).ready(function() {
         var vote_direction = $(this).attr('data-vote-direction');
         var votable_id = $(this).attr('data-votable-id');
         var votable_type = $(this).attr('data-votable-type');
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                'Content-type': 'application/json'
-            }
-        });
-
-        $.ajax({
-            type:"POST",
-            url: '/vote/' + votable_type,
-            dataType: "json",
-            data:  JSON.stringify({votable_id: votable_id, votable_type: votable_type, vote_direction: vote_direction}),
-            processData: false,
-            success: function(response) {
-              
-                if (!response['meta']['success'])
-                {
-                    showJSflash('Your vote failed', 'flash-danger');
-                }
-                else
-                {
-                    // Success  
-                    var vote_count = (vote_direction == 'up') ? (parseInt(vote_container.find('.vote-count').html()) + 1) : (parseInt(vote_container.find('.vote-count').html()) - 1);
-
-                    vote_container.find('.vote-count').html(vote_count);
-
-                    vote_container.removeClass('positive-vote negative-vote')
-
-                    if (vote_count < 0)
-                    {
-                        vote_container.addClass('negative-vote');
-                    }
-                    else if (vote_count > 0)
-                    {
-                        vote_container.addClass('positive-vote');
-                    }
-
-                    vote_container.find('.vote-button').removeClass('voted');
-
-                    vote_button.addClass('voted');
-
-                    showJSflash('Your vote was successful', 'flash-success');
-                }
-            
-            },
-            error: function(response) {
-                
-                // Error
-                console.log(response);
-                
-                showJSflash('Your vote failed', 'flash-danger');
-
-            }
-        });
+        
+        addVote(vote_button, vote_container, vote_direction, votable_id, votable_type);
 
     });
 

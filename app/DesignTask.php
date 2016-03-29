@@ -31,7 +31,7 @@ class DesignTask extends Model
 
     public function voteCount()
     {
-        return DesignTaskVote::where('design_task_id', $this->id)->sum('value');
+        return DesignTaskVote::where([['design_task_id', $this->id], ['latest', true]])->sum('value');
     }
 
     public function userVote()
@@ -40,7 +40,8 @@ class DesignTask extends Model
         $user_vote = DesignTaskVote::where([
             ['user_id', Auth::user()->id],
             ['design_task_id', $this->id],
-        ])->orderBy('created_at')->first();
+            ['latest', true],
+        ])->orderBy('created_at', -1)->first();
 
         return $user_vote['value'];
     }
@@ -57,10 +58,18 @@ class DesignTask extends Model
         }
         else
         {
+            // Set old voted to inactive
+            DesignTaskVote::where([
+                'design_task_id' => $this->id,
+                'user_id' => Auth::user()->id,
+            ])->update(['latest' => false]);
+
+            // Add new vote
             DesignTaskVote::create([
                 'design_task_id' => $this->id,
                 'user_id' => Auth::user()->id,
-                'value' => $value
+                'value' => $value,
+                'latest' => true
             ]);
 
             return true;

@@ -7,6 +7,11 @@
 
 		    	<h4>{{ $design_task['name'] }}</h4>
 		    	
+		    	<p>
+					<i class="fa fa-comment"></i>
+					0
+		    	</p>
+		    	
 		    </span>
 
 		</div>

@@ -36,14 +36,10 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
-        $design_tasks = $idea->designTasks;
-
-        foreach ($design_tasks as $index => $design_task)
-        {
-            $design_task['xmovement_task'] = $design_task->xmovement_task;            
-
-            $design_task['user_vote'] = $design_task->userVote();
-        }
+        // Order by locked first, then highest voted, then alphabetically
+        $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
+            return sprintf('%s%s', $design_task->locked, $design_task->voteCount());
+        })->values()->all();
         
         return view('design.dashboard', [
             'idea' => $idea,
@@ -74,7 +70,27 @@ class DesignController extends Controller
         {
             $response->meta['success'] = true;
         }
+
+        $response->data['vote_count'] = $design_task->voteCount();
         
         return Response::json($response);
+    }
+
+    public function destroyTask(Request $request, DesignTask $design_task)
+    {
+        if (Gate::denies('destroy', $design_task))
+        {
+            Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-warning');
+        }
+        else
+        {
+            $design_task->delete();
+
+            Session::flash('flash_message', trans('flash_message.design_task_deleted'));
+            Session::flash('flash_type', 'flash-danger');
+        }
+
+        return redirect()->action('DesignController@dashboard', $design_task->idea_id);
     }
 }

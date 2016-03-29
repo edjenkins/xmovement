@@ -41,6 +41,11 @@ class PollController extends Controller
     	
     	$poll = $design_task->xmovement_task;
 
+        // Order by locked first, then highest voted, then alphabetically
+        $poll->pollOptions = collect($poll->pollOptions)->sortByDesc(function ($poll_option, $key) {
+            return sprintf('%s', $poll_option->voteCount());
+        })->values()->all();
+
         return view('poll::view', ['poll' => $poll, 'design_task' => $design_task]);
     }
 
@@ -56,6 +61,8 @@ class PollController extends Controller
         {
             $response->meta['success'] = true;
         }
+        
+        $response->data['vote_count'] = $poll_option->voteCount();
         
         return Response::json($response);
     }

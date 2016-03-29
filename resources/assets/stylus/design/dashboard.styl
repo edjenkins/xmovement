@@ -1,14 +1,17 @@
 .view-controls-container
 	border-bottom border-color 1px solid 
-	padding 20px 10px
+	padding 10px 5px
+	@media(max-width: 568px)
+		padding 10px 0 
 	.search-bar-wrapper
 		border border-color 1px solid
 		display inline-block
-		margin 10px 0 
+		margin 10px 5px
+		overflow hidden
 		padding-left 50px 
 		position relative
 		@media(max-width: 568px)
-			width 100% 
+			display block
 		.search-bar-button
 			border-right border-color 1px solid 
 			left 0
@@ -23,11 +26,14 @@
 				cursor pointer 
 		.search-bar
 			border none
+			box-sizing border-box
+			display block
 			line-height 20px
+			margin 0 5px
 			padding 10px 20px 
 			width 260px
 			@media(max-width: 568px)
-				width 100% 
+				width 100%
 			&:focus
 				outline 0
 				
@@ -37,20 +43,44 @@
 		padding 0
 		@media(max-width: 568px)
 			width 100% 
+		@media(min-width: 568px)
+			&.pull-left .module-control
+				margin-right 10px 
+			&.pull-right .module-control
+				margin-left 10px 
 		.module-control
 			border border-color 1px solid
-			text-align center 
-			min-width 30px 
+			display inline-block
+			text-align center
+			min-width 30px
 			@media(max-width: 568px)
-				width 100% 
-			a
+				display block 
+				margin 0 5px
+				margin-bottom 20px
+				&:last-child
+					margin-bottom 0 
+			a, button
+				background transparent
+				border none
 				color #666
 				display block 
 				line-height 40px
 				padding 0 10px 
 				text-decoration none
+				text-align center 
 				transition(all 0.2s linear)
 				i
-					margin-right 5px
-				&:hover
-					background border-color
+					margin 0 5px
+			&:hover
+				border main-color 1px solid
+				a, button
+					background main-color
+					color white
+			form button
+				width 100%
+				
+.module-description
+	background main-color
+	color white
+	margin 20px 5px 0 5px 
+	padding 20px

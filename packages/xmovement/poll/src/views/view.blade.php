@@ -40,17 +40,36 @@
 
 	    			<ul class="module-controls pull-right">
 
-    					<li class="module-control">
-    						
-    						<a href="#submit-poll-option">
+	    				@can('submitOption', $poll)
+	    				
+	    					<li class="module-control">
+	    						
+	    						<a href="#submit-poll-option">
 
-		    					<i class="fa fa-plus"></i>
+			    					<i class="fa fa-plus"></i>
 
-		    					Submit poll option
+			    					Submit poll option
 
-		    				</a>
+			    				</a>
 
-	    				</li>
+		    				</li>
+
+	    				@endcan
+					
+						@can('destroy', $design_task)
+
+	    					<li class="module-control">
+
+						        <form action="{{ action('DesignController@destroyTask', $design_task) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
+						            {!! csrf_field() !!}
+						            {!! method_field('DELETE') !!}
+
+									<button type="submit"><i class="fa fa-trash"></i></button>
+						        </form>
+
+		    				</li>
+
+	    				@endcan
 
 	    			</ul>
 
@@ -74,13 +93,17 @@
 
 	    			</ul>
 
-	    			<div class="submit-poll-option-container" id="submit-poll-option">
+	    			@can('submitOption', $poll)
 
-	    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." />
+		    			<div class="submit-poll-option-container" id="submit-poll-option">
 
-	    				<button id="submit-button" data-poll-id="{{ $poll->id }}">Submit</button>
+		    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." />
 
-	    			</div>
+		    				<button id="submit-button" data-poll-id="{{ $poll->id }}">Submit</button>
+
+		    			</div>
+
+	    			@endcan
 
 	    			<!-- 
 	    			<h2 class="section-header">Discussion</h2>
