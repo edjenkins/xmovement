@@ -13,6 +13,7 @@ use Response;
 use Input;
 use Log;
 use Session;
+use View;
 
 use App\Idea;
 use App\User;
@@ -89,6 +90,26 @@ class PollController extends Controller
     public function update(Request $request)
     {
     	return 'update';
+    }
+
+    public function submitOption(Request $request)
+    {
+        $response = new ResponseObject();
+
+        $value = $request->submission;
+
+        $poll = Poll::whereId($request->poll_id)->first();
+
+        $pollOption = $poll->addOption($value);
+
+        if ($pollOption)
+        {
+            $response->meta['success'] = true;
+            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption])->render();
+        }
+        
+        return Response::json($response);
+
     }
 
 }

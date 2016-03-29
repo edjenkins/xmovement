@@ -4,6 +4,8 @@ namespace XMovement\Poll;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class Poll extends Model
 {
     /**
@@ -30,6 +32,28 @@ class Poll extends Model
     public function designTask()
     {
         return $this->morphMany('App\DesignTask', 'xmovement_task');
+    }
+
+    public function addOption($value)
+    {
+        // Check user can vote
+        // Not locked
+
+        if (false)
+        {
+            // Prevent voting twice in one direction
+            return false;
+        }
+        else
+        {
+            $pollOption = PollOption::create([
+                'xmovement_poll_id' => $this->id,
+                'user_id' => Auth::user()->id,
+                'value' => $value
+            ]);
+
+            return $pollOption;
+        }
     }
 
 }

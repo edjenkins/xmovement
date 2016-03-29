@@ -38,6 +38,22 @@
 
 	    			</ul>
 
+	    			<ul class="module-controls pull-right">
+
+    					<li class="module-control">
+    						
+    						<a href="#submit-poll-option">
+
+		    					<i class="fa fa-plus"></i>
+
+		    					Submit poll option
+
+		    				</a>
+
+	    				</li>
+
+	    			</ul>
+
 	    			<div class="clearfloat"></div>
 
 	    		</div>
@@ -52,29 +68,19 @@
 
 		    			@foreach ($poll->pollOptions as $pollOption)
 
-		    				<li>
-		    					
-		    					<div class="poll-option-value">{{ $pollOption['value'] }}</div>
-
-								<div class="vote-container poll-option-vote-container {{ ($pollOption->voteCount() == 0) ? '' : (($pollOption->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
-									<div class="vote-controls">
-										<div class="vote-button vote-up {{ ($pollOption->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="poll" data-votable-id="{{ $pollOption['id'] }}">
-											<i class="fa fa-2x fa-angle-up"></i>
-										</div>
-										<div class="vote-count">
-											{{ $pollOption->voteCount() }}
-										</div>
-										<div class="vote-button vote-down {{ ($pollOption->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="poll" data-votable-id="{{ $pollOption['id'] }}">
-											<i class="fa fa-2x fa-angle-down"></i>
-										</div>
-									</div>
-								</div>
-
-		    				</li>
+		    				@include('xmovement.poll.poll-option', ['pollOption' => $pollOption])
 
 		    			@endforeach
 
 	    			</ul>
+
+	    			<div class="submit-poll-option-container" id="submit-poll-option">
+
+	    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." />
+
+	    				<button id="submit-button" data-poll-id="{{ $poll->id }}">Submit</button>
+
+	    			</div>
 
 	    			<!-- 
 	    			<h2 class="section-header">Discussion</h2>

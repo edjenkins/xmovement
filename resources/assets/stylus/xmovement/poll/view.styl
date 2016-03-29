@@ -14,9 +14,23 @@ ul.poll-options-list
 		line-height 80px
 		margin 0
 		padding 0 20px
+		padding-left 55px 
 		padding-right 80px 
 		position relative
 		transition(all 0.2s linear)
+		.poll-option-user
+			background border-color
+			background-position center
+			background-repeat no-repeat
+			background-size cover 
+			border none
+			border-radius 20px
+			height 40px
+			width 40px
+			position absolute
+			left 0
+			top 20px
+				
 		.value
 			color #444
 			font-size 1.2em 
@@ -54,3 +68,31 @@ ul.poll-options-list
 						top 10px
 					&.vote-down
 						top 40px
+						
+.submit-poll-option-container
+	border border-color 1px solid 
+	margin-top 20px
+	padding-right 100px 
+	position relative
+	input#poll-contribution
+		border none
+		box-sizing border-box
+		color #444
+		display inline 
+		padding 15px 
+		width 100%
+		&:focus
+			outline 0
+	button#submit-button
+		background main-color
+		border none
+		color white
+		display inline
+		padding 15px 0
+		position absolute
+		text-align center 
+		width 100px 
+		right 0
+		top 0
+		&:hover
+			background darken(main-color, 10%) 

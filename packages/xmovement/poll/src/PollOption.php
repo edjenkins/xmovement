@@ -6,13 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 use Auth;
 
+use App\User;
+
 class PollOption extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id', 'xmovement_poll_id', 'value'
+    ];
+
     protected $table = 'xmovement_poll_options';
 
     public function poll()
     {
         return $this->belongsTo(Poll::class, 'xmovement_poll_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function pollOptionVotes()
