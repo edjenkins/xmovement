@@ -164,6 +164,7 @@ return [
         // XMovement Design Modules
         XMovement\Poll\PollServiceProvider::class,
         XMovement\Discussion\DiscussionServiceProvider::class,
+        XMovement\Requirement\RequirementServiceProvider::class,
 
     ],
 
@@ -219,6 +220,9 @@ return [
         
         'DiscussionServiceProvider' => XMovement\Discussion\DiscussionServiceProvider::class,
         'Discussion' => XMovement\Discussion\Discussion::class,
+        
+        'RequirementServiceProvider' => XMovement\Requirement\RequirementServiceProvider::class,
+        'Requirement' => XMovement\Requirement\Requirement::class,
 
     ],
 

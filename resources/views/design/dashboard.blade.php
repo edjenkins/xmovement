@@ -16,7 +16,7 @@
 
 	    		<div class="column side-column">
 
-	    			<p>Activity</p>
+	    			<!-- Activity -->
 
 	    		</div>
 

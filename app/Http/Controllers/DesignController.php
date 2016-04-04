@@ -36,6 +36,14 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
+        if (Gate::denies('design', $idea))
+        {
+            Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
+
+            return redirect()->back();
+        }
+
         // Order by locked first, then highest voted, then alphabetically
         $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
             return sprintf('%s%s', $design_task->locked, $design_task->voteCount());

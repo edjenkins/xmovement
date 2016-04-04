@@ -8,11 +8,11 @@ return [
     'describe_your_discussion' => 'Describe your Discussion',
     
     'name_label' => 'Choose a name that is short but self explanatory e.g. Let\'s discuss the event',
-    'description_label' => 'Add a short description of your Discussion, this should include the expected outcomes',
-    'locked_label' => 'Specify wether this Discussion should be locked',
+    'description_label' => 'Start the discussion with a question or a statement e.g. Does anyone have ideas for the theme?',
+    'locked_label' => 'Prevent others from voting on this design task',
 
     'name_placeholder' => 'Discussion name',
-    'description_placeholder' => 'Discussion description',
+    'description_placeholder' => 'Start the discussion',
     
     'save_changes' => 'Save Changes',
     'create_discussion' => 'Create Discussion',

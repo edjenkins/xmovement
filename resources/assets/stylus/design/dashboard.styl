@@ -80,7 +80,35 @@
 				width 100%
 				
 .module-description
-	background main-color
-	color white
 	margin 20px 5px 0 5px 
-	padding 20px
+	padding-left 74px
+	position relative  
+	.module-description-user
+		background-color border-color
+		background-size cover
+		background-repeat no-repeat
+		background-position center
+		border-radius 32px
+		height 64px
+		width 64px  
+		position absolute
+		left 0
+		top 0
+	.description-text
+		background main-color
+		border-radius 6px
+		color white
+		font-size 17px 
+		padding 20px
+		position relative 
+		&:after
+			content: "";
+			position: absolute;
+			top: 22px;
+			left: -10px;
+			border-style: solid;
+			border-width: 10px 10px 10px 0;
+			border-color: transparent main-color;
+			display: block;
+			width: 0;
+			z-index: 1;

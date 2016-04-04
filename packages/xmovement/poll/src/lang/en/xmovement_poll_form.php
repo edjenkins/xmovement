@@ -9,7 +9,7 @@ return [
     
     'name_label' => 'Choose a name that is short but self explanatory e.g. Pick the Venue',
     'description_label' => 'Add a short description of your Poll, this should include the expected outcomes',
-    'locked_label' => 'Specify wether this poll should be locked',
+    'locked_label' => 'Prevent others from voting on this design task and submitting new poll options',
 
     'name_placeholder' => 'Poll name',
     'description_placeholder' => 'Poll description',

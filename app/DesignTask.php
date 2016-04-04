@@ -19,6 +19,11 @@ class DesignTask extends Model
         'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'locked'
     ];
     
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
     public function idea()
     {
         return $this->belongsTo(Idea::class);

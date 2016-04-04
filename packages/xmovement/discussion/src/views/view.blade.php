@@ -4,7 +4,8 @@
 	
 	<div class="page-header">
 	    
-        <h2 class="main-title">Discussion - {{ $design_task['name'] }}</h2>
+        <h2 class="main-title">{{ $design_task['name'] }}</h2>
+		<h5 class="sub-title">Discussion</h5>
 
 	</div>
 
@@ -64,7 +65,8 @@
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				{{ $design_task['description'] }}
+	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('{{ $design_task->user->avatar }}')"></a>
+	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
 	    			<div class="discussion-container">

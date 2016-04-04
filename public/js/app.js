@@ -13,7 +13,7 @@ $(document).ready(function() {
 	});
 
     // Hide flash messages
-    setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 2000);
+    setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 4000);
 
 });
 
@@ -39,7 +39,7 @@ function showJSflash(message, type)
 
     $('.flash').show();
     
-    setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 2000);
+    setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 4000);
 }
 
 function addVote(vote_button, vote_container, vote_direction, votable_id, votable_type)

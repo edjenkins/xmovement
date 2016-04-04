@@ -1,0 +1,154 @@
+ul.requirements-list
+	list-style none
+	margin 10px 5px
+	padding 0
+	li
+		float left
+		width 50%
+		&:nth-child(odd)
+			padding-right 10px
+		&:nth-child(even)
+			padding-left 10px
+		@media(max-width: 568px)
+			width 100% 
+			&:nth-child(odd)
+				padding-right 0
+			&:nth-child(even)
+				padding-left 0
+		.requirement-space
+			border #e1e1e1 1px solid
+			display block
+			font-size 15px 
+			height 90px
+			margin 10px 0
+			overflow hidden
+			padding-left 75px 
+			position relative
+			transition(all 0.2s linear)
+			.requirement-circle
+				background-position center
+				background-repeat no-repeat
+				background-size cover 
+				border #e1e1e1 1px solid
+				border-radius 30px
+				color #e1e1e1
+				font-size 30px 
+				line-height 60px
+				overflow hidden
+				position absolute
+				left 15px
+				top 15px
+				text-align center
+				height 60px 
+				width 60px
+				transition(all 0.2s linear)
+				i
+					line-height 60px 
+					position relative
+					z-index 1 
+					&.fa-times
+						line-height 57px 
+				.black-overlay
+					background-color alpha(main-color, 0.5)
+					display none
+					position absolute 
+					top 0
+					bottom 0
+					left 0
+					right 0
+					z-index 0
+			&:hover
+				.requirement-circle
+					border-color main-color
+					color main-color
+					cursor pointer
+			.requirement-item
+				padding 25px 0 
+				h3
+					color #999
+					font-size 20px 
+					line-height 25px
+					margin 0
+					padding 0 20px 
+				p
+					color #CCC
+					font-size 13px 
+					line-height 25px
+					margin 0
+					padding 0 20px
+			.action-inputs
+				button
+					background white 
+					box-sizing border-box
+					border none
+					color #666
+					display block
+					height 44px
+					line-height 44px
+					margin 0
+					outline 0
+					padding 0 15px
+					text-align left
+					width 100% 
+					transition(all 0.2s linear)
+					&:active, &:focus
+						outline 0
+					&:hover
+						color main-color 
+						cursor pointer
+			&.not-filled
+				.action-inputs
+					display none
+				.requirement-item
+					display block
+				.requirement-circle
+					.black-overlay, .fa-check, .fa-times
+						display none
+					.fa-plus
+						display block
+			&.filling
+				.requirement-circle
+					border-color main-color
+					color main-color
+					.black-overlay, .fa-check, .fa-plus
+						display none
+					.fa-times
+						display block
+				.action-inputs
+					display block
+					button:first-child
+						border-bottom main-color 1px solid
+				.requirement-item
+					display none
+			&.filled
+				.requirement-circle
+					background-color border-color
+					border-color border-color
+					color white
+					.fa-plus, .fa-times
+						display none
+					.black-overlay, .fa-check
+						display block
+				.action-inputs
+					display none
+				.requirement-item
+					display block
+				&:hover
+					.requirement-circle
+						cursor default
+						
+// Requirement invite modal
+
+#requirement-invite-modal
+	input, textarea
+		border #e1e1e1 1px solid
+		border-radius 6px
+		display block
+		margin 20px auto 0 auto
+		padding 10px 20px
+		text-align center
+		width 100% 
+	input[type="text"]
+		max-width 260px
+	textarea
+		max-width 260px

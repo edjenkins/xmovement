@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Seeder;
@@ -13,6 +14,22 @@ class DesignTasksTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+
+        $design_modules = [['Poll', 'Poll'], ['Requirement', 'Requirement'], ['Discussion', 'Discussion']];
+
+        for ($i=0; $i < count($design_modules); $i++) { 
+            $name = $design_modules[$i][0];
+            $description = $design_modules[$i][1];
+            
+            // Add design modules
+            DB::table('design_modules')->insert([
+                'name' => $name,
+                'description' => $description,
+                'available' => true,
+                'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+                'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+            ]);
+        }
 
         $design_task_names = array('Venue Name','Primary Speaker','Secondary Speakers','Catering Options');
 
