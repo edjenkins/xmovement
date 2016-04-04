@@ -59,6 +59,10 @@
 		    			
 			    			<li class="design-module-form {{ $index == 0 ? 'active' : '' }}" id="{{ strtolower($design_module->name) }}-form">
 			    				
+			    				<div class="design-task-description">
+			    					{{ $design_module->description }}
+			    				</div>
+
 			    				@include('xmovement/' . strtolower($design_module->name) . '/forms/add', ['editing' => false, 'idea' => $idea])
 
 			    			</li>

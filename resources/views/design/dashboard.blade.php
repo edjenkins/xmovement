@@ -4,8 +4,8 @@
 	
 	<div class="page-header">
 	    
-        <h2 class="main-title">{{ $idea->name }}</h2>
-		<h5 class="sub-title">Design Dashboard</h5>
+        <h2 class="main-title">Dashboard</h2>
+		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 	</div>
 

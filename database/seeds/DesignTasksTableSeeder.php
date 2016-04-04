@@ -15,7 +15,11 @@ class DesignTasksTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $design_modules = [['Poll', 'Poll'], ['Requirement', 'Requirement'], ['Discussion', 'Discussion']];
+        $design_modules = [
+            ['Poll', 'A poll allows people to submit ideas and vote on their favourites, there can be any number of submissions in a poll. A poll might ask used to decide on an event name, the number of people to invite or even what day to have the event. It is possible to lock a poll so only you can add new options.'],
+            ['Requirement', 'A requirement is useful if you need a set number of things for an event for example you may need 6 people to present or 4 cameras to record the event. People can nominate themselves to meet a requirement or invite others by email to take responsibility.'],
+            ['Discussion', 'A discussion is useful if you want to speak about a particular aspect openly and freely with others in the design process. There is no structure to a discussion, which makes it a suitable for many use cases like discussing the theme of the event or asking questions.']
+        ];
 
         for ($i=0; $i < count($design_modules); $i++) { 
             $name = $design_modules[$i][0];
