@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         submit_button.html('Submitting..');
         
-        var submission = $('#contribution-contribution').val();
+        var submission = $('#text-contribution').val();
         var contribution_id = $(this).attr('data-contribution-id');
 
         $.ajaxSetup({
@@ -32,7 +32,7 @@ $(document).ready(function() {
 
                 $('.contribution-options-list').append(response["data"]["element"]);
 
-                $('#contribution-contribution').val('');
+                $('#text-contribution').val('');
 
                 submit_button.html('Submit');
 

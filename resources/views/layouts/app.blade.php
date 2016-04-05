@@ -17,6 +17,7 @@
     
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
     
@@ -47,6 +48,8 @@
     <script src='/js/file_uploader/vendor/jquery.ui.widget.js'></script>
     <script src='/js/file_uploader/jquery.iframe-transport.js'></script>
     <script src='/js/file_uploader/jquery.fileupload.js'></script>
+
+    <script src="/js/easydropdown/jquery.easydropdown.min.js"></script>
 
     <script src="/js/app.js"></script>
 </body>

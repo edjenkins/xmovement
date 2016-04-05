@@ -49,7 +49,7 @@
 
 			    					<i class="fa fa-plus"></i>
 
-			    					Submit contribution option
+			    					Submit contribution
 
 			    				</a>
 
@@ -98,14 +98,23 @@
 	    			@can('submitOption', $contribution)
 
 		    			<div class="submit-contribution-option-container" id="submit-contribution-option">
-
-		    				<input id="contribution-contribution" type="text" placeholder="Submit a contribution option.." />
+							
+							<select id="contribution-type-button" class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
+								<option value="1">Text</option>
+								<option value="2">Image</option>
+								<option value="3">Video</option>
+								<option value="4">File</option>
+							</select>
+		    				
+		    				<input id="text-contribution" type="text" placeholder="Submit a text contribution.." />
 
 		    				<button id="submit-button" data-contribution-id="{{ $contribution->id }}">Submit</button>
 
 		    			</div>
 
 	    			@endcan
+
+
 
 	    			<!-- 
 	    			<h2 class="section-header">Discussion</h2>
