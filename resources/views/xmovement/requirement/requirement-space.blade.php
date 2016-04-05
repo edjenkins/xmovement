@@ -1,6 +1,6 @@
 <li>
 
-	<div class="requirement-space {{ isset($requirementFilled) ? 'filled' : 'not-filled' }}">
+	<div class="requirement-space {{ isset($requirementFilled) ? 'filled' : 'not-filled' }}" data-requirement-id="{{ $requirement['id'] }}" data-requirement-filled-id="{{ isset($requirementFilled) ? $requirementFilled->id : '' }}">
 		
 		<div class="requirement-circle" style="{{ isset($requirementFilled) ? 'background-image: url("' . $requirementFilled->user->avatar . '")' : '' }}" data-user-background="{{ Auth::user()->avatar }}">
 
@@ -14,10 +14,10 @@
 
 		<div class="action-inputs">
 
-			<button class="suggest-button" data-toggle="modal" data-target="#requirement-invite-modal">Suggest someone you know</button>
+			<button class="fill-button">Fill this requirement</button>
+			
+			<button class="suggest-button" data-toggle="modal" data-target="#requirement-invite-modal">Invite someone you know</button>
 
-			<button class="fill-button" data-requirement-id="{{ $requirement['id'] }}">Step forward to fill this requirement</button>
-		
 		</div>
 
 		<div class="requirement-item">
@@ -26,13 +26,13 @@
 			<p>
 				@if (isset($requirementFilled))
 					@if ($requirementFilled->user->id == Auth::user()->id)
-						<a href="#" onClick="confirm('Remove yourself from this requirement?')">You have filled this requirement (undo)</a>
+						<a class="withdraw-from-requirement" href="#">You have filled this requirement (undo)</a>
 					@else
 						<a href="{{ action('UserController@profile', $requirementFilled->user) }}">{{ $requirementFilled->user->name }}</a>
 					@endif
 				@else
-					<span class="user-not-filled">Requirement not filled</span>
-					<a class="user-filled" style="display:none" href="#" onClick="confirm('Remove yourself from this requirement?')">You have filled this requirement (undo)</a>
+					<span class="not-filled-temp">Requirement not filled</span>
+					<a class="filled-temp withdraw-from-requirement" href="#">You have filled this requirement (undo)</a>
 				@endif
 			</p>
 			

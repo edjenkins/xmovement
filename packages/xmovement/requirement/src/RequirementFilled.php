@@ -30,4 +30,13 @@ class RequirementFilled extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function withdraw()
+    {
+        // Check user can withdraw
+        
+        $this->delete();
+
+        return true;
+    }
 }

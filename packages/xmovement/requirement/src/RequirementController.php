@@ -84,10 +84,9 @@ class RequirementController extends Controller
 
         if ($submission_type == 'fill')
         {
-            if ($requirement->fillRequirement())
-            {
-                $response->meta['success'] = true;
-            }
+            $response->data['requirement_filled_id'] = $requirement->fillRequirement()->id;
+
+            $response->meta['success'] = true;
         }
         else if ($submission_type == 'invite')
         {
@@ -104,6 +103,20 @@ class RequirementController extends Controller
 
             $this->dispatch($job);
 
+            $response->meta['success'] = true;
+        }
+        
+        return Response::json($response);
+    }
+
+    public function withdraw(Request $request)
+    {
+        $response = new ResponseObject();
+
+        $requirement_filled = RequirementFilled::whereId($request->requirement_filled_id)->first();
+
+        if ($requirement_filled->withdraw())
+        {
             $response->meta['success'] = true;
         }
         

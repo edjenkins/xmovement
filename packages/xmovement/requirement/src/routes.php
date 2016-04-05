@@ -11,4 +11,7 @@ Route::group(['middleware' => ['web']], function () {
     // Submit requirement
     Route::post('design/requirement/submit', 'xmovement\requirement\RequirementController@submit');
 
+    // Withdraw requirement
+    Route::post('design/requirement/withdraw', 'xmovement\requirement\RequirementController@withdraw');
+
 });
