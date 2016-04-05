@@ -165,6 +165,7 @@ return [
         XMovement\Poll\PollServiceProvider::class,
         XMovement\Discussion\DiscussionServiceProvider::class,
         XMovement\Requirement\RequirementServiceProvider::class,
+        XMovement\Contribution\ContributionServiceProvider::class,
 
     ],
 
@@ -223,6 +224,9 @@ return [
         
         'RequirementServiceProvider' => XMovement\Requirement\RequirementServiceProvider::class,
         'Requirement' => XMovement\Requirement\Requirement::class,
+        
+        'ContributionServiceProvider' => XMovement\Contribution\ContributionServiceProvider::class,
+        'Contribution' => XMovement\Contribution\Contribution::class,
 
     ],
 

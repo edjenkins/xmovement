@@ -1,10 +1,10 @@
 <?php
 
-namespace XMovement\Poll;
+namespace XMovement\Contribution;
 
 use Illuminate\Support\ServiceProvider;
 
-class PollServiceProvider extends ServiceProvider
+class ContributionServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -13,7 +13,7 @@ class PollServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/views', 'poll');
+        $this->loadViewsFrom(__DIR__.'/views', 'contribution');
 
         $this->publishes([
             __DIR__ . '/policies' => base_path('app/Policies'),
@@ -32,15 +32,15 @@ class PollServiceProvider extends ServiceProvider
         ], 'factories');
 
         $this->publishes([
-            __DIR__.'/views' => base_path('resources/views/xmovement/poll'),
+            __DIR__.'/views' => base_path('resources/views/xmovement/contribution'),
         ], 'views');
         
         $this->publishes([
-            __DIR__.'/stylus' => base_path('resources/assets/stylus/xmovement/poll'),
+            __DIR__.'/stylus' => base_path('resources/assets/stylus/xmovement/contribution'),
         ], 'public');
         
         $this->publishes([
-            __DIR__.'/js' => base_path('public/js/xmovement/poll'),
+            __DIR__.'/js' => base_path('public/js/xmovement/contribution'),
         ], 'public');
         
         $this->publishes([
@@ -56,8 +56,8 @@ class PollServiceProvider extends ServiceProvider
     public function register()
     {
         include __DIR__.'/routes.php';
-        $this->app->make('XMovement\Poll\PollController');
-        $this->app->make('XMovement\Poll\Poll');
+        $this->app->make('XMovement\Contribution\ContributionController');
+        $this->app->make('XMovement\Contribution\Contribution');
     }
 
 }
