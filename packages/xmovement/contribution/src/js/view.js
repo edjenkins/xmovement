@@ -45,18 +45,25 @@ $(document).ready(function() {
             processData: false,
             success: function(response) {
               
-                // Success              
-                
-                showJSflash('Thanks for your submission', 'flash-success');
+                // Success
 
-                $('.contribution-submissions-list').append(response["data"]["element"]);
+                if (response.meta.success)
+                {
+                    showJSflash('Thanks for your submission', 'flash-success');
 
-                $('#text-contribution').val('');
+                    $('.contribution-submissions-list').append(response["data"]["element"]);
 
-                submit_button.html('Submit');
+                    $('#text-contribution').val('');
 
-                addHandlers();
-            
+                    $('#video-contribution').val('');
+
+                    addHandlers();
+                }
+                else
+                {
+                    showJSflash('There was an issue with the submission', 'flash-danger');
+                }
+
             },
             error: function(response) {
                 
@@ -65,9 +72,12 @@ $(document).ready(function() {
                 
                 showJSflash('Your submission failed', 'flash-danger');
 
-                submit_button.html('Submit');
+            },
+            complete: function(response) {
 
+                submit_button.html('Submit');
             }
+
         });
 
     });

@@ -56,6 +56,31 @@ class Contribution extends Model
         }
         else
         {
+            // Video submission
+            
+            if ($submission_type == 3)
+            {
+                // Check if youtube
+                if (preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $value, $matches))
+                {
+                    // Valid youtube ID
+                    $value = 'http://www.youtube.com/embed/' . $matches[0];
+                }
+                else
+                {
+                    // Check if vimeo
+                    if (preg_match("/(?:https?:\/\/)?(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/", $value, $matches)) {
+                        // Valid vimeo ID
+                        $value = 'https://player.vimeo.com/video/' . $matches[3];
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                
+            }
+
             $contributionSubmission = ContributionSubmission::create([
                 'xmovement_contribution_id' => $this->id,
                 'user_id' => Auth::user()->id,

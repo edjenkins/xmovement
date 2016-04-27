@@ -1,4 +1,27 @@
+<style type="text/css">
+	
+	.video-wrapper {
+		max-width: 400px;	
+	}
 
+	.video-container {
+		margin: 20px auto;
+		position: relative;
+		padding-bottom: 56.25%;
+		padding-top: 30px; height: 0; overflow: hidden;
+	}
+
+	.video-container iframe,
+	.video-container object,
+	.video-container embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+</style>
 
 <li>
 	
@@ -20,7 +43,11 @@
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '3') { ?>
 
-			<p>Some video</p>
+			<div class="video-wrapper">
+				<div class="video-container">
+					<iframe src="{{ $contributionSubmission['value'] }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen width="560" height="315"></iframe>
+				</div>
+			</div>
 			
 		<?php } ?>
 
