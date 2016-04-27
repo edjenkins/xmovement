@@ -49,8 +49,8 @@
     <script src='/js/file_uploader/jquery.iframe-transport.js'></script>
     <script src='/js/file_uploader/jquery.fileupload.js'></script>
 
-    <script src="/js/easydropdown/jquery.easydropdown.min.js"></script>
-
     <script src="/js/app.js"></script>
+
+    <script src="/js/easydropdown/jquery.easydropdown.js"></script>
 </body>
 </html>

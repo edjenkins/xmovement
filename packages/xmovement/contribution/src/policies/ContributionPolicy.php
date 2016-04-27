@@ -15,13 +15,13 @@ class ContributionPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine if the given user can submit a contribution option
+     * Determine if the given user can submit a contribution submission
      *
      * @param  User  $user
      * @param  Contribution  $contribution
      * @return bool
      */
-    public function submitOption(User $user, Contribution $contribution)
+    public function submitSubmission(User $user, Contribution $contribution)
     {
     	$designTask = DesignTask::where([['xmovement_task_id', $contribution->id], ['xmovement_task_type', 'Contribution']])->first();
 		

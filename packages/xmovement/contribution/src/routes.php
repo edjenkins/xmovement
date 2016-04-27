@@ -9,10 +9,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('design/contribution/store', 'xmovement\contribution\ContributionController@store');
     Route::post('design/contribution/update', 'xmovement\contribution\ContributionController@update');
 
-    // Submit contribution option
-    Route::post('design/contribution/option/submit', 'xmovement\contribution\ContributionController@submitOption');
+    // Submit contribution submission
+    Route::post('design/contribution/submission/submit', 'xmovement\contribution\ContributionController@submitSubmission');
 
-    // Vote on contribution option
+    // Vote on contribution submission
     Route::post('/vote/contribution', 'xmovement\contribution\ContributionController@vote');
 
 });

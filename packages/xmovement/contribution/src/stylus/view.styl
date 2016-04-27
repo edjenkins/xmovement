@@ -1,4 +1,4 @@
-ul.contribution-options-list
+ul.contribution-submissions-list
 	list-style none
 	margin 10px
 	padding 0
@@ -7,6 +7,7 @@ ul.contribution-options-list
 		font-size 15px 
 		line-height 80px
 		margin 0
+		min-height 80px
 		padding 0 20px
 		padding-left 55px 
 		padding-right 80px 
@@ -14,7 +15,7 @@ ul.contribution-options-list
 		transition(all 0.2s linear)
 		&:last-child
 			border-bottom none
-		.contribution-option-user
+		.contribution-submission-user
 			background border-color
 			background-position center
 			background-repeat no-repeat
@@ -30,7 +31,7 @@ ul.contribution-options-list
 		.value
 			color #444
 			font-size 1.2em 
-		.vote-container.contribution-option-vote-container
+		.vote-container.contribution-submission-vote-container
 			line-height 80px  
 			position absolute
 			right 0
@@ -64,31 +65,73 @@ ul.contribution-options-list
 						top 10px
 					&.vote-down
 						top 40px
-						
-.submit-contribution-option-container
+	
+// Submission container
+
+.submit-contribution-submission-container
 	border border-color 1px solid 
 	margin 20px 10px
 	padding-right 100px 
 	padding-left 105px 
 	position relative
 	.flat
-		background #CCC
 		position absolute
 		left 5px
 		top 5px
-		padding 4px 
-		width 100px 
-		div
-			background main-color
-	input#text-contribution
-		border none
-		box-sizing border-box
-		color #444
-		display inline 
-		padding 15px 
-		width 100%
-		&:focus
-			outline 0
+	.submission-type-wrapper
+		display none
+		&.active
+			display block
+			&[data-type-id="1"], &[data-type-id="3"]
+				input[type="text"]
+					border none
+					box-sizing border-box
+					color #444
+					display inline 
+					padding 15px 
+					width 100%
+					&:focus
+						outline 0
+			&[data-type-id="2"], &[data-type-id="4"]
+				#fileinput-button
+					background white
+					border #ccc 2px solid  
+					color #999
+					margin 5px 5px
+					padding 7px 18px
+					position relative
+					overflow hidden
+					&:hover
+						background-color main-color
+						border-color main-color 
+						color white 
+						cursor pointer
+					
+				#fileinput-button input
+					position absolute
+					top 0px
+					right 0px
+					left 0px
+					bottom 0px 
+					margin 0
+					opacity 0
+					-ms-filter 'alpha(opacity=0)'
+					direction ltr
+					cursor pointer
+					
+				#progress
+					border-radius 16px
+					display none !important
+					height 12px
+					margin 20px
+
+				#files
+					display inline-block
+					margin 5px 0
+					img
+						display inline-block
+						max-height 32px
+						max-width 100px  
 	button#submit-button
 		background main-color
 		border none

@@ -1,15 +1,34 @@
 $(document).ready(function() {
 
+    $('.submission-type-wrapper:first-child').addClass('active');
+    $('.submit-contribution-submission-container #submit-button').attr('data-type-id', $('.submission-type-wrapper:first-child').attr('data-type-id'));
+
+    var $selects = $('select');
+
+    $selects.easyDropDown({
+        wrapperClass: 'flat custom-dropdown',
+        onChange: function(selected){
+            
+            current_submission_type = selected.value;
+
+            $('.submission-type-wrapper').removeClass('active');
+
+            $('.submission-type-wrapper[data-type-id="' + selected.value + '"]').addClass('active');
+        }
+    });
+
     addHandlers();
 
-    $('.submit-contribution-option-container #submit-button').click(function() {
+    $('.submit-contribution-submission-container #submit-button').click(function() {
 
         var submit_button = $(this);
-
-        submit_button.html('Submitting..');
-        
-        var submission = $('#text-contribution').val();
         var contribution_id = $(this).attr('data-contribution-id');
+
+        submit_button.html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+        
+        var submission_type = $("#submission-type-selector").val();
+        var submission = $('.submission-type-wrapper[data-type-id="' + submission_type + '"] input').val();
+        var data = JSON.stringify({contribution_id: contribution_id, submission_type: submission_type, submission: submission, });
 
         $.ajaxSetup({
             headers: {
@@ -20,9 +39,9 @@ $(document).ready(function() {
 
         $.ajax({
             type:"POST",
-            url: '/design/contribution/option/submit',
+            url: '/design/contribution/submission/submit',
             dataType: "json",
-            data:  JSON.stringify({contribution_id: contribution_id, submission: submission}),
+            data:  data,
             processData: false,
             success: function(response) {
               
@@ -30,7 +49,7 @@ $(document).ready(function() {
                 
                 showJSflash('Thanks for your submission', 'flash-success');
 
-                $('.contribution-options-list').append(response["data"]["element"]);
+                $('.contribution-submissions-list').append(response["data"]["element"]);
 
                 $('#text-contribution').val('');
 
@@ -57,7 +76,7 @@ $(document).ready(function() {
 
 function addHandlers()
 {
-    $('.vote-container.contribution-option-vote-container .vote-button').off("click").click(function() {
+    $('.vote-container.contribution-submission-vote-container .vote-button').off("click").click(function() {
 
         var vote_button = $(this);
         var vote_container = $(this).parents('.vote-controls').parents('.vote-container');

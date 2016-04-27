@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateXmovementContributionOptionsTable extends Migration
+class CreateXmovementContributionAvailableTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateXmovementContributionOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('xmovement_contribution_options', function (Blueprint $table) {
+        Schema::create('xmovement_contribution_available_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index();
-            $table->integer('xmovement_contribution_id')->index();
-            $table->string('value', 2000);
+            $table->string('name', 200);
+            $table->string('description', 2000);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateXmovementContributionOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('xmovement_contribution_options');
+        Schema::drop('xmovement_contribution_available_types');
     }
 }

@@ -69,6 +69,25 @@
 
             </div>
 
+            <hr />
+
+            <br />
+                            
+            <div class="form-group{{ $errors->has('item') ? ' has-error' : '' }}">
+
+                <label>{{ trans('xmovement_contribution_form.type_label') }}</label>
+
+                <input type="hidden" id="contribution-type" name="contribution_type" value="1">
+
+                <select>
+                    <option value="1">Text</option>
+                    <option value="2">Image</option>
+                    <option value="3">Video</option>
+                    <option value="4">File</option>
+                </select>
+
+            </div>
+
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_contribution_form.save_changes') : trans('xmovement_contribution_form.create_contribution') }}</button>
             </div>
@@ -78,3 +97,21 @@
     </div>
 
 </form>
+
+<script type="text/javascript">
+
+    function designModuleTileClicked(tile)
+    {
+        var form_id = $(tile).attr('data-form-id');
+        var $selects = $(form_id + ' select');
+    
+        $selects.easyDropDown({
+            wrapperClass: 'flat custom-dropdown',
+            onChange: function(selected){
+                $(form_id + ' form #contribution-type').val(selected.value);
+            }
+        });
+        
+    }
+</script>
+

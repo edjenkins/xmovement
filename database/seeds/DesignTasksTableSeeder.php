@@ -15,6 +15,8 @@ class DesignTasksTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
+        // Create design modules
+
         $design_modules = [
             ['Poll', 'A poll allows people to submit ideas and vote on their favourites, there can be any number of submissions in a poll. A poll might ask used to decide on an event name, the number of people to invite or even what day to have the event. It is possible to lock a poll so only you can add new options.'],
             ['Requirement', 'A requirement is useful if you need a set number of things for an event for example you may need 6 people to present or 4 cameras to record the event. People can nominate themselves to meet a requirement or invite others by email to take responsibility.'],
@@ -35,6 +37,27 @@ class DesignTasksTableSeeder extends Seeder
                 'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
             ]);
         }
+
+        // Contribution design module
+
+        $contribution_available_types = [
+            ['Text', 'A plain text submission'],
+            ['Image', 'An image or photo'],
+            ['Video', 'A link to a video (e.g. Youtube/Vimeo)'],
+            ['File', 'A file upload in any format (.pdf/.pptx)']
+        ];
+
+        for ($i=0; $i < count($contribution_available_types); $i++)
+        {
+            DB::table('xmovement_contribution_available_types')->insert([
+                'name' => $contribution_available_types[$i][0],
+                'description' => $contribution_available_types[$i][1],
+                'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+                'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+            ]);
+        }
+
+        // Create design tasks
 
         $design_task_names = array('Venue Name','Primary Speaker','Secondary Speakers','Catering Options');
 

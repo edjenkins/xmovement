@@ -18,4 +18,7 @@
             </div>
         </div>
     </div>
+
+    <script src="/js/ideas/add.js"></script>
+
 @endsection

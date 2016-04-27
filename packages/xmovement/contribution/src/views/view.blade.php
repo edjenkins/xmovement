@@ -41,11 +41,11 @@
 
 	    			<ul class="module-controls pull-right">
 
-	    				@can('submitOption', $contribution)
+	    				@can('submitSubmission', $contribution)
 	    				
 	    					<li class="module-control">
 	    						
-	    						<a href="#submit-contribution-option">
+	    						<a href="#submit-contribution-submission">
 
 			    					<i class="fa fa-plus"></i>
 
@@ -85,42 +85,65 @@
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
-	    			<ul class="contribution-options-list">
+	    			<ul class="contribution-submissions-list">
 
-		    			@foreach ($contribution->contributionOptions as $contributionOption)
+		    			@foreach ($contribution->contributionSubmissions as $contributionSubmission)
 
-		    				@include('xmovement.contribution.contribution-option', ['contributionOption' => $contributionOption])
+		    				@include('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission])
 
 		    			@endforeach
 
 	    			</ul>
 
-	    			@can('submitOption', $contribution)
+	    			@can('submitSubmission', $contribution)
 
-		    			<div class="submit-contribution-option-container" id="submit-contribution-option">
+		    			<div class="submit-contribution-submission-container" id="submit-contribution-submission">
 							
-							<select id="contribution-type-button" class="dropdown" tabindex="9" data-settings='{"wrapperClass":"flat"}'>
-								<option value="1">Text</option>
-								<option value="2">Image</option>
-								<option value="3">Video</option>
-								<option value="4">File</option>
-							</select>
-		    				
-		    				<input id="text-contribution" type="text" placeholder="Submit a text contribution.." />
+							<select id="submission-type-selector">
+								@foreach ($contribution->contributionTypes as $contributionType)
 
+				    				<option value="{{ $contributionType->id }}">{{ $contributionType->name }}</option>
+				    				
+				    			@endforeach
+							</select>
+
+							@foreach ($contribution->contributionTypes as $contributionType)
+
+								<div class="submission-type-wrapper active" data-type-id="{{ $contributionType->id }}">
+
+									<?php if ($contributionType->id == 1) { ?>
+										
+				    					<input type="text" placeholder="Submit a text contribution.." />
+				    					
+									<?php } ?>
+
+									<?php if ($contributionType->id == 2) { ?>
+
+					    				@include('fileupload', ['cc' => false, 'value' => old('photo')])
+
+									<?php } ?>
+
+									<?php if ($contributionType->id == 3) { ?>
+
+				    					<input type="text" placeholder="Submit a video contribution.. (e.g. youtu.be/hfh2z3)" />
+
+									<?php } ?>
+
+									<?php if ($contributionType->id == 4) { ?>
+
+					    				@include('fileupload', ['cc' => false, 'value' => old('photo')])
+
+									<?php } ?>
+
+								</div>
+
+							@endforeach
+		    				
 		    				<button id="submit-button" data-contribution-id="{{ $contribution->id }}">Submit</button>
 
 		    			</div>
 
 	    			@endcan
-
-
-
-	    			<!-- 
-	    			<h2 class="section-header">Discussion</h2>
-
-	    			@include('disqus')
-	    			-->
 
 	    		</div>
 	    

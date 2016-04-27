@@ -9,7 +9,8 @@ return [
     
     'name_label' => 'Choose a name that is short but self explanatory e.g. Pick the Venue',
     'description_label' => 'Add a short description of your Contribution, this should include the expected outcomes',
-    'locked_label' => 'Prevent others from voting on this design task and submitting new contribution options',
+    'locked_label' => 'Prevent others from voting on this design task and submitting new contribution submissions',
+    'type_label' => 'Select the type of contributions you want people to submit',
 
     'name_placeholder' => 'Contribution name',
     'description_placeholder' => 'Contribution description',

@@ -8,7 +8,7 @@ use Auth;
 
 use App\User;
 
-class ContributionOption extends Model
+class ContributionSubmission extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -16,10 +16,10 @@ class ContributionOption extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'xmovement_contribution_id', 'value'
+        'user_id', 'xmovement_contribution_id', 'xmovement_contribution_available_type_id', 'value'
     ];
 
-    protected $table = 'xmovement_contribution_options';
+    protected $table = 'xmovement_contribution_submissions';
 
     public function contribution()
     {
@@ -31,22 +31,27 @@ class ContributionOption extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function contributionOptionVotes()
+    public function contributionAvailableType()
+    {
+        return $this->belongsTo(ContributionAvailableType::class, 'xmovement_contribution_available_type_id');
+    }
+
+    public function contributionSubmissionVotes()
     {   
-        return $this->hasMany(ContributionOptionVote::class, 'xmovement_contribution_option_id');
+        return $this->hasMany(ContributionSubmissionVote::class, 'xmovement_contribution_submission_id');
     }
 
     public function voteCount()
     {
-        return ContributionOptionVote::where([['xmovement_contribution_option_id', $this->id], ['latest', true]])->sum('value');
+        return ContributionSubmissionVote::where([['xmovement_contribution_submission_id', $this->id], ['latest', true]])->sum('value');
     }
 
     public function userVote()
     {
         // Check if user has voted on module
-        $user_vote = ContributionOptionVote::where([
+        $user_vote = ContributionSubmissionVote::where([
             ['user_id', Auth::user()->id],
-            ['xmovement_contribution_option_id', $this->id],
+            ['xmovement_contribution_submission_id', $this->id],
             ['latest', true],
         ])->orderBy('created_at', -1)->first();
 
@@ -66,14 +71,14 @@ class ContributionOption extends Model
         else
         {
             // Set old voted to inactive
-            ContributionOptionVote::where([
-                'xmovement_contribution_option_id' => $this->id,
+            ContributionSubmissionVote::where([
+                'xmovement_contribution_submission_id' => $this->id,
                 'user_id' => Auth::user()->id,
             ])->update(['latest' => false]);
 
             // Add new vote
-            ContributionOptionVote::create([
-                'xmovement_contribution_option_id' => $this->id,
+            ContributionSubmissionVote::create([
+                'xmovement_contribution_submission_id' => $this->id,
                 'user_id' => Auth::user()->id,
                 'value' => $value,
                 'latest' => true

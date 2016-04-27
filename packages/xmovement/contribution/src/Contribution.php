@@ -21,12 +21,22 @@ class Contribution extends Model
 
     public function renderTile($design_task)
     {
-    	return view('contribution::tile', ['contribution' => $this, 'design_task' => $design_task]);
+        return view('contribution::tile', ['contribution' => $this, 'design_task' => $design_task]);
     }
 
-    public function contributionOptions()
+    public function renderSubmitForm()
     {
-        return $this->hasMany(ContributionOption::class, 'xmovement_contribution_id');
+        return view('contribution::forms::add', ['contribution' => $this]);
+    }
+
+    public function contributionTypes()
+    {
+        return $this->hasManyThrough(ContributionAvailableType::class, ContributionType::class, 'xmovement_contribution_id', 'id');
+    }
+
+    public function contributionSubmissions()
+    {
+        return $this->hasMany(ContributionSubmission::class, 'xmovement_contribution_id');
     }
 
     public function designTask()
@@ -34,7 +44,7 @@ class Contribution extends Model
         return $this->morphMany('App\DesignTask', 'xmovement_task');
     }
 
-    public function addOption($value)
+    public function addSubmission($submission_type, $value)
     {
         // Check user can vote
         // Not locked
@@ -46,13 +56,14 @@ class Contribution extends Model
         }
         else
         {
-            $contributionOption = ContributionOption::create([
+            $contributionSubmission = ContributionSubmission::create([
                 'xmovement_contribution_id' => $this->id,
                 'user_id' => Auth::user()->id,
+                'xmovement_contribution_available_type_id' => $submission_type,
                 'value' => $value
             ]);
 
-            return $contributionOption;
+            return $contributionSubmission;
         }
     }
 

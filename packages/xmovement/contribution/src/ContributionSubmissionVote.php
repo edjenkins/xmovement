@@ -4,7 +4,7 @@ namespace XMovement\Contribution;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ContributionOptionVote extends Model
+class ContributionSubmissionVote extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,10 +12,10 @@ class ContributionOptionVote extends Model
      * @var array
      */
     protected $fillable = [
-        'xmovement_contribution_option_id', 'user_id', 'value'
+        'xmovement_contribution_submission_id', 'user_id', 'value'
     ];
     
-    protected $table = 'xmovement_contribution_option_votes';
+    protected $table = 'xmovement_contribution_submission_votes';
 
     public function contribution()
     {

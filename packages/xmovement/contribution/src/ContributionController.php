@@ -42,8 +42,8 @@ class ContributionController extends Controller
     	$contribution = $design_task->xmovement_task;
 
         // Order by locked first, then highest voted, then alphabetically
-        $contribution->contributionOptions = collect($contribution->contributionOptions)->sortByDesc(function ($contribution_option, $key) {
-            return sprintf('%s', $contribution_option->voteCount());
+        $contribution->contributionSubmissions = collect($contribution->contributionSubmissions)->sortByDesc(function ($contribution_submission, $key) {
+            return sprintf('%s', $contribution_submission->voteCount());
         })->values()->all();
 
         return view('contribution::view', ['contribution' => $contribution, 'design_task' => $design_task]);
@@ -55,14 +55,14 @@ class ContributionController extends Controller
 
         $value = ($request->vote_direction == 'up') ? 1 : -1;
 
-        $contribution_option = ContributionOption::whereId($request->votable_id)->first();
+        $contribution_submission = ContributionSubmission::whereId($request->votable_id)->first();
 
-        if ($contribution_option->addVote($value))
+        if ($contribution_submission->addVote($value))
         {
             $response->meta['success'] = true;
         }
         
-        $response->data['vote_count'] = $contribution_option->voteCount();
+        $response->data['vote_count'] = $contribution_submission->voteCount();
         
         return Response::json($response);
     }
@@ -80,6 +80,11 @@ class ContributionController extends Controller
             'voting_type' => $voting_type,
         ])->id;
 
+        ContributionType::create([
+            'xmovement_contribution_id' => $contribution_id,
+            'id' => $contribution_type,
+        ]);
+
         $design_task_id = DesignTask::create([
             'user_id' => $user_id,
             'idea_id' => $idea_id,
@@ -91,7 +96,7 @@ class ContributionController extends Controller
         ])->id;
 
 	    // Load the design_task view
-		return $this->view($design_task_id);
+        return redirect()->action('DesignController@dashboard', $idea_id);
     }
 
     public function update(Request $request)
@@ -99,20 +104,21 @@ class ContributionController extends Controller
     	return 'update';
     }
 
-    public function submitOption(Request $request)
+    public function submitSubmission(Request $request)
     {
         $response = new ResponseObject();
 
         $value = $request->submission;
+        $submission_type = $request->submission_type;
 
         $contribution = Contribution::whereId($request->contribution_id)->first();
 
-        $contributionOption = $contribution->addOption($value);
+        $contributionSubmission = $contribution->addSubmission($submission_type, $value);
 
-        if ($contributionOption)
+        if ($contributionSubmission)
         {
             $response->meta['success'] = true;
-            $response->data['element'] = View::make('xmovement.contribution.contribution-option', ['contributionOption' => $contributionOption])->render();
+            $response->data['element'] = View::make('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission])->render();
         }
         
         return Response::json($response);

@@ -14,7 +14,7 @@ class CreateXmovementContributionsTable extends Migration
     {
         Schema::create('xmovement_contributions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index();
+            $table->integer('user_id');
             $table->string('contribution_type', 200);
             $table->string('voting_type', 200);
             $table->timestamps();

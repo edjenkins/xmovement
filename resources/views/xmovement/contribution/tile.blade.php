@@ -9,7 +9,7 @@
 		    	
 		    	<p>
 					<i class="fa fa-lightbulb-o"></i>
-		    		{{ $contribution->contributionOptions->count() }}
+		    		{{ $contribution->contributionSubmissions->count() }}
 		    	</p>
 
 		    </span>
