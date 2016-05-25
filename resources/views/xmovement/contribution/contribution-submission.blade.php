@@ -1,60 +1,83 @@
-<style type="text/css">
-	
-	.video-wrapper {
-		max-width: 400px;	
-	}
+<li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
-	.video-container {
-		margin: 20px auto;
-		position: relative;
-		padding-bottom: 56.25%;
-		padding-top: 30px; height: 0; overflow: hidden;
-	}
-
-	.video-container iframe,
-	.video-container object,
-	.video-container embed {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-
-</style>
-
-<li>
-	
-	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('{{ $contributionSubmission->user['avatar'] }}')"></a>	
+	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}')"></a>
 
 	<div class="contribution-submission-value">
 
+		<?php $value = json_decode($contributionSubmission['value']); ?>
+
 		<?php if ($contributionSubmission->contributionAvailableType->id == '1') { ?>
 
-			{{ $contributionSubmission['value'] }}
-			
+			{{ $value->text }}
+
 		<?php } ?>
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '2') { ?>
 
-			<img src="{{ $contributionSubmission['value'] }}" height="100" style="margin: 15px 0" />
-			
+			<div class="item-description">
+				{{ $value->description }}
+			</div>
+
+			<img src="/uploads/images/medium/{{ $value->image }}" height="100" style="margin: 15px 0" />
+
 		<?php } ?>
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '3') { ?>
 
+			<div class="item-description">
+				{{ $value->description }}
+			</div>
+
 			<div class="video-wrapper">
 				<div class="video-container">
-					<iframe src="{{ $contributionSubmission['value'] }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen width="560" height="315"></iframe>
+					<iframe src="{{ $value->video }}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen width="560" height="315"></iframe>
 				</div>
 			</div>
-			
+
 		<?php } ?>
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '4') { ?>
 
-			<p>Some file</p>
-			
+			<div class="item-description">
+				{{ $value->description }}
+			</div>
+
+			<div class="file-container">
+				<div class="file-icon">
+					<?php
+					$extension = pathinfo($value->file, PATHINFO_EXTENSION);
+					switch ($extension) {
+						case 'pdf':
+							$class = 'fa-file-pdf-o';
+							break;
+						case 'doc':
+							$class = 'fa-file-word-o';
+							break;
+						case 'docx':
+							$class = 'fa-file-word-o';
+							break;
+						case 'txt':
+							$class = 'fa-file-text-o';
+							break;
+						case 'rtf':
+							$class = 'fa-file-text-o';
+							break;
+						case 'zip':
+							$class = 'fa-file-archive-o';
+							break;
+
+						default:
+							$class = 'fa-file-o';
+							break;
+					}
+					?>
+					<i class="fa {{ $class }}" aria-hidden="true"></i>
+				</div>
+				<div class="file-name">
+					<a href="/uploads/files/{{ $value->file }}" target="_blank">{{ $value->file }}</a>
+				</div>
+			</div>
+
 		<?php } ?>
 
 	</div>

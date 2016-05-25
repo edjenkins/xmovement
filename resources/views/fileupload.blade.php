@@ -1,13 +1,13 @@
 <div class="input-section">
     <div class="input-wrapper">
-        
+
         <input name="photo" type="hidden" id="uploaded-photo" value="{{ isset($value) ? $value : "" }}">
-    
+
         <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-default fileinput-button" id="fileinput-button">
             <span id="upload-button-text">Choose Photo</span>
             <!-- The file input field used as target for the file upload widget -->
-            <input id="fileupload" type="file" name="files[]">
+						<input id="fileupload" type="file" name="files[]">
         </span>
 
         <?php if ($cc) { ?>
@@ -43,6 +43,8 @@
                 <img src="{{ $value }}" />
             @endif
         </div>
+
+        <div class="error-message" id="photo-error-message"></div>
 
     </div>
 </div>

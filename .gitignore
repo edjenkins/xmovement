@@ -6,3 +6,4 @@ Homestead.json
 
 /public/css/*
 public/img/uploads/**
+public/uploads/**

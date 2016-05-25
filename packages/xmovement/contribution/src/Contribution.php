@@ -5,6 +5,8 @@ namespace XMovement\Contribution;
 use Illuminate\Database\Eloquent\Model;
 
 use Auth;
+use Response;
+use View;
 
 class Contribution extends Model
 {
@@ -56,29 +58,30 @@ class Contribution extends Model
         }
         else
         {
-            // Video submission
-            
-            if ($submission_type == 3)
-            {
-                // Check if youtube
-                if (preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $value, $matches))
-                {
-                    // Valid youtube ID
-                    $value = 'http://www.youtube.com/embed/' . $matches[0];
-                }
-                else
-                {
-                    // Check if vimeo
-                    if (preg_match("/(?:https?:\/\/)?(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/", $value, $matches)) {
-                        // Valid vimeo ID
-                        $value = 'https://player.vimeo.com/video/' . $matches[3];
-                    }
-                    else
-                    {
+            // Image submission
+
+            switch ($submission_type) {
+                case '1':
+                    $value = json_encode(array('text' => $value["text"]));
+                    break;
+
+                case '2':
+                    $value = json_encode(array('image' => $value["image"], 'description' => $value["description"]));
+                    break;
+
+                case '3':
+                    if ($embedLink = $this->getVideoEmbedLink($value["video"])) {
+                        $value = json_encode(array('video' => $this->getVideoEmbedLink($value["video"]), 'description' => $value["description"]));
+                    } else {
+                        // Not a valid video
                         return false;
                     }
-                }
-                
+                    break;
+
+                case '4':
+                    $value = json_encode(array('file' => $value["file"], 'description' => $value["description"]));
+                    break;
+
             }
 
             $contributionSubmission = ContributionSubmission::create([
@@ -88,7 +91,36 @@ class Contribution extends Model
                 'value' => $value
             ]);
 
-            return $contributionSubmission;
+            if ($contributionSubmission)
+            {
+                $response->meta['success'] = true;
+                $response->data['element'] = View::make('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission])->render();
+            }
+            
+            return Response::json($response);
+        }
+    }
+
+    public function getVideoEmbedLink($value)
+    {
+        // Check if youtube
+        if (preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $value, $matches))
+        {
+            // Valid youtube ID
+            return 'http://www.youtube.com/embed/' . $matches[0];
+        }
+        else
+        {
+            // Check if vimeo
+            if (preg_match("/(?:https?:\/\/)?(?:www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/", $value["video"], $matches)) {
+                // Valid vimeo ID
+                return 'https://player.vimeo.com/video/' . $matches[3];
+            }
+            else
+            {
+                // Not a valid video
+                return false;
+            }
         }
     }
 

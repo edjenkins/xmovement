@@ -8,7 +8,7 @@ $(document).ready(function() {
     $selects.easyDropDown({
         wrapperClass: 'flat custom-dropdown',
         onChange: function(selected){
-            
+
             current_submission_type = selected.value;
 
             $('.submission-type-wrapper').removeClass('active');
@@ -25,9 +25,37 @@ $(document).ready(function() {
         var contribution_id = $(this).attr('data-contribution-id');
 
         submit_button.html('<i class="fa fa-circle-o-notch fa-spin"></i>');
-        
+
         var submission_type = $("#submission-type-selector").val();
-        var submission = $('.submission-type-wrapper[data-type-id="' + submission_type + '"] input').val();
+
+        var submission;
+
+        switch (submission_type) {
+
+            case '1':
+            // Text submission
+            submission = {text: $('.submission-type-wrapper[data-type-id="' + submission_type + '"] input').val()};
+            break;
+
+            case '2':
+            // Image submission
+            submission = {image: dropzone_uploaded_file, description: $('.submission-type-wrapper[data-type-id="' + submission_type + '"] #item-description').val()};
+            break;
+
+            case '3':
+            // Video submission
+            submission = {video: $('.submission-type-wrapper[data-type-id="' + submission_type + '"] #video-input').val(), description: $('.submission-type-wrapper[data-type-id="' + submission_type + '"] #item-description').val()};
+            break;
+
+            case '4':
+            // File submission
+            submission = {file: dropzone_uploaded_file, description: $('.submission-type-wrapper[data-type-id="' + submission_type + '"] #item-description').val()};
+            break;
+
+        }
+
+
+
         var data = JSON.stringify({contribution_id: contribution_id, submission_type: submission_type, submission: submission, });
 
         $.ajaxSetup({
@@ -44,7 +72,7 @@ $(document).ready(function() {
             data:  data,
             processData: false,
             success: function(response) {
-              
+
                 // Success
 
                 if (response.meta.success)
@@ -53,11 +81,14 @@ $(document).ready(function() {
 
                     $('.contribution-submissions-list').append(response["data"]["element"]);
 
-                    $('#text-contribution').val('');
-
-                    $('#video-contribution').val('');
+                    $('.submission-type-wrapper input').val('');
 
                     addHandlers();
+
+                    if ((submission_type == '2') || (submission_type == '4'))
+                    {
+                        Dropzone.forElement('#dropzone').removeAllFiles();
+                    }
                 }
                 else
                 {
@@ -66,10 +97,10 @@ $(document).ready(function() {
 
             },
             error: function(response) {
-                
+
                 // Error
                 console.log(response);
-                
+
                 showJSflash('Your submission failed', 'flash-danger');
 
             },
@@ -90,7 +121,7 @@ function addHandlers()
 
         var vote_button = $(this);
         var vote_container = $(this).parents('.vote-controls').parents('.vote-container');
-        
+
         var vote_direction = $(this).attr('data-vote-direction');
         var votable_id = $(this).attr('data-votable-id');
         var votable_type = $(this).attr('data-votable-type');

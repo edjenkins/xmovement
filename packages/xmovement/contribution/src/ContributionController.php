@@ -113,16 +113,7 @@ class ContributionController extends Controller
 
         $contribution = Contribution::whereId($request->contribution_id)->first();
 
-        $contributionSubmission = $contribution->addSubmission($submission_type, $value);
-
-        if ($contributionSubmission)
-        {
-            $response->meta['success'] = true;
-            $response->data['element'] = View::make('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission])->render();
-        }
-        
-        return Response::json($response);
-
+        return $contribution->addSubmission($submission_type, $value, $response);
     }
 
 }
