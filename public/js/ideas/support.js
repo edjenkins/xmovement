@@ -31,9 +31,12 @@ function support(user_id, idea_id)
         		var button_text = (response.data.supporter_count == 1) ? "Supporter" : "Supporters";
 	            $('.supporter-count').html(response.data.supporter_count);
 				$('.supporter-subtitle').html(button_text);
-				$('#support-button').html('Supported');
+
 				$('#support-modal').modal('hide');
                 $('.supporters-tile-footer').addClass('visible');
+
+                $('#support-button').hide();
+                $('#temp-design-button').css('display', 'block');
 			}
         	else
         	{

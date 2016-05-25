@@ -1,0 +1,94 @@
+ul.design-module-selector
+	list-style none 
+	margin 20px 0
+	padding 0
+	text-align center
+	li.design-module-tile
+		background #f2f2f2
+		border white 4px solid 
+		box-sizing border-box
+		color #666
+		display inline-block
+		font-size 18px
+		line-height 100px
+		margin 0
+		padding 0
+		text-align center
+		width (100% / 6)
+		@media(max-width: 1000px)
+			line-height 80px
+			width (100% / 3)
+		@media(max-width: 768px)
+			line-height 60px
+			width (100% / 2)
+		&:hover
+			background darken(#f2f2f2, 5%) 
+			cursor pointer
+		&.active
+			background white
+			border-color main-color
+			cursor pointer
+			color #444 
+			
+.design-module-forms
+	.design-task-description
+		background main-color
+		color white
+		padding 15px 20px
+		margin 20px auto
+		max-width 640px
+		text-align center
+	.design-module-form
+		display none
+		&.active
+			display block
+		form
+			background white 
+			margin 20px auto
+			text-align center
+			.form-page
+				display none
+				&.visible
+					display block 
+				.form-page-header
+					border-bottom #eee 1px solid 
+					background main-color
+					color white 
+					padding 10px 20px
+					h2
+						margin 0
+						padding 0 
+				.form-page-content
+					padding 20px
+							
+					.form-group
+						margin-bottom 40px 
+						label
+							color #999
+							font-size 15px 
+							font-weight normal
+							margin-bottom 20px 
+						input.form-control
+							border none
+							border #e1e1e1 1px solid 
+							height auto 
+							font-size 24px 
+							line-height 30px 
+							margin 0 auto 20px auto 
+							max-width 400px
+							padding 12px 10px 
+							outline 0 
+							text-align center
+						textarea
+							border none
+							border #e1e1e1 1px solid 
+							border-radius 6px
+							font-size 18px 
+							margin 0 auto
+							max-width 100% 
+							padding 20px 
+							outline 0
+							width 600px
+				
+			&.has-errors .step-button
+				display none

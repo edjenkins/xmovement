@@ -55,6 +55,26 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/idea/{idea}', 'IdeaController@view');
     Route::delete('/idea/{idea}', 'IdeaController@destroy');
 
+    // Design routes
+    Route::get('/design/{idea}', 'DesignController@dashboard');
+    Route::get('/design/add/{idea}', 'DesignController@add');
+    Route::delete('/design/task/destroy/{design_task}', 'DesignController@destroyTask');
+
+
+    // Vote routes (Design task)
+    Route::post('/vote/design_task', 'DesignController@vote');
+
     // API routes
     Route::post('/api/support', 'IdeaController@support');
+
+    // File upload
+    Route::post('/upload', 'UploadController@upload');
+
+		Route::get('/test', function()
+		{
+		    $img = Image::make('http://xm.local/uploads/4b0e7aec952b1a1124dd85fc1105f90fba5d9c7e.jpeg')->fit(800, 360);
+
+		    return $img->response('jpg');
+		});
+
 });

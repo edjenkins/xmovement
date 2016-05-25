@@ -20,7 +20,7 @@
                         <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
@@ -80,7 +80,7 @@
             <div class="form-group">
                 <div class="btn btn-primary step-button" onClick="nextStep()">{{ trans('idea_form.next_step') }}</div>
             </div>
-            
+
             <a class="step-button muted-link" onClick="previousStep()">{{ trans('idea_form.previous_step') }}</a>
 
         </div>
@@ -92,13 +92,11 @@
         <div class="form-page-content">
 
             <div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
-            
-                <label>{{ trans('idea_form.photo_label') }}</label>
 
                 @if (isset($idea))
-                    @include('fileupload', ['cc' => true, 'value' => old('photo', $idea->photo)])
+										@include('dropzone', ['type' => 'image', 'cc' => true, 'input_id' => 'idea-image', 'value' => old('photo', $idea->photo)])
                 @else
-                    @include('fileupload', ['cc' => true, 'value' => old('photo')])
+										@include('dropzone', ['type' => 'image', 'cc' => true, 'input_id' => 'idea-image', 'value' => old('photo')])
                 @endif
 
                 @if ($errors->has('photo'))
@@ -112,7 +110,7 @@
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
             </div>
-            
+
             <a class="step-button muted-link" onClick="previousStep()">{{ trans('idea_form.previous_step') }}</a>
 
         </div>

@@ -1,0 +1,12 @@
+{
+    "name": "xmovement/requirement",
+    "description": "The available design modules for an XMovement platform",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Edward Jenkins",
+            "email": "info@edjenkins.co.uk"
+        }
+    ],
+    "require": {}
+}

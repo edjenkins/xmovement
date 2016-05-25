@@ -8,7 +8,7 @@
 
 	</div>
 
-    <div class="container">
+    <div class="container ideas-container">
                         
         <div class="row">
             @foreach ($ideas as $idea)
