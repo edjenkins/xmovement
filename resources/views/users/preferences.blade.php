@@ -5,7 +5,7 @@
         <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
             <label class="control-label">Avatar</label>
 
-            @include('fileupload', ['cc' => false, 'value' => old('avatar', $user->avatar)])
+						@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'avatar', 'value' => old('avatar', $user->avatar)])
 
             @if ($errors->has('avatar'))
                 <span class="help-block">

@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+				// Image Manipulation
+				Intervention\Image\ImageServiceProvider::class,
+
         /*
          * Custom Service Providers...
          */
@@ -165,6 +168,7 @@ return [
         XMovement\Poll\PollServiceProvider::class,
         XMovement\Discussion\DiscussionServiceProvider::class,
         XMovement\Requirement\RequirementServiceProvider::class,
+        XMovement\Contribution\ContributionServiceProvider::class,
 
     ],
 
@@ -213,16 +217,21 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+				'Image' => Intervention\Image\Facades\Image::class,
+
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        
+
         'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
         'Poll' => XMovement\Poll\Poll::class,
-        
+
         'DiscussionServiceProvider' => XMovement\Discussion\DiscussionServiceProvider::class,
         'Discussion' => XMovement\Discussion\Discussion::class,
-        
+
         'RequirementServiceProvider' => XMovement\Requirement\RequirementServiceProvider::class,
         'Requirement' => XMovement\Requirement\Requirement::class,
+
+        'ContributionServiceProvider' => XMovement\Contribution\ContributionServiceProvider::class,
+        'Contribution' => XMovement\Contribution\Contribution::class,
 
     ],
 

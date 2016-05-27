@@ -1,0 +1,170 @@
+ul.fileupload-type-toggle
+	list-style none
+	margin 0
+	padding 0
+	li
+		display inline-block
+
+.dropzone-container
+	border-top none
+	overflow hidden
+	padding 20px
+	position relative
+	.dropzone
+		background #fff
+		border-radius 0px
+		margin 0
+		padding 0
+		.dz-image
+			border-radius 0px
+		.dz-message
+			line-height 150px
+			margin 0
+			padding 0
+	ul.uploaded-file-previews
+		list-style none
+		margin 0
+		padding 0
+		li
+			background-color darken(#f2f2f2, 5%)
+			background-size cover
+			background-position center
+			background-repeat no-repeat
+			border-radius 6px
+			float left
+			height 80px
+			width 80px
+
+#cc-search-field-wrapper
+	border border-color 1px solid
+	display inline-block
+	position relative
+
+.cc-container
+	border border-color 1px solid
+	border-top none
+	overflow hidden
+	padding 20px
+	position relative
+	#cc-search-field-wrapper
+		border border-color 1px solid
+		box-sizing border-box
+		display block
+		margin 5px
+		position relative
+	#cc-search-field
+		border none
+		box-sizing border-box
+		line-height 24px
+		outline none
+		padding 12px 20px
+		width 100%
+	#cc-search-button
+		position absolute
+		margin 0
+		padding 12px
+		right 0px
+		top 0px
+		i
+			color #CCC
+		&:hover
+			i
+				color success-color
+
+	#cc-search-results
+		display none
+		list-style none
+		margin 15px 0 0 0
+		padding 0
+		.cc-search-result
+			float left
+			list-style none
+			margin 0
+			padding 0
+			background-size cover
+			background-position center center
+			background-repeat no-repeat
+			border white 5px solid
+			padding-bottom 22%
+			position relative
+			height 0px
+			width calc(100%/3)
+			.loading-overlay
+				background rgba(0, 0, 0, 0.5)
+				display none
+				position absolute
+				bottom 0
+				top 0
+				left 0
+				right 0
+				text-align center
+				i
+					color white
+					line-height 54px
+					height 54px
+					width 54px
+					top 50%
+					position absolute
+					left 50%
+					margin-left -27px
+					margin-top -27px
+			.selected-overlay
+				background rgba(0, 0, 0, 0.5)
+				display none
+				position absolute
+				bottom 0
+				top 0
+				left 0
+				right 0
+				text-align center
+				svg
+					top 50%
+					position absolute
+					left 50%
+					margin-left -27px
+					margin-top -27px
+			&:hover
+				border success-color 5px solid
+				cursor pointer
+			&.selected
+				border white 5px solid
+				.selected-overlay
+					display block
+			&.loading
+				border orange 5px solid
+				.loading-overlay
+					display block
+
+	#progress
+		border-radius 16px
+		display none
+		height 12px
+		margin 20px
+
+	#files
+		margin 20px 0
+		img
+			display inline-block
+			max-height 120px
+			max-width 120px
+
+.current-file-preview
+	background border-color
+	height 60px
+	overflow hidden
+	padding-left 60px
+	position relative
+	text-align left
+	#file-preview-thumbnail
+		background-size cover
+		background-repeat no-repeat
+		background-position center
+		height 40px
+		width 40px
+		position absolute
+		top 10px
+		left 10px
+	p
+		color #999
+		line-height 60px
+		white-space nowrap

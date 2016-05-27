@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-	
+
 	<div class="page-header">
-	    
+
         <h2 class="main-title">{{ $design_task['name'] }}</h2>
 		<h5 class="sub-title">Discussion</h5>
 
 	</div>
 
 	<div class="container">
-	    
+
 	    <div class="row">
 	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
 
@@ -20,13 +20,13 @@
 
     		</div>
 	    	<div class="col-md-9 col-md-pull-3">
-	    	
+
 	    		<div class="view-controls-container">
 
 	    			<ul class="module-controls pull-left">
 
     					<li class="module-control">
-    						
+
     						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
 
 		    					<i class="fa fa-chevron-left"></i>
@@ -38,7 +38,7 @@
 	    				</li>
 
 	    			</ul>
-					
+
 					@can('destroy', $design_task)
 
 		    			<ul class="module-controls pull-right">
@@ -61,11 +61,11 @@
 	    			<div class="clearfloat"></div>
 
 	    		</div>
-	    
+
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('{{ $design_task->user->avatar }}')"></a>
+	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('/uploads/images/small/{{ $design_task->user->avatar }}')"></a>
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
@@ -74,9 +74,9 @@
 		    			@include('disqus')
 
 		    		</div>
-	    			
+
 	    		</div>
-	    
+
 	    	</div>
 	    </div>
 	</div>

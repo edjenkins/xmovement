@@ -1,0 +1,166 @@
+ul.contribution-submissions-list
+	list-style none
+	margin 10px
+	padding 0
+	li
+		border-bottom #e1e1e1 1px solid
+		font-size 15px
+		line-height 80px
+		margin 0
+		min-height 80px
+		padding 0 20px
+		padding-left 55px
+		padding-right 80px
+		position relative
+		transition(all 0.2s linear)
+		&:last-child
+			border-bottom none
+		.contribution-submission-user
+			background border-color
+			background-position center
+			background-repeat no-repeat
+			background-size cover
+			border none
+			border-radius 20px
+			height 40px
+			width 40px
+			position absolute
+			left 0
+			top 20px
+		#item-description
+			line-height 20px
+			margin-top 20px
+			padding 10px 0
+		.value
+			color #444
+			font-size 1.2em
+		.vote-container.contribution-submission-vote-container
+			line-height 80px
+			position absolute
+			right 0
+			top 0
+			width 70px
+			.vote-count
+				line-height 80px
+				text-align center
+				position absolute
+				right 40px
+				top 0
+				width 30px
+			.vote-controls
+				height 80px
+				width 40px
+				position absolute
+				right 0
+				top 0
+				.vote-button
+					height 30px
+					width 40px
+					line-height 30px
+					position absolute
+					text-align center
+					i
+						position relative
+						right 0
+					&:hover
+						cursor pointer
+					&.vote-up
+						top 10px
+					&.vote-down
+						top 40px
+
+li.contribution-submission-item[data-contribution-type-id="3"]
+	.video-wrapper
+		border #e1e1e1 1px solid
+		margin 20px 0
+		max-width 300px
+
+	.video-container
+		margin 0 auto
+		position relative
+		padding-bottom 47.5%
+		padding-top 30px
+		height 0
+		overflow hidden
+		iframe, object, embed
+			position absolute
+			top 0
+			left 0
+			width 100%
+			height 100%
+
+li.contribution-submission-item[data-contribution-type-id="4"]
+	.file-container
+		border border-color 1px solid
+		border-radius 6px
+		height 80px
+		margin 20px 0
+		padding-left 80px
+		position relative
+		.file-icon
+			background border-color
+			color #999
+			font-size 24px
+			height 80px
+			position absolute
+			text-align center
+			top 0
+			left 0
+			width 80px
+			.fa
+				line-height 80px
+		.file-name
+			line-height 40px
+			padding 20px
+			a
+				color #999
+				line-height 20px
+				&:hover
+					color main-color
+					cursor pointer
+
+// Submission container
+
+.submit-contribution-submission-container
+	border border-color 1px solid
+	margin 20px 10px
+	position relative
+	.submit-contribution-submission-footer
+		background #f9f9f9
+		border-top border-color 1px solid
+		.flat
+			float left
+			margin 10px
+		button#submit-button
+			background main-color
+			border none
+			border-radius 5px
+			color white
+			display inline
+			float right
+			margin 10px
+			padding 10px 0
+			text-align center
+			width 100px
+			&:hover
+				background darken(main-color, 10%)
+	.submission-type-wrapper
+		display none
+		&.active
+			display block
+			input[type="text"]
+				background white
+				border none
+				border-bottom border-color 1px solid
+				box-sizing border-box
+				color #444
+				display inline
+				padding 15px
+				width 100%
+				&:last-child
+					border-bottom none
+				&:focus
+					outline 0
+			&[data-type-id="2"], &[data-type-id="4"]
+				.dropzone-container
+					border-bottom border-color 1px solid

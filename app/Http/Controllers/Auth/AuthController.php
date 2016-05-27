@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Jobs\SendWelcomeEmail;
 
 use Auth;
+use Image;
+use Input;
 use Log;
 use Mail;
 use Redirect;
@@ -64,11 +66,36 @@ class AuthController extends Controller
             return $authUser;
         }
 
+				$file = Image::make($facebookUser->avatar_original);
+
+				$extension = 'jpg';
+
+		    $filename = sha1(time() . time()) . ".{$extension}";
+
+				$directory = public_path() .'/uploads/images';
+
+				$image_sizes = [
+					['name' => 'large', 'size' => 1280],
+					['name' => 'medium', 'size' => 960],
+					['name' => 'small', 'size' => 480],
+					['name' => 'thumb', 'size' => 240],
+				];
+
+				// Save image sizes
+				foreach ($image_sizes as $index => $size)
+				{
+					$img = Image::make($file);
+					$img->resize($size['size'], null, function ($constraint) {
+					    $constraint->aspectRatio();
+					});
+					$img->save($directory . '/' . $size['name'] . '/' . $filename);
+				}
+
         $user = User::create([
             'facebook_id' => $facebookUser->id,
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
-            'avatar' => $facebookUser->avatar_original,
+            'avatar' => $filename,
             'token' => $facebookUser->token
         ]);
 
@@ -187,7 +214,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         Session::flash('show_support', true);
-        
+
         Session::flash('auth_type', 'register');
 
         return $this->parentRegister($request);

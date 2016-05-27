@@ -16,6 +16,10 @@ class PollServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/views', 'poll');
 
         $this->publishes([
+            __DIR__ . '/policies' => base_path('app/Policies'),
+        ], 'policies');
+
+        $this->publishes([
             __DIR__ . '/migrations' => base_path('database/migrations'),
         ], 'migrations');
 

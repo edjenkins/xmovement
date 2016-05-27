@@ -17,6 +17,7 @@
     
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
     
@@ -49,5 +50,7 @@
     <script src='/js/file_uploader/jquery.fileupload.js'></script>
 
     <script src="/js/app.js"></script>
+
+    <script src="/js/easydropdown/jquery.easydropdown.js"></script>
 </body>
 </html>

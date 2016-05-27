@@ -1,7 +1,7 @@
 <div class="col-sm-5 col-md-4 col-lg-3 profile-side-column">
-	
+
 	<div class="avatar-wrapper">
-		<img class="avatar" style="background-image: url('{{ $user->avatar }}')">
+		<img class="avatar" style="background-image: url('/uploads/images/small/{{ $user->avatar }}')">
 	</div>
 
 	<h2 class="user-name visible-xs-block">{{ $user->name }}</h2>
@@ -14,7 +14,7 @@
 		<h3></h3>
 		<p></p>
 	</div>
-	
+
 	<div class="sidebar-section hidden-xs">
 		<div class="sidebar-section-header">
 			{{ trans('profile.supported_ideas') }}
@@ -29,7 +29,7 @@
 			@endif
 		</ul>
 	</div>
-	
+
 	<div class="sidebar-section hidden-xs">
 		<div class="sidebar-section-header">
 			{{ trans('profile.created_ideas') }}
@@ -45,4 +45,4 @@
 		</ul>
 	</div>
 
-</div>	
+</div>
