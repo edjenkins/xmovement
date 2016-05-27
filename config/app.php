@@ -169,6 +169,7 @@ return [
         XMovement\Discussion\DiscussionServiceProvider::class,
         XMovement\Requirement\RequirementServiceProvider::class,
         XMovement\Contribution\ContributionServiceProvider::class,
+        XMovement\External\ExternalServiceProvider::class,
 
     ],
 
@@ -232,6 +233,9 @@ return [
 
         'ContributionServiceProvider' => XMovement\Contribution\ContributionServiceProvider::class,
         'Contribution' => XMovement\Contribution\Contribution::class,
+
+        'ExternalServiceProvider' => XMovement\External\ExternalServiceProvider::class,
+        'External' => XMovement\External\External::class,
 
     ],
 
