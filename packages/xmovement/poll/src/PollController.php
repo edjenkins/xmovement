@@ -74,6 +74,11 @@ class PollController extends Controller
     	$voting_type = $request->voting_type;
     	$contribution_type = $request->contribution_type;
 
+			$validation['name'] = 'required|max:255';
+			$validation['description'] = 'required|max:255';
+
+			$this->validate($request, $validation);
+
       $poll_id = Poll::create([
           'user_id' => $user_id,
           'contribution_type' => $contribution_type,

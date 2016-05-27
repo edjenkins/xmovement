@@ -35,24 +35,33 @@ class ExternalController extends Controller
     	$user_id = Auth::user()->id;
     	$idea_id = $request->idea_id;
     	$embed_code = $request->embed_code;
+    	$external_link = $request->external_link;
 
-        $external_id = External::create([
-            'user_id' => $user_id,
-            'embed_code' => $embed_code,
-        ])->id;
+			$validation['name'] = 'required|max:255';
+			$validation['description'] = 'required|max:255';
+			$validation['embed_code'] = 'required_without:external_link';
+			$validation['external_link'] = 'required_without:embed_code|max:2000';
 
-        $design_task_id = DesignTask::create([
-            'user_id' => $user_id,
-            'idea_id' => $idea_id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'xmovement_task_id' => $external_id,
-            'xmovement_task_type' => 'External',
-            'locked' => $request->locked,
-        ])->id;
+			$this->validate($request, $validation);
+
+      $external_id = External::create([
+          'user_id' => $user_id,
+          'embed_code' => $embed_code,
+          'external_link' => $external_link,
+      ])->id;
+
+      $design_task_id = DesignTask::create([
+          'user_id' => $user_id,
+          'idea_id' => $idea_id,
+          'name' => $request->name,
+          'description' => $request->description,
+          'xmovement_task_id' => $external_id,
+          'xmovement_task_type' => 'External',
+          'locked' => $request->locked,
+      ])->id;
 
 	    // Load the design_task view
-		return $this->view($design_task_id);
+			return $this->view($design_task_id);
     }
 
     public function update(Request $request)

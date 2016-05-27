@@ -31,14 +31,14 @@ class ResponseObject {
         $this->meta['success'] = false;
     }
 }
- 
+
 class ContributionController extends Controller
 {
- 
+
     public static function view($design_task_id)
     {
     	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
-    	
+
     	$contribution = $design_task->xmovement_task;
 
         // Order by locked first, then highest voted, then alphabetically
@@ -61,9 +61,9 @@ class ContributionController extends Controller
         {
             $response->meta['success'] = true;
         }
-        
+
         $response->data['vote_count'] = $contribution_submission->voteCount();
-        
+
         return Response::json($response);
     }
 
@@ -74,29 +74,34 @@ class ContributionController extends Controller
     	$voting_type = $request->voting_type;
     	$contribution_type = $request->contribution_type;
 
-        $contribution_id = Contribution::create([
-            'user_id' => $user_id,
-            'contribution_type' => $contribution_type,
-            'voting_type' => $voting_type,
-        ])->id;
+			$validation['name'] = 'required|max:255';
+			$validation['description'] = 'required|max:255';
 
-        ContributionType::create([
-            'xmovement_contribution_id' => $contribution_id,
-            'id' => $contribution_type,
-        ]);
+			$this->validate($request, $validation);
 
-        $design_task_id = DesignTask::create([
-            'user_id' => $user_id,
-            'idea_id' => $idea_id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'xmovement_task_id' => $contribution_id,
-            'xmovement_task_type' => 'Contribution',
-            'locked' => $request->locked,
-        ])->id;
+      $contribution_id = Contribution::create([
+          'user_id' => $user_id,
+          'contribution_type' => $contribution_type,
+          'voting_type' => $voting_type,
+      ])->id;
+
+      ContributionType::create([
+          'xmovement_contribution_id' => $contribution_id,
+          'id' => $contribution_type,
+      ]);
+
+      $design_task_id = DesignTask::create([
+          'user_id' => $user_id,
+          'idea_id' => $idea_id,
+          'name' => $request->name,
+          'description' => $request->description,
+          'xmovement_task_id' => $contribution_id,
+          'xmovement_task_type' => 'Contribution',
+          'locked' => $request->locked,
+      ])->id;
 
 	    // Load the design_task view
-        return redirect()->action('DesignController@dashboard', $idea_id);
+      return redirect()->action('DesignController@dashboard', $idea_id);
     }
 
     public function update(Request $request)

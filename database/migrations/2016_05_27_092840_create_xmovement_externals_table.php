@@ -15,7 +15,7 @@ class CreateXmovementExternalsTable extends Migration
         Schema::create('xmovement_externals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
-            $table->string('embed_code', 2000);
+            $table->string('embed_code');
             $table->string('external_link', 2000);
             $table->timestamps();
         });
