@@ -33,14 +33,14 @@ class ResponseObject {
         $this->meta['success'] = false;
     }
 }
- 
+
 class RequirementController extends Controller
 {
- 
+
     public static function view($design_task_id)
     {
     	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
-    	
+
     	$requirement = $design_task->xmovement_task;
 
         return view('requirement::view', ['requirement' => $requirement, 'design_task' => $design_task]);
@@ -50,27 +50,32 @@ class RequirementController extends Controller
     {
     	$user_id = Auth::user()->id;
     	$idea_id = $request->idea_id;
-        $item = $request->item;
-        $count = $request->count;
 
-        $requirement_id = Requirement::create([
-            'user_id' => $user_id,
-            'item' => $item,
-            'count' => $count,
-        ])->id;
+			$validation['name'] = 'required|max:255';
+			$validation['description'] = 'required|max:255';
+			$validation['item'] = 'required|max:255';
+			$validation['count'] = 'required|integer|between:0,10000';
 
-        $design_task_id = DesignTask::create([
-            'user_id' => $user_id,
-            'idea_id' => $idea_id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'xmovement_task_id' => $requirement_id,
-            'xmovement_task_type' => 'Requirement',
-            'locked' => $request->locked,
-        ])->id;
+			$this->validate($request, $validation);
+
+      $requirement_id = Requirement::create([
+          'user_id' => $user_id,
+          'item' => $request->item,
+          'count' => $request->count,
+      ])->id;
+
+      $design_task_id = DesignTask::create([
+          'user_id' => $user_id,
+          'idea_id' => $idea_id,
+          'name' => $request->name,
+          'description' => $request->description,
+          'xmovement_task_id' => $requirement_id,
+          'xmovement_task_type' => 'Requirement',
+          'locked' => $request->locked,
+      ])->id;
 
 	    // Load the design_task view
-		return $this->view($design_task_id);
+			return $this->view($design_task_id);
     }
 
     public function submit(Request $request)
@@ -96,7 +101,7 @@ class RequirementController extends Controller
             $email = $request->email;
             $personal_message = $request->message;
             $link = $request->link;
-            
+
             $user = Auth::user();
 
             $job = (new SendXMovementRequirementInviteEmail($name, $email, $personal_message, $link, $user))->onQueue('emails');
@@ -105,7 +110,7 @@ class RequirementController extends Controller
 
             $response->meta['success'] = true;
         }
-        
+
         return Response::json($response);
     }
 
@@ -119,7 +124,7 @@ class RequirementController extends Controller
         {
             $response->meta['success'] = true;
         }
-        
+
         return Response::json($response);
     }
 

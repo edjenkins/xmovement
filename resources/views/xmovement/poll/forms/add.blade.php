@@ -24,7 +24,7 @@
                         <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
@@ -38,7 +38,7 @@
                         <strong>{{ $errors->first('description') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group{{ $errors->has('locked') ? ' has-error' : '' }}">
@@ -72,7 +72,7 @@
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_poll_form.save_changes') : trans('xmovement_poll_form.create_poll') }}</button>
             </div>
-            
+
         </div>
 
     </div>

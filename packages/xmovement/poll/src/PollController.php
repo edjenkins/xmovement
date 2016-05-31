@@ -31,14 +31,14 @@ class ResponseObject {
         $this->meta['success'] = false;
     }
 }
- 
+
 class PollController extends Controller
 {
- 
+
     public static function view($design_task_id)
     {
     	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
-    	
+
     	$poll = $design_task->xmovement_task;
 
         // Order by locked first, then highest voted, then alphabetically
@@ -61,9 +61,9 @@ class PollController extends Controller
         {
             $response->meta['success'] = true;
         }
-        
+
         $response->data['vote_count'] = $poll_option->voteCount();
-        
+
         return Response::json($response);
     }
 
@@ -74,21 +74,26 @@ class PollController extends Controller
     	$voting_type = $request->voting_type;
     	$contribution_type = $request->contribution_type;
 
-        $poll_id = Poll::create([
-            'user_id' => $user_id,
-            'contribution_type' => $contribution_type,
-            'voting_type' => $voting_type,
-        ])->id;
+			$validation['name'] = 'required|max:255';
+			$validation['description'] = 'required|max:255';
 
-        $design_task_id = DesignTask::create([
-            'user_id' => $user_id,
-            'idea_id' => $idea_id,
-            'name' => $request->name,
-            'description' => $request->description,
-            'xmovement_task_id' => $poll_id,
-            'xmovement_task_type' => 'Poll',
-            'locked' => $request->locked,
-        ])->id;
+			$this->validate($request, $validation);
+
+      $poll_id = Poll::create([
+          'user_id' => $user_id,
+          'contribution_type' => $contribution_type,
+          'voting_type' => $voting_type,
+      ])->id;
+
+      $design_task_id = DesignTask::create([
+          'user_id' => $user_id,
+          'idea_id' => $idea_id,
+          'name' => $request->name,
+          'description' => $request->description,
+          'xmovement_task_id' => $poll_id,
+          'xmovement_task_type' => 'Poll',
+          'locked' => $request->locked,
+      ])->id;
 
 	    // Load the design_task view
 		return $this->view($design_task_id);
@@ -114,7 +119,7 @@ class PollController extends Controller
             $response->meta['success'] = true;
             $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption])->render();
         }
-        
+
         return Response::json($response);
 
     }

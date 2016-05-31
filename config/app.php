@@ -169,6 +169,8 @@ return [
         XMovement\Discussion\DiscussionServiceProvider::class,
         XMovement\Requirement\RequirementServiceProvider::class,
         XMovement\Contribution\ContributionServiceProvider::class,
+        XMovement\External\ExternalServiceProvider::class,
+        XMovement\Scheduler\SchedulerServiceProvider::class,
 
     ],
 
@@ -232,6 +234,12 @@ return [
 
         'ContributionServiceProvider' => XMovement\Contribution\ContributionServiceProvider::class,
         'Contribution' => XMovement\Contribution\Contribution::class,
+
+        'ExternalServiceProvider' => XMovement\External\ExternalServiceProvider::class,
+        'External' => XMovement\External\External::class,
+
+        'SchedulerServiceProvider' => XMovement\Scheduler\SchedulerServiceProvider::class,
+        'Scheduler' => XMovement\Scheduler\Scheduler::class,
 
     ],
 
