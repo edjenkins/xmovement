@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Console\Scheduling\Scheduler;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -16,14 +16,14 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
-     * Define the application's command schedule.
+     * Define the application's command scheduler.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Scheduler  $scheduler
      * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function scheduler(Scheduler $scheduler)
     {
-        // $schedule->command('inspire')
+        // $scheduler->command('inspire')
         //          ->hourly();
     }
 }
