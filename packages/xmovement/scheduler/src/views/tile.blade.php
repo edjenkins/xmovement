@@ -1,6 +1,6 @@
 <div class="xmovement-tile">
 
-    <a href="/design/schedule/{{ $design_task['id'] }}">
+    <a href="/design/scheduler/{{ $design_task['id'] }}">
     	<div class="tile-body">
 
 		    <span class="vertically-aligned-text">
@@ -8,7 +8,7 @@
 		    	<h4>{{ $design_task['name'] }}</h4>
 
 		    	<p>
-					<i class="fa fa-schedule"></i>
+					<i class="fa fa-scheduler"></i>
 		    	</p>
 
 		    </span>

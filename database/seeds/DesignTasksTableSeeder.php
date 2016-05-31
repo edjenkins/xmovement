@@ -18,7 +18,7 @@ class DesignTasksTableSeeder extends Seeder
         // Create design modules
 
         $design_modules = [
-						['Scheduler', 'Collaboratively decide on a time/date using the schedule module as a scheduling assistant.'],
+						['Scheduler', 'Collaboratively decide on a time/date using the scheduler module as a scheduling assistant.'],
 						['Poll', 'A poll allows people to submit ideas and vote on their favourites, there can be any number of submissions in a poll. A poll might ask used to decide on an event name, the number of people to invite or even what day to have the event. It is possible to lock a poll so only you can add new options.'],
             ['Requirement', 'A requirement is useful if you need a set number of things for an event for example you may need 6 people to present or 4 cameras to record the event. People can nominate themselves to meet a requirement or invite others by email to take responsibility.'],
             ['Contribution', 'A contribution allows people to submit different forms of media and text and vote on them to collaboratively decide which is best. It is possible to lock contrbutions to specific file types such as photos/audio/video/links.'],

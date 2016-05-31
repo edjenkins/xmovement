@@ -1,10 +1,10 @@
 <?php
 
-namespace XMovement\Schedule;
+namespace XMovement\Scheduler;
 
 use Illuminate\Support\ServiceProvider;
 
-class ScheduleServiceProvider extends ServiceProvider
+class SchedulerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -13,7 +13,7 @@ class ScheduleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/views', 'schedule');
+        $this->loadViewsFrom(__DIR__.'/views', 'scheduler');
 
         $this->publishes([
             __DIR__ . '/migrations' => base_path('database/migrations'),
@@ -28,15 +28,15 @@ class ScheduleServiceProvider extends ServiceProvider
         ], 'factories');
 
         $this->publishes([
-            __DIR__.'/views' => base_path('resources/views/xmovement/schedule'),
+            __DIR__.'/views' => base_path('resources/views/xmovement/scheduler'),
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/stylus' => base_path('resources/assets/stylus/xmovement/schedule'),
+            __DIR__.'/stylus' => base_path('resources/assets/stylus/xmovement/scheduler'),
         ], 'public');
 
         $this->publishes([
-            __DIR__.'/js' => base_path('public/js/xmovement/schedule'),
+            __DIR__.'/js' => base_path('public/js/xmovement/scheduler'),
         ], 'public');
 
         $this->publishes([
@@ -52,7 +52,7 @@ class ScheduleServiceProvider extends ServiceProvider
     public function register()
     {
         include __DIR__.'/routes.php';
-        $this->app->make('XMovement\Schedule\ScheduleController');
+        $this->app->make('XMovement\Scheduler\SchedulerController');
     }
 
 }

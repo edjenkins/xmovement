@@ -77,6 +77,6 @@
 	    </div>
 	</div>
 
-	<!-- <script src="/js/xmovement/schedule/view.js"></script> -->
+	<!-- <script src="/js/xmovement/scheduler/view.js"></script> -->
 
 @endsection

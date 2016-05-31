@@ -1,8 +1,8 @@
-<form class="{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ $editing ? '/design/schedule/update' : '/design/schedule/store' }}">
+<form class="{{ $errors->isEmpty() ? '' : ' has-errors' }}" role="form" method="POST" action="{{ $editing ? '/design/scheduler/update' : '/design/scheduler/store' }}">
     {!! csrf_field() !!}
 
     @if ($editing)
-        <input type="hidden" name="id" value="{{ $schedule->id }}">
+        <input type="hidden" name="id" value="{{ $scheduler->id }}">
     @endif
 
     <input type="hidden" name="idea_id" value="{{ $idea->id }}">
@@ -15,9 +15,9 @@
 
             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
-                <label>{{ trans('xmovement_schedule_form.name_label') }}</label>
+                <label>{{ trans('xmovement_scheduler_form.name_label') }}</label>
 
-                <input type="text" class="form-control" name="name" value="{{ isset($poll) ? old('name', $poll->name) : old('name') }}" placeholder="{{ trans('xmovement_schedule_form.name_placeholder') }}">
+                <input type="text" class="form-control" name="name" value="{{ isset($poll) ? old('name', $poll->name) : old('name') }}" placeholder="{{ trans('xmovement_scheduler_form.name_placeholder') }}">
 
                 @if ($errors->has('name'))
                     <span class="help-block">
@@ -29,9 +29,9 @@
 
             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
 
-                <label>{{ trans('xmovement_schedule_form.description_label') }}</label>
+                <label>{{ trans('xmovement_scheduler_form.description_label') }}</label>
 
-                <input type="text" class="form-control" name="description" value="{{ isset($poll) ? old('description', $poll->description) : old('description') }}" placeholder="{{ trans('xmovement_schedule_form.description_placeholder') }}">
+                <input type="text" class="form-control" name="description" value="{{ isset($poll) ? old('description', $poll->description) : old('description') }}" placeholder="{{ trans('xmovement_scheduler_form.description_placeholder') }}">
 
                 @if ($errors->has('description'))
                     <span class="help-block">
@@ -45,7 +45,7 @@
 
                 <div class="toggle-switch-wrapper">
 
-                    <label>{{ trans('xmovement_schedule_form.locked_label') }}</label>
+                    <label>{{ trans('xmovement_scheduler_form.locked_label') }}</label>
 
                     <label class="toggle-switch">
 
@@ -70,7 +70,7 @@
             </div>
 						
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_schedule_form.save_changes') : trans('xmovement_schedule_form.create_schedule') }}</button>
+                <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_scheduler_form.save_changes') : trans('xmovement_scheduler_form.create_scheduler') }}</button>
             </div>
 
         </div>

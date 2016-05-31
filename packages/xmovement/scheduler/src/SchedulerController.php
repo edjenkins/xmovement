@@ -1,6 +1,6 @@
 <?php
 
-namespace XMovement\Schedule;
+namespace XMovement\Scheduler;
 
 use Illuminate\Http\Request;
 
@@ -18,16 +18,16 @@ use App\Idea;
 use App\User;
 use App\DesignTask;
 
-class ScheduleController extends Controller
+class SchedulerController extends Controller
 {
 
     public static function view($design_task_id)
     {
     	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
 
-    	$schedule = $design_task->xmovement_task;
+    	$scheduler = $design_task->xmovement_task;
 
-        return view('schedule::view', ['schedule' => $schedule, 'design_task' => $design_task]);
+        return view('scheduler::view', ['scheduler' => $scheduler, 'design_task' => $design_task]);
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class ScheduleController extends Controller
 
 			$this->validate($request, $validation);
 
-      $schedule_id = Schedule::create([
+      $scheduler_id = Scheduler::create([
           'user_id' => $user_id,
       ])->id;
 
@@ -49,8 +49,8 @@ class ScheduleController extends Controller
           'idea_id' => $idea_id,
           'name' => $request->name,
           'description' => $request->description,
-          'xmovement_task_id' => $schedule_id,
-          'xmovement_task_type' => 'Schedule',
+          'xmovement_task_id' => $scheduler_id,
+          'xmovement_task_type' => 'Scheduler',
           'locked' => $request->locked,
       ])->id;
 

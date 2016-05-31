@@ -39,7 +39,7 @@
             var scopeEvalAsync = function (expression) {
                     var scope = angular.element(this)
                             .fileupload('option', 'scope');
-                    // Schedule a new $digest cycle if not already inside of one
+                    // Scheduler a new $digest cycle if not already inside of one
                     // and evaluate the given expression:
                     scope.$evalAsync(expression);
                 },

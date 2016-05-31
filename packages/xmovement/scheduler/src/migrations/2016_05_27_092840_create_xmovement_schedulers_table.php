@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateXmovementSchedulesTable extends Migration
+class CreateXmovementSchedulersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateXmovementSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('xmovement_schedules', function (Blueprint $table) {
+        Schema::create('xmovement_schedulers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->timestamps();
@@ -26,6 +26,6 @@ class CreateXmovementSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('xmovement_schedules');
+        Schema::drop('xmovement_schedulers');
     }
 }

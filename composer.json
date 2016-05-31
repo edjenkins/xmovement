@@ -31,7 +31,7 @@
             "XMovement\\Requirement\\": "packages/xmovement/requirement/src",
             "XMovement\\Contribution\\": "packages/xmovement/contribution/src",
             "XMovement\\External\\": "packages/xmovement/external/src",
-            "XMovement\\Schedule\\": "packages/xmovement/schedule/src"
+            "XMovement\\Scheduler\\": "packages/xmovement/scheduler/src"
         }
     },
     "autoload-dev": {
