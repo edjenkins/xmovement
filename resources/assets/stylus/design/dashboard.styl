@@ -1,27 +1,115 @@
 .view-controls-container
-	border-bottom border-color 1px solid 
-	padding 10px 0
+	border-bottom border-color 1px solid
+	padding 10px 5px
+	@media(max-width: 568px)
+		padding 10px 0
 	.search-bar-wrapper
 		border border-color 1px solid
 		display inline-block
-		padding-left 50px 
+		margin 10px 5px
+		overflow hidden
+		padding-left 50px
 		position relative
+		@media(max-width: 568px)
+			display block
 		.search-bar-button
-			border-right border-color 1px solid 
+			border-right border-color 1px solid
 			left 0
 			line-height 40px
-			position absolute 
+			position absolute
 			top 0
 			text-align center
 			width 50px
 			transition(all 0.2s linear)
 			&:hover
 				background border-color
-				cursor pointer 
+				cursor pointer
 		.search-bar
 			border none
+			box-sizing border-box
+			display block
 			line-height 20px
-			padding 10px 20px 
-			width 220px
+			margin 0 5px
+			padding 10px 20px
+			width 260px
+			@media(max-width: 568px)
+				width 100%
 			&:focus
-				outline 0 
+				outline 0
+
+	.module-controls
+		list-style none
+		margin 10px 0
+		padding 0
+		@media(max-width: 568px)
+			width 100%
+		@media(min-width: 568px)
+			&.pull-left .module-control
+				margin-right 10px
+			&.pull-right .module-control
+				margin-left 10px
+		.module-control
+			border border-color 1px solid
+			display inline-block
+			text-align center
+			min-width 30px
+			@media(max-width: 568px)
+				display block
+				margin 0 5px
+				margin-bottom 20px
+				&:last-child
+					margin-bottom 0
+			a, button
+				background transparent
+				border none
+				color #666
+				display block
+				line-height 40px
+				padding 0 10px
+				text-decoration none
+				text-align center
+				transition(all 0.2s linear)
+				i
+					margin 0 5px
+			&:hover
+				border main-color 1px solid
+				a, button
+					background main-color
+					color white
+			form button
+				width 100%
+
+.module-description
+	margin 20px 5px 0 5px
+	padding-left 74px
+	position relative
+	.module-description-user
+		background-color border-color
+		background-size cover
+		background-repeat no-repeat
+		background-position center
+		border-radius 32px
+		height 64px
+		width 64px
+		position absolute
+		left 0
+		top 0
+	.description-text
+		background main-color
+		border-radius 6px
+		color white
+		font-size 17px
+		min-height 65px
+		padding 20px
+		position relative
+		&:after
+			content: "";
+			position: absolute;
+			top: 22px;
+			left: -10px;
+			border-style: solid;
+			border-width: 10px 10px 10px 0;
+			border-color: transparent main-color;
+			display: block;
+			width: 0;
+			z-index: 1;

@@ -1,7 +1,8 @@
-<div class="tile idea-tile mini-tile" onClick="document.location = '{{ action('IdeaController@view', $idea->id) }}'">
+<div class="idea-tile mini-tile" onClick="document.location = '{{ action('IdeaController@view', $idea->id) }}'">
 	<div class="inner-container">
 		<h4>
-		    {{ $idea->name }}
+				<i class="fa fa-circle-o"></i>
+				{{ $idea->name }}
 		</h4>
 	</div>
 </div>

@@ -61,4 +61,9 @@ class UserPolicy
             return true;
         }
     }
+
+    public function dashboard(User $user, Idea $idea)
+    {
+        return true;
+    }
 }

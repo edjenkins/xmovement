@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Idea;
 use App\User;
 use App\Supporter;
+use App\DesignTask;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 

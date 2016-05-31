@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -156,10 +156,21 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+				// Image Manipulation
+				Intervention\Image\ImageServiceProvider::class,
+
         /*
          * Custom Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+
+        // XMovement Design Modules
+        XMovement\Poll\PollServiceProvider::class,
+        XMovement\Discussion\DiscussionServiceProvider::class,
+        XMovement\Requirement\RequirementServiceProvider::class,
+        XMovement\Contribution\ContributionServiceProvider::class,
+        XMovement\External\ExternalServiceProvider::class,
+        XMovement\Scheduler\SchedulerServiceProvider::class,
 
     ],
 
@@ -208,7 +219,27 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+				'Image' => Intervention\Image\Facades\Image::class,
+
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
+        'Poll' => XMovement\Poll\Poll::class,
+
+        'DiscussionServiceProvider' => XMovement\Discussion\DiscussionServiceProvider::class,
+        'Discussion' => XMovement\Discussion\Discussion::class,
+
+        'RequirementServiceProvider' => XMovement\Requirement\RequirementServiceProvider::class,
+        'Requirement' => XMovement\Requirement\Requirement::class,
+
+        'ContributionServiceProvider' => XMovement\Contribution\ContributionServiceProvider::class,
+        'Contribution' => XMovement\Contribution\Contribution::class,
+
+        'ExternalServiceProvider' => XMovement\External\ExternalServiceProvider::class,
+        'External' => XMovement\External\External::class,
+
+        'SchedulerServiceProvider' => XMovement\Scheduler\SchedulerServiceProvider::class,
+        'Scheduler' => XMovement\Scheduler\Scheduler::class,
 
     ],
 

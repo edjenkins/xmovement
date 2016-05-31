@@ -20,6 +20,16 @@ class Idea extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * The Design Tasks for the idea.
+     *
+     * @var array
+     */
+    public function designTasks()
+    {
+        return $this->hasMany(DesignTask::class);
+    }
+
     public function supporterCount()
     {
         return Supporter::where('idea_id', $this->id)->count();

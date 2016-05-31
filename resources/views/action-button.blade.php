@@ -1,12 +1,10 @@
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
 <div class="action-buttons">
 
 	@if (Auth::check())
 
 		@can('support', $idea)
 		
-			<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#support-modal">Support this Idea</div>
+			<div class="btn btn-primary" id="support-button" data-toggle="modal" data-target="#support-modal" data-design-link="{{ action('DesignController@dashboard', $idea) }}">Support this Idea</div>
 
 		@endcan
 
@@ -19,6 +17,10 @@
 	@can('design', $idea)
 
 		<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">Help Design</a>
+	
+	@else
+
+		<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button" id="temp-design-button">Help Design</a>
 
 	@endcan
 

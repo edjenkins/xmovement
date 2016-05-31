@@ -17,7 +17,6 @@ $('#cc-search-button').click(function() {
 
 function searchCC() {
 
-
     var query = $('#cc-search-field').val();
 
     $('#photo-error-message').html('').css('display', 'none');
@@ -81,6 +80,9 @@ $(function () {
 				$('#photo-error-message').html('').css('display', 'none');
 
             	if (file.error) {
+
+                    console.log('There was an error with the upload');
+                    console.log(file.error);
 
 	            	$('#upload-button-text').html('Failed');
 	            	$('#fileinput-button').removeClass('btn-success').addClass('btn-danger');
