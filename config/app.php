@@ -170,6 +170,7 @@ return [
         XMovement\Requirement\RequirementServiceProvider::class,
         XMovement\Contribution\ContributionServiceProvider::class,
         XMovement\External\ExternalServiceProvider::class,
+        XMovement\Schedule\ScheduleServiceProvider::class,
 
     ],
 
@@ -236,6 +237,9 @@ return [
 
         'ExternalServiceProvider' => XMovement\External\ExternalServiceProvider::class,
         'External' => XMovement\External\External::class,
+
+        'ScheduleServiceProvider' => XMovement\Schedule\ScheduleServiceProvider::class,
+        'Schedule' => XMovement\Schedule\Schedule::class,
 
     ],
 
