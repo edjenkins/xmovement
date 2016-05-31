@@ -60,6 +60,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/design/add/{idea}', 'DesignController@add');
     Route::delete('/design/task/destroy/{design_task}', 'DesignController@destroyTask');
 
+    // Propose routes
+    Route::get('/propose/{idea}', 'ProposeController@index');
+    Route::get('/propose/add/{idea}', 'ProposeController@add');
+    // Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroyTask');
+
 
     // Vote routes (Design task)
     Route::post('/vote/design_task', 'DesignController@vote');

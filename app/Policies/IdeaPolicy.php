@@ -62,6 +62,18 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can submit a proposal for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function propose(User $user, Idea $idea)
+    {
+        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+    }
+
+    /**
      * Determine if the given user can edit the given idea.
      *
      * @param  User  $user
