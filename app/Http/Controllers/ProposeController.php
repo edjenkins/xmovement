@@ -54,6 +54,11 @@ class ProposeController extends Controller
         ]);
     }
 
+    public function view(Request $request, Idea $idea)
+    {
+        // Do nothing
+    }
+
     public function add(Request $request, Idea $idea)
     {
         // Fetch proposals

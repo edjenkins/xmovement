@@ -3,9 +3,8 @@
 
     <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
         <label class="control-label">Your Proposal</label>
-
-				<textarea name="body" rows="20" placeholder="Proposal..."></textarea>
-        <!-- <input type="email" class="form-control input-field" name="email" value="{{ old('email') }}" > -->
+		
+        <input type="text" class="form-control input-field" name="body" value="{{ old('body') }}" >
 
         @if ($errors->has('body'))
             <span class="help-block">

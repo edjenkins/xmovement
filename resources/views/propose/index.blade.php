@@ -45,14 +45,11 @@
 
 	    		</div>
 
-	    		<div class="column main-column">
+	    		<div class="column">
 
 					@foreach ($proposals as $proposal)
 
-						<?php
-						// echo $design_task->xmovement_task->renderTile($design_task);
-						echo $proposal;
-						?>
+						@include('propose/tile', ['proposal' => $proposal])
 
 					@endforeach
 

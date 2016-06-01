@@ -16,7 +16,7 @@ class CreateProposalsTable extends Migration
             $table->increments('id');
             $table->integer('idea_id')->index();
             $table->integer('user_id')->index();
-            $table->string('name', 200);
+            $table->string('body', 2000);
             $table->timestamps();
         });
     }

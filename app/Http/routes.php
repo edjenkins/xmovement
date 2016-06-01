@@ -62,6 +62,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Propose routes
     Route::get('/propose/{idea}', 'ProposeController@index');
+		Route::get('/propose/view/{proposal}', 'ProposeController@view');
     Route::get('/propose/add/{idea}', 'ProposeController@add');
     // Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroyTask');
 
