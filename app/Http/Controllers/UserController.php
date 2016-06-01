@@ -20,7 +20,7 @@ class UserController extends Controller
     public function profile(Request $request, User $user)
 	{
 		if (is_null($user->id)) { $user = Auth::user(); }
-		
+
 		$supported_ideas = $user->supportedIdeas->take(10);
 		$created_ideas = $user->ideas->take(10);
 
@@ -37,7 +37,7 @@ class UserController extends Controller
 	public function addDetails(Request $request)
 	{
 		$user = Auth::user();
-		
+
 		$validation = ['phone' => 'max:255', 'bio' => 'max:2000'];
 
 		if (isset($request->name)) {
@@ -64,6 +64,7 @@ class UserController extends Controller
 		Session::flash('flash_message', trans('flash_message.profile_updated'));
 		Session::flash('flash_type', 'flash-success');
 
-	    return redirect()->action('UserController@profile', $user->id);
+	    // return redirect()->action('UserController@profile', $user->id);
+			return redirect()->back();
 	}
 }

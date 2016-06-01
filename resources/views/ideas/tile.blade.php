@@ -1,5 +1,5 @@
 <div class="tile idea-tile" onClick="document.location = '{{ action('IdeaController@view', $idea->id) }}'">
-	<div class="tile-image" style="background-image:url('{{ $idea->photo }}')"></div>
+	<div class="tile-image" style="background-image:url('uploads/images/large/{{ $idea->photo }}')"></div>
 	<div class="inner-container">
 		<h4>
 		    {{ $idea->name }}

@@ -5,10 +5,10 @@
     <div class="container-fluid error-page">
 
         <div class="text-container">
-            <h1>503</h1>
-			<h3>Service Unavailable</h3>
-			<a href="{{action('PageController@home')}}">
-				<i class="fa fa-home"></i>
+            <h1>404</h1>
+			<h3>Not Found</h3>
+			<a href="{{URL::previous()}}">
+				<i class="fa fa-arrow-left"></i>
 			</a>
         </div>
 

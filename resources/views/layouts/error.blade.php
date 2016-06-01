@@ -16,30 +16,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <!-- Styles -->
-    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
     <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
 
 	@include('google-analytics')
-	
-    @include('facebook-sdk')
-
-    @include('navbar')
-
-    @if ( Session::has('flash_message') )
-
-        <div class="flash {{ Session::get('flash_type') }}">
-            {{ Session::get('flash_message') }}
-        </div>
-
-    @endif
 
     @yield('content')
-
-    @include('footer')
-
-    @include('modals/auth')
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

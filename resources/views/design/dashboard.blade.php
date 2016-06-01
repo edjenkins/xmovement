@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-	
+
 	<div class="page-header">
-	    
+
         <h2 class="main-title">Dashboard</h2>
 		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 	</div>
 
 	<div class="container">
-	    
+
 	    <div class="row">
 	    	<div class="col-md-4 col-md-push-8 hidden-sm hidden-xs">
 
@@ -22,9 +22,9 @@
 
     		</div>
 	    	<div class="col-md-8 col-md-pull-4">
-	    	
+
 	    		<div class="view-controls-container">
-	    			
+
 	    			<div class="search-bar-wrapper">
 
 	    				<div class="search-bar-button"><i class="fa fa-search"></i></div>
@@ -35,7 +35,7 @@
 	    			<ul class="module-controls pull-right">
 
     					<li class="module-control">
-    						
+
     						<a href="{{ action('DesignController@add', $idea) }}">
 
 		    					<i class="fa fa-plus"></i>
@@ -51,7 +51,7 @@
 	    			<div class="clearfloat"></div>
 
 	    		</div>
-	    		
+
 	    		<div class="column main-column">
 
 					@foreach ($design_tasks as $design_task)
@@ -62,9 +62,17 @@
 
 					@endforeach
 
+					@if (count($design_tasks) == 0)
+
+						<a href="{{ action('DesignController@add', $idea) }}" class="action-panel">
+							Add Design Task
+						</a>
+
+					@endif
+
 	    			<div class="clearfloat"></div>
 	    		</div>
-	    
+
 	    	</div>
 	    </div>
 	</div>
