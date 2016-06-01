@@ -36,7 +36,7 @@ class IdeaController extends Controller
 {
     public function index(Request $request)
 	{
-	    $ideas = Idea::where('visibility', 'public')->get();
+	    $ideas = Idea::where('visibility', 'public')->orderBy('created_at', 'desc')->get();
 
 	    return view('ideas.index', [
 	        'ideas' => $ideas,
