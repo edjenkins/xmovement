@@ -24,7 +24,7 @@ class SendWelcomeEmail extends Job implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, bool $isFacebookUser)
+    public function __construct(User $user, $isFacebookUser)
     {
         $this->user = $user;
         $this->isFacebookUser = $isFacebookUser;
