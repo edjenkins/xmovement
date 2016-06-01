@@ -70,11 +70,52 @@ Route::group(['middleware' => ['web']], function () {
     // File upload
     Route::post('/upload', 'UploadController@upload');
 
-		Route::get('/test', function()
+		// Images
+		Route::get('/uploads/images/{size}/{type}', function($size, $type)
 		{
-		    $img = Image::make('http://xm.local/uploads/4b0e7aec952b1a1124dd85fc1105f90fba5d9c7e.jpeg')->fit(800, 360);
+			$img = Image::canvas(800, 800, '#e1e1e1');
 
-		    return $img->response('jpg');
+			switch ($type) {
+				case 'placeholder':
+					$img->circle(100, 200, 400, function ($draw) {
+							$draw->background('#f2f2f2');
+					});
+					$img->circle(100, 400, 400, function ($draw) {
+							$draw->background('#f2f2f2');
+					});
+					$img->circle(100, 600, 400, function ($draw) {
+							$draw->background('#f2f2f2');
+					});
+					break;
+
+				case 'avatar':
+					$img->circle(350, 400, 300, function ($draw) {
+							$draw->background('#f2f2f2');
+					});
+					$img->circle(600, 400, 750, function ($draw) {
+							$draw->background('#f2f2f2');
+					});
+					break;
+			}
+
+			return $img->response('jpg');
+		});
+
+		Route::get('/uploads/images/{size}/', function($size)
+		{
+			$img = Image::canvas(800, 800, '#e1e1e1');
+
+			$img->circle(100, 200, 400, function ($draw) {
+					$draw->background('#f2f2f2');
+			});
+			$img->circle(100, 400, 400, function ($draw) {
+					$draw->background('#f2f2f2');
+			});
+			$img->circle(100, 600, 400, function ($draw) {
+					$draw->background('#f2f2f2');
+			});
+
+			return $img->response('jpg');
 		});
 
 });
