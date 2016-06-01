@@ -24,10 +24,22 @@ class LogActivity
 
     public function terminate($request, $response)
 	{
+		$data = $request->all();
+
+		if (in_array($request->path(), ['login', 'register']) || (substr($request->path(), 0, 14) === 'password/reset')) {
+			// May contain password
+			if (array_key_exists('password', $data)) {
+				$data['password'] = 'sensitive';
+			}
+			if (array_key_exists('password_confirmation', $data)) {
+				$data['password_confirmation'] = 'sensitive';
+			}
+		}
+
 		ActivityLog::create([
 			'request' => $request,
 			'response' => $response,
-			'data' => json_encode($request->all()),
+			'data' => json_encode($data),
 			'method' => $request->method(),
 			'path' => $request->path(),
 			'url' => $request->url(),
