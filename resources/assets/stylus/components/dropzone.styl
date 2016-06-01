@@ -150,11 +150,14 @@ ul.fileupload-type-toggle
 
 .current-file-preview
 	background border-color
+	display none
 	height 60px
 	overflow hidden
 	padding-left 60px
 	position relative
 	text-align left
+	&.visible
+		display block
 	#file-preview-thumbnail
 		background-size cover
 		background-repeat no-repeat

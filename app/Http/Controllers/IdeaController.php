@@ -56,7 +56,15 @@ class IdeaController extends Controller
 
     public function add(Request $request)
 	{
-	    return view('ideas.add');
+			if (Auth::check())
+			{
+		    return view('ideas.add');
+			}
+			else
+			{
+				Session::flash('redirect', $request->url());
+				return view('ideas.learn');
+			}
 	}
 
     public function edit(Request $request, Idea $idea)
