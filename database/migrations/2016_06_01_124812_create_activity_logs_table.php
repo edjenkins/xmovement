@@ -16,13 +16,13 @@ class CreateActivityLogsTable extends Migration
             $table->increments('id');
 			$table->string('request');
 			$table->text('response');
-			$table->json('data');
+			$table->text('data');
 			$table->string('method');
 			$table->string('path');
 			$table->string('url');
 			$table->string('full_url');
 			$table->string('action');
-			$table->json('parameters');
+			$table->text('parameters');
 			$table->string('ip');
 			$table->string('referer');
 			$table->string('user_agent');
