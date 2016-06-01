@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
     <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
