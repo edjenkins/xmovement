@@ -15,7 +15,7 @@ use App\User;
 class SendWelcomeEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
-    
+
     protected $user;
     protected $isFacebookUser;
 
@@ -24,7 +24,7 @@ class SendWelcomeEmail extends Job implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, bool $isFacebookUser)
+    public function __construct(User $user, boolean $isFacebookUser)
     {
         $this->user = $user;
         $this->isFacebookUser = $isFacebookUser;
