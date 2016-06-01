@@ -61,12 +61,12 @@ class IdeaController extends Controller
 
     public function edit(Request $request, Idea $idea)
 	{
-		if (Gate::denies('update', $idea))
+		if (Gate::denies('edit', $idea))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
 			Session::flash('flash_type', 'flash-warning');
-			
-			return view('ideas.view', ['idea' => $idea]);
+
+			return redirect()->back();
 		}
 		else
 		{
@@ -75,7 +75,7 @@ class IdeaController extends Controller
 	}
 
 	public function store(Request $request)
-	{	
+	{
 		// Validate the idea
 	    $this->validate($request, [
 	        'name' => 'required|max:255',
@@ -100,7 +100,7 @@ class IdeaController extends Controller
 	{
 		$idea = Idea::find($request->id);
 
-		if (Gate::denies('update', $idea))
+		if (Gate::denies('edit', $idea))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
 			Session::flash('flash_type', 'flash-warning');
@@ -196,7 +196,7 @@ class IdeaController extends Controller
 	public function support(Request $request)
 	{
 		$response = new ResponseObject();
-    	
+
 	    $recaptcha = new \ReCaptcha\ReCaptcha(getenv('CAPTCHA_SECRET'));
 
 	    $resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
@@ -204,7 +204,7 @@ class IdeaController extends Controller
 	    if ($resp->isSuccess())
 	    {
 	    	$idea = Idea::find($request->idea_id);
-	    	
+
 			$idea->supporters()->attach($request->user_id);
 
 			$receiver = User::find($request->user_id);
