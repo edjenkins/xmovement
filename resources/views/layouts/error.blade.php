@@ -21,6 +21,8 @@
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
 
+	@include('google-analytics')
+
     @yield('content')
 
     <!-- JavaScripts -->
