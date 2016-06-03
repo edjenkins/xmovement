@@ -12,38 +12,33 @@
 	<div class="container">
 
 	    <div class="row">
-	    	<div class="col-md-4 col-md-push-8 hidden-sm hidden-xs">
+	    	<div class="col-md-8 col-md-offset-2">
 
-	    		<div class="column side-column">
+				@if (count($proposals) > 0)
 
-	    			<!-- Activity -->
+					<div class="view-controls-container">
 
-	    		</div>
+		    			<ul class="module-controls pull-right">
 
-    		</div>
-	    	<div class="col-md-8 col-md-pull-4">
+	    					<li class="module-control">
 
-	    		<div class="view-controls-container">
+	    						<a href="{{ action('ProposeController@add', $idea) }}">
 
-	    			<ul class="module-controls pull-right">
+			    					<i class="fa fa-plus"></i>
 
-    					<li class="module-control">
+			    					Add Proposal
 
-    						<a href="{{ action('ProposeController@add', $idea) }}">
+			    				</a>
 
-		    					<i class="fa fa-plus"></i>
+		    				</li>
 
-		    					Add Proposal
+		    			</ul>
 
-		    				</a>
+		    			<div class="clearfloat"></div>
 
-	    				</li>
+		    		</div>
 
-	    			</ul>
-
-	    			<div class="clearfloat"></div>
-
-	    		</div>
+				@endif
 
 	    		<div class="column">
 
@@ -52,6 +47,14 @@
 						@include('propose/tile', ['proposal' => $proposal])
 
 					@endforeach
+
+					@if (count($proposals) == 0)
+
+						<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
+							Add Proposal
+						</a>
+
+					@endif
 
 	    			<div class="clearfloat"></div>
 	    		</div>

@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div class="page-header">
+	<div class="page-header colorful">
 
         <h2 class="main-title">Add Proposal</h2>
 
@@ -23,7 +23,7 @@
 
 		    					<i class="fa fa-chevron-left"></i>
 
-		    					Back to Dashboard
+		    					Back to Proposals
 
 		    				</a>
 
@@ -35,15 +35,36 @@
 
 	    		</div>
 
+			</div>
+
+			<div class="col-md-8 col-md-offset-2">
+
 	    		<div class="column main-column">
 
-	    			<div class="proposal-form">
+					<div class="proposal-guide-container">
 
-							@include('forms/proposal')
+						<h3>
+							Creating a proposal is simple, just complete the following steps:
+						</h3>
+						<p>
+							Select the design tasks you would like to include in your proposal.
+						</p>
+						<p>
+							You will then be taken through each selected task and asked to choose one or more contributions from each.
+						</p>
+						<p>
+							You can add text to your proposal to explain decisions you have made and how the selected items work together.
+						</p>
+						<p>
+							Finally, review your proposal and submit it to the community.
+						</p>
 
-	    			</div>
+						<a href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">Get Started</a>
 
-	    			<div class="clearfloat"></div>
+		    			<div class="clearfloat"></div>
+
+					</div>
+
 	    		</div>
 
 	    	</div>

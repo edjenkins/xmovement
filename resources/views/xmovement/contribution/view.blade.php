@@ -2,81 +2,97 @@
 
 @section('content')
 
-	<div class="page-header">
+	<div class="page-header {{ ($proposal_mode) ? ' colorful' : '' }}">
 
         <h2 class="main-title">{{ $design_task['name'] }}</h2>
-		<h5 class="sub-title">Contribution</h5>
+		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more contributions' : 'Contribution' }}</h5>
 
 	</div>
+
+	@if ($proposal_mode)
+
+		@include('propose/toolbar', $design_task)
+
+	@endif
 
 	<div class="container">
 
 	    <div class="row">
-	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
 
-	    		<div class="column side-column">
+			@if (!$proposal_mode)
+
+				<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
+
+		    		<div class="column side-column">
+
+		    		</div>
 
 	    		</div>
 
-    		</div>
-	    	<div class="col-md-9 col-md-pull-3">
+			@endif
 
-	    		<div class="view-controls-container">
+	    	<div class="{{ (!$proposal_mode) ? 'col-md-9 col-md-pull-3' : 'col-md-8 col-md-offset-2' }}">
 
-	    			<ul class="module-controls pull-left">
+				@if (!$proposal_mode)
 
-    					<li class="module-control">
+		    		<div class="view-controls-container">
 
-    						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
-
-		    					<i class="fa fa-chevron-left"></i>
-
-		    					Back to Dashboard
-
-		    				</a>
-
-	    				</li>
-
-	    			</ul>
-
-	    			<ul class="module-controls pull-right">
-
-	    				@can('submitSubmission', $contribution)
+		    			<ul class="module-controls pull-left">
 
 	    					<li class="module-control">
 
-	    						<a href="#submit-contribution-submission">
+	    						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
 
-			    					<i class="fa fa-plus"></i>
+			    					<i class="fa fa-chevron-left"></i>
 
-			    					Submit contribution
+			    					Back to Dashboard
 
 			    				</a>
 
 		    				</li>
 
-	    				@endcan
+		    			</ul>
 
-						@can('destroy', $design_task)
+		    			<ul class="module-controls pull-right">
 
-	    					<li class="module-control">
+		    				@can('submitSubmission', $contribution)
 
-						        <form action="{{ action('DesignController@destroyTask', $design_task) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
-						            {!! csrf_field() !!}
-						            {!! method_field('DELETE') !!}
+		    					<li class="module-control">
 
-									<button type="submit"><i class="fa fa-trash"></i></button>
-						        </form>
+		    						<a href="#submit-contribution-submission">
 
-		    				</li>
+				    					<i class="fa fa-plus"></i>
 
-	    				@endcan
+				    					Submit contribution
 
-	    			</ul>
+				    				</a>
 
-	    			<div class="clearfloat"></div>
+			    				</li>
 
-	    		</div>
+		    				@endcan
+
+							@can('destroy', $design_task)
+
+		    					<li class="module-control">
+
+							        <form action="{{ action('DesignController@destroyTask', $design_task) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
+							            {!! csrf_field() !!}
+							            {!! method_field('DELETE') !!}
+
+										<button type="submit"><i class="fa fa-trash"></i></button>
+							        </form>
+
+			    				</li>
+
+		    				@endcan
+
+		    			</ul>
+
+		    			<div class="clearfloat"></div>
+
+		    		</div>
+
+				@endif
 
 	    		<div class="column main-column">
 
@@ -85,7 +101,7 @@
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
-	    			<ul class="contribution-submissions-list">
+	    			<ul class="contribution-submissions-list {{ ($proposal_mode) ? 'proposal-mode' : '' }}">
 
 		    			@foreach ($contribution->contributionSubmissions as $contributionSubmission)
 
@@ -95,67 +111,71 @@
 
 	    			</ul>
 
-	    			@can('submitSubmission', $contribution)
+					@if (!$proposal_mode)
 
-		    			<div class="submit-contribution-submission-container" id="submit-contribution-submission">
+		    			@can('submitSubmission', $contribution)
 
-							@foreach ($contribution->contributionTypes as $contributionType)
+			    			<div class="submit-contribution-submission-container" id="submit-contribution-submission">
 
-								<div class="submission-type-wrapper active" data-type-id="{{ $contributionType->id }}">
+								@foreach ($contribution->contributionTypes as $contributionType)
 
-									<?php if ($contributionType->id == 1) { ?>
+									<div class="submission-type-wrapper active" data-type-id="{{ $contributionType->id }}">
 
-				    					<input type="text" placeholder="Submit a text contribution.." />
+										<?php if ($contributionType->id == 1) { ?>
 
-									<?php } ?>
+					    					<input type="text" placeholder="Submit a text contribution.." />
 
-									<?php if ($contributionType->id == 2) { ?>
+										<?php } ?>
 
-					    				@include('dropzone', ['type' => 'image', 'input_id' => 'contribution-image'])
+										<?php if ($contributionType->id == 2) { ?>
 
-					    				<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
+						    				@include('dropzone', ['type' => 'image', 'input_id' => 'contribution-image'])
 
-									<?php } ?>
+						    				<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
 
-									<?php if ($contributionType->id == 3) { ?>
+										<?php } ?>
 
-				    					<input id="video-input" type="text" placeholder="Submit a video contribution.. (e.g. youtu.be/hfh2z3)" />
+										<?php if ($contributionType->id == 3) { ?>
 
-										<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
+					    					<input id="video-input" type="text" placeholder="Submit a video contribution.. (e.g. youtu.be/hfh2z3)" />
 
-									<?php } ?>
+											<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
 
-									<?php if ($contributionType->id == 4) { ?>
+										<?php } ?>
 
-					    				@include('dropzone', ['type' => 'file', 'input_id' => 'contribution-file'])
+										<?php if ($contributionType->id == 4) { ?>
 
-					    				<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
+						    				@include('dropzone', ['type' => 'file', 'input_id' => 'contribution-file'])
 
-									<?php } ?>
+						    				<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
 
-								</div>
+										<?php } ?>
 
-							@endforeach
+									</div>
 
-							<div class="submit-contribution-submission-footer">
+								@endforeach
 
-								<select id="submission-type-selector">
-									@foreach ($contribution->contributionTypes as $contributionType)
+								<div class="submit-contribution-submission-footer">
 
-					    				<option value="{{ $contributionType->id }}">{{ $contributionType->name }}</option>
+									<select id="submission-type-selector">
+										@foreach ($contribution->contributionTypes as $contributionType)
 
-					    			@endforeach
-								</select>
+						    				<option value="{{ $contributionType->id }}">{{ $contributionType->name }}</option>
 
-			    				<button id="submit-button" data-contribution-id="{{ $contribution->id }}">Submit</button>
+						    			@endforeach
+									</select>
 
-			    				<div class="clearfloat"></div>
+				    				<button id="submit-button" data-contribution-id="{{ $contribution->id }}">Submit</button>
 
-		    				</div>
+				    				<div class="clearfloat"></div>
 
-		    			</div>
+			    				</div>
 
-	    			@endcan
+			    			</div>
+
+		    			@endcan
+
+					@endif
 
 	    		</div>
 
