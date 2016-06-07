@@ -9,67 +9,95 @@
 		overflow hidden
 		padding 0
 		li
-			border-bottom border-color 1px solid
 			list-style none
-			margin 0
-			padding 30px
-			position relative
-			text-align center
-			transition('background-color' 0.2s linear)
-			&.sortable
-				i
-					color #CCC
-					position absolute
-					right 10px
-					top 10px
-			&:first-child
+			&.proposal-item
 				border-bottom border-color 1px solid
-			&:last-child
-				border-bottom none
-			&.ui-sortable-helper
-				background-color white
-				border border-color 1px solid
-			.name-header
-				font-size 16px
-				font-weight bold
-			&.description-header
-				background-color #f9f9f9
-				color #999
-			&.add-content
-				padding 20px
-				transition(all 0.2s linear)
-				i
-					color #CCC
-				&:hover
-					background white
-					cursor pointer
+				margin 0
+				padding 30px
+				position relative
+				text-align center
+				transition('background-color' 0.2s linear)
+				&.sortable
 					i
-						color main-color
-			&.proposal-text-container
-				padding-top 20px
-				h3
-					color #666
-					font-size 15px
-					margin 0 0 20px 0
-					padding 0
-				textarea
+						color #CCC
+						position absolute
+						right 10px
+						top 10px
+				&:first-child
+					border-bottom border-color 1px solid
+				&:last-child
+					border-bottom none
+				&.ui-sortable-helper
+					background-color white
 					border border-color 1px solid
-					height 160px
-					margin 0
-					padding 10px
-					width 100%
-					outline 0 !important
-			&.user-header
-				.avatar-wrapper
-					position relative
-					.avatar
-						background-color white
-						background-size cover
-						background-position center
-						background-repeat no-repeat
-						border-radius 50%
-						height 80px
-						width 80px
-						@media(min-width: $screen-sm-min)
+				.name-header
+					font-size 16px
+					font-weight bold
+					margin-bottom 5px
+				&.description-header
+					background-color #f9f9f9
+					color #999
+				&.add-content
+					padding 20px
+					transition(all 0.2s linear)
+					i
+						color #CCC
+					&:hover
+						background white
+						cursor pointer
+						i
+							color main-color
+				&.proposal-text-container
+					padding-top 20px
+					h3
+						color #666
+						font-size 15px
+						margin 0 0 20px 0
+						padding 0
+					textarea
+						border border-color 1px solid
+						height 160px
+						margin 0
+						padding 10px
+						width 100%
+						outline 0 !important
+					input
+						border border-color 1px solid
+						margin 0
+						padding 10px
+						text-align center
+						width 100%
+						outline 0 !important
+				&.user-header
+					padding-bottom 20px
+					.avatar-wrapper
+						position relative
+						.avatar
+							background-color white
+							background-size cover
+							background-position center
+							background-repeat no-repeat
+							border-radius 50%
 							height 80px
 							width 80px
+							@media(min-width: $screen-sm-min)
+								height 80px
+								width 80px
+			&.proposal-footer
+				ul.proposal-vote-controls
+					list-style none
+					margin 0
+					padding 0
+					li
+						box-sizing border-box
+						font-size 24px
+						float left
+						margin 0
+						padding 20px 0
+						width 50%
+						transition(all 0.2s linear)
+						&:hover
+							background-color border-color
+							cursor pointer
+						&:first-child
+							border-right border-color 1px solid

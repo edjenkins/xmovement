@@ -25,12 +25,38 @@
 
 	    		<div class="view-controls-container">
 
-	    			<div class="search-bar-wrapper">
+					<ul class="module-controls pull-left">
+
+						<li class="module-control">
+
+							<a href="{{ action('IdeaController@view', $idea) }}">
+
+								<i class="fa fa-chevron-left"></i>
+
+								Back to Idea
+
+							</a>
+
+						</li>
+
+						<li class="module-control">
+
+							<a href="{{ action('ProposeController@index', $idea) }}">
+
+								View Proposals
+
+							</a>
+
+						</li>
+
+					</ul>
+
+	    			<!-- <div class="search-bar-wrapper">
 
 	    				<div class="search-bar-button"><i class="fa fa-search"></i></div>
 		    			<input class="search-bar" type="text" placeholder="Search Design Tasks">
 
-	    			</div>
+	    			</div> -->
 
 	    			<ul class="module-controls pull-right">
 

@@ -1,0 +1,37 @@
+// Proposal tile
+.tile.proposal-tile
+	display block
+	height 400px
+	margin 15px auto
+	max-width 360px
+	overflow hidden
+	position relative
+	transition(all linear 0.2s)
+	&:hover
+		cursor pointer
+
+	.avatar-wrapper
+		position relative
+		text-align center
+		z-index 2
+		.avatar
+			background-color white
+			background-size cover
+			background-position center
+			background-repeat no-repeat
+			border white 4px solid
+			border-radius 50%
+			margin 0 auto -20px auto
+			height 80px
+			width 80px
+			@media(min-width: $screen-sm-min)
+				height 100px
+				width 100px
+	.inner-container
+		background #f2f2f2
+		overflow hidden
+		padding 30px 20px 10px 20px
+		h4
+			color #555
+		p
+			color #999

@@ -187,13 +187,14 @@ class ProposeController extends Controller
 
 		// Validate the proposal
 	    $this->validate($request, [
-	        // 'body' => 'required|max:255',
+	        'description' => 'required|max:500'
 	    ]);
 
 	    // Create the idea
 	    Proposal::create([
 	        'idea_id' => $idea->id,
 	        'user_id' => $user->id,
+	        'description' => $request->description,
 	        'body' => $request->proposal
 	    ]);
 

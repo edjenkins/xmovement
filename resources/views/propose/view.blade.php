@@ -42,7 +42,10 @@
 									{!! csrf_field() !!}
 									{!! method_field('DELETE') !!}
 
-									<button type="submit"><i class="fa fa-trash"></i></button>
+									<button type="submit">
+										<i class="fa fa-trash"></i>
+										Delete Proposal
+									</button>
 								</form>
 
 							</li>
@@ -63,17 +66,19 @@
 
 					<ul class="proposal-preview">
 
-						<li class="user-header">
+						<li class="proposal-item user-header">
 							<div class="avatar-wrapper">
 								<img class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}')">
 							</div>
+							<br>
+							<h4>{{ $proposal->description }}</h4>
 						</li>
 
 						@foreach($proposal_items as $index => $proposal_item)
 
 							@if ($proposal_item->type == 'task')
 
-								<li>
+								<li class="proposal-item">
 									<span class="name-header">{{ $proposal_item->design_task->name }}</span>
 
 									@foreach($proposal_item->design_task->contributions as $contribution)
@@ -89,7 +94,7 @@
 
 							@if ($proposal_item->type == 'text')
 
-								<li>
+								<li class="proposal-item">
 									<span class="name-header">Proposal description</span>
 
 									<p>
@@ -102,6 +107,17 @@
 							@endif
 
 						@endforeach
+
+						<li class="proposal-footer">
+							<ul class="proposal-vote-controls">
+								<li>
+									<i class="fa fa-angle-down"></i>
+								</li>
+								<li>
+									<i class="fa fa-angle-up"></i>
+								</li>
+							</ul>
+						</li>
 
 					</ul>
 

@@ -12,11 +12,38 @@
 	<div class="container">
 
 	    <div class="row">
-	    	<div class="col-md-8 col-md-offset-2">
+
+			<div class="col-md-12">
 
 				@if (count($proposals) > 0)
 
 					<div class="view-controls-container">
+
+		    			<ul class="module-controls pull-left">
+
+	    					<li class="module-control">
+
+	    						<a href="{{ action('IdeaController@view', $idea) }}">
+
+			    					<i class="fa fa-chevron-left"></i>
+
+			    					Back to Idea
+
+			    				</a>
+
+		    				</li>
+
+	    					<li class="module-control hidden-xs">
+
+	    						<a href="{{ action('DesignController@dashboard', $idea) }}">
+
+			    					Design Dashboard
+
+			    				</a>
+
+		    				</li>
+
+		    			</ul>
 
 		    			<ul class="module-controls pull-right">
 
@@ -40,27 +67,34 @@
 
 				@endif
 
-	    		<div class="column">
+			</div>
 
-					@foreach ($proposals as $proposal)
+	    	<div class="col-md-12">
 
-						@include('propose/tile', ['proposal' => $proposal])
+				@if (count($proposals) == 0)
 
-					@endforeach
+					<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
+						Add Proposal
+					</a>
 
-					@if (count($proposals) == 0)
+				@else
 
-						<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
-							Add Proposal
-						</a>
 
-					@endif
+					<div class="row">
+						@foreach ($proposals as $proposal)
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								@include('propose/tile', ['proposal' => $proposal])
+							</div>
+						@endforeach
+					</div>
 
-	    			<div class="clearfloat"></div>
-	    		</div>
+
+				@endif
 
 	    	</div>
+
 	    </div>
+
 	</div>
 
 	<script src="/js/propose/dashboard.js"></script>
