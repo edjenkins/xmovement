@@ -72,7 +72,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/propose/next', 'ProposeController@next');
 	Route::get('/propose/review/{idea}', 'ProposeController@review');
 	Route::post('/propose/submit', 'ProposeController@submit');
-    // Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroyTask');
+    Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
 
     // Vote routes (Design task)

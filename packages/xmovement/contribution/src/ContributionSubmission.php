@@ -37,7 +37,7 @@ class ContributionSubmission extends Model
     }
 
     public function contributionSubmissionVotes()
-    {   
+    {
         return $this->hasMany(ContributionSubmissionVote::class, 'xmovement_contribution_submission_id');
     }
 
@@ -86,5 +86,10 @@ class ContributionSubmission extends Model
 
             return true;
         }
+    }
+
+    public function renderTile($contributionSubmission)
+    {
+    	return view('contribution::proposal-tile', ['contributionSubmission' => $contributionSubmission]);
     }
 }

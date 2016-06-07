@@ -17,6 +17,7 @@
 	<form action="{{ action('ProposeController@next') }}" method="POST">
 		{!! csrf_field() !!}
 		<input type="hidden" name="current_task" value="{{ $design_task->id }}">
+		<input type="hidden" name="selected_contributions" id="selected_contributions" value="">
 		<button class="next-button pull-right" type="submit">
 			<i class="fa fa-arrow-right fa-2x"></i>
 		</button>

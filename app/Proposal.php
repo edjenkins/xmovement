@@ -12,11 +12,16 @@ class Proposal extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'idea_id', 'user_id', 'body'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function idea()
+    {
+        return $this->belongsTo(Idea::class);
     }
 }

@@ -38,7 +38,7 @@ function showJSflash(message, type)
     $('body').append(flash_message);
 
     $('.flash').show();
-    
+
     setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 4000);
 }
 
@@ -58,14 +58,14 @@ function addVote(vote_button, vote_container, vote_direction, votable_id, votabl
         data:  JSON.stringify({votable_id: votable_id, votable_type: votable_type, vote_direction: vote_direction}),
         processData: false,
         success: function(response) {
-          
+
             if (!response['meta']['success'])
             {
                 showJSflash('Your vote failed', 'flash-danger');
             }
             else
             {
-                // Success  
+                // Success
                 var vote_count = response['data']['vote_count'];
 
                 vote_container.find('.vote-count').html(vote_count);
@@ -87,13 +87,13 @@ function addVote(vote_button, vote_container, vote_direction, votable_id, votabl
 
                 showJSflash('Your vote was successful', 'flash-success');
             }
-        
+
         },
         error: function(response) {
-            
+
             // Error
             console.log(response);
-            
+
             showJSflash('Your vote failed', 'flash-danger');
 
         }
@@ -106,13 +106,26 @@ $(document).ready(function() {
 
         var vote_button = $(this);
         var vote_container = $(this).parents('.vote-controls').parents('.vote-container');
-        
+
         var vote_direction = $(this).attr('data-vote-direction');
         var votable_id = $(this).attr('data-votable-id');
         var votable_type = $(this).attr('data-votable-type');
-        
+
         addVote(vote_button, vote_container, vote_direction, votable_id, votable_type);
 
     });
 
+})
+
+// Propose mode
+
+var selected_contributions = [];
+
+$(document).ready(function() {
+	$('.proposal-button').click(function() {
+		$(this).toggleClass('fa-square fa-check-square');
+		var contribution_id = $(this).attr('data-contribution-id');
+		selected_contributions.push(contribution_id);
+		$('#selected_contributions').val(selected_contributions);
+	})
 })

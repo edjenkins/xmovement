@@ -7,7 +7,7 @@ $(document).ready(function() {
         var submit_button = $(this);
 
         submit_button.html('Submitting..');
-        
+
         var submission = $('#poll-contribution').val();
         var poll_id = $(this).attr('data-poll-id');
 
@@ -25,9 +25,9 @@ $(document).ready(function() {
             data:  JSON.stringify({poll_id: poll_id, submission: submission}),
             processData: false,
             success: function(response) {
-              
-                // Success              
-                
+
+                // Success
+
                 showJSflash('Thanks for your submission', 'flash-success');
 
                 $('.poll-options-list').append(response["data"]["element"]);
@@ -37,13 +37,13 @@ $(document).ready(function() {
                 submit_button.html('Submit');
 
                 addHandlers();
-            
+
             },
             error: function(response) {
-                
+
                 // Error
                 console.log(response);
-                
+
                 showJSflash('Your submission failed', 'flash-danger');
 
                 submit_button.html('Submit');
@@ -61,7 +61,7 @@ function addHandlers()
 
         var vote_button = $(this);
         var vote_container = $(this).parents('.vote-controls').parents('.vote-container');
-        
+
         var vote_direction = $(this).attr('data-vote-direction');
         var votable_id = $(this).attr('data-votable-id');
         var votable_type = $(this).attr('data-votable-type');

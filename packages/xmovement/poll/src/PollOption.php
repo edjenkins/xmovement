@@ -32,7 +32,7 @@ class PollOption extends Model
     }
 
     public function pollOptionVotes()
-    {   
+    {
         return $this->hasMany(PollOptionVote::class, 'xmovement_poll_option_id');
     }
 
@@ -81,5 +81,10 @@ class PollOption extends Model
 
             return true;
         }
+    }
+
+    public function renderTile($pollOption)
+    {
+    	return view('poll::proposal-tile', ['pollOption' => $pollOption, 'proposal_mode' => false]);
     }
 }

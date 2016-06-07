@@ -21,18 +21,10 @@
 				</div>
 			@endunless
 			@if ($proposal_mode)
-				<i class="fa fa-square fa-2x proposal-button"></i>
+				<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>
 			@endif
 		</div>
 
 	</div>
 
 </li>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.proposal-button').click(function() {
-			$(this).toggleClass('fa-square fa-check-square');
-		})
-	})
-</script>

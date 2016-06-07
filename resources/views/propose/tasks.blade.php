@@ -17,7 +17,7 @@
 			</button>
 		</a>
 
-		<form action="{{ action('ProposeController@select', $idea) }}" method="POST" onsubmit="return confirm('Are you happy with your selection?');">
+		<form action="{{ action('ProposeController@select', $idea) }}" method="POST">
 			{!! csrf_field() !!}
 			<input type="hidden" name="selected_tasks" id="selected_tasks" value="">
 			<button class="next-button pull-right" type="submit">

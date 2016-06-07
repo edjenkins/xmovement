@@ -17,13 +17,6 @@
 			</button>
 		</form>
 
-		<form action="{{ action('ProposeController@submit', $idea) }}" method="POST" onsubmit="return confirm('Are you sure you want to submit this proposal?');">
-			{!! csrf_field() !!}
-			<button class="next-button pull-right" type="submit">
-				<i class="fa fa-check fa-2x"></i>
-			</button>
-		</form>
-
 		<div class="clearfloat"></div>
 
 	</div>
@@ -35,7 +28,7 @@
 
 	    		<div class="column main-column proposal-preview-column">
 
-					<ul class="proposal-preview">
+					<ul class="proposal-preview" id="sortable">
 
 						<li class="user-header">
 							<div class="avatar-wrapper">
@@ -43,35 +36,44 @@
 							</div>
 						</li>
 
-						@foreach($design_tasks as $design_task)
+						@foreach($design_tasks as $index => $design_task)
 
-							<li class="name-header">{{ $design_task->name }}</li>
-							<li class="description-header">{{ $design_task->description }}</li>
+							<li class="sortable" id="proposal-item-id-{{ $index }}" data-proposal-item-type="task" data-design-task-id="{{ $design_task->id }}" data-design-task-xmovement-task-type="{{ $design_task->xmovement_task_type }}" data-design-task-contribution-ids="{{ json_encode($design_task->contribution_ids) }}">
+								<i class="fa fa-bars"></i>
 
-							<!--
-							[id] => 6
-						    [idea_id] => 21
-						    [user_id] => 21
-						    [name] => Time
-						    [description] => What time of day is best?
-						    [xmovement_task_id] => 6
-						    [xmovement_task_type] => Poll
-						    [locked] => 0
-						    [created_at] => 2016-06-03 08:46:50
-						    [updated_at] => 2016-06-03 08:46:50
-							-->
+								<span class="name-header">{{ $design_task->name }}</span>
+
+								@foreach($design_task->contributions as $contribution)
+
+									<?php echo $contribution->renderTile($contribution); ?>
+
+								@endforeach
+
+								<div class="clearfloat"></div>
+							</li>
+
 						@endforeach
 
-						<li class="add-content">
-							<i class="fa fa-plus-circle fa-2x"></i>
+						<li class="proposal-text-container sortable" id="proposal-item-id-{{ ($index + 1) }}" data-proposal-item-type="text">
+							<i class="fa fa-bars"></i>
+							<h3>Write your proposal</h3>
+							<textarea name="name" rows="8" cols="40"></textarea>
 						</li>
+						<!-- <li class="add-content">
+							<i class="fa fa-plus-circle fa-2x"></i>
+						</li> -->
 					</ul>
 
 					<br />
 
-					<button type="button" class="btn btn-primary">
-						Submit Proposal
-					</button>
+
+					<form action="{{ action('ProposeController@submit', $idea) }}" method="POST" onsubmit="return confirm('Are you sure you want to submit this proposal?');">
+						{!! csrf_field() !!}
+						<input type="hidden" name="proposal" id="proposal-input" value="">
+						<button type="submit" type="button" class="btn btn-primary">
+							Submit Proposal
+						</button>
+					</form>
 
 	    		</div>
 
