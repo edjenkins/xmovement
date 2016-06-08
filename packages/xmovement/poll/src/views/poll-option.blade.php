@@ -1,3 +1,5 @@
+<?php $proposal_mode = (isset($proposal_mode)) ? $proposal_mode : false; ?>
+
 <li class="proposal-item">
 
 	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('/uploads/images/small/{{ $pollOption->user['avatar'] }}')"></a>

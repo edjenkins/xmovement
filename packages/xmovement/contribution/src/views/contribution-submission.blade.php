@@ -1,3 +1,5 @@
+<?php $proposal_mode = (isset($proposal_mode)) ? $proposal_mode : false; ?>
+
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
 	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}')"></a>

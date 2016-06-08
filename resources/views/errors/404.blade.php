@@ -8,7 +8,7 @@
             <h1>404</h1>
 			<h3>Not Found</h3>
 			<a href="{{URL::previous()}}">
-				<i class="fa fa-arrow-left"></i>
+				<i class="fa fa-angle-left"></i>
 			</a>
         </div>
 

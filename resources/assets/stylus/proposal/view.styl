@@ -1,11 +1,10 @@
-// main: app.styl
+// XMStyles
 
 .proposal-preview-column
 	text-align center
 	ul.proposal-preview
-		background-color #f9f9f9
+		background-color #fff
 		border border-color 1px solid
-		border-radius 6px
 		list-style none
 		margin 30px auto
 		overflow hidden
@@ -13,7 +12,7 @@
 		li
 			list-style none
 			&.proposal-item
-				border-bottom border-color 1px solid
+				border-bottom border-color 1px dashed
 				margin 0
 				padding 30px
 				position relative
@@ -26,7 +25,7 @@
 						right 10px
 						top 10px
 				&:first-child
-					border-bottom border-color 1px solid
+					border-bottom border-color 1px dashed
 				&:last-child
 					border-bottom none
 				&.ui-sortable-helper
@@ -90,14 +89,13 @@
 			&.proposal-footer
 				.vote-container.proposal-vote-container
 					text-align center
-					.vote-count
-						display inline-block
-						line-height 50px
-						text-align center
-						width calc(100% / 3)
-					.vote-button
-						display inline-block
+					.vote-count, .vote-button
+						display block
+						float left
 						height 60px
-						width calc(100% / 3)
 						line-height 60px
 						text-align center
+						width calc(100% / 3)
+						i
+							position relative
+							top 5px

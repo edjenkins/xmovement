@@ -2,9 +2,12 @@
 
 @section('content')
 
+	@include('grey-background')
+
 	<div class="page-header colorful">
 
         <h2 class="main-title">Review Proposal</h2>
+		<h5 class="sub-title">Finalise your proposal by reordering elements and adding comments</h5>
 
 	</div>
 
@@ -13,7 +16,7 @@
 		<form action="{{ action('ProposeController@previous') }}" method="POST">
 			{!! csrf_field() !!}
 			<button class="previous-button pull-left" type="submit">
-				<i class="fa fa-arrow-left fa-2x"></i>
+				<i class="fa fa-angle-left fa-2x"></i>
 			</button>
 		</form>
 

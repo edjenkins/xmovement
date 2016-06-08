@@ -1,64 +1,59 @@
-// main: app.styl
+// XMStyles
 
 .tile.proposal-tile
+	background white
+	border border-color 1px solid
 	display block
-	height 300px
-	margin 15px auto
+	height 260px
+	margin 30px auto 0 auto
 	max-width 360px
-	overflow hidden
 	position relative
 	.avatar-wrapper
+		padding-top 15px
 		position relative
 		text-align center
-		z-index 2
 		.avatar
-			background #f2f2f2
+			background light-grey
 			background-size cover
 			background-position center
 			background-repeat no-repeat
-			border white 4px solid
 			border-radius 50%
-			margin 0 auto -20px auto
+			margin 0 auto
 			height 80px
 			width 80px
-			@media(min-width: $screen-sm-min)
-				height 100px
-				width 100px
 	.tile-body
-		background #f2f2f2
+		background #fff
 		overflow hidden
-		padding 30px 20px 10px 20px
+		padding 20px
+		text-align center
 		transition(all linear 0.2s)
-		h4
-			color #555
+		h5
+			color #333
+			font-size 15px
+			margin-top 0
+			padding-top 0
+			white-space nowrap
 		p
 			color #999
-		&:hover
-			background darken(#f2f2f2, 10%)
 
 	.tile-footer
 		background white
+		border-top border-color 1px solid
+		color white
 		padding 0
+		position absolute
+		bottom 0
+		text-align center
+		width 100%
 		transition(all 0.2s linear)
-		p
+		a
 			color #999
-			line-height 40px
-			margin 0
-			padding 0
-		.vote-container.proposal-vote-container
-			text-align center
-			.vote-count
-				display inline
-				line-height 40px
-				text-align center
-				width 60px
-			.vote-button
-				display inline-block
-				height 30px
-				width 60px
-				line-height 30px
-				text-align center
-				&.vote-up
-					top 10px
-				&.vote-down
-					top 40px
+			display block
+			line-height 50px
+		&:hover
+			background-color main-color
+			border-top main-color 1px solid
+			cursor pointer
+			a
+				color white
+				text-decoration none

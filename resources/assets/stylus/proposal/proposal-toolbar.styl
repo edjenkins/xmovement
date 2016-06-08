@@ -1,4 +1,4 @@
-// main: app.styl
+// XMStyles
 
 .proposal-toolbar
 	display block
@@ -10,11 +10,18 @@
 		background darken(main-color, 10%)
 		border none
 		display inline-block
+		height 60px
+		width 60px
+		text-align center
 		margin 0
-		padding 20px
+		padding 0
 		position relative
 		z-index 10
 		transition(all 0.2s linear)
+		i
+			font-size 40px
+		i.fa-ban
+			font-size 30px
 		&:hover
 			background darken(main-color, 20%)
 			cursor pointer
@@ -28,23 +35,19 @@
 			&:hover
 				background darken(main-color, 20%)
 	ul.page-dots
-		height 14px
+		height 60px
+		line-height 60px
 		list-style none
 		margin 0
 		padding 0
 		position absolute
-		top 50%
-		margin-top -7px
+
 		text-align center
 		width 100%
 		li
-			background-color alpha(white, 0.5)
-			border-radius 7px
 			display inline-block
-			height 14px
-			margin 0px 3px
+			margin 0 3px
 			padding 0
-			width 14px
 			transition(all 0.2s linear)
-			&.active
-				background-color alpha(white, 1.0)
+			i
+				color white

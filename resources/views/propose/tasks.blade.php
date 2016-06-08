@@ -13,7 +13,7 @@
 
 		<a href="{{ action('IdeaController@view', $idea) }}">
 			<button class="next-button pull-left">
-				<i class="fa fa-home fa-2x"></i>
+				<i class="fa fa-ban fa-2x"></i>
 			</button>
 		</a>
 
@@ -21,7 +21,7 @@
 			{!! csrf_field() !!}
 			<input type="hidden" name="selected_tasks" id="selected_tasks" value="">
 			<button class="next-button pull-right" type="submit">
-				<i class="fa fa-arrow-right fa-2x"></i>
+				<i class="fa fa-angle-right fa-2x"></i>
 			</button>
 		</form>
 

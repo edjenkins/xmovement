@@ -15,7 +15,7 @@ var stylus = require('laravel-elixir-stylus');
 
 elixir(function(mix) {
     mix.copy('resources/assets/css/*', 'public/css');
-	mix.stylus('app.styl');
+	mix.stylus('app.styl', null, { use: [ bootstrap() ] });
 	mix.stylus('libs.styl', null, { use: [ bootstrap() ] });
     mix.browserSync({
         proxy: 'xm.local',

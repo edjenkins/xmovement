@@ -12,7 +12,7 @@
 	<div class="container">
 
 	    <div class="row">
-	    	<div class="col-md-4 col-md-push-8 hidden-sm hidden-xs">
+	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
 
 	    		<div class="column side-column">
 
@@ -21,7 +21,7 @@
 	    		</div>
 
     		</div>
-	    	<div class="col-md-8 col-md-pull-4">
+	    	<div class="col-md-9 col-md-pull-3">
 
 	    		<div class="view-controls-container">
 
