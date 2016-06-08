@@ -1,26 +1,28 @@
+// main: app.styl
+
 .xmovement-tile
 	box-sizing border-box
 	float left
-	padding 10px 
-	text-align center 
+	padding 10px
+	text-align center
 	width 33%
 	@media(max-width: 600px)
 		width 100%
 	transition(all 0.2s linear)
 	a
-		text-decoration none 
+		text-decoration none
 	.tile-body
 		background #f2f2f2
-		display table 
-		height 140px 
+		display table
+		height 140px
 		padding 20px
-		width 100% 
+		width 100%
 		transition(all 0.2s linear)
 		.vertically-aligned-text
 			display table-cell
-			vertical-align middle 
+			vertical-align middle
 			text-align center
-			width 100% 
+			width 100%
 			h4
 				color #444
 				margin 5px 0
@@ -31,7 +33,7 @@
 				padding 0
 		&:hover
 			cursor pointer
-			background main-color 
+			background main-color
 			.vertically-aligned-text
 				h4, p
 					color white
@@ -49,9 +51,9 @@
 		.vote-container.design-task-vote-container
 			.vote-count
 				display inline
-				line-height 40px 
+				line-height 40px
 				text-align center
-				width 60px 
+				width 60px
 			.vote-button
 				display inline-block
 				height 30px
@@ -62,5 +64,3 @@
 					top 10px
 				&.vote-down
 					top 40px
-			
-						

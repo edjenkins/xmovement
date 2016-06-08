@@ -71,7 +71,10 @@
 								<img class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}')">
 							</div>
 							<br>
-							<h4>{{ $proposal->description }}</h4>
+							<h3>{{ $proposal->description }}</h3>
+							<p>
+								Added {{ $proposal->created_at->diffForHumans() }}
+							</p>
 						</li>
 
 						@foreach($proposal_items as $index => $proposal_item)
@@ -109,15 +112,22 @@
 						@endforeach
 
 						<li class="proposal-footer">
-							<ul class="proposal-vote-controls">
-								<li>
-									<i class="fa fa-angle-down"></i>
-								</li>
-								<li>
-									<i class="fa fa-angle-up"></i>
-								</li>
-							</ul>
-						</li>
+
+							<div class="vote-container proposal-vote-container {{ ($proposal->voteCount() == 0) ? '' : (($proposal->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
+								<div class="vote-controls">
+									<div class="vote-button vote-up {{ ($proposal->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
+										<i class="fa fa-2x fa-angle-up"></i>
+									</div>
+									<div class="vote-count">
+										{{ $proposal->voteCount() }}
+									</div>
+									<div class="vote-button vote-down {{ ($proposal->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
+										<i class="fa fa-2x fa-angle-down"></i>
+									</div>
+								</div>
+							</div>
+
+						</div>
 
 					</ul>
 
@@ -126,5 +136,7 @@
 	    	</div>
 	    </div>
 	</div>
+
+	<script src="/js/propose/vote.js"></script>
 
 @endsection

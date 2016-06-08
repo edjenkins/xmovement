@@ -16,6 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <!-- Styles -->
+    <link href="{{ URL::asset('css/libs.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
     <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
 
@@ -47,7 +48,7 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	
+
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script src="https://www.google.com/recaptcha/api.js"></script>

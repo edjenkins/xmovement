@@ -75,8 +75,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
 
-    // Vote routes (Design task)
-    Route::post('/vote/design_task', 'DesignController@vote');
+    // Vote routes
+    Route::post('/vote/design_task', 'DesignController@vote'); // Design task
+    Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
 
     // API routes
     Route::post('/api/support', 'IdeaController@support');

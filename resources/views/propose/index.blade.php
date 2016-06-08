@@ -97,6 +97,6 @@
 
 	</div>
 
-	<script src="/js/propose/dashboard.js"></script>
+	<script src="/js/propose/vote.js"></script>
 
 @endsection

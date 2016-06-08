@@ -48,8 +48,10 @@ class ProposeController extends Controller
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
 
-        // Fetch proposals
-        $proposals = Proposal::get();
+        // Order by locked first, then highest voted, then alphabetically
+        $proposals = collect($idea->proposals)->sortByDesc(function ($proposal, $key) {
+            return sprintf('%s', $proposal->voteCount());
+        })->values()->all();
 
         return view('propose.index', [
             'idea' => $idea,
@@ -303,4 +305,22 @@ class ProposeController extends Controller
 			return redirect("/design/" . strtolower($design_task->xmovement_task_type) . "/" . $design_task->id );
 		}
 	}
+
+    public function vote(Request $request)
+    {
+        $response = new ResponseObject();
+
+        $value = ($request->vote_direction == 'up') ? 1 : -1;
+
+        $proposal = Proposal::whereId($request->votable_id)->first();
+
+        if ($proposal->addVote($value))
+        {
+            $response->meta['success'] = true;
+        }
+
+        $response->data['vote_count'] = $proposal->voteCount();
+
+        return Response::json($response);
+    }
 }

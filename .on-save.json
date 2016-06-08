@@ -1,0 +1,8 @@
+[
+  {
+    "srcDir": "src",
+    "destDir": "lib",
+    "files": "./packages/*",
+    "command": "bash /Users/edjenkins/MAMP/xmovement/update.sh"
+  }
+]

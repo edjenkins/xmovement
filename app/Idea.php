@@ -14,7 +14,7 @@ class Idea extends Model
     protected $fillable = [
         'name', 'visibility', 'description', 'photo'
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -28,6 +28,16 @@ class Idea extends Model
     public function designTasks()
     {
         return $this->hasMany(DesignTask::class);
+    }
+
+    /**
+     * The Proposals for the idea.
+     *
+     * @var array
+     */
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
     }
 
     public function supporterCount()

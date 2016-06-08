@@ -1,21 +1,18 @@
-// Proposal tile
+// main: app.styl
+
 .tile.proposal-tile
 	display block
-	height 400px
+	height 300px
 	margin 15px auto
 	max-width 360px
 	overflow hidden
 	position relative
-	transition(all linear 0.2s)
-	&:hover
-		cursor pointer
-
 	.avatar-wrapper
 		position relative
 		text-align center
 		z-index 2
 		.avatar
-			background-color white
+			background #f2f2f2
 			background-size cover
 			background-position center
 			background-repeat no-repeat
@@ -27,11 +24,41 @@
 			@media(min-width: $screen-sm-min)
 				height 100px
 				width 100px
-	.inner-container
+	.tile-body
 		background #f2f2f2
 		overflow hidden
 		padding 30px 20px 10px 20px
+		transition(all linear 0.2s)
 		h4
 			color #555
 		p
 			color #999
+		&:hover
+			background darken(#f2f2f2, 10%)
+
+	.tile-footer
+		background white
+		padding 0
+		transition(all 0.2s linear)
+		p
+			color #999
+			line-height 40px
+			margin 0
+			padding 0
+		.vote-container.proposal-vote-container
+			text-align center
+			.vote-count
+				display inline
+				line-height 40px
+				text-align center
+				width 60px
+			.vote-button
+				display inline-block
+				height 30px
+				width 60px
+				line-height 30px
+				text-align center
+				&.vote-up
+					top 10px
+				&.vote-down
+					top 40px
