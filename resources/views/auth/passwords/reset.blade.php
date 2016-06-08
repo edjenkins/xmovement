@@ -2,17 +2,17 @@
 
 @section('content')
 
-    <div class="page-header">
-        
+    <div class="page-header colorful">
+
         <h2 class="main-title">Reset Password</h2>
 
     </div>
 
     <div class="container">
         <div class="row">
-            
+
             <div class="auth-panel">
-            
+
                 <form class="auth-form" role="form" method="POST" action="{{ url('/password/reset') }}">
                     {!! csrf_field() !!}
 
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group">
-                    
+
                         <button type="submit" class="btn btn-primary">
                             Reset Password
                         </button>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bodyclasses' => 'colorful'])
 
 @section('content')
 
@@ -11,64 +11,36 @@
 	<div class="container">
 
 	    <div class="row">
-	    	<div class="col-md-12">
 
-	    		<div class="view-controls-container">
+			<div class="col-md-8 col-md-offset-2">
 
-	    			<ul class="module-controls pull-left">
+	    		<div class="info-panel">
 
-    					<li class="module-control">
+					<h5>Step One</h5>
+					<p>
+						Select the design tasks you would like to include in your proposal.
+					</p>
+					<h5>Step Two</h5>
+					<p>
+						You will then be taken through each selected task and asked to choose one or more contributions from each.
+					</p>
+					<h5>Step Three</h5>
+					<p>
+						Finally, review your proposal and add text to your proposal to explain decisions you have made and how the selected items work together..
+					</p>
 
-    						<a href="{{ action('ProposeController@index', $idea) }}">
+					<a href="{{ action('IdeaController@view', $idea) }}" class="btn btn-danger">Cancel</a>
 
-		    					<i class="fa fa-chevron-left"></i>
-
-		    					Back to Proposals
-
-		    				</a>
-
-	    				</li>
-
-	    			</ul>
+					<a href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">Get Started</a>
 
 	    			<div class="clearfloat"></div>
 
 	    		</div>
 
-			</div>
-
-			<div class="col-md-8 col-md-offset-2">
-
-	    		<div class="column main-column">
-
-					<div class="proposal-guide-container">
-
-						<h3>
-							Creating a proposal is simple, just complete the following steps:
-						</h3>
-						<p>
-							Select the design tasks you would like to include in your proposal.
-						</p>
-						<p>
-							You will then be taken through each selected task and asked to choose one or more contributions from each.
-						</p>
-						<p>
-							You can add text to your proposal to explain decisions you have made and how the selected items work together.
-						</p>
-						<p>
-							Finally, review your proposal and submit it to the community.
-						</p>
-
-						<a href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">Get Started</a>
-
-		    			<div class="clearfloat"></div>
-
-					</div>
-
-	    		</div>
-
 	    	</div>
+
 	    </div>
+
 	</div>
 
 	<script src="/js/propose/add.js"></script>
