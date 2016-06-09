@@ -48,12 +48,11 @@ class PollController extends Controller
 
 		// The user is putting a proposal together
 		$proposal_mode = ($request->session()->has('proposal.active')) ? $request->session()->get('proposal.active') : false;
-
 		$proposal_task_index = ($request->session()->has('proposal.task_index')) ? $request->session()->get('proposal.task_index') : 0;
-
 		$proposal_tasks = ($request->session()->has('proposal.tasks')) ? $request->session()->get('proposal.tasks') : [];
+		$contributions = $request->session()->get('proposal.contributions');
 
-        return view('poll::view', ['poll' => $poll, 'design_task' => $design_task, 'proposal_mode' => $proposal_mode, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks]);
+        return view('poll::view', ['poll' => $poll, 'design_task' => $design_task, 'proposal_mode' => $proposal_mode, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks, 'contributions' => $contributions]);
     }
 
     public function vote(Request $request)
@@ -99,7 +98,8 @@ class PollController extends Controller
           'description' => $request->description,
           'xmovement_task_id' => $poll_id,
           'xmovement_task_type' => 'Poll',
-          'locked' => $request->locked,
+          'proposal_interactivity' => true,
+		  'locked' => $request->locked,
       ]);
 
 	    // Load the design_task view

@@ -44,6 +44,13 @@
 
 							<li class="proposal-item proposal-text-container">
 								<h3>Description</h3>
+
+								@if ($errors->has('description'))
+									<span class="help-block">
+										<strong>{{ $errors->first('description') }}</strong>
+									</span>
+								@endif
+
 								<input type="text" name="description" placeholder="Describe your proposal..." />
 							</li>
 
@@ -52,28 +59,30 @@
 								<li class="proposal-item sortable" id="proposal-item-id-{{ $index }}" data-proposal-item-type="task" data-design-task-id="{{ $design_task->id }}" data-design-task-xmovement-task-type="{{ $design_task->xmovement_task_type }}" data-design-task-contribution-ids="{{ json_encode($design_task->contribution_ids) }}">
 									<i class="fa fa-bars"></i>
 
+									<a href="{{ $design_task->getLink() }}" target="_blank">
+										<i class="fa fa-external-link"></i>
+									</a>
+
 									<span class="name-header">{{ $design_task->name }}</span>
 
-									@foreach($design_task->contributions as $contribution)
-
-										<?php echo $contribution->renderTile($contribution); ?>
-
-									@endforeach
+									<?php echo $design_task->xmovement_task->renderProposalOutput($design_task); ?>
 
 									<div class="clearfloat"></div>
 								</li>
 
 							@endforeach
 
-							<li class="proposal-item proposal-text-container sortable" id="proposal-item-id-{{ ($index + 1) }}" data-proposal-item-type="text">
+							<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-1">
 								<i class="fa fa-bars"></i>
 								<h3>Add some text</h3>
 								<textarea name="name" placeholder="Justify your choices with added text..." rows="8" cols="40"></textarea>
 							</li>
-							<!-- <li class="add-content">
-								<i class="fa fa-plus-circle fa-2x"></i>
-							</li> -->
+
 						</ul>
+
+						<div class="add-content" id="add-content">
+							<i class="fa fa-plus-circle fa-2x"></i>
+						</div>
 
 						<br />
 

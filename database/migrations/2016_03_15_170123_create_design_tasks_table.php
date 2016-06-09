@@ -20,7 +20,8 @@ class CreateDesignTasksTable extends Migration
             $table->string('description', 2000);
             $table->integer('xmovement_task_id')->index();
             $table->string('xmovement_task_type', 200);
-            $table->boolean('locked')->default(false);
+            $table->boolean('proposal_interactivity')->default(false);
+			$table->boolean('locked')->default(false);
             $table->timestamps();
         });
     }

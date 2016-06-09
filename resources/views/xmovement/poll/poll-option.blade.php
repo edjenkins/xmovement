@@ -23,7 +23,17 @@
 				</div>
 			@endunless
 			@if ($proposal_mode)
-				<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>
+
+				@if (array_key_exists($design_task->id, $contributions))
+					@if (in_array($pollOption->id, $contributions[$design_task->id]))
+						<i class="fa fa-check-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>
+					@else
+						<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>
+					@endif
+				@else
+					<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>
+				@endif
+
 			@endif
 		</div>
 

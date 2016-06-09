@@ -140,26 +140,37 @@ class ProposeController extends Controller
 
 	private function fetchDesignTasks($selected_tasks, $proposal_contributions)
 	{
+		$collection = collect($selected_tasks);
+
+		$plucked = $collection->pluck('id');
+
+		$selected_task_ids = $plucked->all();
+
+		Log::error($selected_tasks);
+		Log::error($selected_task_ids);
+
 		$design_tasks = DesignTask::with('xmovement_task')
-            ->whereIn('id', $selected_tasks)
+            ->whereIn('id', $selected_task_ids)
             ->get();
 
 		foreach ($design_tasks as $index => $design_task)
 		{
-			$contributions = $proposal_contributions[$design_task->id];
+			if (array_key_exists($design_task->id, $proposal_contributions))
+			{
 
-			$contribution_ids = explode(',', $contributions);;
+				$contributions = $proposal_contributions[$design_task->id];
 
-			$design_task->contribution_ids = $contribution_ids;
+				$design_task->contribution_ids = $contributions;
 
-			switch ($design_task->xmovement_task_type) {
-				case 'Poll':
-					$design_task->contributions = \XMovement\Poll\PollOption::whereIn('id', $contribution_ids)->get();
-					break;
+				switch ($design_task->xmovement_task_type) {
+					case 'Poll':
+						$design_task->contributions = \XMovement\Poll\PollOption::whereIn('id', $design_task->contribution_ids)->get();
+						break;
 
-				case 'Contribution':
-					$design_task->contributions = \XMovement\Contribution\ContributionSubmission::whereIn('id', $contribution_ids)->get();
-					break;
+					case 'Contribution':
+						$design_task->contributions = \XMovement\Contribution\ContributionSubmission::whereIn('id', $design_task->contribution_ids)->get();
+						break;
+				}
 			}
 
 		}
@@ -168,6 +179,9 @@ class ProposeController extends Controller
 
 	public function review(Request $request, Idea $idea)
 	{
+		// Get out of proposal mode
+		$request->session()->put('proposal.active', false);
+
 		$user = Auth::user();
 
 		$selected_tasks = $request->session()->get('proposal.tasks');
@@ -207,64 +221,48 @@ class ProposeController extends Controller
 
     public function tasks(Request $request, Idea $idea)
     {
-        // Order by locked first, then highest voted, then alphabetically
-        $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
-            return sprintf('%s%s', $design_task->locked, $design_task->voteCount());
-        })->values()->all();
+		if ($request->isMethod('get'))
+		{
+	        // Order by locked first, then highest voted, then alphabetically
+	        $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
+	            return sprintf('%s%s', $design_task->locked, $design_task->voteCount());
+	        })->values()->all();
 
-        return view('propose.tasks', [
-            'idea' => $idea,
-            'design_tasks' => $design_tasks,
-        ]);
+	        return view('propose.tasks', [
+	            'idea' => $idea,
+	            'design_tasks' => $design_tasks,
+	        ]);
+		}
+
+		if ($request->isMethod('post'))
+		{
+			// Save selected tasks to session
+			$selected_tasks = json_decode($request->selected_tasks);
+
+			$request->session()->put('proposal.tasks', $selected_tasks);
+			$request->session()->put('proposal.task_index', -1);
+			$request->session()->put('proposal.idea_id', $idea->id);
+			$request->session()->put('proposal.contributions', []);
+
+			return $this->loadTask($request, 1);
+		}
     }
-
-    public function select(Request $request, Idea $idea)
-    {
-		// Save selected tasks to session
-		$selected_tasks = json_decode($request->selected_tasks);
-
-		$request->session()->put('proposal.active', true);
-		$request->session()->put('proposal.tasks', $selected_tasks);
-		$request->session()->put('proposal.task_index', 0);
-		$request->session()->put('proposal.idea_id', $idea->id);
-		$request->session()->put('proposal.contributions');
-
-		// Find the first design task
-		$design_task = DesignTask::find($selected_tasks[0]);
-
-		// Redirect to first design task
-		return redirect("/design/" . strtolower($design_task->xmovement_task_type) . "/" . $design_task->id);
-	}
 
     public function previous(Request $request)
     {
-		// Get selected tasks
-		$selected_tasks = $request->session()->get('proposal.tasks');
-
-		// Get current task index
-		$task_index = ($request->session()->get('proposal.task_index') - 1);
-
-		// Redirect to next design task
-		if ($task_index < 0)
-		{
-			$idea = Idea::find($request->session()->get('proposal.idea_id'));
-			return redirect()->action('ProposeController@tasks', $idea);
-		}
-		else
-		{
-			// Put new index value in session
-			$request->session()->put('proposal.task_index', $task_index);
-
-			// Find the next design task
-			$design_task = DesignTask::find($selected_tasks[$task_index]);
-
-			return redirect("/design/" . strtolower($design_task->xmovement_task_type) . "/" . $design_task->id );
-		}
+		return $this->loadTask($request, -1);
 
 	}
 
 	public function next(Request $request)
 	{
+		return $this->loadTask($request, 1);
+	}
+
+	private function loadTask(Request $request, Int $direction)
+	{
+		$request->session()->put('proposal.active', true);
+		
 		// Get selected tasks
 		$selected_tasks = $request->session()->get('proposal.tasks');
 
@@ -274,36 +272,62 @@ class ProposeController extends Controller
 		// Update proposal contributions
 		$proposal_contributions = $request->session()->get('proposal.contributions');
 
-		$string_index = (String)$task_index;
+		Log::info($request->current_task);
 
-		$key = (String)$selected_tasks[$string_index];
-
-		$proposal_contributions[$key] = $request->selected_contributions;
-
-		$request->session()->put('proposal.contributions', $proposal_contributions);
-
-        Log::info('Proposal contributions - ', $proposal_contributions);
-
-		// Update task index
-		$task_index++;
-
-		// Put new index value in session
-		$request->session()->put('proposal.task_index', $task_index);
-
-
-		if ($task_index >= count($selected_tasks))
+		// Save selected contributions
+		if ($request->current_task)
 		{
-			$idea = Idea::find($request->session()->get('proposal.idea_id'));
-			return redirect()->action('ProposeController@review', $idea);
+			$proposal_contributions[$request->current_task] = explode(',', $request->selected_contributions);
+			$request->session()->put('proposal.contributions', $proposal_contributions);
 		}
 		else
 		{
-			// Find the next design task
-			$design_task = DesignTask::find($selected_tasks[$task_index]);
 
-			// Redirect to next design task
-			return redirect("/design/" . strtolower($design_task->xmovement_task_type) . "/" . $design_task->id );
 		}
+
+		// Put new index value in session
+		$task_index = $task_index + $direction;
+
+		$request->session()->put('proposal.task_index', $task_index);
+
+		$idea = Idea::find($request->session()->get('proposal.idea_id'));
+
+		$skipping = true;
+
+		while ($skipping)
+		{
+			Log::error('Index - ' . $task_index);
+
+			if ($task_index >= count($selected_tasks))
+			{
+				$skipping = false;
+				return redirect()->action('ProposeController@review', $idea);
+			}
+			else if ($task_index < 0)
+			{
+				$skipping = false;
+				return redirect()->action('ProposeController@tasks', $idea);
+			}
+			else
+			{
+				// Find the next design task
+				$design_task = DesignTask::find($selected_tasks[$task_index]->id);
+
+				if ($design_task->proposal_interactivity)
+				{
+					// Redirect to next design task
+					$skipping = false;
+					return redirect("/design/" . strtolower($design_task->xmovement_task_type) . "/" . $design_task->id );
+				}
+				else
+				{
+					// No interaction so contrinue / skip
+					$task_index = $task_index + $direction;
+					$request->session()->put('proposal.task_index', $task_index);
+				}
+			}
+		}
+
 	}
 
     public function vote(Request $request)

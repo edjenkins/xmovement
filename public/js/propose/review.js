@@ -1,10 +1,12 @@
-$(document).ready(function() {
+var text_index = 1;
 
+function initSortable() {
 	$( "#sortable" ).sortable({
 		items: ".sortable",
 		opacity: 0.8,
 		create: function( event, ui ) {
 			setOrder();
+			attachHandlers();
 		},
 		start: function( event, ui ) {
 			$(this).addClass('sorting');
@@ -16,11 +18,26 @@ $(document).ready(function() {
 			setOrder();
 		},
 	});
+}
+
+function attachHandlers() {
+
+	$('textarea').off('change keyup paste').on('change keyup paste', function() {
+		setOrder();
+	});
+}
+
+$(document).ready(function() {
+
+	initSortable();
 
 	$( "#sortable" ).disableSelection();
 
-	$('textarea').on('change keyup paste', function() {
-	    setOrder();
+	$('#add-content').click(function() {
+		text_index++;
+		$('.proposal-preview').append('<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-' + text_index + '"><i class="fa fa-bars"></i><h3>Add some text</h3><textarea name="name" placeholder="Justify your choices with added text..." rows="8" cols="40"></textarea></li>');
+		initSortable();
+		attachHandlers();
 	});
 
 });
@@ -28,6 +45,8 @@ $(document).ready(function() {
 function setOrder()
 {
 	var orderedIds = $("#sortable").sortable("toArray");
+
+	console.log(orderedIds);
 
 	// Loop through order and build proposal
 	var proposal = [];
@@ -54,4 +73,6 @@ function setOrder()
 	});
 
 	$('#proposal-input').val(JSON.stringify(proposal));
+
+	console.log($('#proposal-input').val());
 }

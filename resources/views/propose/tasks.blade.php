@@ -17,8 +17,9 @@
 			</button>
 		</a>
 
-		<form action="{{ action('ProposeController@select', $idea) }}" method="POST">
+		<form action="{{ action('ProposeController@tasks', $idea) }}" method="POST">
 			{!! csrf_field() !!}
+			<input type="hidden" name="current_task" id="current_task" value="-1">
 			<input type="hidden" name="selected_tasks" id="selected_tasks" value="">
 			<button class="next-button pull-right" type="submit">
 				<i class="fa fa-angle-right fa-2x"></i>

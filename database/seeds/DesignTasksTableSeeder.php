@@ -77,6 +77,7 @@ class DesignTasksTableSeeder extends Seeder
                 'description' => $faker->sentence($nbWords = 5, $variableNbWords = true),
                 'xmovement_task_id' => $i,
                 'xmovement_task_type' => 'Poll',
+				'proposal_interactivity' => true,
                 'locked' => $faker->randomElement($array = array(0, 1)),
                 'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
                 'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),

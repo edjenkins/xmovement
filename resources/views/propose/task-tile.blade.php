@@ -1,4 +1,4 @@
-<div class="xmovement-propose-tile" data-id="{{ $design_task['id'] }}">
+<div class="xmovement-propose-tile" data-design-task="{{ json_encode($design_task) }}">
 
 	<div class="tile-body">
 

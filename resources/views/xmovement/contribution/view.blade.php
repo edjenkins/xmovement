@@ -11,7 +11,7 @@
 
 	@if ($proposal_mode)
 
-		@include('propose/toolbar', $design_task)
+		@include('propose/toolbar', ['design_task' => $design_task, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks])
 
 	@endif
 

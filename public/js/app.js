@@ -119,13 +119,20 @@ $(document).ready(function() {
 
 // Propose mode
 
-var selected_contributions = [];
-
 $(document).ready(function() {
+
+	var selected_contributions = $('#selected_contributions').attr('data-original-values').split(',');
+	$('#selected_contributions').val(selected_contributions);
+
 	$('.proposal-button').click(function() {
 		$(this).toggleClass('fa-square fa-check-square');
 		var contribution_id = $(this).attr('data-contribution-id');
-		selected_contributions.push(contribution_id);
+		var i = selected_contributions.indexOf(contribution_id);
+		if(i != -1) {
+			selected_contributions.splice(i, 1);
+		} else {
+			selected_contributions.push(contribution_id);
+		}
 		$('#selected_contributions').val(selected_contributions);
 	})
 })

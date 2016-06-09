@@ -66,7 +66,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/propose/add/{idea}', 'ProposeController@add');
 
 	Route::get('/propose/workflow/tasks/{idea}', 'ProposeController@tasks');
-	Route::post('/propose/workflow/select/{idea}', 'ProposeController@select');
+	Route::post('/propose/workflow/tasks/{idea}', 'ProposeController@tasks');
 	Route::get('/propose/task/{design_task}', 'ProposeController@task');
 	Route::post('/propose/previous', 'ProposeController@previous');
 	Route::post('/propose/next', 'ProposeController@next');

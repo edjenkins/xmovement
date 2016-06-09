@@ -22,6 +22,11 @@ class Scheduler extends Model
     	return view('scheduler::tile', ['scheduler' => $this, 'design_task' => $design_task]);
     }
 
+	public function renderProposalOutput(\App\DesignTask $design_task)
+	{
+		return view('scheduler::proposal-tile', ['scheduler' => $this]);
+	}
+
     public function designTask()
     {
         return $this->morphMany('App\DesignTask', 'xmovement_task');

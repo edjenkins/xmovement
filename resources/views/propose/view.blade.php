@@ -87,13 +87,14 @@
 						@if ($proposal_item->type == 'task')
 
 							<li class="proposal-item">
+
+								<a href="{{ $design_task->getLink() }}" target="_blank">
+									<i class="fa fa-external-link"></i>
+								</a>
+
 								<span class="name-header">{{ $proposal_item->design_task->name }}</span>
 
-								@foreach($proposal_item->design_task->contributions as $contribution)
-
-									<?php echo $contribution->renderTile($contribution); ?>
-
-								@endforeach
+								<?php echo $proposal_item->design_task->xmovement_task->renderProposalOutput($proposal_item->design_task); ?>
 
 								<div class="clearfloat"></div>
 							</li>
@@ -103,7 +104,6 @@
 						@if ($proposal_item->type == 'text')
 
 							<li class="proposal-item">
-								<span class="name-header">Proposal description</span>
 
 								<p>
 									{{ $proposal_item->text }}
