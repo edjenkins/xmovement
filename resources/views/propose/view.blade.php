@@ -88,7 +88,7 @@
 
 							<li class="proposal-item">
 
-								<a href="{{ $design_task->getLink() }}" target="_blank">
+								<a href="{{ $proposal_item->design_task->getLink() }}" target="_blank">
 									<i class="fa fa-external-link"></i>
 								</a>
 

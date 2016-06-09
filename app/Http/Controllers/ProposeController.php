@@ -37,6 +37,9 @@ class ProposeController extends Controller
 {
     public function index(Request $request, Idea $idea)
     {
+		// Get out of proposal mode
+		$request->session()->put('proposal.active', false);
+
         if (Gate::denies('propose', $idea))
         {
             Session::flash('flash_message', trans('flash_message.no_permission'));
@@ -44,9 +47,6 @@ class ProposeController extends Controller
 
             return redirect()->back();
         }
-
-		// Get out of proposal mode
-		$request->session()->put('proposal.active', false);
 
         // Order by locked first, then highest voted, then alphabetically
         $proposals = collect($idea->proposals)->sortByDesc(function ($proposal, $key) {
@@ -61,6 +61,9 @@ class ProposeController extends Controller
 
     public function view(Request $request, Proposal $proposal)
     {
+		// Get out of proposal mode
+		$request->session()->put('proposal.active', false);
+		
 		$user = Auth::user();
 
 		$proposal->document = [];
@@ -262,7 +265,7 @@ class ProposeController extends Controller
 	private function loadTask(Request $request, Int $direction)
 	{
 		$request->session()->put('proposal.active', true);
-		
+
 		// Get selected tasks
 		$selected_tasks = $request->session()->get('proposal.tasks');
 
