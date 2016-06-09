@@ -25,6 +25,11 @@ class Requirement extends Model
     	return view('requirement::tile', ['requirement' => $this, 'design_task' => $design_task]);
     }
 
+	public function renderProposalOutput(\App\DesignTask $design_task)
+	{
+		return view('requirement::proposal-tile', ['requirement' => $this]);
+	}
+
     public function requirementsFilled()
     {
         return $this->hasMany(RequirementFilled::class, 'xmovement_requirement_id');

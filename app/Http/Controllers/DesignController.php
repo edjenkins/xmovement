@@ -44,11 +44,14 @@ class DesignController extends Controller
             return redirect()->back();
         }
 
+		// Get out of proposal mode
+		$request->session()->put('proposal.active', false);
+
         // Order by locked first, then highest voted, then alphabetically
         $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
             return sprintf('%s%s', $design_task->locked, $design_task->voteCount());
         })->values()->all();
-        
+
         return view('design.dashboard', [
             'idea' => $idea,
             'design_tasks' => $design_tasks,
@@ -80,7 +83,7 @@ class DesignController extends Controller
         }
 
         $response->data['vote_count'] = $design_task->voteCount();
-        
+
         return Response::json($response);
     }
 

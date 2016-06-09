@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Idea;
 use App\User;
 use App\DesignTask;
+use App\Proposal;
 use XMovement\Poll\Poll;
 use XMovement\Contribution\Contribution;
 
@@ -13,6 +14,7 @@ use App\Policies\UserPolicy;
 use App\Policies\DesignTaskPolicy;
 use App\Policies\PollPolicy;
 use App\Policies\ContributionPolicy;
+use App\Policies\ProposalPolicy;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -31,6 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         DesignTask::class => DesignTaskPolicy::class,
         Poll::class => PollPolicy::class,
         Contribution::class => ContributionPolicy::class,
+        Proposal::class => ProposalPolicy::class,
     ];
 
     /**

@@ -1,0 +1,116 @@
+// XMStyles
+
+.help-block
+	color danger-color
+
+.proposal-preview-column
+	text-align center
+	ul.proposal-preview
+		background-color #fff
+		border border-color 1px solid
+		list-style none
+		margin 30px auto 10px auto
+		overflow hidden
+		padding 0
+		li
+			list-style none
+			&.proposal-item
+				border-bottom border-color 1px dashed
+				margin 0
+				padding 30px
+				position relative
+				text-align center
+				transition('background-color' 0.2s linear)
+				i.fa.fa-bars
+					color #CCC
+					position absolute
+					right 10px
+					top 10px
+				i.fa.fa-external-link
+					color #CCC
+					position absolute
+					right 10px
+					top 10px
+				&.sortable
+					i.fa.fa-external-link
+						right 40px
+				&:first-child
+					border-bottom border-color 1px dashed
+				&:last-child
+					border-bottom none
+				&.ui-sortable-helper
+					background-color white
+					border border-color 1px solid
+				.name-header
+					font-size 16px
+					font-weight bold
+					margin-bottom 10px
+				p
+					margin 0
+					padding 0
+				&.proposal-text-container
+					padding-top 20px
+					h3
+						color #666
+						font-size 15px
+						margin 0 0 20px 0
+						padding 0
+					textarea
+						border border-color 1px solid
+						height 160px
+						margin 0
+						padding 10px
+						text-align center
+						width 100%
+						outline 0 !important
+					input
+						border border-color 1px solid
+						margin 0
+						padding 10px
+						text-align center
+						width 100%
+						outline 0 !important
+				&.user-header
+					padding-bottom 20px
+					h3
+						margin 0 0 10px 0
+						padding 0
+					p
+						color #BBB
+					.avatar-wrapper
+						position relative
+						.avatar
+							background-color white
+							background-size cover
+							background-position center
+							background-repeat no-repeat
+							border-radius 50%
+							height 80px
+							width 80px
+							@media(min-width: $screen-sm-min)
+								height 80px
+								width 80px
+			&.proposal-footer
+				.vote-container.proposal-vote-container
+					text-align center
+					.vote-count, .vote-button
+						display block
+						float left
+						height 60px
+						line-height 60px
+						text-align center
+						width calc(100% / 3)
+						i
+							position relative
+							top 5px
+	.add-content
+		display inline-block
+		margin-bottom 20px
+		padding 40px
+		i
+			color #CCC
+			transition(all 0.2s linear)
+		&:hover
+			cursor pointer
+			i
+				color main-color

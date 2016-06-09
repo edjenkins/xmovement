@@ -22,6 +22,11 @@ class Discussion extends Model
     	return view('discussion::tile', ['discussion' => $this, 'design_task' => $design_task]);
     }
 
+	public function renderProposalOutput(\App\DesignTask $design_task)
+	{
+		return view('discussion::proposal-tile', ['discussion' => $this]);
+	}
+
     public function designTask()
     {
         return $this->morphMany('App\DesignTask', 'xmovement_task');

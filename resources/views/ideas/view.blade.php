@@ -55,6 +55,28 @@
 
     				</div>
 
+					@if (count($idea->proposals) > 0)
+
+						<div class="proposals-container hidden-xs">
+
+			    			<h2 class="section-header">Proposals</h2>
+
+							<div class="proposals-wrapper">
+
+								@foreach ($idea->proposals->take(3) as $proposal)
+									<div class="col-xs-12 col-sm-6 col-md-4">
+										@include('propose/tile', ['proposal' => $proposal])
+									</div>
+								@endforeach
+
+								<div class="clearfloat"></div>
+
+							</div>
+
+						</div>
+
+					@endif
+
 	    			<h2 class="section-header">Discussion</h2>
 
 	    			@include('disqus')

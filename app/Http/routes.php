@@ -60,9 +60,24 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/design/add/{idea}', 'DesignController@add');
     Route::delete('/design/task/destroy/{design_task}', 'DesignController@destroyTask');
 
+    // Propose routes
+    Route::get('/propose/{idea}', 'ProposeController@index');
+	Route::get('/propose/view/{proposal}', 'ProposeController@view');
+    Route::get('/propose/add/{idea}', 'ProposeController@add');
 
-    // Vote routes (Design task)
-    Route::post('/vote/design_task', 'DesignController@vote');
+	Route::get('/propose/workflow/tasks/{idea}', 'ProposeController@tasks');
+	Route::post('/propose/workflow/tasks/{idea}', 'ProposeController@tasks');
+	Route::get('/propose/task/{design_task}', 'ProposeController@task');
+	Route::post('/propose/previous', 'ProposeController@previous');
+	Route::post('/propose/next', 'ProposeController@next');
+	Route::get('/propose/review/{idea}', 'ProposeController@review');
+	Route::post('/propose/submit', 'ProposeController@submit');
+    Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
+
+
+    // Vote routes
+    Route::post('/vote/design_task', 'DesignController@vote'); // Design task
+    Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
 
     // API routes
     Route::post('/api/support', 'IdeaController@support');
@@ -70,52 +85,52 @@ Route::group(['middleware' => ['web']], function () {
     // File upload
     Route::post('/upload', 'UploadController@upload');
 
-		// Images
-		Route::get('/uploads/images/{size}/{type}', function($size, $type)
-		{
-			$img = Image::canvas(800, 800, '#e1e1e1');
+	// Images
+	Route::get('/uploads/images/{size}/{type}', function($size, $type)
+	{
+		$img = Image::canvas(800, 800, '#e1e1e1');
 
-			switch ($type) {
-				case 'placeholder':
-					$img->circle(100, 200, 400, function ($draw) {
-							$draw->background('#f2f2f2');
-					});
-					$img->circle(100, 400, 400, function ($draw) {
-							$draw->background('#f2f2f2');
-					});
-					$img->circle(100, 600, 400, function ($draw) {
-							$draw->background('#f2f2f2');
-					});
-					break;
+		switch ($type) {
+			case 'placeholder':
+				$img->circle(100, 200, 400, function ($draw) {
+						$draw->background('#f2f2f2');
+				});
+				$img->circle(100, 400, 400, function ($draw) {
+						$draw->background('#f2f2f2');
+				});
+				$img->circle(100, 600, 400, function ($draw) {
+						$draw->background('#f2f2f2');
+				});
+				break;
 
-				case 'avatar':
-					$img->circle(350, 400, 300, function ($draw) {
-							$draw->background('#f2f2f2');
-					});
-					$img->circle(600, 400, 750, function ($draw) {
-							$draw->background('#f2f2f2');
-					});
-					break;
-			}
+			case 'avatar':
+				$img->circle(350, 400, 300, function ($draw) {
+						$draw->background('#f2f2f2');
+				});
+				$img->circle(600, 400, 750, function ($draw) {
+						$draw->background('#f2f2f2');
+				});
+				break;
+		}
 
-			return $img->response('jpg');
+		return $img->response('jpg');
+	});
+
+	Route::get('/uploads/images/{size}/', function($size)
+	{
+		$img = Image::canvas(800, 800, '#e1e1e1');
+
+		$img->circle(100, 200, 400, function ($draw) {
+				$draw->background('#f2f2f2');
+		});
+		$img->circle(100, 400, 400, function ($draw) {
+				$draw->background('#f2f2f2');
+		});
+		$img->circle(100, 600, 400, function ($draw) {
+				$draw->background('#f2f2f2');
 		});
 
-		Route::get('/uploads/images/{size}/', function($size)
-		{
-			$img = Image::canvas(800, 800, '#e1e1e1');
-
-			$img->circle(100, 200, 400, function ($draw) {
-					$draw->background('#f2f2f2');
-			});
-			$img->circle(100, 400, 400, function ($draw) {
-					$draw->background('#f2f2f2');
-			});
-			$img->circle(100, 600, 400, function ($draw) {
-					$draw->background('#f2f2f2');
-			});
-
-			return $img->response('jpg');
-		});
+		return $img->response('jpg');
+	});
 
 });

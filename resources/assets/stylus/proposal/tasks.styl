@@ -1,0 +1,69 @@
+// XMStyles
+
+.xmovement-propose-tile
+	box-sizing border-box
+	float left
+	padding 10px
+	text-align center
+	width 25%
+	@media(max-width: 600px)
+		width 100%
+	@media(max-width:960px)
+		width 50%
+	transition(all 0.2s linear)
+	a
+		text-decoration none
+	.tile-body
+		background #f2f2f2
+		display table
+		height 140px
+		padding 20px
+		width 100%
+		transition(all 0.2s linear)
+		.vertically-aligned-text
+			display table-cell
+			vertical-align middle
+			text-align center
+			width 100%
+			h4
+				color #444
+				line-height 1.4em
+				margin 5px 0
+				padding 0
+			p
+				color #AAA
+				margin 5px 0
+				padding 0
+		&:hover
+			cursor pointer
+			background darken(#f2f2f2, 10%)
+	.tile-footer
+		p
+			color main-color
+		.add-text
+			cursor pointer
+			display block
+		.remove-text
+			cursor pointer
+			display none
+	&.selected
+		.tile-body
+			cursor pointer
+			background main-color
+			.vertically-aligned-text
+				h4, p
+					color white
+		.tile-footer
+			.add-text
+				display none
+			.remove-text
+				display block
+	.tile-footer
+		background white
+		padding 0
+		transition(all 0.2s linear)
+		p
+			color #999
+			line-height 40px
+			margin 0
+			padding 0

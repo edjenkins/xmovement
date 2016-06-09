@@ -24,6 +24,25 @@ class Poll extends Model
     	return view('poll::tile', ['poll' => $this, 'design_task' => $design_task]);
     }
 
+	public function renderProposalOutput(\App\DesignTask $design_task)
+	{
+		$rendered_response = '';
+
+		if (count($design_task->contributions) == 0)
+		{
+			$rendered_response = '<div>No options selected</div>';
+		}
+		else
+		{
+			foreach ($design_task->contributions as $index => $contribution)
+			{
+				$rendered_response .= $contribution->renderTile($contribution);
+			}
+		}
+
+		return $rendered_response;
+	}
+
     public function pollOptions()
     {
         return $this->hasMany(PollOption::class, 'xmovement_poll_id');

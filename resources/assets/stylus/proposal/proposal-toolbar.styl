@@ -1,0 +1,53 @@
+// XMStyles
+
+.proposal-toolbar
+	display block
+	margin 0 0 20px 0
+	padding 0
+	position relative
+	text-align center
+	.previous-button, .next-button
+		background darken(main-color, 10%)
+		border none
+		display inline-block
+		height 60px
+		width 60px
+		text-align center
+		margin 0
+		padding 0
+		position relative
+		z-index 10
+		transition(all 0.2s linear)
+		i
+			font-size 40px
+		i.fa-ban
+			font-size 30px
+		&:hover
+			background darken(main-color, 20%)
+			cursor pointer
+			text-decoration none
+	&.colorful
+		background darken(main-color, 10%)
+		.previous-button, .next-button
+			background darken(main-color, 10%)
+			border-color white
+			color white
+			&:hover
+				background darken(main-color, 20%)
+	ul.page-dots
+		height 60px
+		line-height 60px
+		list-style none
+		margin 0
+		padding 0
+		position absolute
+
+		text-align center
+		width 100%
+		li
+			display inline-block
+			margin 0 3px
+			padding 0
+			transition(all 0.2s linear)
+			i
+				color white

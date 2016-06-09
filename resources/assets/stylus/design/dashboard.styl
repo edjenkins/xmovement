@@ -1,8 +1,7 @@
+// XMStyles
+
 .view-controls-container
 	border-bottom border-color 1px solid
-	padding 10px 5px
-	@media(max-width: 568px)
-		padding 10px 0
 	.search-bar-wrapper
 		border border-color 1px solid
 		display inline-block
@@ -39,24 +38,18 @@
 
 	.module-controls
 		list-style none
-		margin 10px 0
+		margin 0
 		padding 0
-		@media(max-width: 568px)
-			width 100%
-		@media(min-width: 568px)
-			&.pull-left .module-control
-				margin-right 10px
-			&.pull-right .module-control
-				margin-left 10px
+
 		.module-control
-			border border-color 1px solid
-			display inline-block
+			display block
+			float left
 			text-align center
 			min-width 30px
 			@media(max-width: 568px)
 				display block
 				margin 0 5px
-				margin-bottom 20px
+				// width 100%
 				&:last-child
 					margin-bottom 0
 			a, button
@@ -64,18 +57,18 @@
 				border none
 				color #666
 				display block
-				line-height 40px
-				padding 0 10px
+				line-height 60px
+				padding 0 20px
 				text-decoration none
 				text-align center
 				transition(all 0.2s linear)
 				i
 					margin 0 5px
 			&:hover
-				border main-color 1px solid
+				// border main-color 1px solid
 				a, button
-					background main-color
-					color white
+					// background light-grey
+					color main-color
 			form button
 				width 100%
 
@@ -113,18 +106,3 @@
 			display: block;
 			width: 0;
 			z-index: 1;
-
-.action-panel
-	background white
-	border border-color 2px dashed
-	border-radius 10px
-	color #CCC
-	display block
-	font-size 24px
-	padding 60px 40px
-	text-align center
-	transition(all 0.2s linear)
-	&:hover
-		background border-color
-		color #AAA
-		text-decoration none

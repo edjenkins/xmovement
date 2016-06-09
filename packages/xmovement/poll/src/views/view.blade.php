@@ -2,81 +2,97 @@
 
 @section('content')
 
-	<div class="page-header">
+	<div class="page-header {{ ($proposal_mode) ? ' colorful' : '' }}">
 
         <h2 class="main-title">{{ $design_task['name'] }}</h2>
-		<h5 class="sub-title">Poll</h5>
+		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more poll options' : 'Poll' }}</h5>
 
 	</div>
+
+	@if ($proposal_mode)
+
+		@include('propose/toolbar', ['design_task' => $design_task, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks])
+
+	@endif
 
 	<div class="container">
 
 	    <div class="row">
-	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
 
-	    		<div class="column side-column">
+			@unless ($proposal_mode)
+
+				<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
+
+		    		<div class="column side-column">
+
+		    		</div>
 
 	    		</div>
 
-    		</div>
-	    	<div class="col-md-9 col-md-pull-3">
+			@endunless
 
-	    		<div class="view-controls-container">
+	    	<div class="{{ (!$proposal_mode) ? 'col-md-9 col-md-pull-3' : 'col-md-8 col-md-offset-2' }}">
 
-	    			<ul class="module-controls pull-left">
+				@unless ($proposal_mode)
 
-    					<li class="module-control">
+		    		<div class="view-controls-container">
 
-    						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
-
-		    					<i class="fa fa-chevron-left"></i>
-
-		    					Back to Dashboard
-
-		    				</a>
-
-	    				</li>
-
-	    			</ul>
-
-	    			<ul class="module-controls pull-right">
-
-	    				@can('submitOption', $poll)
+		    			<ul class="module-controls pull-left">
 
 	    					<li class="module-control">
 
-	    						<a href="#submit-poll-option">
+	    						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
 
-			    					<i class="fa fa-plus"></i>
+			    					<i class="fa fa-chevron-left"></i>
 
-			    					Submit poll option
+			    					Back to Dashboard
 
 			    				</a>
 
 		    				</li>
 
-	    				@endcan
+		    			</ul>
 
-						@can('destroy', $design_task)
+		    			<ul class="module-controls pull-right">
 
-	    					<li class="module-control">
+		    				@can('submitOption', $poll)
 
-						        <form action="{{ action('DesignController@destroyTask', $design_task) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
-						            {!! csrf_field() !!}
-						            {!! method_field('DELETE') !!}
+		    					<li class="module-control">
 
-									<button type="submit"><i class="fa fa-trash"></i></button>
-						        </form>
+		    						<a href="#submit-poll-option">
 
-		    				</li>
+				    					<i class="fa fa-plus"></i>
 
-	    				@endcan
+				    					Submit poll option
 
-	    			</ul>
+				    				</a>
 
-	    			<div class="clearfloat"></div>
+			    				</li>
 
-	    		</div>
+		    				@endcan
+
+							@can('destroy', $design_task)
+
+		    					<li class="module-control">
+
+							        <form action="{{ action('DesignController@destroyTask', $design_task) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
+							            {!! csrf_field() !!}
+							            {!! method_field('DELETE') !!}
+
+										<button type="submit"><i class="fa fa-trash"></i></button>
+							        </form>
+
+			    				</li>
+
+		    				@endcan
+
+		    			</ul>
+
+		    			<div class="clearfloat"></div>
+
+		    		</div>
+
+				@endunless
 
 	    		<div class="column main-column">
 
@@ -85,7 +101,7 @@
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
-	    			<ul class="poll-options-list">
+	    			<ul class="poll-options-list {{ ($proposal_mode) ? 'proposal-mode' : '' }}">
 
 		    			@foreach ($poll->pollOptions as $pollOption)
 
@@ -95,23 +111,21 @@
 
 	    			</ul>
 
-	    			@can('submitOption', $poll)
+					@unless ($proposal_mode)
 
-		    			<div class="submit-poll-option-container" id="submit-poll-option">
+		    			@can('submitOption', $poll)
 
-		    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." />
+			    			<div class="submit-poll-option-container" id="submit-poll-option">
 
-		    				<button id="submit-button" data-poll-id="{{ $poll->id }}">Submit</button>
+			    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." />
 
-		    			</div>
+			    				<button id="submit-button" data-poll-id="{{ $poll->id }}">Submit</button>
 
-	    			@endcan
+			    			</div>
 
-	    			<!--
-	    			<h2 class="section-header">Discussion</h2>
+		    			@endcan
 
-	    			@include('disqus')
-	    			-->
+					@endunless
 
 	    		</div>
 
