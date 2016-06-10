@@ -12,7 +12,14 @@ class Idea extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'visibility', 'description', 'photo'
+        'name',
+		'visibility',
+		'description',
+		'photo',
+		'duration',
+		'design_during_support',
+		'proposals_during_design',
+		'supporters_target'
     ];
 
     public function user()
@@ -42,7 +49,8 @@ class Idea extends Model
 
     public function supporterCount()
     {
-        return Supporter::where('idea_id', $this->id)->count();
+        return Supporter::where('idea_id',
+		$this->id)->count();
     }
 
     /**

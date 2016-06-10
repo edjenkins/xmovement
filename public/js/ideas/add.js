@@ -1,5 +1,28 @@
 // Create idea
 
+$(document).ready(function() {
+
+	$('.slider').slider({
+	    min: 5,
+	    max: 45,
+		change: function(event, ui) {
+	    	var input_id = $(this).attr('data-input-id');
+			$('#' + input_id).val(ui.value);
+	    }
+	})
+	.slider('pips', {
+	    handle: false,
+	    pips: true,
+	    first: 'label',
+	    last: 'label',
+	    rest: 'label',
+		step: 5
+	})
+	.slider('float');
+
+	$('.slider').slider('value', parseInt($('.slider').attr('data-value')));
+})
+
 function nextStep()
 {
     var step = $('.idea-form').attr('data-current-step');
@@ -24,10 +47,3 @@ function showStep(step)
     $('#page-title').html($('#form-page-' + step).attr('data-title'));
     $('#form-page-' + step + ' input:text, #form-page-' + step + ' textarea').first().focus();
 }
-
-$("input").keyup(function (e) {
-    if ((e.keyCode == 9) || (e.keyCode == 13)) {
-        nextStep();
-    }
-    e.preventDefault();
-});

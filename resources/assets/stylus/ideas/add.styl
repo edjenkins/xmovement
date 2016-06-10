@@ -55,3 +55,72 @@
 	.dropzone-container
 		border border-color 1px solid
 		border-top none
+
+
+
+
+// Slider
+.slider-wrapper
+	margin-bottom 80px
+	#slider
+		&.ui-slider
+			border-radius 20px
+		    background main-color
+		    border none
+		    height 10px
+		    margin 1em 4em 4em
+		.ui-slider-pips
+			color black
+			font-weight normal
+		.ui-slider-tip
+			background main-color
+			border none
+			color white
+			line-height 30px
+			padding 0 10px
+			height 30px
+			top -40px
+			&:before
+				border-top-color transparent
+				border-width 8px
+			&:after
+				border-top-color main-color
+				border-width 8px
+				bottom -15px
+				margin-left -8px
+
+		.ui-slider-handle
+			background white
+			cursor pointer
+			outline 0
+			border-radius 23px
+			height 23px
+			width 23px
+			top -7px
+			margin-left -11px
+			border 2px solid main-color
+		.ui-slider-pip
+			top 3px
+			.ui-slider-label
+				color #999
+				top 30px
+				font-weight normal
+			.ui-slider-line
+				height: 6px;
+				top 20px
+		.ui-slider-pip-first
+			color red
+			.ui-slider-label
+				color #999
+				font-weight normal
+		.ui-slider-pip-last
+			.ui-slider-label
+				color #999
+				font-weight normal
+		.ui-slider-pip-selected-initial
+			color red
+			font-weight normal
+
+
+	#slider .ui-slider-pip.ui-slider-pip-selected, #slider .ui-slider-pip.ui-slider-pip-selected-initial
+		color main-color

@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                @include('forms/idea', ['editing' => false])
+                @include('forms/idea/add', ['editing' => false])
 
             </div>
         </div>
