@@ -22,7 +22,7 @@ class ProposalPolicy
      */
     public function edit(User $user, Proposal $proposal)
     {
-        return $user->id === $proposal->user_id;
+        return $user->id == $proposal->user_id;
     }
 
     /**
@@ -34,7 +34,7 @@ class ProposalPolicy
      */
     public function destroy(User $user, Proposal $proposal)
     {
-        return $user->id === $proposal->user_id;
+        return $user->id == $proposal->user_id;
     }
 
     /**
