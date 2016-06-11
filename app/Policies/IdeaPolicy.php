@@ -22,7 +22,7 @@ class IdeaPolicy
      */
     public function invite(User $user, Idea $idea)
     {
-        return $user->id === $idea->user_id;
+        return $user->id == $idea->user_id;
     }
 
     /**
@@ -82,7 +82,7 @@ class IdeaPolicy
      */
     public function edit(User $user, Idea $idea)
     {
-        return $user->id === $idea->user_id;
+        return $user->id == $idea->user_id;
     }
 
     /**
@@ -94,7 +94,7 @@ class IdeaPolicy
      */
     public function destroy(User $user, Idea $idea)
     {
-        return $user->id === $idea->user_id;
+        return $user->id == $idea->user_id;
     }
 
     /**

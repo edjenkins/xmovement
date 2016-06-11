@@ -25,7 +25,7 @@ class ContributionPolicy
     {
     	$designTask = DesignTask::where([['xmovement_task_id', $contribution->id], ['xmovement_task_type', 'Contribution']])->first();
 		
-        return (!$designTask["locked"] || ($user->id === $contribution->user_id));
+        return (!$designTask["locked"] || ($user->id == $contribution->user_id));
     }
 
     /**
