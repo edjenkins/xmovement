@@ -22,9 +22,9 @@
 
 				<label>{{ trans('idea_form.duration_label') }}</label>
 
-				<input type="hidden" name="duration" id="duration-slider" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration') }}">
+				<input type="hidden" name="duration" id="duration-slider" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}">
 
-				<div class="slider" id="slider" data-input-id="duration-slider" data-value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration') }}"></div>
+				<div class="slider" id="slider" data-input-id="duration-slider" data-value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}"></div>
 
 			</div>
 

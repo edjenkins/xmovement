@@ -34,7 +34,8 @@ class IdeaPolicy
      */
     public function support(User $user, Idea $idea)
     {
-        return !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+		$is_not_existing_supporter = !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        return ($is_not_existing_supporter && ($idea->support_state == 'open'));
     }
 
     /**
@@ -58,7 +59,8 @@ class IdeaPolicy
      */
     public function design(User $user, Idea $idea)
     {
-        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+		return ($is_existing_supporter && ($idea->design_state == 'open'));
     }
 
     /**
@@ -70,7 +72,8 @@ class IdeaPolicy
      */
     public function propose(User $user, Idea $idea)
     {
-        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+		return ($is_existing_supporter && ($idea->proposal_state == 'open'));
     }
 
     /**

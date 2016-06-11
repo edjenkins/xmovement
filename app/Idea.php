@@ -13,13 +13,16 @@ class Idea extends Model
      */
     protected $fillable = [
         'name',
-		'visibility',
 		'description',
 		'photo',
+		'visibility',
+		'support_state',
+		'design_state',
+		'proposal_state',
+		'supporters_target',
 		'duration',
 		'design_during_support',
 		'proposals_during_design',
-		'supporters_target'
     ];
 
     public function user()

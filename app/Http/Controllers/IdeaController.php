@@ -87,9 +87,9 @@ class IdeaController extends Controller
 		// Validate the idea
 		$this->validate($request, [
 			'name' => 'required|max:255',
-			'visibility' => 'required',
 			'description' => 'required|max:2000',
 			'photo' => 'required|max:255',
+			'visibility' => 'required',
 			'duration' => 'integer|between:5,45',
 			'design_during_support' => 'required|boolean',
 			'proposals_during_design' => 'required|boolean',
@@ -98,13 +98,16 @@ class IdeaController extends Controller
 		// Create the idea
 		$idea = $request->user()->ideas()->create([
 			'name' => $request->name,
-			'visibility' => $request->visibility,
 			'description' => $request->description,
 			'photo' => $request->photo,
+			'visibility' => $request->visibility,
+			'support_state' => 'open',
+			'design_state' => ($request->design_during_support) ? 'open' : 'closed',
+			'proposal_state' => 'closed',
+			'supporters_target' => $request->supporters_target,
 			'duration' => $request->duration,
 			'design_during_support' => $request->design_during_support,
 			'proposals_during_design' => $request->proposals_during_design,
-			'supporters_target' => $request->supporters_target,
 		]);
 
 		// Redirect to invite view
