@@ -30,6 +30,32 @@
 
 	    			@include('action-button')
 
+					@if ($idea->design_state == 'closed')
+
+						<div class="info-tile">
+							<div class="info-tile-content">
+								<p>
+									<i class="fa fa-info"></i>
+									Design area opens in {{ $idea->designPhaseOpens() }}
+								</p>
+							</div>
+						</div>
+
+					@endif
+
+					@if ($idea->proposal_state == 'closed')
+
+						<div class="info-tile">
+							<div class="info-tile-content">
+								<p>
+									<i class="fa fa-info"></i>
+									Proposal area opens in {{ $idea->proposalPhaseOpens() }}
+								</p>
+							</div>
+						</div>
+
+					@endif
+
 	    		</div>
 
     		</div>

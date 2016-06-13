@@ -3,7 +3,7 @@
 @section('content')
 
 	@include('grey-background')
-	
+
 	<div class="page-header">
 
 	    <h2 class="main-title">Proposals</h2>
@@ -43,21 +43,25 @@
 
     			</ul>
 
-    			<ul class="module-controls pull-right">
+				@can('propose', $idea)
 
-					<li class="module-control">
+	    			<ul class="module-controls pull-right">
 
-						<a href="{{ action('ProposeController@add', $idea) }}">
+						<li class="module-control">
 
-	    					<i class="fa fa-plus"></i>
+							<a href="{{ action('ProposeController@add', $idea) }}">
 
-	    					Add Proposal
+		    					<i class="fa fa-plus"></i>
 
-	    				</a>
+		    					Add Proposal
 
-    				</li>
+		    				</a>
 
-    			</ul>
+	    				</li>
+
+	    			</ul>
+
+				@endcan
 
     			<div class="clearfloat"></div>
 
@@ -71,9 +75,13 @@
 
 		@if (count($proposals) == 0)
 
-			<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
-				Add Proposal
-			</a>
+			@can('propose', $idea)
+
+				<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
+					Add Proposal
+				</a>
+
+			@endcan
 
 		@else
 

@@ -6,6 +6,7 @@ use App\Idea;
 use App\User;
 use App\Supporter;
 use App\DesignTask;
+use Log;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -61,6 +62,18 @@ class IdeaPolicy
     {
         $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
 		return ($is_existing_supporter && ($idea->design_state == 'open'));
+    }
+
+    /**
+     * Determine if the given user can design the given idea after they have supported it.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function design_after_support(User $user, Idea $idea)
+    {
+		return ($idea->design_state == 'open');
     }
 
     /**
