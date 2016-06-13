@@ -1,7 +1,7 @@
 // Creative Commons image search
 
 $('#cc-search-field').keypress(function(event) {
-    
+
     if (event.which == 13) // Enter key = keycode 13
     {
         searchCC();
@@ -10,9 +10,9 @@ $('#cc-search-field').keypress(function(event) {
 });
 
 $('#cc-search-button').click(function() {
-    
+
     searchCC();
-    
+
 });
 
 function searchCC() {
@@ -28,7 +28,7 @@ function searchCC() {
             console.log(data);
 
             $('#cc-search-results').html('<div class="clearfloat"></div>');
-            
+
             for (var i = 0; i < data.length; i++) {
                 var result = '<li class="cc-search-result" data-url="' + data[i].urls.regular + '" style="background-image: url(' + data[i].urls.small + ')"></li>';
 
@@ -47,7 +47,7 @@ function searchCC() {
                 $('#uploaded-photo').val($(this).attr('data-url'));
 
             });
-            
+
         }
     })
     .fail(function( jqxhr, textStatus, error ) {
@@ -70,11 +70,11 @@ $(function () {
         url: url,
         dataType: 'json',
         done: function (e, data) {
-            
+
             $('#progress').slideUp(300);
 
             $.each(data.result.files, function (index, file) {
-                
+
                 $('#cc-search-field').val('');
                 $('#cc-search-results').html('<div class="clearfloat"></div>');
 				$('#photo-error-message').html('').css('display', 'none');
@@ -118,7 +118,7 @@ $(function () {
             });
         },
         progressall: function (e, data) {
-            
+
             $('#progress').slideDown(300);
 
             var progress = parseInt(data.loaded / data.total * 100, 10);

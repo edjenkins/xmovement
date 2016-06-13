@@ -1,4 +1,5 @@
-// View event
+// XMStyles
+
 .banner-row
 	background-color white
 	color #333
@@ -29,6 +30,14 @@
 		border-left main-color 4px solid
 		font-size 18px
 		padding 20px
+	@media(max-width: $screen-md-min)
+		.mobile-sidebar, p.idea-description
+			float left
+			width 50%
+	@media(max-width: $screen-sm-min)
+		.mobile-sidebar, p.idea-description
+			float none
+			width 100%
 
 .side-column
 	.creator-tile
@@ -88,3 +97,29 @@
 		p
 			margin 0
 			padding 0
+
+.info-tile
+	list-style none
+	margin 0
+	padding 0
+	text-align center
+	.info-tile-content
+		color #999
+		padding 6px 10px
+		p
+			margin 0
+			padding 0
+			i
+				margin-right 6px
+
+.proposals-container
+	margin-bottom 20px
+	.proposals-wrapper
+		.col-md-4
+			padding 0
+			&:nth-child(1)
+				padding 0 15px 0 0
+			&:nth-child(2)
+				padding 0 15px
+			&:nth-child(3)
+				padding 0 0 0 15px

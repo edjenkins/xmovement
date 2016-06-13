@@ -51,7 +51,8 @@ class SchedulerController extends Controller
           'description' => $request->description,
           'xmovement_task_id' => $scheduler_id,
           'xmovement_task_type' => 'Scheduler',
-          'locked' => $request->locked,
+          'proposal_interactivity' => true,
+		  'locked' => $request->locked,
       ])->id;
 
 	    // Load the design_task view

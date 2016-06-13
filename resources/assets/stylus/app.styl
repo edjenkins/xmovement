@@ -1,3 +1,5 @@
+// out: ../public/css/app.css, sourcemap: true, compress: true
+
 /* Import bootstrap */
 @import 'bootstrap'
 
@@ -21,6 +23,9 @@
 
 /* Design styles */
 @import 'design/*'
+
+/* Proposal styles */
+@import 'proposal/*'
 
 /* Design styles */
 @import 'xmovement/*/*'
@@ -142,3 +147,39 @@ body.colorful
 		border none
 		h2
 			color white
+
+// Errors
+.error-page
+	.text-container
+		text-align center
+		h1
+			color white
+			font-size 42px
+			font-weight 300
+			margin-bottom 20px
+		h3
+			color white
+			font-weight 300
+			margin-bottom 20px
+		a
+			color white
+			display block
+			font-weight 300
+			padding 10px
+			i
+				font-size 22px
+
+.action-panel
+	border border-color 2px dashed
+	border-radius 10px
+	color #CCC
+	display block
+	font-size 24px
+	margin 20px
+	padding 60px 40px
+	text-align center
+	transition(all 0.2s linear)
+	&:hover
+		border-color darken(border-color, 10%)
+		color darken(#CCC, 10%)
+		text-decoration none

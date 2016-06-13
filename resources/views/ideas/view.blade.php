@@ -30,6 +30,32 @@
 
 	    			@include('action-button')
 
+					@if ($idea->design_state == 'closed')
+
+						<div class="info-tile">
+							<div class="info-tile-content">
+								<p>
+									<i class="fa fa-info"></i>
+									Design area opens in {{ $idea->designPhaseOpens() }}
+								</p>
+							</div>
+						</div>
+
+					@endif
+
+					@if ($idea->proposal_state == 'closed')
+
+						<div class="info-tile">
+							<div class="info-tile-content">
+								<p>
+									<i class="fa fa-info"></i>
+									Proposal area opens in {{ $idea->proposalPhaseOpens() }}
+								</p>
+							</div>
+						</div>
+
+					@endif
+
 	    		</div>
 
     		</div>
@@ -43,7 +69,7 @@
 	    				{{ $idea->description }}
 	    			</p>
 
-	    			<div class="hidden-md hidden-lg">
+	    			<div class="mobile-sidebar hidden-md hidden-lg">
 
     					<div class="stats-tile supporters-tile">
 	    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
@@ -54,6 +80,28 @@
 	    				@include('action-button')
 
     				</div>
+
+					@if (count($idea->proposals) > 0)
+
+						<div class="proposals-container hidden-xs">
+
+			    			<h2 class="section-header">Proposals</h2>
+
+							<div class="proposals-wrapper">
+
+								@foreach ($idea->proposals->take(3) as $proposal)
+									<div class="col-xs-12 col-sm-6 col-md-4">
+										@include('propose/tile', ['proposal' => $proposal])
+									</div>
+								@endforeach
+
+								<div class="clearfloat"></div>
+
+							</div>
+
+						</div>
+
+					@endif
 
 	    			<h2 class="section-header">Discussion</h2>
 

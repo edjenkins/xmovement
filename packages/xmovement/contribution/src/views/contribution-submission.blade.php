@@ -1,3 +1,5 @@
+<?php $proposal_mode = (isset($proposal_mode)) ? $proposal_mode : false; ?>
+
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
 	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}')"></a>
@@ -83,17 +85,36 @@
 	</div>
 
 	<div class="vote-container contribution-submission-vote-container {{ ($contributionSubmission->voteCount() == 0) ? '' : (($contributionSubmission->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
+
 		<div class="vote-controls">
-			<div class="vote-button vote-up {{ ($contributionSubmission->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="contribution" data-votable-id="{{ $contributionSubmission['id'] }}" title="Vote up">
-				<i class="fa fa-2x fa-angle-up"></i>
-			</div>
+			@unless ($proposal_mode)
+				<div class="vote-button vote-up {{ ($contributionSubmission->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="contribution" data-votable-id="{{ $contributionSubmission['id'] }}" title="Vote up">
+					<i class="fa fa-2x fa-angle-up"></i>
+				</div>
+			@endunless
 			<div class="vote-count">
 				{{ $contributionSubmission->voteCount() }}
 			</div>
-			<div class="vote-button vote-down {{ ($contributionSubmission->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="contribution" data-votable-id="{{ $contributionSubmission['id'] }}" title="Vote down">
-				<i class="fa fa-2x fa-angle-down"></i>
-			</div>
+			@unless ($proposal_mode)
+				<div class="vote-button vote-down {{ ($contributionSubmission->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="contribution" data-votable-id="{{ $contributionSubmission['id'] }}" title="Vote down">
+					<i class="fa fa-2x fa-angle-down"></i>
+				</div>
+			@endunless
+			@if ($proposal_mode)
+
+				@if (array_key_exists($design_task->id, $contributions))
+					@if (in_array($contributionSubmission->id, $contributions[$design_task->id]))
+						<i class="fa fa-check-square fa-2x proposal-button" data-contribution-id="{{ $contributionSubmission->id }}"></i>
+					@else
+						<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $contributionSubmission->id }}"></i>
+					@endif
+				@else
+					<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $contributionSubmission->id }}"></i>
+				@endif
+
+			@endif
 		</div>
+
 	</div>
 
 </li>

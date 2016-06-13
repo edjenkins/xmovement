@@ -1,4 +1,5 @@
-// Navbar
+// XMStyles
+
 .navbar
 	background-color white
 	border none
@@ -6,7 +7,7 @@
 	height $navbar-height
 	position fixed
 	top 0
-	width 100% 
+	width 100%
 	z-index 999
 	&:after
 		background-color main-color
@@ -18,8 +19,8 @@
 		transition(all 0.4s linear)
 	transition(all 0.2s linear)
 	a.navbar-brand
-		color #444 
-		font-size 24px 
+		color #444
+		font-size 24px
 		font-weight 300
 		height $navbar-height
 		line-height $navbar-height
@@ -28,27 +29,27 @@
 		&:hover
 			color main-color
 		strong
-			font-weight 400 
+			font-weight 400
 	.navbar-nav
 		margin 0 -15px
-		padding 0 -15px 
+		padding 0 -15px
 	.navbar-nav > li
-		z-index 999 
+		z-index 999
 	.navbar-nav > li > a
 		color #666
-		font-size 14px 
+		font-size 14px
 		font-weight 500
 		line-height $navbar-height
 		padding 0 20px
 		transition(color 0.2s linear)
 		&:hover
-			background transparent 
+			background transparent
 			color main-color
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus
 	background-color transparent
 .dropdown-menu
-	border none 
+	border none
 	top auto
 	margin 0
 	overflow hidden
@@ -60,8 +61,8 @@
 		a
 			padding 15px 20px !important
 .navbar-toggle
-	border none 
-	height 40px 
+	border none
+	height 40px
 	margin (($navbar-height - 40) / 2)
 	.icon-bar
 		background-color main-color
@@ -79,7 +80,7 @@ body.fade-nav.transparent
 	.navbar
 		background-color transparent
 		&:after
-			opacity 0 
+			opacity 0
 			width 0px
 		a.navbar-brand
 			color white
@@ -87,30 +88,30 @@ body.fade-nav.transparent
 			padding 0 20px
 		.navbar-nav
 			margin 0 -15px
-			padding 0 -15px 
+			padding 0 -15px
 		.navbar-nav li a
-			color #666 
+			color #666
 		.navbar-nav > li > a
 			color white
 			line-height $navbar-height
 			transition(color 0.2s linear)
 			&:hover
-				background transparent 
+				background transparent
 				color main-color
 		.navbar-toggle
-			border none 
-			height 40px 
+			border none
+			height 40px
 			margin (($navbar-height - 40) / 2)
 			.icon-bar
 				background-color white
 			&:hover
 				.icon-bar
 					background-color main-color
-				
-@media(max-width: $screen-sm-min) 
+
+@media(max-width: $screen-sm-min)
 	.navbar-collapse
 		background-color white
 		.navbar-nav li:hover
-			background #f2f2f2 
+			background #f2f2f2
 		.navbar-nav > li > a
 			color #666 !important

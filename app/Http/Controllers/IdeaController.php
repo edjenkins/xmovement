@@ -12,6 +12,7 @@ use Response;
 use Input;
 use Log;
 use Session;
+use Carbon\Carbon;
 
 use App\Jobs\SendInviteEmail;
 use App\Jobs\SendDidSupportEmail;
@@ -22,51 +23,59 @@ use App\Supporter;
 
 class ResponseObject {
 
-    public $meta = array();
-    public $errors = array();
-    public $data = array();
+	public $meta = array();
+	public $errors = array();
+	public $data = array();
 
-    public function __construct()
-    {
-        $this->meta['success'] = false;
-    }
+	public function __construct()
+	{
+		$this->meta['success'] = false;
+	}
 }
 
 class IdeaController extends Controller
 {
-    public function index(Request $request)
+	public function index(Request $request)
 	{
-	    $ideas = Idea::where('visibility', 'public')->get();
+		$ideas = Idea::where('visibility', 'public')->orderBy('created_at', 'desc')->get();
 
-	    return view('ideas.index', [
-	        'ideas' => $ideas,
-	    ]);
+		return view('ideas.index', [
+			'ideas' => $ideas,
+		]);
 	}
 
-    public function view(Request $request, Idea $idea)
+	public function view(Request $request, Idea $idea)
 	{
 		// Check if user? is a supporter
 		$supported = (Auth::check()) ? Auth::user()->hasSupportedIdea($idea) : false;
 
 		return view('ideas.view', [
-	    	'idea' => $idea,
-	    	'supported' => $supported
-	    ]);
+			'idea' => $idea,
+			'supported' => $supported
+		]);
 	}
 
-    public function add(Request $request)
+	public function add(Request $request)
 	{
-	    return view('ideas.add');
+		if (Auth::check())
+		{
+			return view('ideas.add');
+		}
+		else
+		{
+			Session::flash('redirect', $request->url());
+			return view('ideas.learn');
+		}
 	}
 
-    public function edit(Request $request, Idea $idea)
+	public function edit(Request $request, Idea $idea)
 	{
-		if (Gate::denies('update', $idea))
+		if (Gate::denies('edit', $idea))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
 			Session::flash('flash_type', 'flash-warning');
-			
-			return view('ideas.view', ['idea' => $idea]);
+
+			return redirect()->back();
 		}
 		else
 		{
@@ -75,24 +84,34 @@ class IdeaController extends Controller
 	}
 
 	public function store(Request $request)
-	{	
+	{
 		// Validate the idea
-	    $this->validate($request, [
-	        'name' => 'required|max:255',
-	        'visibility' => 'required',
-	        'description' => 'required|max:2000',
-	        'photo' => 'required|max:255',
-	    ]);
+		$this->validate($request, [
+			'name' => 'required|max:255',
+			'description' => 'required|max:2000',
+			'photo' => 'required|max:255',
+			'visibility' => 'required',
+			'duration' => 'integer|between:5,45',
+			'design_during_support' => 'required|boolean',
+			'proposals_during_design' => 'required|boolean',
+		]);
 
-	    // Create the idea
-	    $idea = $request->user()->ideas()->create([
-	        'name' => $request->name,
-	        'visibility' => $request->visibility,
-	        'description' => $request->description,
-	        'photo' => $request->photo,
-	    ]);
+		// Create the idea
+		$idea = $request->user()->ideas()->create([
+			'name' => $request->name,
+			'description' => $request->description,
+			'photo' => $request->photo,
+			'visibility' => $request->visibility,
+			'support_state' => 'open',
+			'design_state' => ($request->design_during_support) ? 'open' : 'closed',
+			'proposal_state' => 'closed',
+			'supporters_target' => $request->supporters_target,
+			'duration' => $request->duration,
+			'design_during_support' => $request->design_during_support,
+			'proposals_during_design' => $request->proposals_during_design,
+		]);
 
-	    // Redirect to invite view
+		// Redirect to invite view
 		return redirect()->action('IdeaController@invite', $idea);
 	}
 
@@ -100,24 +119,24 @@ class IdeaController extends Controller
 	{
 		$idea = Idea::find($request->id);
 
-		if (Gate::denies('update', $idea))
+		if (Gate::denies('edit', $idea))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
 			Session::flash('flash_type', 'flash-warning');
 		}
 		else
 		{
-		    $this->validate($request, [
-		        'name' => 'required|max:255',
-		        'visibility' => 'required',
-		        'description' => 'required|max:2000',
-		        'photo' => 'required|max:255',
-		    ]);
+			$this->validate($request, [
+				'name' => 'required|max:255',
+				'visibility' => 'required',
+				'description' => 'required|max:2000',
+				'photo' => 'required|max:255',
+			]);
 
-	        $idea->name = $request->name;
-	        $idea->visibility = $request->visibility;
-	        $idea->description = $request->description;
-	        $idea->photo = $request->photo;
+			$idea->name = $request->name;
+			$idea->visibility = $request->visibility;
+			$idea->description = $request->description;
+			$idea->photo = $request->photo;
 
 			$idea->save();
 
@@ -146,24 +165,24 @@ class IdeaController extends Controller
 		return redirect()->action('IdeaController@index', $idea);
 	}
 
-    public function invite(Request $request, Idea $idea)
+	public function invite(Request $request, Idea $idea)
 	{
-        if (Gate::denies('invite', $idea))
-        {
-            return redirect()->action('IdeaController@view', $idea);
-        }
-        else
-        {
-        	return view('ideas.invite', ['idea' => $idea]);
-        }
+		if (Gate::denies('invite', $idea))
+		{
+			return redirect()->action('IdeaController@view', $idea);
+		}
+		else
+		{
+			return view('ideas.invite', ['idea' => $idea]);
+		}
 	}
 
-    public function sendInvites(Request $request, Idea $idea)
+	public function sendInvites(Request $request, Idea $idea)
 	{
 		$user = Auth::user();
 
-        if (Gate::denies('invite', $idea))
-        {
+		if (Gate::denies('invite', $idea))
+		{
 			Session::flash('flash_message', trans('flash_message.invites_not_sent'));
 			Session::flash('flash_type', 'flash-danger');
 		}
@@ -175,36 +194,36 @@ class IdeaController extends Controller
 			{
 				$job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
 
-		        $this->dispatch($job);
+				$this->dispatch($job);
 			}
 
 			Session::flash('flash_message', trans('flash_message.invites_sent_successfully'));
 			Session::flash('flash_type', 'flash-success');
 		}
 
-	    return redirect()->action('IdeaController@view', $idea);
+		return redirect()->action('IdeaController@view', $idea);
 	}
 
-    /**
-     * Make given User a supporter of a given Idea
-     *
-     * @param  int  $user_id
-     * @param  int  $idea_id
-     * @param  string  $captcha
-     * @return ResponseObject $response
-     */
+	/**
+	* Make given User a supporter of a given Idea
+	*
+	* @param  int  $user_id
+	* @param  int  $idea_id
+	* @param  string  $captcha
+	* @return ResponseObject $response
+	*/
 	public function support(Request $request)
 	{
 		$response = new ResponseObject();
-    	
-	    $recaptcha = new \ReCaptcha\ReCaptcha(getenv('CAPTCHA_SECRET'));
 
-	    $resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
+		$recaptcha = new \ReCaptcha\ReCaptcha(getenv('CAPTCHA_SECRET'));
 
-	    if ($resp->isSuccess())
-	    {
-	    	$idea = Idea::find($request->idea_id);
-	    	
+		$resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
+
+		if ($resp->isSuccess())
+		{
+			$idea = Idea::find($request->idea_id);
+
 			$idea->supporters()->attach($request->user_id);
 
 			$receiver = User::find($request->user_id);
@@ -212,22 +231,22 @@ class IdeaController extends Controller
 			if ($idea->user_id != $receiver->id)
 			{
 				$job = (new SendDidSupportEmail($idea->user, $receiver, $idea))->onQueue('emails');
-		        $this->dispatch($job);
+				$this->dispatch($job);
 			}
 
 			$response->meta['success'] = true;
 
-	    } else {
+		} else {
 
-	    	// $resp->getErrorCodes()
+			// $resp->getErrorCodes()
 
-	    	array_push($response->errors, 'Please complete the CAPTCHA below');
+			array_push($response->errors, 'Please complete the CAPTCHA below');
 
-	    	$response->meta['success'] = false;
-	    }
+			$response->meta['success'] = false;
+		}
 
-	    $response->data['supporter_count'] = Supporter::where('idea_id', '=', $request->idea_id)->count();
+		$response->data['supporter_count'] = Supporter::where('idea_id', '=', $request->idea_id)->count();
 
-	    return Response::json($response);
+		return Response::json($response);
 	}
 }

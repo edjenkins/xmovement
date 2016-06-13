@@ -25,7 +25,7 @@ class PollPolicy
     {
     	$designTask = DesignTask::where([['xmovement_task_id', $poll->id], ['xmovement_task_type', 'Poll']])->first();
 		
-        return (!$designTask["locked"] || ($user->id === $poll->user_id));
+        return (!$designTask["locked"] || ($user->id == $poll->user_id));
     }
 
     /**

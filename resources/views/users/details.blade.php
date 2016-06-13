@@ -2,15 +2,15 @@
 
 @section('content')
 
-    <div class="page-header">
-        
+    <div class="page-header colorful">
+
         <h2 class="main-title">Add some details</h2>
 
     </div>
 
     <div class="container">
         <div class="row">
-            
+
             <div class="auth-panel">
 
                 <form class="auth-form" role="form" method="POST" action="{{ action('UserController@addDetails') }}">

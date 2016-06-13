@@ -71,7 +71,8 @@ class RequirementController extends Controller
           'description' => $request->description,
           'xmovement_task_id' => $requirement_id,
           'xmovement_task_type' => 'Requirement',
-          'locked' => $request->locked,
+          'proposal_interactivity' => false,
+		  'locked' => $request->locked,
       ])->id;
 
 	    // Load the design_task view

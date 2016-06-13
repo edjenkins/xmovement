@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\User;
 use App\Idea;
+use App\Proposal;
 use Auth;
 
 class User extends Authenticatable
@@ -36,6 +37,16 @@ class User extends Authenticatable
     public function ideas()
     {
         return $this->hasMany(Idea::class);
+    }
+
+    /**
+     * The Proposals the user has created.
+     *
+     * @var array
+     */
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
     }
 
     /**

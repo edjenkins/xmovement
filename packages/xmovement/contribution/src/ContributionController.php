@@ -35,7 +35,7 @@ class ResponseObject {
 class ContributionController extends Controller
 {
 
-    public static function view($design_task_id)
+    public static function view(Request $request, $design_task_id)
     {
     	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
 
@@ -46,7 +46,13 @@ class ContributionController extends Controller
             return sprintf('%s', $contribution_submission->voteCount());
         })->values()->all();
 
-        return view('contribution::view', ['contribution' => $contribution, 'design_task' => $design_task]);
+		// The user is putting a proposal together
+		$proposal_mode = ($request->session()->has('proposal.active')) ? $request->session()->get('proposal.active') : false;
+		$proposal_task_index = ($request->session()->has('proposal.task_index')) ? $request->session()->get('proposal.task_index') : 0;
+		$proposal_tasks = ($request->session()->has('proposal.tasks')) ? $request->session()->get('proposal.tasks') : [];
+		$contributions = $request->session()->get('proposal.contributions');
+
+        return view('contribution::view', ['contribution' => $contribution, 'design_task' => $design_task, 'proposal_mode' => $proposal_mode, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks, 'contributions' => $contributions]);
     }
 
     public function vote(Request $request)
@@ -90,18 +96,19 @@ class ContributionController extends Controller
           'id' => $contribution_type,
       ]);
 
-      $design_task_id = DesignTask::create([
+      $design_task = DesignTask::create([
           'user_id' => $user_id,
           'idea_id' => $idea_id,
           'name' => $request->name,
           'description' => $request->description,
           'xmovement_task_id' => $contribution_id,
           'xmovement_task_type' => 'Contribution',
-          'locked' => $request->locked,
-      ])->id;
+		  'proposal_interactivity' => true,
+		  'locked' => $request->locked,
+      ]);
 
 	    // Load the design_task view
-      return redirect()->action('DesignController@dashboard', $idea_id);
+		return redirect()->action('\xmovement\contribution\ContributionController@view', ['design_task' => $design_task]);
     }
 
     public function update(Request $request)

@@ -16,14 +16,14 @@ class DesignTask extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'locked'
+        'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'proposal_interactivity', 'locked'
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function idea()
     {
         return $this->belongsTo(Idea::class);
@@ -80,4 +80,9 @@ class DesignTask extends Model
             return true;
         }
     }
+
+	public function getLink()
+	{
+		return action('\xmovement\\' . strtolower($this->xmovement_task_type) . '\\' . $this->xmovement_task_type . 'Controller@view', $this->id);
+	}
 }

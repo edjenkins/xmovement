@@ -26,6 +26,25 @@ class Contribution extends Model
         return view('contribution::tile', ['contribution' => $this, 'design_task' => $design_task]);
     }
 
+	public function renderProposalOutput(\App\DesignTask $design_task)
+	{
+		$rendered_response = '';
+
+		if (count($design_task->contributions) == 0)
+		{
+			$rendered_response = '<div>No contributions selected</div>';
+		}
+		else
+		{
+			foreach ($design_task->contributions as $index => $contribution)
+			{
+				$rendered_response .= $contribution->renderTile($contribution);
+			}
+		}
+
+		return $rendered_response;
+	}
+
     public function renderSubmitForm()
     {
         return view('contribution::forms::add', ['contribution' => $this]);
@@ -96,7 +115,7 @@ class Contribution extends Model
                 $response->meta['success'] = true;
                 $response->data['element'] = View::make('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission])->render();
             }
-            
+
             return Response::json($response);
         }
     }

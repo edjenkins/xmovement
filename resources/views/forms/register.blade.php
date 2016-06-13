@@ -60,16 +60,16 @@
     @endif
 
     <div class="form-group">
-        
+
         <button type="submit" class="btn btn-primary">
             Register
         </button>
-        
+
         @if ($type == 'standard')
-        
+
             <br />
             <a class="btn btn-link muted-link" href="{{ url('/login') }}">Already have an account?</a>
-        
+
         @endif
 
     </div>

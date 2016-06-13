@@ -36,19 +36,14 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
-        if (Gate::denies('design', $idea))
-        {
-            Session::flash('flash_message', trans('flash_message.no_permission'));
-            Session::flash('flash_type', 'flash-danger');
-
-            return redirect()->back();
-        }
+		// Get out of proposal mode
+		$request->session()->put('proposal.active', false);
 
         // Order by locked first, then highest voted, then alphabetically
         $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
             return sprintf('%s%s', $design_task->locked, $design_task->voteCount());
         })->values()->all();
-        
+
         return view('design.dashboard', [
             'idea' => $idea,
             'design_tasks' => $design_tasks,
@@ -57,31 +52,51 @@ class DesignController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
-        // Fetch available design modules
-        $design_modules = DesignModule::get();
+		if (Gate::denies('design', $idea))
+        {
+            Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
+			
+			return redirect()->back();
+        }
+		else
+		{
+	        // Fetch available design modules
+	        $design_modules = DesignModule::get();
 
-        return view('design.add', [
-            'idea' => $idea,
-            'design_modules' => $design_modules,
-        ]);
+	        return view('design.add', [
+	            'idea' => $idea,
+	            'design_modules' => $design_modules,
+	        ]);
+		}
     }
 
     public function vote(Request $request)
     {
-        $response = new ResponseObject();
+		$response = new ResponseObject();
 
-        $value = ($request->vote_direction == 'up') ? 1 : -1;
-
-        $design_task = DesignTask::whereId($request->votable_id)->first();
-
-        if ($design_task->addVote($value))
+        if (Gate::denies('design', $idea))
         {
-            $response->meta['success'] = true;
-        }
+            Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
 
-        $response->data['vote_count'] = $design_task->voteCount();
-        
-        return Response::json($response);
+            return Response::json($response);
+        }
+		else
+		{
+	        $value = ($request->vote_direction == 'up') ? 1 : -1;
+
+	        $design_task = DesignTask::whereId($request->votable_id)->first();
+
+	        if ($design_task->addVote($value))
+	        {
+	            $response->meta['success'] = true;
+	        }
+
+	        $response->data['vote_count'] = $design_task->voteCount();
+
+	        return Response::json($response);
+		}
     }
 
     public function destroyTask(Request $request, DesignTask $design_task)

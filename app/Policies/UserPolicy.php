@@ -33,7 +33,7 @@ class UserPolicy
      */
     public function viewMessages(User $user, User $profile)
     {
-        return $user->id === $profile->id;
+        return $user->id == $profile->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class UserPolicy
      */
     public function editPreferences(User $user, User $profile)
     {
-        return $user->id === $profile->id;
+        return $user->id == $profile->id;
     }
 
     /**

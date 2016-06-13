@@ -6,6 +6,7 @@ use App\Idea;
 use App\User;
 use App\Supporter;
 use App\DesignTask;
+use Log;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -22,7 +23,7 @@ class IdeaPolicy
      */
     public function invite(User $user, Idea $idea)
     {
-        return $user->id === $idea->user_id;
+        return $user->id == $idea->user_id;
     }
 
     /**
@@ -34,7 +35,8 @@ class IdeaPolicy
      */
     public function support(User $user, Idea $idea)
     {
-        return !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+		$is_not_existing_supporter = !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        return ($is_not_existing_supporter && ($idea->support_state == 'open'));
     }
 
     /**
@@ -58,7 +60,33 @@ class IdeaPolicy
      */
     public function design(User $user, Idea $idea)
     {
-        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+		return ($is_existing_supporter && ($idea->design_state == 'open'));
+    }
+
+    /**
+     * Determine if the given user can design the given idea after they have supported it.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function design_after_support(User $user, Idea $idea)
+    {
+		return ($idea->design_state == 'open');
+    }
+
+    /**
+     * Determine if the given user can submit a proposal for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function propose(User $user, Idea $idea)
+    {
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+		return ($is_existing_supporter && ($idea->proposal_state == 'open'));
     }
 
     /**
@@ -70,7 +98,7 @@ class IdeaPolicy
      */
     public function edit(User $user, Idea $idea)
     {
-        return $user->id === $idea->user_id;
+        return $user->id == $idea->user_id;
     }
 
     /**
@@ -82,7 +110,7 @@ class IdeaPolicy
      */
     public function destroy(User $user, Idea $idea)
     {
-        return $user->id === $idea->user_id;
+        return $user->id == $idea->user_id;
     }
 
     /**

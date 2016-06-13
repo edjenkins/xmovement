@@ -51,7 +51,8 @@ class DiscussionController extends Controller
           'description' => $request->description,
           'xmovement_task_id' => $discussion_id,
           'xmovement_task_type' => 'Discussion',
-          'locked' => $request->locked,
+          'proposal_interactivity' => false,
+		  'locked' => $request->locked,
       ])->id;
 
 	    // Load the design_task view

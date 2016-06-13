@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-	
+
 	<div class="page-header">
-	    
+
         <h2 class="main-title">Dashboard</h2>
 		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 	</div>
 
 	<div class="container">
-	    
+
 	    <div class="row">
-	    	<div class="col-md-4 col-md-push-8 hidden-sm hidden-xs">
+	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
 
 	    		<div class="column side-column">
 
@@ -21,37 +21,64 @@
 	    		</div>
 
     		</div>
-	    	<div class="col-md-8 col-md-pull-4">
-	    	
+	    	<div class="col-md-9 col-md-pull-3">
+
 	    		<div class="view-controls-container">
-	    			
-	    			<div class="search-bar-wrapper">
 
-	    				<div class="search-bar-button"><i class="fa fa-search"></i></div>
-		    			<input class="search-bar" type="text" placeholder="Search Design Tasks">
+					<ul class="module-controls pull-left">
 
-	    			</div>
+						<li class="module-control">
 
-	    			<ul class="module-controls pull-right">
+							<a href="{{ action('IdeaController@view', $idea) }}">
 
-    					<li class="module-control">
-    						
-    						<a href="{{ action('DesignController@add', $idea) }}">
+								<i class="fa fa-chevron-left"></i>
 
-		    					<i class="fa fa-plus"></i>
+								Back to Idea
 
-		    					Add Design Task
+							</a>
 
-		    				</a>
+						</li>
 
-	    				</li>
+						@unless (Gate::denies('propose', $idea))
 
-	    			</ul>
+							<li class="module-control">
+
+								<a href="{{ action('ProposeController@index', $idea) }}">
+
+									View Proposals
+
+								</a>
+
+							</li>
+
+						@endunless
+
+					</ul>
+
+	    			@unless (Gate::denies('design', $idea))
+
+		    			<ul class="module-controls pull-right">
+
+	    					<li class="module-control">
+
+	    						<a href="{{ action('DesignController@add', $idea) }}">
+
+			    					<i class="fa fa-plus"></i>
+
+			    					Add Design Task
+
+			    				</a>
+
+		    				</li>
+
+		    			</ul>
+
+					@endunless
 
 	    			<div class="clearfloat"></div>
 
 	    		</div>
-	    		
+
 	    		<div class="column main-column">
 
 					@foreach ($design_tasks as $design_task)
@@ -62,9 +89,21 @@
 
 					@endforeach
 
+					@if (count($design_tasks) == 0)
+
+						@can('design', $idea)
+
+							<a href="{{ action('DesignController@add', $idea) }}" class="action-panel">
+								Add Design Task
+							</a>
+
+						@endcan
+
+					@endif
+
 	    			<div class="clearfloat"></div>
 	    		</div>
-	    
+
 	    	</div>
 	    </div>
 	</div>

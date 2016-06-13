@@ -6,7 +6,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'bio' => $faker->text($maxNbChars = 200),
         'email' => $faker->email,
         'phone' => $faker->phoneNumber,
-        'avatar' => 'avatar.jpg',
+        'avatar' => 'avatar',
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
         'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),

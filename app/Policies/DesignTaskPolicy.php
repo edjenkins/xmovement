@@ -22,7 +22,7 @@ class DesignTaskPolicy
      */
     public function destroy(User $user, DesignTask $design_task)
     {
-        return $user->id === $design_task->user_id;
+        return $user->id == $design_task->user_id;
     }
 
     /**

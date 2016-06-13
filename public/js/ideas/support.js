@@ -23,7 +23,7 @@ function support(user_id, idea_id)
         data:  JSON.stringify({user_id: user_id, idea_id: idea_id, captcha: g_recaptcha_response}),
         processData: false,
         success: function(response) {
-        	
+
         	$('#support-errors').html(''); // Clear errors
 
         	if (response.meta.success)
@@ -35,8 +35,8 @@ function support(user_id, idea_id)
 				$('#support-modal').modal('hide');
                 $('.supporters-tile-footer').addClass('visible');
 
-                $('#support-button').hide();
-                $('#temp-design-button').css('display', 'block');
+                $('.support-button').hide();
+                $('.temp-design-button').css('display', 'block');
 			}
         	else
         	{

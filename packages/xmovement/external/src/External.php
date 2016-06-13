@@ -24,6 +24,11 @@ class External extends Model
     	return view('external::tile', ['external' => $this, 'design_task' => $design_task]);
     }
 
+	public function renderProposalOutput(\App\DesignTask $design_task)
+	{
+		return view('external::proposal-tile', ['external' => $this]);
+	}
+
     public function designTask()
     {
         return $this->morphMany('App\DesignTask', 'xmovement_task');
