@@ -30,6 +30,14 @@
 		border-left main-color 4px solid
 		font-size 18px
 		padding 20px
+	@media(max-width: $screen-md-min)
+		.mobile-sidebar, p.idea-description
+			float left
+			width 50%
+	@media(max-width: $screen-sm-min)
+		.mobile-sidebar, p.idea-description
+			float none
+			width 100%
 
 .side-column
 	.creator-tile

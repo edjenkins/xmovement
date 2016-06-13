@@ -69,7 +69,7 @@
 	    				{{ $idea->description }}
 	    			</p>
 
-	    			<div class="hidden-md hidden-lg">
+	    			<div class="mobile-sidebar hidden-md hidden-lg">
 
     					<div class="stats-tile supporters-tile">
 	    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>

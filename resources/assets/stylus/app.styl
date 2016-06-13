@@ -170,7 +170,6 @@ body.colorful
 				font-size 22px
 
 .action-panel
-	background white
 	border border-color 2px dashed
 	border-radius 10px
 	color #CCC
@@ -181,6 +180,6 @@ body.colorful
 	text-align center
 	transition(all 0.2s linear)
 	&:hover
-		background border-color
-		color #AAA
+		border-color darken(border-color, 10%)
+		color darken(#CCC, 10%)
 		text-decoration none
