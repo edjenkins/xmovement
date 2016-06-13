@@ -1,9 +1,10 @@
 <?php
-
 namespace App\Console;
 
-use Illuminate\Console\Scheduling\Scheduler;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+
+use Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,17 +14,27 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        \App\Console\Commands\UpdateIdeaStates::class,
+        \App\Console\Commands\SupportPhaseUpdates::class,
+        \App\Console\Commands\DesignPhaseUpdates::class,
+        \App\Console\Commands\ProposalPhaseUpdates::class
     ];
 
-    /**
-     * Define the application's command scheduler.
-     *
-     * @param  \Illuminate\Console\Scheduling\Scheduler  $scheduler
-     * @return void
-     */
-    protected function scheduler(Scheduler $scheduler)
-    {
-        // $scheduler->command('inspire')
-        //          ->hourly();
+	protected function schedule(Schedule $schedule)
+	{
+		// Update the states of ideas
+		$schedule->command('update-idea-states')->everyMinute()->withoutOverlapping();
+
+		// Send support phase update emails (at 11am every 3 days)
+		// $schedule->command('support-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
+		// $schedule->command('support-phase-updates')->everyMinute()->withoutOverlapping();
+
+		// Send design phase update emails (at 11am every 3 days)
+		// $schedule->command('design-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
+		// $schedule->command('design-phase-updates')->everyMinute()->withoutOverlapping();
+
+		// Send proposal phase update emails (at 11am every 3 days)
+		// $schedule->command('proposal-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
+		// $schedule->command('proposal-phase-updates')->everyMinute()->withoutOverlapping();
     }
 }

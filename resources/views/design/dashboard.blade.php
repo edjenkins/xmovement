@@ -39,40 +39,41 @@
 
 						</li>
 
-						<li class="module-control">
+						@unless (Gate::denies('propose', $idea))
 
-							<a href="{{ action('ProposeController@index', $idea) }}">
+							<li class="module-control">
 
-								View Proposals
+								<a href="{{ action('ProposeController@index', $idea) }}">
 
-							</a>
+									View Proposals
 
-						</li>
+								</a>
+
+							</li>
+
+						@endunless
 
 					</ul>
 
-	    			<!-- <div class="search-bar-wrapper">
+	    			@unless (Gate::denies('design', $idea))
 
-	    				<div class="search-bar-button"><i class="fa fa-search"></i></div>
-		    			<input class="search-bar" type="text" placeholder="Search Design Tasks">
+		    			<ul class="module-controls pull-right">
 
-	    			</div> -->
+	    					<li class="module-control">
 
-	    			<ul class="module-controls pull-right">
+	    						<a href="{{ action('DesignController@add', $idea) }}">
 
-    					<li class="module-control">
+			    					<i class="fa fa-plus"></i>
 
-    						<a href="{{ action('DesignController@add', $idea) }}">
+			    					Add Design Task
 
-		    					<i class="fa fa-plus"></i>
+			    				</a>
 
-		    					Add Design Task
+		    				</li>
 
-		    				</a>
+		    			</ul>
 
-	    				</li>
-
-	    			</ul>
+					@endunless
 
 	    			<div class="clearfloat"></div>
 
@@ -90,9 +91,13 @@
 
 					@if (count($design_tasks) == 0)
 
-						<a href="{{ action('DesignController@add', $idea) }}" class="action-panel">
-							Add Design Task
-						</a>
+						@can('design', $idea)
+
+							<a href="{{ action('DesignController@add', $idea) }}" class="action-panel">
+								Add Design Task
+							</a>
+
+						@endcan
 
 					@endif
 

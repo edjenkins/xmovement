@@ -18,6 +18,14 @@
 
 		<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">View Proposals</a>
 
+	@else
+
+		@if ($idea->design_state == 'locked')
+
+			<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">View Proposals</a>
+
+		@endif
+
 	@endcan
 
 	@can('design', $idea)
@@ -25,6 +33,16 @@
 		<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">Help Design</a>
 
 	@else
+
+		@if ($idea->design_state == 'locked')
+
+			<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">View Design</a>
+
+		@endif
+
+	@endcan
+
+	@can('design_after_support', $idea)
 
 		<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button" id="temp-design-button">Help Design</a>
 

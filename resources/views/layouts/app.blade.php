@@ -13,11 +13,12 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <!-- Styles -->
-    <link href="{{ URL::asset('css/libs.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
+	<link href="/css/jquery-ui-slider-pips.css" rel="stylesheet">
     <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
 
 	<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
@@ -53,12 +54,12 @@
 
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
-    <script src='/js/file_uploader/vendor/jquery.ui.widget.js'></script>
-    <script src='/js/file_uploader/jquery.iframe-transport.js'></script>
-    <script src='/js/file_uploader/jquery.fileupload.js'></script>
+    <script src='{{ URL::asset('js/file_uploader/vendor/jquery.ui.widget.js') }}'></script>
+    <script src='{{ URL::asset('js/file_uploader/jquery.iframe-transport.js') }}'></script>
+    <script src='{{ URL::asset('js/file_uploader/jquery.fileupload.js') }}'></script>
 
-    <script src="/js/app.js"></script>
-
-    <script src="/js/easydropdown/jquery.easydropdown.js"></script>
+	<script src="{{ URL::asset('js/app.js') }}"></script>
+	<script src="{{ URL::asset('js/vendor.js') }}"></script>
+    <script src="{{ URL::asset('js/easydropdown/jquery.easydropdown.js') }}"></script>
 </body>
 </html>

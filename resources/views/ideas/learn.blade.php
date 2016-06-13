@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page-header">
+    <div class="page-header colorful">
 
         <h2 class="main-title" id="page-title">Lets get started!</h2>
 

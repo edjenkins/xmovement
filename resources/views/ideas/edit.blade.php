@@ -13,12 +13,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
-                @include('forms/idea', ['editing' => true])
+                @include('forms/idea/add', ['editing' => true])
 
             </div>
         </div>
     </div>
 
     <script src="/js/ideas/add.js"></script>
-		
+
 @endsection
