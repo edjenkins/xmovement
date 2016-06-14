@@ -1,8 +1,6 @@
 [
   {
-    "srcDir": "src",
-    "destDir": "lib",
-    "files": "./packages/*",
-    "command": "bash /Users/edjenkins/MAMP/xmovement/update.sh"
+    "files": "**.styl",
+    "command": "php artisan vendor:publish --tag=public --force"
   }
 ]

@@ -21,8 +21,8 @@ elixir(function(mix) {
 	mix.copy('resources/assets/css/*', 'public/css');
 	mix.stylus('app.styl', null, { use: [ bootstrap() ] });
 	mix.stylus('vendor.styl', null, { use: [ bootstrap() ] });
-    mix.browserSync({
-        proxy: 'xm.local',
-        notify: false
-    });
+    // mix.browserSync({
+    //     proxy: 'xm.local',
+    //     notify: false
+    // });
 });

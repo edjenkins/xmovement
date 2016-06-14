@@ -31,7 +31,7 @@
 
 			@endunless
 
-	    	<div class="{{ (!$proposal_mode) ? 'col-md-9 col-md-pull-3' : 'col-md-8 col-md-offset-2' }}">
+	    	<div class="{{ (!$proposal_mode) ? 'col-md-9 col-md-pull-3' : 'col-md-10 col-md-offset-1' }}">
 
 				@unless ($proposal_mode)
 

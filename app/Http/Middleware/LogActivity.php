@@ -50,5 +50,6 @@ class LogActivity
 			'referer' => URL::previous(),
 			'user_agent' => $request->header('User-Agent'),
 		]);
+
 	}
 }

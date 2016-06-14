@@ -8,12 +8,14 @@ use App\DesignTask;
 use App\Proposal;
 use XMovement\Poll\Poll;
 use XMovement\Contribution\Contribution;
+use XMovement\Scheduler\Scheduler;
 
 use App\Policies\IdeaPolicy;
 use App\Policies\UserPolicy;
 use App\Policies\DesignTaskPolicy;
 use App\Policies\PollPolicy;
 use App\Policies\ContributionPolicy;
+use App\Policies\SchedulerPolicy;
 use App\Policies\ProposalPolicy;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
@@ -33,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         DesignTask::class => DesignTaskPolicy::class,
         Poll::class => PollPolicy::class,
         Contribution::class => ContributionPolicy::class,
+        Scheduler::class => SchedulerPolicy::class,
         Proposal::class => ProposalPolicy::class,
     ];
 
