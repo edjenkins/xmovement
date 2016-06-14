@@ -61,5 +61,6 @@
 	<script src="{{ URL::asset('js/app.js') }}"></script>
 	<script src="{{ URL::asset('js/vendor.js') }}"></script>
     <script src="{{ URL::asset('js/easydropdown/jquery.easydropdown.js') }}"></script>
+
 </body>
 </html>

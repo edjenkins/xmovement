@@ -16,6 +16,10 @@ class SchedulerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/views', 'scheduler');
 
         $this->publishes([
+            __DIR__ . '/policies' => base_path('app/Policies'),
+        ], 'policies');
+
+        $this->publishes([
             __DIR__ . '/migrations' => base_path('database/migrations'),
         ], 'migrations');
 
@@ -53,6 +57,7 @@ class SchedulerServiceProvider extends ServiceProvider
     {
         include __DIR__.'/routes.php';
         $this->app->make('XMovement\Scheduler\SchedulerController');
+        $this->app->make('XMovement\Scheduler\Scheduler');
     }
 
 }
