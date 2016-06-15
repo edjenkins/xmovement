@@ -6,7 +6,7 @@
     @endif
 
     <input type="hidden" name="idea_id" value="{{ $idea->id }}">
-    <input type="hidden" name="voting_type" value="standard">
+    <input type="hidden" name="voting_type" value="boolean">
     <input type="hidden" name="contribution_type" value="text">
 
     <div class="form-page visible">
@@ -68,7 +68,7 @@
                 @endif
 
             </div>
-						
+
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_scheduler_form.save_changes') : trans('xmovement_scheduler_form.create_scheduler') }}</button>
             </div>

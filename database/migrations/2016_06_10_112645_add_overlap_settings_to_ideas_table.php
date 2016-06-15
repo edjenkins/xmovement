@@ -13,8 +13,8 @@ class AddOverlapSettingsToIdeasTable extends Migration
     public function up()
     {
         Schema::table('ideas', function ($table) {
-			$table->boolean('design_during_support')->after('duration')->default(true);
-			$table->boolean('proposals_during_design')->after('design_during_support')->default(true);
+			$table->boolean('design_during_support')->after('duration')->default(false);
+			$table->boolean('proposals_during_design')->after('design_during_support')->default(false);
         });
     }
 

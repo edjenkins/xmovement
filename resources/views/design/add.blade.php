@@ -43,7 +43,9 @@
 
 			    			<li href="#{{ strtolower($design_module->name) }}-form-hash" class="design-module-tile" id="design-module-tile-{{ $design_module->id }}" data-form-id="#{{ strtolower($design_module->name) }}-form">
 
-			    				{{ $design_module->name }}
+								<i class="fa {{ $design_module->icon }}"></i>
+
+			    				<span>{{ $design_module->name }}</span>
 
 			    			</li>
 

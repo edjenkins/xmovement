@@ -1,1 +1,1 @@
-<div class="proposal-scheduler-tile">Some output</div>
+<div class="scheduler-option-value">{{ $schedulerOption['value'] }}</div>

@@ -4,34 +4,34 @@
 
 <input type="hidden" name="photo" id="{{ $input_id }}" value="{{ isset($value) ? $value : "" }}" />
 
-<?php if ($cc): ?>
+@if ($cc)
 
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
-	  <li role="presentation" class="active"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload</a></li>
-	  <li role="presentation"><a href="#search" aria-controls="search" role="tab" data-toggle="tab">Search</a></li>
+	  <li role="presentation" class="active"><a href="#search" aria-controls="search" role="tab" data-toggle="tab">Search</a></li>
+	  <li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload</a></li>
 	</ul>
 
-<?php endif; ?>
+@endif
 
 <!-- Tab panes -->
 <div class="tab-content">
 
-  <div role="tabpanel" class="tab-pane active" id="upload">
+	@if ($cc)
 
-		@include('dropzone-container')
-
-	</div>
-
-	<?php if ($cc) { ?>
-
-		<div role="tabpanel" class="tab-pane" id="search">
+		<div role="tabpanel" class="tab-pane active" id="search">
 
 			@include('cc-container')
 
 		</div>
 
-	<?php } ?>
+	@endif
+
+	<div role="tabpanel" class="tab-pane {{ ($cc) ? '' : 'active' }}" id="upload">
+
+		@include('dropzone-container')
+
+	</div>
 
 </div>
 

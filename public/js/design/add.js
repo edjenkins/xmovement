@@ -20,17 +20,20 @@ function showModule(form_id) {
 
 	var location_hash = form_id + '-hash';
 
-	if (history.pushState) {
-	    history.pushState(null, null, location_hash);
-	} else {
-	    location.hash = location_hash;
+	if (location_hash != '-hash') {
+
+		if (history.pushState) {
+		    history.pushState(null, null, location_hash);
+		} else {
+		    location.hash = location_hash;
+		}
 	}
 }
 
 $(document).ready(function() {
 
-	var form_id = window.location.hash.slice(0, -5);
-	showModule(form_id);
+	// var form_id = window.location.hash.slice(0, -5);
+	// showModule(form_id);
 	$('.design-module-tile[data-form-id="' + form_id + '"]').addClass('active');
 
 });

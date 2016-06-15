@@ -14,6 +14,6 @@ class DesignModule extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'available'
+        'name', 'description', 'icon', 'available'
     ];
 }
