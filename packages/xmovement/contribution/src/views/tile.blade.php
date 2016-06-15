@@ -2,11 +2,11 @@
 
     <a href="/design/contribution/{{ $design_task['id'] }}">
     	<div class="tile-body">
-	    
+
 		    <span class="vertically-aligned-text">
 
 		    	<h4>{{ $design_task['name'] }}</h4>
-		    	
+
 		    	<p>
 					<i class="fa fa-lightbulb-o"></i>
 		    		{{ $contribution->contributionSubmissions->count() }}
@@ -20,15 +20,15 @@
 
 	<div class="tile-footer">
 
-		@if($design_task['locked'] == true)
-		
+		@if($design_task['pinned'])
+
 			<p>
-				<i class="fa fa-lock"></i>
-				Locked
+				<i class="fa fa-thumb-tack"></i>
+				Pinned
 			</p>
-		
+
 		@else
-			
+
 			<div class="vote-container design-task-vote-container {{ ($design_task->voteCount() == 0) ? '' : (($design_task->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 				<div class="vote-controls">
 					<div class="vote-button vote-up {{ ($design_task->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="design_task" data-votable-id="{{ $design_task['id'] }}">
@@ -44,7 +44,7 @@
 			</div>
 
 		@endif
-		
+
 	</div>
 
 </div>

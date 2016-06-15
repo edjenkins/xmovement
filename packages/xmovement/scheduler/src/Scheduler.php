@@ -14,7 +14,7 @@ class Scheduler extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'contribution_type', 'voting_type'
+        'user_id', 'voting_type'
     ];
 
     protected $table = 'xmovement_schedulers';

@@ -15,7 +15,6 @@ class CreateXmovementSchedulersTable extends Migration
         Schema::create('xmovement_schedulers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->index();
-            $table->string('contribution_type', 200);
             $table->string('voting_type', 200);
             $table->timestamps();
         });

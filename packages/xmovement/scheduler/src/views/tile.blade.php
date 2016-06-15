@@ -9,6 +9,7 @@
 
 		    	<p>
 					<i class="fa fa-calendar"></i>
+					{{ $scheduler->schedulerOptions->count() }}
 		    	</p>
 
 		    </span>
@@ -19,11 +20,11 @@
 
 	<div class="tile-footer">
 
-		@if($design_task['locked'] == true)
+		@if($design_task['pinned'])
 
 			<p>
-				<i class="fa fa-lock"></i>
-				Locked
+				<i class="fa fa-thumb-tack"></i>
+				Pinned
 			</p>
 
 		@else

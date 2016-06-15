@@ -41,6 +41,8 @@
 
             </div>
 
+			@include('forms/components/pin-toggle', ['design_task' => (isset($poll) ? ((method_exists($poll, 'design_task')) ? $poll->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+
             <div class="form-group{{ $errors->has('locked') ? ' has-error' : '' }}">
 
                 <div class="toggle-switch-wrapper">

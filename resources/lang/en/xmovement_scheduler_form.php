@@ -6,7 +6,8 @@ return [
 
     'name_label' => 'Choose a name that is short but self explanatory e.g. Time of Event',
     'description_label' => 'Describe the activity e.g. Help us to decide when the event should take place',
-    'locked_label' => 'Prevent others from voting on this design task',
+	'pinned_label' => 'Pin this design task (disable voting)',
+	'locked_label' => 'Prevent others from submitting times/dates',
 
     'name_placeholder' => 'Scheduler name',
     'description_placeholder' => 'Scheduler description',

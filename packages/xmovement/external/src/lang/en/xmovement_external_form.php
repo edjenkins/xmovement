@@ -9,16 +9,16 @@ return [
 
     'name_label' => 'Choose a name that is short but self explanatory e.g. Floorplan sketches',
     'description_label' => 'Describe the activity e.g. Help sketch the floorplan on an interactive whiteboard',
-    'locked_label' => 'Prevent others from voting on this design task',
+	'pinned_label' => 'Pin this design task (disable voting)',
 
     'name_placeholder' => 'External resource name',
     'description_placeholder' => 'External resource description',
 
-		'embed_code_label' => 'Paste embed code such as an iFrame below',
-		'embed_code_placeholder' => 'Embed code',
+	'embed_code_label' => 'Paste embed code such as an iFrame below',
+	'embed_code_placeholder' => 'Embed code',
 
-		'external_link_label' => 'Paste link to external resource',
-		'external_link_placeholder' => 'Link to resource',
+	'external_link_label' => 'Paste link to external resource',
+	'external_link_placeholder' => 'Link to resource',
 
     'save_changes' => 'Save Changes',
     'create_external' => 'Create External Resource',

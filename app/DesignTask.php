@@ -16,7 +16,7 @@ class DesignTask extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'proposal_interactivity', 'locked'
+        'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'proposal_interactivity', 'pinned', 'locked'
     ];
 
     public function user()

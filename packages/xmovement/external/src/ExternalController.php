@@ -58,7 +58,8 @@ class ExternalController extends Controller
           'xmovement_task_id' => $external_id,
           'xmovement_task_type' => 'External',
           'proposal_interactivity' => false,
-		  'locked' => $request->locked,
+		  'pinned' => ($request->pinned) ? $request->pinned : false,
+		  'locked' => ($request->locked) ? $request->locked : false,
       ])->id;
 
 	    // Load the design_task view

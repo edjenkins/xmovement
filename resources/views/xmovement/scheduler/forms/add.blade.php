@@ -7,7 +7,6 @@
 
     <input type="hidden" name="idea_id" value="{{ $idea->id }}">
     <input type="hidden" name="voting_type" value="boolean">
-    <input type="hidden" name="contribution_type" value="text">
 
     <div class="form-page visible">
 
@@ -17,7 +16,7 @@
 
                 <label>{{ trans('xmovement_scheduler_form.name_label') }}</label>
 
-                <input type="text" class="form-control" name="name" value="{{ isset($poll) ? old('name', $poll->name) : old('name') }}" placeholder="{{ trans('xmovement_scheduler_form.name_placeholder') }}">
+                <input type="text" class="form-control" name="name" value="{{ isset($scheduler) ? old('name', $scheduler->name) : old('name') }}" placeholder="{{ trans('xmovement_scheduler_form.name_placeholder') }}">
 
                 @if ($errors->has('name'))
                     <span class="help-block">
@@ -31,7 +30,7 @@
 
                 <label>{{ trans('xmovement_scheduler_form.description_label') }}</label>
 
-                <input type="text" class="form-control" name="description" value="{{ isset($poll) ? old('description', $poll->description) : old('description') }}" placeholder="{{ trans('xmovement_scheduler_form.description_placeholder') }}">
+                <input type="text" class="form-control" name="description" value="{{ isset($scheduler) ? old('description', $scheduler->description) : old('description') }}" placeholder="{{ trans('xmovement_scheduler_form.description_placeholder') }}">
 
                 @if ($errors->has('description'))
                     <span class="help-block">
@@ -41,6 +40,8 @@
 
             </div>
 
+			@include('forms/components/pin-toggle', ['design_task' => (isset($scheduler) ? ((method_exists($scheduler, 'design_task')) ? $scheduler->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+
             <div class="form-group{{ $errors->has('locked') ? ' has-error' : '' }}">
 
                 <div class="toggle-switch-wrapper">
@@ -49,9 +50,9 @@
 
                     <label class="toggle-switch">
 
-                        <input type="hidden" class="form-control" name="locked" id="locked-input" value="{{ isset($poll) ? old('locked', $poll->locked) : old('locked', 0) }}">
-                        @if (isset($poll))
-                            <div class="toggle-button{{ (old('locked', $poll->locked) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
+                        <input type="hidden" class="form-control" name="locked" id="locked-input" value="{{ isset($scheduler) ? old('locked', $scheduler->locked) : old('locked', 0) }}">
+                        @if (isset($scheduler))
+                            <div class="toggle-button{{ (old('locked', $scheduler->locked) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
                         @else
                             <div class="toggle-button{{ (old('locked', 0) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
                         @endif

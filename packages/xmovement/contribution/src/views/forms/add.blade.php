@@ -24,7 +24,7 @@
                         <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
@@ -38,8 +38,10 @@
                         <strong>{{ $errors->first('description') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
+
+			@include('forms/components/pin-toggle', ['design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <div class="form-group{{ $errors->has('locked') ? ' has-error' : '' }}">
 
@@ -72,7 +74,7 @@
             <hr />
 
             <br />
-                            
+
             <div class="form-group{{ $errors->has('item') ? ' has-error' : '' }}">
 
                 <label>{{ trans('xmovement_contribution_form.type_label') }}</label>
@@ -91,7 +93,7 @@
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_contribution_form.save_changes') : trans('xmovement_contribution_form.create_contribution') }}</button>
             </div>
-            
+
         </div>
 
     </div>
@@ -104,14 +106,13 @@
     {
         var form_id = $(tile).attr('data-form-id');
         var $selects = $(form_id + ' select');
-    
+
         $selects.easyDropDown({
             wrapperClass: 'flat custom-dropdown',
             onChange: function(selected){
                 $(form_id + ' form #contribution-type').val(selected.value);
             }
         });
-        
+
     }
 </script>
-

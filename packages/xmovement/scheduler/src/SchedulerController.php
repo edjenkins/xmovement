@@ -78,7 +78,6 @@ class SchedulerController extends Controller
     	$user_id = Auth::user()->id;
     	$idea_id = $request->idea_id;
     	$voting_type = $request->voting_type;
-    	$contribution_type = $request->contribution_type;
 
 			$validation['name'] = 'required|max:255';
 			$validation['description'] = 'required|max:255';
@@ -87,7 +86,6 @@ class SchedulerController extends Controller
 
       $scheduler_id = Scheduler::create([
           'user_id' => $user_id,
-          'contribution_type' => $contribution_type,
           'voting_type' => $voting_type,
       ])->id;
 
@@ -99,7 +97,8 @@ class SchedulerController extends Controller
           'xmovement_task_id' => $scheduler_id,
           'xmovement_task_type' => 'Scheduler',
           'proposal_interactivity' => true,
-		  'locked' => $request->locked,
+		  'pinned' => ($request->pinned) ? $request->pinned : false,
+		  'locked' => ($request->locked) ? $request->locked : false,
       ]);
 
 	    // Load the design_task view

@@ -32,8 +32,8 @@ function showModule(form_id) {
 
 $(document).ready(function() {
 
-	// var form_id = window.location.hash.slice(0, -5);
-	// showModule(form_id);
+	var form_id = window.location.hash.slice(0, -5);
+	showModule(form_id);
 	$('.design-module-tile[data-form-id="' + form_id + '"]').addClass('active');
 
 });

@@ -81,6 +81,10 @@ class ProposeController extends Controller
 						case 'Contribution':
 							$design_task->contributions = \XMovement\Contribution\ContributionSubmission::whereIn('id', $contribution_ids)->get();
 							break;
+
+						case 'Scheduler':
+							$design_task->contributions = \XMovement\Scheduler\SchedulerSubmission::whereIn('id', $contribution_ids)->get();
+							break;
 					}
 
 					$proposal_item->design_task = $design_task;

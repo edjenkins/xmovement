@@ -99,7 +99,8 @@ class PollController extends Controller
           'xmovement_task_id' => $poll_id,
           'xmovement_task_type' => 'Poll',
           'proposal_interactivity' => true,
-		  'locked' => $request->locked,
+		  'pinned' => ($request->pinned) ? $request->pinned : false,
+		  'locked' => ($request->locked) ? $request->locked : false,
       ]);
 
 	    // Load the design_task view

@@ -41,7 +41,7 @@ class DesignController extends Controller
 
         // Order by locked first, then highest voted, then alphabetically
         $design_tasks = collect($idea->designTasks)->sortByDesc(function ($design_task, $key) {
-            return sprintf('%s%s', $design_task->locked, $design_task->voteCount());
+            return sprintf('%s%s', $design_task->pinned, $design_task->voteCount());
         })->values()->all();
 
         return view('design.dashboard', [
@@ -56,7 +56,7 @@ class DesignController extends Controller
         {
             Session::flash('flash_message', trans('flash_message.no_permission'));
             Session::flash('flash_type', 'flash-danger');
-			
+
 			return redirect()->back();
         }
 		else
@@ -75,7 +75,9 @@ class DesignController extends Controller
     {
 		$response = new ResponseObject();
 
-        if (Gate::denies('design', $idea))
+		$design_task = DesignTask::whereId($request->votable_id)->first();
+
+        if (Gate::denies('design', $design_task->idea))
         {
             Session::flash('flash_message', trans('flash_message.no_permission'));
             Session::flash('flash_type', 'flash-danger');
@@ -85,8 +87,6 @@ class DesignController extends Controller
 		else
 		{
 	        $value = ($request->vote_direction == 'up') ? 1 : -1;
-
-	        $design_task = DesignTask::whereId($request->votable_id)->first();
 
 	        if ($design_task->addVote($value))
 	        {

@@ -24,7 +24,7 @@
                         <strong>{{ $errors->first('name') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
@@ -38,36 +38,10 @@
                         <strong>{{ $errors->first('description') }}</strong>
                     </span>
                 @endif
-            
-            </div>
-
-            <div class="form-group{{ $errors->has('locked') ? ' has-error' : '' }}">
-
-                <div class="toggle-switch-wrapper">
-
-                    <label>{{ trans('xmovement_requirement_form.locked_label') }}</label>
-
-                    <label class="toggle-switch">
-
-                        <input type="hidden" class="form-control" name="locked" id="locked-input" value="{{ isset($requirement) ? old('locked', $requirement->locked) : old('locked', 0) }}">
-                        @if (isset($requirement))
-                            <div class="toggle-button{{ (old('locked', $requirement->locked) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
-                        @else
-                            <div class="toggle-button{{ (old('locked', 0) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
-                        @endif
-                    </label>
-
-                    <div class="clearfloat"></div>
-
-                </div>
-
-                @if ($errors->has('locked'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('locked') }}</strong>
-                    </span>
-                @endif
 
             </div>
+
+			@include('forms/components/pin-toggle', ['design_task' => (isset($requirement) ? ((method_exists($requirement, 'design_task')) ? $requirement->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <hr />
 
@@ -84,7 +58,7 @@
                         <strong>{{ $errors->first('item') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group{{ $errors->has('count') ? ' has-error' : '' }}">
@@ -98,13 +72,13 @@
                         <strong>{{ $errors->first('count') }}</strong>
                     </span>
                 @endif
-            
+
             </div>
 
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_requirement_form.save_changes') : trans('xmovement_requirement_form.create_requirement') }}</button>
             </div>
-            
+
         </div>
 
     </div>

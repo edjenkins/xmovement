@@ -155,21 +155,29 @@
 
 								@endforeach
 
-								<div class="submit-contribution-submission-footer">
+								@unless ($proposal_mode)
 
-									<select id="submission-type-selector">
-										@foreach ($contribution->contributionTypes as $contributionType)
+					    			@can('submitOption', $contribution)
 
-						    				<option value="{{ $contributionType->id }}">{{ $contributionType->name }}</option>
+										<div class="submit-contribution-submission-footer">
 
-						    			@endforeach
-									</select>
+											<select id="submission-type-selector">
+												@foreach ($contribution->contributionTypes as $contributionType)
 
-				    				<button id="submit-button" data-contribution-id="{{ $contribution->id }}">Submit</button>
+								    				<option value="{{ $contributionType->id }}">{{ $contributionType->name }}</option>
 
-				    				<div class="clearfloat"></div>
+								    			@endforeach
+											</select>
 
-			    				</div>
+						    				<button id="submit-button" data-contribution-id="{{ $contribution->id }}">Submit</button>
+
+						    				<div class="clearfloat"></div>
+
+					    				</div>
+
+					    			@endcan
+
+								@endunless
 
 			    			</div>
 
