@@ -71,9 +71,21 @@ class IdeaPolicy
      * @param  Idea  $idea
      * @return bool
      */
-    public function pin(User $user, Idea $idea)
+    public function pinDesignTask(User $user, Idea $idea)
     {
         return ($user->id == $idea->user_id);
+    }
+
+    /**
+     * Determine if the given user can lock a design task in the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function lockDesignTask(User $user, Idea $idea)
+    {
+        return true;
     }
 
     /**

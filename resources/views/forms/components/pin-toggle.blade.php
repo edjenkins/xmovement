@@ -1,4 +1,4 @@
-@can('pin', $idea)
+@can('pinDesignTask', $idea)
 
 	<div class="form-group{{ $errors->has('pinned') ? ' has-error' : '' }}">
 

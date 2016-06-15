@@ -43,33 +43,7 @@
 
 			@include('forms/components/pin-toggle', ['design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
-            <div class="form-group{{ $errors->has('locked') ? ' has-error' : '' }}">
-
-                <div class="toggle-switch-wrapper">
-
-                    <label>{{ trans('xmovement_contribution_form.locked_label') }}</label>
-
-                    <label class="toggle-switch">
-
-                        <input type="hidden" class="form-control" name="locked" id="locked-input" value="{{ isset($contribution) ? old('locked', $contribution->locked) : old('locked', 0) }}">
-                        @if (isset($contribution))
-                            <div class="toggle-button{{ (old('locked', $contribution->locked) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
-                        @else
-                            <div class="toggle-button{{ (old('locked', 0) == 1) ? ' checked' : '' }}" id="locked-toggle-button" onClick="$(this).toggleClass('checked'); $('#locked-input').attr('value', $(this).hasClass('checked') ? 1 : 0);"></div>
-                        @endif
-                    </label>
-
-                    <div class="clearfloat"></div>
-
-                </div>
-
-                @if ($errors->has('locked'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('locked') }}</strong>
-                    </span>
-                @endif
-
-            </div>
+			@include('forms/components/lock-toggle', ['design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <hr />
 
