@@ -1,3 +1,0 @@
-"/Users/edjenkins/MAMP/xmovement": {
-    "**/*.styl": "bash /Users/edjenkins/MAMP/xmovement/update.sh"
-}

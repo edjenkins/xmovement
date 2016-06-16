@@ -41,10 +41,10 @@
 
             </div>
 
-			@include('forms/components/pin-toggle', ['design_task' => (isset($poll) ? ((method_exists($poll, 'design_task')) ? $poll->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/pin-toggle', ['label' => trans('xmovement_poll_form.pinned_label'), 'design_task' => (isset($poll) ? ((method_exists($poll, 'design_task')) ? $poll->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
-			@include('forms/components/lock-toggle', ['design_task' => (isset($poll) ? ((method_exists($poll, 'design_task')) ? $poll->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
-			
+			@include('forms/components/lock-toggle', ['label' => trans('xmovement_poll_form.locked_label'), 'design_task' => (isset($poll) ? ((method_exists($poll, 'design_task')) ? $poll->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_poll_form.save_changes') : trans('xmovement_poll_form.create_poll') }}</button>
             </div>

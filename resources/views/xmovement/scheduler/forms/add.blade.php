@@ -40,9 +40,9 @@
 
             </div>
 
-			@include('forms/components/pin-toggle', ['design_task' => (isset($scheduler) ? ((method_exists($scheduler, 'design_task')) ? $scheduler->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/pin-toggle', ['label' => trans('xmovement_scheduler_form.pinned_label'), 'design_task' => (isset($scheduler) ? ((method_exists($scheduler, 'design_task')) ? $scheduler->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
-			@include('forms/components/lock-toggle', ['design_task' => (isset($scheduler) ? ((method_exists($scheduler, 'design_task')) ? $scheduler->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/lock-toggle', ['label' => trans('xmovement_scheduler_form.locked_label'), 'design_task' => (isset($scheduler) ? ((method_exists($scheduler, 'design_task')) ? $scheduler->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_scheduler_form.save_changes') : trans('xmovement_scheduler_form.create_scheduler') }}</button>

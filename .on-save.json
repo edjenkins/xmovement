@@ -1,6 +1,0 @@
-[
-  {
-    "files": "**.styl",
-    "command": "php artisan vendor:publish --tag=public --force"
-  }
-]

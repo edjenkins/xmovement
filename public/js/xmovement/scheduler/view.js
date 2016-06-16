@@ -77,6 +77,20 @@ function addHandlers()
 
 $(document).ready(function() {
 
-	$('#scheduler-contribution').datepicker();
+    var today = new Date();
+
+	$('#scheduler-contribution').daterangepicker({
+	    "opens": "center",
+	    "drops": "up",
+	    "singleDatePicker": true,
+	    "timePicker": true,
+	    "timePicker24Hour": true,
+	    "autoApply": true,
+	    "alwaysShowCalendars": true,
+		"minDate": moment().format('YYYY-MM-DD'),
+        locale: {
+            format: 'YYYY-MM-DD H:mm:ss'
+        }
+	});
 
 });

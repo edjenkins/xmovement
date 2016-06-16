@@ -4,7 +4,7 @@
 
 		<div class="toggle-switch-wrapper">
 
-			<label>{{ trans('xmovement_contribution_form.locked_label') }}</label>
+			<label>{{ $label }}</label>
 
 			<label class="toggle-switch">
 

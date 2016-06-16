@@ -95,6 +95,16 @@ class SchedulerOption extends Model
 		return Carbon::parse($this['value'])->format('F Y');
 	}
 
+	public function getTime()
+	{
+		return Carbon::parse($this['value'])->format('H:i');
+	}
+
+	public function getDate()
+	{
+		return Carbon::parse($this['value'])->format('jS F Y');
+	}
+
     public function renderTile($schedulerOption)
     {
     	return view('scheduler::proposal-tile', ['schedulerOption' => $schedulerOption, 'proposal_mode' => false]);

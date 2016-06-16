@@ -5,8 +5,8 @@
 	<a href="{{ action('UserController@profile', $schedulerOption->user) }}" title="{{ $schedulerOption->user['name'] }}" class="scheduler-option-user" style="background-image: url('/uploads/images/small/{{ $schedulerOption->user['avatar'] }}')"></a>
 
 	<div class="scheduler-option-value">
-		<h2>{{ $schedulerOption->getDay() }}</h2>
-		<h3>{{ $schedulerOption->getMonthYear() }}</h3>
+		<h2>{{ $schedulerOption->getTime() }}</h2>
+		<h3>{{ $schedulerOption->getDate() }}</h3>
 	</div>
 
 	<div class="vote-container scheduler-option-vote-container {{ ($schedulerOption->voteCount() == 0) ? '' : (($schedulerOption->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">

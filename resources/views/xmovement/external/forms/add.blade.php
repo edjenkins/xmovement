@@ -39,7 +39,7 @@
 
             </div>
 
-			@include('forms/components/pin-toggle', ['design_task' => (isset($external) ? ((method_exists($external, 'design_task')) ? $external->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/pin-toggle', ['label' => trans('xmovement_external_form.pinned_label'), 'design_task' => (isset($external) ? ((method_exists($external, 'design_task')) ? $external->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
 			<hr />
 

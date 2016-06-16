@@ -119,7 +119,11 @@
 
 			    			<div class="submit-scheduler-option-container" id="submit-scheduler-option">
 
-				                <input id="scheduler-contribution" type="text" placeholder="Select a date..." />
+								<div class="datetime-picker"></div>
+
+				                <input id="scheduler-contribution" type="hidden" />
+
+								<div class="clearfloat"></div>
 
 			    				<button id="submit-button" data-scheduler-id="{{ $scheduler->id }}">Submit</button>
 

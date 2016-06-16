@@ -23,6 +23,12 @@
 
 	<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
+	<!-- Include Required Prerequisites -->
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+	<!-- Include Date Range Picker -->
+	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.css') }}" />
+
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
 
@@ -61,6 +67,7 @@
 	<script src="{{ URL::asset('js/app.js') }}"></script>
 	<script src="{{ URL::asset('js/vendor.js') }}"></script>
     <script src="{{ URL::asset('js/easydropdown/jquery.easydropdown.js') }}"></script>
+	<script src="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
 </body>
 </html>

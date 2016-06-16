@@ -41,7 +41,7 @@
 
             </div>
 
-			@include('forms/components/pin-toggle', ['design_task' => (isset($requirement) ? ((method_exists($requirement, 'design_task')) ? $requirement->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/pin-toggle', ['label' => trans('xmovement_requirement_form.pinned_label'), 'design_task' => (isset($requirement) ? ((method_exists($requirement, 'design_task')) ? $requirement->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <hr />
 

@@ -39,7 +39,7 @@
 
             </div>
 
-            @include('forms/components/pin-toggle', ['design_task' => (isset($discussion) ? ((method_exists($discussion, 'design_task')) ? $discussion->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+            @include('forms/components/pin-toggle', ['label' => trans('xmovement_discussion_form.pinned_label'), 'design_task' => (isset($discussion) ? ((method_exists($discussion, 'design_task')) ? $discussion->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">{{ ($editing) ? trans('xmovement_discussion_form.save_changes') : trans('xmovement_discussion_form.create_discussion') }}</button>

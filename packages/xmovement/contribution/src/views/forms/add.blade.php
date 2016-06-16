@@ -41,9 +41,9 @@
 
             </div>
 
-			@include('forms/components/pin-toggle', ['design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/pin-toggle', ['label' => trans('xmovement_contribution_form.pinned_label'), 'design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
-			@include('forms/components/lock-toggle', ['design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
+			@include('forms/components/lock-toggle', ['label' => trans('xmovement_contribution_form.locked_label'), 'design_task' => (isset($contribution) ? ((method_exists($contribution, 'design_task')) ? $contribution->design_task() : NULL) : NULL) , 'idea' => $idea, 'errors' => $errors])
 
             <hr />
 
