@@ -4,22 +4,48 @@
 	background main-color
 	color white
 	font-size 1.2em
-	padding 30px 10px
+	line-height 77px
+	padding 0 10px
 	position fixed
 	text-align center
 	z-index 1000
 	top 0px
 	left 0px
 	right 0px
+	.flash-dismiss
+		height 77px
+		width 77px
+		position absolute
+		top 0
+		right 0
+		text-align center
+		i
+			color white
+			line-height 60px
+
 	&.flash-success
-		background success-color
+		background darken(success-color, 5%)
 		border-bottom 3px solid darken(success-color, 10%)
 		color white
+		.flash-dismiss
+			&:hover
+				cursor pointer
+				background-color darken(success-color, 10%)
+
 	&.flash-warning
-		background warning-color
+		background darken(warning-color, 5%)
 		border-bottom 3px solid darken(warning-color, 10%)
 		color white
+		.flash-dismiss
+			&:hover
+				cursor pointer
+				background-color darken(warning-color, 10%)
+
 	&.flash-danger
-		background danger-color
+		background darken(danger-color, 5%)
 		border-bottom 3px solid darken(danger-color, 10%)
 		color white
+		.flash-dismiss
+			&:hover
+				cursor pointer
+				background-color darken(danger-color, 10%)

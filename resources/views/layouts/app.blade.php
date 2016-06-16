@@ -42,6 +42,9 @@
 
         <div class="flash {{ Session::get('flash_type') }}">
             {{ Session::get('flash_message') }}
+			<div class="flash-dismiss" onClick="$(this).parent().fadeOut()">
+				<i class="fa fa-times"></i>
+			</div>
         </div>
 
     @endif
