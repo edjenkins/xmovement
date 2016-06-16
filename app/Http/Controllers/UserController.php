@@ -13,8 +13,6 @@ use Session;
 
 use Illuminate\Http\Request;
 
-
-
 class UserController extends Controller
 {
     public function profile(Request $request, User $user)
@@ -38,7 +36,7 @@ class UserController extends Controller
 	{
 		$user = Auth::user();
 
-		$validation = ['phone' => 'max:255', 'bio' => 'max:2000'];
+		$validation = ['phone' => 'phone:LENIENT,GB,US', 'bio' => 'max:2000'];
 
 		if (isset($request->name)) {
 			$validation['name'] = 'required|max:255';
@@ -64,7 +62,6 @@ class UserController extends Controller
 		Session::flash('flash_message', trans('flash_message.profile_updated'));
 		Session::flash('flash_type', 'flash-success');
 
-	    // return redirect()->action('UserController@profile', $user->id);
-			return redirect()->back();
+	    return redirect()->action('UserController@profile', $user->id);
 	}
 }
