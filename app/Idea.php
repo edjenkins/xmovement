@@ -83,7 +83,7 @@ class Idea extends Model
 		return Carbon::parse($this->timescales('proposal', 'start'))->diffForHumans(null, true);
 	}
 
-	public function timescales(String $phase, String $point)
+	public function timescales($phase, $point)
 	{
 		$now = Carbon::now();
 
