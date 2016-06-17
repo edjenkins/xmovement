@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Carbon\Carbon;
+use Log;
 
 class Idea extends Model
 {
@@ -185,6 +186,26 @@ class Idea extends Model
 				}
 				break;
 		}
+	}
+
+	public function progress_percentage()
+	{
+		$diff = Carbon::parse($this->timescales('support', 'start'))->diffInHours();
+		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+	}
+
+	public function design_percentage()
+	{
+		$created = Carbon::parse($this->created_at);
+		$diff = $created->diffInHours(Carbon::parse($this->timescales('design', 'start')));
+		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+	}
+
+	public function proposal_percentage()
+	{
+		$created = Carbon::parse($this->created_at);
+		$diff = $created->diffInHours(Carbon::parse($this->timescales('proposal', 'start')));
+		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
 	}
 
 }

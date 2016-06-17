@@ -65,6 +65,8 @@
 
 	    			<div class="idea-media" style="background-image: url('/uploads/images/large/{{ $idea->photo }}')"></div>
 
+					@include('ideas/progress')
+
 	    			<p class="idea-description">
 	    				{{ $idea->description }}
 	    			</p>
@@ -103,7 +105,7 @@
 
 					@endif
 
-	    			<h2 class="section-header">Discussion</h2>
+					<br />
 
 	    			@include('disqus')
 
