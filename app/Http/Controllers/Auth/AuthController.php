@@ -164,7 +164,7 @@ class AuthController extends Controller
         if ($data['type'] == 'quick')
         {
             $validator = Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:20',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             ]);
@@ -172,7 +172,7 @@ class AuthController extends Controller
         else
         {
             $validator = Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:20',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
             ]);
@@ -216,11 +216,6 @@ class AuthController extends Controller
         Session::flash('show_support', true);
 
         Session::flash('auth_type', 'register');
-
-		$validation['name'] = 'required|max:20';
-		$validation['email'] = 'required|email|max:255|unique:users,email';
-
-		$this->validate($request, $validation);
 
         return $this->parentRegister($request);
     }
