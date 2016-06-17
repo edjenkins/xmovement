@@ -4,7 +4,7 @@
 
 	    <span class="vertically-aligned-text">
 
-	    	<h4>{{ $design_task['name'] }}</h4>
+	    	<h4>{{ str_limit($design_task['name'], 50) }}</h4>
 
 	    </span>
 

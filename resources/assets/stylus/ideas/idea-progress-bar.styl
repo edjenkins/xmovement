@@ -13,6 +13,7 @@
 			background-color border-color
 		&.ipb-progress-line
 			background-color main-color
+			max-width 98%
 			width 0%
 			transition(width 0.8s ease-out)
 	.ipb-dot
@@ -24,23 +25,16 @@
 		top 9px
 		transition(all 0.2s ease-out)
 		&.ipb-start-dot
-			background-color main-color
 			left 0
-			transition(all 0.2s ease-out)
-			&:hover
-				background-color darken(main-color, 10%)
 		&.ipb-end-dot
 			right 0
-			transition(all 0.2s ease-out)
+		&:hover
+			background-color darken(border-color, 10%)
+			cursor pointer
+		&.complete
+			background-color main-color
 			&:hover
-				background-color darken(border-color, 10%)
-		&.ipb-milestone-dot
-			background-color border-color
-			transition(all 0.2s ease-out)
-			&.complete
-				background-color main-color
-			&:hover
-				background-color darken(border-color, 10%)
+				background-color darken(main-color, 10%)
 		.ipb-label
 			opacity 0
 			position absolute

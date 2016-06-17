@@ -191,7 +191,8 @@ class Idea extends Model
 	public function progress_percentage()
 	{
 		$diff = Carbon::parse($this->timescales('support', 'start'))->diffInHours();
-		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+		$progress = 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+		return ($progress > 100) ? 100 : $progress;
 	}
 
 	public function design_percentage()

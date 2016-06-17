@@ -3,7 +3,7 @@
 	<div class="ipb-line ipb-placeholder-line"></div>
 	<div class="ipb-line ipb-progress-line" style="width: {{ $idea->progress_percentage() }}%"></div>
 
-	<div class="ipb-dot ipb-start-dot">
+	<div class="ipb-dot ipb-start-dot complete">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				@if(($idea->design_percentage() + $idea->proposal_percentage()) == 0)
@@ -16,7 +16,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="ipb-dot ipb-end-dot">
+	<div class="ipb-dot ipb-end-dot {{ ($idea->progress_percentage() >= 100) ? 'complete' : '' }}">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				Complete
