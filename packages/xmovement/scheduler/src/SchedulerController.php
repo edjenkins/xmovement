@@ -118,7 +118,7 @@ class SchedulerController extends Controller
 
         $scheduler = Scheduler::whereId($request->scheduler_id)->first();
 
-		if (DB::table('xmovement_scheduler_options')->where('value', $value)->get()) {
+		if (DB::table('xmovement_scheduler_options')->where([['value', $value],['xmovement_scheduler_id', $request->scheduler_id]])->get()) {
 			array_push($response->errors, 'Someone has already submitted that time/date');
 			return Response::json($response);
 		}
