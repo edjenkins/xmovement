@@ -79,7 +79,7 @@ class SchedulerController extends Controller
     	$idea_id = $request->idea_id;
     	$voting_type = $request->voting_type;
 
-			$validation['name'] = 'required|max:255';
+			$validation['name'] = 'required|max:50';
 			$validation['description'] = 'required|max:255';
 
 			$this->validate($request, $validation);
@@ -118,13 +118,20 @@ class SchedulerController extends Controller
 
         $scheduler = Scheduler::whereId($request->scheduler_id)->first();
 
-        $schedulerOption = $scheduler->addOption($value);
+		if (DB::table('xmovement_scheduler_options')->where('value', $value)->get()) {
+			array_push($response->errors, 'Someone has already submitted that time/date');
+			return Response::json($response);
+		}
+		else
+		{
+	        $schedulerOption = $scheduler->addOption($value);
 
-        if ($schedulerOption)
-        {
-            $response->meta['success'] = true;
-            $response->data['element'] = View::make('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption])->render();
-        }
+	        if ($schedulerOption)
+	        {
+	            $response->meta['success'] = true;
+	            $response->data['element'] = View::make('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption])->render();
+	        }
+		}
 
         return Response::json($response);
 

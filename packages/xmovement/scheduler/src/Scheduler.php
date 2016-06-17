@@ -55,24 +55,13 @@ class Scheduler extends Model
 
     public function addOption($value)
     {
-        // Check user can vote
-        // Not locked
+		$schedulerOption = SchedulerOption::create([
+            'xmovement_scheduler_id' => $this->id,
+            'user_id' => Auth::user()->id,
+            'value' => $value
+        ]);
 
-        if (false)
-        {
-            // Prevent voting twice in one direction
-            return false;
-        }
-        else
-        {
-            $schedulerOption = SchedulerOption::create([
-                'xmovement_scheduler_id' => $this->id,
-                'user_id' => Auth::user()->id,
-                'value' => $value
-            ]);
-
-            return $schedulerOption;
-        }
+        return $schedulerOption;
     }
 
 }

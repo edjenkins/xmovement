@@ -157,7 +157,7 @@
 
 								@unless ($proposal_mode)
 
-					    			@can('submitOption', $contribution)
+					    			@can('submitSubmission', $contribution)
 
 										<div class="submit-contribution-submission-footer">
 

@@ -80,7 +80,7 @@ class PollController extends Controller
     	$voting_type = $request->voting_type;
     	$contribution_type = $request->contribution_type;
 
-			$validation['name'] = 'required|max:255';
+			$validation['name'] = 'required|max:50';
 			$validation['description'] = 'required|max:255';
 
 			$this->validate($request, $validation);

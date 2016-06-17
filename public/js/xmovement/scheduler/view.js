@@ -28,19 +28,26 @@ $(document).ready(function() {
 
                 // Success
 
-                showJSflash('Thanks for your submission', 'flash-success');
+				if (response["meta"]["success"])
+				{
+	                showJSflash('Thanks for your submission', 'flash-success');
 
-                $('.scheduler-options-list').append(response["data"]["element"]);
+	                $('.scheduler-options-list').append(response["data"]["element"]);
 
-				$('.scheduler-options-list .clearfloat').remove();
+					$('.scheduler-options-list .clearfloat').remove();
 
-				$('.scheduler-options-list').append('<div class="clearfloat"></div>');
+					$('.scheduler-options-list').append('<div class="clearfloat"></div>');
 
-                $('#scheduler-contribution').val('');
+	                $('#scheduler-contribution').val('');
 
-                submit_button.html('Submit');
+	                submit_button.html('Submit');
 
-                addHandlers();
+	                addHandlers();
+				}
+				else
+				{
+					showJSflash(response["errors"][0], 'flash-danger');
+				}
 
             },
             error: function(response) {

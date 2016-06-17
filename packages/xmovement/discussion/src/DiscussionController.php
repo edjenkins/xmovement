@@ -35,7 +35,7 @@ class DiscussionController extends Controller
     	$user_id = Auth::user()->id;
     	$idea_id = $request->idea_id;
 
-			$validation['name'] = 'required|max:255';
+			$validation['name'] = 'required|max:50';
 			$validation['description'] = 'required|max:255';
 
 			$this->validate($request, $validation);

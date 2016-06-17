@@ -73,20 +73,3 @@
     </div>
 
 </form>
-
-<script type="text/javascript">
-
-    function designModuleTileClicked(tile)
-    {
-        var form_id = $(tile).attr('data-form-id');
-        var $selects = $(form_id + ' select');
-
-        $selects.easyDropDown({
-            wrapperClass: 'flat custom-dropdown',
-            onChange: function(selected){
-                $(form_id + ' form #contribution-type').val(selected.value);
-            }
-        });
-
-    }
-</script>

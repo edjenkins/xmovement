@@ -1,44 +1,38 @@
 // XMStyles
 
+.picker-column
+	padding-left 34px
+	text-align center
+	width 300px
+.options-column
+	width calc(100% - 320px)
+	&.proposal-mode
+		width 100%
+.picker-column, .options-column
+	float left
+	@media(max-width: 768px)
+		float none
+		padding 0
+		width 100%
+
 ul.scheduler-options-list
 	list-style none
 	margin 10px
 	padding 0
 	li
-		border #e1e1e1 1px solid
+		border-bottom #e1e1e1 1px solid
 		box-sizing border-box
 		font-size 15px
-		float left
 		height 80px
-		margin 10px
+		margin 0
 		padding 0 20px
-		padding-left 75px
+		padding-left 55px
 		padding-right 80px
 		position relative
-		width calc((100% - 40px)/3)
+		width 100%
 		transition(all 0.2s linear)
-		&:nth-child(3n-2)
-			margin-left 0
-		&:nth-child(3n)
-			margin-right 0
-		@media(max-width: 992px)
-			float left
-			height 80px
-			width calc((100% - 20px)/2)
-			&:nth-child(3n-2)
-				margin-left 10px
-			&:nth-child(3n)
-				margin-right 10px
-			&:nth-child(2n)
-				margin-right 0
-			&:nth-child(2n-1)
-				margin-left 0
-		@media(max-width: 568px)
-			float none
-			height 80px
-			margin 10px 0 !important
-			width calc(100% - 20px)
-
+		&:last-child
+			border-bottom none
 		.scheduler-option-user
 			background border-color
 			background-position center
@@ -49,24 +43,20 @@ ul.scheduler-options-list
 			height 40px
 			width 40px
 			position absolute
-			left 20px
+			left 0px
 			top 20px
 		.scheduler-option-value
 			color #444
-			text-align center
+			text-align left
 			h2
-				font-size 18px
-				line-height 25px
+				font-size 16px
+				font-weight normal
+				line-height 50px
 				padding 0
 				margin 0
 				padding-top 15px
-			h3
-				color #AAA
-				font-size 13px
-				line-height 25px
-				margin 0
-				padding 0
-				padding-bottom 15px
+				span.date
+					color #AAA
 		.value
 			color #444
 			font-size 1.2em
@@ -115,7 +105,7 @@ ul.scheduler-options-list
 .submit-scheduler-option-container
 	border border-color 1px solid
 	display inline-block
-	margin 20px 10px
+	margin 20px 0
 	position relative
 	input#scheduler-contribution
 		border none

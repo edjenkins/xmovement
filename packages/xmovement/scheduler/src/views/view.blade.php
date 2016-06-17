@@ -101,40 +101,44 @@
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
-	    			<ul class="scheduler-options-list {{ ($proposal_mode) ? 'proposal-mode' : '' }}">
+					<div class="options-column {{ ($proposal_mode) ? 'proposal-mode' : '' }}">
 
-		    			@foreach ($scheduler->schedulerOptions as $schedulerOption)
+						<ul class="scheduler-options-list {{ ($proposal_mode) ? 'proposal-mode' : '' }}">
 
-		    				@include('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption])
+			    			@foreach ($scheduler->schedulerOptions as $schedulerOption)
 
-		    			@endforeach
+			    				@include('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption])
 
-						<div class="clearfloat"></div>
+			    			@endforeach
 
-	    			</ul>
+		    			</ul>
 
-					@unless ($proposal_mode)
+					</div>
 
-		    			@can('submitOption', $scheduler)
+					<div class="picker-column">
 
-			    			<div class="submit-scheduler-option-container" id="submit-scheduler-option">
+						@unless ($proposal_mode)
 
-								<div class="datetime-picker"></div>
+			    			@can('submitOption', $scheduler)
 
-				                <input id="scheduler-contribution" type="hidden" />
+				    			<div class="submit-scheduler-option-container" id="submit-scheduler-option">
 
-								<div class="clearfloat"></div>
+									<div class="datetime-picker"></div>
 
-			    				<button id="submit-button" data-scheduler-id="{{ $scheduler->id }}">Submit</button>
+					                <input id="scheduler-contribution" type="hidden" />
 
-			    			</div>
+									<div class="clearfloat"></div>
 
-		    			@endcan
+				    				<button id="submit-button" data-scheduler-id="{{ $scheduler->id }}">Submit</button>
 
-					@endunless
+				    			</div>
 
+			    			@endcan
+
+						@endunless
+
+					</div>
 	    		</div>
-
 	    	</div>
 	    </div>
 	</div>
