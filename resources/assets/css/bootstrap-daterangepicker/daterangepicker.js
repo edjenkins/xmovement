@@ -911,7 +911,7 @@
             // minutes
             //
 
-            html += ': <select class="minuteselect">';
+            html += '<select class="minuteselect">';
 
             for (var i = 0; i < 60; i += this.timePickerIncrement) {
                 var padded = i < 10 ? '0' + i : i;

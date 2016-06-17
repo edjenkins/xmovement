@@ -217,6 +217,11 @@ class AuthController extends Controller
 
         Session::flash('auth_type', 'register');
 
+		$validation['name'] = 'required|max:20';
+		$validation['email'] = 'required|email|max:255|unique:users,email';
+
+		$this->validate($request, $validation);
+
         return $this->parentRegister($request);
     }
 }

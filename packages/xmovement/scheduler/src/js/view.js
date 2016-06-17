@@ -33,21 +33,15 @@ $(document).ready(function() {
 	                showJSflash('Thanks for your submission', 'flash-success');
 
 	                $('.scheduler-options-list').append(response["data"]["element"]);
-
-					$('.scheduler-options-list .clearfloat').remove();
-
-					$('.scheduler-options-list').append('<div class="clearfloat"></div>');
-
-	                $('#scheduler-contribution').val('');
-
-	                submit_button.html('Submit');
-
-	                addHandlers();
 				}
 				else
 				{
 					showJSflash(response["errors"][0], 'flash-danger');
 				}
+
+				submit_button.html('Submit');
+
+				addHandlers();
 
             },
             error: function(response) {
@@ -91,7 +85,7 @@ $(document).ready(function() {
 	    "drops": "up",
 	    "singleDatePicker": true,
 	    "timePicker": true,
-	    "timePicker24Hour": true,
+	    "timePicker24Hour": false,
 	    "autoApply": true,
 	    "alwaysShowCalendars": true,
 		"minDate": moment().format('YYYY-MM-DD'),
