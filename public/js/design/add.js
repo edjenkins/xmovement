@@ -8,6 +8,8 @@ $('.design-module-tile').click(function(e) {
 
 	$(this).addClass('active');
 
+	Cookies.set('current_design_module', form_id);
+
 	designModuleTileClicked(this);
 
 });
@@ -32,7 +34,7 @@ function showModule(form_id) {
 
 $(document).ready(function() {
 
-	var form_id = window.location.hash.slice(0, -5);
+	var form_id =  (Cookies.get('current_design_module')) ? Cookies.get('current_design_module') : window.location.hash.slice(0, -5);
 	showModule(form_id);
 	$('.design-module-tile[data-form-id="' + form_id + '"]').addClass('active');
 
