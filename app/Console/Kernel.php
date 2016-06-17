@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
 	{
 		if (true) {
 			// Update the states of ideas
-			$schedule->command('update-idea-states')->everyTenMinutes()->withoutOverlapping();
+			$schedule->command('update-idea-states')->everyMinute()->withoutOverlapping();
 
 			// Send support phase update emails (at 11am every 3 days)
 			// $schedule->command('support-phase-updates')->everyMinute()->withoutOverlapping();
