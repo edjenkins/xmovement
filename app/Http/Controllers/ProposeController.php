@@ -262,7 +262,7 @@ class ProposeController extends Controller
 		return $this->loadTask($request, 1);
 	}
 
-	private function loadTask(Request $request, Int $direction)
+	private function loadTask(Request $request, $direction)
 	{
 		$request->session()->put('proposal.active', true);
 

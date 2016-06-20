@@ -9,10 +9,6 @@
 	overflow hidden
 	position relative
 	transition(all linear 0.2s)
-	&.mini-tile
-		height auto
-		&:hover
-			background #f9f9f9
 	&:hover
 		cursor pointer
 	.tile-image
@@ -42,17 +38,20 @@
 			margin 0
 			padding 15px 20px
 
-
-.idea-tile.mini-tile
+.mini-tile
 	border-bottom border-color 1px solid
 	display block
+	height auto
 	padding 15px 0
 	max-width 360px
 	overflow hidden
 	position relative
 	transition(all linear 0.2s)
-	.fa
-		margin-right 6px
+	.inner-container
+		h4, p
+			white-space nowrap
+			.fa
+				margin-right 6px
 	&:hover
 		color main-color
 		cursor pointer
