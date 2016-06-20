@@ -107,6 +107,8 @@
 
 					<br />
 
+					<h2 class="section-header">Discussion</h2>
+
 	    			@include('disqus')
 
 	    		</div>
