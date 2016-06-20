@@ -80,28 +80,28 @@ class PollController extends Controller
     	$voting_type = $request->voting_type;
     	$contribution_type = $request->contribution_type;
 
-			$validation['name'] = 'required|max:50';
-			$validation['description'] = 'required|max:255';
+		$validation['name'] = 'required|max:50|unique:design_tasks,name';
+		$validation['description'] = 'required|max:255';
 
-			$this->validate($request, $validation);
+		$this->validate($request, $validation);
 
-      $poll_id = Poll::create([
-          'user_id' => $user_id,
-          'contribution_type' => $contribution_type,
-          'voting_type' => $voting_type,
-      ])->id;
+		$poll_id = Poll::create([
+			'user_id' => $user_id,
+			'contribution_type' => $contribution_type,
+			'voting_type' => $voting_type,
+		])->id;
 
-      $design_task = DesignTask::create([
-          'user_id' => $user_id,
-          'idea_id' => $idea_id,
-          'name' => $request->name,
-          'description' => $request->description,
-          'xmovement_task_id' => $poll_id,
-          'xmovement_task_type' => 'Poll',
-          'proposal_interactivity' => true,
-		  'pinned' => ($request->pinned) ? $request->pinned : false,
-		  'locked' => ($request->locked) ? $request->locked : false,
-      ]);
+		$design_task = DesignTask::create([
+			'user_id' => $user_id,
+			'idea_id' => $idea_id,
+			'name' => $request->name,
+			'description' => $request->description,
+			'xmovement_task_id' => $poll_id,
+			'xmovement_task_type' => 'Poll',
+			'proposal_interactivity' => true,
+			'pinned' => ($request->pinned) ? $request->pinned : false,
+			'locked' => ($request->locked) ? $request->locked : false,
+		]);
 
 	    // Load the design_task view
 		return redirect()->action('\xmovement\poll\PollController@view', ['design_task' => $design_task]);
@@ -120,13 +120,25 @@ class PollController extends Controller
 
         $poll = Poll::whereId($request->poll_id)->first();
 
-        $pollOption = $poll->addOption($value);
+		if ($value == "") {
+			array_push($response->errors, 'Please enter a poll option');
+			return Response::json($response);
+		}
 
-        if ($pollOption)
-        {
-            $response->meta['success'] = true;
-            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption])->render();
-        }
+		if (DB::table('xmovement_poll_options')->where([['value', $value],['xmovement_poll_id', $request->poll_id]])->get()) {
+			array_push($response->errors, 'Someone has already submitted that option');
+			return Response::json($response);
+		}
+		else
+		{
+	        $pollOption = $poll->addOption($value);
+
+	        if ($pollOption)
+	        {
+	            $response->meta['success'] = true;
+	            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption])->render();
+	        }
+		}
 
         return Response::json($response);
 

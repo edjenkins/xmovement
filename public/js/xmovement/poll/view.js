@@ -28,16 +28,23 @@ $(document).ready(function() {
 
                 // Success
 
-                showJSflash('Thanks for your submission', 'flash-success');
+				if (response["meta"]["success"])
+				{
+	                showJSflash('Thanks for your submission', 'flash-success');
 
-                $('.poll-options-list').append(response["data"]["element"]);
+	                $('.poll-options-list').append(response["data"]["element"]);
 
-                $('#poll-contribution').val('');
+					$('#poll-contribution').val('');
+				}
+				else
+				{
+					showJSflash(response["errors"][0], 'flash-danger');
+				}
 
-                submit_button.html('Submit');
+				submit_button.html('Submit');
 
-                addHandlers();
-
+				addHandlers();
+				
             },
             error: function(response) {
 

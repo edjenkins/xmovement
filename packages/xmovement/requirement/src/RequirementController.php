@@ -51,7 +51,7 @@ class RequirementController extends Controller
     	$user_id = Auth::user()->id;
     	$idea_id = $request->idea_id;
 
-			$validation['name'] = 'required|max:50';
+			$validation['name'] = 'required|max:50|unique:design_tasks,name';
 			$validation['description'] = 'required|max:255';
 			$validation['item'] = 'required|max:255';
 			$validation['count'] = 'required|integer|between:0,10000';
