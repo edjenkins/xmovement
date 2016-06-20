@@ -25,7 +25,7 @@
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
 </head>
-<body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">
+<body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement" ng-controller="ExploreController">
 
 	@include('google-analytics')
 
@@ -53,6 +53,8 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
@@ -66,6 +68,8 @@
 	<script src="{{ URL::asset('js/vendor.js') }}"></script>
     <script src="{{ URL::asset('js/easydropdown/jquery.easydropdown.js') }}"></script>
 	<script src="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+
+	<script src="{{ URL::asset('scripts/app.js') }}"></script>
 
 </body>
 </html>

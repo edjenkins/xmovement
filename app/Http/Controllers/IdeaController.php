@@ -35,6 +35,17 @@ class ResponseObject {
 
 class IdeaController extends Controller
 {
+	public function api_index(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$response->data['ideas'] = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
+
+		return Response::json($response);
+	}
+
 	public function index(Request $request)
 	{
 		$ideas = Idea::where('visibility', 'public')->orderBy('created_at', 'desc')->get();

@@ -1,10 +1,8 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 	<div class="page-header" ng-click="test()">
 
-        <h2 class="main-title">{{ trans('pages.explore') }}</h2>
+        <h2 class="main-title"><?php echo e(trans('pages.explore')); ?></h2>
 
 	</div>
 
@@ -39,7 +37,7 @@
 					</li>
 
 					<li class="module-control search-element">
-						<input type="text" ng-model="idea_search_term" placeholder="{{ trans('placeholders.search_ideas') }}">
+						<input type="text" ng-model="idea_search_term" placeholder="<?php echo e(trans('placeholders.search_ideas')); ?>">
 					</li>
 
 				</ul>
@@ -81,4 +79,6 @@
 
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

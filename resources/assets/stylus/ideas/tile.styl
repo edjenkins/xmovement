@@ -9,8 +9,6 @@
 	overflow hidden
 	position relative
 	transition(all linear 0.2s)
-	&:hover
-		cursor pointer
 	.tile-image
 		background-color #f1f1f1
 		background-position center
@@ -18,15 +16,19 @@
 		background-size cover
 		-webkit-background-size cover
 		-o-background-size cover
+		display block
 		height 0
 		padding-bottom 60%
 	.inner-container
 		overflow hidden
 		padding 10px 20px
-		h4
+		a.idea-name
 			color #555
+			font-size 18px
+			margin 0
+			padding 5px 0
 			word-wrap break-word
-		p
+		p.idea-description
 			color #999
 			word-wrap break-word
 	.tile-footer
