@@ -26,6 +26,13 @@ Route::get('/', 'PageController@home');
 
 Route::group(['middleware' => ['web']], function () {
 
+	$middleware = [];
+
+	if (Config::get('app.debug'))
+	{
+		array_push($middleware, ['middleware' => 'clearcache']);
+	}
+
     // Auth routes
 	Route::auth();
 
@@ -84,6 +91,9 @@ Route::group(['middleware' => ['web']], function () {
 
     // File upload
     Route::post('/upload', 'UploadController@upload');
+
+	// API routes
+	Route::get('/api/ideas', 'IdeaController@api_index');
 
 	// Images
 	Route::get('/uploads/images/{size}/{type}', function($size, $type)

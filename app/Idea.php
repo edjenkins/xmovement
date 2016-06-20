@@ -28,6 +28,8 @@ class Idea extends Model
 		'proposals_during_design',
     ];
 
+	protected $appends = ['supporter_count'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -54,6 +56,16 @@ class Idea extends Model
     }
 
     public function supporterCount()
+    {
+        return Supporter::where('idea_id', $this->id)->count();
+    }
+
+    /**
+     * Get the supporters count
+     *
+     * @return int
+     */
+    public function getSupporterCountAttribute()
     {
         return Supporter::where('idea_id', $this->id)->count();
     }
