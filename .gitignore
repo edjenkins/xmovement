@@ -4,6 +4,7 @@ Homestead.yaml
 Homestead.json
 .env
 
+/storage/framework/vews/*
 /public/css/*
 public/img/uploads/**
 public/uploads/**
