@@ -63,9 +63,19 @@
 
             <div class="form-group{{ $errors->has('count') ? ' has-error' : '' }}">
 
-                <label>{{ trans('xmovement_requirement_form.count_label') }}</label>
+                <!-- <label>{{ trans('xmovement_requirement_form.count_label') }}</label> -->
 
-                <input type="text" class="form-control" name="count" value="{{ isset($requirement) ? old('count', $requirement->count) : old('count') }}" placeholder="{{ trans('xmovement_requirement_form.count_placeholder') }}">
+                <!-- <input type="text" class="form-control" name="count" value="{{ isset($requirement) ? old('count', $requirement->count) : old('count') }}" placeholder="{{ trans('xmovement_requirement_form.count_placeholder') }}"> -->
+
+				<div class="slider-wrapper">
+
+					<label>{{ trans('xmovement_requirement_form.count_label') }}</label>
+
+					<input type="hidden" name="count" id="count-slider" value="{{ isset($requirement) ? old('count', $requirement->count) : old('count', 0) }}">
+
+					<div class="slider" id="xmovement-requirement-count-slider" style="max-width:600px;margin:0 auto;" data-input-id="count-slider" data-value="{{ isset($requirement) ? old('count', $requirement->count) : old('count', 0) }}"></div>
+
+				</div>
 
                 @if ($errors->has('count'))
                     <span class="help-block">
@@ -84,3 +94,28 @@
     </div>
 
 </form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	$('#xmovement-requirement-count-slider').slider({
+		min: 0,
+		max: 50,
+		change: function(event, ui) {
+			var input_id = $(this).attr('data-input-id');
+			$('#' + input_id).val(ui.value);
+		}
+	})
+	.slider('pips', {
+		handle: false,
+		pips: true,
+		first: 'label',
+		last: 'label',
+		rest: 'label',
+		step: 5
+	})
+	.slider('float');
+
+	$('#xmovement-requirement-count-slider').slider('value', parseInt($('#xmovement-requirement-count-slider').attr('data-value')));
+})
+</script>

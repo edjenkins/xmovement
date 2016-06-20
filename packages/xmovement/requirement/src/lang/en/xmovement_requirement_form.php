@@ -11,7 +11,7 @@ return [
     'description_label' => 'Add a short description of your Requirement, this should justify the requirement',
 	'pinned_label' => 'Pin this design task (disable voting)',
     'item_label' => 'What is the requirement? e.g. Camcorder',
-    'count_label' => 'How many are required? e.g. 7',
+    'count_label' => 'How many are required?',
 
     'name_placeholder' => 'Requirement name',
     'description_placeholder' => 'Requirement description',

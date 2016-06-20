@@ -4,7 +4,7 @@
 
 	<div class="page-header {{ ($proposal_mode) ? ' colorful' : '' }}">
 
-        <h2 class="main-title">{{ $design_task['name'] }}</h2>
+        <h2 class="main-title">{{ str_limit($design_task['name'], 50) }}</h2>
 		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more slots' : 'Scheduler' }}</h5>
 
 	</div>

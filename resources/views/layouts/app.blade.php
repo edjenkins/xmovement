@@ -14,20 +14,15 @@
 
     <!-- JavaScripts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-    <!-- Styles -->
-    <link href="{{ URL::asset('css/vendor.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
-	<link href="/css/jquery-ui-slider-pips.css" rel="stylesheet">
-    <link href="/css/easydropdown/easydropdown.css" rel="stylesheet">
-
-	<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
-
-	<!-- Include Required Prerequisites -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
-	<!-- Include Date Range Picker -->
-	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.css') }}" />
+    <!-- Styles -->
+	<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+	<link href="{{ URL::asset('css/jquery-ui-slider-pips.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/easydropdown/easydropdown.css') }}" rel="stylesheet">
+	<link href="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/vendor.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout">

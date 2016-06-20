@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	$('.slider').slider({
+	$('#idea-duration-slider').slider({
 	    min: 5,
 	    max: 45,
 		change: function(event, ui) {
@@ -20,7 +20,7 @@ $(document).ready(function() {
 	})
 	.slider('float');
 
-	$('.slider').slider('value', parseInt($('.slider').attr('data-value')));
+	$('#idea-duration-slider').slider('value', parseInt($('#idea-duration-slider').attr('data-value')));
 })
 
 function nextStep()

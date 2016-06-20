@@ -62,7 +62,7 @@
 // Slider
 .slider-wrapper
 	margin-bottom 80px
-	#slider
+	.slider
 		&.ui-slider
 			border-radius 20px
 		    background main-color
@@ -79,7 +79,7 @@
 			line-height 30px
 			padding 0 10px
 			height 30px
-			top -40px
+			top -40px !important
 			&:before
 				border-top-color transparent
 				border-width 8px
@@ -103,11 +103,12 @@
 			top 3px
 			.ui-slider-label
 				color #999
-				top 30px
+				top 20px
 				font-weight normal
 			.ui-slider-line
-				height: 6px;
+				height 6px
 				top 20px
+				display none
 		.ui-slider-pip-first
 			color red
 			.ui-slider-label

@@ -15,8 +15,6 @@
 
 		@include('forms/idea/pages/4')
 
-		@include('forms/idea/pages/5')
-
 	@endunless
 
 </form>

@@ -4,7 +4,7 @@
 
 	<div class="page-header">
 
-        <h2 class="main-title">{{ $design_task['name'] }}</h2>
+        <h2 class="main-title">{{ str_limit($design_task['name'], 50) }}</h2>
 		<h5 class="sub-title">External</h5>
 
 	</div>
