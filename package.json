@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "bootstrap-styl": "^5.0.5",
-    "laravel-elixir": "^4.0.0"
+    "laravel-elixir": "^4.0.0",
+	"js-cookie": "2.1.2"
   }
 }
