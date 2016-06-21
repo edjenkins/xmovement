@@ -116,7 +116,6 @@ class IdeaController extends Controller
 			'support_state' => 'open',
 			'design_state' => ($request->design_during_support) ? 'open' : 'closed',
 			'proposal_state' => 'closed',
-			'supporters_target' => $request->supporters_target,
 			'duration' => $request->duration,
 			'design_during_support' => $request->design_during_support,
 			'proposals_during_design' => $request->proposals_during_design,
