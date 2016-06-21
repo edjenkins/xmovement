@@ -10,6 +10,7 @@ use File;
 use Image;
 use Input;
 use Response;
+use Storage;
 use Validator;
 
 class UploadController extends Controller
@@ -79,20 +80,19 @@ class UploadController extends Controller
 
 		$extension = (isset($request->cc)) ? 'jpg' : $file->getClientOriginalExtension();
 
-    $filename = sha1(time() . time()) . ".{$extension}";
+	    $filename = sha1(time() . time()) . ".{$extension}";
 
 		if ($request_type == 'file')
 		{
 			$directory = public_path() .'/uploads/files';
 
-	    if ($file->move($directory, $filename))
+			$path = 'uploads/files/';
+
+			if (!Storage::disk('s3')->put($path.$filename,  file_get_contents($file), 'public'))
 			{
-	    	return Response::json(array('success' => 200, 'filename' => $filename));
-	    }
-			else
-			{
-	    	return Response::json('error', 400);
-	    }
+				return Response::json('error', 400);
+		    }
+			return Response::json(array('success' => 200, 'filename' => $filename));
 		}
 
 		if ($request_type == 'image')
@@ -113,10 +113,15 @@ class UploadController extends Controller
 				$img->resize($size['size'], null, function ($constraint) {
 				    $constraint->aspectRatio();
 				});
-				if (!$img->save($directory . '/' . $size['name'] . '/' . $filename))
+
+		        $img = $img->stream();
+
+				$path = 'uploads/images/' . $size['name'] . '/';
+
+		        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
 				{
-					return Response::json('error', 400);
-				}
+		        	return Response::json('error', 400);
+		        }
 			}
 
 			return Response::json(array('success' => 200, 'filename' => $filename));

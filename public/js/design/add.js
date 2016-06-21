@@ -30,6 +30,13 @@ function showModule(form_id) {
 		    location.hash = location_hash;
 		}
 	}
+
+	$('select').easyDropDown({
+		wrapperClass: 'flat custom-dropdown',
+		onChange: function(selected){
+			$(form_id + ' form #contribution-type').val(selected.value);
+		}
+	});
 }
 
 $(document).ready(function() {
@@ -39,7 +46,7 @@ $(document).ready(function() {
 	window.location.hash = Cookies.get('current_design_module');
 	showModule(form_id);
 	$('.design-module-tile[data-form-id="' + form_id + '"]').addClass('active');
-	
+
 	$('select').easyDropDown({
 		wrapperClass: 'flat custom-dropdown',
 		onChange: function(selected){

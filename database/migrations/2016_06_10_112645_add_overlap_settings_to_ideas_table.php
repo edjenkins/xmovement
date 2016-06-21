@@ -26,8 +26,8 @@ class AddOverlapSettingsToIdeasTable extends Migration
     public function down()
     {
         Schema::table('ideas', function ($table) {
+			$table->dropColumn('proposals_during_design');
             $table->dropColumn('design_during_support');
-            $table->dropColumn('proposals_during_design ');
         });
     }
 }

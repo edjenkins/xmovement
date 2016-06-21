@@ -2,7 +2,7 @@
 
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
-	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}')"></a>
+	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}')"></a>
 
 	<div class="contribution-submission-value">
 
@@ -20,7 +20,7 @@
 				{{ $value->description }}
 			</div>
 
-			<img src="/uploads/images/medium/{{ $value->image }}" height="100" style="margin: 15px 0" />
+			<img src="https://s3.amazonaws.com/xmovement/uploads/images/medium/{{ $value->image }}" height="100" style="margin: 15px 0" />
 
 		<?php } ?>
 
@@ -76,7 +76,7 @@
 					<i class="fa {{ $class }}" aria-hidden="true"></i>
 				</div>
 				<div class="file-name">
-					<a href="/uploads/files/{{ $value->file }}" target="_blank">{{ $value->file }}</a>
+					<a href="https://s3.amazonaws.com/xmovement/uploads/files/{{ $value->file }}" target="_blank">{{ $value->file }}</a>
 				</div>
 			</div>
 
