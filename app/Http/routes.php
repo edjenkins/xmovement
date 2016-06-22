@@ -98,10 +98,9 @@ Route::group(['middleware' => ['web']], function () {
 	// Images
 	Route::get('/uploads/images/{size}/{filename}', function($size, $filename)
 	{
-		$img = Image::canvas(800, 800, '#e1e1e1');
-
 		switch ($filename) {
 			case 'placeholder':
+				$img = Image::canvas(800, 800, '#e1e1e1');
 				$img->circle(100, 200, 400, function ($draw) {
 						$draw->background('#f2f2f2');
 				});
@@ -115,6 +114,7 @@ Route::group(['middleware' => ['web']], function () {
 				break;
 
 			case 'avatar':
+				$img = Image::canvas(800, 800, '#e1e1e1');
 				$img->circle(350, 400, 300, function ($draw) {
 						$draw->background('#f2f2f2');
 				});
@@ -125,9 +125,16 @@ Route::group(['middleware' => ['web']], function () {
 				break;
 
 			default:
-				return Image::make('https://s3.amazonaws.com/xmovement/uploads/images/' . $size . '/' . $filename)->response();
+				$src = 'https://s3.amazonaws.com/xmovement/uploads/images/' . $size . '/' . $filename;
+
 				break;
 		}
+
+		$cacheimage = Image::cache(function($image) use ($src) {
+			$image->make($src);
+		}, 10, true);
+
+		return $cacheimage->response('jpg');
 
 	});
 
