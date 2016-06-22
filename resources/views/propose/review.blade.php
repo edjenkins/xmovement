@@ -38,7 +38,7 @@
 
 							<li class="proposal-item user-header">
 								<div class="avatar-wrapper">
-									<img class="avatar" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $user->avatar }}')">
+									<img class="avatar" style="background-image: url('/uploads/images/small/{{ $user->avatar }}')">
 								</div>
 							</li>
 

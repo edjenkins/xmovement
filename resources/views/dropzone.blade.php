@@ -36,7 +36,7 @@
 </div>
 
 <div class="current-file-preview <?php if (isset($value)) { echo 'visible'; } ?>">
-	<div id="file-preview-thumbnail" <?php if (isset($value)) { echo 'style="background-image: url(https://s3.amazonaws.com/xmovement/uploads/images/small/' . $value . ')"'; } ?>></div>
+	<div id="file-preview-thumbnail" <?php if (isset($value)) { echo 'style="background-image: url(/uploads/images/small/' . $value . ')"'; } ?>></div>
 	<p id="file-preview-filename">{{ $value or '' }}</p>
 </div>
 
@@ -79,7 +79,7 @@
 			if ($('#{{ $input_id }}').length) {
 					$('#{{ $input_id }}').val(response.filename);
 					$('#file-preview-filename').html(response.filename);
-					$('#file-preview-thumbnail').css('background-image','url(https://s3.amazonaws.com/xmovement/uploads/images/small/' + response.filename + ')');
+					$('#file-preview-thumbnail').css('background-image','url(/uploads/images/small/' + response.filename + ')');
 					$('.current-file-preview').addClass('visible');
 			}
     });
@@ -169,7 +169,7 @@
 													selected_tile.addClass('selected');
 													$('#{{ $input_id }}').val(response.filename);
 													$('#file-preview-filename').html(response.filename);
-													$('#file-preview-thumbnail').css('background-image','url(https://s3.amazonaws.com/xmovement/uploads/images/small/' + response.filename + ')');
+													$('#file-preview-thumbnail').css('background-image','url(/uploads/images/small/' + response.filename + ')');
 													$('.current-file-preview').addClass('visible');
 												}
 

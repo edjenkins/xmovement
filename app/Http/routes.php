@@ -96,11 +96,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/api/ideas', 'IdeaController@api_index');
 
 	// Images
-	Route::get('/uploads/images/{size}/{type}', function($size, $type)
+	Route::get('/uploads/images/{size}/{filename}', function($size, $filename)
 	{
 		$img = Image::canvas(800, 800, '#e1e1e1');
 
-		switch ($type) {
+		switch ($filename) {
 			case 'placeholder':
 				$img->circle(100, 200, 400, function ($draw) {
 						$draw->background('#f2f2f2');
@@ -111,6 +111,7 @@ Route::group(['middleware' => ['web']], function () {
 				$img->circle(100, 600, 400, function ($draw) {
 						$draw->background('#f2f2f2');
 				});
+				return $img->response('jpg');
 				break;
 
 			case 'avatar':
@@ -120,27 +121,14 @@ Route::group(['middleware' => ['web']], function () {
 				$img->circle(600, 400, 750, function ($draw) {
 						$draw->background('#f2f2f2');
 				});
+				return $img->response('jpg');
+				break;
+
+			default:
+				return Image::make('https://s3.amazonaws.com/xmovement/uploads/images/' . $size . '/' . $filename)->response();
 				break;
 		}
 
-		return $img->response('jpg');
-	});
-
-	Route::get('/uploads/images/{size}/', function($size)
-	{
-		$img = Image::canvas(800, 800, '#e1e1e1');
-
-		$img->circle(100, 200, 400, function ($draw) {
-				$draw->background('#f2f2f2');
-		});
-		$img->circle(100, 400, 400, function ($draw) {
-				$draw->background('#f2f2f2');
-		});
-		$img->circle(100, 600, 400, function ($draw) {
-				$draw->background('#f2f2f2');
-		});
-
-		return $img->response('jpg');
 	});
 
 });

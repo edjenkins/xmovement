@@ -17,7 +17,7 @@
 	    		<div class="column side-column">
 
 	    			<div class="creator-tile" onClick="document.location = '{{ action('UserController@profile', $idea->user_id) }}';">
-    					<div class="creator-avatar" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/medium/{{ $idea->user->avatar }}')"></div>
+    					<div class="creator-avatar" style="background-image:url('/uploads/images/medium/{{ $idea->user->avatar }}')"></div>
     					<h4>{{ $idea->user->name }}</h4>
     					<h5 class="subtitle">Idea Creator</h5>
 	    			</div>
@@ -63,7 +63,7 @@
 
 	    		<div class="column main-column">
 
-	    			<div class="idea-media" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/large/{{ $idea->photo }}')"></div>
+	    			<div class="idea-media" style="background-image: url('/uploads/images/large/{{ $idea->photo }}')"></div>
 
 					@include('ideas/progress')
 

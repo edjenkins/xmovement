@@ -12,7 +12,8 @@
         "intervention/image": "^2.3",
 		"propaganistas/laravel-phone": "~2.0",
         "aws/aws-sdk-php": "^3.18",
-        "league/flysystem-aws-s3-v3": "^1.0"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "intervention/imagecache": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

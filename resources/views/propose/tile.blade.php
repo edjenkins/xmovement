@@ -1,7 +1,7 @@
 <div class="tile proposal-tile">
 
 	<div class="avatar-wrapper">
-		<div class="avatar" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $proposal->user->avatar }}')"></div>
+		<div class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}')"></div>
 	</div>
 
 	<div class="tile-body">
