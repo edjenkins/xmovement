@@ -2,18 +2,6 @@
     <form class="auth-form" role="form" method="POST" action="{{ action('UserController@addDetails') }}">
         {!! csrf_field() !!}
 
-        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
-            <label class="control-label">Avatar</label>
-
-						@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'avatar', 'value' => old('avatar', $user->avatar)])
-
-            @if ($errors->has('avatar'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('avatar') }}</strong>
-                </span>
-            @endif
-        </div>
-
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <label class="control-label">Name</label>
 
@@ -58,6 +46,18 @@
             @if ($errors->has('phone'))
                 <span class="help-block">
                     <strong>{{ $errors->first('phone') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+            <label class="control-label">Avatar</label>
+
+						@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'avatar', 'value' => old('avatar', $user->avatar)])
+
+            @if ($errors->has('avatar'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('avatar') }}</strong>
                 </span>
             @endif
         </div>

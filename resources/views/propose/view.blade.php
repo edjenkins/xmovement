@@ -72,13 +72,13 @@
 				<ul class="proposal-preview">
 
 					<li class="proposal-item user-header">
-						<div class="avatar-wrapper">
+						<a href="{{ action('UserController@profile', $proposal->user) }}" class="avatar-wrapper">
 							<div class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}/{{ urlencode($proposal->user->name) }}')"></div>
-						</div>
+						</a>
 						<br>
 						<h3>{{ $proposal->description }}</h3>
 						<p>
-							Added {{ $proposal->created_at->diffForHumans() }}
+							Added by {{ $proposal->user->name }} {{ $proposal->created_at->diffForHumans() }}
 						</p>
 					</li>
 

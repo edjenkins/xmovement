@@ -19,7 +19,7 @@
 
 	@if ($cc)
 
-		<div role="tabpanel" class="tab-pane active" id="search">
+		<div role="tabpanel" class="dropzone-tab-pane tab-pane active" id="search">
 
 			@include('cc-container')
 
@@ -27,7 +27,7 @@
 
 	@endif
 
-	<div role="tabpanel" class="tab-pane {{ ($cc) ? '' : 'active' }}" id="upload">
+	<div role="tabpanel" class="dropzone-tab-pane tab-pane {{ ($cc) ? '' : 'active' }}" id="upload">
 
 		@include('dropzone-container')
 

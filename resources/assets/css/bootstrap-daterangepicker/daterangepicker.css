@@ -135,10 +135,3 @@
     .daterangepicker .calendar-time .flat.custom-dropdown {
 	  display: inline-block;
   	  width: 70px !important; }
-	 .flat li {
-		 border-color:
-		 padding: 8px 12px !important;
-	 }
-	.flat:hover .selected {
-		padding: 8px 35px 8px 5px;
-	}

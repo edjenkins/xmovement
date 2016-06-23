@@ -87,15 +87,7 @@ class DesignController extends Controller
 		else
 		{
 	        $value = ($request->vote_direction == 'up') ? 1 : -1;
-
-	        if ($design_task->addVote($value))
-	        {
-	            $response->meta['success'] = true;
-	        }
-
-	        $response->data['vote_count'] = $design_task->voteCount();
-
-	        return Response::json($response);
+			return $design_task->addVote($value);
 		}
     }
 

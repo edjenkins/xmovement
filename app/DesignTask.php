@@ -7,6 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use App\DesignTaskVote;
 
 use Auth;
+use Response;
+
+class ResponseObject {
+
+	public $meta = array();
+	public $errors = array();
+	public $data = array();
+
+	public function __construct()
+	{
+		$this->meta['success'] = false;
+	}
+}
 
 class DesignTask extends Model
 {
@@ -53,13 +66,15 @@ class DesignTask extends Model
 
     public function addVote($value)
     {
-        // Check user can vote
-        // Not locked
+		$response = new ResponseObject();
 
         if ($this->userVote() == $value)
         {
             // Prevent voting twice in one direction
-            return false;
+			if ($value == 1) { array_push($response->errors, 'You can\' vote up twice'); }
+			if ($value == -1) { array_push($response->errors, 'You can\' vote down twice'); }
+
+            $response->meta['success'] = false;
         }
         else
         {
@@ -77,8 +92,12 @@ class DesignTask extends Model
                 'latest' => true
             ]);
 
-            return true;
+			$response->meta['success'] = true;
         }
+
+		$response->data['vote_count'] = $this->voteCount();
+
+		return Response::json($response);
     }
 
 	public function getLink()

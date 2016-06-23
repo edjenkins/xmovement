@@ -52,6 +52,10 @@ class UserController extends Controller
 			$user->avatar = $request->photo;
 		}
 
+		if (isset($request->banner)) {
+			$user->banner = $request->banner;
+		}
+
 		$this->validate($request, $validation);
 
 		$user->phone = $request->phone;

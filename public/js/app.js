@@ -61,7 +61,7 @@ function addVote(vote_button, vote_container, vote_direction, votable_id, votabl
 
             if (!response['meta']['success'])
             {
-                showJSflash('Your vote failed', 'flash-danger');
+                showJSflash(response['errors'][0], 'flash-danger');
             }
             else
             {

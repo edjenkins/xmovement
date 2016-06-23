@@ -1,6 +1,6 @@
 <li>
 
-	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('{{ $pollOption->user['avatar'] }}/{{ urlencode($pollOption->user->['name']) }}')"></a>	
+	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('{{ $pollOption->user['avatar'] }}/{{ urlencode($pollOption->user['name']) }}')"></a>	
 
 	<div class="poll-option-value">{{ $pollOption['value'] }}</div>
 

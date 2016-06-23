@@ -2,7 +2,7 @@
 
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
-	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}/{{ urlencode($contributionSubmission->user->['name']) }}')"></a>
+	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}/{{ urlencode($contributionSubmission->user['name']) }}')"></a>
 
 	<div class="contribution-submission-value">
 
@@ -10,25 +10,28 @@
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '1') { ?>
 
-			{{ $value->text }}
+			<h5>{{ $value->text }}</h5>
+			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
 
 		<?php } ?>
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '2') { ?>
 
-			<div class="item-description">
-				{{ $value->description }}
-			</div>
 
-			<img src="/uploads/images/medium/{{ $value->image }}" height="100" style="margin: 15px 0" />
+			<h5>{{ $value->description }}</h5>
+			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
+
+			<a href="/uploads/images/large/{{ $value->image }}" target="_blank">
+				<img src="/uploads/images/small/{{ $value->image }}"/>
+			</a>
 
 		<?php } ?>
 
 		<?php if ($contributionSubmission->contributionAvailableType->id == '3') { ?>
 
-			<div class="item-description">
-				{{ $value->description }}
-			</div>
+
+			<h5>{{ $value->description }}</h5>
+			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
 
 			<div class="video-wrapper">
 				<div class="video-container">
