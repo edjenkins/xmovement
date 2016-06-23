@@ -59,13 +59,13 @@
 
 		    					<li class="module-control">
 
-		    						<a href="#submit-poll-option">
+		    						<button id="submit-poll-option">
 
 				    					<i class="fa fa-plus"></i>
 
 				    					Submit poll option
 
-				    				</a>
+				    				</button>
 
 			    				</li>
 
@@ -115,13 +115,17 @@
 
 		    			@can('submitOption', $poll)
 
-			    			<div class="submit-poll-option-container" id="submit-poll-option">
+							<form id="poll-contribution-form" method="post">
 
-			    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." />
+				    			<div class="submit-poll-option-container" id="submit-poll-option">
 
-			    				<button id="submit-button" data-poll-id="{{ $poll->id }}">Submit</button>
+				    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." data-poll-id="{{ $poll->id }}" />
 
-			    			</div>
+				    				<button id="submit-button">Submit</button>
+
+				    			</div>
+
+							</form>
 
 		    			@endcan
 

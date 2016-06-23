@@ -37,7 +37,7 @@ class ExternalController extends Controller
     	$embed_code = $request->embed_code;
     	$external_link = $request->external_link;
 
-			$validation['name'] = 'required|max:50|unique:design_tasks,name';
+			$validation['name'] = 'required|max:50|unique:design_tasks,name,NULL,id,idea_id,' . $idea_id;
 			$validation['description'] = 'required|max:255';
 			$validation['embed_code'] = 'required_without:external_link';
 			$validation['external_link'] = 'required_without:embed_code|max:2000';

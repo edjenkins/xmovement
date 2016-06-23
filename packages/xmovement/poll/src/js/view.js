@@ -2,14 +2,24 @@ $(document).ready(function() {
 
     addHandlers();
 
-    $('.submit-poll-option-container #submit-button').click(function() {
+	$('#submit-poll-option').click(function() {
 
-        var submit_button = $(this);
+	    $('html, body').animate({
+	        scrollTop: $("#poll-contribution-form").offset().top
+	    }, 1000);
+
+		$('#poll-contribution-form #poll-contribution').focus();
+	})
+
+	$('#poll-contribution-form').submit(function(event) {
+
+        var submit_button = $(this).find('#submit-button');
+        var submission_field = $('#poll-contribution-form #poll-contribution');
+
+		var submission = submission_field.val();
+        var poll_id = submission_field.attr('data-poll-id');
 
         submit_button.html('Submitting..');
-
-        var submission = $('#poll-contribution').val();
-        var poll_id = $(this).attr('data-poll-id');
 
         $.ajaxSetup({
             headers: {
@@ -27,13 +37,10 @@ $(document).ready(function() {
             success: function(response) {
 
                 // Success
-
 				if (response["meta"]["success"])
 				{
 	                showJSflash('Thanks for your submission', 'flash-success');
-
 	                $('.poll-options-list').append(response["data"]["element"]);
-
 					$('#poll-contribution').val('');
 				}
 				else
@@ -44,21 +51,19 @@ $(document).ready(function() {
 				submit_button.html('Submit');
 
 				addHandlers();
-				
             },
             error: function(response) {
 
                 // Error
                 console.log(response);
-
                 showJSflash('Your submission failed', 'flash-danger');
-
                 submit_button.html('Submit');
-
             }
         });
 
-    });
+		event.preventDefault();
+
+	});
 
 })
 

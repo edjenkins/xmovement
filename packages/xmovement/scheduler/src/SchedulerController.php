@@ -79,7 +79,7 @@ class SchedulerController extends Controller
     	$idea_id = $request->idea_id;
     	$voting_type = $request->voting_type;
 
-			$validation['name'] = 'required|max:50|unique:design_tasks,name';
+			$validation['name'] = 'required|max:50|unique:design_tasks,name,NULL,id,idea_id,' . $idea_id;
 			$validation['description'] = 'required|max:255';
 
 			$this->validate($request, $validation);

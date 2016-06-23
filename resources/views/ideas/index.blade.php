@@ -77,6 +77,12 @@
 
             </div>
 
+			<div class="col-xs-12 no-results" ng-show="(ideas | filter:idea_search_term).length == 0">
+
+				No Results for <% idea_search_term %>
+
+			</div>
+
         </div>
 
     </div>

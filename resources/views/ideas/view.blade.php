@@ -17,7 +17,7 @@
 	    		<div class="column side-column">
 
 	    			<div class="creator-tile" onClick="document.location = '{{ action('UserController@profile', $idea->user_id) }}';">
-    					<div class="creator-avatar" style="background-image:url('/uploads/images/medium/{{ $idea->user->avatar }}')"></div>
+    					<div class="creator-avatar" style="background-image:url('/uploads/images/medium/{{ $idea->user->avatar }}/{{ urlencode($idea->user->name) }}')"></div>
     					<h4>{{ $idea->user->name }}</h4>
     					<h5 class="subtitle">Idea Creator</h5>
 	    			</div>

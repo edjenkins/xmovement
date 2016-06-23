@@ -96,7 +96,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/api/ideas', 'IdeaController@api_index');
 
 	// Images
-	Route::get('/uploads/images/{size}/{filename}', function($size, $filename)
+	Route::get('/uploads/images/{size}/{filename}/{name?}', function($size, $filename, $name = null)
 	{
 		switch ($filename) {
 			case 'placeholder':
@@ -114,13 +114,33 @@ Route::group(['middleware' => ['web']], function () {
 				break;
 
 			case 'avatar':
-				$img = Image::canvas(800, 800, '#e1e1e1');
+				$img = Image::canvas(800, 800, '#6acda4');
+
 				$img->circle(350, 400, 300, function ($draw) {
-						$draw->background('#f2f2f2');
+						$draw->background('#fff');
 				});
 				$img->circle(600, 400, 750, function ($draw) {
-						$draw->background('#f2f2f2');
+						$draw->background('#fff');
 				});
+
+				if ($name)
+				{
+					$name = urldecode($name);
+
+					if(preg_match_all('/\b(\w)/',strtoupper($name),$m)) {
+					    $name_acronymn = implode('',$m[1]); // $v is now SOQTU
+					}
+
+					$img->text($name_acronymn, 600, 600, function($font) {
+					    $font->file('fonts/sourcesanspro-bold-webfont.ttf');
+					    $font->size(100);
+					    $font->color('#6acda4');
+					    $font->align('right');
+					    $font->valign('center');
+					});
+				}
+
+
 				return $img->response('jpg');
 				break;
 
