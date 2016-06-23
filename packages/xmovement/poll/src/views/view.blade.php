@@ -5,7 +5,7 @@
 	<div class="page-header {{ ($proposal_mode) ? ' colorful' : '' }}">
 
         <h2 class="main-title">{{ str_limit($design_task['name'], 50) }}</h2>
-		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more poll options' : 'Added by ' . $design_task->user->name . ' ' . $design_task->created_at->diffForHumans() }}</h5>
+		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more poll options' : 'Added ' . $design_task->created_at->diffForHumans() . ' by ' . $design_task->user->name }}</h5>
 
 	</div>
 
