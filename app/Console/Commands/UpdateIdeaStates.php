@@ -70,7 +70,7 @@ class UpdateIdeaStates extends Command
 
 			if ((!$now->between($support_start, $support_end)) && ($idea->support_state == 'open'))
 			{
-				$idea->support_state = ($now->gt($support_end)) ? 'locked' : 'closed';
+				$idea->support_state = ($now->lt($support_start)) ? 'closed';
 			}
 			else if (($idea->support_state != 'open') && ($now->between($support_start, $support_end)))
 			{
