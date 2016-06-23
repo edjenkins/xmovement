@@ -81,7 +81,7 @@
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('/uploads/images/small/{{ $design_task->user->avatar }}')"></a>
+	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('/uploads/images/small/{{ $design_task->user->avatar }}/{{ urlencode($design_task->user->name) }}')"></a>
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 

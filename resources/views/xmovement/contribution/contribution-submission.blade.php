@@ -2,7 +2,7 @@
 
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
-	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}')"></a>
+	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}/{{ urlencode($contributionSubmission->user->['name']) }}')"></a>
 
 	<div class="contribution-submission-value">
 

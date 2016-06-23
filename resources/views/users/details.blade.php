@@ -13,6 +13,11 @@
 
             <div class="auth-panel">
 
+				<div class="avatar-wrapper">
+					<div class="avatar" style="background-image: url('/uploads/images/small/{{ $user->avatar }}/{{ urlencode($user->name) }}')">
+					</div>
+				</div>
+
                 <form class="auth-form" role="form" method="POST" action="{{ action('UserController@addDetails') }}">
                     {!! csrf_field() !!}
 

@@ -73,7 +73,7 @@
 
 					<li class="proposal-item user-header">
 						<div class="avatar-wrapper">
-							<img class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}')">
+							<div class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}/{{ urlencode($proposal->user->name) }}')"></div>
 						</div>
 						<br>
 						<h3>{{ $proposal->description }}</h3>
