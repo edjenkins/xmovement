@@ -79,8 +79,7 @@ class DesignController extends Controller
 
         if (Gate::denies('design', $design_task->idea))
         {
-            Session::flash('flash_message', trans('flash_message.no_permission'));
-            Session::flash('flash_type', 'flash-danger');
+            array_push($response->errors, trans('flash_message.no_permission'));
 
             return Response::json($response);
         }

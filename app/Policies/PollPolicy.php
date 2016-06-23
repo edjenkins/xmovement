@@ -7,6 +7,7 @@ use App\User;
 use App\Supporter;
 use App\DesignTask;
 use XMovement\Poll\Poll;
+use XMovement\Poll\PollOption;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -24,7 +25,7 @@ class PollPolicy
     public function submitOption(User $user, Poll $poll)
     {
     	$designTask = DesignTask::where([['xmovement_task_id', $poll->id], ['xmovement_task_type', 'Poll']])->first();
-		
+
         return (!$designTask["locked"] || ($user->id == $poll->user_id));
     }
 

@@ -57,20 +57,21 @@ class PollController extends Controller
 
     public function vote(Request $request)
     {
-        $response = new ResponseObject();
+		$response = new ResponseObject();
 
-        $value = ($request->vote_direction == 'up') ? 1 : -1;
+		$poll_option = PollOption::whereId($request->votable_id)->first();
 
-        $poll_option = PollOption::whereId($request->votable_id)->first();
-
-        if ($poll_option->addVote($value))
+		if (Gate::denies('voteOnDesignTasks', $poll_option))
         {
-            $response->meta['success'] = true;
+            array_push($response->errors, trans('flash_message.no_permission'));
+
+			return Response::json($response);
         }
-
-        $response->data['vote_count'] = $poll_option->voteCount();
-
-        return Response::json($response);
+		else
+		{
+	        $value = ($request->vote_direction == 'up') ? 1 : -1;
+			return $poll_option->addVote($value);
+		}
     }
 
     public function store(Request $request)
@@ -105,11 +106,6 @@ class PollController extends Controller
 
 	    // Load the design_task view
 		return redirect()->action('\xmovement\poll\PollController@view', ['design_task' => $design_task]);
-    }
-
-    public function update(Request $request)
-    {
-    	return 'update';
     }
 
     public function submitOption(Request $request)

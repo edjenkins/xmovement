@@ -59,6 +59,8 @@ function addVote(vote_button, vote_container, vote_direction, votable_id, votabl
         processData: false,
         success: function(response) {
 
+			console.log(response);
+
             if (!response['meta']['success'])
             {
                 showJSflash(response['errors'][0], 'flash-danger');
@@ -102,10 +104,10 @@ function addVote(vote_button, vote_container, vote_direction, votable_id, votabl
 
 $(document).ready(function() {
 
-    $('.vote-container.design-task-vote-container .vote-button').click(function() {
+    $('.design-task-vote-container .vote-button').click(function() {
 
         var vote_button = $(this);
-        var vote_container = $(this).parents('.vote-controls').parents('.vote-container');
+        var vote_container = $(this).parents('.vote-controls').parents('.design-task-vote-container');
 
         var vote_direction = $(this).attr('data-vote-direction');
         var votable_id = $(this).attr('data-votable-id');

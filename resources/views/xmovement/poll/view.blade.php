@@ -55,7 +55,7 @@
 
 		    			<ul class="module-controls pull-right">
 
-		    				@can('submitOption', $poll)
+		    				@can('contribute', $design_task)
 
 		    					<li class="module-control">
 
@@ -113,7 +113,7 @@
 
 					@unless ($proposal_mode)
 
-		    			@can('submitOption', $poll)
+		    			@can('contribute', $design_task)
 
 							<form id="poll-contribution-form" method="post">
 

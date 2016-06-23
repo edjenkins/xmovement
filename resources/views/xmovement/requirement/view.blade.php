@@ -41,7 +41,7 @@
 
 	    			<ul class="module-controls pull-right">
 
-	    				@can('submitOption', $requirement)
+	    				@can('contribute', $design_task)
 
 	    					<li class="module-control">
 

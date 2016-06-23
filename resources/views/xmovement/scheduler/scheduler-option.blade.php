@@ -12,19 +12,28 @@
 	<div class="vote-container scheduler-option-vote-container {{ ($schedulerOption->voteCount() == 0) ? '' : (($schedulerOption->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 
 		<div class="vote-controls">
-			@unless ($proposal_mode)
-				<div class="vote-button vote-up {{ ($schedulerOption->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="scheduler" data-votable-id="{{ $schedulerOption['id'] }}" title="Vote up">
-					<i class="fa fa-2x fa-angle-up"></i>
+			@can('voteOnDesignTasks', $design_task)
+				@unless ($proposal_mode)
+					<div class="vote-button vote-up {{ ($schedulerOption->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="scheduler" data-votable-id="{{ $schedulerOption['id'] }}" title="Vote up">
+						<i class="fa fa-2x fa-angle-up"></i>
+					</div>
+				@endunless
+			@endcan
+			@cannot('voteOnDesignTasks', $design_task)
+				<div class="voting-locked" onClick="alert('Support this idea to contribute to the design.')">
+					<i class="fa fa-lock"></i>
 				</div>
-			@endunless
+			@endcannot
 			<div class="vote-count">
 				{{ $schedulerOption->voteCount() }}
 			</div>
-			@unless ($proposal_mode)
-				<div class="vote-button vote-down {{ ($schedulerOption->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="scheduler" data-votable-id="{{ $schedulerOption['id'] }}" title="Vote down">
-					<i class="fa fa-2x fa-angle-down"></i>
-				</div>
-			@endunless
+			@can('voteOnDesignTasks', $design_task)
+				@unless ($proposal_mode)
+					<div class="vote-button vote-down {{ ($schedulerOption->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="scheduler" data-votable-id="{{ $schedulerOption['id'] }}" title="Vote down">
+						<i class="fa fa-2x fa-angle-down"></i>
+					</div>
+				@endunless
+			@endcan
 			@if ($proposal_mode)
 
 				@if (array_key_exists($design_task->id, $contributions))

@@ -55,7 +55,7 @@
 
 						<ul class="module-controls pull-right">
 
-							@can('submitOption', $scheduler)
+							@can('contribute', $design_task)
 
 								<li class="module-control">
 
@@ -119,7 +119,7 @@
 
 						@unless ($proposal_mode)
 
-			    			@can('submitOption', $scheduler)
+			    			@can('contribute', $design_task)
 
 				    			<div class="submit-scheduler-option-container" id="submit-scheduler-option">
 
