@@ -105,7 +105,7 @@
 
 		    			@foreach ($contribution->contributionSubmissions as $contributionSubmission)
 
-		    				@include('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission, 'design_task' => $contributionSubmission->design_task])
+		    				@include('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission, 'design_task' => $design_task])
 
 		    			@endforeach
 

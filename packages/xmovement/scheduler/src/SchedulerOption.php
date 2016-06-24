@@ -5,6 +5,7 @@ namespace XMovement\Scheduler;
 use Illuminate\Database\Eloquent\Model;
 
 use Auth;
+use Response;
 
 use App\User;
 

@@ -112,21 +112,35 @@ class ContributionController extends Controller
 		return redirect()->action('\xmovement\contribution\ContributionController@view', ['design_task' => $design_task]);
     }
 
-    public function update(Request $request)
-    {
-    	return 'update';
-    }
-
     public function submitSubmission(Request $request)
     {
         $response = new ResponseObject();
 
         $value = $request->submission;
-        $submission_type = $request->submission_type;
+
+		$submission_type = $request->submission_type;
 
         $contribution = Contribution::whereId($request->contribution_id)->first();
 
-        return $contribution->addSubmission($submission_type, $value, $response);
+		$design_task = DesignTask::where([['xmovement_task_type','Contribution'],['xmovement_task_id',$contribution->id]])->get()->first();
+
+		// TODO: Check if submission exists
+		if (DB::table('xmovement_contribution_submissions')->where([['value', $value],['xmovement_contribution_id', $request->contribution_id]])->get()) {
+			array_push($response->errors, 'Someone has already submitted that contribution');
+		}
+		else
+		{
+	        $contributionSubmission = $contribution->addSubmission($submission_type, $value);
+
+	        if ($contributionSubmission)
+	        {
+	            $response->meta['success'] = true;
+	            $response->data['element'] = View::make('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission, 'design_task' => $design_task])->render();
+	        }
+		}
+
+        return Response::json($response);
+
     }
 
 }

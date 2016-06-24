@@ -105,7 +105,7 @@
 
 		    			@foreach ($poll->pollOptions as $pollOption)
 
-		    				@include('xmovement.poll.poll-option', ['pollOption' => $pollOption])
+		    				@include('xmovement.poll.poll-option', ['pollOption' => $pollOption, 'design_task' => $design_task])
 
 		    			@endforeach
 

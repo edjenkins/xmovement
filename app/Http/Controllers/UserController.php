@@ -19,6 +19,12 @@ class UserController extends Controller
 	{
 		if (is_null($user->id)) { $user = Auth::user(); }
 
+		if (!$user) {
+			Session::flash('flash_message', trans('flash_message.user_not_found'));
+			Session::flash('flash_type', 'flash-danger');
+
+		    return redirect()->action('PageController@home');
+		}
 		$supported_ideas = $user->supportedIdeas->take(10);
 		$created_ideas = $user->ideas->take(10);
 
@@ -28,6 +34,13 @@ class UserController extends Controller
     public function showDetails(Request $request)
 	{
 		$user = Auth::user();
+
+		if (!$user) {
+			Session::flash('flash_message', trans('flash_message.user_not_found'));
+			Session::flash('flash_type', 'flash-danger');
+
+		    return redirect()->action('PageController@home');
+		}
 
 		return view('users.details', ['user' => $user]);
 	}

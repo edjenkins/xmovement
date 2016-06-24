@@ -6,10 +6,10 @@ $(document).ready(function() {
 
 function addHandlers()
 {
-	$('.vote-container.proposal-vote-container .vote-button').off("click").click(function() {
+	$('.proposal-vote-container .vote-button').off("click").click(function() {
 
 		var vote_button = $(this);
-		var vote_container = $(this).parents('.vote-controls').parents('.vote-container');
+		var vote_container = $(this).parents('.vote-controls').parents('.proposal-vote-container');
 
 		var vote_direction = $(this).attr('data-vote-direction');
 		var votable_id = $(this).attr('data-votable-id');

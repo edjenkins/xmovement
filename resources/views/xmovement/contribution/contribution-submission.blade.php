@@ -90,14 +90,14 @@
 	<div class="vote-container contribution-submission-vote-container {{ ($contributionSubmission->voteCount() == 0) ? '' : (($contributionSubmission->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 
 		<div class="vote-controls">
-			@can('voteOnDesignTasks', $design_task)
+			@can('contribute', $design_task)
 				@unless ($proposal_mode)
 					<div class="vote-button vote-up {{ ($contributionSubmission->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="contribution" data-votable-id="{{ $contributionSubmission['id'] }}" title="Vote up">
 						<i class="fa fa-2x fa-angle-up"></i>
 					</div>
 				@endunless
 			@endcan
-			@cannot('voteOnDesignTasks', $design_task)
+			@cannot('contribute', $design_task)
 				<div class="voting-locked">
 					<i class="fa fa-lock"></i>
 				</div>
@@ -105,7 +105,7 @@
 			<div class="vote-count">
 				{{ $contributionSubmission->voteCount() }}
 			</div>
-			@can('voteOnDesignTasks', $design_task)
+			@can('contribute', $design_task)
 				@unless ($proposal_mode)
 					<div class="vote-button vote-down {{ ($contributionSubmission->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="contribution" data-votable-id="{{ $contributionSubmission['id'] }}" title="Vote down">
 						<i class="fa fa-2x fa-angle-down"></i>

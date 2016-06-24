@@ -93,18 +93,50 @@
 								height 80px
 								width 80px
 			&.proposal-footer
-				.vote-container.proposal-vote-container
-					text-align center
-					.vote-count, .vote-button
-						display block
-						float left
-						height 60px
+
+				.proposal-vote-container
+					.vote-count
+						color #999
+						font-weight bold
+					&.positive-vote .vote-count
+						color success-color
+					&.negative-vote .vote-count
+						color danger-color
+					.vote-button
+						i
+							color #999
+						&:hover
+							cursor pointer
+						&.vote-up
+							&:hover i, &.voted i
+								color success-color
+						&.vote-down
+							&:hover i, &.voted i
+								color danger-color
+				.proposal-vote-container
+					line-height 60px
+					.voting-locked
+						color #999
 						line-height 60px
 						text-align center
-						width calc(100% / 3)
-						i
-							position relative
-							top 5px
+						width 30px
+					.vote-controls
+						height 60px
+						.vote-count
+							display inline-block
+							line-height 60px
+							text-align center
+							width 30px
+						.vote-button
+							display inline-block
+							height 30px
+							width 40px
+							line-height 30px
+							text-align center
+							i
+								position relative
+							&:hover
+								cursor pointer
 	.add-content
 		display inline-block
 		margin-bottom 20px

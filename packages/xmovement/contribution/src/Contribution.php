@@ -67,57 +67,38 @@ class Contribution extends Model
 
     public function addSubmission($submission_type, $value)
     {
-        // Check user can vote
-        // Not locked
+        switch ($submission_type) {
+            case '1':
+                $value = json_encode(array('text' => $value["text"]));
+                break;
 
-        if (false)
-        {
-            // Prevent voting twice in one direction
-            return false;
+            case '2':
+                $value = json_encode(array('image' => $value["image"], 'description' => $value["description"]));
+                break;
+
+            case '3':
+                if ($embedLink = $this->getVideoEmbedLink($value["video"])) {
+                    $value = json_encode(array('video' => $this->getVideoEmbedLink($value["video"]), 'description' => $value["description"]));
+                } else {
+                    // Not a valid video
+                    return false;
+                }
+                break;
+
+            case '4':
+                $value = json_encode(array('file' => $value["file"], 'description' => $value["description"]));
+                break;
+
         }
-        else
-        {
-            // Image submission
 
-            switch ($submission_type) {
-                case '1':
-                    $value = json_encode(array('text' => $value["text"]));
-                    break;
+        $contributionSubmission = ContributionSubmission::create([
+            'xmovement_contribution_id' => $this->id,
+            'user_id' => Auth::user()->id,
+            'xmovement_contribution_available_type_id' => $submission_type,
+            'value' => $value
+        ]);
 
-                case '2':
-                    $value = json_encode(array('image' => $value["image"], 'description' => $value["description"]));
-                    break;
-
-                case '3':
-                    if ($embedLink = $this->getVideoEmbedLink($value["video"])) {
-                        $value = json_encode(array('video' => $this->getVideoEmbedLink($value["video"]), 'description' => $value["description"]));
-                    } else {
-                        // Not a valid video
-                        return false;
-                    }
-                    break;
-
-                case '4':
-                    $value = json_encode(array('file' => $value["file"], 'description' => $value["description"]));
-                    break;
-
-            }
-
-            $contributionSubmission = ContributionSubmission::create([
-                'xmovement_contribution_id' => $this->id,
-                'user_id' => Auth::user()->id,
-                'xmovement_contribution_available_type_id' => $submission_type,
-                'value' => $value
-            ]);
-
-            if ($contributionSubmission)
-            {
-                $response->meta['success'] = true;
-                $response->data['element'] = View::make('xmovement.contribution.contribution-submission', ['contributionSubmission' => $contributionSubmission])->render();
-            }
-
-            return Response::json($response);
-        }
+        return $contributionSubmission;
     }
 
     public function getVideoEmbedLink($value)

@@ -3,5 +3,5 @@ do
 #    composer dump-autoload
     php artisan vendor:publish --force
 #    php artisan vendor:publish --tag=public --force
-    sleep 3
+    sleep 5
 done

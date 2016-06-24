@@ -61,7 +61,9 @@ class PollController extends Controller
 
 		$poll_option = PollOption::whereId($request->votable_id)->first();
 
-		if (Gate::denies('contribute', $poll_option))
+		$design_task = DesignTask::where([['xmovement_task_type','Poll'],['xmovement_task_id',$poll_option->poll->id]])->get()->first();
+
+		if (Gate::denies('contribute', $design_task))
         {
             array_push($response->errors, trans('flash_message.no_permission'));
 
@@ -116,6 +118,8 @@ class PollController extends Controller
 
         $poll = Poll::whereId($request->poll_id)->first();
 
+		$design_task = DesignTask::where([['xmovement_task_type','Poll'],['xmovement_task_id',$poll->id]])->get()->first();
+
 		if ($value == "") {
 			array_push($response->errors, 'Please enter a poll option');
 			return Response::json($response);
@@ -132,7 +136,7 @@ class PollController extends Controller
 	        if ($pollOption)
 	        {
 	            $response->meta['success'] = true;
-	            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption, 'design_task' => $poll->design_task])->render();
+	            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption, 'design_task' => $design_task])->render();
 	        }
 		}
 

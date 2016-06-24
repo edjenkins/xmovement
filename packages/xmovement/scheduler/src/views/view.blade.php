@@ -107,7 +107,7 @@
 
 			    			@foreach ($scheduler->schedulerOptions as $schedulerOption)
 
-			    				@include('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption, 'design_task' => $schedulerOption->design_task])
+			    				@include('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption, 'design_task' => $design_task])
 
 			    			@endforeach
 

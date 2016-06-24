@@ -118,7 +118,7 @@
 
 					<li class="proposal-footer">
 
-						<div class="vote-container proposal-vote-container {{ ($proposal->voteCount() == 0) ? '' : (($proposal->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
+						<div class="proposal-vote-container {{ ($proposal->voteCount() == 0) ? '' : (($proposal->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 							<div class="vote-controls">
 								<div class="vote-button vote-up {{ ($proposal->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
 									<i class="fa fa-2x fa-angle-up"></i>
@@ -136,6 +136,8 @@
 					</div>
 
 				</ul>
+
+				@include('disqus')
 
     		</div>
 

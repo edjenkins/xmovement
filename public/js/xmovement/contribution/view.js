@@ -90,10 +90,10 @@ $(document).ready(function() {
                         Dropzone.forElement('#dropzone').removeAllFiles();
                     }
                 }
-                else
-                {
-                    showJSflash('There was an issue with the submission', 'flash-danger');
-                }
+				else
+				{
+					showJSflash(response["errors"][0], 'flash-danger');
+				}
 
             },
             error: function(response) {

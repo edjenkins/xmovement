@@ -5,7 +5,7 @@
 	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('/uploads/images/small/{{ $pollOption->user['avatar'] }}/{{ urlencode($pollOption->user['name']) }}')"></a>
 
 	<div class="poll-option-value">
-		<h5>{{ $pollOption['value'] }} {{ $design_task }}</h5>
+		<h5>{{ $pollOption['value'] }}</h5>
 		<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $pollOption['user']) }}">{{ $pollOption['user']['name'] }}</a></p>
 	</div>
 
@@ -37,7 +37,7 @@
 			@if ($proposal_mode)
 
 				@if (array_key_exists($design_task->id, $contributions))
-					@if (in_array($pollOption->id, $contributions[$design_task->id]))
+					@if (in_array($pollOption->id, $contributions[$design_task]))
 						<i class="fa fa-check-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>
 					@else
 						<i class="fa fa-square fa-2x proposal-button" data-contribution-id="{{ $pollOption->id }}"></i>

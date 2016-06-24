@@ -109,6 +109,6 @@
 
 	<script src="/js/xmovement/requirement/view.js"></script>
 
-	@include('xmovement/requirement/modals/suggest')
+	@include('xmovement/requirement/modals/requirement-invite')
 
 @endsection
