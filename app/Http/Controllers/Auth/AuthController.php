@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use App\Jobs\SendWelcomeEmail;
+use Intervention\Image\ImageManager;
 
 use Auth;
 use Image;
@@ -18,6 +19,7 @@ use Mail;
 use Redirect;
 use Socialite;
 use Session;
+use Storage;
 use URL;
 
 class AuthController extends Controller
@@ -66,30 +68,38 @@ class AuthController extends Controller
             return $authUser;
         }
 
-				$file = Image::make($facebookUser->avatar_original);
+		$extension = 'jpg';
 
-				$extension = 'jpg';
+	    $filename = sha1(time() . time()) . ".{$extension}";
 
-		    $filename = sha1(time() . time()) . ".{$extension}";
+		$image_sizes = [
+			['name' => 'large', 'size' => 1280],
+			['name' => 'medium', 'size' => 960],
+			['name' => 'small', 'size' => 480],
+			['name' => 'thumb', 'size' => 240],
+		];
 
-				$directory = public_path() .'/uploads/images';
+		// Save image sizes
+		foreach ($image_sizes as $index => $size)
+		{
+			$img = Image::make(file_get_contents($facebookUser->avatar_original));
 
-				$image_sizes = [
-					['name' => 'large', 'size' => 1280],
-					['name' => 'medium', 'size' => 960],
-					['name' => 'small', 'size' => 480],
-					['name' => 'thumb', 'size' => 240],
-				];
+			$img->resize($size['size'], null, function ($constraint) {
+			    $constraint->aspectRatio();
+			});
 
-				// Save image sizes
-				foreach ($image_sizes as $index => $size)
-				{
-					$img = Image::make($file);
-					$img->resize($size['size'], null, function ($constraint) {
-					    $constraint->aspectRatio();
-					});
-					$img->save($directory . '/' . $size['name'] . '/' . $filename);
-				}
+			$img = $img->stream();
+
+			$path = 'uploads/images/' . $size['name'] . '/';
+
+	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
+			{
+	        	Log::error('Failed to save user avatar from Facebook - ' . $facebookUser->email);
+	        }
+			else {
+				Log::error('Saved to - ' . $path.$filename);
+			}
+		}
 
         $user = User::create([
             'facebook_id' => $facebookUser->id,

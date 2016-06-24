@@ -29,7 +29,7 @@
 
 	@else
 
-		<p onClick="alert('Support this idea to contribute to the design.')">
+		<p>
 			<i class="fa fa-lock"></i>
 			Locked
 		</p>

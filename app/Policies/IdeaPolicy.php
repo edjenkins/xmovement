@@ -65,6 +65,20 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can submit a contribution to given idea
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function contribute(User $user, Idea $idea)
+    {
+		return true;
+    	// $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->idea->id)->exists();
+        // return ((!$design_task["locked"] || ($user->id == $idea->user_id)) && $is_existing_supporter);
+    }
+
+    /**
      * Determine if the given user can pin a design task in the given idea.
      *
      * @param  User  $user
@@ -85,7 +99,7 @@ class IdeaPolicy
      */
     public function lockDesignTask(User $user, Idea $idea)
     {
-        return true;
+        return $idea->user_id == $user->id;
     }
 
     /**

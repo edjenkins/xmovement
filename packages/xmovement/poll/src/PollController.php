@@ -52,7 +52,7 @@ class PollController extends Controller
 		$proposal_tasks = ($request->session()->has('proposal.tasks')) ? $request->session()->get('proposal.tasks') : [];
 		$contributions = $request->session()->get('proposal.contributions');
 
-        return view('poll::view', ['poll' => $poll, 'design_task' => $design_task, 'proposal_mode' => $proposal_mode, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks, 'contributions' => $contributions]);
+        return view('poll::view', ['poll' => $poll, 'idea' => $poll->idea, 'design_task' => $design_task, 'proposal_mode' => $proposal_mode, 'proposal_task_index' => $proposal_task_index, 'proposal_tasks' => $proposal_tasks, 'contributions' => $contributions]);
     }
 
     public function vote(Request $request)
@@ -61,7 +61,7 @@ class PollController extends Controller
 
 		$poll_option = PollOption::whereId($request->votable_id)->first();
 
-		if (Gate::denies('voteOnDesignTasks', $poll_option))
+		if (Gate::denies('contribute', $poll_option))
         {
             array_push($response->errors, trans('flash_message.no_permission'));
 
@@ -132,7 +132,7 @@ class PollController extends Controller
 	        if ($pollOption)
 	        {
 	            $response->meta['success'] = true;
-	            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption])->render();
+	            $response->data['element'] = View::make('xmovement.poll.poll-option', ['pollOption' => $pollOption, 'design_task' => $poll->design_task])->render();
 	        }
 		}
 

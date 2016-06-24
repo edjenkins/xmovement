@@ -98,7 +98,7 @@
 				@endunless
 			@endcan
 			@cannot('voteOnDesignTasks', $design_task)
-				<div class="voting-locked" onClick="alert('Support this idea to contribute to the design.')">
+				<div class="voting-locked">
 					<i class="fa fa-lock"></i>
 				</div>
 			@endcannot

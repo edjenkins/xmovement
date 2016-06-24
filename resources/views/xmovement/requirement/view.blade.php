@@ -89,7 +89,7 @@
 
 		    			<?php for ($i=0; $i < count($requirement->requirementsFilled); $i++) { ?>
 
-		    				@include('xmovement.requirement.requirement-space', ['requirementFilled' => $requirement->requirementsFilled[$i]])
+		    				@include('xmovement.requirement.requirement-space', ['requirementFilled' => $requirement->requirementsFilled[$i], 'design_task' => $requirement->design_task])
 
 		    			<?php } ?>
 

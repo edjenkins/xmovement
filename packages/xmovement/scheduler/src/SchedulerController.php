@@ -129,7 +129,7 @@ class SchedulerController extends Controller
 	        if ($schedulerOption)
 	        {
 	            $response->meta['success'] = true;
-	            $response->data['element'] = View::make('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption])->render();
+	            $response->data['element'] = View::make('xmovement.scheduler.scheduler-option', ['schedulerOption' => $schedulerOption, 'design_task' => $scheduler->designTask()])->render();
 	        }
 		}
 
