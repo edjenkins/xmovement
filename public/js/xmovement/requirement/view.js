@@ -25,6 +25,7 @@ function setRequirementState(state, requirement_space)
             requirement_space.removeClass('filled filling').addClass('not-filled');
             requirement_circle.css('background-image', 'none');
             requirement_space.find('.filled-temp').hide();
+			requirement_space.find('.withdraw-from-requirement').hide();
             requirement_space.find('.not-filled-temp').show();
 
             break;
@@ -38,7 +39,7 @@ function addHandlers()
 		var requirement = $(this).parent();
 
 		if (requirement.hasClass('filled')) return;
-		
+
         if (requirement.hasClass('filling'))
 		{
 			requirement.removeClass('filling').addClass('not-filled');
@@ -72,9 +73,9 @@ function addHandlers()
             data:  JSON.stringify({requirement_id: requirement_id, submission_type: 'fill'}),
             processData: false,
             success: function(response) {
-              
-                // Success              
-                
+
+                // Success
+
                 showJSflash('Thanks for your submission', 'flash-success');
 
                 requirement_space.attr('data-requirement-filled-id', response.data.requirement_filled_id);
@@ -83,14 +84,14 @@ function addHandlers()
 
             },
             error: function(response) {
-                
+
                 // Error
                 console.log(response);
-                
+
                 showJSflash('Your submission failed', 'flash-danger');
 
             }
-        });   
+        });
 
     });
 
@@ -116,23 +117,23 @@ function addHandlers()
             data:  JSON.stringify({requirement_filled_id: requirement_filled_id}),
             processData: false,
             success: function(response) {
-              
-                // Success              
-                
+
+                // Success
+
                 showJSflash('You have withdrawn', 'flash-success');
 
                 setRequirementState('not-filled', requirement_space);
-            
+
             },
             error: function(response) {
-                
+
                 // Error
                 console.log(response);
-                
+
                 showJSflash('We couldn\'t withdraw you', 'flash-danger');
 
             }
-        });   
+        });
 
     });
 
@@ -159,23 +160,23 @@ function addHandlers()
             data:  JSON.stringify({requirement_id: requirement_id, submission_type: 'invite', name: name, email: email, message: message, link: window.location.href}),
             processData: false,
             success: function(response) {
-              
-                // Success              
-                
+
+                // Success
+
                 showJSflash('Your invitation was sent', 'flash-success');
 
                 $('#requirement-invite-modal').modal('hide');
-            
+
             },
             error: function(response) {
-                
+
                 // Error
                 console.log(response);
-                
+
                 showJSflash('Invitation failed to send', 'flash-danger');
 
             }
-        });   
+        });
 
     });
 }

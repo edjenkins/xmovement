@@ -36,6 +36,8 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
+		$this->authorize('design', $idea);
+
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
 
@@ -52,23 +54,15 @@ class DesignController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
-		if (Gate::denies('design', $idea))
-        {
-            Session::flash('flash_message', trans('flash_message.no_permission'));
-            Session::flash('flash_type', 'flash-danger');
+		$this->authorize('design', $idea);
 
-			return redirect()->back();
-        }
-		else
-		{
-	        // Fetch available design modules
-	        $design_modules = DesignModule::get();
+        // Fetch available design modules
+        $design_modules = DesignModule::get();
 
-	        return view('design.add', [
-	            'idea' => $idea,
-	            'design_modules' => $design_modules,
-	        ]);
-		}
+        return view('design.add', [
+            'idea' => $idea,
+            'design_modules' => $design_modules,
+        ]);
     }
 
     public function vote(Request $request)
@@ -83,27 +77,19 @@ class DesignController extends Controller
 
             return Response::json($response);
         }
-		else
-		{
-	        $value = ($request->vote_direction == 'up') ? 1 : -1;
-			return $design_task->addVote($value);
-		}
+
+        $value = ($request->vote_direction == 'up') ? 1 : -1;
+		return $design_task->addVote($value);
     }
 
     public function destroyTask(Request $request, DesignTask $design_task)
     {
-        if (Gate::denies('destroy', $design_task))
-        {
-            Session::flash('flash_message', trans('flash_message.no_permission'));
-            Session::flash('flash_type', 'flash-warning');
-        }
-        else
-        {
-            $design_task->delete();
+		$this->authorize('destroy', $design_task);
 
-            Session::flash('flash_message', trans('flash_message.design_task_deleted'));
-            Session::flash('flash_type', 'flash-danger');
-        }
+        $design_task->delete();
+
+        Session::flash('flash_message', trans('flash_message.design_task_deleted'));
+        Session::flash('flash_type', 'flash-success');
 
         return redirect()->action('DesignController@dashboard', $design_task->idea_id);
     }

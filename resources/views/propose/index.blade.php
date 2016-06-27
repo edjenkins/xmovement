@@ -43,7 +43,7 @@
 
     			</ul>
 
-				@can('propose', $idea)
+				@can('add_proposal', $idea)
 
 	    			<ul class="module-controls pull-right">
 
@@ -75,7 +75,7 @@
 
 		@if (count($proposals) == 0)
 
-			@can('propose', $idea)
+			@can('add_proposal', $idea)
 
 				<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
 					Add Proposal

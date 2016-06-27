@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Session;
+use Log;
 
 class Handler extends ExceptionHandler
 {
@@ -47,8 +49,20 @@ class Handler extends ExceptionHandler
     {
 		if ($e instanceof ModelNotFoundException)
 		{
-			return response()->view('errors.'.'404');
+			Session::flash('flash_message', trans('flash_message.page_not_found'));
+            Session::flash('flash_type', 'flash-danger');
+
+			return redirect()->action('PageController@home');
 		}
+
+		Log::error($e);
+		// else
+		// {
+		// 	Session::flash('flash_message', trans('flash_message.no_permission'));
+        //     Session::flash('flash_type', 'flash-danger');
+		//
+		// 	return redirect()->action('PageController@home');
+		// }
         return parent::render($request, $e);
     }
 }

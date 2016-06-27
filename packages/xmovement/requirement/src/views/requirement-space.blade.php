@@ -27,12 +27,14 @@
 				@if (isset($requirementFilled))
 					@if ($requirementFilled->user->id == Auth::user()->id)
 						<a class="withdraw-from-requirement" href="#">You have filled this requirement (undo)</a>
+						<span class="not-filled-temp" style="display: none">Requirement not filled</span>
 					@else
 						<a href="{{ action('UserController@profile', $requirementFilled->user) }}">{{ $requirementFilled->user->name }}</a>
+						<span class="not-filled-temp" style="display: none">Requirement not filled</span>
 					@endif
 				@else
-					<span class="not-filled-temp">Requirement not filled</span>
 					<a class="filled-temp withdraw-from-requirement" href="#">You have filled this requirement (undo)</a>
+					<span class="not-filled-temp">Requirement not filled</span>
 				@endif
 			</p>
 

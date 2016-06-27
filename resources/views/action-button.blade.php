@@ -10,7 +10,11 @@
 
 	@else
 
-		<div class="btn btn-primary support-button" data-toggle="modal" data-target="#auth-modal">{{ trans('idea.support_this_idea') }}</div>
+		@if ($idea->support_state == 'open')
+
+			<div class="btn btn-primary support-button" data-toggle="modal" data-target="#auth-modal">{{ trans('idea.support_this_idea') }}</div>
+
+		@endif
 
 	@endif
 
@@ -34,7 +38,7 @@
 
 	@endcan
 
-	@can('propose', $idea)
+	@can('view_proposals', $idea)
 
 		<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
 

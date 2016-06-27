@@ -37,6 +37,8 @@ class ProposeController extends Controller
 {
     public function index(Request $request, Idea $idea)
     {
+		$this->authorize('view_proposals', $idea);
+
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
 
@@ -53,6 +55,8 @@ class ProposeController extends Controller
 
     public function view(Request $request, Proposal $proposal)
     {
+		$this->authorize('view_proposals', $proposal->idea);
+
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
 
@@ -110,6 +114,8 @@ class ProposeController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
+		$this->authorize('add_proposal', $idea);
+
         // Fetch proposals
         $proposals = Proposal::get();
 
@@ -121,18 +127,12 @@ class ProposeController extends Controller
 
     public function destroy(Request $request, Proposal $proposal)
     {
-		if (Gate::denies('destroy', $proposal))
-		{
-			Session::flash('flash_message', trans('flash_message.no_permission'));
-			Session::flash('flash_type', 'flash-warning');
-		}
-		else
-		{
-			$proposal->delete();
+		$this->authorize('destroy', $proposal);
 
-			Session::flash('flash_message', trans('flash_message.proposal_deleted'));
-			Session::flash('flash_type', 'flash-danger');
-		}
+		$proposal->delete();
+
+		Session::flash('flash_message', trans('flash_message.proposal_deleted'));
+		Session::flash('flash_type', 'flash-danger');
 
         return redirect()->action('ProposeController@index', $proposal->idea);
     }
@@ -144,9 +144,6 @@ class ProposeController extends Controller
 		$plucked = $collection->pluck('id');
 
 		$selected_task_ids = $plucked->all();
-
-		Log::error($selected_tasks);
-		Log::error($selected_task_ids);
 
 		$design_tasks = DesignTask::with('xmovement_task')
             ->whereIn('id', $selected_task_ids)
@@ -202,6 +199,9 @@ class ProposeController extends Controller
 	public function submit(Request $request)
 	{
 		$idea = Idea::find($request->session()->get('proposal.idea_id'));
+
+		$this->authorize('add_proposal', $idea);
+
 		$user = Auth::user();
 
 		// Validate the proposal
@@ -275,17 +275,11 @@ class ProposeController extends Controller
 		// Update proposal contributions
 		$proposal_contributions = $request->session()->get('proposal.contributions');
 
-		Log::info($request->current_task);
-
 		// Save selected contributions
 		if ($request->current_task)
 		{
 			$proposal_contributions[$request->current_task] = explode(',', $request->selected_contributions);
 			$request->session()->put('proposal.contributions', $proposal_contributions);
-		}
-		else
-		{
-
 		}
 
 		// Put new index value in session
@@ -299,8 +293,6 @@ class ProposeController extends Controller
 
 		while ($skipping)
 		{
-			Log::error('Index - ' . $task_index);
-
 			if ($task_index >= count($selected_tasks))
 			{
 				$skipping = false;

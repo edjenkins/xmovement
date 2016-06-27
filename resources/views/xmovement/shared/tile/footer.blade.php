@@ -1,6 +1,6 @@
 <div class="tile-footer">
 
-	@can('voteOnDesignTasks', $design_task)
+	@can('vote_on_design_tasks', $design_task)
 
 		@if($design_task['pinned'])
 

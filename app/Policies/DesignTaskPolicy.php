@@ -26,6 +26,19 @@ class DesignTaskPolicy
     }
 
     /**
+     * Determine if the given user can delete the given design task.
+     *
+     * @param  User  $user
+     * @param  DesignTask  $design_task
+     * @return bool
+     */
+    public function flag(User $user, DesignTask $design_task)
+    {
+		$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
+        return $is_existing_supporter;
+    }
+
+    /**
      * Determine if the given user can submit a contribution
      *
      * @param  User  $user
@@ -45,7 +58,7 @@ class DesignTaskPolicy
      * @param  Idea  $idea
      * @return bool
      */
-    public function voteOnDesignTasks(User $user, DesignTask $design_task)
+    public function vote_on_design_tasks(User $user, DesignTask $design_task)
     {
         $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
 		return ($is_existing_supporter && ($design_task->idea->design_state == 'open'));

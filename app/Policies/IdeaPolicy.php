@@ -27,6 +27,30 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can edit the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function edit(User $user, Idea $idea)
+    {
+        return $user->id == $idea->user_id;
+    }
+
+    /**
+     * Determine if the given user can delete the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function destroy(User $user, Idea $idea)
+    {
+        return $user->id == $idea->user_id;
+    }
+
+    /**
      * Determine if the given user can support the given idea.
      *
      * @param  User  $user
@@ -40,18 +64,6 @@ class IdeaPolicy
     }
 
     /**
-     * Determine if the given user has supported the given idea.
-     *
-     * @param  User  $user
-     * @param  Idea  $idea
-     * @return bool
-     */
-    public function supported(User $user, Idea $idea)
-    {
-        return Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
-    }
-
-    /**
      * Determine if the given user can design the given idea.
      *
      * @param  User  $user
@@ -60,8 +72,7 @@ class IdeaPolicy
      */
     public function design(User $user, Idea $idea)
     {
-        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
-		return ($is_existing_supporter && ($idea->design_state == 'open'));
+		return ($idea->design_state == 'open');
     }
 
     /**
@@ -73,9 +84,8 @@ class IdeaPolicy
      */
     public function contribute(User $user, Idea $idea)
     {
-		return true;
-    	// $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->idea->id)->exists();
-        // return ((!$design_task["locked"] || ($user->id == $idea->user_id)) && $is_existing_supporter);
+    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->idea->id)->exists();
+        return ($idea->design_state == "open" && $is_existing_supporter);
     }
 
     /**
@@ -115,40 +125,28 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can view proposals for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function view_proposals(User $user, Idea $idea)
+    {
+		return ($idea->proposal_state != 'closed');
+    }
+
+    /**
      * Determine if the given user can submit a proposal for the given idea.
      *
      * @param  User  $user
      * @param  Idea  $idea
      * @return bool
      */
-    public function propose(User $user, Idea $idea)
+    public function add_proposal(User $user, Idea $idea)
     {
         $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
 		return ($is_existing_supporter && ($idea->proposal_state == 'open'));
-    }
-
-    /**
-     * Determine if the given user can edit the given idea.
-     *
-     * @param  User  $user
-     * @param  Idea  $idea
-     * @return bool
-     */
-    public function edit(User $user, Idea $idea)
-    {
-        return $user->id == $idea->user_id;
-    }
-
-    /**
-     * Determine if the given user can delete the given idea.
-     *
-     * @param  User  $user
-     * @param  Idea  $idea
-     * @return bool
-     */
-    public function destroy(User $user, Idea $idea)
-    {
-        return $user->id == $idea->user_id;
     }
 
     /**

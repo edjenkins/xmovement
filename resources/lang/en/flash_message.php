@@ -11,5 +11,6 @@ return [
     'invites_not_sent' => 'Failed to send invites',
     'profile_updated' => 'Your profile was updated',
     'no_permission' => 'You do not have permission to do that',
-	'user_not_found' => 'User not found'
+	'user_not_found' => 'User not found',
+	'page_not_found' => 'Page not found'
 ];

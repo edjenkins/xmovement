@@ -7,7 +7,7 @@
 	<div class="tile-body">
 
 		<h5 class="proposal-description">
-			{{ $proposal->description }}
+			{{ str_limit($proposal->description, $limit = 80, $end = '...') }}
 		</h5>
 
 		<p>
@@ -22,7 +22,7 @@
 	<div class="tile-footer">
 
 		<a href="{{ action('ProposeController@view', $proposal->id) }}">
-			Read Proposal
+			View Proposal
 		</a>
 
 	</div>

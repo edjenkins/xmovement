@@ -55,22 +55,6 @@
 
 						<ul class="module-controls pull-right">
 
-							@can('contribute', $design_task)
-
-								<li class="module-control">
-
-									<a href="#submit-scheduler-option">
-
-										<i class="fa fa-plus"></i>
-
-										Submit scheduler option
-
-									</a>
-
-								</li>
-
-							@endcan
-
 							@can('destroy', $design_task)
 
 								<li class="module-control">

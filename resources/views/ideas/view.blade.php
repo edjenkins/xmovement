@@ -123,7 +123,7 @@
 
 	@endcan
 
-	<?php Session::flash('redirect', Request::url()); ?>
+	<?php Session::set('redirect', Request::url()); ?>
 
 	<script type="text/javascript">
 

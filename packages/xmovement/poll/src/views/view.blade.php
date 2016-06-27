@@ -45,7 +45,7 @@
 
 			    					<i class="fa fa-chevron-left"></i>
 
-			    					Back to Dashboard
+			    					<span class="control-label">Back to Dashboard</span>
 
 			    				</a>
 
@@ -63,9 +63,25 @@
 
 				    					<i class="fa fa-plus"></i>
 
-				    					Submit poll option
+				    					<span class="control-label">Submit poll option</span>
 
 				    				</button>
+
+			    				</li>
+
+		    				@endcan
+
+							@can('flag', $design_task)
+
+		    					<li class="module-control">
+
+							        <button>
+
+										<i class="fa fa-flag"></i>
+
+										<span class="control-label">Report content</span>
+
+									</button>
 
 			    				</li>
 
@@ -79,7 +95,14 @@
 							            {!! csrf_field() !!}
 							            {!! method_field('DELETE') !!}
 
-										<button type="submit"><i class="fa fa-trash"></i></button>
+										<button type="submit">
+
+											<i class="fa fa-trash"></i>
+
+											<span class="control-label">Delete task</span>
+											
+										</button>
+
 							        </form>
 
 			    				</li>

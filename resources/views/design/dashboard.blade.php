@@ -39,7 +39,7 @@
 
 						</li>
 
-						@unless (Gate::denies('propose', $idea))
+						@unless (Gate::denies('view_proposals', $idea))
 
 							<li class="module-control">
 
