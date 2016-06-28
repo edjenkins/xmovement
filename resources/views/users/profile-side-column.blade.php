@@ -1,7 +1,7 @@
 <div class="col-sm-5 col-md-4 col-lg-3 profile-side-column">
 
 	<div class="avatar-wrapper">
-		<div class="avatar" style="background-image: url('/uploads/images/small/{{ $user->avatar }}/{{ urlencode($user->name) }}')"></div>
+		<div class="avatar" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $user->avatar }}?name={{ urlencode($user->name) }}')"></div>
 	</div>
 
 	<h2 class="user-name visible-xs-block">{{ $user->name }}</h2>

@@ -96,8 +96,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/api/ideas', 'IdeaController@api_index');
 
 	// Images
-	Route::get('/uploads/images/{size}/{filename}/{name?}', function($size, $filename, $name = null)
+	Route::get('/uploads/images/{size}/{filename}', function($size, $filename)
 	{
+		$name = Input::get("name");
+
 		switch ($filename) {
 			case 'placeholder':
 				$img = Image::canvas(800, 800, '#e1e1e1');
@@ -145,7 +147,7 @@ Route::group(['middleware' => ['web']], function () {
 				break;
 
 			default:
-				$src = 'https://s3.amazonaws.com/xmovement/uploads/images/' . $size . '/' . $filename;
+				$src = 'https://s3.amazonaws.com/xmovementhttps://s3.amazonaws.com/xmovement/uploads/images/' . $size . '/' . $filename;
 
 				break;
 		}

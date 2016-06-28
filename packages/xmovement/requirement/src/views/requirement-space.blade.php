@@ -2,7 +2,7 @@
 
 	<div class="requirement-space {{ isset($requirementFilled) ? 'filled' : 'not-filled' }}" data-requirement-id="{{ $requirement['id'] }}" data-requirement-filled-id="{{ isset($requirementFilled) ? $requirementFilled->id : '' }}">
 
-		<div class="requirement-circle" style="{{ isset($requirementFilled) ? 'background-image: url("/uploads/images/small/' . $requirementFilled->user->avatar . '")' : '' }}" data-user-background="/uploads/images/small/{{ Auth::user()->avatar }}/{{ urlencode(Auth::user()->name) }}">
+		<div class="requirement-circle" style="{{ isset($requirementFilled) ? 'background-image: url("https://s3.amazonaws.com/xmovement/uploads/images/small/' . $requirementFilled->user->avatar . '")' : '' }}" data-user-background="https://s3.amazonaws.com/xmovement/uploads/images/small/{{ Auth::user()->avatar }}?name={{ urlencode(Auth::user()->name) }}">
 
 			<i class="fa fa-check"></i>
 			<i class="fa fa-plus"></i>

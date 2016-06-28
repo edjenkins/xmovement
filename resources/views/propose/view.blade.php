@@ -73,7 +73,7 @@
 
 					<li class="proposal-item user-header">
 						<a href="{{ action('UserController@profile', $proposal->user) }}" class="avatar-wrapper">
-							<div class="avatar" style="background-image: url('/uploads/images/small/{{ $proposal->user->avatar }}/{{ urlencode($proposal->user->name) }}')"></div>
+							<div class="avatar" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $proposal->user->avatar }}?name={{ urlencode($proposal->user->name) }}')"></div>
 						</a>
 						<br>
 						<h3>{{ $proposal->description }}</h3>

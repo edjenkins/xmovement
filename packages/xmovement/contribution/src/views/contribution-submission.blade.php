@@ -2,7 +2,7 @@
 
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
-	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}/{{ urlencode($contributionSubmission->user['name']) }}')"></a>
+	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $contributionSubmission->user['avatar'] }}?name={{ urlencode($contributionSubmission->user['name']) }}')"></a>
 
 	<div class="contribution-submission-value">
 
@@ -21,8 +21,8 @@
 			<h5>{{ $value->description }}</h5>
 			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
 
-			<a href="/uploads/images/large/{{ $value->image }}" target="_blank">
-				<img src="/uploads/images/small/{{ $value->image }}"/>
+			<a href="https://s3.amazonaws.com/xmovement/uploads/images/large/{{ $value->image }}" target="_blank">
+				<img src="https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $value->image }}"/>
 			</a>
 
 		<?php } ?>
