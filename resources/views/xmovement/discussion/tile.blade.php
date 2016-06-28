@@ -8,8 +8,7 @@
 		    	<h4>{{ str_limit($design_task['name'], 50) }}</h4>
 
 		    	<p>
-					<i class="fa fa-comment"></i>
-					0
+					<i class="fa fa-comments"></i>
 		    	</p>
 
 		    </span>
