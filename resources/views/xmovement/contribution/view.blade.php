@@ -45,7 +45,7 @@
 
 			    					<i class="fa fa-chevron-left"></i>
 
-			    					Back to Dashboard
+			    					<span class="control-label">Back to Dashboard</span>
 
 			    				</a>
 
@@ -63,7 +63,7 @@
 
 				    					<i class="fa fa-plus"></i>
 
-				    					Submit contribution
+				    					<span class="control-label">Submit contribution</span>
 
 				    				</a>
 
@@ -79,7 +79,14 @@
 							            {!! csrf_field() !!}
 							            {!! method_field('DELETE') !!}
 
-										<button type="submit"><i class="fa fa-trash"></i></button>
+										<button type="submit">
+
+											<i class="fa fa-trash"></i>
+
+											<span class="control-label">Delete task</span>
+
+										</button>
+										
 							        </form>
 
 			    				</li>
