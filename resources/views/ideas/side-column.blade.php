@@ -1,5 +1,5 @@
 <div class="creator-tile" onClick="document.location = '{{ action('UserController@profile', $idea->user_id) }}';">
-	<div class="creator-avatar" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/medium/{{ $idea->user->avatar }}?name={{ urlencode($idea->user->name) }}')"></div>
+	<div class="creator-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($idea->user, 'medium') }}')"></div>
 	<h4>{{ $idea->user->name }}</h4>
 	<h5 class="subtitle">Idea Creator</h5>
 </div>
@@ -15,6 +15,7 @@
 	<li class="share-twitter"><i class="fa fa-twitter"></i></li>
 	<li class="share-googleplus"><i class="fa fa-google-plus"></i></li>
 	<li class="share-email"><i class="fa fa-envelope"></i></li>
+	<div class="clearfloat"></div>
 </ul>
 
 @include('action-button')

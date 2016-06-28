@@ -2,7 +2,7 @@
 
 <li class="proposal-item">
 
-	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $pollOption->user['avatar'] }}?name={{ urlencode($pollOption->user['name']) }}')"></a>
+	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('{{ ResourceImage::getProfileImage($pollOption->user, 'small') }}')"></a>
 
 	<div class="poll-option-value">
 		<h5>{{ $pollOption['value'] }}</h5>

@@ -2,7 +2,7 @@
 
 <li class="proposal-item">
 
-	<a href="{{ action('UserController@profile', $schedulerOption->user) }}" title="{{ $schedulerOption->user['name'] }}" class="scheduler-option-user" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $schedulerOption->user['avatar'] }}?name={{ urlencode($schedulerOption->user['name']) }}')"></a>
+	<a href="{{ action('UserController@profile', $schedulerOption->user) }}" title="{{ $schedulerOption->user['name'] }}" class="scheduler-option-user" style="background-image: url('{{ ResourceImage::getProfileImage($schedulerOption->user, 'small') }}')"></a>
 
 	<div class="scheduler-option-value">
 		<h5>{{ $schedulerOption->getDate() }} - {{ $schedulerOption->getTime() }}</h5>

@@ -86,7 +86,7 @@
 											<span class="control-label">Delete task</span>
 
 										</button>
-										
+
 							        </form>
 
 			    				</li>
@@ -104,7 +104,7 @@
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/medium/{{ $design_task->user->avatar }}?name={{ urlencode($design_task->user->name) }}')"></a>
+	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('{{ ResourceImage::getProfileImage($design_task->user, 'medium') }}')"></a>
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 

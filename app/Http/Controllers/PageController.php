@@ -18,17 +18,17 @@ class PageController extends Controller
 
 	    return view('pages.home', ['ideas' => $ideas]);
 	}
-	
+
     public function about(Request $request)
 	{
 	    return view('pages.about');
 	}
-	
+
     public function contact(Request $request)
 	{
 	    return view('pages.contact');
 	}
-	
+
     public function terms(Request $request)
 	{
 	    return view('pages.terms');

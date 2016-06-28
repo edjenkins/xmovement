@@ -14,7 +14,7 @@
             <div class="auth-panel">
 
 				<div class="avatar-wrapper">
-					<div class="avatar" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/small/{{ $user->avatar }}?name={{ urlencode($user->name) }}')">
+					<div class="avatar" style="background-image: url('{{ ResourceImage::getProfileImage($user, 'small') }}')">
 					</div>
 				</div>
 

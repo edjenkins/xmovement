@@ -163,6 +163,7 @@ return [
          * Custom Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+		App\Providers\ResourceImageProvider::class,
 
         // XMovement Design Modules
         XMovement\Poll\PollServiceProvider::class,
@@ -222,6 +223,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
 		'Image'     => Intervention\Image\Facades\Image::class,
+		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 

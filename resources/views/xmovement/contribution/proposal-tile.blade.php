@@ -14,7 +14,7 @@
 			{{ $value->description }}
 		</div>
 
-		<img src="https://s3.amazonaws.com/xmovement/uploads/images/medium/{{ $value->image }}" height="100" style="margin: 15px 0" />
+		<img src="{{ ResourceImage::getImage($value->image, 'medium') }}" height="100" style="margin: 15px 0" />
 
 	<?php } ?>
 
@@ -70,7 +70,7 @@
 				<i class="fa {{ $class }}" aria-hidden="true"></i>
 			</div>
 			<div class="file-name">
-				<a href="https://s3.amazonaws.com/xmovement/uploads/files/{{ $value->file }}" target="_blank">{{ $value->file }}</a>
+				<a href="{{ ResourceImage::getFile($value->file) }}" target="_blank">{{ $value->file }}</a>
 			</div>
 		</div>
 

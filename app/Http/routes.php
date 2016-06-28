@@ -12,10 +12,7 @@
 */
 
 
-Route::get('/123', function(){
-	ImageResource::getImage();
-});
-// Route::get('/', 'PageController@home');
+Route::get('/', 'PageController@home');
 
 /*
 |--------------------------------------------------------------------------
@@ -99,69 +96,52 @@ Route::group(['middleware' => ['web']], function () {
 	// API routes
 	Route::get('/api/ideas', 'IdeaController@api_index');
 
-	// Images
-	Route::get('/uploads/images/{size}/{filename}', function($size, $filename)
+	// Dynamic Images
+	Route::get('/dynamic/avatar/{size}', function($size)
 	{
+		$img = Image::canvas(800, 800, '#6acda4');
+
+		$img->circle(350, 400, 300, function ($draw) {
+				$draw->background('#fff');
+		});
+		$img->circle(600, 400, 750, function ($draw) {
+				$draw->background('#fff');
+		});
+
 		$name = Input::get("name");
 
-		switch ($filename) {
-			case 'placeholder':
-				$img = Image::canvas(800, 800, '#e1e1e1');
-				$img->circle(100, 200, 400, function ($draw) {
-						$draw->background('#f2f2f2');
-				});
-				$img->circle(100, 400, 400, function ($draw) {
-						$draw->background('#f2f2f2');
-				});
-				$img->circle(100, 600, 400, function ($draw) {
-						$draw->background('#f2f2f2');
-				});
-				return $img->response('jpg');
-				break;
+		if ($name)
+		{
+			$name = urldecode($name);
 
-			case 'avatar':
-				$img = Image::canvas(800, 800, '#6acda4');
+			if(preg_match_all('/\b(\w)/',strtoupper($name),$m)) {
+			    $name_acronymn = implode('',$m[1]); // $v is now SOQTU
+			}
 
-				$img->circle(350, 400, 300, function ($draw) {
-						$draw->background('#fff');
-				});
-				$img->circle(600, 400, 750, function ($draw) {
-						$draw->background('#fff');
-				});
-
-				if ($name)
-				{
-					$name = urldecode($name);
-
-					if(preg_match_all('/\b(\w)/',strtoupper($name),$m)) {
-					    $name_acronymn = implode('',$m[1]); // $v is now SOQTU
-					}
-
-					$img->text($name_acronymn, 600, 600, function($font) {
-					    $font->file('fonts/sourcesanspro-bold-webfont.ttf');
-					    $font->size(100);
-					    $font->color('#6acda4');
-					    $font->align('right');
-					    $font->valign('center');
-					});
-				}
-
-
-				return $img->response('jpg');
-				break;
-
-			default:
-				$src = 'https://s3.amazonaws.com/xmovementhttps://s3.amazonaws.com/xmovement/uploads/images/' . $size . '/' . $filename;
-
-				break;
+			$img->text($name_acronymn, 600, 600, function($font) {
+			    $font->file('fonts/sourcesanspro-bold-webfont.ttf');
+			    $font->size(100);
+			    $font->color('#6acda4');
+			    $font->align('right');
+			    $font->valign('center');
+			});
 		}
 
-		$cacheimage = Image::cache(function($image) use ($src) {
-			$image->make($src);
-		}, 10, true);
-
-		return $cacheimage->response('jpg');
-
+		return $img->response('jpg');
 	});
 
+	Route::get('/dynamic/placeholder/{size}', function($size)
+	{
+		$img = Image::canvas(800, 800, '#e1e1e1');
+		$img->circle(100, 200, 400, function ($draw) {
+				$draw->background('#f2f2f2');
+		});
+		$img->circle(100, 400, 400, function ($draw) {
+				$draw->background('#f2f2f2');
+		});
+		$img->circle(100, 600, 400, function ($draw) {
+				$draw->background('#f2f2f2');
+		});
+		return $img->response('jpg');
+	});
 });

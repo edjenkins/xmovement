@@ -30,6 +30,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
+			"ResourceImage\\" : "ResourceImage/",
             "XMovement\\Poll\\": "packages/xmovement/poll/src",
             "XMovement\\Discussion\\": "packages/xmovement/discussion/src",
             "XMovement\\Requirement\\": "packages/xmovement/requirement/src",

@@ -30,7 +30,7 @@
 
 	    		<div class="column main-column">
 
-	    			<div class="idea-media" style="background-image: url('https://s3.amazonaws.com/xmovement/uploads/images/large/{{ $idea->photo }}')"></div>
+	    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
 
 					@include('ideas/progress')
 

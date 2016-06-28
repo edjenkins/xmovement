@@ -1,6 +1,7 @@
 @extends('layouts.app', ['bodyclasses' => 'transparent'])
 
 @section('content')
+
     <div class="container-fluid hero-container" style="background-image:url('{{ getenv('APP_HOME_HEADER_IMG') }}')">
         <div class="black-overlay"></div>
         <div class="text-container">
