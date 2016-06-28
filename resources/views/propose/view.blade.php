@@ -97,9 +97,11 @@
 								<?php echo $proposal_item->design_task->xmovement_task->renderProposalOutput($proposal_item->design_task); ?>
 
 								@if(isset($proposal_item->proposal_item_details))
-									<p class="proposal-item-details">
-										{{ $proposal_item->proposal_item_details }}
-									</p>
+									@if($proposal_item->proposal_item_details != "")
+										<p class="proposal-item-details">
+											{{ $proposal_item->proposal_item_details }}
+										</p>
+									@endif
 								@endif
 
 								<div class="clearfloat"></div>
