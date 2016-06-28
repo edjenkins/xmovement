@@ -55,7 +55,7 @@
 
 					</ul>
 
-	    			@unless (Gate::denies('design', $idea))
+	    			@unless (Gate::denies('contribute', $idea))
 
 		    			<ul class="module-controls pull-right">
 
@@ -91,7 +91,7 @@
 
 					@if (count($design_tasks) == 0)
 
-						@can('design', $idea)
+						@can('contribute', $idea)
 
 							<a href="{{ action('DesignController@add', $idea) }}" class="action-panel">
 								Add Design Task

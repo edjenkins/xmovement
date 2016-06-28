@@ -59,7 +59,7 @@ class DesignController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
-		if (Gate::denies('design', $idea))
+		if (Gate::denies('contribute', $idea))
 		{
 	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
 	        Session::flash('flash_type', 'flash-danger');
