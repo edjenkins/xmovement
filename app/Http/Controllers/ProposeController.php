@@ -37,7 +37,12 @@ class ProposeController extends Controller
 {
     public function index(Request $request, Idea $idea)
     {
-		$this->authorize('view_proposals', $idea);
+		if (Gate::denies('view_proposals', $idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
@@ -55,7 +60,12 @@ class ProposeController extends Controller
 
     public function view(Request $request, Proposal $proposal)
     {
-		$this->authorize('view_proposals', $proposal->idea);
+		if (Gate::denies('view_proposals', $proposal->idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $proposal->idea);
+		}
 
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
@@ -114,7 +124,12 @@ class ProposeController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
-		$this->authorize('add_proposal', $idea);
+		if (Gate::denies('add_proposal', $idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
         // Fetch proposals
         $proposals = Proposal::get();
@@ -127,7 +142,12 @@ class ProposeController extends Controller
 
     public function destroy(Request $request, Proposal $proposal)
     {
-		$this->authorize('destroy', $proposal);
+		if (Gate::denies('destroy', $idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
 		$proposal->delete();
 
@@ -200,7 +220,12 @@ class ProposeController extends Controller
 	{
 		$idea = Idea::find($request->session()->get('proposal.idea_id'));
 
-		$this->authorize('add_proposal', $idea);
+		if (Gate::denies('add_proposal', $idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.no_permission'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
 		$user = Auth::user();
 

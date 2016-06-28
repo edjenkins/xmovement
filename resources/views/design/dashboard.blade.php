@@ -103,7 +103,11 @@
 
 	    			<div class="clearfloat"></div>
 
-					@include('disqus')
+					<div class="discussion-wrapper" style="padding: 15px">
+
+						@include('disqus')
+
+					</div>
 
 	    		</div>
 

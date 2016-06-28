@@ -59,7 +59,12 @@ class DesignController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
-		$this->authorize('design', $idea);
+		if (Gate::denies('design', $idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
         // Fetch available design modules
         $design_modules = DesignModule::where('available','1')->get();
@@ -89,7 +94,12 @@ class DesignController extends Controller
 
     public function destroyTask(Request $request, DesignTask $design_task)
     {
-		$this->authorize('destroy', $design_task);
+		if (Gate::denies('destroy', $design_task))
+		{
+	        Session::flash('flash_message', trans('flash_message.no_permission'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
         $design_task->delete();
 
