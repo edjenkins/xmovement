@@ -39,7 +39,7 @@ class ProposeController extends Controller
     {
 		if (Gate::denies('view_proposals', $idea))
 		{
-	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_message', trans('flash_message.proposal_phase_closed'));
 	        Session::flash('flash_type', 'flash-danger');
 			return redirect()->action('IdeaController@view', $idea);
 		}
@@ -126,7 +126,7 @@ class ProposeController extends Controller
     {
 		if (Gate::denies('add_proposal', $idea))
 		{
-	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_message', trans('flash_message.no_permission'));
 	        Session::flash('flash_type', 'flash-danger');
 			return redirect()->action('IdeaController@view', $idea);
 		}
@@ -144,7 +144,7 @@ class ProposeController extends Controller
     {
 		if (Gate::denies('destroy', $idea))
 		{
-	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_message', trans('flash_message.no_permission'));
 	        Session::flash('flash_type', 'flash-danger');
 			return redirect()->action('IdeaController@view', $idea);
 		}
