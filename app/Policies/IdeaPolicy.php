@@ -84,7 +84,7 @@ class IdeaPolicy
      */
     public function contribute(User $user, Idea $idea)
     {
-    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->idea->id)->exists();
+    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
         return ($idea->design_state == "open" && $is_existing_supporter);
     }
 
