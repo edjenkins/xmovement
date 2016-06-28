@@ -79,6 +79,44 @@
 			border-color main-color
 			cursor pointer
 
+ul.sidebar-social-links
+	cleanlist()
+	border border-color 1px solid
+	border-right none
+	box-sizing border-box
+	height 50px
+	margin-bottom 15px
+	li
+		cleanlist()
+		border-right border-color 1px solid
+		box-sizing border-box
+		float left
+		font-size 20px
+		height 50px
+		line-height 50px
+		text-align center
+		width 25%
+		animate()
+		i
+			color #999
+			animate()
+		&:hover
+			cursor pointer
+			i
+				color white
+		&.share-fb:hover
+			background-color #3B5998
+			border-color #3B5998
+		&.share-twitter:hover
+			background-color #4099ff
+			border-color #4099ff
+		&.share-googleplus:hover
+			background-color #d34836
+			border-color #d34836
+		&.share-email:hover
+			background-color #4875B4
+			border-color #4875B4
+
 .stats-tile
 	border border-color 1px solid
 	list-style none

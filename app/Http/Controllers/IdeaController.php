@@ -11,6 +11,7 @@ use Gate;
 use Response;
 use Input;
 use Log;
+use Redirect;
 use Session;
 use Carbon\Carbon;
 
@@ -55,9 +56,11 @@ class IdeaController extends Controller
 		]);
 	}
 
-	public function view(Request $request, Idea $idea)
+	public function view(Request $request, Idea $idea, $slug = null)
 	{
-		// Log::error(Idea::where('id', $idea->id)->count());
+		if ($slug != $idea->slug)
+			return redirect()->action('IdeaController@view', [$idea, $idea->slug]);
+	        // return Redirect::route('idea.view', array('id' => $idea->id, 'slug' => $idea->slug), 301);
 
 		if (Idea::where('id', $idea->id)->count() == 0)
 		{

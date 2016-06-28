@@ -156,8 +156,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-				// Image Manipulation
-				Intervention\Image\ImageServiceProvider::class,
+		// Image Manipulation
+		Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Custom Service Providers...
@@ -221,7 +221,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-		'Image' => Intervention\Image\Facades\Image::class,
+		'Image'     => Intervention\Image\Facades\Image::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 

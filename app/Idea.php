@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use MartinBean\Database\Eloquent\Sluggable;
 
 use Carbon\Carbon;
 use Log;
@@ -29,6 +30,8 @@ class Idea extends Model
     ];
 
 	protected $appends = ['supporter_count'];
+
+	use Sluggable;
 
     public function user()
     {

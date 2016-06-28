@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'PageController@home');
+
+Route::get('/123', function(){
+	ImageResource::getImage();
+});
+// Route::get('/', 'PageController@home');
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +63,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/idea/edit/{idea}', 'IdeaController@edit');
     Route::post('/idea/update', 'IdeaController@update');
     Route::post('/idea/store', 'IdeaController@store');
-    Route::get('/idea/{idea}', 'IdeaController@view');
+    Route::get('/idea/{idea}/{slug?}', 'IdeaController@view');
     Route::delete('/idea/{idea}', 'IdeaController@destroy');
 
     // Design routes
