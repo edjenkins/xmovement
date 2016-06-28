@@ -57,6 +57,15 @@ class IdeaController extends Controller
 
 	public function view(Request $request, Idea $idea)
 	{
+		// Log::error(Idea::where('id', $idea->id)->count());
+
+		if (Idea::where('id', $idea->id)->count() == 0)
+		{
+	        Session::flash('flash_message', trans('flash_message.idea_not_found'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@index');
+		}
+
 		// Check if user? is a supporter
 		$supported = (Auth::check()) ? Auth::user()->hasSupportedIdea($idea) : false;
 

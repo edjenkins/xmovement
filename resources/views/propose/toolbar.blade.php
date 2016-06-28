@@ -14,7 +14,7 @@
 		{!! csrf_field() !!}
 		<input type="hidden" name="current_task" value="{{ $design_task->id }}">
 		<button class="previous-button pull-left" type="submit">
-			<i class="fa fa-angle-left"></i>
+			Previous
 		</button>
 	</form>
 
@@ -23,7 +23,7 @@
 		<input type="hidden" name="current_task" value="{{ $design_task->id }}">
 		<input type="hidden" name="selected_contributions" id="selected_contributions" data-original-values="{{ array_key_exists($design_task->id, $contributions) ? ltrim(implode(',', array_slice($contributions[$design_task->id], 0, count($contributions[$design_task->id]))),',') : '' }}" value="">
 		<button class="next-button pull-right" type="submit">
-			<i class="fa fa-angle-right"></i>
+			Next
 		</button>
 	</form>
 

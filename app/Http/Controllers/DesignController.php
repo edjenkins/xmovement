@@ -36,7 +36,12 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
-		$this->authorize('design', $idea);
+		if (Gate::denies('design', $idea))
+		{
+	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
+	        Session::flash('flash_type', 'flash-danger');
+			return redirect()->action('IdeaController@view', $idea);
+		}
 
 		// Get out of proposal mode
 		$request->session()->put('proposal.active', false);
@@ -57,7 +62,7 @@ class DesignController extends Controller
 		$this->authorize('design', $idea);
 
         // Fetch available design modules
-        $design_modules = DesignModule::get();
+        $design_modules = DesignModule::where('available','1')->get();
 
         return view('design.add', [
             'idea' => $idea,

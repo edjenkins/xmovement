@@ -75,9 +75,13 @@
 
 		    					<li class="module-control">
 
-							        <button><i class="fa fa-flag"></i></button>
+							        <button>
 
-									<span class="control-label">Report content</span>
+										<i class="fa fa-flag"></i>
+
+										<span class="control-label">Report content</span>
+
+									</button>
 
 			    				</li>
 
@@ -91,9 +95,13 @@
 							            {!! csrf_field() !!}
 							            {!! method_field('DELETE') !!}
 
-										<button type="submit"><i class="fa fa-trash"></i></button>
+										<button type="submit">
 
-										<span class="control-label">e
+											<i class="fa fa-trash"></i>
+
+											<span class="control-label">Delete task</span>
+											
+										</button>
 
 							        </form>
 

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Inspiring;
 
 use App\Jobs\SendDesignPhaseOpenEmail;
 use App\Jobs\SendProposalPhaseOpenEmail;
+use App\Jobs\SendProposalPhaseCompleteEmail;
 
 use Carbon\Carbon;
 use App\Idea;
@@ -99,6 +100,16 @@ class UpdateIdeaStates extends Command
 			if ((!$now->between($proposal_start, $proposal_end)) && ($idea->proposal_state == 'open'))
 			{
 				$idea->proposal_state = ($now->gt($proposal_end)) ? 'locked' : 'closed';
+
+				if ($idea->proposal_state == 'locked') {
+
+					// Send proposal phase complete email
+					foreach ($idea->get_supporters() as $index => $supporter)
+					{
+						// $job = (new SendProposalPhaseCompleteEmail($supporter->user, $idea, true))->delay(5)->onQueue('emails');
+						// $this->dispatch($job);
+					}
+				}
 			}
 			else if (($idea->proposal_state != 'open') && ($now->between($proposal_start, $proposal_end)))
 			{

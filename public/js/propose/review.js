@@ -23,8 +23,20 @@ function initSortable() {
 function attachHandlers() {
 
 	$('textarea').off('change keyup paste').on('change keyup paste', function() {
+
+		$(this).outerHeight(20).outerHeight(this.scrollHeight);
+
 		setOrder();
 	});
+
+	$('.fa-trash-o').off('click').on('click', function() {
+		var this_text_index = $(this).attr('data-text-index');
+		$('#proposal-text-' + this_text_index).remove();
+	})
+
+	$('.fa-pencil').off('click').on('click', function() {
+		$(this).parent().find('textarea').show();
+	})
 }
 
 $(document).ready(function() {
@@ -35,7 +47,7 @@ $(document).ready(function() {
 
 	$('#add-content').click(function() {
 		text_index++;
-		$('.proposal-preview').append('<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-' + text_index + '"><i class="fa fa-bars"></i><h3>Add some text</h3><textarea name="name" placeholder="Justify your choices with added text..." rows="8" cols="40"></textarea></li>');
+		$('.proposal-preview').append('<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-' + text_index + '"><i data-text-index="' + text_index + '" class="fa fa-trash-o"></i><textarea class="expanding" name="name" placeholder="Justify your choices with added text..." rows="8" cols="40"></textarea></li>');
 		initSortable();
 		attachHandlers();
 	});
@@ -60,7 +72,8 @@ function setOrder()
 				var design_task_id = item.attr('data-design-task-id');
 				var design_task_xmovement_task_type = item.attr('data-design-task-xmovement-task-type');
 				var design_task_contribution_ids = item.attr('data-design-task-contribution-ids');
-				proposal.push({type:proposal_item_type, id:design_task_id, xmovement_task_type:design_task_xmovement_task_type, contribution_ids:design_task_contribution_ids});
+				var proposal_item_details = item.find('.proposal-item-details').val();
+				proposal.push({type:proposal_item_type, id:design_task_id, xmovement_task_type:design_task_xmovement_task_type, contribution_ids:design_task_contribution_ids, proposal_item_details:proposal_item_details});
 				break;
 			case 'text':
 				var design_task_id = item.attr('data-design-task-id');

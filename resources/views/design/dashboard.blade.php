@@ -102,6 +102,9 @@
 					@endif
 
 	    			<div class="clearfloat"></div>
+
+					@include('disqus')
+
 	    		</div>
 
 	    	</div>

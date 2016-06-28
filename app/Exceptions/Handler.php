@@ -52,17 +52,11 @@ class Handler extends ExceptionHandler
 			Session::flash('flash_message', trans('flash_message.page_not_found'));
             Session::flash('flash_type', 'flash-danger');
 
-			return redirect()->action('PageController@home');
+			// return redirect()->action('PageController@home');
 		}
 
 		Log::error($e);
-		// else
-		// {
-		// 	Session::flash('flash_message', trans('flash_message.no_permission'));
-        //     Session::flash('flash_type', 'flash-danger');
-		//
-		// 	return redirect()->action('PageController@home');
-		// }
+
         return parent::render($request, $e);
     }
 }

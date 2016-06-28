@@ -56,7 +56,7 @@
 
         <div class="row">
 
-            <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="idea in ideas | orderBy:sort_type:true | filter:idea_search_term">
+            <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="idea in ideas | orderBy:sort_type:true | filter:idea_search_term" ng-show="ideas">
 
 				<div class="tile idea-tile">
 					<a class="tile-image" style="background-image:url('/uploads/images/large/<% idea.photo %>')" ng-href="/idea/<% idea.id %>"></a>

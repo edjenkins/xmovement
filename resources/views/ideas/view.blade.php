@@ -24,7 +24,7 @@
 
 	    			<div class="stats-tile supporters-tile">
     					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
-	    				<h5 class="supporter-subtitle">Supporters</h5>
+	    				<h5 class="supporter-subtitle">{{ trans_choice('idea.supporters', $idea->supporterCount()) }}</h5>
 	    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">{{ trans('common.you_supported_idea') }}</div>
     				</div>
 
@@ -75,7 +75,7 @@
 
     					<div class="stats-tile supporters-tile">
 	    					<h3 class="supporter-count">{{ $idea->supporterCount() }}</h3>
-		    				<h5 class="supporter-subtitle">Supporters</h5>
+		    				<h5 class="supporter-subtitle">{{ trans_choice('idea.supporters', $idea->supporterCount()) }}</h5>
 		    				<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">{{ trans('common.you_supported_idea') }}</div>
 	    				</div>
 
@@ -87,13 +87,16 @@
 
 						<div class="proposals-container hidden-xs">
 
-			    			<h2 class="section-header">Proposals</h2>
+			    			<div class="section-header">
+								<h2>Proposals</h2>
+								<a href="{{ action('ProposeController@index', $idea) }}">View all</a>
+							</div>
 
 							<div class="proposals-wrapper">
 
-								@foreach ($idea->proposals->take(3) as $proposal)
+								@foreach ($idea->proposals->take(3) as $index => $proposal)
 									<div class="col-xs-12 col-sm-6 col-md-4">
-										@include('propose/tile', ['proposal' => $proposal])
+										@include('propose/tile', ['proposal' => $proposal, 'index' => $index])
 									</div>
 								@endforeach
 
@@ -107,7 +110,9 @@
 
 					<br />
 
-					<h2 class="section-header">Discussion</h2>
+					<div class="section-header">
+						<h2>Discussion</h2>
+					</div>
 
 	    			@include('disqus')
 

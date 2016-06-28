@@ -96,6 +96,12 @@
 
 								<?php echo $proposal_item->design_task->xmovement_task->renderProposalOutput($proposal_item->design_task); ?>
 
+								@if(isset($proposal_item->proposal_item_details))
+									<p class="proposal-item-details">
+										{{ $proposal_item->proposal_item_details }}
+									</p>
+								@endif
+
 								<div class="clearfloat"></div>
 							</li>
 
@@ -120,22 +126,28 @@
 
 						<div class="proposal-vote-container {{ ($proposal->voteCount() == 0) ? '' : (($proposal->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 							<div class="vote-controls">
-								<div class="vote-button vote-up {{ ($proposal->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
-									<i class="fa fa-2x fa-angle-up"></i>
-								</div>
+								@can('vote_on_proposals', $proposal)
+									<div class="vote-button vote-up {{ ($proposal->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
+										<i class="fa fa-2x fa-angle-up"></i>
+									</div>
+								@endcan
 								<div class="vote-count">
 									{{ $proposal->voteCount() }}
 								</div>
-								<div class="vote-button vote-down {{ ($proposal->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
-									<i class="fa fa-2x fa-angle-down"></i>
-								</div>
+								@can('vote_on_proposals', $proposal)
+									<div class="vote-button vote-down {{ ($proposal->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
+										<i class="fa fa-2x fa-angle-down"></i>
+									</div>
+								@endcan
 								<div class="clearfloat"></div>
 							</div>
 						</div>
 
-					</div>
+					</li>
 
 				</ul>
+
+				<div class="clearfloat"></div>
 
 				@include('disqus')
 

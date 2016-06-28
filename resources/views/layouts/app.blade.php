@@ -60,6 +60,8 @@
 
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
+	<script src='{{ URL::asset('js/expanding.js') }}'></script>
+
     <script src='{{ URL::asset('js/file_uploader/vendor/jquery.ui.widget.js') }}'></script>
     <script src='{{ URL::asset('js/file_uploader/jquery.iframe-transport.js') }}'></script>
     <script src='{{ URL::asset('js/file_uploader/jquery.fileupload.js') }}'></script>

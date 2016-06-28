@@ -38,6 +38,19 @@ class ProposalPolicy
     }
 
     /**
+     * Determine if the given user can vote on proposals.
+     *
+     * @param  User  $user
+     * @param  Proposal  $proposal
+     * @return bool
+     */
+    public function vote_on_proposals(User $user, Proposal $proposal)
+    {
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $proposal->idea->id)->exists();
+		return ($is_existing_supporter && ($proposal->idea->proposal_state == 'open'));
+    }
+
+    /**
      * Override all policy restrictions if the user is a super admin
      *
      * @param  User  $user

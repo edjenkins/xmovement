@@ -7,24 +7,24 @@ ul.design-module-selector
 	text-align center
 	li.design-module-tile
 		background #f2f2f2
+		box-sizing border-box
 		border white 4px solid
 		box-sizing border-box
 		color #999
-		display block
-		float left
+		display inline-block
 		font-size 18px
 		line-height 100px
 		margin 0
 		padding 0
 		text-align center
-		width (100% / 6)
+		width calc((100% / 6) - 16px)
 		transition(all 0.2s linear)
 		@media(max-width: 1000px)
 			line-height 80px
-			width (100% / 3)
+			width calc((100% / 3) - 12px)
 		@media(max-width: 768px)
 			line-height 60px
-			width (100% / 2)
+			width calc((100% / 2) - 8px)
 		i
 			margin-right 6px
 		&:hover

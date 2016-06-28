@@ -13,7 +13,7 @@
 
 		<a href="{{ action('IdeaController@view', $idea) }}">
 			<button class="next-button pull-left">
-				<i class="fa fa-ban fa-2x"></i>
+				Cancel
 			</button>
 		</a>
 
@@ -22,7 +22,7 @@
 			<input type="hidden" name="current_task" id="current_task" value="-1">
 			<input type="hidden" name="selected_tasks" id="selected_tasks" value="">
 			<button class="next-button pull-right" type="submit">
-				<i class="fa fa-angle-right fa-2x"></i>
+				Next
 			</button>
 		</form>
 

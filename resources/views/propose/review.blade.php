@@ -16,7 +16,7 @@
 		<form action="{{ action('ProposeController@previous') }}" method="POST">
 			{!! csrf_field() !!}
 			<button class="previous-button pull-left" type="submit">
-				<i class="fa fa-angle-left fa-2x"></i>
+				Previous
 			</button>
 		</form>
 
@@ -57,26 +57,25 @@
 							@foreach($design_tasks as $index => $design_task)
 
 								<li class="proposal-item sortable" id="proposal-item-id-{{ $index }}" data-proposal-item-type="task" data-design-task-id="{{ $design_task->id }}" data-design-task-xmovement-task-type="{{ $design_task->xmovement_task_type }}" data-design-task-contribution-ids="{{ json_encode($design_task->contribution_ids) }}">
-									<i class="fa fa-bars"></i>
+
+									<i class="fa fa-trash-o"></i>
 
 									<a href="{{ $design_task->getLink() }}" target="_blank">
 										<i class="fa fa-external-link"></i>
 									</a>
 
+									<i class="fa fa-pencil"></i>
+
 									<span class="name-header">{{ $design_task->name }}</span>
 
 									<?php echo $design_task->xmovement_task->renderProposalOutput($design_task); ?>
+
+									<textarea class="proposal-item-details" name="name" placeholder="Justify this decision.." rows="8" cols="40"></textarea>
 
 									<div class="clearfloat"></div>
 								</li>
 
 							@endforeach
-
-							<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-1">
-								<i class="fa fa-bars"></i>
-								<h3>Add some text</h3>
-								<textarea name="name" placeholder="Justify your choices with added text..." rows="8" cols="40"></textarea>
-							</li>
 
 						</ul>
 

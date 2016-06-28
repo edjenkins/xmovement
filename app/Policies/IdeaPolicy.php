@@ -72,7 +72,7 @@ class IdeaPolicy
      */
     public function design(User $user, Idea $idea)
     {
-		return ($idea->design_state == 'open');
+		return ($idea->design_state != 'closed');
     }
 
     /**

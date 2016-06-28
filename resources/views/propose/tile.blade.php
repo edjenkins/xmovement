@@ -11,7 +11,11 @@
 		</h5>
 
 		<p>
-			Added {{ $proposal->created_at->diffForHumans() }}
+			@if($idea->proposal_state == 'locked' && $index == 0)
+				<div class="winner-banner">WINNER</div>
+			@else
+				Added {{ $proposal->created_at->diffForHumans() }}
+			@endif
 		</p>
 		<p>
 			Posted by <a href="{{ action('UserController@profile', [$proposal->user]) }}">{{ $proposal->user->name or $proposal->user_id }}</a>

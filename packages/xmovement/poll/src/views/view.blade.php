@@ -100,7 +100,7 @@
 											<i class="fa fa-trash"></i>
 
 											<span class="control-label">Delete task</span>
-											
+
 										</button>
 
 							        </form>

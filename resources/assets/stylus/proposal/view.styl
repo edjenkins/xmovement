@@ -5,11 +5,38 @@
 
 .proposal-preview-column
 	text-align center
+	.tip.proposal-tip
+		background-color white
+		border border-color 1px solid
+		border-radius 12px
+		margin 10px auto 0 auto
+		padding 15px
+		position relative
+		text-align left
+		h2
+			color #999
+			font-size 1.3em
+			margin 0 0 5px 0
+			padding 0
+		p
+			color #999
+			font-size 1.0em
+			margin 0
+			padding 0
+		.close-button
+			color #999
+			position absolute
+			top 0
+			right 0
+			height 50px
+			line-height 50px
+			text-align center
+			width 50px
 	ul.proposal-preview
-		background-color #fff
+		background-color white
 		border border-color 1px solid
 		list-style none
-		margin 30px auto 10px auto
+		margin 10px auto 30px auto
 		overflow hidden
 		padding 0
 		li
@@ -21,16 +48,30 @@
 				position relative
 				text-align center
 				transition('background-color' 0.2s linear)
-				i.fa.fa-bars
+				i.fa.fa-trash-o
 					color #CCC
 					position absolute
 					right 10px
 					top 10px
+					&:hover
+						cursor pointer
+						color danger-color
 				i.fa.fa-external-link
 					color #CCC
 					position absolute
-					right 10px
-					top 10px
+					right 6px
+					top 11px
+					&:hover
+						cursor pointer
+						color main-color
+				i.fa.fa-pencil
+					color #CCC
+					position absolute
+					right 75px
+					top 11px
+					&:hover
+						cursor pointer
+						color main-color
 				&.sortable
 					i.fa.fa-external-link
 						right 40px
@@ -48,6 +89,27 @@
 				p
 					margin 0
 					padding 0
+				p.proposal-item-details
+					border border-color 1px solid
+					border-radius 6px
+					margin 10px auto 0 auto
+					max-width 600px
+					padding 10px
+					text-align center
+
+				textarea.proposal-item-details
+					border border-color 1px solid
+					border-radius 6px
+					display none
+					height 40px
+					margin 10px 0 0 0
+					min-height 40px
+					max-width 600px
+					padding 10px
+					resize none
+					text-align center
+					width 400px
+					outline 0 !important
 				&.proposal-text-container
 					padding-top 20px
 					h3
@@ -57,17 +119,22 @@
 						padding 0
 					textarea
 						border border-color 1px solid
-						height 160px
+						border-radius 6px
+						height 80px
 						margin 0
+						min-height 80px
 						padding 10px
-						text-align center
+						resize none
+						text-align left
 						width 100%
 						outline 0 !important
 					input
 						border border-color 1px solid
+						border-radius 6px
 						margin 0
 						padding 10px
 						text-align center
+						max-width 400px
 						width 100%
 						outline 0 !important
 				&.user-header
@@ -140,7 +207,7 @@
 	.add-content
 		display inline-block
 		margin-bottom 20px
-		padding 40px
+		padding 20px
 		i
 			color #CCC
 			transition(all 0.2s linear)
