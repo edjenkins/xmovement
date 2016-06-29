@@ -41,22 +41,6 @@
 
 	    			<ul class="module-controls pull-right">
 
-	    				@can('contribute', $design_task)
-
-	    					<li class="module-control">
-
-	    						<a href="#submit-requirement-option">
-
-			    					<i class="fa fa-plus"></i>
-
-			    					<span class="control-label">Submit requirement option</span>
-
-			    				</a>
-
-		    				</li>
-
-	    				@endcan
-
 						@can('destroy', $design_task)
 
 	    					<li class="module-control">

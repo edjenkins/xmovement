@@ -56,6 +56,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
+	
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script src="https://www.google.com/recaptcha/api.js"></script>

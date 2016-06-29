@@ -28,7 +28,15 @@ class UserController extends Controller
 		$supported_ideas = $user->supportedIdeas->take(10);
 		$created_ideas = $user->ideas->take(10);
 
-	    return view('users.profile', ['user' => $user, 'supported_ideas' => $supported_ideas, 'created_ideas' => $created_ideas]);
+		$viewing_own_profile = false;
+		if (Auth::user())
+		{
+			if (Auth::user()->id == $user->id) {
+				$viewing_own_profile = true;
+			}
+		}
+
+	    return view('users.profile', ['user' => $user, 'supported_ideas' => $supported_ideas, 'created_ideas' => $created_ideas, 'viewing_own_profile' => $viewing_own_profile]);
 	}
 
     public function showDetails(Request $request)
@@ -61,12 +69,12 @@ class UserController extends Controller
 			$user->email = $request->email;
 		}
 
-		if (isset($request->photo)) {
-			$user->avatar = $request->photo;
+		if (isset($request->avatar)) {
+			$user->avatar = $request->avatar;
 		}
 
-		if (isset($request->banner)) {
-			$user->banner = $request->banner;
+		if (isset($request->header)) {
+			$user->header = $request->header;
 		}
 
 		$this->validate($request, $validation);

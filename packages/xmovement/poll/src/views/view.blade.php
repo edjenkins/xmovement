@@ -55,22 +55,6 @@
 
 		    			<ul class="module-controls pull-right">
 
-		    				@can('contribute', $design_task)
-
-		    					<li class="module-control">
-
-		    						<button id="submit-poll-option">
-
-				    					<i class="fa fa-plus"></i>
-
-				    					<span class="control-label">Submit poll option</span>
-
-				    				</button>
-
-			    				</li>
-
-		    				@endcan
-
 							@can('flag', $design_task)
 
 		    					<li class="module-control">

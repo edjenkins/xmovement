@@ -55,22 +55,6 @@
 
 		    			<ul class="module-controls pull-right">
 
-		    				@can('submitSubmission', $contribution)
-
-		    					<li class="module-control">
-
-		    						<a href="#submit-contribution-submission">
-
-				    					<i class="fa fa-plus"></i>
-
-				    					<span class="control-label">Submit contribution</span>
-
-				    				</a>
-
-			    				</li>
-
-		    				@endcan
-
 							@can('destroy', $design_task)
 
 		    					<li class="module-control">

@@ -8,9 +8,11 @@
 		{{ $user->name }}
 	</h2>
 
-	<div class="contact-button">
-		{{ trans('profile.send_a_message') }}
-	</div>
+	@unless($viewing_own_profile)
+		<div class="contact-button">
+			{{ trans('profile.send_a_message') }}
+		</div>
+	@endunless
 
 	<div class="user-stats visible-md-block visible-lg-block">
 		<h3></h3>

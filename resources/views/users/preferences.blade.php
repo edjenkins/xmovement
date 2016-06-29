@@ -53,7 +53,7 @@
         <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
             <label class="control-label">Avatar</label>
 
-						@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'avatar', 'value' => old('avatar', $user->avatar)])
+			@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'avatar', 'value' => old('avatar', $user->avatar), 'dropzone_id' => 1])
 
             @if ($errors->has('avatar'))
                 <span class="help-block">
@@ -61,6 +61,18 @@
                 </span>
             @endif
         </div>
+
+		<div class="form-group{{ $errors->has('header') ? ' has-error' : '' }}">
+			<label class="control-label">Header Image</label>
+
+			@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'header', 'value' => old('header', $user->header), 'dropzone_id' => 2])
+
+			@if ($errors->has('header'))
+				<span class="help-block">
+					<strong>{{ $errors->first('header') }}</strong>
+				</span>
+			@endif
+		</div>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary">

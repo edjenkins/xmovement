@@ -2,7 +2,7 @@
 
 	<div class="requirement-space {{ isset($requirementFilled) ? 'filled' : 'not-filled' }}" data-requirement-id="{{ $requirement['id'] }}" data-requirement-filled-id="{{ isset($requirementFilled) ? $requirementFilled->id : '' }}">
 
-		<div class="requirement-circle" style="{{ isset($requirementFilled) ? 'background-image: url("{{ ResourceImage::getProfileImage($user, "medium") }}' : '' }}" data-user-background="{{ ResourceImage::getProfileImage(Auth::user(), 'small') }}">
+		<div class="requirement-circle" style="{{ isset($requirementFilled) ? 'background-image: url(' . ResourceImage::getProfileImage($user, "medium") . ')' : '' }}" data-user-background="{{ ResourceImage::getProfileImage(Auth::user(), 'small') }}">
 
 			<i class="fa fa-check"></i>
 			<i class="fa fa-plus"></i>
