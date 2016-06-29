@@ -10,8 +10,11 @@ use Auth;
 use Gate;
 use Response;
 use Input;
+use Lang;
 use Log;
+use MetaTag;
 use Redirect;
+use ResourceImage;
 use Session;
 use Carbon\Carbon;
 
@@ -51,6 +54,11 @@ class IdeaController extends Controller
 	{
 		$ideas = Idea::where('visibility', 'public')->orderBy('created_at', 'desc')->get();
 
+		# META
+		MetaTag::set('title', Lang::get('meta.ideas_index_title'));
+		MetaTag::set('description', Lang::get('meta.ideas_index_description'));
+		# META
+
 		return view('ideas.index', [
 			'ideas' => $ideas,
 		]);
@@ -59,8 +67,9 @@ class IdeaController extends Controller
 	public function view(Request $request, Idea $idea, $slug = null)
 	{
 		if ($slug != $idea->slug)
+		{
 			return redirect()->action('IdeaController@view', [$idea, $idea->slug]);
-	        // return Redirect::route('idea.view', array('id' => $idea->id, 'slug' => $idea->slug), 301);
+		}
 
 		if (Idea::where('id', $idea->id)->count() == 0)
 		{
@@ -71,6 +80,12 @@ class IdeaController extends Controller
 
 		// Check if user? is a supporter
 		$supported = (Auth::check()) ? Auth::user()->hasSupportedIdea($idea) : false;
+
+		# META
+		MetaTag::set('title',  Lang::get('meta.ideas_view_title', ['idea_name' => $idea->name]));
+		MetaTag::set('description',  Lang::get('meta.ideas_view_description', ['idea_name' => $idea->name, 'user_name' => $idea->user->name]));
+        MetaTag::set('image', ResourceImage::getImage($idea->photo, 'large'));
+		# META
 
 		return view('ideas.view', [
 			'idea' => $idea,

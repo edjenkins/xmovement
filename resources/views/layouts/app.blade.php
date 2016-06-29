@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>XM</title>
+    <title>{{ MetaTag::get('title') }}</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -23,6 +23,16 @@
 	<link href="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
+
+    {!! MetaTag::tag('description') !!}
+    {!! MetaTag::tag('image') !!}
+
+    {!! MetaTag::openGraph() !!}
+
+    {!! MetaTag::twitterCard() !!}
+
+    {{--Set default share picture after custom section pictures--}}
+    {!! MetaTag::tag('image',  getenv('APP_HOME_HEADER_IMG')) !!}
 
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement" ng-controller="ExploreController">
@@ -57,7 +67,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
-	
+
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script src="https://www.google.com/recaptcha/api.js"></script>

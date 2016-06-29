@@ -164,6 +164,7 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
 		App\Providers\ResourceImageProvider::class,
+		Torann\LaravelMetaTags\MetaTagsServiceProvider::class,
 
         // XMovement Design Modules
         XMovement\Poll\PollServiceProvider::class,
@@ -226,6 +227,7 @@ return [
 		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+		'MetaTag'   => Torann\LaravelMetaTags\Facades\MetaTag::class,
 
         'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
         'Poll' => XMovement\Poll\Poll::class,
