@@ -1,7 +1,7 @@
 <?php if (true) { ?>
 
 	<div class="no-content no-messages">
-		<h3>You have no news</h3>
+		<h3>{{ trans('profile.no_news') }}</h3>
 	</div>
 
 <?php } else { ?>

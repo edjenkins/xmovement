@@ -4,7 +4,7 @@
 
     <div class="page-header colorful">
 
-        <h2 class="main-title">Add some details</h2>
+        <h2 class="main-title">{{ trans('details_form.add_details') }}</h2>
 
     </div>
 
@@ -22,10 +22,10 @@
                     {!! csrf_field() !!}
 
                     <div class="form-group{{ $errors->has('bio') ? ' has-error' : '' }}">
-                        <label class="control-label">Bio</label>
+                        <label class="control-label">{{ trans('auth.bio') }}</label>
 
                         <div class="">
-                            <input type="text" class="form-control" name="bio" value="{{ old('bio', $user->bio) }}" placeholder="Say something about yourself">
+                            <input type="text" class="form-control" name="bio" value="{{ old('bio', $user->bio) }}" placeholder="{{ trans('auth.bio_placeholder') }}">
 
                             @if ($errors->has('bio'))
                                 <span class="help-block">
@@ -36,10 +36,10 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                        <label class="control-label">Phone Number</label>
+                        <label class="control-label">{{ trans('auth.phone_number') }}</label>
 
                         <div class="">
-                            <input type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="Your phone number">
+                            <input type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="{{ trans('auth.phone_number_placeholder') }}">
 
                             @if ($errors->has('phone'))
                                 <span class="help-block">
@@ -51,10 +51,10 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">
-                            Update
+                            {{ trans('details_form.update') }}
                         </button>
                         <br />
-                        <a class="btn btn-link muted-link" href="{{ url('/profile') }}">Skip for now</a>
+                        <a class="btn btn-link muted-link" href="{{ action('UserController@profile') }}">{{ trans('details_form.skip') }}</a>
                     </div>
 
                 </form>

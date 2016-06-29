@@ -13,11 +13,11 @@
 	<div class="tile-footer">
 
 		<p class="add-text">
-			Add to Proposal
+			{{ trans('proposals.add_to_proposal') }}
 		</p>
 
 		<p class="remove-text">
-			Remove from Proposal
+			{{ trans('proposals.remove_from_proposal') }}
 		</p>
 
 	</div>

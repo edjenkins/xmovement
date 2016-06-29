@@ -2,7 +2,7 @@
 
 	<div id="cc-search-field-wrapper">
 
-			<input type="text" name="cc-search-field" id="cc-search-field" placeholder="Search the web for a photo.." />
+			<input type="text" name="cc-search-field" id="cc-search-field" placeholder="{{ trans('dropzone.search_the_web') }}" />
 
 			<div class="btn" id="cc-search-button"><i class="fa fa-search"></i></div>
 

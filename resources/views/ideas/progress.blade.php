@@ -7,11 +7,11 @@
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				@if(($idea->design_percentage() + $idea->proposal_percentage()) == 0)
-					Support/Design/Propose
+					{{ trans('idea.progress_support_design_propose') }}
 				@elseif($idea->design_percentage() == 0)
-					Support/Design
+					{{ trans('idea.progress_support_design') }}
 				@else
-					Support
+					{{ trans('idea.progress_support') }}
 				@endif
 			</div>
 		</div>
@@ -19,7 +19,7 @@
 	<div class="ipb-dot ipb-end-dot {{ ($idea->progress_percentage() >= 100) ? 'complete' : '' }}">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
-				Complete
+				{{ trans('idea.complete') }}
 			</div>
 		</div>
 	</div>
@@ -28,7 +28,7 @@
 		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
-					Support/Design/Propose
+					{{ trans('idea.progress_support_design_propose') }}
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
-					Design/Propose
+					{{ trans('idea.progress_design_propose') }}
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 			<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
 				<div class="ipb-label">
 					<div class="ipb-label-text">
-						Design
+						{{ trans('idea.progress_design') }}
 					</div>
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->proposal_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->proposal_percentage() }}%">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
-					Propose
+					{{ trans('idea.progress_propose') }}
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@
 
 	<div class="page-header">
 
-        <h2 class="main-title">Add Design Task</h2>
+        <h2 class="main-title">{{ trans('design.add_design_task') }}</h2>
 
 	</div>
 
@@ -23,7 +23,7 @@
 
 		    					<i class="fa fa-chevron-left"></i>
 
-		    					Back to Dashboard
+		    					{{ trans('design.back_to_dashboard') }}
 
 		    				</a>
 

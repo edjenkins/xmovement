@@ -4,7 +4,7 @@
 
 	<div class="page-header">
 
-        <h2 class="main-title">Dashboard</h2>
+        <h2 class="main-title">{{ trans('design.dashboard') }}</h2>
 		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 	</div>
@@ -33,7 +33,7 @@
 
 								<i class="fa fa-chevron-left"></i>
 
-								Back to Idea
+								{{ trans('design.back_to_idea') }}
 
 							</a>
 
@@ -45,7 +45,7 @@
 
 								<a href="{{ action('ProposeController@index', $idea) }}">
 
-									View Proposals
+									{{ trans('design.view_proposals') }}
 
 								</a>
 
@@ -65,7 +65,7 @@
 
 			    					<i class="fa fa-plus"></i>
 
-			    					Add Design Task
+			    					{{ trans('design.add_design_task') }}
 
 			    				</a>
 
@@ -94,7 +94,7 @@
 						@can('contribute', $idea)
 
 							<a href="{{ action('DesignController@add', $idea) }}" class="action-panel">
-								Add Design Task
+								{{ trans('design.add_design_task') }}
 							</a>
 
 						@endcan

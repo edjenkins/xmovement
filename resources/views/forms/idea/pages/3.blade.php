@@ -5,9 +5,9 @@
 		<div class="form-group{{ $errors->has('photo') ? ' has-error' : '' }}">
 
 			@if (isset($idea))
-				@include('dropzone', ['type' => 'image', 'cc' => true, 'input_id' => 'idea-image', 'value' => old('photo', $idea->photo)])
+				@include('dropzone', ['type' => 'image', 'cc' => true, 'input_id' => 'photo', 'value' => old('photo', $idea->photo), 'dropzone_id' => 1])
 			@else
-				@include('dropzone', ['type' => 'image', 'cc' => true, 'input_id' => 'idea-image', 'value' => old('photo')])
+				@include('dropzone', ['type' => 'image', 'cc' => true, 'input_id' => 'photo', 'value' => old('photo'), 'dropzone_id' => 1])
 			@endif
 
 			@if ($errors->has('photo'))

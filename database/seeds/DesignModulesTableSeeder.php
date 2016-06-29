@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Generator;
+use Illuminate\Support\Facades\Lang;
 
 class DesignModulesTableSeeder extends Seeder
 {
@@ -20,66 +21,66 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => 'Scheduler',
-					'description' => 'Collaboratively decide on a time/date using the scheduler module as a scheduling assistant.',
+					'name' => Lang::get('xmovement.scheduler'),
+					'description' => Lang::get('xmovement.scheduler_description'),
 					'icon' => 'fa-calendar',
 				)
-			)
+			);
 		}
 
 		if (env('APP_XM_MODULE_POLL', true))
 		{
 			array_push($design_modules,
 				array(
-					'name' => 'Poll',
-					'description' => 'A poll allows people to submit ideas and vote on their favourites, there can be any number of submissions in a poll. A poll might ask used to decide on an event name, the number of people to invite or even what day to have the event. It is possible to lock a poll so only you can add new options.',
+					'name' => Lang::get('xmovement.poll'),
+					'description' => Lang::get('xmovement.poll_description'),
 					'icon' => 'fa-th-list',
 				)
-			)
+			);
 		}
 
 		if (env('APP_XM_MODULE_REQUIREMENT', true))
 		{
 			array_push($design_modules,
 				array(
-					'name' => 'Requirement',
-					'description' => 'A requirement is useful if you need a set number of things for an event for example you may need 6 people to present or 4 cameras to record the event. People can nominate themselves to meet a requirement or invite others by email to take responsibility.',
+					'name' => Lang::get('xmovement.requirement'),
+					'description' => Lang::get('xmovement.requirement_description'),
 					'icon' => 'fa-check-circle-o',
 				)
-			)
+			);
 		}
 
 		if (env('APP_XM_MODULE_CONTRIBUTION', true))
 		{
 			array_push($design_modules,
 				array(
-					'name' => 'Contribution',
-					'description' => 'A contribution allows people to submit different forms of media and text and vote on them to collaboratively decide which is best. It is possible to lock contrbutions to specific file types such as photos/audio/video/links.',
+					'name' => Lang::get('xmovement.contribution'),
+					'description' => Lang::get('xmovement.contribution_description'),
 					'icon' => 'fa-thumbs-o-up',
 				)
-			)
+			);
 		}
 
 		if (env('APP_XM_MODULE_EXTERNAL', true))
 		{
 			array_push($design_modules,
 				array(
-					'name' => 'External',
-					'description' => 'An external resource can be any open resource hosted on an external site. An example might be an online whiteboard or group video chat.',
+					'name' => Lang::get('xmovement.external'),
+					'description' => Lang::get('xmovement.external_description'),
 					'icon' => 'fa-external-link',
 				)
-			)
+			);
 		}
 
 		if (env('APP_XM_MODULE_DISCUSSION', true))
 		{
 			array_push($design_modules,
 				array(
-					'name' => 'Discussion',
-					'description' => 'A discussion is useful if you want to speak about a particular aspect openly and freely with others in the design process. There is no structure to a discussion, which makes it a suitable for many use cases like discussing the theme of the event or asking questions.',
+					'name' => Lang::get('xmovement.discussion'),
+					'description' => Lang::get('xmovement.discussion_description'),
 					'icon' => 'fa-comments-o',
 				)
-			)
+			);
 		}
 
 		foreach ($design_modules as $design_module)

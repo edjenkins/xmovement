@@ -6,7 +6,7 @@
 
 	<div class="page-header">
 
-	    <h2 class="main-title">Proposals</h2>
+	    <h2 class="main-title">{{ trans('proposals.proposals') }}</h2>
 		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 	</div>
@@ -25,7 +25,7 @@
 
 	    					<i class="fa fa-chevron-left"></i>
 
-	    					Back to Idea
+	    					{{ trans('design.back_to_dashboard') }}
 
 	    				</a>
 
@@ -35,7 +35,7 @@
 
 						<a href="{{ action('DesignController@dashboard', $idea) }}">
 
-	    					Design Dashboard
+	    					{{ trans('design.design_dashboard') }}
 
 	    				</a>
 
@@ -53,7 +53,7 @@
 
 		    					<i class="fa fa-plus"></i>
 
-		    					Add Proposal
+		    					{{ trans('proposals.add_proposal') }}
 
 		    				</a>
 

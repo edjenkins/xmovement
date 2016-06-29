@@ -8,8 +8,8 @@
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#search" aria-controls="search" role="tab" data-toggle="tab">Search</a></li>
-	<li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">Upload</a></li>
+	<li role="presentation" class="active"><a href="#search" aria-controls="search" role="tab" data-toggle="tab">{{ trans('dropzone.search') }}</a></li>
+	<li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">{{ trans('dropzone.upload') }}</a></li>
 </ul>
 
 @endif
@@ -144,7 +144,7 @@
 
 					$('#cc-search-results .cc-search-result').removeClass('selected');
 
-					Dropzone.forElement('#dropzone-{{ $dropzone_id }}').removeAllFiles();
+					Dropzone.forElement('.dropzone-{{ $dropzone_id }}').removeAllFiles();
 
 					// Upload file
 					$.ajaxSetup({
@@ -168,9 +168,9 @@
 							{
 								selected_tile.addClass('selected');
 								$('#{{ $input_id }}').val(response.filename);
-								$('#file-preview-filename').html(response.filename);
-								$('#file-preview-thumbnail').css('background-image','url(https://s3.amazonaws.com/xmovement/uploads/images/small/' + response.filename + ')');
-								$('.current-file-preview').addClass('visible');
+								$('.current-file-preview-{{ $dropzone_id }} #file-preview-filename').html(response.filename);
+								$('.current-file-preview-{{ $dropzone_id }} #file-preview-thumbnail').css('background-image','url(https://s3.amazonaws.com/xmovement/uploads/images/small/' + response.filename + ')');
+								$('.current-file-preview-{{ $dropzone_id }}').addClass('visible');
 							}
 
 						},

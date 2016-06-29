@@ -4,7 +4,7 @@
 
 	<div class="page-header colorful">
 
-        <h2 class="main-title">Add Proposal</h2>
+        <h2 class="main-title">{{ trans('proposals.add_proposal') }}</h2>
 
 	</div>
 
@@ -18,22 +18,22 @@
 
 					<h5>- 1 -</h5>
 					<p>
-						Select the design tasks you would like to include in your proposal.
+						{{ trans('proposals.step_one') }}
 					</p>
 					<h5>- 2 -</h5>
 					<p>
-						You will then be taken through each selected task and asked to choose one or more contributions from each.
+						{{ trans('proposals.step_two') }}
 					</p>
 					<h5>- 3 -</h5>
 					<p>
-						Finally, review your proposal and add text to your proposal to explain decisions you have made and how the selected items work together..
+						{{ trans('proposals.step_three') }}
 					</p>
 
-					<a href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">Get Started</a>
+					<a href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">{{ trans('proposals.get_started') }}</a>
 
 					<br />
 
-					<a class="btn btn-link muted-link" href="{{ action('IdeaController@view', $idea) }}">Maybe later</a>
+					<a class="btn btn-link muted-link" href="{{ action('IdeaController@view', $idea) }}">{{ trans('proposals.maybe_later') }}</a>
 
 	    			<div class="clearfloat"></div>
 

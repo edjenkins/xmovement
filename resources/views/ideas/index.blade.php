@@ -18,13 +18,13 @@
 
 					<li class="module-control" ng-click="sort_type = 'created_at'" ng-class="{'active':sort_type == 'created_at'}">
 
-						<button type="button">Recent</button>
+						<button type="button">{{ trans('idea.sort_recent') }}</button>
 
     				</li>
 
 					<li class="module-control" ng-click="sort_type = 'supporter_count'" ng-class="{'active':sort_type == 'supporter_count'}">
 
-						<button type="button">Popular</button>
+						<button type="button">{{ trans('idea.sort_popular') }}</button>
 
     				</li>
 
@@ -70,7 +70,7 @@
 					</div>
 					<div class="tile-footer">
 						<p>
-						    Posted by <a href="/profile/<% idea.user.id %>"><% idea.user.name %></a>
+						    {{ trans('idea.posted_by') }} <a href="/profile/<% idea.user.id %>"><% idea.user.name %></a>
 						</p>
 					</div>
 				</div>

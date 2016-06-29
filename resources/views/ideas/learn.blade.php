@@ -4,7 +4,7 @@
 
     <div class="page-header colorful">
 
-        <h2 class="main-title" id="page-title">Lets get started!</h2>
+        <h2 class="main-title" id="page-title">{{ trans('common.get_started') }}</h2>
 
     </div>
 

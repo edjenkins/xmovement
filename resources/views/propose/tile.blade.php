@@ -12,13 +12,13 @@
 
 		<p>
 			@if($idea->proposal_state == 'locked' && $index == 0)
-				<div class="winner-banner">WINNER</div>
+				<div class="winner-banner">{{ trans('proposals.winner') }}</div>
 			@else
-				Added {{ $proposal->created_at->diffForHumans() }}
+				{{ trans('proposals.added_x_ago', ['time' => $proposal->created_at->diffForHumans()]) }}
 			@endif
 		</p>
 		<p>
-			Posted by <a href="{{ action('UserController@profile', [$proposal->user]) }}">{{ $proposal->user->name or $proposal->user_id }}</a>
+			{{ trans('proposals.posted_by_x', ['url' => action('UserController@profile', [$proposal->user]), 'name' => $proposal->user->name]) }}
 		</p>
 
 	</div>
@@ -26,7 +26,7 @@
 	<div class="tile-footer">
 
 		<a href="{{ action('ProposeController@view', $proposal->id) }}">
-			View Proposal
+			{{ trans('proposals.view_proposal') }}
 		</a>
 
 	</div>

@@ -5,10 +5,10 @@
     <div class="container-fluid error-page">
 
         <div class="text-container">
-            <h1>404</h1>
-			<h3>Page Not Found</h3>
+            <h1>{{ trans('errors.404') }}</h1>
+			<h3>{{ trans('errors.page_not_found') }}</h3>
 			<a href="{{ action('PageController@home') }}">
-				Return to Home
+				{{ trans('errors.return_to_home') }}
 			</a>
         </div>
 

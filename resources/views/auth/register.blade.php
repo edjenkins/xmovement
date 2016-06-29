@@ -4,7 +4,7 @@
 
     <div class="page-header colorful">
 
-        <h2 class="main-title">Register</h2>
+        <h2 class="main-title">{{ trans('auth.register') }}</h2>
 
     </div>
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>XM</title>
+    <title>{{ MetaTag::get('title') }}</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -33,7 +33,6 @@
 
     <script src='/js/file_uploader/vendor/jquery.ui.widget.js'></script>
     <script src='/js/file_uploader/jquery.iframe-transport.js'></script>
-    <script src='/js/file_uploader/jquery.fileupload.js'></script>
 
     <script src="/js/app.js"></script>
 

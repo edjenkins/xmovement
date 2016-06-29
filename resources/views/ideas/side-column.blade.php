@@ -1,7 +1,7 @@
 <div class="creator-tile" onClick="document.location = '{{ action('UserController@profile', $idea->user_id) }}';">
 	<div class="creator-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($idea->user, 'medium') }}')"></div>
 	<h4>{{ $idea->user->name }}</h4>
-	<h5 class="subtitle">Idea Creator</h5>
+	<h5 class="subtitle">{{ trans('idea.creator') }}</h5>
 </div>
 
 <div class="stats-tile supporters-tile">
@@ -26,7 +26,7 @@
 		<div class="info-tile-content">
 			<p>
 				<i class="fa fa-info"></i>
-				Design area opens in {{ $idea->designPhaseOpens() }}
+				{{ trans('idea.design_area_opens', ['time' => $idea->designPhaseOpens()]) }}
 			</p>
 		</div>
 	</div>
@@ -39,7 +39,7 @@
 		<div class="info-tile-content">
 			<p>
 				<i class="fa fa-info"></i>
-				Proposal area opens in {{ $idea->proposalPhaseOpens() }}
+				{{ trans('idea.proposal_area_opens', ['time' => $idea->proposalPhaseOpens()]) }}
 			</p>
 		</div>
 	</div>

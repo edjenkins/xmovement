@@ -6,8 +6,8 @@
 
 	<div class="page-header colorful">
 
-        <h2 class="main-title">Review Proposal</h2>
-		<h5 class="sub-title">Finalise your proposal by reordering elements and adding comments</h5>
+        <h2 class="main-title">{{ trans('proposals.review_proposal') }}</h2>
+		<h5 class="sub-title">{{ trans('proposals.review_proposal_subtitle') }}</h5>
 
 	</div>
 
@@ -16,7 +16,7 @@
 		<form action="{{ action('ProposeController@previous') }}" method="POST">
 			{!! csrf_field() !!}
 			<button class="previous-button pull-left" type="submit">
-				Previous
+				{{ trans('proposals.previous') }}
 			</button>
 		</form>
 
@@ -30,7 +30,7 @@
 			<div class="col-md-8 col-md-offset-2">
 
 	    		<div class="column main-column proposal-preview-column">
-					<form action="{{ action('ProposeController@submit', $idea) }}" method="POST" onsubmit="return confirm('Are you sure you want to submit this proposal?');">
+					<form action="{{ action('ProposeController@submit', $idea) }}" method="POST" onsubmit="return confirm('{{ trans('proposals.submit_confirmation') }}');">
 						{!! csrf_field() !!}
 						<input type="hidden" name="proposal" id="proposal-input" value="">
 
@@ -43,7 +43,7 @@
 							</li>
 
 							<li class="proposal-item proposal-text-container">
-								<h3>Description</h3>
+								<h3>{{ trans('proposals.description') }}</h3>
 
 								@if ($errors->has('description'))
 									<span class="help-block">
@@ -51,7 +51,7 @@
 									</span>
 								@endif
 
-								<input type="text" name="description" placeholder="Describe your proposal..." />
+								<input type="text" name="description" placeholder="{{ trans('proposals.description_placeholder') }}" />
 							</li>
 
 							@foreach($design_tasks as $index => $design_task)
@@ -86,7 +86,7 @@
 						<br />
 
 						<button type="submit" type="button" class="btn btn-primary">
-							Submit Proposal
+							{{ trans('proposals.submit_proposal') }}
 						</button>
 					</form>
 

@@ -4,9 +4,9 @@
     <input type="hidden" name="type" value="{{ $type }}">
 
     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-        <label class="control-label">Name</label>
+        <label class="control-label">{{ trans('auth.name') }}</label>
 
-        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name">
+        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="{{ trans('auth.name') }}">
 
         @if ($errors->has('name'))
             <span class="help-block">
@@ -17,9 +17,9 @@
     </div>
 
     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <label class="control-label">Email Address</label>
+        <label class="control-label">{{ trans('auth.email_address') }}</label>
 
-        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
 
         @if ($errors->has('email'))
             <span class="help-block">
@@ -30,9 +30,9 @@
     </div>
 
     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label class="control-label">Password</label>
+        <label class="control-label">{{ trans('auth.password') }}</label>
 
-        <input type="password" class="form-control" name="password" placeholder="Password">
+        <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.password') }}">
 
         @if ($errors->has('password'))
             <span class="help-block">
@@ -45,9 +45,9 @@
     @if ($type == 'standard')
 
         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-            <label class="control-label">Confirm Password</label>
+            <label class="control-label">{{ trans('auth.confirm_password') }}</label>
 
-            <input type="password" class="form-control" name="password_confirmation" placeholder="Password">
+            <input type="password" class="form-control" name="password_confirmation" placeholder="{{ trans('auth.password') }}">
 
             @if ($errors->has('password_confirmation'))
                 <span class="help-block">
@@ -62,13 +62,13 @@
     <div class="form-group">
 
         <button type="submit" class="btn btn-primary">
-            Register
+            {{ trans('auth.register') }}
         </button>
 
         @if ($type == 'standard')
 
             <br />
-            <a class="btn btn-link muted-link" href="{{ url('/login') }}">Already have an account?</a>
+            <a class="btn btn-link muted-link" href="{{ url('/login') }}">{{ trans('auth.have_an_account') }}</a>
 
         @endif
 
@@ -76,13 +76,13 @@
 
     <div class="text-linethru">
         <div class="line"></div>
-        <div class="text">or</div>
+        <div class="text">{{ trans('common.or') }}</div>
     </div>
 
     <div class="form-group">
         <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider') }}">
             <i class="fa fa-fw fa-facebook"></i>
-            Log in with Facebook
+            {{ trans('auth.facebook_login') }}
         </a>
     </div>
 

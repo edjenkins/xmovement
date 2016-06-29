@@ -2,8 +2,8 @@
     {!! csrf_field() !!}
 
     <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-        <label class="control-label">Your Proposal</label>
-		
+        <label class="control-label">{{ trans('proposals.your_proposal') }}</label>
+
         <input type="text" class="form-control input-field" name="body" value="{{ old('body') }}" >
 
         @if ($errors->has('body'))
@@ -17,12 +17,14 @@
     <div class="form-group">
 
         <button type="submit" class="btn btn-primary">
-            Submit Proposal
+            {{ trans('proposals.submit_proposal') }}
         </button>
 
         <br />
 
-        <a class="btn btn-link muted-link" href="{{ url('/proposal/save') }}">Save for later</a>
+        <a class="btn btn-link muted-link" href="{{ url('/proposal/save') }}">
+			{{ trans('proposals.save_for_later') }}
+		</a>
 
     </div>
 

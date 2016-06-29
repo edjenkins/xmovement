@@ -4,7 +4,7 @@
 
     <div class="page-header colorful">
 
-        <h2 class="main-title">Reset Password</h2>
+        <h2 class="main-title">{{ trans('auth.reset_password') }}</h2>
 
     </div>
 
@@ -23,9 +23,9 @@
                     {!! csrf_field() !!}
 
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label class="control-label">Email Address</label>
+                        <label class="control-label">{{ trans('auth.email_address') }}</label>
 
-                        <input type="email" class="form-control input-field" name="email" value="{{ old('email') }}" placeholder="Email">
+                        <input type="email" class="form-control input-field" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
 
                         @if ($errors->has('email'))
                             <span class="help-block">
@@ -38,7 +38,7 @@
                     <div class="form-group">
 
                         <button type="submit" class="btn btn-primary">
-                            Send Reset Email
+                            {{ trans('auth.send_reset_email') }}
                         </button>
 
                     </div>

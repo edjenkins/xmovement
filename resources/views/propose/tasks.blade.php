@@ -4,8 +4,8 @@
 
 	<div class="page-header colorful">
 
-        <h2 class="main-title">Select Design Tasks</h2>
-		<h5 class="sub-title">Select the tasks you would like to include in your proposal</h5>
+        <h2 class="main-title">{{ trans('proposals.select_design_tasks') }}</h2>
+		<h5 class="sub-title">{{ trans('proposals.select_design_tasks_subtitle') }}</h5>
 
 	</div>
 
@@ -13,7 +13,7 @@
 
 		<a href="{{ action('IdeaController@view', $idea) }}">
 			<button class="next-button pull-left">
-				Cancel
+				{{ trans('proposals.cancel') }}
 			</button>
 		</a>
 
@@ -22,7 +22,7 @@
 			<input type="hidden" name="current_task" id="current_task" value="-1">
 			<input type="hidden" name="selected_tasks" id="selected_tasks" value="">
 			<button class="next-button pull-right" type="submit">
-				Next
+				{{ trans('proposals.next') }}
 			</button>
 		</form>
 

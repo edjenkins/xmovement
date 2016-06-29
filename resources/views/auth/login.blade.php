@@ -4,7 +4,7 @@
 
     <div class="page-header colorful">
 
-        <h2 class="main-title">Log In</h2>
+        <h2 class="main-title">{{ trans('auth.login') }}</h2>
 
     </div>
 

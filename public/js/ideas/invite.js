@@ -5,7 +5,7 @@ var panelCount = 3;
 $(document).ready(function() {
 
 	$('#continue-button').click(function() {
-		
+
 		submitForm();
 
 		return false;
@@ -18,7 +18,7 @@ function addPanel() {
 
 	panelCount++; // Increment panel count
 
-	var panelHtml = '<div class="col-sm-4"><div class="user-panel" data-index="' + panelCount + '"><input type="text" class="name-field" placeholder="Name"><input type="text" class="email-field" placeholder="Email"></div></div>';
+	var panelHtml = '<div class="col-sm-4"><div class="user-panel" data-index="' + panelCount + '"><input type="text" class="name-field" placeholder="' + name_placeholder + '"><input type="text" class="email-field" placeholder="' + email_placeholder + '"></div></div>';
 
 	$(panelHtml).hide().appendTo("#panel-container").fadeIn(500);
 
@@ -41,7 +41,7 @@ function emptyPanels() {
 	for (var i = 0; i <= panelCount; i++) {
 
 		if (($('.user-panel:eq(' + i + ') .email-field').val() == '') || ($('.user-panel:eq(' + i + ') .name-field').val() == '')) {
-			
+
 			emptyPanelCount++;
 		}
 	}
@@ -71,7 +71,7 @@ function submitForm() {
 		var email = $('.user-panel:eq(' + i + ') .email-field').val();
 
 		if (checkEmail(email) && (name != '')) {
-			
+
 			var user = new Object;
 			user.name = name;
 			user.email = email;

@@ -45,7 +45,7 @@
 
 			    					<i class="fa fa-chevron-left"></i>
 
-			    					<span class="control-label">Back to Dashboard</span>
+			    					<span class="control-label">{{ trans('design.back_to_dashboard') }}</span>
 
 			    				</a>
 
@@ -67,7 +67,7 @@
 
 											<i class="fa fa-trash"></i>
 
-											<span class="control-label">Delete task</span>
+											<span class="control-label">{{ trans('design.delete_task') }}</span>
 
 										</button>
 
@@ -120,7 +120,7 @@
 
 										<?php if ($contributionType->id == 2) { ?>
 
-						    				@include('dropzone', ['type' => 'image', 'input_id' => 'contribution-image'])
+						    				@include('dropzone', ['type' => 'image', 'input_id' => 'contribution-image', 'dropzone_id' => 1])
 
 						    				<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
 
@@ -136,7 +136,7 @@
 
 										<?php if ($contributionType->id == 4) { ?>
 
-						    				@include('dropzone', ['type' => 'file', 'input_id' => 'contribution-file'])
+						    				@include('dropzone', ['type' => 'file', 'input_id' => 'contribution-file', 'dropzone_id' => 1])
 
 						    				<input class="item-description" id="item-description" type="text" placeholder="Add a description" />
 

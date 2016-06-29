@@ -31,7 +31,7 @@
 
 		    					<i class="fa fa-chevron-left"></i>
 
-		    					<span class="control-label">Back to Dashboard</span>
+		    					<span class="control-label">{{ trans('design.back_to_dashboard') }}</span>
 
 		    				</a>
 
@@ -53,7 +53,7 @@
 
 										<i class="fa fa-trash"></i>
 
-										<span class="control-label">Delete task</span>
+										<span class="control-label">{{ trans('design.delete_task') }}</span>
 
 									</button>
 

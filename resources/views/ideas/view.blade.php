@@ -10,7 +10,7 @@
 	<div class="page-header">
 
         <h2 class="main-title">{{ $idea->name }}</h2>
-		<h5 class="sub-title">Organized by <a href="{{ action('UserController@profile', $idea->user_id) }}">{{ $idea->user->name or $idea->user_id }}</a></h5>
+		<h5 class="sub-title">{{ trans('idea.organized_by', ['user_name' => $idea->user->name]) }}</h5>
 
 	</div>
 
@@ -49,8 +49,8 @@
 						<div class="proposals-container hidden-xs">
 
 			    			<div class="section-header">
-								<h2>Proposals</h2>
-								<a href="{{ action('ProposeController@index', $idea) }}">View all</a>
+								<h2>{{ trans('idea.proposals') }}</h2>
+								<a href="{{ action('ProposeController@index', $idea) }}">{{ trans('idea.view_all_proposals') }}</a>
 							</div>
 
 							<div class="proposals-wrapper">
@@ -72,7 +72,7 @@
 					<br />
 
 					<div class="section-header">
-						<h2>Discussion</h2>
+						<h2>{{ trans('idea.discussion') }}</h2>
 					</div>
 
 	    			@include('disqus')

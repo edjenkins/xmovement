@@ -6,7 +6,7 @@
 
 	<div class="page-header">
 
-        <h2 class="main-title">Proposal</h2>
+        <h2 class="main-title">{{ trans('proposals.proposal') }}</h2>
 		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $proposal->idea) }}">{{ $proposal->idea->name }}</a></h5>
 
 	</div>
@@ -25,7 +25,7 @@
 
 							<i class="fa fa-chevron-left"></i>
 
-							Back to Proposals
+							{{ trans('proposals.back_to_proposals') }}
 
 						</a>
 
@@ -45,7 +45,7 @@
 
 								<button type="submit">
 									<i class="fa fa-trash"></i>
-									Delete Proposal
+									{{ trans('proposals.delete_proposal') }}
 								</button>
 							</form>
 
@@ -78,7 +78,7 @@
 						<br>
 						<h3>{{ $proposal->description }}</h3>
 						<p>
-							Added by {{ $proposal->user->name }} {{ $proposal->created_at->diffForHumans() }}
+							{{ trans('proposals.added_by_x_x', ['name' => $proposal->user->name, 'time' => $proposal->created_at->diffForHumans()]) }}
 						</p>
 					</li>
 

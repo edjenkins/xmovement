@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+	
 	<div class="page-header {{ ($proposal_mode) ? ' colorful' : '' }}">
 
         <h2 class="main-title">{{ str_limit($design_task['name'], 50) }}</h2>
-		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more poll options' : 'Added ' . $design_task->created_at->diffForHumans() . ' by ' . $design_task->user->name }}</h5>
+		<h5 class="sub-title">{{ ($proposal_mode) ? trans('xmovement_poll.proposal_tip') : trans('xmovement_poll.added_at_x_by_x', ['name' => $design_task->user->name, 'time' => $design_task->created_at->diffForHumans()]) }}</h5>
 
 	</div>
 
@@ -45,7 +45,7 @@
 
 			    					<i class="fa fa-chevron-left"></i>
 
-			    					<span class="control-label">Back to Dashboard</span>
+			    					<span class="control-label">{{ trans('design.back_to_dashboard') }}</span>
 
 			    				</a>
 
@@ -63,7 +63,7 @@
 
 										<i class="fa fa-flag"></i>
 
-										<span class="control-label">Report content</span>
+										<span class="control-label">{{ trans('design.report_content') }}</span>
 
 									</button>
 
@@ -83,7 +83,7 @@
 
 											<i class="fa fa-trash"></i>
 
-											<span class="control-label">Delete task</span>
+											<span class="control-label">{{ trans('design.delete_task') }}</span>
 
 										</button>
 
@@ -126,9 +126,9 @@
 
 				    			<div class="submit-poll-option-container" id="submit-poll-option">
 
-				    				<input id="poll-contribution" type="text" placeholder="Submit a poll option.." data-poll-id="{{ $poll->id }}" />
+				    				<input id="poll-contribution" type="text" placeholder="{{ trans('xmovement_poll.submit_poll_option_placeholder') }}" data-poll-id="{{ $poll->id }}" />
 
-				    				<button id="submit-button">Submit</button>
+				    				<button id="submit-button">{{ trans('xmovement_poll.submit_poll_option') }}</button>
 
 				    			</div>
 

@@ -17,6 +17,6 @@ return [
 	'ideas_index_title' => 'Ideas - XMovement',
 	'ideas_index_description' => 'Discover Ideas',
 	'ideas_view_title' => ':idea_name - XMovement',
-	'ideas_view_description' => ':idea_name by :user_name',
+	'ideas_view_description' => 'Support :user_name\'s idea \':idea_name\' on XMovement',
 
 ];
