@@ -20,9 +20,9 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
-            
+
                 <li><a href="{{ action('IdeaController@index') }}">{{ trans('navbar.explore') }}</a></li>
-            
+
                 <li><a href="{{ action('PageController@about') }}">{{ trans('navbar.about') }}</a></li>
 
                 @if (Auth::guest())
@@ -36,7 +36,12 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('UserController@profile') }}"></i>{{ trans('navbar.profile') }}</a></li>
-                            <li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
+							@if (App::getLocale() == 'en')
+			                    <li><a href="{{ action('PageController@home', ['locale' => 'null']) }}"></i>{{ trans('navbar.translate') }}</a></li>
+							@else
+								<li><a href="{{ action('PageController@home', ['locale' => 'en']) }}"></i>{{ trans('navbar.stop_translating') }}</a></li>
+							@endif
+							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>
                 @endif

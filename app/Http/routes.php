@@ -52,6 +52,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/contact', 'PageController@contact');
     Route::get('/terms', 'PageController@terms');
 
+	// Translation routes
+    Route::get('/translate', 'TranslationController@index');
+	Route::get('/translate/setLocale', 'TranslationController@setLocale');
+
     // Idea routes
     Route::get('/explore', 'IdeaController@index');
     Route::get('/idea/create', 'IdeaController@add');

@@ -5,7 +5,7 @@
 	<div class="page-header {{ ($proposal_mode) ? ' colorful' : '' }}">
 
         <h2 class="main-title">{{ str_limit($design_task['name'], 50) }}</h2>
-		<h5 class="sub-title">{{ ($proposal_mode) ? ' Select one or more slots' : 'Added ' . $design_task->created_at->diffForHumans() . ' by ' . $design_task->user->name }}</h5>
+		<h5 class="sub-title">{{ ($proposal_mode) ? trans('xmovement_scheduler.proposal_tip') : trans('xmovement_scheduler.added_at_x_by_x', ['name' => $design_task->user->name, 'time' => $design_task->created_at->diffForHumans()]) }}</h5>
 
 	</div>
 
@@ -120,7 +120,7 @@
 
 									<div class="clearfloat"></div>
 
-				    				<button id="submit-button" data-scheduler-id="{{ $scheduler->id }}">Submit</button>
+				    				<button id="submit-button" data-scheduler-id="{{ $scheduler->id }}">{{ trans('xmovement_scheduler.submit_scheduler_option') }}</button>
 
 				    			</div>
 

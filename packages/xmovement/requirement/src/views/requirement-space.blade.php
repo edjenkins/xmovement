@@ -14,9 +14,9 @@
 
 		<div class="action-inputs">
 
-			<button class="fill-button">Fill this requirement</button>
+			<button class="fill-button">{{ trans('xmovement.requirement.fill_requirement') }}</button>
 
-			<button class="suggest-button" data-toggle="modal" data-target="#requirement-invite-modal">Invite someone you know</button>
+			<button class="suggest-button" data-toggle="modal" data-target="#requirement-invite-modal">{{ trans('xmovement.requirement.invite') }}</button>
 
 		</div>
 
@@ -26,15 +26,15 @@
 			<p>
 				@if (isset($requirementFilled))
 					@if ($requirementFilled->user->id == Auth::user()->id)
-						<a class="withdraw-from-requirement" href="#">You have filled this requirement (undo)</a>
-						<span class="not-filled-temp" style="display: none">Requirement not filled</span>
+						<a class="withdraw-from-requirement" href="#">{{ trans('xmovement.requirement.you_filled_requirement') }}</a>
+						<span class="not-filled-temp" style="display: none">{{ trans('xmovement.requirement.requirement_not_filled') }}</span>
 					@else
 						<a href="{{ action('UserController@profile', $requirementFilled->user) }}">{{ $requirementFilled->user->name }}</a>
-						<span class="not-filled-temp" style="display: none">Requirement not filled</span>
+						<span class="not-filled-temp" style="display: none">{{ trans('xmovement.requirement.requirement_not_filled') }}</span>
 					@endif
 				@else
-					<a class="filled-temp withdraw-from-requirement" href="#">You have filled this requirement (undo)</a>
-					<span class="not-filled-temp">Requirement not filled</span>
+					<a class="filled-temp withdraw-from-requirement" href="#">{{ trans('xmovement.requirement.you_filled_requirement') }}</a>
+					<span class="not-filled-temp">{{ trans('xmovement.requirement.requirement_not_filled') }}</span>
 				@endif
 			</p>
 

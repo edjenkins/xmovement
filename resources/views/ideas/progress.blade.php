@@ -19,7 +19,7 @@
 	<div class="ipb-dot ipb-end-dot {{ ($idea->progress_percentage() >= 100) ? 'complete' : '' }}">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
-				{{ trans('idea.complete') }}
+				{{ trans('idea.progress_complete') }}
 			</div>
 		</div>
 	</div>

@@ -78,7 +78,8 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+	// TODO: change back to 'en'
+    'fallback_locale' => 'none',
 
     /*
     |--------------------------------------------------------------------------

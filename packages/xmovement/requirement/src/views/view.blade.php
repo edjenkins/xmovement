@@ -5,8 +5,7 @@
 	<div class="page-header">
 
         <h2 class="main-title">{{ str_limit($design_task['name'], 50) }}</h2>
-		<h5 class="sub-title">{{ 'Added ' . $design_task->created_at->diffForHumans() . ' by ' . $design_task->user->name }}</h5>
-
+		<h5 class="sub-title">{{ trans('xmovement_requirement.added_at_x_by_x', ['name' => $design_task->user->name, 'time' => $design_task->created_at->diffForHumans()]) }}</h5>
 	</div>
 
 	<div class="container">

@@ -9,5 +9,7 @@ return [
     'logout' => 'Log out',
     'toggle' => 'Toggle Navigation',
     'profile' => 'Your Profile',
+	'translate' => 'Translate',
+	'stop_translating' => 'Stop Translating',
     'preferences' => 'Preferences',
 ];
