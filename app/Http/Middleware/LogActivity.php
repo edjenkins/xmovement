@@ -19,9 +19,6 @@ class LogActivity
      */
     public function handle($request, Closure $next)
     {
-		// Set locale
-		\App::setLocale($request->locale);
-
 		return $next($request);
 	}
 
