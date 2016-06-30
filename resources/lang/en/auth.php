@@ -37,7 +37,7 @@ return [
 	'avatar' => 'Avatar',
 	'header_image' => 'Header Image',
 
-	'update' => '',
+	'update' => 'Update',
 	'remember_me' => 'Remember me',
 	'forgot_your_password' => 'Forgot Your Password?',
 	'have_an_account' => 'Already have an account?',
