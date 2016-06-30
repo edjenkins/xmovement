@@ -8,3 +8,5 @@ storage/framework/views/*
 /public/css/*
 public/img/uploads/**
 public/uploads/**
+
+**/.DS_Store
