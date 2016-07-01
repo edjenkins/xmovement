@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
 	    factory(App\User::class, 4)->create()->each(function($u) {
 
-	        // $u->ideas()->save(factory(App\Idea::class)->make());
+	        $u->proposals()->save(factory(App\Proposal::class)->make());
 
 			$faker = Faker\Factory::create();
 

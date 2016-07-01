@@ -52,6 +52,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/contact', 'PageController@contact');
     Route::get('/terms', 'PageController@terms');
 
+	// Admin routes
+	Route::get('/admin/email/test', 'AdminController@emailTest');
+
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
 	Route::get('/translate/setLocale', 'TranslationController@setLocale');

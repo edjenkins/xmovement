@@ -234,7 +234,7 @@ class ProposeController extends Controller
 	        'description' => 'required|max:500'
 	    ]);
 
-	    // Create the idea
+	    // Create the proposal
 	    Proposal::create([
 	        'idea_id' => $idea->id,
 	        'user_id' => $user->id,

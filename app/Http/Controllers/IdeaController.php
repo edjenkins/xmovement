@@ -18,6 +18,7 @@ use ResourceImage;
 use Session;
 use Carbon\Carbon;
 
+use App\Jobs\SendCreateIdeaEmail;
 use App\Jobs\SendInviteEmail;
 use App\Jobs\SendDidSupportEmail;
 
@@ -147,6 +148,10 @@ class IdeaController extends Controller
 			'design_during_support' => $request->design_during_support,
 			'proposals_during_design' => $request->proposals_during_design,
 		]);
+
+        $job = (new SendCreateIdeaEmail($user, $idea))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
 
 		// Redirect to invite view
 		return redirect()->action('IdeaController@invite', $idea);
