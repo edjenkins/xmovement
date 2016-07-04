@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-	    factory(App\User::class, 4)->create()->each(function($u) {
+		factory(App\User::class, 4)->create()->each(function($u) {
 
 	        $u->proposals()->save(factory(App\Proposal::class)->make());
 

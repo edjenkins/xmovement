@@ -47,7 +47,7 @@ class SendXMovementRequirementInviteEmail extends Job implements ShouldQueue
     {
         Mail::send('xmovement.requirement.emails.invite', ['name' => $this->name, 'email' => $this->email, 'personal_message' => $this->personal_message, 'link' => $this->link, 'user' => $this->user], function ($message) {
 
-            $message->to($this->email)->subject(Lang::get('emails.xmovement_requirement_invite_subject', ['name' => $this->user->name]));
+			$message->to($this->email)->subject(Lang::get('emails.xmovement_requirement_invite_subject', ['name' => $this->user->name]));
 
         });
     }

@@ -41,11 +41,11 @@
 
 		    			@foreach($design_modules as $index => $design_module)
 
-			    			<li href="#{{ strtolower($design_module->name) }}-form-hash" class="design-module-tile" id="design-module-tile-{{ $design_module->id }}" data-form-id="#{{ strtolower($design_module->name) }}-form">
+			    			<li href="#{{ $design_module->class }}-form-hash" class="design-module-tile" id="design-module-tile-{{ $design_module->id }}" data-form-id="#{{ $design_module->class }}-form">
 
 								<i class="fa {{ $design_module->icon }}"></i>
 
-			    				<span>{{ $design_module->name }}</span>
+			    				<span>{{ trans($design_module->name) }}</span>
 
 			    			</li>
 
@@ -59,13 +59,13 @@
 
 		    			@foreach($design_modules as $index => $design_module)
 
-			    			<li class="design-module-form" id="{{ strtolower($design_module->name) }}-form">
+			    			<li class="design-module-form" id="{{ $design_module->class }}-form">
 
 			    				<div class="design-task-description">
-			    					{{ $design_module->description }}
+			    					{{ trans($design_module->description) }}
 			    				</div>
 
-			    				@include('xmovement/' . strtolower($design_module->name) . '/forms/add', ['editing' => false, 'idea' => $idea])
+			    				@include('xmovement/' . $design_module->class . '/forms/add', ['editing' => false, 'idea' => $idea])
 
 			    			</li>
 
