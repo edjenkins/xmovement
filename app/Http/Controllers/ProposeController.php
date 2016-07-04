@@ -142,11 +142,11 @@ class ProposeController extends Controller
 
     public function destroy(Request $request, Proposal $proposal)
     {
-		if (Gate::denies('destroy', $idea))
+		if (Gate::denies('destroy', $proposal))
 		{
 	        Session::flash('flash_message', trans('flash_message.no_permission'));
 	        Session::flash('flash_type', 'flash-danger');
-			return redirect()->action('IdeaController@view', $idea);
+			return redirect()->action('IdeaController@view', $proposal->idea);
 		}
 
 		$proposal->delete();
