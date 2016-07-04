@@ -90,7 +90,7 @@ class UpdateIdeaStates extends Command
 				// Send design phase open email
 				foreach ($idea->get_supporters() as $index => $supporter)
 				{
-					$job = (new SendDesignPhaseOpenEmail($supporter->user, $idea, true))->delay(5)->onQueue('emails');
+					$job = (new SendDesignPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 					$this->dispatch($job);
 				}
 			}
@@ -103,10 +103,14 @@ class UpdateIdeaStates extends Command
 
 				if ($idea->proposal_state == 'locked') {
 
+					// Get winning proposal
+					$proposal = $idea->winning_proposal();
+
 					// Send proposal phase complete email
 					foreach ($idea->get_supporters() as $index => $supporter)
 					{
-						// $job = (new SendProposalPhaseCompleteEmail($supporter->user, $idea, true))->delay(5)->onQueue('emails');
+						// TODO: Test and enable
+						// $job = (new SendProposalPhaseCompleteEmail($supporter->user, $idea, $proposal))->delay(5)->onQueue('emails');
 						// $this->dispatch($job);
 					}
 				}
@@ -117,7 +121,7 @@ class UpdateIdeaStates extends Command
 				// Send proposal phase open email
 				foreach ($idea->get_supporters() as $index => $supporter)
 				{
-					$job = (new SendProposalPhaseOpenEmail($supporter->user, $idea, true))->delay(5)->onQueue('emails');
+					$job = (new SendProposalPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 					$this->dispatch($job);
 				}
 			}

@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Lang;
 use Mail;
 
 use App\User;
@@ -16,7 +17,7 @@ use App\Idea;
 class SendDidSupportEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
-    
+
     protected $creator;
     protected $receiver;
     protected $idea;
@@ -42,7 +43,7 @@ class SendDidSupportEmail extends Job implements ShouldQueue
     {
         Mail::send('emails.support', ['creator' => $this->creator, 'receiver' => $this->receiver, 'idea' => $this->idea], function ($message) {
 
-            $message->to($this->receiver['email'])->subject('You have supported an idea on XMovement');
+            $message->to($this->receiver['email'])->subject(Lang::get('emails.support_subject', ['idea' => $this->idea->name]));
 
         });
     }

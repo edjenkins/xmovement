@@ -17,7 +17,10 @@ class DatabaseSeeder extends Seeder
 
 		$this->call(DesignModulesTableSeeder::class);
 
-        $this->call(UsersTableSeeder::class);
+		if (env('APP_DEBUG', false))
+		{
+	        $this->call(UsersTableSeeder::class);
+		}
 
 	    Model::reguard();
     }

@@ -7,10 +7,12 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Lang;
 use Mail;
 
 use App\User;
 use App\Idea;
+use App\Proposal;
 
 
 class SendProposalPhaseCompleteEmail extends Job implements ShouldQueue
@@ -19,16 +21,18 @@ class SendProposalPhaseCompleteEmail extends Job implements ShouldQueue
 
     protected $user;
     protected $idea;
+    protected $proposal;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(User $user, Idea $idea)
+    public function __construct(User $user, Idea $idea, Proposal $proposal)
     {
         $this->user = $user;
         $this->idea = $idea;
+        $this->proposal = $proposal;
     }
 
     /**
@@ -38,9 +42,9 @@ class SendProposalPhaseCompleteEmail extends Job implements ShouldQueue
      */
     public function handle()
     {
-        Mail::send('emails.proposal-phase-complete', ['user' => $this->user, 'idea' => $this->idea], function ($message) {
+        Mail::send('emails.proposal-phase-complete', ['user' => $this->user, 'idea' => $this->idea, 'proposal' => $this->proposal], function ($message) {
 
-            $message->to($this->user->email)->subject('Proposal phase is complete');
+            $message->to($this->user->email)->subject(Lang::get('emails.proposal_phase_complete_subject'));
 
         });
     }

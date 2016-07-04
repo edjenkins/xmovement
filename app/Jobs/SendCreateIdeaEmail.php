@@ -10,11 +10,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Lang;
 use Mail;
 
-use App\User;
 use App\Idea;
+use App\User;
 
 
-class SendDesignPhaseOpenEmail extends Job implements ShouldQueue
+class SendCreateIdeaEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
@@ -39,9 +39,9 @@ class SendDesignPhaseOpenEmail extends Job implements ShouldQueue
      */
     public function handle()
     {
-        Mail::send('emails.design-phase-open', ['user' => $this->user, 'idea' => $this->idea], function ($message) {
+        Mail::send('emails.create-idea', ['idea' => $this->idea, 'user' => $this->user], function ($message) {
 
-            $message->to($this->user->email)->subject(Lang::get('emails.design_phase_open_subject'));
+            $message->to($this->user->email)->subject(Lang::get('emails.create_idea_subject'));
 
         });
     }

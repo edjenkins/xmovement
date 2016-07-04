@@ -21,8 +21,9 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => Lang::get('xmovement.scheduler'),
-					'description' => Lang::get('xmovement.scheduler_description'),
+					'name' => 'xmovement.scheduler',
+					'description' => 'xmovement.scheduler_description',
+					'class' => 'scheduler',
 					'icon' => 'fa-calendar',
 				)
 			);
@@ -32,8 +33,9 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => Lang::get('xmovement.poll'),
-					'description' => Lang::get('xmovement.poll_description'),
+					'name' => 'xmovement.poll',
+					'description' => 'xmovement.poll_description',
+					'class' => 'poll',
 					'icon' => 'fa-th-list',
 				)
 			);
@@ -43,8 +45,9 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => Lang::get('xmovement.requirement'),
-					'description' => Lang::get('xmovement.requirement_description'),
+					'name' => 'xmovement.requirement',
+					'description' => 'xmovement.requirement_description',
+					'class' => 'requirement',
 					'icon' => 'fa-check-circle-o',
 				)
 			);
@@ -54,8 +57,9 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => Lang::get('xmovement.contribution'),
-					'description' => Lang::get('xmovement.contribution_description'),
+					'name' => 'xmovement.contribution',
+					'description' => 'xmovement.contribution_description',
+					'class' => 'contribution',
 					'icon' => 'fa-thumbs-o-up',
 				)
 			);
@@ -65,8 +69,9 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => Lang::get('xmovement.external'),
-					'description' => Lang::get('xmovement.external_description'),
+					'name' => 'xmovement.external',
+					'description' => 'xmovement.external_description',
+					'class' => 'external',
 					'icon' => 'fa-external-link',
 				)
 			);
@@ -76,8 +81,9 @@ class DesignModulesTableSeeder extends Seeder
 		{
 			array_push($design_modules,
 				array(
-					'name' => Lang::get('xmovement.discussion'),
-					'description' => Lang::get('xmovement.discussion_description'),
+					'name' => 'xmovement.discussion',
+					'description' => 'xmovement.discussion_description',
+					'class' => 'discussion',
 					'icon' => 'fa-comments-o',
 				)
 			);
@@ -88,6 +94,7 @@ class DesignModulesTableSeeder extends Seeder
             DB::table('design_modules')->insert([
                 'name' => $design_module['name'],
                 'description' => $design_module['description'],
+				'class' => $design_module['class'],
                 'icon' => $design_module['icon'],
                 'available' => true,
                 'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),

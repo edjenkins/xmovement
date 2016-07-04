@@ -2,39 +2,45 @@
 
 	@include('emails/email-header')
 
-	<h3>Welcome to {{ trans('common.brand') }}! We’re so glad you’re here!</h3>
+	<h3>Congratulations! You started your {{ trans_choice('common.idea', 1) }}, <a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a>. Looking good! So what’s next?</h3>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		{{ trans('common.brand') }} is a new and exciting way to create and commission training events and courses. Start with an {{ trans_choice('common.idea', 1) }} for an event, involve the community and make it happen! Here’s a super quick tour of what to do next…
+		Your {{ trans_choice('common.idea', 1) }} is in the support phase right now but there is still plenty to do. Here are our top tips for making your {{ trans_choice('common.idea', 1) }} a reality.
 	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<a style="color: white; background-color: #6CCCA4; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: normal; font-size: 1.1em;" href="{{ action('IdeaController@index') }}">Browse and Support {{ trans_choice('common.idea', 0) }}</a>
-	</p>
-
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Browse other people’s ideas and see something you like? Click support and help develop the {{ trans_choice('common.idea', 1) }} to make it a reality. Here are some of our top picks right now.
-	</p>
-
-	@include('emails/featured-ideas')
-
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<a style="color: white; background-color: #6CCCA4; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: normal; font-size: 1.1em;" href="{{ action('IdeaController@add') }}">Start an {{ trans_choice('common.idea', 1) }}</a>
-	</p>
-
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Whether your {{ trans_choice('common.idea', 1) }} is fully formed or just a small spark, with a few simple clicks you can start things moving. Gather supporters and make it happen!
-	</p>
-
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<strong>Spread the love</strong>
-	</p>
-
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		{{ trans('common.brand') }} works best when people come together around {{ trans_choice('common.idea', 0) }} to show support, so why not invite friends to get involved with {{ trans_choice('common.idea', 0) }} you think they’ll like?
+		<strong>1. Spread the word!</strong>
 	</p>
 
 	<?php // TODO: ADD social media links ?>
+
+	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
+		The more supporters an {{ trans_choice('common.idea', 1) }} has, the more likely it is to succeed. So tell everyone you can about your {{ trans_choice('common.idea', 1) }}. {{ trans('common.brand') }} makes it easy to share, with just a few clicks.
+	</p>
+
+	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
+		<strong>2. Make regular updates!</strong>
+	</p>
+
+	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
+		Posting regularly on your {{ trans_choice('common.idea', 1) }}'s home page is a great way to get a buzz going. Start discussions and ask questions to supporters to make your {{ trans_choice('common.idea', 1) }} feel alive.
+	</p>
+
+	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
+		<strong>3. Listen to supporters!</strong>
+	</p>
+
+	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
+		Did you know you can start the developing your {{ trans_choice('common.idea', 1) }} now? If you think the idea is ready to go on to the next stage, then why not start the Get Involved phase early?
+	</p>
+
+	<?php // TODO: ADD link to idea settings ?>
+
+	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
+		You can find out more about the journey an {{ trans_choice('common.idea', 1) }} goes through <a href="{{ action('PageController@about') }}">here</a>.
+		<br><br>
+		Good luck!
+	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
 		- The {{ trans('common.brand') }} team
