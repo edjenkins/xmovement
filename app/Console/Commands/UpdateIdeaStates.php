@@ -103,15 +103,18 @@ class UpdateIdeaStates extends Command
 
 				if ($idea->proposal_state == 'locked') {
 
+					// Lock all states
+					$idea->support_state = 'locked';
+					$idea->design_state = 'locked';
+
 					// Get winning proposal
 					$proposal = $idea->winning_proposal();
 
 					// Send proposal phase complete email
 					foreach ($idea->get_supporters() as $index => $supporter)
 					{
-						// TODO: Test and enable
-						// $job = (new SendProposalPhaseCompleteEmail($supporter->user, $idea, $proposal))->delay(5)->onQueue('emails');
-						// $this->dispatch($job);
+						$job = (new SendProposalPhaseCompleteEmail($supporter->user, $idea, $proposal))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
 					}
 				}
 			}

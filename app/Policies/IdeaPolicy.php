@@ -89,6 +89,19 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can open the design phase early
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function open_design_phase(User $user, Idea $idea)
+    {
+    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        return ($idea->design_state == "closed" && $is_existing_supporter && ($user->id == $idea->user_id));
+    }
+
+    /**
      * Determine if the given user can pin a design task in the given idea.
      *
      * @param  User  $user

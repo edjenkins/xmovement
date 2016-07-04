@@ -1,9 +1,12 @@
+.about-summary-row
+	position relative
+	margin-top -40px
+
 .about-summary-tile
 	background white
 	border border-color 1px solid
+	margin 20px auto
 	padding 20px
-	position relative
-	margin-top -20px
 	text-align center
 	img
 		height 60px
@@ -12,30 +15,45 @@
 		margin 0
 		padding 0
 	h3
+		color #444
 		margin 0 0 10px 0
 	p
 		color #666
 		font-size 1.1em
-	@media(max-width: $screen-md-max)
-		margin-top 20px
 
 .about-phase-row
-	padding-top 50px
+	padding-top 30px
 	text-align center
 	.about-phase-title
 		color main-color
+		margin-bottom 20px
 	.about-phase-tile
 		background white
 		border border-color 1px solid
-		margin 40px auto
+		margin 60px auto
 		max-width 960px
 		padding 30px
+		position relative
 		text-align center
+		.phase-step-indicator
+			background-color main-color
+			border-radius 50%
+			color white
+			font-size 1.6em
+			position absolute
+			top -30px
+			left 50%
+			margin-left -30px
+			height 60px
+			line-height 60px
+			width 60px
+			text-align center
 		h3, p
 			margin 0
 			padding 0
 		h3
-			margin 0 0 20px 0
+			color #444
+			margin 20px 0
 		p
 			color #666
 			font-size 1.1em

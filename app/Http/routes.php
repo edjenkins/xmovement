@@ -68,6 +68,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/idea/update', 'IdeaController@update');
     Route::post('/idea/store', 'IdeaController@store');
     Route::get('/idea/{idea}/{slug?}', 'IdeaController@view');
+    Route::post('/idea/open_design_phase/{idea}', 'IdeaController@openDesignPhase');
     Route::delete('/idea/{idea}', 'IdeaController@destroy');
 
     // Design routes
