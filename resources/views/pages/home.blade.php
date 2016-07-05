@@ -57,19 +57,22 @@
 
 	</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="panel-heading text-center">
-                <h2>{{ trans('home.featured_ideas', ['idea' => trans_choice('common.idea', count($ideas))]) }}</h2>
-            </div>
+	@if(count($ideas) > 0)
+	    <div class="container">
+	        <div class="row">
+	            <div class="panel-heading text-center">
+	                <h2>{{ trans('home.featured_ideas', ['idea' => trans_choice('common.idea', count($ideas))]) }}</h2>
+	            </div>
 
-            <div class="row-fluid">
-                @foreach ($ideas as $idea)
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        @include('ideas.tile')
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
+	            <div class="row-fluid">
+	                @foreach ($ideas as $idea)
+	                    <div class="col-xs-12 col-sm-6 col-md-4">
+	                        @include('ideas.tile')
+	                    </div>
+	                @endforeach
+	            </div>
+	        </div>
+	    </div>
+	@endif
+	
 @endsection

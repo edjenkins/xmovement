@@ -38,7 +38,7 @@
 						</div>
 					</li>
 
-					<li class="module-control search-element">
+					<li class="module-control search-element" ng-init="idea_search_term = ''">
 						<input type="text" ng-model="idea_search_term" placeholder="{{ trans('placeholders.search_ideas') }}">
 					</li>
 
@@ -79,7 +79,8 @@
 
 			<div class="col-xs-12 no-results" ng-show="(ideas | filter:idea_search_term).length == 0">
 
-				No Results for <% idea_search_term %>
+
+				No Results<span ng-show="idea_search_term.length > 0"> for <% idea_search_term %></span>
 
 			</div>
 
