@@ -3,8 +3,8 @@
 $(document).ready(function() {
 
 	$('#idea-duration-slider').slider({
-	    min: 5,
-	    max: 45,
+	    min: 3,
+	    max: 21,
 		change: function(event, ui) {
 	    	var input_id = $(this).attr('data-input-id');
 			$('#' + input_id).val(ui.value);
@@ -16,7 +16,7 @@ $(document).ready(function() {
 	    first: 'label',
 	    last: 'label',
 	    rest: 'label',
-		step: 5
+		step: 3
 	})
 	.slider('float');
 
