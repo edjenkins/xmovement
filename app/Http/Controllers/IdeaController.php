@@ -21,6 +21,7 @@ use Carbon\Carbon;
 use App\Jobs\SendCreateIdeaEmail;
 use App\Jobs\SendInviteEmail;
 use App\Jobs\SendDidSupportEmail;
+use App\Jobs\SendDesignPhaseOpenEmail;
 
 use App\Idea;
 use App\User;
@@ -216,6 +217,13 @@ class IdeaController extends Controller
 			$idea->design_during_support = true;
 			$idea->design_state = 'open';
 			$idea->save();
+
+			// Send design phase open email
+			foreach ($idea->get_supporters() as $index => $supporter)
+			{
+				$job = (new SendDesignPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
+				$this->dispatch($job);
+			}
 
 			Session::flash('flash_message', trans('flash_message.design_phase_opened'));
 			Session::flash('flash_type', 'flash-success');
