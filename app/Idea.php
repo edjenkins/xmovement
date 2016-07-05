@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use MartinBean\Database\Eloquent\Sluggable;
 
 use Carbon\Carbon;
@@ -30,8 +31,10 @@ class Idea extends Model
     ];
 
 	protected $appends = ['supporter_count'];
+    protected $dates = ['deleted_at'];
 
 	use Sluggable;
+    use SoftDeletes;
 
     public function user()
     {

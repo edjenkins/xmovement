@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\DesignTaskVote;
 
@@ -31,6 +32,10 @@ class DesignTask extends Model
     protected $fillable = [
         'idea_id', 'user_id', 'name', 'description', 'xmovement_task_id', 'xmovement_task_type', 'proposal_interactivity', 'pinned', 'locked'
     ];
+
+    protected $dates = ['deleted_at'];
+
+	use SoftDeletes;
 
     public function user()
     {

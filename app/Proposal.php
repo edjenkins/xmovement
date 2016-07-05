@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Auth;
 
@@ -16,6 +17,10 @@ class Proposal extends Model
     protected $fillable = [
         'idea_id', 'user_id', 'description', 'body'
     ];
+
+    protected $dates = ['deleted_at'];
+
+	use SoftDeletes;
 
     public function user()
     {
