@@ -37,7 +37,7 @@
 </head>
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement" ng-controller="ExploreController">
 
-	@include('google-analytics')
+	@include('google-analytics', ['trackingId' => getenv('APP_GA_TRACKING_ID')])
 
     @include('facebook-sdk')
 
