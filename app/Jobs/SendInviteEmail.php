@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Lang;
 use Mail;
 
 use App\User;
@@ -16,7 +17,7 @@ use App\Idea;
 class SendInviteEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
-    
+
     protected $sender;
     protected $receiver;
     protected $idea;
@@ -42,7 +43,7 @@ class SendInviteEmail extends Job implements ShouldQueue
     {
         Mail::send('emails.invite', ['sender' => $this->sender, 'receiver' => $this->receiver, 'idea' => $this->idea], function ($message) {
 
-            $message->to($this->receiver['email'])->subject($this->sender->name . ' has sent you an invitation');
+            $message->to($this->receiver['email'])->subject(Lang::get('emails.invite_subject', ['name' => $this->sender->name]));
 
         });
     }

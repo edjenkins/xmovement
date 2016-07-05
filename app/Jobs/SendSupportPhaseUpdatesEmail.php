@@ -7,6 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Lang;
 use Mail;
 
 use App\User;
@@ -40,7 +41,7 @@ class SendSupportPhaseUpdatesEmail extends Job implements ShouldQueue
     {
         Mail::send('emails.support-phase-updates', ['user' => $this->user, 'idea' => $this->idea], function ($message) {
 
-            $message->to($this->user->email)->subject('Support updates');
+            $message->to($this->user->email)->subject(Lang::get('emails.support_phase_updates_subject'));
 
         });
     }

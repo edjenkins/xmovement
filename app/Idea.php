@@ -58,6 +58,20 @@ class Idea extends Model
         return $this->hasMany(Proposal::class);
     }
 
+    /**
+     * The winning Proposal for the idea.
+     *
+     * @var array
+     */
+    public function winning_proposal()
+    {
+		$proposals = collect($this->proposals)->sortByDesc(function ($proposal, $key) {
+            return sprintf('%s', $proposal->voteCount());
+        })->values()->all();
+
+        return $proposals[0];
+    }
+
     public function supporterCount()
     {
         return Supporter::where('idea_id', $this->id)->count();
@@ -97,6 +111,11 @@ class Idea extends Model
 	public function proposalPhaseOpens()
 	{
 		return Carbon::parse($this->timescales('proposal', 'start'))->diffForHumans(null, true);
+	}
+
+	public function proposalPhaseCloses()
+	{
+		return Carbon::parse($this->timescales('proposal', 'end'))->diffForHumans(null, true);
 	}
 
 	public function timescales($phase, $point)

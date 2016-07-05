@@ -25,7 +25,7 @@
 
 	    					<i class="fa fa-chevron-left"></i>
 
-	    					{{ trans('design.back_to_dashboard') }}
+	    					{{ trans('design.back_to_idea') }}
 
 	    				</a>
 
@@ -78,7 +78,7 @@
 			@can('add_proposal', $idea)
 
 				<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
-					Add Proposal
+					{{ trans('proposals.add_proposal') }}
 				</a>
 
 			@endcan

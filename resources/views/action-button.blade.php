@@ -52,6 +52,12 @@
 
 	@endcan
 
+	@can('open_design_phase', $idea)
+
+		<div data-toggle="modal" data-target="#open-design-phase-modal" class="btn btn-primary action-button">{{ trans('idea.open_design_phase') }}</div>
+
+	@endcan
+
 	@can('edit', $idea)
 
 		<a href="{{ action('IdeaController@edit', $idea) }}" class="btn btn-warning action-button">{{ trans('idea.edit_idea') }}</a>

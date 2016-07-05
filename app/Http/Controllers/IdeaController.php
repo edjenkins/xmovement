@@ -18,6 +18,7 @@ use ResourceImage;
 use Session;
 use Carbon\Carbon;
 
+use App\Jobs\SendCreateIdeaEmail;
 use App\Jobs\SendInviteEmail;
 use App\Jobs\SendDidSupportEmail;
 
@@ -129,9 +130,7 @@ class IdeaController extends Controller
 			'description' => 'required|max:2000',
 			'photo' => 'required|max:255',
 			'visibility' => 'required',
-			'duration' => 'integer|between:5,45',
-			'design_during_support' => 'required|boolean',
-			'proposals_during_design' => 'required|boolean',
+			'duration' => 'integer|between:5,45'
 		]);
 
 		// Create the idea
@@ -143,10 +142,12 @@ class IdeaController extends Controller
 			'support_state' => 'open',
 			'design_state' => ($request->design_during_support) ? 'open' : 'closed',
 			'proposal_state' => 'closed',
-			'duration' => $request->duration,
-			'design_during_support' => $request->design_during_support,
-			'proposals_during_design' => $request->proposals_during_design,
+			'duration' => $request->duration
 		]);
+
+        $job = (new SendCreateIdeaEmail($request->user(), $idea))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
 
 		// Redirect to invite view
 		return redirect()->action('IdeaController@invite', $idea);
@@ -200,6 +201,27 @@ class IdeaController extends Controller
 		}
 
 		return redirect()->action('IdeaController@index', $idea);
+	}
+
+	public function openDesignPhase(Request $request, Idea $idea)
+	{
+		if (Gate::denies('open_design_phase', $idea))
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+			Session::flash('flash_type', 'flash-warning');
+		}
+		else
+		{
+			// Update
+			$idea->design_during_support = true;
+			$idea->design_state = 'open';
+			$idea->save();
+
+			Session::flash('flash_message', trans('flash_message.design_phase_opened'));
+			Session::flash('flash_type', 'flash-success');
+		}
+
+		return redirect()->action('IdeaController@view', $idea);
 	}
 
 	public function invite(Request $request, Idea $idea)

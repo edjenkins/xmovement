@@ -89,6 +89,12 @@
 
 	@endcan
 
+	@can('open_design_phase', $idea)
+
+		@include('modals/open-design-phase', ['idea' => $idea])
+
+	@endcan
+
 	<?php Session::set('redirect', Request::url()); ?>
 
 	<script type="text/javascript">

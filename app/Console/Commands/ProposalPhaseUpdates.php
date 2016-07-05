@@ -46,7 +46,7 @@ class ProposalPhaseUpdates extends Command
 		{
 			foreach ($idea->get_supporters() as $index => $supporter)
 			{
-				$job = (new SendProposalPhaseUpdatesEmail($supporter->user, $idea, true))->delay(5)->onQueue('emails');
+				$job = (new SendProposalPhaseUpdatesEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 				$this->dispatch($job);
 			}
 		}

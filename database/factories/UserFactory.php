@@ -2,9 +2,9 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName . ' ' . $faker->lastName,
         'bio' => $faker->text($maxNbChars = 200),
-        'email' => $faker->email,
+        'email' => strtolower($faker->firstNameMale) . '@edjenkins.co.uk',
         'phone' => $faker->phoneNumber,
         'avatar' => 'avatar',
         'password' => bcrypt(str_random(10)),
