@@ -36,12 +36,6 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('UserController@profile') }}"></i>{{ trans('navbar.profile') }}</a></li>
-							
-							@if (App::getLocale() == 'en')
-			                    <li><a href="{{ action('PageController@home', ['locale' => 'null']) }}"></i>{{ trans('navbar.translate') }}</a></li>
-							@else
-								<li><a href="{{ action('PageController@home', ['locale' => 'en']) }}"></i>{{ trans('navbar.stop_translating') }}</a></li>
-							@endif
 							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>
