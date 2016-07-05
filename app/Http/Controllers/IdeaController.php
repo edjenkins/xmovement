@@ -150,6 +150,9 @@ class IdeaController extends Controller
 
         $this->dispatch($job);
 
+		// Set creator as a supporter
+		$idea->supporters()->attach($request->user()->id); // TODO: Check this works
+
 		// Redirect to invite view
 		return redirect()->action('IdeaController@invite', $idea);
 	}
