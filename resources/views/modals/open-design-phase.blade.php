@@ -7,20 +7,20 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-				<h4 class="modal-title" id="support-modal">Open Design Phase Early</h4>
+				<h4 class="modal-title" id="support-modal">{{ trans('idea.open_design_phase_early') }}</h4>
 
 			</div>
 
 			<div class="modal-body">
 
 				<p>
-					As the idea creator you can open the design phase at any time, however please note that it is not possible to revert this action.
+					{{ trans('idea.open_design_phase_early_header') }}
 				</p>
 
 				<br />
 
 				<p class="text-muted">
-					By opening the design phase early you will be inviting supporters to contribute to the design of your idea. Make sure you are happy with the number of supporters before continuing.
+					{{ trans('idea.open_design_phase_early_subheader') }}
 				</p>
 
 			</div>
