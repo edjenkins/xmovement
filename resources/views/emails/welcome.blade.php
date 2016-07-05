@@ -13,10 +13,10 @@
 	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Browse other people’s ideas and see something you like? Click support and help develop the {{ trans_choice('common.idea', 1) }} to make it a reality. Here are some of our top picks right now.
+		Browse other people’s ideas and see something you like? Click support and help develop the {{ trans_choice('common.idea', 1) }} to make it a reality.
 	</p>
 
-	@include('emails/featured-ideas')
+	<?php // TODO: ADD featured ideas ?>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
 		<a style="color: white; background-color: #6CCCA4; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: normal; font-size: 1.1em;" href="{{ action('IdeaController@add') }}">Start an {{ trans_choice('common.idea', 1) }}</a>

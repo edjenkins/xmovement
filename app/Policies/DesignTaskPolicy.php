@@ -34,6 +34,7 @@ class DesignTaskPolicy
      */
     public function flag(User $user, DesignTask $design_task)
     {
+		return false; // TODO: Add flag functionality
 		$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
         return $is_existing_supporter;
     }

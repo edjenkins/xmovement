@@ -18,11 +18,7 @@
 
 	<?php // TODO: ADD social media links ?>
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<strong>Recommended {{ trans_choice('common.idea', 0) }}</strong>
-	</p>
-
-	@include('emails/featured-ideas')
+	<?php // TODO: ADD featured ideas ?>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
 		- The {{ trans('common.brand') }} team

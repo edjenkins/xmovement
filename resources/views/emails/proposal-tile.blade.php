@@ -1,2 +1,1 @@
-<?php // TODO:  ?>
-<h2>{{ $proposal->description }}</h2>
+@include('propose/tile', ['proposal' => $proposal, 'index' => 0])
