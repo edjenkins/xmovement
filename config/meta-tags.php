@@ -9,7 +9,7 @@ return array(
      |
      */
 
-    'title' => 'My Site',
+    'title' => env('APP_SITE_TITLE'),
 
     /*
      |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ return array(
      */
 
     'open_graph' => [
-        'site_name' => 'My Site',
+        'site_name' => env('APP_SITE_TITLE'),
         'type' => 'website'
     ],
 
@@ -54,8 +54,8 @@ return array(
 
     'twitter' => [
         'card' => 'summary',
-        'creator' => '@mysite',
-        'site' => '@mysite'
+        'creator' => '@edjenkins91',
+        'site' => '@edjenkins91'
     ],
 
     /*
