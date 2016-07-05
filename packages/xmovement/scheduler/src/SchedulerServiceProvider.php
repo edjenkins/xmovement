@@ -42,10 +42,6 @@ class SchedulerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/js' => base_path('public/js/xmovement/scheduler'),
         ], 'public');
-
-        $this->publishes([
-            __DIR__.'/lang/en' => base_path('resources/lang/en'),
-        ], 'public');
     }
 
     /**

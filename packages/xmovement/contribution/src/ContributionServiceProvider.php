@@ -34,17 +34,13 @@ class ContributionServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/views' => base_path('resources/views/xmovement/contribution'),
         ], 'views');
-        
+
         $this->publishes([
             __DIR__.'/stylus' => base_path('resources/assets/stylus/xmovement/contribution'),
         ], 'public');
-        
+
         $this->publishes([
             __DIR__.'/js' => base_path('public/js/xmovement/contribution'),
-        ], 'public');
-        
-        $this->publishes([
-            __DIR__.'/lang/en' => base_path('resources/lang/en'),
         ], 'public');
     }
 
