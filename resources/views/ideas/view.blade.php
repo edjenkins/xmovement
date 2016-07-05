@@ -44,30 +44,34 @@
 
     				</div>
 
-					@if (count($idea->proposals) > 0)
+					@unless($idea->proposal_state == 'closed')
 
-						<div class="proposals-container hidden-xs">
+						@if (count($idea->proposals) > 0)
 
-			    			<div class="section-header">
-								<h2>{{ trans('idea.proposals') }}</h2>
-								<a href="{{ action('ProposeController@index', $idea) }}">{{ trans('idea.view_all_proposals') }}</a>
+							<div class="proposals-container hidden-xs">
+
+				    			<div class="section-header">
+									<h2>{{ trans('idea.proposals') }}</h2>
+									<a href="{{ action('ProposeController@index', $idea) }}">{{ trans('idea.view_all_proposals') }}</a>
+								</div>
+
+								<div class="proposals-wrapper">
+
+									@foreach ($idea->proposals->take(3) as $index => $proposal)
+										<div class="col-xs-12 col-sm-6 col-md-4">
+											@include('propose/tile', ['proposal' => $proposal, 'index' => $index])
+										</div>
+									@endforeach
+
+									<div class="clearfloat"></div>
+
+								</div>
+
 							</div>
 
-							<div class="proposals-wrapper">
+						@endif
 
-								@foreach ($idea->proposals->take(3) as $index => $proposal)
-									<div class="col-xs-12 col-sm-6 col-md-4">
-										@include('propose/tile', ['proposal' => $proposal, 'index' => $index])
-									</div>
-								@endforeach
-
-								<div class="clearfloat"></div>
-
-							</div>
-
-						</div>
-
-					@endif
+					@endunless
 
 					<br />
 
