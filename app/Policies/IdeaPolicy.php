@@ -97,6 +97,7 @@ class IdeaPolicy
      */
     public function open_design_phase(User $user, Idea $idea)
     {
+		return false; // TODO: Prevent opening of design phase early
     	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
         return ($idea->design_state == "closed" && $is_existing_supporter && ($user->id == $idea->user_id));
     }

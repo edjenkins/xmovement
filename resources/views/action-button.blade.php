@@ -18,40 +18,44 @@
 
 	@endif
 
-	@can('design', $idea)
+	@if($idea->supported)
 
-		<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
-
-	@else
-
-		@if ($idea->design_state == 'locked')
+		@can('design', $idea)
 
 			<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
 
-		@endif
+		@else
 
-		@can('design_after_support', $idea)
+			@if ($idea->design_state == 'locked')
 
-			<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button temp-design-button">{{ trans('idea.design_dashboard') }}</a>
+				<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
+
+			@endif
+
+			@can('design_after_support', $idea)
+
+				<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button temp-design-button">{{ trans('idea.design_dashboard') }}</a>
+
+			@endcan
 
 		@endcan
 
-	@endcan
-
-	@can('view_proposals', $idea)
-
-		<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
-
-	@else
-
-		@if ($idea->design_state == 'locked')
+		@can('view_proposals', $idea)
 
 			<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
 
-		@endif
+		@else
 
-	@endcan
+			@if ($idea->design_state == 'locked')
 
+				<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
+
+			@endif
+
+		@endcan
+
+	@endif
+	
 	@can('open_design_phase', $idea)
 
 		<div data-toggle="modal" data-target="#open-design-phase-modal" class="btn btn-primary action-button">{{ trans('idea.open_design_phase') }}</div>

@@ -58,19 +58,23 @@
 
             <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="idea in ideas | orderBy:sort_type:true | filter:idea_search_term">
 
-				<div class="tile idea-tile" ng-show="ideas">
+				<div class="tile idea-tile" ng-show="idea">
 					<a class="tile-image" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/large/<% idea.photo %>')" ng-href="/idea/<% idea.id %>"></a>
 					<div class="inner-container">
 						<a class="idea-name" ng-href="/idea/<% idea.id %>">
 						    <% idea.name | cut:true:50:'...' %>
 						</a>
+						<p class="idea-author">
+							{{ trans('idea.posted_by') }} <a href="/profile/<% idea.user.id %>"><% idea.user.name %></a>
+						</p>
 						<p class="idea-description">
 							<% idea.description | cut:true:100:'...' %>
 						</p>
 					</div>
 					<div class="tile-footer">
+						<div class="phase-progress" style="right:<% (100 - idea.progress) %>%"></div>
 						<p>
-						    {{ trans('idea.posted_by') }} <a href="/profile/<% idea.user.id %>"><% idea.user.name %></a>
+							<% idea.latest_phase %>
 						</p>
 					</div>
 				</div>

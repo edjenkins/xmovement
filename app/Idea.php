@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use MartinBean\Database\Eloquent\Sluggable;
 
+use Auth;
 use Carbon\Carbon;
 use Log;
 
@@ -30,7 +31,7 @@ class Idea extends Model
 		'proposals_during_design',
     ];
 
-	protected $appends = ['supporter_count'];
+	protected $appends = ['supporter_count', 'progress', 'latest_phase', 'supported'];
     protected $dates = ['deleted_at'];
 
 	use Sluggable;
@@ -72,12 +73,36 @@ class Idea extends Model
             return sprintf('%s', $proposal->voteCount());
         })->values()->all();
 
-        return $proposals[0];
+		if ($proposals)
+		{
+			return $proposals[0];
+		}
+		else
+		{
+			return null;
+		}
     }
 
     public function supporterCount()
     {
         return Supporter::where('idea_id', $this->id)->count();
+    }
+
+    /**
+     * Check if user has supported this idea
+     *
+     * @return bool
+     */
+    public function getSupportedAttribute()
+    {
+		if (Auth::user())
+		{
+			return Supporter::where('user_id', Auth::user()->id)->where('idea_id', $this->id)->exists();
+		}
+		else
+		{
+			return false;
+		}
     }
 
     /**
@@ -87,7 +112,42 @@ class Idea extends Model
      */
     public function getSupporterCountAttribute()
     {
-        return Supporter::where('idea_id', $this->id)->count();
+        return $this->supporterCount();
+    }
+
+    /**
+     * Get the progress as a percentage
+     *
+     * @return int
+     */
+    public function getProgressAttribute()
+    {
+		return $this->progress_percentage();
+    }
+
+    /**
+     * Get the latest state
+     *
+     * @return string
+     */
+    public function getLatestPhaseAttribute()
+    {
+		if ($this->proposal_state == 'locked')
+		{
+			return 'Complete';
+		}
+		if ($this->proposal_state == 'open')
+		{
+			return 'Proposal Phase';
+		}
+		if ($this->design_state == 'open' && $this->proposal_state != 'open')
+		{
+			return 'Design Phase';
+		}
+		if ($this->support_state == 'open' && $this->design_state != 'open')
+		{
+			return 'Support Phase';
+		}
     }
 
     /**
@@ -230,6 +290,13 @@ class Idea extends Model
 		$diff = Carbon::parse($this->timescales('support', 'start'))->diffInHours();
 		$progress = 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
 		return ($progress > 100) ? 100 : $progress;
+	}
+
+	public function support_percentage()
+	{
+		$created = Carbon::parse($this->created_at);
+		$diff = $created->diffInHours(Carbon::parse($this->timescales('support', 'start')));
+		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
 	}
 
 	public function design_percentage()

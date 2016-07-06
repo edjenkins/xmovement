@@ -30,10 +30,20 @@
 
 	    		<div class="column main-column">
 
+					@if(false)
+						@if($idea->design_state == 'open')
+							@include('ideas/notification', ['message' => trans('idea.design_phase_open_notification')])
+						@endif
+
+						@if($idea->proposal_state == 'open')
+							@include('ideas/notification', ['message' => trans('idea.proposal_phase_open_notification')])
+						@endif
+					@endif
+
 	    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
 
 					@include('ideas/progress')
-
+					
 	    			<p class="idea-description">
 	    				{{ $idea->description }}
 	    			</p>
