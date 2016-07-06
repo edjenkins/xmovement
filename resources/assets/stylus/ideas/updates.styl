@@ -1,0 +1,64 @@
+.updates-container
+	.post-update-container
+		background very-light-grey
+		min-height 50px
+		padding 20px
+		padding-left 80px
+		position relative
+		.creator-avatar
+			background-color border-color
+			bacground-position center
+			background-size cover
+			background-repeat no-repeat
+			border-radius 50%
+			height 50px
+			width 50px
+			position absolute
+			left 20px
+			top 20px
+		.update-composer-wrapper
+			button.post-update-button
+				background very-light-grey
+				border border-color 1px solid
+				border-radius 4px
+				bottom 28px
+				line-height 34px
+				padding 0 20px
+				right 28px
+				position absolute
+				animate()
+				&:hover
+					background success-color
+					border-color success-color
+					color white
+					cursor pointer
+			input
+				background-color white
+				border border-color 1px solid
+				border-radius 6px
+				box-sizing border-box
+				margin 0
+				line-height 30px
+				padding 10px 15px
+				width 100%
+				&:active
+					outline 0
+
+	ul.updates-list
+		cleanlist()
+		li.update
+			cleanlist()
+			border-top border-color 1px dashed
+			padding 20px
+			h5
+				margin 0 0 10px 0
+				padding 0
+				i
+					color orange
+					margin-right 6px
+			p
+				color #888
+				margin 0
+				padding 0
+			&:first-child
+				border-top border-color 1px solid

@@ -40,15 +40,19 @@
 						@endif
 					@endif
 
-	    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
+					<div class="idea-section">
 
-					@include('ideas/progress')
-					
-	    			<p class="idea-description">
-	    				{{ $idea->description }}
-	    			</p>
+		    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
 
-	    			<div class="mobile-sidebar hidden-md hidden-lg">
+						@include('ideas/progress')
+
+		    			<p class="idea-description">
+		    				{{ $idea->description }}
+		    			</p>
+
+					</div>
+
+	    			<div class="mobile-sidebar side-column hidden-md hidden-lg">
 
     					@include('ideas/side-column')
 
@@ -83,13 +87,25 @@
 
 					@endunless
 
-					<br />
+					<div class="section-header">
+						<h2>{{ trans('idea.updates') }}</h2>
+					</div>
+
+					<div class="idea-section">
+
+		    			@include('ideas/updates')
+
+					</div>
 
 					<div class="section-header">
 						<h2>{{ trans('idea.discussion') }}</h2>
 					</div>
 
-	    			@include('disqus')
+					<div class="idea-section padded">
+
+						@include('disqus')
+
+					</div>
 
 	    		</div>
 

@@ -19,5 +19,7 @@
 
 		@endcan
 
+		<div class="clearfloat"></div>
+
 	</ul>
 </div>

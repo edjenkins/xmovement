@@ -1,7 +1,7 @@
 <div class="idea-progress-bar">
 
 	<div class="ipb-line ipb-placeholder-line"></div>
-	<div class="ipb-line ipb-progress-line" style="width: {{ $idea->progress_percentage() }}%"></div>
+	<div class="ipb-line ipb-progress-line" style="right: {{ (100 - $idea->progress_percentage()) }}%"></div>
 
 	<div class="ipb-dot ipb-start-dot complete">
 		<div class="ipb-label">

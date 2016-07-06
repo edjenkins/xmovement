@@ -1,4 +1,4 @@
-@extends('layouts.app', ['bodyclasses' => 'transparent'])
+@extends('layouts.app', ['bodyclasses' => 'transparent grey'])
 
 @section('content')
     <div class="container-fluid hero-container" style="background-image:url('{{ getenv('APP_ABOUT_HEADER_IMG') }}')">
@@ -54,7 +54,7 @@
 					</p>
 				</div>
 			</div>
-			
+
 		</div>
 
 		<div class="row about-phase-row">
@@ -66,7 +66,7 @@
 				<div class="about-phase-tile">
 
 					<div class="phase-step-indicator">
-						<span>1</span>
+						1
 					</div>
 
 					<h3>
@@ -87,7 +87,7 @@
 				<div class="about-phase-tile">
 
 					<div class="phase-step-indicator">
-						<span>2</span>
+						2
 					</div>
 
 					<h3>
@@ -108,7 +108,7 @@
 				<div class="about-phase-tile">
 
 					<div class="phase-step-indicator">
-						<span>3</span>
+						3
 					</div>
 
 					<h3>

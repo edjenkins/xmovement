@@ -40,9 +40,14 @@
 				background-color darken(light-grey, 10%)
 				cursor pointer
 
+	.idea-section
+		background white
+		border border-color 1px solid // border border-color 1px solid
+		&.padded
+			padding 20px
 	.section-header
 		height 60px
-		margin-top 40px
+		margin 20px 10px 0 10px
 		h2
 			float left
 			font-size 1.4em
@@ -67,13 +72,15 @@
 		padding-bottom 40%
 		position relative
 	p.idea-description
-		border-left main-color 4px solid
+		border-top border-color 1px dashed
 		font-size 18px
+		margin 0
 		padding 20px
 		word-wrap break-word
 
 .side-column
 	.creator-tile
+		background white
 		border border-color 1px solid
 		padding 20px
 		text-align center
@@ -101,12 +108,16 @@
 			padding 5px 10px
 
 		&:hover
-			background white
 			border-color main-color
 			cursor pointer
+	&.mobile-sidebar
+		margin-top 15px
+		.creator-tile
+			display none
 
 ul.sidebar-social-links
 	cleanlist()
+	background white
 	border border-color 1px solid
 	border-top none
 	box-sizing border-box
@@ -142,6 +153,7 @@ ul.sidebar-social-links
 			border-color #4875B4
 
 .stats-tile
+	background white
 	border border-color 1px solid
 	list-style none
 	margin 15px 0
@@ -159,10 +171,12 @@ ul.sidebar-social-links
 		margin 0
 		padding 5px 20px 20px 20px
 	.stats-tile-footer
-		background light-grey
-		color #999
+		background main-color
+		border-radius 5px
+		color white
 		display none
-		padding 6px 10px
+		margin 0 10px 10px 10px
+		padding 5px 10px
 		&.visible
 			display block
 		p
@@ -175,12 +189,13 @@ ul.sidebar-social-links
 	padding 0
 	text-align center
 	.info-tile-content
-		color #999
 		padding 6px 10px
 		p
+			color #999
 			margin 0
 			padding 0
 			i
+				color #999
 				margin-right 6px
 
 .proposals-container
@@ -194,3 +209,5 @@ ul.sidebar-social-links
 				padding 0 15px
 			&:nth-child(3)
 				padding 0 0 0 15px
+			.proposal-tile
+				margin 0
