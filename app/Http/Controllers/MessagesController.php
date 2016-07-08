@@ -16,7 +16,7 @@ use Session;
 use View;
 use Carbon\Carbon;
 
-// use App\Jobs\SendDirectMessageEmail;
+use App\Jobs\SendDirectMessageEmail;
 
 use App\Idea;
 use App\User;
@@ -49,35 +49,24 @@ class MessagesController extends Controller
 		// Notify users via email
 
 		// Check if users are being spammed
-		// $direct_messages_count = Message::where([['receiver_id', $message->id], ['created_at', '>=', Carbon::now()->subDay()]])->count();
+		$direct_messages_count = Message::where([['user_id', $message->user_id], ['sender_id', $message->sender_id], ['created_at', '>=', Carbon::now()->subHour()]])->count();
 
-		// Log::info('Messages sent today - ' . $direct_messages_count);
-		//
-		// if ($recent_update_count < 2)
-		// {
-		// 	foreach ($idea->get_supporters() as $index => $supporter)
-		// 	{
-		// 		$job = (new SendUpdatePostedEmail(Auth::user(), $supporter->user, $idea, $update))->delay(5)->onQueue('emails');
-		// 		$this->dispatch($job);
-		// 	}
-		// }
-		// else
-		// {
-		// 	Log::error('Can only send 2 updates per day');
-		// }
+		Log::info('Messages sent in the past hour - ' . $direct_messages_count);
+
+		if ($direct_messages_count < 10)
+		{
+			$job = (new SendDirectMessageEmail(Auth::user(), $message->user, $message))->delay(5)->onQueue('emails');
+			$this->dispatch($job);
+		}
+		else
+		{
+			Log::error('Can only send 10 messages per hour');
+		}
 
 		Session::flash('flash_message', trans('flash_message.direct_messages_sent'));
 		Session::flash('flash_type', 'flash-success');
 
 		return redirect()->action('UserController@profile', $request->user_id);
-
-		// Return JSON response
-
-		// $response = new ResponseObject();
-		//
-		// $response->meta['success'] = true;
-		//
-		// return Response::json($response);
 	}
 
 }
