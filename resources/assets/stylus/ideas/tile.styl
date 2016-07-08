@@ -14,8 +14,6 @@
 		background-position center
 		background-repeat no-repeat
 		background-size cover
-		-webkit-background-size cover
-		-o-background-size cover
 		display block
 		height 0
 		padding-bottom 60%
@@ -64,20 +62,38 @@
 			padding 0 20px
 
 .mini-tile
-	border-bottom border-color 1px solid
+	border transparent 1px solid
+	border-radius 4px
 	display block
-	height auto
-	padding 15px 0
+	margin 0 0 10px 0
+	padding 0 0 0 50px
 	max-width 360px
 	overflow hidden
 	position relative
-	transition(all linear 0.2s)
+	animate()
+	.tile-image
+		border-bottom border-color 1px solid
+		background-position center
+		background-repeat no-repeat
+		background-size cover
+		border-radius 4px
+		display inline-block
+		position absolute
+		top 0
+		left 0
+		height 40px
+		width 52px
 	.inner-container
-		h4, p
-			color #999
+		h4
+			color #666
+			font-size 16px
+			font-weight normal
+			line-height 40px
+			margin 0
+			padding 0 10px
 			white-space nowrap
 			.fa
 				margin-right 6px
 	&:hover
-		color main-color
+		border border-color 1px solid
 		cursor pointer
