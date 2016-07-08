@@ -12,14 +12,14 @@
 	<div class="vote-container poll-option-vote-container {{ ($pollOption->voteCount() == 0) ? '' : (($pollOption->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 
 		<div class="vote-controls">
-			@can('contribute', $design_task)
+			@can('vote_on_design_submissions', $design_task)
 				@unless ($proposal_mode)
 					<div class="vote-button vote-up {{ ($pollOption->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="poll" data-votable-id="{{ $pollOption['id'] }}" title="Vote up">
 						<i class="fa fa-2x fa-angle-up"></i>
 					</div>
 				@endunless
 			@endcan
-			@cannot('contribute', $design_task)
+			@cannot('vote_on_design_submissions', $design_task)
 				<div class="voting-locked">
 					<i class="fa fa-lock"></i>
 				</div>
@@ -27,7 +27,7 @@
 			<div class="vote-count">
 				{{ $pollOption->voteCount() }}
 			</div>
-			@can('contribute', $design_task)
+			@can('vote_on_design_submissions', $design_task)
 				@unless ($proposal_mode)
 					<div class="vote-button vote-down {{ ($pollOption->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="poll" data-votable-id="{{ $pollOption['id'] }}" title="Vote down">
 						<i class="fa fa-2x fa-angle-down"></i>
