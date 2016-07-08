@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bodyclasses' => 'grey'])
 
 @section('content')
 
@@ -30,25 +30,25 @@
 
 	    		<div class="column main-column">
 
-					@if(false)
+					<div class="idea-section">
+
+		    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
+
+						@include('ideas/progress')
+
 						@if($idea->design_state == 'open')
-							@include('ideas/notification', ['message' => trans('idea.design_phase_open_notification')])
+							@include('ideas/notification', ['message' => trans('idea.design_phase_open_notification'), 'notification_type' => 'design-phase-notification'])
+						@elseif($idea->proposal_state == 'open')
+							@include('ideas/notification', ['message' => trans('idea.proposal_phase_open_notification'), 'notification_type' => 'proposal-phase-notification'])
 						@endif
 
-						@if($idea->proposal_state == 'open')
-							@include('ideas/notification', ['message' => trans('idea.proposal_phase_open_notification')])
-						@endif
-					@endif
+		    			<p class="idea-description">
+		    				{{ $idea->description }}
+		    			</p>
 
-	    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
+					</div>
 
-					@include('ideas/progress')
-					
-	    			<p class="idea-description">
-	    				{{ $idea->description }}
-	    			</p>
-
-	    			<div class="mobile-sidebar hidden-md hidden-lg">
+	    			<div class="mobile-sidebar side-column hidden-md hidden-lg">
 
     					@include('ideas/side-column')
 
@@ -83,13 +83,29 @@
 
 					@endunless
 
-					<br />
+					@unless((count($updates) == 0) && (Gate::denies('postUpdate', $idea)))
+
+						<div class="section-header">
+							<h2>{{ trans('idea.updates') }}</h2>
+						</div>
+
+						<div class="idea-section updates-section">
+
+			    			@include('ideas/updates', ['updates' => $updates])
+
+						</div>
+
+					@endunless
 
 					<div class="section-header">
 						<h2>{{ trans('idea.discussion') }}</h2>
 					</div>
 
-	    			@include('disqus')
+					<div class="idea-section padded">
+
+						@include('disqus')
+
+					</div>
 
 	    		</div>
 
@@ -120,5 +136,6 @@
 	</script>
 
 	<script src="/js/ideas/view.js"></script>
+	<script src="/js/ideas/update.js"></script>
 
 @endsection

@@ -115,6 +115,31 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can post an update for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function postUpdate(User $user, Idea $idea)
+    {
+        return ($user->id == $idea->user_id);
+    }
+
+    /**
+     * Determine if the given user can destroy an update for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function destroyUpdate(User $user, Idea $idea)
+    {
+        return ($user->id == $idea->user_id);
+    }
+
+
+    /**
      * Determine if the given user can lock a design task in the given idea.
      *
      * @param  User  $user

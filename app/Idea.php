@@ -43,6 +43,16 @@ class Idea extends Model
     }
 
     /**
+     * The updates posted for this idea.
+     *
+     * @var array
+     */
+    public function updates()
+    {
+        return $this->hasMany(Update::class);
+    }
+
+    /**
      * The Design Tasks for the idea.
      *
      * @var array

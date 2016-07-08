@@ -6,7 +6,7 @@ $(document).ready(function() {
 	// Add the handlers for share buttons
 	addShareButtonHandlers();
 
- })
+})
 
 function showSupportModal()
 {

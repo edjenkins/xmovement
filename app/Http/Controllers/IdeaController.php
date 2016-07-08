@@ -89,8 +89,14 @@ class IdeaController extends Controller
         MetaTag::set('image', ResourceImage::getImage($idea->photo, 'large'));
 		# META
 
+		$updates = $idea->updates->sortByDesc(function($update)
+		{
+			return $update->created_at;
+		});
+
 		return view('ideas.view', [
 			'idea' => $idea,
+			'updates' => $updates,
 			'supported' => $supported
 		]);
 	}
@@ -290,7 +296,7 @@ class IdeaController extends Controller
 
 		$resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
 
-		if ($resp->isSuccess())
+		if ($resp->isSuccess() || (getenv('APP_ENV') == 'local'))
 		{
 			$idea = Idea::find($request->idea_id);
 

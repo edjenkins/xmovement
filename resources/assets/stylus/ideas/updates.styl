@@ -1,0 +1,94 @@
+.updates-section
+	border-top none !important
+	.post-update-container
+		background white
+		border-top border-color 1px solid
+		min-height 50px
+		padding 20px
+		padding-left 80px
+		position relative
+		.creator-avatar
+			background-color border-color
+			bacground-position center
+			background-size cover
+			background-repeat no-repeat
+			border-radius 50%
+			height 50px
+			width 50px
+			position absolute
+			left 20px
+			top 20px
+		.update-composer-wrapper
+			button.post-update-button
+				background very-light-grey
+				border border-color 1px solid
+				border-radius 4px
+				bottom 28px
+				line-height 34px
+				padding 0 20px
+				right 28px
+				position absolute
+				animate()
+				.idle-state
+					display block
+				.posting-state
+					display none
+				&.posting
+					.posting-state
+						display block
+						background success-color
+						border-color success-color
+					.idle-state
+						display none
+				&:hover
+					background success-color
+					border-color success-color
+					cursor pointer
+					span
+						color white
+			textarea
+				background-color white
+				border border-color 1px solid
+				border-radius 6px
+				box-sizing border-box
+				margin 0
+				line-height 30px
+				outline 0
+				padding 10px 80px 10px 15px
+				width 100%
+				&:active
+					outline 0
+
+	ul.updates-list
+		cleanlist()
+		li.update
+			cleanlist()
+			border-top border-color 1px dashed
+			padding 20px
+			position relative
+			h5
+				color light-font-color
+				margin 0 0 10px 0
+				padding 0
+				word-break break-all
+				i
+					color orange
+					width 20px
+			p
+				margin 0
+				padding 0 0 0 22px
+				word-break break-all
+
+			i.fa.fa-trash-o
+				color #CCC
+				padding 10px
+				position absolute
+				right 0
+				top 0
+				animate()
+				&:hover
+					cursor pointer
+					color danger-color
+
+			&:first-child
+				border-top border-color 1px solid

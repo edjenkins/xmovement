@@ -1,20 +1,19 @@
 .idea-progress-bar
-	height 60px
+	height 50px
+	margin 0 15px
 	position relative
-	width 100%
 	.ipb-line
 		border-radius 10px
 		height 20px
 		position absolute
 		top 8px
-		left 0
-		right 0
+		left 0px
+		right 0px
 		&.ipb-placeholder-line
 			background-color border-color
 		&.ipb-progress-line
 			background-color main-color
-			max-width 98%
-			width 0%
+			min-width 20px
 			transition(width 0.8s ease-out)
 	.ipb-dot
 		background-color white

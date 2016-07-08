@@ -1,7 +1,7 @@
 <div class="idea-tile mini-tile" onClick="document.location = '{{ action('IdeaController@view', $idea->id) }}'">
 	<div class="inner-container">
+		<a href="{{ action('IdeaController@view', $idea->id) }}" class="tile-image" style="background-image:url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></a>
 		<h4>
-			<i class="fa fa-circle-o"></i>
 			{{ $idea->name }}
 		</h4>
 	</div>
