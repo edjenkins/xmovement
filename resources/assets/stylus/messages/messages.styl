@@ -1,0 +1,43 @@
+.message-list
+	cleanlist()
+	.message-wrapper
+		cleanlist()
+		padding 10px 10px 10px 60px
+		position relative
+		.message-user
+			background-color border-color
+			background-position center
+			background-repeat no-repeat
+			background-size cover
+			border-radius 50%
+			height 50px
+			width 50px
+			position absolute
+			top 10px
+			left 0
+		p.message-bubble
+			background grey
+			border-radius 6px
+			line-height 20px
+			margin 0
+			padding 15px
+			position relative
+			&:before
+				content ''
+				position absolute
+				border-style solid
+				border-width 12px 6px
+				border-color transparent grey transparent transparent
+				display block
+				height 0
+				left -12px
+				z-index 1
+				bottom -6px
+				top 25px
+				margin-top -12px
+		a.message-info
+			color #CCC
+			display block
+			font-size 14px
+			margin 3px
+			text-align right

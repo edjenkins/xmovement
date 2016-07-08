@@ -40,6 +40,26 @@ class User extends Authenticatable
     }
 
     /**
+     * The Messages the user has received.
+     *
+     * @var array
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class)->orderBy('created_at', 'desc');
+    }
+
+    /**
+     * The Messages the user has received.
+     *
+     * @var array
+     */
+    public function recent_messages()
+    {
+        return $this->hasMany(Message::class)->orderBy('created_at', 'desc')->take(10);
+    }
+
+    /**
      * The Proposals the user has created.
      *
      * @var array

@@ -9,44 +9,39 @@
 	</h2>
 
 	@unless($viewing_own_profile)
-		<div class="contact-button">
+		<div class="contact-button" data-toggle="modal" data-target="#direct-message-modal">
 			{{ trans('profile.send_a_message') }}
 		</div>
 	@endunless
 
-	<div class="user-stats visible-md-block visible-lg-block">
-		<h3></h3>
-		<p></p>
-	</div>
+	@unless (count($created_ideas) == 0)
 
-	<div class="sidebar-section hidden-xs">
-		<div class="sidebar-section-header">
-			{{ trans('profile.supported_ideas') }}
+		<div class="sidebar-section hidden-xs">
+			<div class="sidebar-section-header">
+				{{ trans('profile.created_ideas') }}
+			</div>
+			<ul class="ideas-list">
+				@foreach ($created_ideas as $idea)
+	                @include('ideas.mini-tile')
+	            @endforeach
+			</ul>
 		</div>
-		<ul class="ideas-list">
-			@if (count($supported_ideas) > 0)
+
+	@endunless
+
+	@unless (count($supported_ideas) == 0)
+
+		<div class="sidebar-section hidden-xs">
+			<div class="sidebar-section-header">
+				{{ trans('profile.supported_ideas') }}
+			</div>
+			<ul class="ideas-list">
 				@foreach ($supported_ideas as $idea)
 	                @include('ideas.mini-tile')
 	            @endforeach
-			@else
-			    <li>{{ trans('profile.no_ideas') }}</li>
-			@endif
-		</ul>
-	</div>
-
-	<div class="sidebar-section hidden-xs">
-		<div class="sidebar-section-header">
-			{{ trans('profile.created_ideas') }}
+			</ul>
 		</div>
-		<ul class="ideas-list">
-			@if (count($created_ideas) > 0)
-			    @foreach ($created_ideas as $idea)
-	                @include('ideas.mini-tile')
-	            @endforeach
-			@else
-			    <li>{{ trans('profile.no_ideas') }}</li>
-			@endif
-		</ul>
-	</div>
+
+	@endunless
 
 </div>

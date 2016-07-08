@@ -96,9 +96,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
 
     // API routes
-    Route::post('/api/support', 'IdeaController@support');
-    Route::post('/api/update/add', 'UpdatesController@add');
-    Route::delete('/api/update/destroy', 'UpdatesController@destroy');
+
+		// Support routes
+	    Route::post('/api/support', 'IdeaController@support');
+	    Route::post('/api/update/add', 'UpdatesController@add');
+
+		// Updates routes
+	    Route::delete('/api/update/destroy', 'UpdatesController@destroy');
+
+		// Message routes
+		Route::post('/api/messages/send', 'MessagesController@send');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');
