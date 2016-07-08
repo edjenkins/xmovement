@@ -40,6 +40,8 @@ function addHandlers()
 
 		if (requirement.hasClass('filled')) return;
 
+		if (requirement.hasClass('locked')) return;
+
         if (requirement.hasClass('filling'))
 		{
 			requirement.removeClass('filling').addClass('not-filled');

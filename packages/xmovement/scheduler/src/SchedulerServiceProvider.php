@@ -16,10 +16,6 @@ class SchedulerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/views', 'scheduler');
 
         $this->publishes([
-            __DIR__ . '/policies' => base_path('app/Policies'),
-        ], 'policies');
-
-        $this->publishes([
             __DIR__ . '/migrations' => base_path('database/migrations'),
         ], 'migrations');
 

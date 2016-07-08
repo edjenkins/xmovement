@@ -49,7 +49,7 @@ class DesignTaskPolicy
     public function contribute(User $user, DesignTask $design_task)
     {
     	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
-        return ((!$design_task["locked"] || ($user->id == $design_task->user_id)) && $is_existing_supporter);
+        return ((!$design_task["locked"] || ($user->id == $design_task->user_id)) && $is_existing_supporter && ($design_task->idea->design_state == 'open'));
     }
 
     /**

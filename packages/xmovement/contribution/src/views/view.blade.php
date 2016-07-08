@@ -104,7 +104,7 @@
 
 					@if (!$proposal_mode)
 
-		    			@can('submitSubmission', $contribution)
+		    			@can('contribute', $design_task)
 
 			    			<div class="submit-contribution-submission-container" id="submit-contribution-submission">
 
@@ -148,7 +148,7 @@
 
 								@unless ($proposal_mode)
 
-					    			@can('submitSubmission', $contribution)
+					    			@can('contribute', $design_task)
 
 										<div class="submit-contribution-submission-footer">
 

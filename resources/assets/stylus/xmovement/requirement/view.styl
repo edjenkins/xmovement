@@ -98,16 +98,25 @@ ul.requirements-list
 					&:hover
 						color main-color
 						cursor pointer
-			&.not-filled
+			&.not-filled, &.locked
 				.action-inputs
 					display none
 				.requirement-item
 					display block
 				.requirement-circle
+					&:hover
+						cursor default
+						border-color #e1e1e1
+						color #e1e1e1
 					.black-overlay, .fa-check, .fa-times
 						display none
 					.fa-plus
 						display block
+				&:hover
+					.requirement-circle
+						cursor default
+						border-color #e1e1e1
+						color #e1e1e1
 			&.filling
 				.requirement-circle
 					border-color main-color
