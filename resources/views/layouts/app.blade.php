@@ -21,7 +21,6 @@
 	<link href="{{ URL::asset('css/jquery-ui-slider-pips.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/easydropdown/easydropdown.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('css/vendor.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
     {!! MetaTag::tag('description') !!}
@@ -31,7 +30,6 @@
 
     {!! MetaTag::twitterCard() !!}
 
-    {{--Set default share picture after custom section pictures--}}
     {!! MetaTag::tag('image',  getenv('APP_HOME_HEADER_IMG')) !!}
 
 </head>

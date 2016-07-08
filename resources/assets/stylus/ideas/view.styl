@@ -15,34 +15,38 @@
 
 .main-column
 	.notification
-		background-color light-grey
-		margin-bottom 10px
-		padding 15px 60px 15px 20px
+		background main-color
+		border-radius 6px
+		color white
+		margin 0 15px
+		padding 15px 20px
 		position relative
+		&:before
+			content ''
+			position absolute
+			border-style solid
+			border-width 0 12px 6px
+			border-color transparent transparent main-color
+			display block
+			width 0
+			z-index 1
+			top -6px
+			left 50%
+			margin-left -3px
+		&.design-phase-notification:before
+			left 33%
+		&.proposal-phase-notification:before
+			left 66%
 		p
-			color #666
+			color white
 			font-size 16px
 			line-height 20px
 			margin 0
 			padding 0
-		.close-notificaiton-button
-			height 50px
-			line-height 50px
-			width 50px
-			position absolute
-			top 0
-			right 0
-			text-align center
-			animate()
-			i
-				color #999
-			&:hover
-				background-color darken(light-grey, 10%)
-				cursor pointer
 
 	.idea-section
 		background white
-		border border-color 1px solid // border border-color 1px solid
+		border border-color 1px solid
 		&.padded
 			padding 20px
 	.section-header
@@ -72,7 +76,6 @@
 		padding-bottom 40%
 		position relative
 	p.idea-description
-		border-top border-color 1px dashed
 		font-size 18px
 		margin 0
 		padding 20px
@@ -110,10 +113,59 @@
 		&:hover
 			border-color main-color
 			cursor pointer
+
+	.stats-tile
+		background white
+		border border-color 1px solid
+		border-top none
+		list-style none
+		margin 0
+		padding 0
+		text-align center
+		h3
+			font-size 42px
+			font-weight bolder
+			margin 0
+			padding 20px 20px 5px 20px
+		h5
+			color #999
+			font-size 16px
+			margin 0
+			padding 5px 20px 20px 20px
+		.stats-tile-footer
+			background main-color
+			border-radius 5px
+			color white
+			display none
+			margin 0 10px 10px 10px
+			padding 5px 10px
+			&.visible
+				display block
+			p
+				margin 0
+				padding 0
+
+	.info-tile
+		list-style none
+		margin 0
+		padding 0
+		text-align center
+		.info-tile-content
+			padding 6px 10px
+			p
+				color #999
+				margin 0
+				padding 0
+				i
+					color #999
+					margin-right 6px
+
 	&.mobile-sidebar
 		margin-top 15px
 		.creator-tile
 			display none
+		.stats-tile
+			border-top border-color 1px solid
 
 ul.sidebar-social-links
 	cleanlist()
@@ -151,52 +203,6 @@ ul.sidebar-social-links
 		&.share-email:hover
 			background-color #4875B4
 			border-color #4875B4
-
-.stats-tile
-	background white
-	border border-color 1px solid
-	list-style none
-	margin 15px 0
-	margin-bottom 0px
-	padding 0
-	text-align center
-	h3
-		font-size 42px
-		font-weight bolder
-		margin 0
-		padding 20px 20px 5px 20px
-	h5
-		color #999
-		font-size 16px
-		margin 0
-		padding 5px 20px 20px 20px
-	.stats-tile-footer
-		background main-color
-		border-radius 5px
-		color white
-		display none
-		margin 0 10px 10px 10px
-		padding 5px 10px
-		&.visible
-			display block
-		p
-			margin 0
-			padding 0
-
-.info-tile
-	list-style none
-	margin 0
-	padding 0
-	text-align center
-	.info-tile-content
-		padding 6px 10px
-		p
-			color #999
-			margin 0
-			padding 0
-			i
-				color #999
-				margin-right 6px
 
 .proposals-container
 	margin-bottom 20px

@@ -3,6 +3,7 @@
 $('#confirm-support-button').click(function() {
 
 	support($(this).attr('data-user-id'), $(this).attr('data-idea-id'));
+
 });
 
 function support(user_id, idea_id)

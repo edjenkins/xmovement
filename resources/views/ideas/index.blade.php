@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bodyclasses' => 'grey'])
 
 @section('content')
 

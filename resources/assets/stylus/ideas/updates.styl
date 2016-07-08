@@ -1,6 +1,8 @@
-.updates-container
+.updates-section
+	border-top none !important
 	.post-update-container
-		background very-light-grey
+		background white
+		border-top border-color 1px solid
 		min-height 50px
 		padding 20px
 		padding-left 80px
@@ -27,19 +29,32 @@
 				right 28px
 				position absolute
 				animate()
+				.idle-state
+					display block
+				.posting-state
+					display none
+				&.posting
+					.posting-state
+						display block
+						background success-color
+						border-color success-color
+					.idle-state
+						display none
 				&:hover
 					background success-color
 					border-color success-color
-					color white
 					cursor pointer
-			input
+					span
+						color white
+			textarea
 				background-color white
 				border border-color 1px solid
 				border-radius 6px
 				box-sizing border-box
 				margin 0
 				line-height 30px
-				padding 10px 15px
+				outline 0
+				padding 10px 80px 10px 15px
 				width 100%
 				&:active
 					outline 0
@@ -50,15 +65,30 @@
 			cleanlist()
 			border-top border-color 1px dashed
 			padding 20px
+			position relative
 			h5
+				color light-font-color
 				margin 0 0 10px 0
 				padding 0
+				word-break break-all
 				i
 					color orange
-					margin-right 6px
+					width 20px
 			p
-				color #888
 				margin 0
-				padding 0
+				padding 0 0 0 22px
+				word-break break-all
+
+			i.fa.fa-trash-o
+				color #CCC
+				padding 10px
+				position absolute
+				right 0
+				top 0
+				animate()
+				&:hover
+					cursor pointer
+					color danger-color
+
 			&:first-child
 				border-top border-color 1px solid

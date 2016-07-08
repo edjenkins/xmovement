@@ -97,6 +97,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // API routes
     Route::post('/api/support', 'IdeaController@support');
+    Route::post('/api/update/add', 'UpdatesController@add');
+    Route::delete('/api/update/destroy', 'UpdatesController@destroy');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');

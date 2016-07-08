@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bodyclasses' => 'grey'])
 
 @section('content')
 
@@ -30,21 +30,17 @@
 
 	    		<div class="column main-column">
 
-					@if(false)
-						@if($idea->design_state == 'open')
-							@include('ideas/notification', ['message' => trans('idea.design_phase_open_notification')])
-						@endif
-
-						@if($idea->proposal_state == 'open')
-							@include('ideas/notification', ['message' => trans('idea.proposal_phase_open_notification')])
-						@endif
-					@endif
-
 					<div class="idea-section">
 
 		    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
 
 						@include('ideas/progress')
+
+						@if($idea->design_state == 'open')
+							@include('ideas/notification', ['message' => trans('idea.design_phase_open_notification'), 'notification_type' => 'design-phase-notification'])
+						@elseif($idea->proposal_state == 'open')
+							@include('ideas/notification', ['message' => trans('idea.proposal_phase_open_notification'), 'notification_type' => 'proposal-phase-notification'])
+						@endif
 
 		    			<p class="idea-description">
 		    				{{ $idea->description }}
@@ -87,15 +83,19 @@
 
 					@endunless
 
-					<div class="section-header">
-						<h2>{{ trans('idea.updates') }}</h2>
-					</div>
+					@unless((count($updates) == 0) && (Gate::denies('postUpdate', $idea)))
 
-					<div class="idea-section">
+						<div class="section-header">
+							<h2>{{ trans('idea.updates') }}</h2>
+						</div>
 
-		    			@include('ideas/updates')
+						<div class="idea-section updates-section">
 
-					</div>
+			    			@include('ideas/updates', ['updates' => $updates])
+
+						</div>
+
+					@endunless
 
 					<div class="section-header">
 						<h2>{{ trans('idea.discussion') }}</h2>
@@ -136,5 +136,6 @@
 	</script>
 
 	<script src="/js/ideas/view.js"></script>
+	<script src="/js/ideas/update.js"></script>
 
 @endsection
