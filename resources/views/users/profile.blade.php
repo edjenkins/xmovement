@@ -16,6 +16,6 @@
 
 	</div>
 
-	@include('modals/send-user-message')
+	@include('modals/direct-message')
 
 @endsection

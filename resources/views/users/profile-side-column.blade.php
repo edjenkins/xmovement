@@ -9,29 +9,9 @@
 	</h2>
 
 	@unless($viewing_own_profile)
-		<div class="contact-button" data-toggle="modal" data-target="#send-user-message-modal">
+		<div class="contact-button" data-toggle="modal" data-target="#direct-message-modal">
 			{{ trans('profile.send_a_message') }}
 		</div>
-	@endunless
-
-	<div class="user-stats visible-md-block visible-lg-block">
-		<h3></h3>
-		<p></p>
-	</div>
-
-	@unless (count($supported_ideas) == 0)
-
-		<div class="sidebar-section hidden-xs">
-			<div class="sidebar-section-header">
-				{{ trans('profile.supported_ideas') }}
-			</div>
-			<ul class="ideas-list">
-				@foreach ($supported_ideas as $idea)
-	                @include('ideas.mini-tile')
-	            @endforeach
-			</ul>
-		</div>
-
 	@endunless
 
 	@unless (count($created_ideas) == 0)
@@ -42,6 +22,21 @@
 			</div>
 			<ul class="ideas-list">
 				@foreach ($created_ideas as $idea)
+	                @include('ideas.mini-tile')
+	            @endforeach
+			</ul>
+		</div>
+
+	@endunless
+
+	@unless (count($supported_ideas) == 0)
+
+		<div class="sidebar-section hidden-xs">
+			<div class="sidebar-section-header">
+				{{ trans('profile.supported_ideas') }}
+			</div>
+			<ul class="ideas-list">
+				@foreach ($supported_ideas as $idea)
 	                @include('ideas.mini-tile')
 	            @endforeach
 			</ul>

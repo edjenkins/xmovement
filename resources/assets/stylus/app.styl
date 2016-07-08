@@ -31,6 +31,9 @@
 /* Page styles */
 @import 'pages/*'
 
+/* Messages styles */
+@import 'messages/*'
+
 body
 	background white
 	font-family 'Lato'
@@ -58,11 +61,25 @@ body.grey
 a
 	color main-color
 
-*, p, h1, h2, h3, h4, h5
+p, h1, h2, h3, h4, h5
 	color dark-font-color
 
 .clearfloat
 	clearfloat()
+
+textarea
+	border none
+	border #e1e1e1 1px solid
+	border-radius 6px
+	font-size 16px
+	margin 0 auto
+	max-width 100%
+	padding 15px
+	outline 0
+	width 600px
+
+.text-muted
+	color #CCC
 
 .muted-link
 	color #CCC

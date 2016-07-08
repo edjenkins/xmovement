@@ -6,7 +6,7 @@
 
 			<label>{{ trans('idea_form.description_label') }}</label>
 
-			<textarea name="description" rows="4">{{ isset($idea) ? old('description', $idea->description) : old('description') }}</textarea>
+			<textarea class="expanding" name="description" rows="4">{{ isset($idea) ? old('description', $idea->description) : old('description') }}</textarea>
 
 			@if ($errors->has('description'))
 				<span class="help-block">

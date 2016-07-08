@@ -16,34 +16,6 @@
 
 		</div>
 
-		<div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
-
-			<div class="toggle-switch-wrapper">
-
-				<label>{{ trans('idea_form.visibility_label') }}</label>
-
-				<label class="toggle-switch">
-
-					<input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('visibility', $idea->visibility) : old('visibility', 'public') }}">
-					@if (isset($idea))
-						<div class="toggle-button{{ (old('visibility', $idea->visibility) == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
-					@else
-						<div class="toggle-button{{ (old('visibility', 'public') == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
-					@endif
-				</label>
-
-				<div class="clearfloat"></div>
-
-			</div>
-
-			@if ($errors->has('visibility'))
-				<span class="help-block">
-					<strong>{{ $errors->first('visibility') }}</strong>
-				</span>
-			@endif
-
-		</div>
-
 		<div class="form-group">
 			<div class="btn btn-primary step-button" onClick="nextStep()">{{ trans('idea_form.next_step') }}</div>
 		</div>
