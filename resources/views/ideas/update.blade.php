@@ -1,7 +1,7 @@
 <li class="update" id="update-{{ $update->id }}">
 	<h5>
 		<i class="fa fa-star"></i>
-		Update posted {{ $update->created_at->diffForHumans() }}
+		{{ trans('idea.updated_posted_x', ['time' => $update->created_at->diffForHumans()]) }}
 	</h5>
 
 	<p>
