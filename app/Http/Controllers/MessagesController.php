@@ -38,33 +38,43 @@ class MessagesController extends Controller
 {
 	public function send(Request $request, User $user)
 	{
-		// Save message
-
-		$message = Message::create([
-			'user_id' => $request->user_id,
-			'sender_id' => Auth::user()->id,
-			'text' => nl2br(htmlentities($request->text, ENT_QUOTES, 'UTF-8'))
-		]);
-
-		// Notify users via email
-
 		// Check if users are being spammed
-		$direct_messages_count = Message::where([['user_id', $message->user_id], ['sender_id', $message->sender_id], ['created_at', '>=', Carbon::now()->subHour()]])->count();
+		$direct_messages_count = Message::where([['user_id', $request->user_id], ['sender_id', Auth::user()->id], ['created_at', '>=', Carbon::now()->subHour()]])->count();
 
 		Log::info('Messages sent in the past hour - ' . $direct_messages_count);
 
-		if ($direct_messages_count < 10)
+		if ($direct_messages_count < 30)
 		{
-			$job = (new SendDirectMessageEmail(Auth::user(), $message->user, $message))->delay(5)->onQueue('emails');
-			$this->dispatch($job);
+			// Save message
+
+			$message = Message::create([
+				'user_id' => $request->user_id,
+				'sender_id' => Auth::user()->id,
+				'text' => nl2br(htmlentities($request->text, ENT_QUOTES, 'UTF-8'))
+			]);
+
+			Session::flash('flash_message', trans('flash_message.direct_message_sent'));
+			Session::flash('flash_type', 'flash-success');
 		}
 		else
 		{
-			Log::error('Can only send 10 messages per hour');
+			Log::error('Can only send 30 messages per hour');
 		}
 
-		Session::flash('flash_message', trans('flash_message.direct_messages_sent'));
-		Session::flash('flash_type', 'flash-success');
+		if ($direct_messages_count < 10)
+		{
+			// Notify users via email
+
+			$job = (new SendDirectMessageEmail(Auth::user(), $message->user, $message))->delay(5)->onQueue('emails');
+			$this->dispatch($job);
+
+			Session::flash('flash_message', trans('flash_message.direct_message_sent_via_email'));
+			Session::flash('flash_type', 'flash-success');
+		}
+		else
+		{
+			Log::error('Can only send 10 messages per hour via email');
+		}
 
 		return redirect()->action('UserController@profile', $request->user_id);
 	}
