@@ -78,43 +78,68 @@
 				left 20px
 				top 20px
 			.comment-header
-				color #CCC
 				margin 0
 				padding 0
+				.created-timestamp
+					color #999
+					margin-left 5px
+
 			.comment-body
 				color #444
 				font-size 15px
 				margin 5px 0
 				padding 0
 			.comment-footer
-				left -12px
+				min-height 20px
 				margin 0
 				padding 0
-				position relative
-				span
+				.comment-action-button
+					border-left border-color 1px solid
 					color #CCC
 					font-size 13px
 					float left
-					line-height 15px
+					line-height 20px
 					padding 0 12px
-				.comment-reply-button, .comment-share-button
-					border-left border-color 1px solid
-					font-weight bold
 					animate()
 					&:hover
 						cursor pointer
 						color main-color
-				.comment-vote-count
-					padding 0
-				i
-					color #CCC
+
+				.comment-vote-container
 					float left
-					font-size 20px
-					line-height 12px
-					margin 0
-					padding 0 15px
-					position relative
-					animate()
-					&:hover
-						cursor pointer
-						color darken(#CCC, 20%)
+					margin-right 10px
+					.vote-controls
+						height 20px
+						.vote-count
+							color #CCC
+							display inline-block
+							line-height 20px
+							text-align center
+							min-width 24px
+						&.positive-vote .vote-count
+							color success-color
+						&.negative-vote .vote-count
+							color danger-color
+						.vote-button
+							i
+								color #CCC
+							&:hover
+								cursor pointer
+							&.vote-up
+								&:hover i, &.voted i
+									color success-color
+							&.vote-down
+								&:hover i, &.voted i
+									color danger-color
+						.vote-button
+							color #CCC
+							display inline-block
+							height 20px
+							width 20px
+							line-height 20px
+							text-align center
+							i
+								font-size 20px
+								position relative
+							&:hover
+								cursor pointer

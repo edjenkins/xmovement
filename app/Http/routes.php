@@ -92,8 +92,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Vote routes
-    Route::post('/vote/design_task', 'DesignController@vote'); // Design task
+	Route::post('/vote/design_task', 'DesignController@vote'); // Design task
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
+	Route::post('/vote/comment', 'CommentController@vote'); // Comment
 
     // API routes
 

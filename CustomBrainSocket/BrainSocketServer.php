@@ -12,7 +12,7 @@ class BrainSocketServer{
 		$this->server = IoServer::factory(
 			new HttpServer(
 				new WsServer(
-					new \CustomBrainSocket\BrainSocketEventListener(//new \App\Http\Controllers\BrainSocketController(
+					new \CustomBrainSocket\BrainSocketEventListener(
 						new \BrainSocket\BrainSocketResponse(new \BrainSocket\LaravelEventPublisher())
 					)
 				)

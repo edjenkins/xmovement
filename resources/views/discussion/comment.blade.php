@@ -4,23 +4,41 @@
 
 	<p class="comment-header">
 		<a href="{{ action('UserController@profile', $comment->user) }}">{{ $comment->user->name }}</a>
-		<span style="color: #CCC; margin-left: 10px">{{ $comment->created_at->diffForHumans() }}</span>
+		<span class="created-timestamp">{{ $comment->created_at->diffForHumans() }}</span>
 	</p>
 	<p class="comment-body">
 		{{ $comment->text }}
 	</p>
-	<p class="comment-footer">
+	<div class="comment-footer">
 
-		<i class="fa fa-angle-up comment-vote-up-button"></i>
-		<span class="comment-vote-count">2</span>
-		<i class="fa fa-angle-down comment-vote-down-button"></i>
+		<div class="comment-vote-container {{ ($comment->voteCount() == 0) ? '' : (($comment->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
+			<div class="vote-controls">
+				<div class="vote-button vote-up {{ ($comment->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="comment" data-votable-id="{{ $comment['id'] }}">
+					<i class="fa fa-2x fa-angle-up"></i>
+				</div>
+				<div class="vote-count">
+					{{ $comment->voteCount() }}
+				</div>
+				<div class="vote-button vote-down {{ ($comment->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="comment" data-votable-id="{{ $comment['id'] }}">
+					<i class="fa fa-2x fa-angle-down"></i>
+				</div>
+			</div>
+		</div>
 
-		<span class="comment-reply-button">Reply</span>
+		<span class="comment-action-button">Reply</span>
 
-		<span class="comment-share-button">Share</span>
+		@if($authenticated_user_id == $comment->user->id)
+
+			<span class="comment-action-button">Delete</span>
+
+		@else
+
+			<span class="comment-action-button">Flag</span>
+
+		@endif
 
 		<div class="clearfloat"></div>
 
-	</p>
+	</div>
 
 </li>

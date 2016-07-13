@@ -47,11 +47,35 @@ class CommentController extends Controller
 
 		$response->data['comments'] = $comments;
 
+		$user_id = (Auth::user()) ? Auth::user()->id : null;
+
 		foreach ($comments as $index => $comment)
 		{
-			$comment['view'] = View::make('discussion.comment', ['comment' => $comment])->render();
+			$comment['view'] = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user_id' => $user_id])->render();
 		}
 
 		return Response::json($response);
 	}
+
+    public function vote(Request $request)
+    {
+        $response = new ResponseObject();
+
+        $value = ($request->vote_direction == 'up') ? 1 : -1;
+
+        $comment = Comment::whereId($request->votable_id)->first();
+
+        if ($comment->addVote($value))
+        {
+            $response->meta['success'] = true;
+        }
+		else
+		{
+			array_push($response->errors, Lang::get('flash_message.vote_twice_error'));
+		}
+
+        $response->data['vote_count'] = $comment->voteCount();
+
+        return Response::json($response);
+    }
 }

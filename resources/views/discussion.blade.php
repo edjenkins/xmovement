@@ -4,6 +4,10 @@
 
 @if (Auth::guest())
 
+<p>
+	Please sign in to comment
+</p>
+
 @else
 
 <div class="post-comment-container">
@@ -14,7 +18,7 @@
 
 		<textarea class="expanding" rows="1" id="comment-text-input" name="text" placeholder="{{ trans('idea.comment_text_placeholder') }}"></textarea>
 
-		<button type="button" class="post-comment-button" id="post-comment-button" data-action-type="comment" data-idea-id="{{ $idea->id }}" data-user-id="{{ Auth::user()->id }}">
+		<button type="button" class="post-comment-button" id="post-comment-button">
 			<span class="idle-state">
 				{{ trans('idea.comment_button_idle') }}
 			</span>

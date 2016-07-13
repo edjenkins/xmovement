@@ -66,7 +66,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 				, $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
 
 			$res = json_decode($msg);
-			$res->client->view = View::make('discussion.comment', ['comment' => $comment])->render();
+			$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user_id' => $user_id])->render();
 			$msg = json_encode($res);
 
 			foreach ($this->clients as $client) {
