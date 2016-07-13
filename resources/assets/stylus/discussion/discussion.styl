@@ -1,0 +1,120 @@
+.comments-section, .discussion-wrapper
+	.post-comment-container
+		background white
+		min-height 50px
+		padding 20px
+		padding-left 80px
+		position relative
+		.user-avatar
+			background-color border-color
+			bacground-position center
+			background-size cover
+			background-repeat no-repeat
+			border-radius 50%
+			height 50px
+			width 50px
+			position absolute
+			left 20px
+			top 20px
+		.comment-composer-wrapper
+			button.post-comment-button
+				background very-light-grey
+				border border-color 1px solid
+				border-radius 4px
+				bottom 28px
+				line-height 34px
+				padding 0 20px
+				right 28px
+				position absolute
+				animate()
+				.idle-state
+					display block
+				.posting-state
+					display none
+				&.posting
+					.posting-state
+						display block
+						background success-color
+						border-color success-color
+					.idle-state
+						display none
+				&:hover
+					background success-color
+					border-color success-color
+					cursor pointer
+					span
+						color white
+			textarea
+				background-color white
+				border border-color 1px solid
+				border-radius 6px
+				box-sizing border-box
+				margin 0
+				line-height 30px
+				outline 0
+				padding 10px 80px 10px 15px
+				width 100%
+				&:active
+					outline 0
+
+	ul#comments-container
+		cleanlist()
+		li.comment
+			cleanlist()
+			border-bottom border-color 1px dashed
+			margin 0
+			padding 15px 20px 15px 80px
+			position relative
+			word-break break-word
+			.user-avatar
+				background-color border-color
+				bacground-position center
+				background-size cover
+				background-repeat no-repeat
+				border-radius 50%
+				height 40px
+				width 40px
+				position absolute
+				left 20px
+				top 20px
+			.comment-header
+				color #CCC
+				margin 0
+				padding 0
+			.comment-body
+				color #444
+				font-size 15px
+				margin 5px 0
+				padding 0
+			.comment-footer
+				left -12px
+				margin 0
+				padding 0
+				position relative
+				span
+					color #CCC
+					font-size 13px
+					float left
+					line-height 15px
+					padding 0 12px
+				.comment-reply-button, .comment-share-button
+					border-left border-color 1px solid
+					font-weight bold
+					animate()
+					&:hover
+						cursor pointer
+						color main-color
+				.comment-vote-count
+					padding 0
+				i
+					color #CCC
+					float left
+					font-size 20px
+					line-height 12px
+					margin 0
+					padding 0 15px
+					position relative
+					animate()
+					&:hover
+						cursor pointer
+						color darken(#CCC, 20%)

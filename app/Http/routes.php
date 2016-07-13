@@ -107,6 +107,9 @@ Route::group(['middleware' => ['web']], function () {
 		// Message routes
 		Route::post('/api/messages/send', 'MessagesController@send');
 
+		// Discussion routes
+		Route::get('/api/comments/view', 'CommentController@view');
+
     // File upload
     Route::post('/upload', 'UploadController@upload');
 

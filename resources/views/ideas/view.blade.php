@@ -101,9 +101,9 @@
 						<h2>{{ trans('idea.discussion') }}</h2>
 					</div>
 
-					<div class="idea-section padded">
+					<div class="idea-section comments-section">
 
-						@include('disqus')
+						@include('discussion')
 
 					</div>
 

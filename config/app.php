@@ -162,6 +162,10 @@ return [
         /*
          * Custom Service Providers...
          */
+
+ 		BrainSocket\BrainSocketServiceProvider::class,
+		App\Providers\CustomBrainSocketServiceProvider::class,
+
         Laravel\Socialite\SocialiteServiceProvider::class,
 		App\Providers\ResourceImageProvider::class,
 		Torann\LaravelMetaTags\MetaTagsServiceProvider::class,
@@ -223,11 +227,14 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-		'Image'     => Intervention\Image\Facades\Image::class,
-		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,
-
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 		'MetaTag'   => Torann\LaravelMetaTags\Facades\MetaTag::class,
+
+		'BrainSocket'     => BrainSocket\BrainSocketFacade::class,
+		'CustomBrainSocket'     => CustomBrainSocket\Facades\BrainSocket::class,
+
+		'Image'     => Intervention\Image\Facades\Image::class,
+		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,
 
         'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
         'Poll' => XMovement\Poll\Poll::class,
