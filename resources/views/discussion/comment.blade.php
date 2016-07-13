@@ -1,4 +1,4 @@
-<li class="comment">
+<li class="comment" id="comment-{{ $comment->id }}">
 
 	<a href="{{ action('UserController@profile', $comment->user) }}" class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($comment->user, 'medium') }}')"></a>
 
@@ -7,7 +7,7 @@
 		<span class="created-timestamp">{{ $comment->created_at->diffForHumans() }}</span>
 	</p>
 	<p class="comment-body">
-		{{ $comment->text }}
+		{!! nl2br($comment->text) !!}
 	</p>
 	<div class="comment-footer">
 
@@ -27,15 +27,17 @@
 
 		<span class="comment-action-button">Reply</span>
 
-		@if($authenticated_user_id == $comment->user->id)
+		@can('destroy', $comment)
 
-			<span class="comment-action-button">Delete</span>
+			<span class="comment-action-button destroy-comment-button" data-comment-id="{{ $comment->id }}" data-delete-confirmation="{{ trans('idea.comment_delete_confirmation') }}">Delete</span>
 
-		@else
+		@endcan
+
+		@can('flag', $comment)
 
 			<span class="comment-action-button">Flag</span>
 
-		@endif
+		@endcan
 
 		<div class="clearfloat"></div>
 

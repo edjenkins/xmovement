@@ -109,7 +109,8 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/api/messages/send', 'MessagesController@send');
 
 		// Discussion routes
-		Route::get('/api/comments/view', 'CommentController@view');
+		Route::get('/api/comment/view', 'CommentController@view');
+	    Route::delete('/api/comment/destroy', 'CommentController@destroy');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');

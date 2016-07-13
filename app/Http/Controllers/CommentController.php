@@ -78,4 +78,27 @@ class CommentController extends Controller
 
         return Response::json($response);
     }
+
+	public function destroy(Request $request)
+	{
+		$comment = Comment::whereId($request->comment_id)->first();
+
+		$response = new ResponseObject();
+
+		if (Gate::denies('destroy', $comment))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
+
+            return Response::json($response);
+		}
+		else
+		{
+			$comment->delete();
+
+			$response->meta['success'] = true;
+
+			return Response::json($response);
+		}
+
+	}
 }

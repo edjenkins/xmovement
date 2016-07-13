@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Comment;
 use App\Idea;
 use App\User;
 use App\Supporter;
@@ -16,7 +17,7 @@ class UserPolicy
      * Determine if the given user can view the news stream of the user.
      *
      * @param  User  $user
-     * @param  Idea  $idea
+     * @param  User  $profile
      * @return bool
      */
     public function viewNews(User $user, User $profile)
@@ -28,7 +29,7 @@ class UserPolicy
      * Determine if the given user can view the messages of the user.
      *
      * @param  User  $user
-     * @param  Idea  $idea
+     * @param  User  $profile
      * @return bool
      */
     public function viewMessages(User $user, User $profile)
@@ -40,7 +41,7 @@ class UserPolicy
      * Determine if the given user can edit the preferences of the user.
      *
      * @param  User  $user
-     * @param  Idea  $idea
+     * @param  User  $profile
      * @return bool
      */
     public function editPreferences(User $user, User $profile)
@@ -60,10 +61,5 @@ class UserPolicy
         if ($user->isSuperAdmin()) {
             return true;
         }
-    }
-
-    public function dashboard(User $user, Idea $idea)
-    {
-        return true;
     }
 }

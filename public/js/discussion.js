@@ -42,6 +42,14 @@ function postComment()
 
 function attachHandlers()
 {
+	// Add destroy handlers
+	$('.destroy-comment-button').off('click').on('click', function() {
+
+		destroyComment($(this));
+
+	});
+
+	// Add vote handlers
 	$('.comment-vote-container .vote-button').off('click').on('click', function() {
 
 		var vote_button = $(this);
@@ -54,6 +62,50 @@ function attachHandlers()
 		addVote(vote_button, vote_container, vote_direction, votable_id, votable_type);
 
 	});
+}
+
+function destroyComment(delete_button)
+{
+	var result = confirm(delete_button.attr('data-delete-confirmation'));
+
+	if (!result)
+	    return;
+
+	var comment_id = delete_button.attr('data-comment-id');
+
+	$.ajaxSetup({
+        headers: {
+        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        	'Content-type': 'application/json'
+        }
+	});
+
+    $.ajax({
+        type:"DELETE",
+        url: "/api/comment/destroy",
+        dataType: "json",
+        data:  JSON.stringify({comment_id: comment_id}),
+        processData: false,
+        success: function(response) {
+
+        	if (response.meta.success)
+        	{
+				// Remove element from DOM
+				$('#comment-' + comment_id).remove();
+			}
+        	else
+        	{
+        		// Output errors
+        		$.each(response.errors, function(index, value) {
+        			alert(value);
+        		})
+        	}
+        },
+        error: function(response) {
+			console.log(response);
+        	alert('Something went wrong!');
+        }
+    });
 }
 
 $(document).ready(function() {
@@ -71,7 +123,7 @@ $(document).ready(function() {
 
 	});
 
-	$.getJSON("/api/comments/view", {url: window.location.href} , function(response) {
+	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
 
 		if (response) {
 
