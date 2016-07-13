@@ -49,6 +49,13 @@ function attachHandlers()
 
 	});
 
+	// Add report handlers
+	$('.report-comment-button').off('click').on('click', function() {
+
+		reportComment($(this));
+
+	});
+
 	// Add vote handlers
 	$('.comment-vote-container .vote-button').off('click').on('click', function() {
 
@@ -138,3 +145,46 @@ $(document).ready(function() {
 	});
 
 });
+
+function reportComment(report_button)
+{
+	var result = confirm(report_button.attr('data-report-confirmation'));
+
+	if (!result)
+	    return;
+
+	var comment_id = report_button.attr('data-comment-id');
+
+	$.ajaxSetup({
+        headers: {
+        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        	'Content-type': 'application/json'
+        }
+	});
+
+    $.ajax({
+        type:"POST",
+        url: "/api/report",
+        dataType: "json",
+        data:  JSON.stringify({reportable_id: comment_id, reportable_type: 'comment'}),
+        processData: false,
+        success: function(response) {
+
+        	if (response.meta.success)
+        	{
+				report_button.html('Reported!');
+			}
+        	else
+        	{
+        		// Output errors
+        		$.each(response.errors, function(index, value) {
+        			alert(value);
+        		})
+        	}
+        },
+        error: function(response) {
+			console.log(response);
+        	alert('Something went wrong!');
+        }
+    });
+}

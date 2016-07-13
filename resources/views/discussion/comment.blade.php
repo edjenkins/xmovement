@@ -33,9 +33,9 @@
 
 		@endcan
 
-		@can('flag', $comment)
+		@can('report', $comment)
 
-			<span class="comment-action-button">Flag</span>
+			<span class="comment-action-button report-comment-button" data-comment-id="{{ $comment->id }}" data-report-confirmation="{{ trans('idea.comment_report_confirmation') }}">Report</span>
 
 		@endcan
 

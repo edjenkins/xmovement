@@ -28,13 +28,13 @@ class CommentPolicy
     }
 
     /**
-     * Determine if the given user can flag the given comment.
+     * Determine if the given user can report the given comment.
      *
      * @param  User  $user
      * @param  Comment  $comment
      * @return bool
      */
-    public function flag(User $user, Comment $comment)
+    public function report(User $user, Comment $comment)
     {
         return $user->id != $comment->user_id;
     }

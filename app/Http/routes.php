@@ -112,6 +112,9 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/api/comment/view', 'CommentController@view');
 	    Route::delete('/api/comment/destroy', 'CommentController@destroy');
 
+		// Report routes
+		Route::post('/api/report', 'ReportController@add');
+
     // File upload
     Route::post('/upload', 'UploadController@upload');
 
