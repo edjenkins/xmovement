@@ -56,16 +56,16 @@
 
 					@unless($idea->proposal_state == 'closed')
 
-						@if (count($idea->proposals) > 0)
+						<div class="proposals-container hidden-xs">
 
-							<div class="proposals-container hidden-xs">
+			    			<div class="section-header">
+								<h2>{{ trans('idea.proposals') }}</h2>
+								<a href="{{ action('ProposeController@index', $idea) }}">{{ trans('idea.view_all_proposals') }}</a>
+							</div>
 
-				    			<div class="section-header">
-									<h2>{{ trans('idea.proposals') }}</h2>
-									<a href="{{ action('ProposeController@index', $idea) }}">{{ trans('idea.view_all_proposals') }}</a>
-								</div>
+							<div class="proposals-wrapper">
 
-								<div class="proposals-wrapper">
+								@if (count($idea->proposals) > 0)
 
 									@foreach ($idea->proposals->take(3) as $index => $proposal)
 										<div class="col-xs-12 col-sm-6 col-md-4">
@@ -75,26 +75,40 @@
 
 									<div class="clearfloat"></div>
 
-								</div>
+								@else
+
+									<div class="idea-section padded first-to-add">
+										@can('add_proposal', $idea)
+											<a href="{{ action('ProposeController@add', $idea) }}">
+												{{ trans('idea.first_to_add_proposal') }}
+											</a>
+										@else
+											<a href="{{ action('ProposeController@index', $idea) }}">
+												{{ trans('idea.no_proposals_added_yet') }}
+											</a>
+										@endcan
+									</div>
+
+								@endif
 
 							</div>
 
-						@endif
+						</div>
 
 					@endunless
 
 					@unless($idea->design_state == 'closed')
 
-						@if (count($idea->featuredDesignTasks) > 0)
+						<div class="design-tasks-container hidden-xs">
 
-							<div class="design-tasks-container hidden-xs">
+			    			<div class="section-header">
+								<h2>{{ trans('idea.design_tasks') }}</h2>
+								<a href="{{ action('DesignController@dashboard', $idea) }}">{{ trans('idea.view_all_design_tasks') }}</a>
+							</div>
 
-				    			<div class="section-header">
-									<h2>{{ trans('idea.design_tasks') }}</h2>
-									<a href="{{ action('DesignController@dashboard', $idea) }}">{{ trans('idea.view_all_design_tasks') }}</a>
-								</div>
+							<div class="design-tasks-wrapper">
 
-								<div class="design-tasks-wrapper">
+								@if (count($idea->featuredDesignTasks) > 0)
 
 									@foreach ($idea->featuredDesignTasks as $design_task)
 
@@ -104,11 +118,27 @@
 
 									<div class="clearfloat"></div>
 
-								</div>
+								@else
+
+									<div class="idea-section padded first-to-add">
+										@can('contribute', $idea)
+											<a href="{{ action('DesignController@add', $idea) }}">
+												{{ trans('idea.first_to_add_design_task') }}
+											</a>
+										@else
+											<a href="{{ action('DesignController@dashboard', $idea) }}">
+												{{ trans('idea.no_design_tasks_added_yet') }}
+											</a>
+										@endcan
+									</div>
+
+								@endif
+
+								<div class="clearfloat"></div>
 
 							</div>
 
-						@endif
+						</div>
 
 					@endunless
 
