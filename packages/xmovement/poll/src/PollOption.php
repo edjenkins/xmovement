@@ -63,7 +63,7 @@ class PollOption extends Model
         {
             // Prevent voting twice in one direction
 			if ($value == 1) { array_push($response->errors, Lang::get('flash_message.vote_up_twice_error')); }
-			if ($value == -1) { array_push($response->errors, Lang::get('flash_message.vote_down_twice_error'); }
+			if ($value == -1) { array_push($response->errors, Lang::get('flash_message.vote_down_twice_error')); }
 
             $response->meta['success'] = false;
         }

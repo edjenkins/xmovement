@@ -41,17 +41,17 @@ class CommentController extends Controller
 
 		$url = $request->url;
 
-		$comments = Comment::where('url', $url)->get();
+		$comments = Comment::where([['url', $url], ['in_reply_to_comment_id', null]])->get();
 
 		$response->meta['success'] = true;
 
 		$response->data['comments'] = $comments;
 
-		$user_id = (Auth::user()) ? Auth::user()->id : null;
+		$authenticated_user = (Auth::user()) ? Auth::user() : null;
 
 		foreach ($comments as $index => $comment)
 		{
-			$comment['view'] = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user_id' => $user_id])->render();
+			$comment['view'] = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $authenticated_user])->render();
 		}
 
 		return Response::json($response);

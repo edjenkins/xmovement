@@ -8,40 +8,60 @@ app.BrainSocket = new BrainSocket(
 app.BrainSocket.Event.listen('comment.posted',function(msg)
 {
 	console.log(msg);
-	$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
+
+	if (msg.client.data.in_reply_to_comment_id != "")
+	{
+		// This is a reply
+		$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
+	}
+	else
+	{
+		$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
+	}
 
 	attachHandlers();
 });
 
-app.BrainSocket.Event.listen('app.success',function(msg)
-{
-    console.log(msg);
-});
-
-app.BrainSocket.Event.listen('app.error',function(msg)
-{
-    console.log(msg);
-});
-
-$('#post-comment-button').click(function(event)
-{
-	postComment()
-});
-
-function postComment()
-{
-	// Get comment from textarea
-	var comment = $('#comment-text-input').val();
-
-	// Clear textarea
-	$('#comment-text-input').val('').change();
-
-	// Post message
-	app.BrainSocket.message('comment.posted', { url: window.location.href, comment: comment });
-}
+// app.BrainSocket.Event.listen('app.success',function(msg)
+// {
+//     console.log(msg);
+// });
+//
+// app.BrainSocket.Event.listen('app.error',function(msg)
+// {
+//     console.log(msg);
+// });
 
 function attachHandlers()
 {
+	$('.reply-to-comment-button').off('click').on('click', function(event)
+	{
+		var wrapper = $(this).parent();
+
+		$(this).parent().parent().children('.post-reply-container').show();
+	});
+
+	// Add post comment handlers
+	$('.post-comment-button').off('click').on('click', function(event)
+	{
+		var wrapper = $(this).parent();
+
+		postComment(wrapper);
+	});
+
+	// Add post comment on enter handlers
+	$('.comment-text-input').off('keypress').on('keypress', function(event) {
+
+		var code = event.keyCode ? event.keyCode : event.which;
+
+		if (code == 13)
+		{
+			event.preventDefault();
+			postComment($(this).parent());
+		}
+
+	});
+
 	// Add destroy handlers
 	$('.destroy-comment-button').off('click').on('click', function() {
 
@@ -69,6 +89,41 @@ function attachHandlers()
 		addVote(vote_button, vote_container, vote_direction, votable_id, votable_type);
 
 	});
+}
+
+$(document).ready(function() {
+
+	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
+
+		if (response) {
+
+			$.each(response.data.comments, function(index, comment) {
+
+				$('#comments-container').append(comment.view);
+
+			})
+
+			attachHandlers();
+		}
+	});
+
+});
+
+function postComment(wrapper)
+{
+	var in_reply_to_comment_id = wrapper.attr('data-in-reply-to-comment-id');
+
+	// Get comment from textarea
+	var comment = wrapper.children('textarea').val();
+
+	// Clear textarea
+	wrapper.children('textarea').val('').change();
+
+	// Hide reply composer
+	$('.post-reply-container').hide();
+
+	// Post message
+	app.BrainSocket.message('comment.posted', { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id });
 }
 
 function destroyComment(delete_button)
@@ -115,43 +170,15 @@ function destroyComment(delete_button)
     });
 }
 
-$(document).ready(function() {
-
-	$('#comment-text-input').keyup(function(e) {
-
-		var code = e.keyCode ? e.keyCode : e.which;
-
-		if (code == 13)
-		{
-			postComment();
-		}
-
-		e.preventDefault();
-
-	});
-
-	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
-
-		if (response) {
-
-			$.each(response.data.comments, function(index, comment) {
-
-				$('#comments-container').append(comment.view);
-
-			})
-
-			attachHandlers();
-		}
-	});
-
-});
-
 function reportComment(report_button)
 {
+	if (report_button.hasClass('reported'))
+		return; // This has been reported so cancel
+
 	var result = confirm(report_button.attr('data-report-confirmation'));
 
 	if (!result)
-	    return;
+	    return; // User decided not to report this so cancel
 
 	var comment_id = report_button.attr('data-comment-id');
 
@@ -172,7 +199,7 @@ function reportComment(report_button)
 
         	if (response.meta.success)
         	{
-				report_button.html('Reported!');
+				report_button.addClass('reported');
 			}
         	else
         	{

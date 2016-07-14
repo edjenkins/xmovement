@@ -12,24 +12,7 @@
 
 <div class="post-comment-container">
 
-	<div class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage(Auth::user(), 'medium') }}')"></div>
-
-	<div class="comment-composer-wrapper">
-
-		<textarea class="expanding" rows="1" id="comment-text-input" name="text" placeholder="{{ trans('idea.comment_text_placeholder') }}"></textarea>
-
-		<button type="button" class="post-comment-button" id="post-comment-button">
-			<span class="idle-state">
-				{{ trans('idea.comment_button_idle') }}
-			</span>
-			<span class="posting-state">
-				{{ trans('idea.comment_button_posting') }}
-			</span>
-		</button>
-
-		<ul class="error-list" id="comment-errors"></ul>
-
-	</div>
+	@include('discussion.comment-composer', ['authenticated_user' => Auth::user()])
 
 </div>
 

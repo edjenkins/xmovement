@@ -52,13 +52,15 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 		$user_id = $currentUser->id;
 		$text = json_decode($msg)->client->data->comment;
 		$url = json_decode($msg)->client->data->url;
+		$in_reply_to_comment_id = json_decode($msg)->client->data->in_reply_to_comment_id;
 
 		if (json_decode($msg)->client->event == 'comment.posted')
 		{
 			$comment = Comment::create([
 				'user_id' => $user_id,
 				'text' => $text,
-				'url' => $url
+				'url' => $url,
+				'in_reply_to_comment_id' => $in_reply_to_comment_id
 			]);
 
 			$numRecv = count($this->clients) - 1;
@@ -66,7 +68,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 				, $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
 
 			$res = json_decode($msg);
-			$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user_id' => $user_id])->render();
+			$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $currentUser])->render();
 			$msg = json_encode($res);
 
 			foreach ($this->clients as $client) {

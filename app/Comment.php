@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\CommentVote;
+use App\Report;
 use Auth;
+use App\Comment;
 use Log;
 use Response;
 
@@ -25,7 +27,7 @@ class ResponseObject {
 class Comment extends Model
 {
 	protected $fillable = [
-	   'user_id', 'text', 'url'
+	   'user_id', 'text', 'url', 'in_reply_to_comment_id'
 	];
 
     protected $dates = ['deleted_at'];
@@ -35,6 +37,21 @@ class Comment extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function children()
+	{
+        return $this->hasMany('App\Comment', 'in_reply_to_comment_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Comment', 'in_reply_to_comment_id');
+    }
+
+    public function reports()
+    {
+		return $this->morphMany('App\Report', 'reportable');
     }
 
     public function voteCount()

@@ -1,10 +1,14 @@
 .comments-section, .discussion-wrapper
-	.post-comment-container
+	.post-comment-container, .post-reply-container
 		background white
 		min-height 50px
 		padding 20px
 		padding-left 80px
 		position relative
+		&.post-reply-container
+			padding-bottom 16px
+			position relative
+			margin-left -40px
 		.user-avatar
 			background-color border-color
 			bacground-position center
@@ -52,6 +56,7 @@
 				margin 0
 				line-height 30px
 				outline 0
+				resize none
 				padding 10px 80px 10px 15px
 				width 100%
 				&:active
@@ -63,7 +68,7 @@
 			cleanlist()
 			border-bottom border-color 1px dashed
 			margin 0
-			padding 15px 20px 15px 80px
+			padding 15px 20px 15px 75px
 			position relative
 			word-break break-word
 			.user-avatar
@@ -81,7 +86,10 @@
 				margin 0
 				padding 0
 				.created-timestamp
-					color #999
+					color #CCC
+					margin-left 2px
+				.reply-header
+					color #CCC
 					margin-left 5px
 
 			.comment-body
@@ -101,9 +109,23 @@
 					line-height 20px
 					padding 0 12px
 					animate()
+					&.report-comment-button
+						.idle-state
+							display block
+						.reported-state
+							display none
+						&.reported
+							.reported-state
+								display block
+								color danger-color
+							.idle-state
+								display none
 					&:hover
 						cursor pointer
 						color main-color
+					&.reported:hover
+						color danger-color
+						cursor default
 
 				.comment-vote-container
 					float left
@@ -143,3 +165,12 @@
 								position relative
 							&:hover
 								cursor pointer
+			.post-reply-container
+				display none
+			.comment-replies
+				cleanlist()
+				position relative
+				margin-left -40px
+				li.comment
+					border-bottom none
+					padding-bottom 0

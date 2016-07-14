@@ -3,8 +3,20 @@
 	<a href="{{ action('UserController@profile', $comment->user) }}" class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($comment->user, 'medium') }}')"></a>
 
 	<p class="comment-header">
-		<a href="{{ action('UserController@profile', $comment->user) }}">{{ $comment->user->name }}</a>
-		<span class="created-timestamp">{{ $comment->created_at->diffForHumans() }}</span>
+		<a href="{{ action('UserController@profile', $comment->user) }}">
+			{{ $comment->user->name }}
+		</a>
+
+		@if(isset($comment->parent))
+			<span class="reply-header">
+				<i class="fa fa-comments"></i>
+				{{ $comment->parent->user->name }}
+			</span>
+		@endif
+
+		<span class="created-timestamp">
+			• {{ $comment->created_at->diffForHumans() }}
+		</span>
 	</p>
 	<p class="comment-body">
 		{!! nl2br($comment->text) !!}
@@ -25,22 +37,41 @@
 			</div>
 		</div>
 
-		<span class="comment-action-button">Reply</span>
+		<span class="comment-action-button reply-to-comment-button">Reply</span>
 
-		@can('destroy', $comment)
+
+		@if(Gate::forUser($authenticated_user)->allows('destroy', $comment))
 
 			<span class="comment-action-button destroy-comment-button" data-comment-id="{{ $comment->id }}" data-delete-confirmation="{{ trans('idea.comment_delete_confirmation') }}">Delete</span>
 
-		@endcan
+		@endif
 
-		@can('report', $comment)
+		@if(Gate::forUser($authenticated_user)->allows('report', $comment))
 
-			<span class="comment-action-button report-comment-button" data-comment-id="{{ $comment->id }}" data-report-confirmation="{{ trans('idea.comment_report_confirmation') }}">Report</span>
+			<span class="comment-action-button report-comment-button" data-comment-id="{{ $comment->id }}" data-report-confirmation="{{ trans('idea.comment_report_confirmation') }}">
+				<span class="idle-state">
+					Report
+				</span>
+				<span class="reported-state">
+					You reported this
+				</span>
+			</span>
 
-		@endcan
+		@endif
 
 		<div class="clearfloat"></div>
 
 	</div>
+	<div class="post-reply-container">
+
+		@include('discussion.comment-composer', ['authenticated_user' => $authenticated_user, 'comment' => $comment])
+
+	</div>
+
+	<ul class="comment-replies">
+		@foreach($comment->children as $reply)
+			@include('discussion.comment', ['comment' => $reply, 'authenticated_user_id' => Auth::user()->id])
+		@endforeach
+	</ul>
 
 </li>
