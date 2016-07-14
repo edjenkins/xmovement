@@ -4,7 +4,7 @@
 
 @if (Auth::guest())
 
-<p>
+<p class="sign-in-required">
 	Please sign in to comment
 </p>
 

@@ -105,7 +105,7 @@
 						<h2>{{ trans('idea.discussion') }}</h2>
 					</div>
 
-					<div class="idea-section comments-section">
+					<div class="comments-section">
 
 						@include('discussion')
 

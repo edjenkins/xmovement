@@ -150,8 +150,12 @@
 				</ul>
 
 				<div class="clearfloat"></div>
+				
+				<div class="comments-section">
 
-				@include('disqus')
+					@include('discussion')
+
+				</div>
 
     		</div>
 

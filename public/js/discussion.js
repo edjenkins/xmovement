@@ -22,15 +22,15 @@ app.BrainSocket.Event.listen('comment.posted',function(msg)
 	attachHandlers();
 });
 
-// app.BrainSocket.Event.listen('app.success',function(msg)
-// {
-//     console.log(msg);
-// });
-//
-// app.BrainSocket.Event.listen('app.error',function(msg)
-// {
-//     console.log(msg);
-// });
+app.BrainSocket.Event.listen('app.success',function(msg)
+{
+    console.log(msg);
+});
+
+app.BrainSocket.Event.listen('app.error',function(msg)
+{
+    console.log(msg);
+});
 
 function attachHandlers()
 {
@@ -40,7 +40,7 @@ function attachHandlers()
 
 		$('.post-reply-container').hide();
 		$(this).parent().parent().children('.post-reply-container').show();
-		$(this).parent().parent().children('.post-reply-container').find('textarea').focus();
+		$(this).parent().parent().children('.post-reply-container').find('textarea').expanding().focus();
 	});
 
 	// Add post comment handlers
@@ -54,12 +54,14 @@ function attachHandlers()
 	// Add post comment on enter handlers
 	$('.comment-text-input').off('keypress').on('keypress', function(event) {
 
+		var wrapper = $(this).parent().parent();
+
 		var code = event.keyCode ? event.keyCode : event.which;
 
 		if (code == 13)
 		{
 			event.preventDefault();
-			postComment($(this).parent());
+			postComment(wrapper);
 		}
 
 	});
@@ -95,7 +97,11 @@ function attachHandlers()
 
 $(document).ready(function() {
 
+	console.log(window.location.href);
+	
 	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
+
+		console.log(response);
 
 		if (response) {
 

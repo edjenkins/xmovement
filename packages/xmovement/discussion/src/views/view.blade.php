@@ -76,9 +76,9 @@
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
-	    			<div class="discussion-container">
+	    			<div class="comments-section">
 
-		    			@include('disqus')
+		    			@include('discussion')
 
 		    		</div>
 
