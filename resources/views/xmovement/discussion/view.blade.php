@@ -9,7 +9,7 @@
 
 	</div>
 
-	<div class="container">
+	<div class="container discussion-module">
 
 	    <div class="row">
 	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
