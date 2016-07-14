@@ -41,22 +41,26 @@
 				</div>
 			</div>
 
-			<span class="comment-action-button reply-to-comment-button">Reply</span>
+			<span class="comment-action-button reply-to-comment-button">
+				{{ trans('discussion.reply') }}
+			</span>
 
 			@if(Gate::forUser($authenticated_user)->allows('destroy', $comment))
 
-				<span class="comment-action-button destroy-comment-button" data-comment-id="{{ $comment->id }}" data-delete-confirmation="{{ trans('idea.comment_delete_confirmation') }}">Delete</span>
+				<span class="comment-action-button destroy-comment-button" data-comment-id="{{ $comment->id }}" data-delete-confirmation="{{ trans('discussion.comment_delete_confirmation') }}">
+					{{ trans('discussion.delete') }}
+				</span>
 
 			@endif
 
 			@if(Gate::forUser($authenticated_user)->allows('report', $comment))
 
-				<span class="comment-action-button report-comment-button" data-comment-id="{{ $comment->id }}" data-report-confirmation="{{ trans('idea.comment_report_confirmation') }}">
+				<span class="comment-action-button report-comment-button" data-comment-id="{{ $comment->id }}" data-report-confirmation="{{ trans('discussion.comment_report_confirmation') }}">
 					<span class="idle-state">
-						Report
+						{{ trans('discussion.report') }}
 					</span>
 					<span class="reported-state">
-						You reported this
+						{{ trans('discussion.reported') }}
 					</span>
 				</span>
 
