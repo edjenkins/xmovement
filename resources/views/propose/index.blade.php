@@ -71,7 +71,7 @@
 
 	</div>
 
-	<div class="container">
+	<div class="container proposals-container">
 
 		@if (count($proposals) == 0)
 

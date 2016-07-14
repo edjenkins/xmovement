@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\User;
 use App\Idea;
 use App\Proposal;
+use App\Comment;
 use Auth;
 
 class User extends Authenticatable
@@ -37,6 +38,16 @@ class User extends Authenticatable
     public function ideas()
     {
         return $this->hasMany(Idea::class);
+    }
+
+    /**
+     * The comments a user has posted.
+     *
+     * @var array
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**

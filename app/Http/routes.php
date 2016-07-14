@@ -92,8 +92,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
     // Vote routes
-    Route::post('/vote/design_task', 'DesignController@vote'); // Design task
+	Route::post('/vote/design_task', 'DesignController@vote'); // Design task
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
+	Route::post('/vote/comment', 'CommentController@vote'); // Comment
 
     // API routes
 
@@ -106,6 +107,13 @@ Route::group(['middleware' => ['web']], function () {
 
 		// Message routes
 		Route::post('/api/messages/send', 'MessagesController@send');
+
+		// Discussion routes
+		Route::get('/api/comment/view', 'CommentController@view');
+	    Route::delete('/api/comment/destroy', 'CommentController@destroy');
+
+		// Report routes
+		Route::post('/api/report', 'ReportController@add');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');

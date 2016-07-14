@@ -83,9 +83,7 @@
 
 					@foreach ($design_tasks as $design_task)
 
-						<?php
-						echo $design_task->xmovement_task->renderTile($design_task);
-						?>
+						{!! $design_task->xmovement_task->renderTile($design_task) !!}
 
 					@endforeach
 
@@ -103,9 +101,13 @@
 
 	    			<div class="clearfloat"></div>
 
-					<div class="discussion-wrapper" style="padding: 15px">
+					<div class="section-header">
+						<h2>{{ trans('idea.discussion') }}</h2>
+					</div>
 
-						@include('disqus')
+					<div class="comments-section">
+
+						@include('discussion')
 
 					</div>
 

@@ -9,7 +9,7 @@
 
 	</div>
 
-	<div class="container">
+	<div class="container discussion-module">
 
 	    <div class="row">
 	    	<div class="col-md-3 col-md-push-9 hidden-sm hidden-xs">
@@ -76,9 +76,9 @@
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 
-	    			<div class="discussion-container">
+	    			<div class="comments-section">
 
-		    			@include('disqus')
+		    			@include('discussion')
 
 		    		</div>
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\DesignTaskVote;
 
 use Auth;
+use Lang;
 use Response;
 
 class ResponseObject {
@@ -76,8 +77,8 @@ class DesignTask extends Model
         if ($this->userVote() == $value)
         {
             // Prevent voting twice in one direction
-			if ($value == 1) { array_push($response->errors, 'You can\' vote up twice'); }
-			if ($value == -1) { array_push($response->errors, 'You can\' vote down twice'); }
+			if ($value == 1) { array_push($response->errors, Lang::get('flash_message.vote_up_twice_error')); }
+			if ($value == -1) { array_push($response->errors, Lang::get('flash_message.vote_down_twice_error')); }
 
             $response->meta['success'] = false;
         }
