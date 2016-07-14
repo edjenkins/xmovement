@@ -63,6 +63,16 @@ class Idea extends Model
     }
 
     /**
+     * The featured Design Tasks for the idea.
+     *
+     * @var array
+     */
+    public function featuredDesignTasks()
+    {
+        return $this->designTasks()->take(3);
+    }
+
+    /**
      * The Proposals for the idea.
      *
      * @var array

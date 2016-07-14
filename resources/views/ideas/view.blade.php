@@ -83,6 +83,35 @@
 
 					@endunless
 
+					@unless($idea->design_state == 'closed')
+
+						@if (count($idea->featuredDesignTasks) > 0)
+
+							<div class="design-tasks-container hidden-xs">
+
+				    			<div class="section-header">
+									<h2>{{ trans('idea.design_tasks') }}</h2>
+									<a href="{{ action('DesignController@dashboard', $idea) }}">{{ trans('idea.view_all_design_tasks') }}</a>
+								</div>
+
+								<div class="design-tasks-wrapper">
+
+									@foreach ($idea->featuredDesignTasks as $design_task)
+
+										{!! $design_task->xmovement_task->renderTile($design_task) !!}
+
+									@endforeach
+
+									<div class="clearfloat"></div>
+
+								</div>
+
+							</div>
+
+						@endif
+
+					@endunless
+
 					@unless((count($updates) == 0) && (Gate::denies('postUpdate', $idea)))
 
 						<div class="section-header">
