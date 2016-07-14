@@ -1,5 +1,5 @@
 
-@if($user->recent_messages)
+@if(count($user->recent_messages) > 0)
 
 	<ul class="message-list">
 
