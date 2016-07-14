@@ -52,7 +52,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 		$user_id = $currentUser->id;
 		$text = json_decode($msg)->client->data->comment;
 		$url = json_decode($msg)->client->data->url;
-		$in_reply_to_comment_id = json_decode($msg)->client->data->in_reply_to_comment_id;
+		$in_reply_to_comment_id = (json_decode($msg)->client->data->in_reply_to_comment_id) ? json_decode($msg)->client->data->in_reply_to_comment_id : NULL;
 
 		if (json_decode($msg)->client->event == 'comment.posted')
 		{

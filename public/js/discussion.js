@@ -38,7 +38,9 @@ function attachHandlers()
 	{
 		var wrapper = $(this).parent();
 
+		$('.post-reply-container').hide();
 		$(this).parent().parent().children('.post-reply-container').show();
+		$(this).parent().parent().children('.post-reply-container').find('textarea').focus();
 	});
 
 	// Add post comment handlers
@@ -114,16 +116,17 @@ function postComment(wrapper)
 	var in_reply_to_comment_id = wrapper.attr('data-in-reply-to-comment-id');
 
 	// Get comment from textarea
-	var comment = wrapper.children('textarea').val();
+	var comment = wrapper.find('textarea').val();
 
 	// Clear textarea
-	wrapper.children('textarea').val('').change();
+	wrapper.find('textarea').val('').change();
 
 	// Hide reply composer
 	$('.post-reply-container').hide();
 
 	// Post message
-	app.BrainSocket.message('comment.posted', { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id });
+	var data = { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
+	app.BrainSocket.message('comment.posted', data);
 }
 
 function destroyComment(delete_button)
