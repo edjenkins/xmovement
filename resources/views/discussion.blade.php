@@ -4,8 +4,8 @@
 
 @if (Auth::guest())
 
-<p class="sign-in-required">
-	Please sign in to comment
+<p class="sign-in-required">	
+	{{ trans('discussion.signin') }}
 </p>
 
 @else

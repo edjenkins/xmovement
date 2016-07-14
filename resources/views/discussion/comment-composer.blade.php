@@ -2,14 +2,14 @@
 
 <div class="comment-composer-wrapper" data-in-reply-to-comment-id="{{ isset($comment) ? $comment->id : null }}">
 
-	<textarea class="expanding comment-text-input" rows="1" name="text" placeholder="{{ trans('idea.comment_text_placeholder') }}"></textarea>
+	<textarea class="expanding comment-text-input" rows="1" name="text" placeholder="{{ isset($comment) ? trans('discussion.reply_text_placeholder') : trans('discussion.comment_text_placeholder') }}"></textarea>
 
 	<button type="button" class="post-comment-button">
 		<span class="idle-state">
-			{{ trans('idea.comment_button_idle') }}
+			{{ isset($comment) ? trans('discussion.reply_button_idle') : trans('discussion.comment_button_idle') }}
 		</span>
 		<span class="posting-state">
-			{{ trans('idea.comment_button_posting') }}
+			{{ isset($comment) ? trans('discussion.reply_button_posting') : trans('discussion.comment_button_posting') }}
 		</span>
 	</button>
 
