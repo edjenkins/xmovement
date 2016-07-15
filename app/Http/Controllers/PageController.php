@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Idea;
 
+use Cookie;
 use Lang;
 use MetaTag;
 
@@ -17,6 +18,11 @@ class PageController extends Controller
 {
     public function home(Request $request)
 	{
+		if ($request->has('cookie_library_study'))
+		{
+			$request->session()->flash('cookie_library_study', 'no');
+		}
+
 	    $ideas = Idea::take(3)->get();
 
 		# META

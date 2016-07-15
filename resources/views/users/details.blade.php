@@ -35,19 +35,21 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                        <label class="control-label">{{ trans('auth.phone_number') }}</label>
+					@if(false)
+	                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+	                        <label class="control-label">{{ trans('auth.phone_number') }}</label>
 
-                        <div class="">
-                            <input type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="{{ trans('auth.phone_number_placeholder') }}">
+	                        <div class="">
+	                            <input type="text" class="form-control" name="phone" value="{{ old('phone', $user->phone) }}" placeholder="{{ trans('auth.phone_number_placeholder') }}">
 
-                            @if ($errors->has('phone'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('phone') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
+	                            @if ($errors->has('phone'))
+	                                <span class="help-block">
+	                                    <strong>{{ $errors->first('phone') }}</strong>
+	                                </span>
+	                            @endif
+	                        </div>
+	                    </div>
+					@endif
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">

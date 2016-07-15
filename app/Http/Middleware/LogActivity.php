@@ -2,10 +2,14 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Support\Facades\Auth;
-use App\ActivityLog;
+
+use Closure;
+use Log;
 use URL;
+use Session;
+
+use App\ActivityLog;
 
 class LogActivity
 {
@@ -50,6 +54,5 @@ class LogActivity
 			'referer' => URL::previous(),
 			'user_agent' => $request->header('User-Agent'),
 		]);
-
 	}
 }
