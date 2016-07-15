@@ -1,7 +1,7 @@
 window.app = {};
 
 app.BrainSocket = new BrainSocket(
-        new WebSocket('ws://xm.local:8080'),
+        new WebSocket('ws://' + location.host + ':8080'),
         new BrainSocketPubSub()
 );
 
@@ -98,7 +98,7 @@ function attachHandlers()
 $(document).ready(function() {
 
 	console.log(window.location.href);
-	
+
 	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
 
 		console.log(response);
