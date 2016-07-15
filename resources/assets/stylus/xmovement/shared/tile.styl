@@ -5,14 +5,15 @@
 	float left
 	padding 10px
 	text-align center
-	width 33%
+	width calc(100% / 3)
 	@media(max-width: 600px)
 		width 100%
 	transition(all 0.2s linear)
 	a
 		text-decoration none
 	.tile-body
-		background #f2f2f2
+		background white
+		border border-color 1px solid
 		display table
 		height 140px
 		padding 0 20px
@@ -46,7 +47,6 @@
 		.tile-footer p
 			color main-color
 	.tile-footer
-		background white
 		min-height 44px
 		padding 0
 		transition(all 0.2s linear)

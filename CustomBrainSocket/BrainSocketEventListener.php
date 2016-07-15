@@ -5,14 +5,16 @@ use Illuminate\Support\Facades\App;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
+use Illuminate\Session\SessionManager;
+
+use App\User;
 use App\Comment;
-use View;
 
 use Auth;
 use Config;
 use Crypt;
-use App\User;
-use Illuminate\Session\SessionManager;
+use Lang;
+use View;
 
 
 class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener implements MessageComponentInterface {
