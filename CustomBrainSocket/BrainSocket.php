@@ -15,7 +15,7 @@ class BrainSocket extends \BrainSocket\BrainSocket {
 	public function fire()
 	{
 		$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-		$connection =  @socket_connect($socket, 'xm.local', 8080);
+		$connection =  @socket_connect($socket, $_SERVER['HTTP_HOST'], 8080);
 		socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));
 		socket_set_option($socket, SOL_SOCKET, SO_SNDTIMEO, array('sec' => 1, 'usec' => 0));
 
