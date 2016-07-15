@@ -10,8 +10,6 @@
 		{{ $user['name'] }} added the following message:
 	<br /><br />
 		"{{ $personal_message }}"
-	<br /><br />
-		Have fun, XMovement team
 	</p>
 
 	@include('../../../emails/email-footer')
