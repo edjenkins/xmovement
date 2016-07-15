@@ -145,7 +145,7 @@ class AuthController extends Controller
             return Session::pull('redirect');
         }
 
-        return ((!strlen(Auth::user()->phone)) || (!strlen(Auth::user()->bio))) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
+        return (!strlen(Auth::user()->bio)) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
     }
 
     protected function redirectPath()

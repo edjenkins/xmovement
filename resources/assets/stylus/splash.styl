@@ -1,0 +1,67 @@
+.splash
+	background-color alpha(black, 0.7)
+	position fixed
+	top 0
+	bottom 0
+	left 0
+	right 0
+	z-index 9999
+	-webkit-transform-style preserve-3d
+	-moz-transform-style preserve-3d
+	transform-style preserve-3d
+	.popover-message-container
+		background white
+		border-radius 10px
+		min-width 300px
+		max-width 480px
+		overflow hidden
+		padding-bottom 60px
+		position absolute
+		left 50%
+		top 50%
+		transform translate(-50%, -50%)
+
+		.popover-message-header
+			border-bottom border-color 1px solid
+			padding 10px
+			text-align center
+			img
+				height 30px
+				margin 0 auto
+				max-width 100%
+
+		.popover-message-body
+			padding 40px 30px
+			text-align center
+			h3
+				color #666
+				margin 0
+				padding 0
+			ul
+				cleanlist()
+				border-top border-color 1px solid
+				position absolute
+				bottom 0
+				left 0
+				right 0
+				li
+					cleanlist()
+					box-sizing border-box
+					float left
+					width 50%
+					&:first-child
+						border-right border-color 1px solid
+					a
+						background white
+						border none
+						color #666
+						display block
+						font-size 16px
+						line-height 60px
+						text-align center
+						width 100%
+						animate()
+						&:hover
+							background #f9f9f9
+							cursor pointer
+							text-decoration none

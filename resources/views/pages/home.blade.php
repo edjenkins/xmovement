@@ -74,5 +74,10 @@
 	        </div>
 	    </div>
 	@endif
-	
+
+
+	@if(!Session::has('cookie_library_study') && (env('APP_URL') == 'http://eventmovement.co.uk/'))
+		@include('splash')
+	@endif
+
 @endsection

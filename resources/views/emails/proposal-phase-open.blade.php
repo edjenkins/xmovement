@@ -2,22 +2,22 @@
 
 	@include('emails/email-header')
 
-	<h3>Great news, the Blueprint Phase for {{ $idea->name }} has just opened!</h3>
+	<h3>Great news, the Plan It Phase for {{ $idea->name }} has just opened!</h3>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
 		Now you can have your say about what the final idea should look like.
 	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<a style="color: white; background-color: #6CCCA4; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: normal; font-size: 1.1em;" href="{{ action('DesignController@dashboard', $idea) }}">Browse Blueprints</a>
+		<a style="color: white; background-color: #6CCCA4; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: normal; font-size: 1.1em;" href="{{ action('DesignController@dashboard', $idea) }}">Browse plans</a>
 	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Browse blueprints and vote on your favourite
+		Browse plans and vote on your favourite
 	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Make your own blueprint based on your favourite elements
+		Make your own plan based on your favourite elements
 	</p>
 
 	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
