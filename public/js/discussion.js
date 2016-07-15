@@ -1,36 +1,27 @@
-window.app = {};
-
-app.BrainSocket = new BrainSocket(
-        new WebSocket('ws://' + location.host + ':8080'),
-        new BrainSocketPubSub()
-);
-
-app.BrainSocket.Event.listen('comment.posted',function(msg)
+function startListening()
 {
-	console.log(msg);
+	window.app = {};
 
-	if (msg.client.data.in_reply_to_comment_id != "")
+	app.BrainSocket = new BrainSocket(
+	        new WebSocket('ws://' + location.host + ':8080'),
+	        new BrainSocketPubSub()
+	);
+
+	app.BrainSocket.Event.listen('comment.posted',function(msg)
 	{
-		// This is a reply
-		$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
-	}
-	else
-	{
-		$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
-	}
+		if (msg.client.data.in_reply_to_comment_id != "")
+		{
+			// This is a reply
+			$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
+		}
+		else
+		{
+			$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
+		}
 
-	attachHandlers();
-});
-
-app.BrainSocket.Event.listen('app.success',function(msg)
-{
-    console.log(msg);
-});
-
-app.BrainSocket.Event.listen('app.error',function(msg)
-{
-    console.log(msg);
-});
+		attachHandlers();
+	});
+}
 
 function attachHandlers()
 {
@@ -97,11 +88,7 @@ function attachHandlers()
 
 $(document).ready(function() {
 
-	console.log(window.location.href);
-
 	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
-
-		console.log(response);
 
 		if (response) {
 
@@ -112,6 +99,8 @@ $(document).ready(function() {
 			})
 
 			attachHandlers();
+
+			startListening();
 		}
 	});
 

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use Artisan;
 use Auth;
 use DB;
 use Gate;
@@ -24,8 +23,6 @@ class DiscussionController extends Controller
 
     public static function view($design_task_id)
     {
-		Artisan::call('brainsocket:start');
-
     	$design_task = DesignTask::where('id', $design_task_id)->get()->first();
 
     	$discussion = $design_task->xmovement_task;

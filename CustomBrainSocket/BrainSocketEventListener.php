@@ -14,6 +14,7 @@ use Auth;
 use Config;
 use Crypt;
 use Lang;
+use Log;
 use View;
 
 
@@ -66,8 +67,8 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 			]);
 
 			$numRecv = count($this->clients) - 1;
-			echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
-				, $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
+			Log::info(sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
+				, $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's'));
 
 			$res = json_decode($msg);
 			$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $currentUser])->render();

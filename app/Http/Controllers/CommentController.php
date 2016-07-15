@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Artisan;
 use Auth;
 use Gate;
 use Response;
@@ -37,6 +38,10 @@ class CommentController extends Controller
 {
 	public function view(Request $request)
 	{
+		// Attempt to start brainsocket incase it has stopped
+		
+		Artisan::call('brainsocket:start', ['-q' => true]);
+
 		$response = new ResponseObject();
 
 		$url = $request->url;
