@@ -33,7 +33,7 @@
     {!! MetaTag::tag('image',  getenv('APP_HOME_HEADER_IMG')) !!}
 
 </head>
-<body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement" ng-controller="ExploreController">
+<body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement" ng-controller="ExploreController" ng-cloak>
 
 	@include('google-analytics', ['trackingId' => getenv('APP_GA_TRACKING_ID')])
 

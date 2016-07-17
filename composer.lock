@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.18.27",
+            "version": "3.18.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "8cc3d3231d9fb9da528205f3b905097a37ac3df3"
+                "reference": "c75d3ba185d5db6998124fa1a99a63e5d529b247"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8cc3d3231d9fb9da528205f3b905097a37ac3df3",
-                "reference": "8cc3d3231d9fb9da528205f3b905097a37ac3df3",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c75d3ba185d5db6998124fa1a99a63e5d529b247",
+                "reference": "c75d3ba185d5db6998124fa1a99a63e5d529b247",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-07-07 23:09:15"
+            "time": "2016-07-13 20:34:06"
         },
         {
             "name": "brainboxlabs/brain-socket",
@@ -388,16 +388,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "7.4.4",
+            "version": "7.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "75cc4cb41d1f590391f15484df5bdc13963c2b1a"
+                "reference": "a138adeb07233059c2a8d3caea7b6a6bcbee6765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/75cc4cb41d1f590391f15484df5bdc13963c2b1a",
-                "reference": "75cc4cb41d1f590391f15484df5bdc13963c2b1a",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/a138adeb07233059c2a8d3caea7b6a6bcbee6765",
+                "reference": "a138adeb07233059c2a8d3caea7b6a6bcbee6765",
                 "shasum": ""
             },
             "require": {
@@ -448,7 +448,7 @@
                 "phonenumber",
                 "validation"
             ],
-            "time": "2016-06-29 14:09:08"
+            "time": "2016-07-14 10:56:47"
         },
         {
             "name": "google/recaptcha",
@@ -2979,16 +2979,16 @@
         },
         {
             "name": "torann/laravel-meta-tags",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-meta-tags.git",
-                "reference": "957764968957b16ea586bcbc13c8c30aaf4194e0"
+                "reference": "2e520889e1be59ce8f256f805f248063bc1ee740"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-meta-tags/zipball/957764968957b16ea586bcbc13c8c30aaf4194e0",
-                "reference": "957764968957b16ea586bcbc13c8c30aaf4194e0",
+                "url": "https://api.github.com/repos/Torann/laravel-meta-tags/zipball/2e520889e1be59ce8f256f805f248063bc1ee740",
+                "reference": "2e520889e1be59ce8f256f805f248063bc1ee740",
                 "shasum": ""
             },
             "require": {
@@ -3027,7 +3027,7 @@
                 "meta tags",
                 "tags"
             ],
-            "time": "2015-12-23 20:51:32"
+            "time": "2016-07-13 13:30:31"
         },
         {
             "name": "vlucas/phpdotenv",
