@@ -1,5 +1,12 @@
 // Support button
 
+$(document).ready(function() {
+
+	// Prevent issue causing IE ReCaptcha not to work
+	$.fn.modal.Constructor.prototype.enforceFocus = function () { };
+
+});
+
 $('#confirm-support-button').click(function() {
 
 	support($(this).attr('data-user-id'), $(this).attr('data-idea-id'));
