@@ -3,12 +3,15 @@ function startListening()
 	window.app = {};
 
 	app.BrainSocket = new BrainSocket(
-	        new WebSocket('ws://' + location.host + ':8080'),
+	        new WebSocket(web_scoket_url),
 	        new BrainSocketPubSub()
 	);
 
 	app.BrainSocket.Event.listen('comment.posted',function(msg)
 	{
+		console.log('Comment received');
+		console.log(msg);
+
 		if (msg.client.data.in_reply_to_comment_id != "")
 		{
 			// This is a reply
@@ -21,6 +24,20 @@ function startListening()
 
 		attachHandlers();
 	});
+
+	app.BrainSocket.Event.listen('comment.error',function(msg)
+	{
+		console.log('Comment error received');
+		console.log(msg);
+
+		if (msg.client.user_id == current_user_id)
+		{
+			alert(msg.client.errors[0]);
+		}
+
+		attachHandlers();
+	});
+
 }
 
 function attachHandlers()
@@ -122,6 +139,9 @@ function postComment(wrapper)
 	// Post message
 	var data = { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
 	app.BrainSocket.message('comment.posted', data);
+
+	console.log('Posting comment..');
+	console.log(data);
 }
 
 function destroyComment(delete_button)

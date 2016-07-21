@@ -292,11 +292,11 @@ class IdeaController extends Controller
 	{
 		$response = new ResponseObject();
 
-		$recaptcha = new \ReCaptcha\ReCaptcha(getenv('CAPTCHA_SECRET'));
+		$recaptcha = new \ReCaptcha\ReCaptcha(env('CAPTCHA_SECRET'));
 
 		$resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
 
-		if ($resp->isSuccess() || (getenv('APP_ENV') == 'local'))
+		if ($resp->isSuccess() || (env('APP_ENV') == 'local'))
 		{
 			$idea = Idea::find($request->idea_id);
 

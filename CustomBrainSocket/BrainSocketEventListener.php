@@ -15,6 +15,7 @@ use Config;
 use Crypt;
 use Lang;
 use Log;
+use Validator;
 use View;
 
 
@@ -36,9 +37,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 		$session->setId($idSession);
 		// Bind the session handler to the client connection
 		$conn->session = $session;
-
 	}
-
 
 	public function onMessage(ConnectionInterface $from, $msg) {
 
@@ -59,22 +58,41 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 
 		if (json_decode($msg)->client->event == 'comment.posted')
 		{
-			$comment = Comment::create([
-				'user_id' => $user_id,
+			$data = [
 				'text' => $text,
 				'url' => $url,
-				'in_reply_to_comment_id' => $in_reply_to_comment_id
+			];
+
+			// Validate comment
+			$validator = Validator::make($data, [
+				'text' => 'required|between:2,500',
+				'url' => 'required|url',
 			]);
 
-			$numRecv = count($this->clients) - 1;
-			Log::info(sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
-				, $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's'));
-
 			$res = json_decode($msg);
-			$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $currentUser])->render();
+
+	        if ($validator->fails())
+			{
+				$res->client->event = "comment.error";
+				$res->client->user_id = $user_id;
+				$res->client->errors = $validator->errors()->all();
+			}
+			else
+			{
+				$comment = Comment::create([
+					'user_id' => $user_id,
+					'text' => $text,
+					'url' => $url,
+					'in_reply_to_comment_id' => $in_reply_to_comment_id
+				]);
+
+				$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $currentUser])->render();
+			}
+
 			$msg = json_encode($res);
 
-			foreach ($this->clients as $client) {
+			foreach ($this->clients as $client)
+			{
 				$client->send($this->response->make($msg));
 			}
 		}

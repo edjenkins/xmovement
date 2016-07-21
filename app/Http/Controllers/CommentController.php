@@ -39,8 +39,8 @@ class CommentController extends Controller
 	public function view(Request $request)
 	{
 		// Attempt to start brainsocket incase it has stopped
-		
-		Artisan::call('brainsocket:start', ['-q' => true]);
+
+		Artisan::call('brainsocket:start', ['-q' => true, '--port' => getenv('BRAINSOCKET_PORT')]);
 
 		$response = new ResponseObject();
 
