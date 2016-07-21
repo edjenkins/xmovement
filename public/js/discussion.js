@@ -3,7 +3,7 @@ function startListening()
 	window.app = {};
 
 	app.BrainSocket = new BrainSocket(
-	        new WebSocket('ws://' + location.host + ':8080'),
+	        new WebSocket(web_scoket_url),
 	        new BrainSocketPubSub()
 	);
 
@@ -21,6 +21,17 @@ function startListening()
 
 		attachHandlers();
 	});
+
+	app.BrainSocket.Event.listen('comment.error',function(msg)
+	{
+		if (msg.client.user_id == current_user_id)
+		{
+			alert(msg.client.errors[0]);
+		}
+
+		attachHandlers();
+	});
+
 }
 
 function attachHandlers()
