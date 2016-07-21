@@ -17,7 +17,7 @@
 @endif
 
 <script type="text/javascript">
-	var current_user_id = {{ Auth::user()->id }};
+	var current_user_id = <?php if (Auth::guest()) { echo '0'; } else { echo Auth::user()->id; } ?>;
 	var web_scoket_url = 'ws://' + location.host + ':' + {{ getenv('BRAINSOCKET_PORT') }};
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
