@@ -2,6 +2,7 @@
 
 $(document).ready(function() {
 
+	// Scroll function for animated navbar
     $(window).scroll(function() {
 
 		if ($(window).scrollTop() > 50) {
@@ -15,22 +16,77 @@ $(document).ready(function() {
     // Hide flash messages
     setTimeout(function() { $('.flash').fadeOut(300, function() { $('.flash').remove(); }); }, 4000);
 
+	// Vote button handler
+    $('.design-task-vote-container .vote-button').click(function() {
+
+        var vote_button = $(this);
+        var vote_container = $(this).parents('.vote-controls').parents('.design-task-vote-container');
+
+        var vote_direction = $(this).attr('data-vote-direction');
+        var votable_id = $(this).attr('data-votable-id');
+        var votable_type = $(this).attr('data-votable-type');
+
+        addVote(vote_button, vote_container, vote_direction, votable_id, votable_type);
+
+    });
+
+	// Propose mode
+	if ($('#selected_contributions').length != 0)
+	{
+		var selected_contributions = $('#selected_contributions').attr('data-original-values').split(',');
+		$('#selected_contributions').val(selected_contributions);
+
+		$('.proposal-button').click(function() {
+			$(this).toggleClass('fa-square fa-check-square');
+			var contribution_id = $(this).attr('data-contribution-id');
+			var i = selected_contributions.indexOf(contribution_id);
+			if(i != -1) {
+				selected_contributions.splice(i, 1);
+			} else {
+				selected_contributions.push(contribution_id);
+			}
+			$('#selected_contributions').val(selected_contributions);
+		})
+	}
+
 });
 
-function getURLParam(param)
+// Log action such as share button clicks
+function logAction(data)
 {
-    var pageURL = window.location.search.substring(1);
-    var URLVariables = pageURL.split('&');
-    for (var i = 0; i < URLVariables.length; i++)
-    {
-        var parameterName = URLVariables[i].split('=');
-        if (parameterName[0] == param)
-        {
-            return parameterName[1];
+	data['url'] = window.location.href;
+
+	$.ajaxSetup({
+        headers: {
+        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        	'Content-type': 'application/json'
         }
-    }
+	});
+
+    $.ajax({
+        type:"POST",
+        url: "/api/action/log",
+        dataType: "json",
+        data: JSON.stringify(data),
+        processData: false,
+        success: function(response) {
+
+        	if (response.meta.success)
+        	{
+        		// Logged
+			}
+        	else
+        	{
+        		// Failed
+        	}
+        },
+        error: function(response) {
+        	// Failed
+        }
+    });
 }
 
+// Display a flash message from javascript
 function showJSflash(message, type)
 {
     var flash_message = '<div class="flash ' + type + '">' + message + '</div>';
@@ -101,43 +157,3 @@ function addVote(vote_button, vote_container, vote_direction, votable_id, votabl
         }
     });
 }
-
-$(document).ready(function() {
-
-    $('.design-task-vote-container .vote-button').click(function() {
-
-        var vote_button = $(this);
-        var vote_container = $(this).parents('.vote-controls').parents('.design-task-vote-container');
-
-        var vote_direction = $(this).attr('data-vote-direction');
-        var votable_id = $(this).attr('data-votable-id');
-        var votable_type = $(this).attr('data-votable-type');
-
-        addVote(vote_button, vote_container, vote_direction, votable_id, votable_type);
-
-    });
-
-})
-
-// Propose mode
-
-$(document).ready(function() {
-
-	if ($('#selected_contributions').length != 0)
-	{
-		var selected_contributions = $('#selected_contributions').attr('data-original-values').split(',');
-		$('#selected_contributions').val(selected_contributions);
-
-		$('.proposal-button').click(function() {
-			$(this).toggleClass('fa-square fa-check-square');
-			var contribution_id = $(this).attr('data-contribution-id');
-			var i = selected_contributions.indexOf(contribution_id);
-			if(i != -1) {
-				selected_contributions.splice(i, 1);
-			} else {
-				selected_contributions.push(contribution_id);
-			}
-			$('#selected_contributions').val(selected_contributions);
-		})
-	}
-})
