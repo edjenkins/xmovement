@@ -90,13 +90,15 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/propose/submit', 'ProposeController@submit');
     Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
-
     // Vote routes
 	Route::post('/vote/design_task', 'DesignController@vote'); // Design task
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
 	Route::post('/vote/comment', 'CommentController@vote'); // Comment
 
     // API routes
+
+		// Action routes
+		Route::post('/api/action/log', 'ActionController@log');
 
 		// Support routes
 	    Route::post('/api/support', 'IdeaController@support');
