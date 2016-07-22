@@ -10,25 +10,27 @@ function startListening()
 	app.BrainSocket.Event.listen('comment.posted',function(msg)
 	{
 		console.log('Comment received');
-		console.log(msg);
 
-		if (msg.client.data.in_reply_to_comment_id != "")
+		// Check comment is for current page
+		if (msg.client.data.url == window.location.href)
 		{
-			// This is a reply
-			$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
-		}
-		else
-		{
-			$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
-		}
+			if (msg.client.data.in_reply_to_comment_id != "")
+			{
+				// This is a reply
+				$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
+			}
+			else
+			{
+				$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
+			}
 
-		attachHandlers();
+			attachHandlers();
+		}
 	});
 
 	app.BrainSocket.Event.listen('comment.error',function(msg)
 	{
 		console.log('Comment error received');
-		console.log(msg);
 
 		if (msg.client.user_id == current_user_id)
 		{
