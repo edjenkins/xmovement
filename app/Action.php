@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ActivityLog extends Model
+class Action extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,18 +12,12 @@ class ActivityLog extends Model
      * @var array
      */
     protected $fillable = [
-		'user_id',
-		'request',
-		'response',
-		'data',
-		'method',
-		'path',
+        'user_id',
+		'label',
 		'url',
-		'full_url',
-		'action',
-		'parameters',
-		'ip',
-		'referer',
-		'user_agent',
+		'idea_id',
+		'data',
     ];
+
+    protected $dates = ['deleted_at'];
 }

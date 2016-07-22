@@ -2,11 +2,6 @@
 
 @section('content')
 
-	<script type="text/javascript">
-		var idea_url = '{{ url()->current() }}';
-		var idea_name = '{{ $idea->name }}';
-	</script>
-
 	<div class="page-header">
 
         <h2 class="main-title">{{ $idea->name }}</h2>
@@ -188,6 +183,9 @@
 
 	<script type="text/javascript">
 
+		var idea_id = '{{ $idea->id }}';
+		var idea_name = '{{ $idea->name }}';
+		var idea_url = '{{ url()->current() }}';
 		var auth_type = '{{ Session::pull("auth_type") }}';
 		var is_authorized = '{{ Auth::check() ? true : false }}';
 		var show_support = '{{ Session::pull("show_support") ? true : false }}';
