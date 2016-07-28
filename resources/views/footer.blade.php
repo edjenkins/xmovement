@@ -1,17 +1,49 @@
 <footer class="footer">
     <div class="container-fluid">
         <div class="footer-content">
-            <ul>
-                <li>
-                    <p>{{ trans('footer.brand') }}</p>
-                </li>
-                <li>
-                    <a href="{{ action('PageController@contact') }}">{{ trans('footer.contact') }}</a>
-                </li>
-                <li>
-                    <a href="{{ action('PageController@terms') }}">{{ trans('footer.terms') }}</a>
-                </li>
-            </ul>
+			<div class="container">
+				<ul class="pull-left">
+	                <li>
+	                    <p>{{ trans('footer.brand') }}</p>
+	                </li>
+	                <li>
+	                    <a href="{{ action('PageController@contact') }}">{{ trans('footer.contact') }}</a>
+	                </li>
+	                <li>
+	                    <a href="{{ action('PageController@terms') }}">{{ trans('footer.terms') }}</a>
+	                </li>
+	            </ul>
+	            <ul class="pull-right">
+					@if (env('FOOTER_LOGO_IMG_1'))
+						<li>
+							<a href="{{ env('FOOTER_LOGO_LINK_1') }}" target="_blank">
+								<img src="{{ env('FOOTER_LOGO_IMG_1') }}" />
+							</a>
+						</li>
+					@endif
+					@if (env('FOOTER_LOGO_IMG_2'))
+						<li>
+							<a href="{{ env('FOOTER_LOGO_LINK_2') }}" target="_blank">
+								<img src="{{ env('FOOTER_LOGO_IMG_2') }}" />
+							</a>
+						</li>
+					@endif
+					@if (env('FOOTER_LOGO_IMG_3'))
+						<li>
+							<a href="{{ env('FOOTER_LOGO_LINK_3') }}" target="_blank">
+								<img src="{{ env('FOOTER_LOGO_IMG_3') }}" />
+							</a>
+						</li>
+					@endif
+					@if (env('FOOTER_LOGO_IMG_4'))
+						<li>
+							<a href="{{ env('FOOTER_LOGO_LINK_4') }}" target="_blank">
+								<img src="{{ env('FOOTER_LOGO_IMG_4') }}" />
+							</a>
+						</li>
+					@endif
+				</ul>
+			</div>
         </div>
     </div>
 </footer>

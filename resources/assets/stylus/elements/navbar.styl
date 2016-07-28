@@ -30,13 +30,20 @@
 			color main-color
 		strong
 			font-weight 400
+		img
+			display none
+			height 50px
+			margin 10px
+	a.navbar-brand .logo-color
+		display block
+
 	.navbar-nav
 		margin 0 -15px
 		padding 0 -15px
 	.navbar-nav > li
 		z-index 999
 	.navbar-nav > li > a
-		color #666
+		color #333
 		font-size 14px
 		font-weight 500
 		line-height $navbar-height
@@ -45,6 +52,8 @@
 		&:hover
 			background transparent
 			color main-color
+
+
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus
 	background-color transparent
@@ -76,6 +85,11 @@ body.fade-nav
 	&.colorful
 		.navbar
 			background-color white
+			a.navbar-brand
+				.logo-white
+					display none
+				.logo-color
+					display block
 body.fade-nav.transparent
 	.navbar
 		background-color transparent
@@ -88,6 +102,10 @@ body.fade-nav.transparent
 			padding 0 20px
 			strong
 				color white
+			.logo-white
+				display block
+			.logo-color
+				display none
 		.navbar-nav
 			margin 0 -15px
 			padding 0 -15px

@@ -1,8 +1,8 @@
-@extends('layouts.app', ['bodyclasses' => 'transparent'])
+@extends('layouts.app', ['bodyclasses' => env('HOME_BODY_CLASSES')])
 
 @section('content')
 
-    <div class="container-fluid hero-container" style="background-image:url('{{ getenv('APP_HOME_HEADER_IMG') }}')">
+    <div class="container-fluid hero-container" id="home-hero-container" style="background-image:url('{{ getenv('APP_HOME_HEADER_IMG') }}')">
         <div class="black-overlay"></div>
         <div class="text-container">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>

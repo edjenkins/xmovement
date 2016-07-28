@@ -126,7 +126,7 @@ Route::group(['middleware' => ['web']], function () {
 	// Dynamic Images
 	Route::get('/dynamic/avatar/{size}', function($size)
 	{
-		$img = Image::canvas(800, 800, '#6acda4');
+		$img = Image::canvas(800, 800, '#e1e1e1');
 
 		$img->circle(350, 400, 300, function ($draw) {
 				$draw->background('#fff');
@@ -148,7 +148,7 @@ Route::group(['middleware' => ['web']], function () {
 			$img->text($name_acronymn, 600, 600, function($font) {
 			    $font->file('fonts/sourcesanspro-bold-webfont.ttf');
 			    $font->size(100);
-			    $font->color('#6acda4');
+			    $font->color('#e1e1e1');
 			    $font->align('right');
 			    $font->valign('center');
 			});
