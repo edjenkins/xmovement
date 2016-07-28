@@ -95,6 +95,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
 	Route::post('/vote/comment', 'CommentController@vote'); // Comment
 
+    // Contact routes
+	Route::post('/contact/send', 'ContactController@send');
+
     // API routes
 
 		// Action routes

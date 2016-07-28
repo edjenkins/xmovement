@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="footer-content">
 			<div class="container">
-				<ul class="pull-left">
+				<ul class="pull-left footer-links">
 	                <li>
 	                    <p>{{ trans('footer.brand') }}</p>
 	                </li>
@@ -12,8 +12,11 @@
 	                <li>
 	                    <a href="{{ action('PageController@terms') }}">{{ trans('footer.terms') }}</a>
 	                </li>
+	                <li>
+	                    <a href="{{ action('PageController@terms') }}">{{ trans('footer.privacy') }}</a>
+	                </li>
 	            </ul>
-	            <ul class="pull-right">
+	            <ul class="pull-right footer-logos">
 					@if (env('FOOTER_LOGO_IMG_1'))
 						<li>
 							<a href="{{ env('FOOTER_LOGO_LINK_1') }}" target="_blank">
