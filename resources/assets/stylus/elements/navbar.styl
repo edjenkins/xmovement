@@ -75,6 +75,7 @@
 	margin (($navbar-height - 40) / 2)
 	.icon-bar
 		background-color main-color
+		animate()
 	&:hover
 		.icon-bar
 			background-color darken(main-color, 20%)
@@ -117,7 +118,7 @@ body.fade-nav.transparent
 			transition(color 0.2s linear)
 			&:hover
 				background transparent
-				color main-color
+				color alpha(white, 0.8)
 		.navbar-toggle
 			border none
 			height 40px
@@ -126,7 +127,7 @@ body.fade-nav.transparent
 				background-color white
 			&:hover
 				.icon-bar
-					background-color main-color
+					background-color alpha(white, 0.8)
 
 @media(max-width: $screen-sm-min)
 	.navbar-collapse
