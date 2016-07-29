@@ -10,8 +10,8 @@
             </button>
 
             <a class="navbar-brand" href="{{ url('/') }}">
-				<img class="logo-color" src="/img/brand/logo.png" alt="{{ trans('common.brand') }}" />
-				<img class="logo-white" src="/img/brand/logo-white.png" alt="{{ trans('common.brand') }}" />
+				<img class="logo-color" src="{{ asset(env('S3_URL') . '/logos/logo.png') }}" alt="{{ trans('common.brand') }}" />
+				<img class="logo-white" src="{{ asset(env('S3_URL') . '/logos/logo-white.png') }}" alt="{{ trans('common.brand') }}" />
             </a>
 
             <div class="clearfix"></div>
