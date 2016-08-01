@@ -1,0 +1,43 @@
+.translations-container
+
+	ul
+		cleanlist()
+		li.translation
+			cleanlist()
+			ul.translation-row
+				cleanlist()
+				border-bottom border-color 1px solid
+				li
+					box-sizing border-box
+					float left
+					line-height 40px
+					padding 10px
+					&.translation-state
+						padding-right 0
+						text-align center
+						width 30px
+						i.fa.fa-check-circle
+							color success-color
+					&.translation-key
+						overflow hidden
+						white-space nowrap
+						width 240px
+						.translation-group
+							color #999
+					&.translation-value
+						border-left border-color 1px solid
+						padding 0
+						width calc(100% - 240px - 40px)
+						textarea
+							background transparent
+							border none
+							border-radius 0
+							box-sizing border-box
+							display block
+							font-size 14px
+							height 100%
+							line-height 30px
+							margin 0
+							overflow auto
+							resize none
+							width 100%

@@ -159,6 +159,9 @@ return [
 		// Image Manipulation
 		Intervention\Image\ImageServiceProvider::class,
 
+		// Translations
+		App\Providers\TranslateMateProvider::class,
+
         /*
          * Custom Service Providers...
          */
@@ -232,6 +235,8 @@ return [
 
 		'BrainSocket'     => BrainSocket\BrainSocketFacade::class,
 		'CustomBrainSocket'     => CustomBrainSocket\Facades\BrainSocket::class,
+
+		'TranslateMate'     => TranslateMate\Facades\TranslateMate::class,
 
 		'Image'     => Intervention\Image\Facades\Image::class,
 		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,

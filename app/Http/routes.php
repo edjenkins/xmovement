@@ -57,7 +57,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
-	Route::get('/translate/setLocale', 'TranslationController@setLocale');
 
     // Idea routes
     Route::get('/explore', 'IdeaController@index');
@@ -119,6 +118,11 @@ Route::group(['middleware' => ['web']], function () {
 
 		// Report routes
 		Route::post('/api/report', 'ReportController@add');
+
+		// Translation routes
+		Route::get('/api/translations', 'TranslationController@api_index');
+		Route::post('/api/translation/update', 'TranslationController@api_update');
+		Route::get('/api/translations/export', 'TranslationController@api_export');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');
