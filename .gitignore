@@ -9,6 +9,7 @@ storage/framework/views/*
 public/img/uploads/**
 public/img/brand/**
 public/uploads/**
+bower_components/**
 
 **/.DS_Store
 resources/assets/stylus/variables.styl
