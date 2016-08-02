@@ -19,7 +19,10 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
             <ul class="nav navbar-nav navbar-right">
+
                 <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
+
+				<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
 
                 <li><a href="{{ action('IdeaController@index') }}">{{ trans('navbar.explore') }}</a></li>
 

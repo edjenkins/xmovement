@@ -33,7 +33,7 @@
     {!! MetaTag::tag('image',  getenv('APP_HOME_HEADER_IMG')) !!}
 
 </head>
-<body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement" ng-controller="ExploreController" ng-cloak>
+<body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement">
 
 	@include('google-analytics', ['trackingId' => getenv('APP_GA_TRACKING_ID')])
 
@@ -60,20 +60,23 @@
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.4.0/trianglify.min.js"></script>
-
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
     <script src="https://www.google.com/recaptcha/api.js"></script>
 
-	<script src="{{ URL::asset('js/expanding.js') }}"></script>
 
-	<script src="{{ URL::asset('js/app.js') }}"></script>
+
 	<script src="{{ URL::asset('js/vendor.js') }}"></script>
+	<script src="{{ URL::asset('js/app.js') }}"></script>
+
+	<script src="{{ URL::asset('js/expanding.js') }}"></script>
+	<script src="{{ URL::asset('js/slider.js') }}"></script>
+
     <script src="{{ URL::asset('js/easydropdown/jquery.easydropdown.js') }}"></script>
 	<script src="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 

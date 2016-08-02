@@ -59,6 +59,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/translate', 'TranslationController@index');
 	Route::get('/translate/setLocale', 'TranslationController@setLocale');
 
+    // Inspiration routes
+    Route::get('/inspiration', 'InspirationController@index');
+
     // Idea routes
     Route::get('/explore', 'IdeaController@index');
     Route::get('/idea/create', 'IdeaController@add');
@@ -90,7 +93,6 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/propose/submit', 'ProposeController@submit');
     Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
-
     // Vote routes
 	Route::post('/vote/design_task', 'DesignController@vote'); // Design task
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
@@ -98,11 +100,18 @@ Route::group(['middleware' => ['web']], function () {
 
     // API routes
 
+		// Inspiration routes
+		Route::get('/api/inspirations', 'InspirationController@api_index');
+		Route::post('/api/inspiration/add', 'InspirationController@add');
+
+		// Idea routes
+		Route::get('/api/ideas', 'IdeaController@api_index');
+
 		// Support routes
 	    Route::post('/api/support', 'IdeaController@support');
-	    Route::post('/api/update/add', 'UpdatesController@add');
 
 		// Updates routes
+	    Route::post('/api/update/add', 'UpdatesController@add');
 	    Route::delete('/api/update/destroy', 'UpdatesController@destroy');
 
 		// Message routes
@@ -117,9 +126,6 @@ Route::group(['middleware' => ['web']], function () {
 
     // File upload
     Route::post('/upload', 'UploadController@upload');
-
-	// API routes
-	Route::get('/api/ideas', 'IdeaController@api_index');
 
 	// Dynamic Images
 	Route::get('/dynamic/avatar/{size}', function($size)

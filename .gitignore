@@ -8,5 +8,7 @@ storage/framework/views/*
 /public/css/*
 public/img/uploads/**
 public/uploads/**
+resources/assets/js/bower_components/**
+bower_components/**
 
 **/.DS_Store
