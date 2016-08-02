@@ -160,6 +160,8 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 		translation.state = 'loading';
 
+		translation.value = translation.original;
+
 		TranslationService.updateTranslation({ translation : translation }).then(function(response) {
 
 			translation.state = 'updated';

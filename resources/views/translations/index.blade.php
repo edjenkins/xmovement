@@ -92,8 +92,8 @@
 								<span class="translation-group"><% translation.en.group + '.' %></span><span><% translation.en.key %></span>
 							</li>
 
-							<li class="translation-value">
-								<textarea class="expanding" name="value" placeholder="Enter translation" rows="1" cols="40" ng-model="translation.en.value" onfocus="$(this).expanding()" ng-blur="updateTranslation(translation.en)"></textarea>
+							<li class="translation-value" ng-init="translation.en.original = (translation.en.original) ? translation.en.original : translation.en.value">
+								<textarea class="expanding" name="value" placeholder="Enter translation" rows="1" cols="40" ng-model="translation.en.original" onfocus="$(this).expanding()" ng-blur="updateTranslation(translation.en)"></textarea>
 							</li>
 
 							<div class="clearfloat"></div>
