@@ -37,6 +37,9 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('UserController@profile') }}"></i>{{ trans('navbar.profile') }}</a></li>
+							@can('translate', Auth::user())
+								<li><a href="{{ action('TranslationController@index') }}"></i>{{ trans('navbar.translate') }}</a></li>
+							@endcan
 							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>

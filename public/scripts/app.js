@@ -109,7 +109,7 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 		$scope.translations = [];
 
-		TranslationService.getTranslations({ override : true }).then(function(response) {
+		TranslationService.getTranslations({ override : false }).then(function(response) {
 
 			console.log(response);
 

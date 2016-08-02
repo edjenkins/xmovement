@@ -72,7 +72,7 @@
 						</ul>
 					</li>
 
-					<li class="translation" ng-repeat="translation in translations | filter:translation_search_term">
+					<li class="translation" ng-repeat="translation in translations | orderBy:'en.group' | filter:translation_search_term">
 
 						<ul class="translation-row">
 
@@ -87,7 +87,7 @@
 							</li>
 
 							<li class="translation-value">
-								<textarea class="expanding" name="value" placeholder="Enter translation" rows="1" cols="40" ng-model="translation.en.value" ng-blur="updateTranslation(translation.en)"></textarea>
+								<textarea class="expanding" name="value" placeholder="Enter translation" rows="1" cols="40" ng-model="translation.en.value" onfocus="$(this).expanding()" ng-blur="updateTranslation(translation.en)"></textarea>
 							</li>
 
 							<div class="clearfloat"></div>

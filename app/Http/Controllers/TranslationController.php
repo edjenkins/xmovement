@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use Auth;
+use Gate;
 use Log;
 use Response;
+use Session;
 
 class ResponseObject {
 
@@ -35,44 +38,77 @@ class TranslationController extends Controller
 	{
 		$response = new ResponseObject();
 
-		$response->meta['success'] = true;
+		if (Gate::denies('translate', Auth::user()))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
 
-		Log::info($request->override);
+            return Response::json($response);
+		}
+		else
+		{
+			$response->meta['success'] = true;
 
-		$this->manager->importTranslations($request->override);
+			$this->manager->importTranslations($request->override);
 
-		$response->data['translations'] = $this->manager->fetchTranslations();
+			$response->data['translations'] = $this->manager->fetchTranslations();
 
-		return Response::json($response);
+			return Response::json($response);
+		}
 	}
 
 	public function api_update(Request $request)
 	{
 		$response = new ResponseObject();
 
-		$response->meta['success'] = true;
+		if (Gate::denies('translate', Auth::user()))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
 
-		$response->data['translation'] = $this->manager->updateTranslation($request->translation);
+            return Response::json($response);
+		}
+		else
+		{
+			$response->meta['success'] = true;
 
-		return Response::json($response);
+			$response->data['translation'] = $this->manager->updateTranslation($request->translation);
+
+			return Response::json($response);
+		}
 	}
 
 	public function api_export(Request $request)
 	{
 		$response = new ResponseObject();
 
-		$response->meta['success'] = true;
+		if (Gate::denies('translate', Auth::user()))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
 
-		$this->manager->exportAllTranslations();
+            return Response::json($response);
+		}
+		else
+		{
+			$response->meta['success'] = true;
 
-		return Response::json($response);
+			$this->manager->exportAllTranslations();
+
+			return Response::json($response);
+		}
 	}
 
     public function index()
     {
-		$translations = [];
+		if (Gate::denies('translate', Auth::user()))
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
 
-        return view('translations.index', ['translations' => $translations]);
+			return redirect()->action('PageController@home');
+		}
+		else
+		{
+			return view('translations.index');
+		}
     }
 
 }
