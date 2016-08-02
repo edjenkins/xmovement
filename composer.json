@@ -34,6 +34,7 @@
             "App\\": "app/",
 			"CustomBrainSocket\\" : "CustomBrainSocket/",
 			"ResourceImage\\" : "ResourceImage/",
+			"TranslateMate\\" : "TranslateMate/",
             "XMovement\\Poll\\": "packages/xmovement/poll/src",
             "XMovement\\Discussion\\": "packages/xmovement/discussion/src",
             "XMovement\\Requirement\\": "packages/xmovement/requirement/src",

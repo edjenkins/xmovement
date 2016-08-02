@@ -101,7 +101,7 @@
 
 					<hr />
 
-					<h3>
+					<h3 id="privacy">
 						{{ trans('terms.privacy_policy') }}
 					</h3>
 

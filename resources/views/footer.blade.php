@@ -13,7 +13,7 @@
 	                    <a href="{{ action('PageController@terms') }}">{{ trans('footer.terms') }}</a>
 	                </li>
 	                <li>
-	                    <a href="{{ action('PageController@terms') }}">{{ trans('footer.privacy') }}</a>
+	                    <a href="{{ action('PageController@terms', ['#privacy']) }}">{{ trans('footer.privacy') }}</a>
 	                </li>
 	            </ul>
 	            <ul class="pull-right footer-logos">
