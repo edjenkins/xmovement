@@ -33,6 +33,19 @@ XMovement.service('TranslationService', function($http, $q) {
 			});
 			return defer.promise;
 		},
+		'findTranslations': function(params) {
+			var defer = $q.defer();
+			$http({
+			    url: '/api/translations/find',
+			    method: "GET",
+			    params: params
+			 }).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
 		'updateTranslation': function(body) {
 			var defer = $q.defer();
 			$http.post('/api/translation/update', body).success(function(resp){
@@ -118,6 +131,27 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 			setTimeout(function() { $('textarea').expanding(); }, 500);
 
 		});
+	}
+
+	$scope.findTranslations = function($event) {
+
+		console.log("Finding translations");
+
+		$($event.target).html('Finding..');
+
+		$timeout(function () {
+
+			TranslationService.findTranslations().then(function(response) {
+
+				console.log(response);
+
+				$($event.target).html('Find');
+
+				alert('Find complete');
+
+			});
+
+		}, 1000);
 	}
 
 	$scope.updateTranslation = function(translation) {

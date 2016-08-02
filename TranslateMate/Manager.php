@@ -34,7 +34,7 @@ class Manager {
     {
         if(!in_array($group, $this->config['exclude_groups'])) {
             Translation::firstOrCreate(array(
-                'locale' => $this->app['config']['app.locale'],
+                'locale' => 'en', //$this->app['config']['app.locale']
                 'group' => $group,
                 'key' => $key,
             ));
@@ -61,7 +61,7 @@ class Manager {
 
 		foreach ($translations as $key => $value)
 		{
-			$parsed_translations[$value->key][$value->locale] = $value;
+			$parsed_translations[$value->group . '.' . $value->key][$value->locale] = $value;
 		}
 
 		foreach ($parsed_translations as $key => $value)
@@ -74,6 +74,11 @@ class Manager {
 
     public function importTranslations($replace = false)
     {
+		if ($replace)
+		{
+			// $this->findTranslations();
+		}
+
         $counter = 0;
         foreach($this->files->directories($this->app->langPath()) as $langPath){
             $locale = basename($langPath);

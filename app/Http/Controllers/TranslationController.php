@@ -56,6 +56,26 @@ class TranslationController extends Controller
 		}
 	}
 
+	public function api_find(Request $request)
+	{
+		$response = new ResponseObject();
+
+		if (Gate::denies('translate', Auth::user()))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
+
+            return Response::json($response);
+		}
+		else
+		{
+			$response->meta['success'] = true;
+
+			$response->data['count'] = $this->manager->findTranslations();
+
+			return Response::json($response);
+		}
+	}
+
 	public function api_update(Request $request)
 	{
 		$response = new ResponseObject();

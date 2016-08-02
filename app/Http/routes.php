@@ -121,6 +121,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		// Translation routes
 		Route::get('/api/translations', 'TranslationController@api_index');
+		Route::get('/api/translations/find', 'TranslationController@api_find');
 		Route::post('/api/translation/update', 'TranslationController@api_update');
 		Route::get('/api/translations/export', 'TranslationController@api_export');
 

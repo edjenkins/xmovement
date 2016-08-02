@@ -32,6 +32,12 @@
 
 	    			<ul class="module-controls pull-right">
 
+						<li class="module-control" ng-click="findTranslations($event)">
+
+							<button type="button">Find</button>
+
+	    				</li>
+
 						<li class="module-control" ng-click="importTranslations($event)">
 
 							<button type="button">Import</button>
