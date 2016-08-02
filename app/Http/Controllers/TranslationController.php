@@ -37,7 +37,9 @@ class TranslationController extends Controller
 
 		$response->meta['success'] = true;
 
-		$this->manager->importTranslations(false);
+		Log::info($request->override);
+
+		$this->manager->importTranslations($request->override);
 
 		$response->data['translations'] = $this->manager->fetchTranslations();
 
@@ -69,8 +71,6 @@ class TranslationController extends Controller
     public function index()
     {
 		$translations = [];
-
-		$replace = true;
 
         return view('translations.index', ['translations' => $translations]);
     }

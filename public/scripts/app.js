@@ -20,9 +20,13 @@ XMovement.service('ExploreService', function($http, $q) {
 
 XMovement.service('TranslationService', function($http, $q) {
 	return {
-		'getTranslations': function() {
+		'getTranslations': function(params) {
 			var defer = $q.defer();
-			$http.get('/api/translations').success(function(resp){
+			$http({
+			    url: '/api/translations',
+			    method: "GET",
+			    params: params
+			 }).success(function(resp){
 				defer.resolve(resp);
 			}).error( function(err) {
 				defer.reject(err);
@@ -95,7 +99,7 @@ XMovement.controller('ExploreController', function($scope, $http, $rootScope, Ex
 
 });
 
-XMovement.controller('TranslationController', function($scope, $http, $rootScope, TranslationService) {
+XMovement.controller('TranslationController', function($scope, $http, $rootScope, $timeout, TranslationService) {
 
 	$scope.translations = [];
 
@@ -105,7 +109,7 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 		$scope.translations = [];
 
-		TranslationService.getTranslations().then(function(response) {
+		TranslationService.getTranslations({ override : true }).then(function(response) {
 
 			console.log(response);
 
@@ -124,22 +128,61 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 		TranslationService.updateTranslation({ translation : translation }).then(function(response) {
 
-			setTimeout(function() { translation.state = 'updated'; }, 500);
+			translation.state = 'updated';
 
 			console.log(response);
 
 		});
 	}
 
-	$scope.exportAllTranslations = function() {
+	$scope.importTranslations = function($event) {
+
+		console.log("Importing translations");
+
+		$($event.target).html('Importing..');
+
+		$scope.translations = [];
+
+		$timeout(function () {
+
+			TranslationService.getTranslations({ override : true }).then(function(response) {
+
+				console.log(response);
+
+				$scope.translations = response.data.translations;
+
+				setTimeout(function() { $('textarea').expanding(); }, 500);
+
+				$($event.target).html('Import');
+
+				alert('Import complete');
+
+			});
+
+		}, 1000);
+
+	}
+
+	$scope.exportAllTranslations = function($event) {
 
 		console.log('Exporting all translations');
 
-		TranslationService.exportAllTranslations().then(function(response) {
+		$($event.target).html('Exporting..');
 
-			console.log(response);
+		$timeout(function () {
 
-		});
+			TranslationService.exportAllTranslations().then(function(response) {
+
+				console.log(response);
+
+				$($event.target).html('Export');
+
+				alert('Export complete');
+
+			});
+
+		}, 1000);
+
 	}
 
 	$scope.getTranslations();

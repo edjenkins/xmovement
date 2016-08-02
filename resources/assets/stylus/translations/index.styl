@@ -11,7 +11,7 @@
 					box-sizing border-box
 					float left
 					line-height 40px
-					padding 10px
+					padding 10px 25px
 					&.translation-state
 						padding-right 0
 						text-align center
@@ -21,13 +21,13 @@
 					&.translation-key
 						overflow hidden
 						white-space nowrap
-						width 240px
+						width 220px
 						.translation-group
 							color #999
 					&.translation-value
 						border-left border-color 1px solid
 						padding 0
-						width calc(100% - 240px - 40px)
+						width calc((100% - 220px - 40px) / 1)
 						textarea
 							background transparent
 							border none
@@ -41,3 +41,11 @@
 							overflow auto
 							resize none
 							width 100%
+					&.translation-key-header
+						font-weight bold
+						padding-right 0
+						width calc(220px + 30px)
+					&.translation-value-header
+						border-left border-color 1px solid
+						font-weight bold
+						width calc((100% - 220px - 30px) / 1)

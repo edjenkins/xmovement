@@ -12,7 +12,7 @@
 
 		<div class="white-controls-row">
 
-			<div class="container">
+			<div class="container-fluid">
 
 				<div class="view-controls-container">
 
@@ -32,13 +32,13 @@
 
 	    			<ul class="module-controls pull-right">
 
-						<li class="module-control" ng-click="getTranslations()">
+						<li class="module-control" ng-click="importTranslations($event)">
 
-							<button type="button">Reload</button>
+							<button type="button">Import</button>
 
 	    				</li>
 
-						<li class="module-control" ng-click="exportAllTranslations()">
+						<li class="module-control" ng-click="exportAllTranslations($event)">
 
 							<button type="button">Export</button>
 
@@ -54,28 +54,40 @@
 
 		</div>
 
-        <div class="container translations-container">
+        <div class="container-fluid translations-container">
 
 			<div class="row">
 
-	            <ul ng-repeat="translation in translations | filter:translation_search_term">
+	            <ul>
 
 					<li class="translation">
+						<ul class="translation-row">
+							<li class="translation-key-header">
+								Key
+							</li>
+							<li class="translation-value-header">
+								English
+							</li>
+							<div class="clearfloat"></div>
+						</ul>
+					</li>
+
+					<li class="translation" ng-repeat="translation in translations | filter:translation_search_term">
 
 						<ul class="translation-row">
 
-							<li class="translation-state" ng-init="translation.state = (translation.state) ? translation.state : (translation.value ? 'updated' : 'empty')">
-								<i class="fa fa-check-circle" ng-show="translation.state == 'updated'"></i>
-								<i class="fa fa-refresh fa-spin" ng-show="translation.state == 'loading'"></i>
-								<i class="fa fa-exclamation-triangle" ng-show="translation.state == 'empty'"></i>
+							<li class="translation-state" ng-init="translation.en.state = (translation.en.state) ? translation.en.state : (translation.en.value ? 'updated' : 'empty')">
+								<i class="fa fa-check-circle" ng-show="translation.en.state == 'updated'"></i>
+								<i class="fa fa-refresh fa-spin" ng-show="translation.en.state == 'loading'"></i>
+								<i class="fa fa-exclamation-triangle" ng-show="translation.en.state == 'empty'"></i>
 							</li>
 
 							<li class="translation-key">
-								<span class="translation-group"><% translation.group + '.' %></span><span><% translation.key %></span>
+								<span class="translation-group"><% translation.en.group + '.' %></span><span><% translation.en.key %></span>
 							</li>
 
 							<li class="translation-value">
-								<textarea class="expanding" name="value" placeholder="Enter translation" rows="1" cols="40" ng-model="translation.value" ng-blur="updateTranslation(translation)"></textarea>
+								<textarea class="expanding" name="value" placeholder="Enter translation" rows="1" cols="40" ng-model="translation.en.value" ng-blur="updateTranslation(translation.en)"></textarea>
 							</li>
 
 							<div class="clearfloat"></div>

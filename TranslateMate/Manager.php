@@ -54,7 +54,22 @@ class Manager {
 
 	public function fetchTranslations()
 	{
-		return Translation::all();
+		$translations = Translation::all();
+
+		$parsed_translations = [];
+		$flattened_translations = [];
+
+		foreach ($translations as $key => $value)
+		{
+			$parsed_translations[$value->key][$value->locale] = $value;
+		}
+
+		foreach ($parsed_translations as $key => $value)
+		{
+			array_push($flattened_translations, $value);
+		}
+
+		return $flattened_translations;
 	}
 
     public function importTranslations($replace = false)
