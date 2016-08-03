@@ -59,4 +59,11 @@
         </a>
     </div>
 
+    <div class="form-group">
+        <a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider') }}">
+            <i class="fa fa-fw fa-linkedin"></i>
+            {{ trans('auth.linkedin_login') }}
+        </a>
+    </div>
+
 </form>

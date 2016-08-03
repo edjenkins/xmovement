@@ -33,7 +33,7 @@ class AuthController extends Controller
     {
         Session::reflash();
 
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('linkedin')->redirect();
     }
 
     /**
@@ -44,9 +44,9 @@ class AuthController extends Controller
     public function handleProviderCallback()
     {
         try {
-            $user = Socialite::driver('facebook')->user();
+            $user = Socialite::driver('linkedin')->user();
         } catch (Exception $e) {
-            return Redirect::to('auth/facebook');
+            return Redirect::to('auth/linkedin');
         }
 
         $authUser = $this->findOrCreateUser($user);
@@ -59,12 +59,12 @@ class AuthController extends Controller
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $facebookUser
+     * @param $linkedinUser
      * @return User
      */
-    private function findOrCreateUser($facebookUser)
+    private function findOrCreateUser($linkedinUser)
     {
-        if ($authUser = User::where('facebook_id', $facebookUser->id)->first()) {
+        if ($authUser = User::where('linkedin_id', $linkedinUser->id)->first()) {
             return $authUser;
         }
 
@@ -82,7 +82,7 @@ class AuthController extends Controller
 		// Save image sizes
 		foreach ($image_sizes as $index => $size)
 		{
-			$img = Image::make(file_get_contents($facebookUser->avatar_original));
+			$img = Image::make(file_get_contents($linkedinUser->avatar_original));
 
 			$img->resize($size['size'], null, function ($constraint) {
 			    $constraint->aspectRatio();
@@ -94,7 +94,7 @@ class AuthController extends Controller
 
 	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
 			{
-	        	Log::error('Failed to save user avatar from Facebook - ' . $facebookUser->email);
+	        	Log::error('Failed to save user avatar from Facebook - ' . $linkedinUser->email);
 	        }
 			else {
 				Log::error('Saved to - ' . $path.$filename);
@@ -102,11 +102,11 @@ class AuthController extends Controller
 		}
 
         $user = User::create([
-            'facebook_id' => $facebookUser->id,
-            'name' => $facebookUser->name,
-            'email' => $facebookUser->email,
+            'linkedin_id' => $linkedinUser->id,
+            'name' => $linkedinUser->name,
+            'email' => $linkedinUser->email,
             'avatar' => $filename,
-            'token' => $facebookUser->token
+            'token' => $linkedinUser->token
         ]);
 
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
