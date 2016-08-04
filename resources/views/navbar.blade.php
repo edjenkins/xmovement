@@ -40,6 +40,9 @@
 							@can('translate', Auth::user())
 								<li><a href="{{ action('TranslationController@index') }}"></i>{{ trans('navbar.translate') }}</a></li>
 							@endcan
+							@can('view_analytics', Auth::user())
+								<li><a href="{{ action('AnalyticsController@index') }}"></i>{{ trans('navbar.analytics') }}</a></li>
+							@endcan
 							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>

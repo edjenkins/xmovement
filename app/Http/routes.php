@@ -58,6 +58,9 @@ Route::group(['middleware' => ['web']], function () {
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
 
+	// Analytics routes
+    Route::get('/analytics', 'AnalyticsController@index');
+
     // Idea routes
     Route::get('/explore', 'IdeaController@index');
     Route::get('/idea/create', 'IdeaController@add');
@@ -124,6 +127,11 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/api/translations/find', 'TranslationController@api_find');
 		Route::post('/api/translation/update', 'TranslationController@api_update');
 		Route::get('/api/translations/export', 'TranslationController@api_export');
+
+		// Analytics routes
+		Route::get('api/analytics/overview', 'AnalyticsController@api_overview');
+		Route::get('api/analytics/users', 'AnalyticsController@api_users');
+		Route::get('api/analytics/ideas', 'AnalyticsController@api_ideas');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');
