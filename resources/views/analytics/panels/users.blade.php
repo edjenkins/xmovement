@@ -13,11 +13,11 @@
 				<td><% user.name %></td>
 				<td><% user.email %></td>
 				<td><% user.created_at %></td>
-				<td class="expandable" ng-click="toggleDetailRow(user, 'ideas')" ng-class="{'highlighted' : user.visible_detail_row == 'ideas'}"><% user.ideas.length %></td>
-				<td class="expandable" ng-click="toggleDetailRow(user, 'design_tasks')" ng-class="{'highlighted' : user.visible_detail_row == 'design_tasks'}"><% user.design_tasks.length %></td>
-				<td><% user.design_task_votes.length %></td>
-				<td class="expandable" ng-click="toggleDetailRow(user, 'proposals')" ng-class="{'highlighted' : user.visible_detail_row == 'proposals'}"><% user.proposals.length %></td>
-				<td class="expandable" ng-click="toggleDetailRow(user, 'comments')" ng-class="{'highlighted' : user.visible_detail_row == 'comments'}"><% user.comments.length %></td>
+				<td class="expandable" ng-click="toggleDetailRow(user, 'ideas')" ng-class="{'highlighted' : user.visible_detail_row == 'ideas'}"><% user.ideas.length | number : 0 %></td>
+				<td class="expandable" ng-click="toggleDetailRow(user, 'design_tasks')" ng-class="{'highlighted' : user.visible_detail_row == 'design_tasks'}"><% user.design_tasks.length | number : 0 %></td>
+				<td><% user.design_task_votes.length | number : 0 %></td>
+				<td class="expandable" ng-click="toggleDetailRow(user, 'proposals')" ng-class="{'highlighted' : user.visible_detail_row == 'proposals'}"><% user.proposals.length | number : 0 %></td>
+				<td class="expandable" ng-click="toggleDetailRow(user, 'comments')" ng-class="{'highlighted' : user.visible_detail_row == 'comments'}"><% user.comments.length | number : 0 %></td>
 			</tr>
 			<tr class="detail-row">
 				<td colspan="8" ng-show="user.visible_detail_row == 'ideas'">
