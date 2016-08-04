@@ -11,13 +11,13 @@
 			<tr>
 				<td><% idea.name %></td>
 				<td><% idea.user.name %></td>
-				<td><% idea.supporters.length %></td>
-				<td class="expandable" ng-click="toggleDetailRow(idea, 'proposals')" ng-class="{'highlighted' : idea.visible_detail_row == 'proposals'}"><% idea.proposals.length %></td>
-				<td class="expandable" ng-click="toggleDetailRow(idea, 'comments')" ng-class="{'highlighted' : idea.visible_detail_row == 'comments'}"><% idea.comments.length %></td>
-				<td><% idea.duration %></td>
-				<td class="expandable" ng-click="toggleDetailRow(idea, 'design_tasks')" ng-class="{'highlighted' : idea.visible_detail_row == 'design_tasks'}"><% idea.design_tasks.length %></td>
+				<td><% idea.supporters.length | number : 0 %></td>
+				<td class="expandable" ng-click="toggleDetailRow(idea, 'proposals')" ng-class="{'highlighted' : idea.visible_detail_row == 'proposals'}"><% idea.proposals.length | number : 0 %></td>
+				<td class="expandable" ng-click="toggleDetailRow(idea, 'comments')" ng-class="{'highlighted' : idea.visible_detail_row == 'comments'}"><% idea.comments.length | number : 0 %></td>
+				<td><% idea.duration | number : 0 %></td>
+				<td class="expandable" ng-click="toggleDetailRow(idea, 'design_tasks')" ng-class="{'highlighted' : idea.visible_detail_row == 'design_tasks'}"><% idea.design_tasks.length | number : 0 %></td>
 				<td><% idea.progress | number : 0 %>%</td>
-				<td class="expandable" ng-click="toggleDetailRow(idea, 'share_button_clicks')" ng-class="{'highlighted' : idea.visible_detail_row == 'share_button_clicks'}"><% idea.share_button_clicks.length %></td>
+				<td class="expandable" ng-click="toggleDetailRow(idea, 'share_button_clicks')" ng-class="{'highlighted' : idea.visible_detail_row == 'share_button_clicks'}"><% idea.share_button_clicks.length | number : 0  %></td>
 				<td><% idea.created_at %></td>
 			</tr>
 			<tr class="detail-row">
