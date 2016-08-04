@@ -1,8 +1,8 @@
-@extends('layouts.app', ['bodyclasses' => 'transparent'])
+@extends('layouts.app', ['bodyclasses' => env('HOME_BODY_CLASSES')])
 
 @section('content')
 
-    <div class="container-fluid hero-container" style="background-image:url('{{ getenv('APP_HOME_HEADER_IMG') }}')">
+    <div class="container-fluid hero-container" id="home-hero-container" style="background-image:url('{{ asset(getenv('APP_HOME_HEADER_IMG')) }}')">
         <div class="black-overlay"></div>
         <div class="text-container">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>
@@ -18,7 +18,7 @@
 
 			<div class="col-md-4">
 				<div class="about-summary-tile">
-					<img src="{{ asset('img/icons/about/support.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/support.png') }}" />
 					<h3>
 						{{ trans('about.summary-first-title') }}
 					</h3>
@@ -30,7 +30,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="about-summary-tile">
-					<img src="{{ asset('img/icons/about/design.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/design.png') }}" />
 					<h3>
 						{{ trans('about.summary-second-title') }}
 					</h3>
@@ -42,7 +42,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="about-summary-tile">
-					<img src="{{ asset('img/icons/about/propose.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/propose.png') }}" />
 					<h3>
 						{{ trans('about.summary-third-title') }}
 					</h3>

@@ -37,6 +37,12 @@
 /* Discussion styles */
 @import 'discussion/*'
 
+/* Translation styles */
+@import 'translations/*'
+
+/* Analytics styles */
+@import 'analytics/*'
+
 /* Import splash */
 @import 'splash'
 
@@ -137,21 +143,23 @@ textarea
 	h1
 		color white
 		font-weight 300
-		margin-bottom 30px
+		margin 0 auto 30px auto
+		max-width 500px
 	button
 		background transparent
 		border white 2px solid
 		border-radius 0px
 		color white
 		font-size 20px
-		font-weight 300
+		font-weight normal
 		margin 0 auto
 		outline 0
 		padding 8px 26px
 		text-align center
-		&hover
-			background-color main-color
-			border-color main-color
+		animate()
+		&:hover
+			background-color white
+			color dark-font-color
 
 .panel-heading
 	h2
@@ -199,3 +207,5 @@ body.colorful
 		border-color darken(border-color, 10%)
 		color darken(#CCC, 10%)
 		text-decoration none
+
+// End

@@ -8,6 +8,8 @@ use App\User;
 use App\Idea;
 use App\Proposal;
 use App\Comment;
+use App\DesignTask;
+use App\DesignTaskVote;
 use Auth;
 
 class User extends Authenticatable
@@ -38,6 +40,36 @@ class User extends Authenticatable
     public function ideas()
     {
         return $this->hasMany(Idea::class);
+    }
+
+    /**
+     * The actions performed in relation to a user.
+     *
+     * @var array
+     */
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
+
+    /**
+     * The Design Tasks the user has created.
+     *
+     * @var array
+     */
+    public function design_tasks()
+    {
+        return $this->hasMany(DesignTask::class);
+    }
+
+    /**
+     * The Votes a user has made on design tasks.
+     *
+     * @var array
+     */
+    public function design_task_votes()
+    {
+        return $this->hasMany(DesignTaskVote::class);
     }
 
     /**

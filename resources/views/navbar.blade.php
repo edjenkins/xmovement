@@ -10,7 +10,8 @@
             </button>
 
             <a class="navbar-brand" href="{{ url('/') }}">
-                <strong>{{ trans('common.brand') }}</strong>
+				<img class="logo-color" src="{{ asset(env('S3_URL') . '/logos/logo.png') }}" alt="{{ trans('common.brand') }}" />
+				<img class="logo-white" src="{{ asset(env('S3_URL') . '/logos/logo-white.png') }}" alt="{{ trans('common.brand') }}" />
             </a>
 
             <div class="clearfix"></div>
@@ -36,6 +37,12 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('UserController@profile') }}"></i>{{ trans('navbar.profile') }}</a></li>
+							@can('translate', Auth::user())
+								<li><a href="{{ action('TranslationController@index') }}"></i>{{ trans('navbar.translate') }}</a></li>
+							@endcan
+							@can('view_analytics', Auth::user())
+								<li><a href="{{ action('AnalyticsController@index') }}"></i>{{ trans('navbar.analytics') }}</a></li>
+							@endcan
 							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>

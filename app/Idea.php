@@ -43,6 +43,16 @@ class Idea extends Model
     }
 
     /**
+     * The actions performed in relation to an idea.
+     *
+     * @var array
+     */
+    public function actions()
+    {
+        return $this->hasMany(Action::class);
+    }
+
+    /**
      * The updates posted for this idea.
      *
      * @var array
@@ -60,6 +70,16 @@ class Idea extends Model
     public function designTasks()
     {
         return $this->hasMany(DesignTask::class);
+    }
+
+    /**
+     * The Votes cast on design tasks for the idea.
+     *
+     * @var array
+     */
+    public function designTaskVotes()
+    {
+        return $this->hasMany(DesignTaskVote::class);
     }
 
     /**
@@ -176,6 +196,38 @@ class Idea extends Model
     public function supporters()
     {
         return $this->belongsToMany(User::class, 'supporters')->withTimestamps();
+    }
+
+    /**
+     * The comments for the Idea.
+     */
+    public function getComments()
+    {
+		$url = action('IdeaController@view', $this->id);
+
+		$url_with_slug = $url . '/' . $this->slug;
+
+        return Comment::where('url', $url)->orWhere('url', $url_with_slug)->get();
+    }
+
+    /**
+     * The share butotn clicks for the Idea.
+     */
+    public function getShareButtonClicks()
+    {
+		$share_button_clicks = [];
+
+		$labels = ['facebook-share-button-click', 'facebook-share-button-click', 'twitter-share-button-click', 'googleplus-share-button-click', 'email-share-button-click'];
+
+		foreach ($this->actions as $key => $action)
+		{
+			if (in_array($action['label'], $labels))
+			{
+				array_push($share_button_clicks, $action);
+			}
+		}
+
+        return $share_button_clicks;
     }
 
     /**

@@ -7,6 +7,9 @@ Homestead.json
 storage/framework/views/*
 /public/css/*
 public/img/uploads/**
+public/img/brand/**
 public/uploads/**
+bower_components/**
 
 **/.DS_Store
+resources/assets/stylus/variables.styl
