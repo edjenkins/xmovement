@@ -1,0 +1,49 @@
+.analytics-container
+	padding 30px
+	.analytics-panel
+		max-width 100%
+		overflow scroll
+		table
+			border border-color 1px solid
+			width 100%
+			tr
+				td, th
+					border border-color 1px solid
+					padding 10px
+					animate()
+					&.expandable:hover
+						background-color white
+						cursor pointer
+					&.highlighted
+						background-color white !important
+				th
+					white-space nowrap
+					&:hover
+						background-color white
+						cursor pointer
+					i
+						color #999
+						margin-left 4px
+
+			tr.detail-row
+				background-color white
+				ul
+					cleanlist()
+					li
+						cleanlist()
+						border-left main-color 3px solid
+						margin 5px 0px
+						padding 10px
+						i
+							color #999
+							margin-right 4px
+							&.fa-facebook
+								color facebook-color
+							&.fa-twitter
+								color twitter-color
+							&.fa-googleplus
+								color googleplus-color
+						a
+							color #999
+							&:hover
+								color #999

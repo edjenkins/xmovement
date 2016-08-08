@@ -17,6 +17,7 @@ var jscookie = require('js-cookie');
 elixir(function(mix) {
 
 	mix.scripts([
+<<<<<<< HEAD
 		'../../../bower_components/jquery-bridget/jquery-bridget.js',
 		'../../../bower_components/ev-emitter/ev-emitter.js',
 		'../../../bower_components/desandro-matches-selector/matches-selector.js',
@@ -36,11 +37,23 @@ elixir(function(mix) {
 	], 'public/js/slider.js');
 
 	mix.copy('bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css', 'public/css/jquery-ui-slider-pips.css');
+=======
+		'bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.js',
+		'bower_components/js-cookie/src/js.cookie.js'
+	], 'public/js/vendor.js');
+
+	mix.scriptsIn('resources/assets/js/angular', 'public/js/angular.js');
+
+>>>>>>> develop
 	mix.copy('resources/assets/css/*', 'public/css');
 
 	mix.stylus('app.styl', null, { use: [ bootstrap() ] });
 
+<<<<<<< HEAD
 	mix.browserSync({
+=======
+    mix.browserSync({
+>>>>>>> develop
         proxy: 'xm.local',
         notify: true
     });

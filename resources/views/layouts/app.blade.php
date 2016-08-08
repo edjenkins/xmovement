@@ -32,7 +32,19 @@
 
     {!! MetaTag::tag('image',  getenv('APP_HOME_HEADER_IMG')) !!}
 
+	<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+	<script type="text/javascript">
+	    window.cookieconsent_options = {"message":"We use cookies to ensure you get the best experience on our website","dismiss":"Got It","learnMore":"","link":null,"theme":"light-floating"};
+	</script>
+
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+	<!-- End Cookie Consent plugin -->
+
 </head>
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement">
 
 	@include('google-analytics', ['trackingId' => getenv('APP_GA_TRACKING_ID')])
@@ -66,8 +78,12 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+<<<<<<< HEAD
 
     <script src="https://www.google.com/recaptcha/api.js"></script>
+=======
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+>>>>>>> develop
 
 
 
@@ -80,7 +96,7 @@
     <script src="{{ URL::asset('js/easydropdown/jquery.easydropdown.js') }}"></script>
 	<script src="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
-	<script src="{{ URL::asset('scripts/app.js') }}"></script>
+	<script src="{{ URL::asset('js/angular.js') }}"></script>
 
 </body>
 </html>

@@ -12,18 +12,6 @@ use App\Comment;
 use Log;
 use Response;
 
-class ResponseObject {
-
-	public $meta = array();
-	public $errors = array();
-	public $data = array();
-
-	public function __construct()
-	{
-		$this->meta['success'] = false;
-	}
-}
-
 class Comment extends Model
 {
 	protected $fillable = [

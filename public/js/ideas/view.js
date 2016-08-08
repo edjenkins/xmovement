@@ -40,21 +40,25 @@ function addShareButtonHandlers()
 		  method: 'share',
 		  href: idea_url,
 		}, function(response){});
+		logAction({label:'facebook-share-button-click',idea_id:idea_id});
 	});
 
 	$('.share-twitter').click(function(){
 		var url = 'http://twitter.com/home?status=' + idea_url;
 		shareWindow(url);
+		logAction({label:'twitter-share-button-click',idea_id:idea_id});
 	});
 
 	$('.share-googleplus').click(function(){
 		var url = 'https://plus.google.com/share?url=' + idea_url;
 		shareWindow(url);
+		logAction({label:'googleplus-share-button-click',idea_id:idea_id});
 	});
 
 	$('.share-email').click(function(){
 		var url = 'mailto:?Subject=' + idea_name + '&Body=' + idea_url;
 		window.location.href = url;
+		logAction({label:'email-share-button-click',idea_id:idea_id});
 	});
 }
 

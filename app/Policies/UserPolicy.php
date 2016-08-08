@@ -14,6 +14,28 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine if the given user can view analytics for the platform.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function view_analytics(User $user)
+    {
+        return $user->can_view_analytics;
+    }
+
+	/**
+     * Determine if the given user can translate the platform.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function translate(User $user)
+    {
+        return $user->can_translate;
+    }
+
+    /**
      * Determine if the given user can view the news stream of the user.
      *
      * @param  User  $user

@@ -57,7 +57,9 @@ Route::group(['middleware' => ['web']], function () {
 
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
-	Route::get('/translate/setLocale', 'TranslationController@setLocale');
+
+	// Analytics routes
+    Route::get('/analytics', 'AnalyticsController@index');
 
     // Inspiration routes
     Route::get('/inspiration', 'InspirationController@index');
@@ -98,14 +100,22 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
 	Route::post('/vote/comment', 'CommentController@vote'); // Comment
 
+    // Contact routes
+	Route::post('/contact/send', 'ContactController@send');
+
     // API routes
 
+<<<<<<< HEAD
 		// Inspiration routes
 		Route::get('/api/inspirations', 'InspirationController@api_index');
 		Route::post('/api/inspiration/add', 'InspirationController@add');
 
 		// Idea routes
 		Route::get('/api/ideas', 'IdeaController@api_index');
+=======
+		// Action routes
+		Route::post('/api/action/log', 'ActionController@log');
+>>>>>>> develop
 
 		// Support routes
 	    Route::post('/api/support', 'IdeaController@support');
@@ -124,13 +134,24 @@ Route::group(['middleware' => ['web']], function () {
 		// Report routes
 		Route::post('/api/report', 'ReportController@add');
 
+		// Translation routes
+		Route::get('/api/translations', 'TranslationController@api_index');
+		Route::get('/api/translations/find', 'TranslationController@api_find');
+		Route::post('/api/translation/update', 'TranslationController@api_update');
+		Route::get('/api/translations/export', 'TranslationController@api_export');
+
+		// Analytics routes
+		Route::get('api/analytics/overview', 'AnalyticsController@api_overview');
+		Route::get('api/analytics/users', 'AnalyticsController@api_users');
+		Route::get('api/analytics/ideas', 'AnalyticsController@api_ideas');
+
     // File upload
     Route::post('/upload', 'UploadController@upload');
 
 	// Dynamic Images
 	Route::get('/dynamic/avatar/{size}', function($size)
 	{
-		$img = Image::canvas(800, 800, '#6acda4');
+		$img = Image::canvas(800, 800, '#e1e1e1');
 
 		$img->circle(350, 400, 300, function ($draw) {
 				$draw->background('#fff');
@@ -152,7 +173,7 @@ Route::group(['middleware' => ['web']], function () {
 			$img->text($name_acronymn, 600, 600, function($font) {
 			    $font->file('fonts/sourcesanspro-bold-webfont.ttf');
 			    $font->size(100);
-			    $font->color('#6acda4');
+			    $font->color('#e1e1e1');
 			    $font->align('right');
 			    $font->valign('center');
 			});
