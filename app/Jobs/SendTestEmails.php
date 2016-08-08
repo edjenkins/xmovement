@@ -26,6 +26,7 @@ use App\Jobs\SendProposalPhaseUpdatesEmail;
 use App\Jobs\SendDesignPhaseOpenEmail;
 use App\Jobs\SendProposalPhaseOpenEmail;
 use App\Jobs\SendProposalPhaseCompleteEmail;
+use App\Jobs\SendProposalPhaseFailedEmail;
 use App\Jobs\SendXMovementRequirementInviteEmail;
 
 class SendTestEmails extends Job implements ShouldQueue
