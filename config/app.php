@@ -170,8 +170,10 @@ return [
 		App\Providers\CustomBrainSocketServiceProvider::class,
 
         Laravel\Socialite\SocialiteServiceProvider::class,
-		App\Providers\ResourceImageProvider::class,
 		Torann\LaravelMetaTags\MetaTagsServiceProvider::class,
+		Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+
+		App\Providers\ResourceImageProvider::class,
 
         // XMovement Design Modules
         XMovement\Poll\PollServiceProvider::class,
@@ -232,6 +234,7 @@ return [
 
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 		'MetaTag'   => Torann\LaravelMetaTags\Facades\MetaTag::class,
+		'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
 
 		'BrainSocket'     => BrainSocket\BrainSocketFacade::class,
 		'CustomBrainSocket'     => CustomBrainSocket\Facades\BrainSocket::class,
