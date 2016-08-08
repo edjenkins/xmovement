@@ -9,10 +9,6 @@ storage/framework/views/*
 public/img/uploads/**
 public/img/brand/**
 public/uploads/**
-<<<<<<< HEAD
-resources/assets/js/bower_components/**
-=======
->>>>>>> develop
 bower_components/**
 
 **/.DS_Store

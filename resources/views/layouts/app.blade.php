@@ -41,10 +41,7 @@
 	<!-- End Cookie Consent plugin -->
 
 </head>
-<<<<<<< HEAD
-=======
 
->>>>>>> develop
 <body class="fade-nav {{ $bodyclasses or '' }}" id="app-layout" ng-app="XMovement">
 
 	@include('google-analytics', ['trackingId' => getenv('APP_GA_TRACKING_ID')])

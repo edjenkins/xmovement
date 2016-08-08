@@ -4,8 +4,6 @@
 
 	<div ng-controller="ExploreController" ng-cloak>
 
-<<<<<<< HEAD
-
 		<div class="page-header">
 
 	        <h2 class="main-title">{{ trans('pages.explore') }}</h2>
@@ -54,56 +52,6 @@
 
 			</div>
 
-=======
-		<div class="page-header" ng-click="test()">
-
-	        <h2 class="main-title">{{ trans('pages.explore') }}</h2>
-
-		</div>
-
-		<div class="white-controls-row">
-
-			<div class="container">
-
-				<div class="view-controls-container">
-
-	    			<ul class="module-controls pull-left" ng-init="sort_type = 'created_at'">
-
-						<li class="module-control" ng-click="sort_type = 'created_at'" ng-class="{'active':sort_type == 'created_at'}">
-
-							<button type="button">{{ trans('idea.sort_recent') }}</button>
-
-	    				</li>
-
-						<li class="module-control" ng-click="sort_type = 'supporter_count'" ng-class="{'active':sort_type == 'supporter_count'}">
-
-							<button type="button">{{ trans('idea.sort_popular') }}</button>
-
-	    				</li>
-
-	    			</ul>
-
-					<ul class="module-controls pull-right">
-
-						<li class="module-control search-element">
-							<div id="search-button">
-								<i class="fa fa-search"></i>
-							</div>
-						</li>
-
-						<li class="module-control search-element" ng-init="idea_search_term = ''">
-							<input type="text" ng-model="idea_search_term" placeholder="{{ trans('placeholders.search_ideas') }}">
-						</li>
-
-					</ul>
-
-	    			<div class="clearfloat"></div>
-
-	    		</div>
-
-			</div>
-
->>>>>>> develop
 		</div>
 
 	    <div class="container ideas-container">
