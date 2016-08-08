@@ -25,6 +25,8 @@ elixir(function(mix) {
 
 	mix.copy('resources/assets/css/*', 'public/css');
 
+	mix.copy('resources/assets/js/bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css', 'public/css/jquery-ui-slider-pips.css');
+
 	mix.stylus('app.styl', null, { use: [ bootstrap() ] });
 
     mix.browserSync({
