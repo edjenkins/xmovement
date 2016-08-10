@@ -52,15 +52,6 @@
 
 	    				</li>
 
-						<li class="module-control" ng-click="filter_type = 'eating-disorders'" ng-class="{'active':filter_type == 'eating-disorders'}">
-
-							<button type="button">
-								<i class="fa fa-tag"></i>
-								Eating Disorders
-							</button>
-
-	    				</li>
-
 	    			</ul>
 
 	    			<div class="clearfloat"></div>
@@ -105,20 +96,20 @@
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'photo'">
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['photo'].content" cols="40" placeholder="Photo URL"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['photo'].content" cols="40" placeholder="Photo URL"></textarea>
 									</div>
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['photo'].description" cols="40" placeholder="Photo Description"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['photo'].description" cols="40" placeholder="Photo Description"></textarea>
 									</div>
 									<button ng-click="addInspiration('photo')" class="btn" type="button" name="button">Share Photo</button>
 								</form>
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'video'">
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['video'].content" cols="40" placeholder="Video URL"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['video'].content" cols="40" placeholder="Video URL"></textarea>
 									</div>
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['video'].description" cols="40" placeholder="Video Description"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['video'].description" cols="40" placeholder="Video Description"></textarea>
 									</div>
 									<button ng-click="addInspiration('video')" class="btn" type="button" name="button">Share Video</button>
 								</form>
@@ -128,17 +119,17 @@
 										<button class="btn btn-default" type="button" name="button">Add File</button>
 									</div>
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['file'].description" cols="40" placeholder="File Description"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['file'].description" cols="40" placeholder="File Description"></textarea>
 									</div>
 									<button ng-click="addInspiration('file')" class="btn" type="button" name="button">Share File</button>
 								</form>
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'link'">
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['link'].content" cols="40" placeholder="Link URL"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['link'].content" cols="40" placeholder="Link URL"></textarea>
 									</div>
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="inspiration['link'].description" cols="40" placeholder="Link Description"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['link'].description" cols="40" placeholder="Link Description"></textarea>
 									</div>
 									<button ng-click="addInspiration('link')" class="btn" type="button" name="button">Share Link</button>
 								</form>
@@ -149,9 +140,10 @@
 
 				</div>
 
-				<div id="masonry-grid" masonry reload-on-show reload-on-resize class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }">
 
-					<div class="tile masonry-brick inspiration-tile" prepend="isPrepended()" ng-repeat="inspiration in inspirations | orderBy:sort_type:true" ng-click="openInspirationModal(inspiration)" ng-hide="inspirations.length == 0" data-toggle="modal" data-target="#inspiration-modal">
+				<div id="masonry-grid" masonry reload-on-show reload-on-resize class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
+
+					<div class="tile masonry-brick inspiration-tile"  ng-repeat="inspiration in inspirations" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
 
 						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="<% inspiration.content %>"></img>
 
@@ -184,5 +176,9 @@
 		@include('modals/inspiration')
 
 	</div>
+
+	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
+	<script src="{{ URL::asset('js/masonry.js') }}"></script>
+	<script src="{{ URL::asset('js/angular.js') }}"></script>
 
 @endsection

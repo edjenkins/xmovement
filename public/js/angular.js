@@ -1,6 +1,6 @@
 'use strict';
 
-var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage'], function($interpolateProvider) {
+var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'wu.masonry'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 })
@@ -28,6 +28,121 @@ XMovement.filter('cut', function () {
 		return value + (tail || ' …');
 	};
 });
+
+XMovement.service('AnalyticsService', function($http, $q) {
+	return {
+		'getOverviewAnalytics': function() {
+			var defer = $q.defer();
+			$http.get('/api/analytics/overview').success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'getUserAnalytics': function() {
+			var defer = $q.defer();
+			$http.get('/api/analytics/users').success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'getIdeaAnalytics': function() {
+			var defer = $q.defer();
+			$http.get('/api/analytics/ideas').success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		}
+	}})
+
+XMovement.service('ExploreService', function($http, $q) {
+	return {
+		'getIdeas': function() {
+			var defer = $q.defer();
+			$http.get('/api/ideas').success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		}
+	}})
+
+XMovement.service('InspirationService', function($http, $q) {
+	return {
+		'getInspirations': function() {
+			var defer = $q.defer();
+			$http.get('/api/inspirations').success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'addInspiration': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/inspiration/add', body).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		}
+	}})
+
+XMovement.service('TranslationService', function($http, $q) {
+	return {
+		'getTranslations': function(params) {
+			var defer = $q.defer();
+			$http({
+			    url: '/api/translations',
+			    method: "GET",
+			    params: params
+			 }).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'findTranslations': function(params) {
+			var defer = $q.defer();
+			$http({
+			    url: '/api/translations/find',
+			    method: "GET",
+			    params: params
+			 }).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'updateTranslation': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/translation/update', body).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'exportAllTranslations': function() {
+			var defer = $q.defer();
+			$http.get('/api/translations/export').success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		}
+
+	}})
 
 XMovement.controller('AnalyticsController', function($scope, $http, $rootScope, $localStorage, $sessionStorage, AnalyticsService) {
 
@@ -145,6 +260,91 @@ XMovement.controller('ExploreController', function($scope, $http, $rootScope, Ex
 
 });
 
+XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, InspirationService) {
+
+	$scope.inspirations = [];
+	$scope.selected_inspiration = {};
+	$scope.new_inspiration =
+	{
+		photo: {type:'photo',title:'My Test Photo',description:'If you like tests then you will love this test photograph I never took, it was from the interwebs.',content:''},
+		video: {type:'video',title:'My Test Video',description:'If you like tests then you will love this test video I never took, it was from the interwebs.',content:''},
+		file: {type:'file',title:'My Test File',description:'If you like tests then you will love this test file I never took, it was from the interwebs.',content:''},
+		link: {type:'link',title:'My Test Link',description:'If you like tests then you will love this test link I never took, it was from the interwebs.',content:''}
+	};
+
+	$scope.getInspirations = function() {
+
+		console.log("Loading inspirations");
+
+		InspirationService.getInspirations().then(function(response) {
+
+			console.log(response);
+
+			// TODO:
+			// $scope.selected_inspiration = $scope.inspirations[0];
+
+			$scope.inspirations = $scope.formatInspirations(response.data.inspirations);
+
+			console.log($scope.inspirations);
+
+			// $('#masonry-grid').masonry();
+
+		});
+	}
+
+	$scope.addInspiration = function(type) {
+
+		console.log("Adding inspiration");
+
+		$scope.new_inspiration[type].type = type;
+
+		InspirationService.addInspiration({inspiration: $scope.new_inspiration[type] }).then(function(response) {
+
+			console.log(response);
+
+			if (response.meta.success)
+			{
+				$scope.inspirations.unshift($scope.formatInspirations([response.data.inspiration])[0]);
+
+				// $('#masonry-grid').imagesLoaded({ background: '.video-tile-image' }).always(function() {
+				// 	$('#masonry-grid').masonry('reloadItems');
+				// 	$('#masonry-grid').masonry('layout');
+				// });
+
+			}
+
+		});
+	}
+
+	$scope.formatInspirations = function(inspirations) {
+
+		for (var i = 0; i < inspirations.length; i++)
+		{
+			if (inspirations[i].type == 'video')
+			{
+				inspirations[i].content = JSON.parse(inspirations[i].content);
+			}
+		}
+
+		return inspirations;
+
+	}
+
+	$scope.openInspirationModal = function(inspiration) {
+
+		$scope.selected_inspiration = inspiration;
+
+	}
+
+	$scope.setIframeUrl = function(url) {
+
+		return $sce.trustAsResourceUrl(url);
+	}
+
+	$scope.getInspirations();
+
+});
+
 XMovement.controller('TranslationController', function($scope, $http, $rootScope, $timeout, TranslationService) {
 
 	$scope.translations = [];
@@ -257,98 +457,5 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 	$scope.getTranslations();
 
 });
-
-XMovement.service('AnalyticsService', function($http, $q) {
-	return {
-		'getOverviewAnalytics': function() {
-			var defer = $q.defer();
-			$http.get('/api/analytics/overview').success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		},
-		'getUserAnalytics': function() {
-			var defer = $q.defer();
-			$http.get('/api/analytics/users').success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		},
-		'getIdeaAnalytics': function() {
-			var defer = $q.defer();
-			$http.get('/api/analytics/ideas').success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		}
-	}})
-
-XMovement.service('ExploreService', function($http, $q) {
-	return {
-		'getIdeas': function() {
-			var defer = $q.defer();
-			$http.get('/api/ideas').success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		}
-	}})
-
-XMovement.service('TranslationService', function($http, $q) {
-	return {
-		'getTranslations': function(params) {
-			var defer = $q.defer();
-			$http({
-			    url: '/api/translations',
-			    method: "GET",
-			    params: params
-			 }).success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		},
-		'findTranslations': function(params) {
-			var defer = $q.defer();
-			$http({
-			    url: '/api/translations/find',
-			    method: "GET",
-			    params: params
-			 }).success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		},
-		'updateTranslation': function(body) {
-			var defer = $q.defer();
-			$http.post('/api/translation/update', body).success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		},
-		'exportAllTranslations': function() {
-			var defer = $q.defer();
-			$http.get('/api/translations/export').success(function(resp){
-				defer.resolve(resp);
-			}).error( function(err) {
-				defer.reject(err);
-			});
-			return defer.promise;
-		}
-
-	}})
 
 //# sourceMappingURL=angular.js.map

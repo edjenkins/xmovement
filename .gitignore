@@ -5,7 +5,8 @@ Homestead.json
 .env
 
 storage/framework/views/*
-/public/css/*
+/public/css/**
+/public/js/**
 public/img/uploads/**
 public/img/brand/**
 public/uploads/**

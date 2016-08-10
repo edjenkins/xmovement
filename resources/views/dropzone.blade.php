@@ -40,7 +40,7 @@
 		<p id="file-preview-filename">{{ $value or '' }}</p>
 	</div>
 
-	<script type="text/javascript" src="{{ URL::asset('js/vendor/dropzone.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('js/vendor/dropzone/dropzone.js') }}"></script>
 
 	<script type="text/javascript">
 

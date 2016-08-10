@@ -110,4 +110,8 @@
 
 	</div>
 
+	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
+	<script src="{{ URL::asset('js/masonry.js') }}"></script>
+	<script src="{{ URL::asset('js/angular.js') }}"></script>
+
 @endsection
