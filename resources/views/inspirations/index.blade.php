@@ -96,7 +96,9 @@
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'photo'">
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="new_inspiration['photo'].content" cols="40" placeholder="Photo URL"></textarea>
+										<!-- <textarea class="expanding" rows="1" ng-model="new_inspiration['photo'].content" cols="40" placeholder="Photo URL"></textarea> -->
+										<!-- <button class="btn btn-default" type="button" name="button">Add File</button> -->
+										@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'dropzone-photo', 'value' => old('photo'), 'dropzone_id' => 1])
 									</div>
 									<div class="input-wrapper">
 										<textarea class="expanding" rows="1" ng-model="new_inspiration['photo'].description" cols="40" placeholder="Photo Description"></textarea>
@@ -106,7 +108,7 @@
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'video'">
 									<div class="input-wrapper">
-										<textarea class="expanding" rows="1" ng-model="new_inspiration['video'].content" cols="40" placeholder="Video URL"></textarea>
+										<textarea class="expanding" rows="1" ng-model="new_inspiration['video'].content" cols="40" placeholder="YouTube URL"></textarea>
 									</div>
 									<div class="input-wrapper">
 										<textarea class="expanding" rows="1" ng-model="new_inspiration['video'].description" cols="40" placeholder="Video Description"></textarea>
@@ -141,11 +143,11 @@
 				</div>
 
 
-				<div id="masonry-grid" masonry reload-on-show reload-on-resize class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
+				<div id="masonry-grid" masonry reload-on-show reload-on-resize prepend="isPrepended()" class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
 
 					<div class="tile masonry-brick inspiration-tile"  ng-repeat="inspiration in inspirations" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
 
-						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="<% inspiration.content %>"></img>
+						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% inspiration.content %>"></img>
 
 						<div ng-show="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
 							<i class="fa fa-play"></i>

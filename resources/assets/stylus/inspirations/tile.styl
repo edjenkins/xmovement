@@ -37,6 +37,15 @@
 				padding 0
 
 	&.submission-box
+		.dropzone-container
+			border border-color 1px solid
+			border-radius 5px
+			overflow hidden
+			padding 0
+			margin-bottom 10px
+			.dropzone
+				.dz-message
+					font-size 15px
 		form
 			margin-top 15px
 			.input-wrapper
@@ -88,6 +97,8 @@
 	width calc((100% - 90px) / 3)//width calc((100% - 120px) / 4)
 	&.loaded
 		display block
+	&:hover
+		cursor pointer
 	@media(max-width: 1120px)
 		width calc((100% - 90px) / 3)
 	@media(max-width: 987px)

@@ -4,10 +4,10 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.selected_inspiration = {};
 	$scope.new_inspiration =
 	{
-		photo: {type:'photo',title:'My Test Photo',description:'If you like tests then you will love this test photograph I never took, it was from the interwebs.',content:''},
-		video: {type:'video',title:'My Test Video',description:'If you like tests then you will love this test video I never took, it was from the interwebs.',content:''},
-		file: {type:'file',title:'My Test File',description:'If you like tests then you will love this test file I never took, it was from the interwebs.',content:''},
-		link: {type:'link',title:'My Test Link',description:'If you like tests then you will love this test link I never took, it was from the interwebs.',content:''}
+		photo: { type:'photo', description:'', content:'' },
+		video: { type:'video', description:'', content:'' },
+		file: { type:'file', description:'', content:'' },
+		link: { type:'link', description:'', content:'' }
 	};
 
 	$scope.getInspirations = function() {
@@ -18,14 +18,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			console.log(response);
 
-			// TODO:
-			// $scope.selected_inspiration = $scope.inspirations[0];
-
 			$scope.inspirations = $scope.formatInspirations(response.data.inspirations);
-
-			console.log($scope.inspirations);
-
-			// $('#masonry-grid').masonry();
 
 		});
 	}
@@ -36,19 +29,19 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		$scope.new_inspiration[type].type = type;
 
+		console.log($('#dropzone-photo').val());
+
+		if (type == 'photo') {
+			$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
+		}
+
 		InspirationService.addInspiration({inspiration: $scope.new_inspiration[type] }).then(function(response) {
 
 			console.log(response);
 
 			if (response.meta.success)
 			{
-				$scope.inspirations.unshift($scope.formatInspirations([response.data.inspiration])[0]);
-
-				// $('#masonry-grid').imagesLoaded({ background: '.video-tile-image' }).always(function() {
-				// 	$('#masonry-grid').masonry('reloadItems');
-				// 	$('#masonry-grid').masonry('layout');
-				// });
-
+				$scope.inspirations.splice($scope.formatInspirations([response.data.inspiration])[0]);
 			}
 
 		});

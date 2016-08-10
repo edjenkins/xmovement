@@ -11,7 +11,7 @@
 				</div>
 
 				<div ng-show="selected_inspiration.type == 'photo'">
-					<img style="width:100%" src="<% selected_inspiration.content %>"></img>
+					<img style="width:100%" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% selected_inspiration.content %>"></img>
 				</div>
 
 				<br>
