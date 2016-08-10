@@ -29,11 +29,11 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider(Request $request)
     {
         Session::reflash();
 
-        return Socialite::driver('linkedin')->redirect();
+        return Socialite::driver($request->provider)->redirect();
     }
 
     /**
@@ -41,15 +41,26 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
         try {
-            $user = Socialite::driver('linkedin')->user();
+            $user = Socialite::driver($request->provider)->user();
         } catch (Exception $e) {
-            return Redirect::to('auth/linkedin');
+            return Redirect::to('auth/' . $request->provider);
         }
 
-        $authUser = $this->findOrCreateUser($user);
+        switch ($request->provider) {
+        	case 'facebook':
+        		$authUser = $this->findOrCreateFacebookUser($user);
+        		break;
+        	case 'linkedin':
+        		$authUser = $this->findOrCreateLinkedinUser($user);
+        		break;
+
+        	default:
+        		# code...
+        		break;
+        }
 
         Auth::login($authUser, true);
 
@@ -59,10 +70,70 @@ class AuthController extends Controller
     /**
      * Return user if exists; create and return if doesn't
      *
+     * @param $facebookUser
+     * @return User
+     */
+    private function findOrCreateFacebookUser($facebookUser)
+    {
+        if ($authUser = User::where('facebook_id', $facebookUser->id)->first()) {
+            return $authUser;
+        }
+
+		$extension = 'jpg';
+
+	    $filename = sha1(time() . time()) . ".{$extension}";
+
+		$image_sizes = [
+			['name' => 'large', 'size' => 1280],
+			['name' => 'medium', 'size' => 960],
+			['name' => 'small', 'size' => 480],
+			['name' => 'thumb', 'size' => 240],
+		];
+
+		// Save image sizes
+		foreach ($image_sizes as $index => $size)
+		{
+			$img = Image::make(file_get_contents($facebookUser->avatar_original));
+
+			$img->resize($size['size'], null, function ($constraint) {
+			    $constraint->aspectRatio();
+			});
+
+			$img = $img->stream();
+
+			$path = 'uploads/images/' . $size['name'] . '/';
+
+	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
+			{
+	        	Log::error('Failed to save user avatar from Facebook - ' . $facebookUser->email);
+	        }
+			else {
+				Log::error('Saved to - ' . $path.$filename);
+			}
+		}
+
+        $user = User::create([
+            'linkedin_id' => $facebookUser->id,
+            'name' => $facebookUser->name,
+            'email' => $facebookUser->email,
+            'avatar' => $filename,
+            'token' => $facebookUser->token
+        ]);
+
+        $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
+
+        return $user;
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
      * @param $linkedinUser
      * @return User
      */
-    private function findOrCreateUser($linkedinUser)
+    private function findOrCreateLinkedinUser($linkedinUser)
     {
         if ($authUser = User::where('linkedin_id', $linkedinUser->id)->first()) {
             return $authUser;
@@ -94,7 +165,7 @@ class AuthController extends Controller
 
 	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
 			{
-	        	Log::error('Failed to save user avatar from Facebook - ' . $linkedinUser->email);
+	        	Log::error('Failed to save user avatar from Linkedin - ' . $linkedinUser->email);
 	        }
 			else {
 				Log::error('Saved to - ' . $path.$filename);

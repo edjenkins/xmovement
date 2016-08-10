@@ -53,14 +53,14 @@
     </div>
 
     <div class="form-group">
-        <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider') }}">
+        <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'facebook']) }}">
             <i class="fa fa-fw fa-facebook"></i>
             {{ trans('auth.facebook_login') }}
         </a>
     </div>
 
     <div class="form-group">
-        <a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider') }}">
+		<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
             <i class="fa fa-fw fa-linkedin"></i>
             {{ trans('auth.linkedin_login') }}
         </a>
