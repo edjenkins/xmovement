@@ -86,7 +86,6 @@ class InspirationController extends Controller
 		$inspiration = Inspiration::create([
 			'user_id' => Auth::user()->id,
 			'type' => $request->inspiration['type'],
-			'title' => $request->inspiration['title'],
             'description' => $request->inspiration['description'],
             'content' => $content,
         ]);

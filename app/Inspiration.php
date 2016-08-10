@@ -15,7 +15,6 @@ class Inspiration extends Model
     protected $fillable = [
 		'user_id',
 		'type',
-		'title',
 		'description',
 		'content',
     ];

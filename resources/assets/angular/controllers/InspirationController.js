@@ -29,10 +29,26 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		$scope.new_inspiration[type].type = type;
 
-		console.log($('#dropzone-photo').val());
+		switch (type) {
+			case 'photo':
+				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
+				break;
 
-		if (type == 'photo') {
-			$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
+			case 'video':
+
+				break;
+
+			case 'file':
+				$scope.new_inspiration['file'].content = $('#dropzone-file').val();
+				break;
+
+			case 'link':
+
+				break;
+
+			default:
+				
+				break;
 		}
 
 		InspirationService.addInspiration({inspiration: $scope.new_inspiration[type] }).then(function(response) {

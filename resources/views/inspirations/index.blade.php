@@ -96,8 +96,6 @@
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'photo'">
 									<div class="input-wrapper">
-										<!-- <textarea class="expanding" rows="1" ng-model="new_inspiration['photo'].content" cols="40" placeholder="Photo URL"></textarea> -->
-										<!-- <button class="btn btn-default" type="button" name="button">Add File</button> -->
 										@include('dropzone', ['type' => 'image', 'cc' => false, 'input_id' => 'dropzone-photo', 'value' => old('photo'), 'dropzone_id' => 1])
 									</div>
 									<div class="input-wrapper">
@@ -118,7 +116,7 @@
 
 								<form class="" action="index.html" method="post" ng-show="submission_type == 'file'">
 									<div class="input-wrapper">
-										<button class="btn btn-default" type="button" name="button">Add File</button>
+										@include('dropzone', ['type' => 'file', 'cc' => false, 'input_id' => 'dropzone-file', 'value' => old('file'), 'dropzone_id' => 2])
 									</div>
 									<div class="input-wrapper">
 										<textarea class="expanding" rows="1" ng-model="new_inspiration['file'].description" cols="40" placeholder="File Description"></textarea>
@@ -151,6 +149,14 @@
 
 						<div ng-show="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
 							<i class="fa fa-play"></i>
+						</div>
+
+						<div ng-show="inspiration.type == 'file'" class="file-tile-icon">
+							<i class="fa fa-file-text-o"></i>
+						</div>
+
+						<div ng-show="inspiration.type == 'link'" class="link-tile-icon">
+							<i class="fa fa-link"></i>
 						</div>
 
 						<div class="inner-container">

@@ -48,7 +48,7 @@ class UploadController extends Controller
 				// Image validators
 
 				$rules = array(
-				    'file' => 'image|max:3000',
+				    'file' => 'image|max:12000',
 				);
 
 				$validation = Validator::make($input, $rules);
