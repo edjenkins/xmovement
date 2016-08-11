@@ -47,16 +47,29 @@
 
     </div>
 
-    <div class="text-linethru">
-        <div class="line"></div>
-        <div class="text">{{ trans('common.or') }}</div>
-    </div>
+	@if (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true))
+	    <div class="text-linethru">
+	        <div class="line"></div>
+	        <div class="text">{{ trans('common.or') }}</div>
+	    </div>
+	@endif
 
-    <div class="form-group">
-        <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider') }}">
-            <i class="fa fa-fw fa-facebook"></i>
-            {{ trans('auth.facebook_login') }}
-        </a>
-    </div>
+	@if (env('FACEBOOK_AUTH', true))
+	    <div class="form-group">
+	        <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'facebook']) }}">
+	            <i class="fa fa-fw fa-facebook"></i>
+	            {{ trans('auth.facebook_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('LINKEDIN_AUTH', true))
+	    <div class="form-group">
+			<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
+	            <i class="fa fa-fw fa-linkedin"></i>
+	            {{ trans('auth.linkedin_login') }}
+	        </a>
+	    </div>
+	@endif
 
 </form>
