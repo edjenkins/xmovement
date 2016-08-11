@@ -169,7 +169,10 @@ return [
  		BrainSocket\BrainSocketServiceProvider::class,
 		App\Providers\CustomBrainSocketServiceProvider::class,
 
+		// Auth
         Laravel\Socialite\SocialiteServiceProvider::class,
+		Artesaos\LinkedIn\LinkedinServiceProvider::class,
+
 		Torann\LaravelMetaTags\MetaTagsServiceProvider::class,
 		Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
@@ -232,7 +235,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+		// Auth
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+		'LinkedIn'  => \Artesaos\LinkedIn\Facades\LinkedIn::class,
+
 		'MetaTag'   => Torann\LaravelMetaTags\Facades\MetaTag::class,
 		'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
 

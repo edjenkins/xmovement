@@ -17,7 +17,8 @@
         "intervention/imagecache": "^2.3",
         "gurzhii/laravel-sluggable-trait": "^1.0",
         "torann/laravel-meta-tags": "^3.0",
-        "bugsnag/bugsnag-laravel": "^2.0"
+        "bugsnag/bugsnag-laravel": "^2.0",
+        "artesaos/laravel-linkedin": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
