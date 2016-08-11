@@ -17,7 +17,7 @@ class CreateSocialProfilesTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('identifier')->nullable();
             $table->string('provider');
-            $table->json('profile')->nullable();
+            $table->text('profile')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
