@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
-use App\Jobs\SendWelcomeEmail;
 use Intervention\Image\ImageManager;
+
+use App\Jobs\SendWelcomeEmail;
 
 use Auth;
 use Image;
 use Input;
+use LinkedIn;
 use Log;
 use Mail;
 use Redirect;
@@ -21,6 +22,9 @@ use Socialite;
 use Session;
 use Storage;
 use URL;
+
+use App\User;
+use App\SocialProfile;
 
 class AuthController extends Controller
 {
@@ -128,6 +132,26 @@ class AuthController extends Controller
     }
 
     /**
+     * Fetch and store user's LinkedIn profile
+     *
+     * @param $linkedinUser
+     * @return User
+     */
+    private function fetchLinkedInProfile($linkedinUser, $user)
+    {
+		// Save the users profile
+		LinkedIn::setAccessToken($linkedinUser->token);
+		$linkedinProfile = LinkedIn::get('v1/people/~:(id,num-connections,picture-url,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)))');
+
+		SocialProfile::create([
+			'user_id' => $user->id,
+            'identifier' => $linkedinUser->id,
+            'provider' => 'linkedin',
+            'profile' => json_encode($linkedinProfile)
+        ]);
+	}
+
+    /**
      * Return user if exists; create and return if doesn't
      *
      * @param $linkedinUser
@@ -135,8 +159,11 @@ class AuthController extends Controller
      */
     private function findOrCreateLinkedinUser($linkedinUser)
     {
-        if ($authUser = User::where('linkedin_id', $linkedinUser->id)->first()) {
-            return $authUser;
+        if ($user = User::where('linkedin_id', $linkedinUser->id)->first()) {
+
+			$this->fetchLinkedInProfile($linkedinUser, $user);
+
+            return $user;
         }
 
 		$extension = 'jpg';
@@ -179,6 +206,8 @@ class AuthController extends Controller
             'avatar' => $filename,
             'token' => $linkedinUser->token
         ]);
+
+		$this->fetchLinkedInProfile($linkedinUser, $user);
 
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
 
