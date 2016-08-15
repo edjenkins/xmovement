@@ -8,7 +8,7 @@
 
 		@include('emails/components/line', ['text' => trans('comment_reply_email.line_1', ['text' => $comment->text, 'receiver_name' => $receiver->name])])
 
-		@include('emails/components/line', ['text' => trans('comment_reply_email.line_2', ['text' => $comment->text, 'sender_name' => $sender->name])])
+		@include('emails/components/line', ['text' => trans('comment_reply_email.line_2', ['text' => $reply->text, 'sender_name' => $sender->name])])
 
 		@include('emails/components/signature')
 

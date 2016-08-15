@@ -97,11 +97,11 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 					// Send email notification to original commenter
 					$in_reply_to_comment = Comment::where('id', $in_reply_to_comment_id)->with('user')->first();
 					$reply = $comment;
-					
+
 					if ($in_reply_to_comment->user->id != $user_id)
 					{
 						// Notify users via email
-						$job = (new SendCommentReplyEmail(Auth::user(), $in_reply_to_comment->user, $in_reply_to_comment, $reply))->delay(5)->onQueue('emails');
+						$job = (new SendCommentReplyEmail($currentUser, $in_reply_to_comment->user, $in_reply_to_comment, $reply))->delay(5)->onQueue('emails');
 						$this->dispatch($job);
 					}
 				}
