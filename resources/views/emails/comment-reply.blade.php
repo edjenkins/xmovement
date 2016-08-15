@@ -1,17 +1,17 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>{{ $sender->name }} has replied to your comment.</h3>
+	@include('emails/components/header', ['text' => trans('comment_reply_email.header', ['sender_name' => $sender->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		"{{ $comment->text }}" - {{ $receiver->name }}
-	</p>
+	@include('emails/components/wrapper-start')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		"{{ $reply->text }}" - {{ $sender->name }}
-	</p>
+		@include('emails/components/line', ['text' => trans('comment_reply_email.line_1', ['text' => $comment->text, 'receiver_name' => $receiver->name])])
 
-	@include('emails/email-footer')
+		@include('emails/components/line', ['text' => trans('comment_reply_email.line_2', ['text' => $comment->text, 'sender_name' => $sender->name])])
 
-</body>
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection
