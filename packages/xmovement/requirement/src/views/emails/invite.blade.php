@@ -1,19 +1,23 @@
-<body>
+@extends('layouts.email')
 
-	@include('../../../emails/email-header')
+@section('content')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Hey {{ $name }},
-	<br /><br />
-		You have been nominated by {{ $user['name'] }} to fill the following requirement - <a href="{{ $link }}">{{ $link }}</a>
-	<br /><br />
-		{{ $user['name'] }} added the following message:
-	<br /><br />
-		"{{ $personal_message }}"
-	<br /><br />
-		Have fun, XMovement team
-	</p>
+	@include('emails/components/header', ['text' => trans('xmovement_invite_email.header')])
 
-	@include('../../../emails/email-footer')
+	@include('emails/components/wrapper-start')
 
-</body>
+		@include('emails/components/line', ['text' => trans('xmovement_invite_email.line_1', ['receiver_name' => $name])])
+
+		@include('emails/components/subheader', ['text' => trans('xmovement_invite_email.line_2', ['sender_name' => $user->name])])
+
+		@include('emails/components/link', ['text' => trans('emails.view_requirement'), 'url' => $link])
+
+		@include('emails/components/line', ['text' => trans('xmovement_invite_email.line_3', ['sender_name' => $user->name])])
+
+		@include('emails/components/subheader', ['text' => trans('xmovement_invite_email.line_4', ['text' => $personal_message])])
+
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection

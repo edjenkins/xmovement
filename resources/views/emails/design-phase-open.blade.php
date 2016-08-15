@@ -1,43 +1,27 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>Great news, the Get Involved Phase for {{ $idea->name }} has just opened!</h3>
+	@include('emails/components/header', ['text' => trans('design_phase_open_email.header', ['idea_name' => $idea->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Now you can help develop the idea through by joining in with discussion and creating your own talking points.
-	</p>
+	@include('emails/components/wrapper-start')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<a style="color: white; background-color: #6CCCA4; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: normal; font-size: 1.1em;" href="{{ action('DesignController@dashboard', $idea) }}">Visit the Dashboard</a>
-	</p>
+		@include('emails/components/line', ['text' => trans('design_phase_open_email.line_1')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Join in with talking points to chip in your thoughts and suggestions.
-	</p>
+		@include('emails/components/link', ['text' => trans('emails.view_dashboard_page'), 'url' => action('IdeaController@view', $idea)])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Add new talking points to help develop the idea further
-	</p>
+		@include('emails/components/line', ['text' => trans('design_phase_open_email.line_2')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Vote on your favourite responses
-	</p>
+		@include('emails/components/line', ['text' => trans('design_phase_open_email.line_3')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		It’s not too late to gather more supporters for this {{ trans_choice('common.idea', 1) }}, so spread the word!
-	</p>
+		@include('emails/components/line', ['text' => trans('design_phase_open_email.line_4')])
 
-	<?php // TODO: ADD social media links ?>
+		@include('emails/components/line', ['text' => trans('design_phase_open_email.line_5')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<strong><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></strong> will be live for {{ $idea->proposalPhaseCloses() }}.
-	</p>
+		@include('emails/components/link', ['text' => trans('emails.live_for_x', ['idea_name' => $idea->name, 'time' => $idea->proposalPhaseCloses()]), 'url' => action('IdeaController@view', $idea)])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		- The {{ trans('common.brand') }} team
-	</p>
+		@include('emails/components/signature')
 
-	@include('emails/email-footer')
+	@include('emails/components/wrapper-end')
 
-</body>
+@endsection

@@ -1,17 +1,17 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>{{ $name }} has sent you a direct message.</h3>
+	@include('emails/components/header', ['text' => trans('contact_email.header', ['name' => $sender->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		"{{ $text }}" - {{ $name }}
-	</p>
+	@include('emails/components/wrapper-start')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Their email address - {{ $email }}
-	</p>
+		@include('emails/components/line', ['text' => trans('contact_email.line_1', ['text' => $text, 'name' => $name])])
 
-	@include('emails/email-footer')
+		@include('emails/components/line', ['text' => trans('contact_email.line_2', ['email' => $email])])
 
-</body>
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection

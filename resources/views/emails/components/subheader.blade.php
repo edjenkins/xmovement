@@ -1,0 +1,3 @@
+<p style="color: #444; font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.25em; font-weight: bold; margin: 0; padding: 15px 0;">
+	{{ $text }}
+</p>

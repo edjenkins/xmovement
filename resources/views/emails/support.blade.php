@@ -1,29 +1,27 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>Thanks for supporting {{ $idea->name }}, so what’s next?</h3>
+	@include('emails/components/header', ['text' => trans('support_email.header')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Ideas go through different phases, and you should get involved in each step to help the {{ trans_choice('common.idea', 1) }} become a reality. In the Get Involved phase you can create talking points to help develop and shape the {{ trans_choice('common.idea', 1) }}. Afterwards, in the Plan It phase, you can help choose what the final event should look like. Check the {{ trans_choice('common.idea', 1) }} page to see what phase it is in.
-	</p>
+	@include('emails/components/banner', ['image' => ResourceImage::getImage($idea->photo, 'banner')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Find out more about phases and how {{ trans('common.brand') }} works on our <a href="{{ action('PageController@about') }}">About page</a>
-	</p>
+	@include('emails/components/wrapper-start')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		 <a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a> will only get stronger, the more people who support it. So spread the word!
-	</p>
+		@include('emails/components/line', ['text' => trans('support_email.line_1', ['idea_name' => $idea->name])])
 
-	<?php // TODO: ADD social media links ?>
+		@include('emails/components/line', ['text' => trans('support_email.line_2')])
 
-	<?php // TODO: ADD featured ideas ?>
+		@include('emails/components/link', ['text' => trans('emails.view_about_page'), 'url' => action('PageController@about')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		- The {{ trans('common.brand') }} team
-	</p>
+		@include('emails/components/line', ['text' => trans('support_email.line_3')])
 
-	@include('emails/email-footer')
+		@include('emails/components/line', ['text' => trans('support_email.line_4', ['idea_name' => $idea->name])])
 
-</body>
+		@include('emails/components/link', ['text' => trans('emails.view_idea_page'), 'url' => action('IdeaController@view', $idea)])
+
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection
