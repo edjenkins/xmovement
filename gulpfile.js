@@ -28,7 +28,7 @@ elixir(function(mix) {
 
 	mix.scriptsIn('resources/assets/js/angular', 'public/js/angular.js');
 
-	mix.copy('resources/assets/css/*', 'public/css');
+	mix.stylus('resources/assets/stylus/email.styl', 'public/css/email.css');
 
 	mix.stylus('app.styl', null, { use: [ bootstrap() ] });
 

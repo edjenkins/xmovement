@@ -1,37 +1,21 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>Hi {{ $user->name }}, just to let you know that {{ $idea->name }} has now ended.</h3>
+	@include('emails/components/header', ['text' => trans('proposal_phase_failed_email.header')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Unfortunately, there were no Plans made for {{ $idea->name }}
-	</p>
+	@include('emails/components/wrapper-start')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		There were {{ $idea->supporterCount() }} supporters for the idea.
-	</p>
+		@include('emails/components/line', ['text' => trans('proposal_phase_failed_email.line_1', ['user_name' => $user->name, 'idea_name' => $idea->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		A good Plan depends on lots of good Talking Points and an active community in the Get Involved phase. The more supporters you have the better!
-	</p>
+		@include('emails/components/line', ['text' => trans('proposal_phase_failed_email.line_2', ['idea_name' => $idea->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Don’t let that put you off though, as you can always start a new idea.
-	</p>
+		@include('emails/components/line', ['text' => trans('proposal_phase_failed_email.line_3', ['supporter_count' => $idea->supporterCount()])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		<strong>So what next?</strong>
-	</p>
+		@include('emails/components/line', ['text' => trans('proposal_phase_failed_email.line_4')])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		The Support, Get Involved and Plan phases are all closed, so why not support another idea, or start a new one? Don’t forget to let your supporters know about your new idea!
-	</p>
+		@include('emails/components/signature')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		- The {{ trans('common.brand') }} team
-	</p>
+	@include('emails/components/wrapper-end')
 
-	@include('emails/email-footer')
-
-</body>
+@endsection

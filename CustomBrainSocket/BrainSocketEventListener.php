@@ -6,6 +6,9 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
 use Illuminate\Session\SessionManager;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+
+use App\Jobs\SendCommentReplyEmail;
 
 use App\User;
 use App\Comment;
@@ -21,6 +24,7 @@ use View;
 
 class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener implements MessageComponentInterface {
 
+	use DispatchesJobs;
 
 	public function onOpen(ConnectionInterface $conn) {
 
@@ -44,6 +48,8 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 	    $from->session->start();
 
 		$idUser = $from->session->get(Auth::getName());
+
+		Log::info('Auth::getName() - ' . Auth::getName());
 
 		if (!isset($idUser)) {
 	        echo "the user is not logged via an http session";
@@ -85,6 +91,20 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 					'url' => $url,
 					'in_reply_to_comment_id' => $in_reply_to_comment_id
 				]);
+
+				if ($in_reply_to_comment_id)
+				{
+					// Send email notification to original commenter
+					$in_reply_to_comment = Comment::where('id', $in_reply_to_comment_id)->with('user')->first();
+					$reply = $comment;
+
+					if ($in_reply_to_comment->user->id != $user_id)
+					{
+						// Notify users via email
+						$job = (new SendCommentReplyEmail($currentUser, $in_reply_to_comment->user, $in_reply_to_comment, $reply))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
+					}
+				}
 
 				$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $currentUser])->render();
 			}

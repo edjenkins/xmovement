@@ -1,13 +1,15 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>{{ $sender->name }} has sent you a direct message.</h3>
+	@include('emails/components/header', ['text' => trans('direct_message_email.header', ['sender_name' => $sender->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		"{{ $direct_message->text }}" - {{ $sender->name }}
-	</p>
+	@include('emails/components/wrapper-start')
 
-	@include('emails/email-footer')
+		@include('emails/components/line', ['text' => trans('direct_message_email.line_1', ['text' => $direct_message->text, 'sender_name' => $sender->name])])
 
-</body>
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection

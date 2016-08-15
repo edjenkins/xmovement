@@ -208,7 +208,7 @@ class AuthController extends Controller
         ]);
 
 		$this->fetchLinkedInProfile($linkedinUser, $user);
-
+		
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
