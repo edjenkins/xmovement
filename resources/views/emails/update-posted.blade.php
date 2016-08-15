@@ -1,13 +1,21 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<h3>{{ $sender->name }} has posted an update for <a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a>.</h3>
+	@include('emails/components/header', ['text' => trans('update_posted_email.header', ['sender_name' => $sender->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		"{{ $update->text }}" - {{ $sender->name }}
-	</p>
+	@include('emails/components/banner', ['image' => ResourceImage::getImage($idea->photo, 'banner')])
 
-	@include('emails/email-footer')
+	@include('emails/components/wrapper-start')
 
-</body>
+		@include('emails/components/line', ['text' => trans('update_posted_email.line_1', ['sender_name' => $sender->name, 'idea_name' => $idea->name])])
+
+		@include('emails/components/line', ['text' => trans('update_posted_email.line_2', ['sender_name' => $sender->name, 'text_name' => $text])])
+
+		@include('emails/components/link', ['text' => trans('emails.view_idea_page'), 'url' => action('IdeaController@view', $idea)])
+
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection
