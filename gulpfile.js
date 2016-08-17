@@ -23,6 +23,7 @@ elixir(function(mix) {
 	], 'public/js/vendor.js');
 
 	mix.copy('./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css', 'public/css/jquery-ui-slider-pips.css');
+	mix.copy('./bower_components/animate.css/animate.min.css', 'public/css/animate.min.css');
 	mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
 	mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css.map', 'public/css/bootstrap.min.css.map');
 

@@ -42,7 +42,7 @@ class UserPolicy
      * @param  User  $profile
      * @return bool
      */
-    public function viewNews(User $user, User $profile)
+    public function view_news(User $user, User $profile)
     {
         return true;
     }
@@ -54,7 +54,7 @@ class UserPolicy
      * @param  User  $profile
      * @return bool
      */
-    public function viewMessages(User $user, User $profile)
+    public function view_messages(User $user, User $profile)
     {
         return $user->id == $profile->id;
     }
@@ -66,7 +66,7 @@ class UserPolicy
      * @param  User  $profile
      * @return bool
      */
-    public function editPreferences(User $user, User $profile)
+    public function edit_preferences(User $user, User $profile)
     {
         return $user->id == $profile->id;
     }

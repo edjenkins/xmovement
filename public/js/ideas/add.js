@@ -23,27 +23,55 @@ $(document).ready(function() {
 	$('#idea-duration-slider').slider('value', parseInt($('#idea-duration-slider').attr('data-value')));
 })
 
-function nextStep()
+function showStep(direction)
 {
-    var step = $('.idea-form').attr('data-current-step');
-    step++;
-    showStep(step);
-}
+	$.fn.extend({
+	    animateCss: function (animationName) {
+	        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+	        $(this).addClass('animated ' + animationName).one(animationEnd, function() {
+	            $(this).removeClass('animated ' + animationName);
+	        });
+	    }
+	});
 
-function previousStep()
-{
-    var step = $('.idea-form').attr('data-current-step');
-    step--;
-    showStep(step);
-}
+	var current_step = $('.idea-form').attr('data-current-step');
+	var next_step = $('.idea-form').attr('data-current-step');
 
-function showStep(step)
-{
-    if (($('#form-page-' + step).length == 0) || $('.idea-form').hasClass('has-errors')) { return; }
+	var firstLoop = true;
 
-    $('.idea-form').attr('data-current-step', step);
-    $('.form-page').removeClass('visible');
-    $('#form-page-' + step).addClass('visible')
-    $('#page-title').html($('#form-page-' + step).attr('data-title'));
-    $('#form-page-' + step + ' input:text, #form-page-' + step + ' textarea').first().focus();
+	// Checks if the form page with the step id exists if not continues
+	while (($('#form-page-' + next_step).length == 0) || firstLoop) {
+		firstLoop = false;
+		if (direction == 'next') { next_step++; }
+		if (direction == 'previous') { next_step--; }
+		if ((next_step < 0) || (next_step > 100)) {
+			console.log('Page not found');
+			return;
+		}
+	}
+
+    $('.idea-form').attr('data-current-step', next_step);
+    $('.form-page').removeClass('fadeInRight fadeInLeft fadeOutRight fadeOutLeft');
+
+	var animateIn = (direction == 'next') ? 'fadeInRight': 'fadeInLeft';
+	var animateOut = (direction == 'next') ? 'fadeOutLeft': 'fadeOutRight';
+
+	$('#form-page-' + current_step).animateCss(animateOut);
+
+	setTimeout(function() {
+
+		// Set page title/header
+		$('#page-title').html($('#form-page-' + next_step).attr('data-title')).animateCss('tada');
+
+		// Animate page transition
+		$('#form-page-' + current_step).removeClass('visible');
+		$('#form-page-' + next_step).addClass('visible');
+		$('#form-page-' + next_step).animateCss(animateIn);
+
+		// Focus on first field
+		$('#form-page-' + next_step + ' input:text, #form-page-' + next_step + ' textarea').first().focus();
+
+		// Set textareas to expand
+		$('textarea').expanding();
+	}, 300);
 }

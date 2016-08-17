@@ -6,6 +6,7 @@
 	text-align center
 	.form-page
 		display none
+		animation-duration 0.3s
 		&.visible
 			display block
 		.form-page-header
@@ -26,21 +27,9 @@
 					font-size 15px
 					font-weight normal
 					margin-bottom 20px
-				input.form-control
-					border none
-					border #e1e1e1 1px solid
-					box-shadow none
-					height auto
-					font-size 24px
-					line-height 30px
-					margin 0 auto 20px auto
-					max-width 400px
-					padding 12px 10px
-					outline 0
-					text-align center
 				textarea
 					border none
-					border #e1e1e1 1px solid
+					border border-color 1px solid
 					border-radius 6px
 					box-shadow none
 					font-size 18px
@@ -49,6 +38,22 @@
 					padding 20px
 					outline 0
 					width 600px
+				#pre-populated-design-tasks
+					.expanding-wrapper
+						margin-bottom 20px
+			.cc-container
+				#cc-search-field-wrapper
+					border-radius 6px
+					overflow hidden
+				#cc-search-field
+					font-size 16px
+					padding  20px
+				#cc-search-button
+					position absolute
+					margin 0
+					padding 22px
+					right 0px
+					top 0px
 
 	&.has-errors .step-button
 		display none

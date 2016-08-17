@@ -19,6 +19,7 @@
     <!-- Styles -->
 	<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
 	<link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ URL::asset('css/animate.min.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('css/jquery-ui-slider-pips.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('css/easydropdown/easydropdown.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('css/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
