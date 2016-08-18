@@ -12,6 +12,7 @@ use Lang;
 use Log;
 use MetaTag;
 use Response;
+use Session;
 
 use App\User;
 use App\Inspiration;
@@ -43,6 +44,15 @@ class InspirationController extends Controller
 
 	public function index(Request $request)
 	{
+		if (!env('IDEATION_PHASE_ENABLED'))
+		{
+			// Ideation phase disabled
+			Session::flash('flash_message', trans('flash_message.page_not_found'));
+            Session::flash('flash_type', 'flash-danger');
+
+			return redirect()->action('PageController@home');
+		}
+
 		$inspirations = Inspiration::orderBy('created_at', 'desc');
 
 		# META
@@ -102,7 +112,7 @@ class InspirationController extends Controller
 
     }
 
-    public function getVideoEmbedLink($value)
+    private function getVideoEmbedLink($value)
     {
         // Check if youtube
         if (preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $value, $matches))
@@ -125,7 +135,7 @@ class InspirationController extends Controller
         }
     }
 
-    public function getVideoThumbnail($value)
+    private function getVideoThumbnail($value)
     {
         // Check if youtube
         if (preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $value, $matches))

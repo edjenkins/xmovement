@@ -70,18 +70,6 @@
 
 					<div class="side-panel">
 
-						<div class="side-panel-box info-box">
-							<div class="side-panel-box-header">
-								Competition Guidelines
-							</div>
-							<div class="side-panel-box-content">
-								<p>
-									Please be sure to read our simple competition guidelines before getting involved.
-								</p>
-								<button class="btn" type="button" name="button">Read Guidelines</button>
-							</div>
-						</div>
-
 						<div class="side-panel-box submission-box">
 							<div class="side-panel-box-header">
 								Add Inspiration
@@ -136,14 +124,26 @@
 							</div>
 						</div>
 
+						<div class="side-panel-box info-box">
+							<div class="side-panel-box-header">
+								Competition Guidelines
+							</div>
+							<div class="side-panel-box-content">
+								<p>
+									Please be sure to read our simple competition guidelines before getting involved.
+								</p>
+								<button class="btn" type="button" name="button">Read Guidelines</button>
+							</div>
+						</div>
+
 					</div>
 
 				</div>
 
 
-				<div id="masonry-grid" masonry reload-on-show reload-on-resize prepend="isPrepended()" class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
+				<div id="masonry-grid" masonry reload-on-show reload-on-resize class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
 
-					<div class="tile masonry-brick inspiration-tile"  ng-repeat="inspiration in inspirations" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
+					<div class="tile masonry-brick inspiration-tile" ng-repeat="inspiration in inspirations" prepend="<% inspiration.prepended %>" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
 
 						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% inspiration.content %>"></img>
 

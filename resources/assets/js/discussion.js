@@ -3,18 +3,16 @@ function startListening()
 	window.app = {};
 
 	app.BrainSocket = new BrainSocket(
-	        new WebSocket(web_scoket_url),
-	        new BrainSocketPubSub()
+			new WebSocket(web_scoket_url),
+			new BrainSocketPubSub()
 	);
 
 	app.BrainSocket.Event.listen('comment.posted',function(msg)
 	{
-		console.log('Comment received');
-
 		// Check comment is for current page
 		if (msg.client.data.url == window.location.href)
 		{
-			if (msg.client.data.in_reply_to_comment_id != "")
+			if (msg.client.data.in_reply_to_comment_id)
 			{
 				// This is a reply
 				$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
@@ -23,15 +21,12 @@ function startListening()
 			{
 				$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
 			}
-
 			attachHandlers();
 		}
 	});
 
 	app.BrainSocket.Event.listen('comment.error',function(msg)
 	{
-		console.log('Comment error received');
-
 		if (msg.client.user_id == current_user_id)
 		{
 			alert(msg.client.errors[0]);
@@ -39,7 +34,6 @@ function startListening()
 
 		attachHandlers();
 	});
-
 }
 
 function attachHandlers()
@@ -107,7 +101,17 @@ function attachHandlers()
 
 $(document).ready(function() {
 
-	$.getJSON("/api/comment/view", {url: window.location.href} , function(response) {
+	fetchComments(window.location.href);
+
+	startListening();
+
+});
+
+function fetchComments(url) {
+
+	$('#comments-container').html('');
+
+	$.getJSON("/api/comment/view", {url: url} , function(response) {
 
 		if (response) {
 
@@ -119,15 +123,17 @@ $(document).ready(function() {
 
 			attachHandlers();
 
-			startListening();
+			// startListening();
 		}
 	});
 
-});
+}
 
 function postComment(wrapper)
 {
 	var in_reply_to_comment_id = wrapper.attr('data-in-reply-to-comment-id');
+
+	in_reply_to_comment_id = (in_reply_to_comment_id) ? in_reply_to_comment_id : 0;
 
 	// Get comment from textarea
 	var comment = wrapper.find('textarea').val();
@@ -141,9 +147,6 @@ function postComment(wrapper)
 	// Post message
 	var data = { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
 	app.BrainSocket.message('comment.posted', data);
-
-	console.log('Posting comment..');
-	console.log(data);
 }
 
 function destroyComment(delete_button)

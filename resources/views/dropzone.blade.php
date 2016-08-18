@@ -4,7 +4,7 @@
 
 <input type="hidden" name="{{ $input_id }}" id="{{ $input_id }}" value="{{ isset($value) ? $value : "" }}" />
 
-<input type="hidden" name="type" value="file" />
+<input type="hidden" name="type" value="{{ $type }}" />
 
 @if ($cc)
 

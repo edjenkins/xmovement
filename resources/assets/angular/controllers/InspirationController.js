@@ -1,4 +1,4 @@
-XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, InspirationService) {
+XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, $location, InspirationService) {
 
 	$scope.inspirations = [];
 	$scope.selected_inspiration = {};
@@ -47,19 +47,21 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				break;
 
 			default:
-				
+
 				break;
 		}
 
 		InspirationService.addInspiration({inspiration: $scope.new_inspiration[type] }).then(function(response) {
 
-			console.log(response);
-
 			if (response.meta.success)
 			{
-				$scope.inspirations.splice($scope.formatInspirations([response.data.inspiration])[0]);
+				// $scope.inspirations.splice(0, 1, $scope.formatInspiration(response.data.inspiration));
+				// inspiration["prepended"] = true;
+				// $('#masonry-grid').masonry('reload');
+				//  | orderBy:sort_type:true
+				var inspiration = response.data.inspiration;
+				$scope.inspirations.push($scope.formatInspiration(inspiration));
 			}
-
 		});
 	}
 
@@ -67,20 +69,34 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		for (var i = 0; i < inspirations.length; i++)
 		{
-			if (inspirations[i].type == 'video')
-			{
-				inspirations[i].content = JSON.parse(inspirations[i].content);
-			}
+			$scope.formatInspiration(inspirations[i]);
 		}
 
 		return inspirations;
+	}
 
+
+	$scope.formatInspiration = function(inspiration) {
+
+		inspiration["prepended"] = (inspiration["prepended"]) ? inspiration["prepended"] : false;
+
+		if (inspiration.type == 'video')
+		{
+			inspiration.content = JSON.parse(inspiration.content);
+		}
+
+		return inspiration;
 	}
 
 	$scope.openInspirationModal = function(inspiration) {
 
-		$scope.selected_inspiration = inspiration;
+		$location.hash(inspiration.id);
 
+		var url = $location.absUrl();
+
+		fetchComments(url);
+
+		$scope.selected_inspiration = inspiration;
 	}
 
 	$scope.setIframeUrl = function(url) {

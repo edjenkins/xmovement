@@ -5,6 +5,14 @@ var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'wu.masonry
 	$interpolateProvider.endSymbol('%>');
 })
 
+XMovement.config(['$locationProvider',
+
+	function($locationProvider) {
+		$locationProvider.html5Mode(true);
+	}
+
+]);
+
 XMovement.filter('cut', function () {
 	return function (value, wordwise, max, tail) {
 		if (!value) return '';

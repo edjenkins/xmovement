@@ -23,7 +23,9 @@
 
                 <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
 
-				<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
+				@if (env('IDEATION_PHASE_ENABLED'))
+					<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
+				@endif
 
                 <li><a href="{{ action('IdeaController@index') }}">{{ trans('navbar.explore') }}</a></li>
 
