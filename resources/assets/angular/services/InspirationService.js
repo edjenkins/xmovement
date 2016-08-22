@@ -17,5 +17,14 @@ XMovement.service('InspirationService', function($http, $q) {
 				defer.reject(err);
 			});
 			return defer.promise;
+		},
+		'deleteInspiration': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/inspiration/delete', body).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
 		}
 	}})

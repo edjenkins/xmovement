@@ -4,6 +4,19 @@
 
 		<div class="modal-content">
 
+			<ul class="inspiration-header">
+
+				<li class="pull-left inspiration-tag">
+					<i class="fa fa-fw fa-tag"></i>
+					Dementia
+				</li>
+
+				<li class="pull-right close-inspiration">
+					<i class="fa fa-fw fa-times"></i>
+				</li>
+
+			</ul>
+
 			<div class="modal-body">
 
 				<div ng-show="selected_inspiration.type == 'video'" class="video-preview-wrapper embed-responsive embed-responsive-16by9">
@@ -24,13 +37,34 @@
 					<a href="<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
 				</div>
 
-				<br>
-
-				<p>
+				<p class="inspiration-description">
 					<% selected_inspiration.description %>
 				</p>
 
 			</div>
+
+			<ul class="inspiration-toolbar">
+
+				<li class="pull-left author-link">
+					Shared by
+					<a href="/profile/<% selected_inspiration.user.id %>"><% selected_inspiration.user.name %></a>
+				</li>
+
+				<li class="pull-right inspiration-action" ng-click="deleteInspiration(selected_inspiration)">
+					<i class="fa fa-fw fa-trash"></i>
+				</li>
+
+				<li class="pull-right inspiration-action" ng-click="reportInspiration(selected_inspiration)">
+					<i class="fa fa-fw fa-flag"></i>
+				</li>
+
+				<li class="pull-right inspiration-action" ng-click="favouriteInspiration(selected_inspiration)">
+					<i class="fa fa-fw fa-star"></i>
+				</li>
+
+				<div class="clearfloat"></div>
+
+			</ul>
 
 			<div class="comments-section">
 

@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use Gate;
 use Lang;
 use Log;
 use MetaTag;
@@ -37,7 +38,7 @@ class InspirationController extends Controller
 
 		$response->meta['success'] = true;
 
-		$response->data['inspirations'] = Inspiration::orderBy('created_at', 'desc')->get();
+		$response->data['inspirations'] = Inspiration::with('user')->orderBy('created_at', 'desc')->get();
 
 		return Response::json($response);
 	}
@@ -109,7 +110,28 @@ class InspirationController extends Controller
 		}
 
         return Response::json($response);
+    }
 
+    public function destroy(Request $request)
+    {
+        $response = new ResponseObject();
+
+		$inspiration_id = $request->inspiration_id;
+
+		$inspiration = Inspiration::find($inspiration_id);
+
+		if (Gate::denies('destroy', $inspiration))
+		{
+			array_push($response->errors, Lang::get('flash_message.no_permission'));
+		}
+		else
+		{
+			$inspiration->delete();
+
+			$response->meta['success'] = true;
+		}
+
+        return Response::json($response);
     }
 
     private function getVideoEmbedLink($value)

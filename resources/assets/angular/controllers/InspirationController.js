@@ -35,7 +35,6 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				break;
 
 			case 'video':
-
 				break;
 
 			case 'file':
@@ -43,11 +42,9 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				break;
 
 			case 'link':
-
 				break;
 
 			default:
-
 				break;
 		}
 
@@ -60,15 +57,26 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				// $('#masonry-grid').masonry('reload');
 				//  | orderBy:sort_type:true
 				var inspiration = response.data.inspiration;
-				$scope.inspirations.push($scope.formatInspiration(inspiration));
+				// $scope.inspirations.push($scope.formatInspiration(inspiration));
+				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
 			}
+		});
+	}
+
+	$scope.deleteInspiration = function(inspiration) {
+
+		console.log("Deleting inspiration");
+
+		InspirationService.deleteInspiration({ inspiration_id: inspiration.id }).then(function(response) {
+
+			console.log(response);
+
 		});
 	}
 
 	$scope.formatInspirations = function(inspirations) {
 
-		for (var i = 0; i < inspirations.length; i++)
-		{
+		for (var i = 0; i < inspirations.length; i++) {
 			$scope.formatInspiration(inspirations[i]);
 		}
 

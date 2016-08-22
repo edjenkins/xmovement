@@ -33,6 +33,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * The Inspirations the user has created.
+     *
+     * @var array
+     */
+    public function inspirations()
+    {
+        return $this->hasMany(Inspiration::class);
+    }
+
+    /**
      * The Ideas the user has created.
      *
      * @var array
