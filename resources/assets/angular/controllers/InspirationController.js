@@ -14,9 +14,28 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		console.log("Loading inspirations");
 
-		InspirationService.getInspirations().then(function(response) {
+		$scope.loadInspirations('recent');
+	}
+
+	$scope.loadInspirations = function(sort_type) {
+
+		$scope.sort_type = sort_type;
+
+		InspirationService.getInspirations({ sort_type: sort_type }).then(function(response) {
 
 			console.log(response);
+
+			switch (sort_type) {
+
+				case 'popular':
+					response.data.inspirations = _.sortBy(response.data.inspirations, function(inspiration){ return inspiration.favourited_count; }).reverse();
+					break;
+
+				default:
+					response.data.inspirations = response.data.inspirations;
+					break;
+
+			}
 
 			$scope.inspirations = $scope.formatInspirations(response.data.inspirations);
 
@@ -57,8 +76,61 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				// $('#masonry-grid').masonry('reload');
 				//  | orderBy:sort_type:true
 				var inspiration = response.data.inspiration;
+
+				console.log(inspiration);
+
 				// $scope.inspirations.push($scope.formatInspiration(inspiration));
 				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
+			}
+		});
+	}
+
+	$scope.favouriteInspiration = function(inspiration) {
+
+		console.log("Favouriting inspiration");
+
+		inspiration.favouriting = true;
+
+		InspirationService.favouriteInspiration({ inspiration_id: inspiration.id }).then(function(response) {
+
+			console.log(response);
+
+			if (response.meta.success)
+			{
+				// Update count
+				inspiration.favourited_count = response.data.inspiration.favourited_count;
+				inspiration.has_favourited = response.data.inspiration.has_favourited;
+			}
+			else
+			{
+				$.each(response.errors, function(index, error) {
+					alert(error);
+				});
+			}
+
+			inspiration.favouriting = false;
+		});
+	}
+
+	$scope.reportInspiration = function(inspiration) {
+
+		console.log("Reporting inspiration");
+
+		InspirationService.reportInspiration({ reportable_id: inspiration.id, reportable_type: 'inspiration' }).then(function(response) {
+
+			console.log(response);
+
+			if (response.meta.success)
+			{
+				$.each(response.data.messages, function(index, message) {
+					alert(message);
+				});
+			}
+			else
+			{
+				$.each(response.errors, function(index, error) {
+					alert(error);
+				});
 			}
 		});
 	}
@@ -71,6 +143,20 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			console.log(response);
 
+			if (response.meta.success)
+			{
+				$('#inspiration-modal').modal('hide');
+
+				$.each(response.data.messages, function(index, message) {
+					alert(message);
+				});
+			}
+			else
+			{
+				$.each(response.errors, function(index, error) {
+					alert(error);
+				});
+			}
 		});
 	}
 

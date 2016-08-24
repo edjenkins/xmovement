@@ -5,6 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Auth;
+use Log;
+
+use App\InspirationFavourite;
+
 class Inspiration extends Model
 {
     /**
@@ -19,6 +24,7 @@ class Inspiration extends Model
 		'content',
     ];
 
+	protected $appends = ['favourited_count', 'has_favourited'];
     protected $dates = ['deleted_at'];
 
 	use SoftDeletes;
@@ -27,5 +33,72 @@ class Inspiration extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+	public function favourite()
+	{
+		// Set old favourites
+		InspirationFavourite::where([
+			'inspiration_id' => $this->id,
+			'user_id' => Auth::user()->id,
+		])->update(['latest' => false]);
+
+		// Add new favourite
+		$inspiration_favourite = InspirationFavourite::create([
+			'user_id' => Auth::user()->id,
+			'inspiration_id' => $this->id,
+			'value' => 1,
+			'latest' => true
+		]);
+
+		return $inspiration_favourite;
+	}
+
+	public function unfavourite()
+	{
+		// Set old favourites
+		InspirationFavourite::where([
+			'inspiration_id' => $this->id,
+			'user_id' => Auth::user()->id,
+		])->update(['latest' => false]);
+
+		// Add new unfavourite
+		$inspiration_favourite = InspirationFavourite::create([
+			'user_id' => Auth::user()->id,
+			'inspiration_id' => $this->id,
+			'value' => 0,
+			'latest' => true
+		]);
+
+		return $inspiration_favourite;
+	}
+
+    /**
+     * The Favourited Inspirations
+     *
+     * @var array
+     */
+    public function favourites()
+    {
+        return $this->hasMany(InspirationFavourite::class);
+    }
+
+	public function getFavouritedCountAttribute()
+	{
+		return InspirationFavourite::where([
+			'inspiration_id' => $this->id,
+			'value' => 1,
+			'latest' => true
+		])->count();
+	}
+
+	public function getHasFavouritedAttribute()
+	{
+		return InspirationFavourite::where([
+			'inspiration_id' => $this->id,
+			'user_id' => Auth::user()->id,
+			'value' => 1,
+			'latest' => true
+		])->exists();
+	}
 
 }

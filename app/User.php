@@ -10,7 +10,9 @@ use App\Proposal;
 use App\Comment;
 use App\DesignTask;
 use App\DesignTaskVote;
-use Auth;
+use App\Inspiration;
+// use App\InspirationFavourite;
+// use Auth;
 
 class User extends Authenticatable
 {
@@ -110,6 +112,22 @@ class User extends Authenticatable
     public function recent_messages()
     {
         return $this->hasMany(Message::class)->orderBy('created_at', 'desc')->take(10);
+    }
+
+    /**
+     * The Inspirations a user has favourited.
+     *
+     * @var array
+     */
+    public function favourite_inspirations()
+    {
+		// return $this->hasManyThrough(ContributionAvailableType::class, ContributionType::class, 'xmovement_contribution_id', 'id');
+
+        // return $this->hasManyThrough(InspirationFavourite::class, Inspiration::class, 'inspiration_id', 'id');
+		// return $this->hasManyThrough(InspirationFavourite::class, Inspiration::class);
+		return $this->hasManyThrough(Inspiration::class, InspirationFavourite::class, 'user_id', 'inspiration_id', 'id');
+		// return $this->hasManyThrough(Inspiration::class, InspirationFavourite::class, 'inspiration_id', 'id');
+		// return $this->hasMany(Inspiration::class);
     }
 
     /**

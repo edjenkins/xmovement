@@ -5,10 +5,10 @@
 	margin 30px auto 0 auto
 	padding-bottom 44px
 	overflow hidden
-	// display none
+	opacity 0
 	width calc((100% - 90px) / 3)//width calc((100% - 120px) / 4)
-	// &.loaded
-		// display block
+	&.loaded
+		opacity 1
 	&:hover
 		cursor pointer
 	@media(max-width: 1120px)
@@ -71,7 +71,7 @@
 			word-wrap break-all
 			a
 				color #CCC
-		p.inspiration-endorsements
+		p.inspiration-favourties
 			color #CCC
 			font-size 14px
 			line-height 44px
@@ -82,3 +82,8 @@
 			top 0
 			i
 				margin-left 4px
+
+			&.favourited
+				color #d5c243
+				&:hover
+					color darken(#d5c243, 10%)

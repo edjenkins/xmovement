@@ -17,9 +17,11 @@ var jscookie = require('js-cookie');
 elixir(function(mix) {
 
 	mix.scripts([
+		'./bower_components/underscore/underscore-min.js',
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.js',
 		'./bower_components/js-cookie/src/js.cookie.js',
 		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js',
+		'./resources/assets/vendor/easydropdown/jquery.easydropdown.js',
 		'./resources/assets/vendor/easydropdown/jquery.easydropdown.js',
 	], 'public/js/vendor.js');
 

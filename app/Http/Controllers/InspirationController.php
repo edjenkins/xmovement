@@ -17,6 +17,7 @@ use Session;
 
 use App\User;
 use App\Inspiration;
+use App\InspirationFavourite;
 
 class ResponseObject {
 
@@ -38,7 +39,23 @@ class InspirationController extends Controller
 
 		$response->meta['success'] = true;
 
-		$response->data['inspirations'] = Inspiration::with('user')->orderBy('created_at', 'desc')->get();
+		switch ($request->sort_type) {
+			case 'favourites':
+				$inspiration_favourites = InspirationFavourite::where([['user_id', Auth::user()->id], ['value', 1], ['latest', true]])->get();
+				$inspirations = [];
+				foreach ($inspiration_favourites as $index => $inspiration_favourite) {
+					$inspiration_id = $inspiration_favourite->inspiration_id;
+					$inspiration = Inspiration::whereId($inspiration_id)->with('user')->first();
+					array_push($inspirations, $inspiration);
+				}
+				break;
+
+			default:
+				$inspirations = Inspiration::with('user')->orderBy('created_at', 'desc')->get();
+				break;
+		}
+
+		$response->data['inspirations'] = $inspirations;
 
 		return Response::json($response);
 	}
@@ -54,7 +71,7 @@ class InspirationController extends Controller
 			return redirect()->action('PageController@home');
 		}
 
-		$inspirations = Inspiration::orderBy('created_at', 'desc');
+		$inspirations = Inspiration::with('user')->orderBy('created_at', 'desc');
 
 		# META
 		MetaTag::set('title', Lang::get('meta.ideas_index_title'));
@@ -101,16 +118,56 @@ class InspirationController extends Controller
             'content' => $content,
         ]);
 
+		$inspiration = Inspiration::whereId($inspiration->id)->with('user')->first();
+
+		Log::info($inspiration);
 
 		if ($inspiration)
 		{
 			$response->meta['success'] = true;
 			$response->data['inspiration'] = $inspiration;
-			// View::make('xmovement.contribution.contribution-inspiration', ['contributionSubmission' => $contributionSubmission, 'design_task' => $design_task])->render();
 		}
 
         return Response::json($response);
     }
+
+	public function favourite(Request $request)
+	{
+        $response = new ResponseObject();
+
+		$inspiration_id = $request->inspiration_id;
+
+		$inspiration = Inspiration::find($inspiration_id);
+
+		if (Gate::denies('favourite', $inspiration))
+		{
+			array_push($response->errors, Lang::get('flash_message.no_permission'));
+		}
+		else
+		{
+			if ($inspiration->has_favourited)
+			{
+				if ($inspiration->unfavourite())
+				{
+					$response->meta['success'] = true;
+					$response->data['messages'] = [Lang::get('flash_message.inspiration_unfavourited')];
+				}
+			}
+			else
+			{
+				if ($inspiration->favourite())
+				{
+					$response->meta['success'] = true;
+					$response->data['messages'] = [Lang::get('flash_message.inspiration_favourited')];
+
+				}
+			}
+		}
+
+		$response->data['inspiration'] = Inspiration::find($inspiration_id);
+
+        return Response::json($response);
+	}
 
     public function destroy(Request $request)
     {
@@ -126,9 +183,15 @@ class InspirationController extends Controller
 		}
 		else
 		{
-			$inspiration->delete();
-
-			$response->meta['success'] = true;
+			if ($inspiration->delete())
+			{
+				$response->meta['success'] = true;
+				$response->data['messages'] = [Lang::get('flash_message.inspiration_deleted')];
+			}
+			else
+			{
+				array_push($response->errors, Lang::get('flash_message.something_went_wrong'));
+			}
 		}
 
         return Response::json($response);

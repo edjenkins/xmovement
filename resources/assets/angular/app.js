@@ -1,6 +1,12 @@
 'use strict';
 
-var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'wu.masonry'], function($interpolateProvider) {
+var underscore = angular.module('underscore', []);
+
+underscore.factory('_', function() {
+	return window._;
+});
+
+var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'wu.masonry'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 })
@@ -8,7 +14,7 @@ var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'wu.masonry
 XMovement.config(['$locationProvider',
 
 	function($locationProvider) {
-		$locationProvider.html5Mode(true);
+		$locationProvider.html5Mode(false);
 	}
 
 ]);

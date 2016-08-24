@@ -23,4 +23,16 @@ class InspirationPolicy
 	{
 		return $user->id == $inspiration->user_id;
 	}
+
+	/**
+	 * Determine if the given user can favourite the given inspiration.
+	 *
+	 * @param  User  $user
+	 * @param  Inspiration  $inspiration
+	 * @return bool
+	 */
+	public function favourite(User $user, Inspiration $inspiration)
+	{
+		return true;
+	}
 }

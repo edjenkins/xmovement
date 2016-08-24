@@ -16,17 +16,23 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = 'created_at'">
+	    			<ul class="module-controls pull-left" ng-init="sort_type = 'recent'">
 
-						<li class="module-control" ng-click="sort_type = 'created_at'" ng-class="{'active':sort_type == 'created_at'}">
+						<li class="module-control" ng-click="loadInspirations('recent')" ng-class="{'active':sort_type == 'recent'}">
 
 							<button type="button">{{ trans('idea.sort_recent') }}</button>
 
 	    				</li>
 
-						<li class="module-control" ng-click="sort_type = 'supporter_count'" ng-class="{'active':sort_type == 'supporter_count'}">
+						<li class="module-control" ng-click="loadInspirations('popular')" ng-class="{'active':sort_type == 'popular'}">
 
 							<button type="button">{{ trans('idea.sort_popular') }}</button>
+
+	    				</li>
+
+						<li class="module-control" ng-click="loadInspirations('favourites')" ng-class="{'active':sort_type == 'favourites'}">
+
+							<button type="button">{{ trans('idea.sort_favourites') }}</button>
 
 	    				</li>
 
@@ -143,7 +149,7 @@
 
 				<div id="masonry-grid" masonry reload-on-show reload-on-resize class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
 
-					<div class="tile masonry-brick inspiration-tile" ng-repeat="inspiration in inspirations" prepend="<% inspiration.prepended %>" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
+					<div class="tile masonry-brick inspiration-tile" ng-repeat="inspiration in inspirations" ng-show="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" prepend="<% inspiration.prepended %>" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
 
 						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% inspiration.content %>"></img>
 
@@ -167,10 +173,10 @@
 
 						<div class="inspiration-tile-footer">
 							<p class="inspiration-author">
-								Edward Jenkins
+								<% inspiration.user.name %>
 							</p>
-							<p class="inspiration-endorsements">
-								7 <i class="fa fa-star"></i>
+							<p class="inspiration-favourties" ng-class="{ 'favourited' : inspiration.has_favourited }">
+								<% inspiration.favourited_count %> <i class="fa fa-fw" ng-class="inspiration.favouriting ? 'fa-spinner fa-pulse' : 'fa-star'"></i>
 							</p>
 						</div>
 					</div>

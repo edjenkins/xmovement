@@ -11,9 +11,11 @@
 					Dementia
 				</li>
 
-				<li class="pull-right close-inspiration">
+				<li class="pull-right close-inspiration" data-dismiss="modal">
 					<i class="fa fa-fw fa-times"></i>
 				</li>
+
+				<div class="clearfloat"></div>
 
 			</ul>
 
@@ -58,8 +60,8 @@
 					<i class="fa fa-fw fa-flag"></i>
 				</li>
 
-				<li class="pull-right inspiration-action" ng-click="favouriteInspiration(selected_inspiration)">
-					<i class="fa fa-fw fa-star"></i>
+				<li class="pull-right inspiration-action" ng-click="favouriteInspiration(selected_inspiration)" ng-class="{ 'favourited' : selected_inspiration.has_favourited }">
+					<% selected_inspiration.favourited_count %> <i class="fa fa-fw" ng-class="selected_inspiration.favouriting ? 'fa-spinner fa-pulse' : 'fa-star'"></i>
 				</li>
 
 				<div class="clearfloat"></div>
