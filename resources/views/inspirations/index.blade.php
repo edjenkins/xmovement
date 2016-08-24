@@ -147,9 +147,9 @@
 				</div>
 
 
-				<div id="masonry-grid" masonry reload-on-show reload-on-resize class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
+				<div isotope-container="isotope-container" id="isotopeContainer" isotope-container ng-cloak class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
 
-					<div class="tile masonry-brick inspiration-tile" ng-repeat="inspiration in inspirations" ng-show="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" prepend="<% inspiration.prepended %>" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
+					<div isotope-item="isotope-item" class="tile inspiration-tile isotope-item" ng-repeat="inspiration in inspirations" ng-show="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" prepend="<% inspiration.prepended %>" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
 
 						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% inspiration.content %>"></img>
 
@@ -192,7 +192,7 @@
 	</div>
 
 	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
-	<script src="{{ URL::asset('js/masonry.js') }}"></script>
 	<script src="{{ URL::asset('js/angular.js') }}"></script>
+	<script src="{{ URL::asset('js/isotope.js') }}"></script>
 
 @endsection

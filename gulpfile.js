@@ -17,7 +17,7 @@ var jscookie = require('js-cookie');
 elixir(function(mix) {
 
 	mix.scripts([
-		'./bower_components/underscore/underscore-min.js',
+		'./bower_components/underscore/underscore.js',
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.js',
 		'./bower_components/js-cookie/src/js.cookie.js',
 		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js',
@@ -38,6 +38,11 @@ elixir(function(mix) {
 		'./bower_components/angular/angular.js',
 		'./bower_components/angular-masonry/angular-masonry.js',
 	], 'public/js/masonry.js');
+
+	mix.scripts([
+		'./bower_components/isotope/jquery.isotope.js',
+		'./bower_components/angular-isotope/dist/angular-isotope.min.js',
+	], 'public/js/isotope.js');
 
 	mix.styles([
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css',

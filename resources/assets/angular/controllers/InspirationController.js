@@ -19,6 +19,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.loadInspirations = function(sort_type) {
 
+		$scope.inspirations = [];
+
 		$scope.sort_type = sort_type;
 
 		InspirationService.getInspirations({ sort_type: sort_type }).then(function(response) {
@@ -81,6 +83,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 				// $scope.inspirations.push($scope.formatInspiration(inspiration));
 				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
+
+				$scope.$emit('iso-method', {name:null, params:null});
 			}
 		});
 	}

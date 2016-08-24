@@ -6,7 +6,7 @@ underscore.factory('_', function() {
 	return window._;
 });
 
-var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'wu.masonry'], function($interpolateProvider) {
+var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 })
