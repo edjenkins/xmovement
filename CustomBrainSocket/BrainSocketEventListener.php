@@ -74,7 +74,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 			// Validate comment
 			$validator = Validator::make($data, [
 				'text' => 'required|between:2,500',
-				'url' => 'required|url',
+				'url' => 'required',
 			]);
 
 			$res = json_decode($msg);
