@@ -24,7 +24,7 @@ class Inspiration extends Model
 		'content',
     ];
 
-	protected $appends = ['favourited_count', 'has_favourited'];
+	protected $appends = ['short_description', 'favourited_count', 'has_favourited'];
     protected $dates = ['deleted_at'];
 
 	use SoftDeletes;
@@ -81,6 +81,11 @@ class Inspiration extends Model
     {
         return $this->hasMany(InspirationFavourite::class);
     }
+
+	public function getShortDescriptionAttribute()
+	{
+		return str_limit($this->description, 80);
+	}
 
 	public function getFavouritedCountAttribute()
 	{

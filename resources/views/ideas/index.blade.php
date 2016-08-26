@@ -58,9 +58,10 @@
 
 	        <div class="row">
 
-	            <div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="idea in ideas | orderBy:sort_type:true | filter:idea_search_term">
+				<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="idea in ideas | orderBy:sort_type:true | filter:idea_search_term">
 
 					<div class="tile idea-tile">
+
 						<a class="tile-image" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/large/<% idea.photo %>')" ng-href="/idea/<% idea.id %>"></a>
 						<div class="inner-container">
 							<a class="idea-name" ng-href="/idea/<% idea.id %>">
@@ -97,7 +98,6 @@
 	</div>
 
 	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
-	<script src="{{ URL::asset('js/masonry.js') }}"></script>
 	<script src="{{ URL::asset('js/angular.js') }}"></script>
 
 @endsection

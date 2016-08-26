@@ -115,6 +115,8 @@ function fetchComments(url) {
 
 		if (response) {
 
+			$('#comments-container').html('');
+			
 			$.each(response.data.comments, function(index, comment) {
 
 				$('#comments-container').append(comment.view);

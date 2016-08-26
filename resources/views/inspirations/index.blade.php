@@ -4,7 +4,7 @@
 
 	<div ng-controller="InspirationController" ng-cloak>
 
-		<div class="page-header" ng-click="formatInspirations()">
+		<div class="page-header">
 
 	        <h2 class="main-title">{{ trans('pages.inspiration') }}</h2>
 
@@ -16,19 +16,19 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = 'recent'">
-
-						<li class="module-control" ng-click="loadInspirations('recent')" ng-class="{'active':sort_type == 'recent'}">
-
-							<button type="button">{{ trans('idea.sort_recent') }}</button>
-
-	    				</li>
+	    			<ul class="module-controls pull-left" ng-init="sort_type = 'popular'">
 
 						<li class="module-control" ng-click="loadInspirations('popular')" ng-class="{'active':sort_type == 'popular'}">
 
 							<button type="button">{{ trans('idea.sort_popular') }}</button>
 
 	    				</li>
+
+							<li class="module-control" ng-click="loadInspirations('recent')" ng-class="{'active':sort_type == 'recent'}">
+
+								<button type="button">{{ trans('idea.sort_recent') }}</button>
+
+		    				</li>
 
 						<li class="module-control" ng-click="loadInspirations('favourites')" ng-class="{'active':sort_type == 'favourites'}">
 
@@ -146,10 +146,15 @@
 
 				</div>
 
+				<div class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
-				<div isotope-container="isotope-container" id="isotopeContainer" isotope-container ng-cloak class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3" masonry-options="{ percentPosition: true, gutter: 30 }" ng-show="inspirations.length">
+					<div class="loader" ng-show="loading_inspirations">Loading...</div>
 
-					<div isotope-item="isotope-item" class="tile inspiration-tile isotope-item" ng-repeat="inspiration in inspirations" ng-show="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" prepend="<% inspiration.prepended %>" ng-click="openInspirationModal(inspiration)" data-toggle="modal" data-target="#inspiration-modal">
+				</div>
+
+				<div ng-cloak isotope-container="isotope-container" id="isotopeContainer" isotope-container class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
+
+					<div ng-cloak isotope-item="isotope-item" class="tile inspiration-tile isotope-item images-loaded" ng-repeat="inspiration in inspirations" ng-show="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" ng-click="openInspirationModal(inspiration)">
 
 						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% inspiration.content %>"></img>
 
@@ -167,7 +172,7 @@
 
 						<div class="inner-container">
 							<p class="inspiration-description">
-								<% inspiration.description %>
+								<% inspiration.short_description %>
 							</p>
 						</div>
 
@@ -193,6 +198,5 @@
 
 	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
 	<script src="{{ URL::asset('js/angular.js') }}"></script>
-	<script src="{{ URL::asset('js/isotope.js') }}"></script>
 
 @endsection

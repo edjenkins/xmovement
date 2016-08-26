@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<base href="/">
+<base href="/inspiration/">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,6 +72,7 @@
 
 	<script src="https://www.google.com/recaptcha/api.js"></script>
 
+	<script src="{{ URL::asset('js/vendor.js') }}"></script>
 	<script src="{{ URL::asset('js/vendor.js') }}"></script>
 	<script src="{{ URL::asset('js/expanding.js') }}"></script>
 

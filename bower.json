@@ -20,6 +20,7 @@
     "angular-route": "^1.5.8",
     "ngstorage": "^0.3.11",
     "underscore": "^1.8.3",
-    "angular-isotope": "^0.1.14"
+    "angular-isotope": "^0.1.14",
+    "angular-images-loaded": "^0.2.1"
   }
 }

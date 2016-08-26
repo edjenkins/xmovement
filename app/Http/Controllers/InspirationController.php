@@ -60,6 +60,19 @@ class InspirationController extends Controller
 		return Response::json($response);
 	}
 
+	public function api_view(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$inspiration = Inspiration::whereId($request->inspiration_id)->with('user')->first();
+
+		$response->data['inspiration'] = $inspiration;
+
+		return Response::json($response);
+	}
+
 	public function index(Request $request)
 	{
 		if (!env('IDEATION_PHASE_ENABLED'))

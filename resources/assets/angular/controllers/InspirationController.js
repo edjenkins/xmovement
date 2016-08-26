@@ -1,5 +1,17 @@
-XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, $location, InspirationService) {
+XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, $location, $window, InspirationService) {
 
+	var w = angular.element($window);
+
+	var ticker = setInterval(function() {
+		$scope.layoutGrid();
+	}, 2000);
+
+	w.bind('resize', function () {
+		console.log('resize');
+		$scope.layoutGrid();
+	});
+
+	$scope.loading_inspirations = true;
 	$scope.inspirations = [];
 	$scope.selected_inspiration = {};
 	$scope.new_inspiration =
@@ -10,22 +22,37 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		link: { type:'link', description:'', content:'' }
 	};
 
-	$scope.getInspirations = function() {
+	$scope.$on('imagesLoaded:loaded', function(event, element){
+		setTimeout(function() { $scope.layoutGrid(); }, 500);
+    });
 
-		console.log("Loading inspirations");
+	$scope.layoutGrid = function() {
+		$scope.$emit('iso-method', {name:'reloadItems', params:null});
+		$scope.$emit('iso-method', {name:'reloadItems'});
+		$scope.$emit('iso-method', 'reloadItems');
+	}
 
-		$scope.loadInspirations('recent');
+	$('#inspiration-modal').on('hide.bs.modal', function (e) {
+		$scope.selected_inspiration = {};
+		$location.search('id', null);
+	});
+
+	$scope.pageLoaded = function() {
+		var inspiration_id = $location.search().id;
+		if (inspiration_id) {
+			$scope.loadInspiration(inspiration_id);
+		}
 	}
 
 	$scope.loadInspirations = function(sort_type) {
 
-		$scope.inspirations = [];
+		$scope.loading_inspirations = true;
 
 		$scope.sort_type = sort_type;
 
-		InspirationService.getInspirations({ sort_type: sort_type }).then(function(response) {
+		$scope.inspirations = [];
 
-			console.log(response);
+		InspirationService.getInspirations({ sort_type: sort_type }).then(function(response) {
 
 			switch (sort_type) {
 
@@ -41,6 +68,25 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			$scope.inspirations = $scope.formatInspirations(response.data.inspirations);
 
+			$scope.layoutGrid();
+
+			$scope.loading_inspirations = false;
+		});
+	}
+
+	$scope.loadInspiration = function(inspiration_id) {
+
+		InspirationService.getInspiration({ inspiration_id: inspiration_id }).then(function(response) {
+
+			if (response.meta.success)
+			{
+				$scope.openInspirationModal(response.data.inspiration);
+			}
+			else
+			{
+				console.log('Request failed');
+			}
+
 		});
 	}
 
@@ -55,14 +101,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
 				break;
 
-			case 'video':
-				break;
-
 			case 'file':
 				$scope.new_inspiration['file'].content = $('#dropzone-file').val();
-				break;
-
-			case 'link':
 				break;
 
 			default:
@@ -73,18 +113,24 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			if (response.meta.success)
 			{
-				// $scope.inspirations.splice(0, 1, $scope.formatInspiration(response.data.inspiration));
-				// inspiration["prepended"] = true;
-				// $('#masonry-grid').masonry('reload');
-				//  | orderBy:sort_type:true
 				var inspiration = response.data.inspiration;
-
-				console.log(inspiration);
 
 				// $scope.inspirations.push($scope.formatInspiration(inspiration));
 				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
 
-				$scope.$emit('iso-method', {name:null, params:null});
+				setTimeout(function() {
+					$scope.layoutGrid();
+					$scope.openInspirationModal(inspiration);
+				}, 2000);
+
+				// Reset form
+				$scope.new_inspiration =
+				{
+					photo: { type:'photo', description:'', content:'' },
+					video: { type:'video', description:'', content:'' },
+					file: { type:'file', description:'', content:'' },
+					link: { type:'link', description:'', content:'' }
+				};
 			}
 		});
 	}
@@ -151,6 +197,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 			{
 				$('#inspiration-modal').modal('hide');
 
+				$scope.loadInspirations($scope.sort_type);
+
 				$.each(response.data.messages, function(index, message) {
 					alert(message);
 				});
@@ -188,13 +236,15 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.openInspirationModal = function(inspiration) {
 
-		$location.hash(inspiration.id);
+		$location.search('id', inspiration.id);
 
 		var url = $location.absUrl();
 
 		fetchComments(url);
 
 		$scope.selected_inspiration = inspiration;
+
+		$('#inspiration-modal').modal('show')
 	}
 
 	$scope.setIframeUrl = function(url) {
@@ -202,6 +252,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		return $sce.trustAsResourceUrl(url);
 	}
 
-	$scope.getInspirations();
+	$scope.loadInspirations('popular');
+	$scope.pageLoaded();
 
 });

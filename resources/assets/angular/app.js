@@ -6,7 +6,7 @@ underscore.factory('_', function() {
 	return window._;
 });
 
-var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives'], function($interpolateProvider) {
+var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives', 'hj.imagesLoaded'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 })
@@ -14,7 +14,7 @@ var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore
 XMovement.config(['$locationProvider',
 
 	function($locationProvider) {
-		$locationProvider.html5Mode(false);
+		$locationProvider.html5Mode(true);
 	}
 
 ]);

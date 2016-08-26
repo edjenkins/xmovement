@@ -107,6 +107,7 @@ Route::group(['middleware' => ['web']], function () {
 
 		// Inspiration routes
 		Route::get('/api/inspirations', 'InspirationController@api_index');
+		Route::get('/api/inspiration', 'InspirationController@api_view');
 		Route::post('/api/inspiration/add', 'InspirationController@add');
 		Route::post('/api/inspiration/favourite', 'InspirationController@favourite');
 		Route::post('/api/inspiration/delete', 'InspirationController@destroy');
