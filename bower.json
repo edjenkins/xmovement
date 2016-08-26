@@ -21,6 +21,7 @@
     "ngstorage": "^0.3.11",
     "underscore": "^1.8.3",
     "angular-isotope": "^0.1.14",
-    "angular-images-loaded": "^0.2.1"
+    "angular-images-loaded": "^0.2.1",
+    "animate.css": "^3.5.2"
   }
 }

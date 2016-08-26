@@ -23,7 +23,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	};
 
 	$scope.$on('imagesLoaded:loaded', function(event, element){
-		setTimeout(function() { $scope.layoutGrid(); }, 500);
+		// setTimeout(function() { $scope.layoutGrid(); }, 200);
+		$scope.layoutGrid();
     });
 
 	$scope.layoutGrid = function() {

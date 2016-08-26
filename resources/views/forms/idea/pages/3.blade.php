@@ -1,4 +1,4 @@
-<div class="form-page <?php if (!$errors->isEmpty()) { echo 'visible'; } ?>" id="form-page-3" data-title="{{ trans('idea_form.add_a_photo') }}">
+<div class="form-page animated <?php if (!$errors->isEmpty()) { echo 'visible'; } ?>" id="form-page-3" data-title="{{ trans('idea_form.add_a_photo') }}">
 
 	<div class="form-page-content">
 
@@ -20,19 +20,19 @@
 
 		<div class="form-group">
 
-			@unless($editing)
-
-				<div class="btn btn-primary step-button" onClick="nextStep()">{{ trans('idea_form.next_step') }}</div>
-
-			@else
+			@if($editing)
 
 				<button class="btn btn-primary" type="submit">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
 
-			@endunless
+			@else
+
+				<div class="btn btn-primary step-button" onClick="showStep('next')">{{ trans('idea_form.next_step') }}</div>
+
+			@endif
 
 		</div>
 
-		<a class="step-button muted-link" onClick="previousStep()">{{ trans('idea_form.previous_step') }}</a>
+		<a class="step-button muted-link" onClick="showStep('previous')">{{ trans('idea_form.previous_step') }}</a>
 
 	</div>
 
