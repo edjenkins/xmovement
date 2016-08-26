@@ -46,6 +46,8 @@ class CommentController extends Controller
 
 		$url = $request->url;
 
+		$url = preg_replace("(^https?://)", "", $url);
+
 		$comments = Comment::where([['url', $url], ['in_reply_to_comment_id', null]])->get();
 
 		$response->meta['success'] = true;

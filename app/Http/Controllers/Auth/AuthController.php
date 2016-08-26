@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
-use App\Jobs\SendWelcomeEmail;
 use Intervention\Image\ImageManager;
+
+use App\Jobs\SendWelcomeEmail;
 
 use Auth;
 use Image;
 use Input;
+use LinkedIn;
 use Log;
 use Mail;
 use Redirect;
@@ -22,6 +23,9 @@ use Session;
 use Storage;
 use URL;
 
+use App\User;
+use App\SocialProfile;
+
 class AuthController extends Controller
 {
     /**
@@ -29,11 +33,11 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider(Request $request)
     {
         Session::reflash();
 
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver($request->provider)->redirect();
     }
 
     /**
@@ -41,15 +45,26 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
         try {
-            $user = Socialite::driver('facebook')->user();
+            $user = Socialite::driver($request->provider)->user();
         } catch (Exception $e) {
-            return Redirect::to('auth/facebook');
+            return Redirect::to('auth/' . $request->provider);
         }
 
-        $authUser = $this->findOrCreateUser($user);
+        switch ($request->provider) {
+        	case 'facebook':
+        		$authUser = $this->findOrCreateFacebookUser($user);
+        		break;
+        	case 'linkedin':
+        		$authUser = $this->findOrCreateLinkedinUser($user);
+        		break;
+
+        	default:
+        		# code...
+        		break;
+        }
 
         Auth::login($authUser, true);
 
@@ -62,7 +77,7 @@ class AuthController extends Controller
      * @param $facebookUser
      * @return User
      */
-    private function findOrCreateUser($facebookUser)
+    private function findOrCreateFacebookUser($facebookUser)
     {
         if ($authUser = User::where('facebook_id', $facebookUser->id)->first()) {
             return $authUser;
@@ -102,13 +117,98 @@ class AuthController extends Controller
 		}
 
         $user = User::create([
-            'facebook_id' => $facebookUser->id,
+            'linkedin_id' => $facebookUser->id,
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'avatar' => $filename,
             'token' => $facebookUser->token
         ]);
 
+        $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
+
+        return $user;
+    }
+
+    /**
+     * Fetch and store user's LinkedIn profile
+     *
+     * @param $linkedinUser
+     * @return User
+     */
+    private function fetchLinkedInProfile($linkedinUser, $user)
+    {
+		// Save the users profile
+		LinkedIn::setAccessToken($linkedinUser->token);
+		$linkedinProfile = LinkedIn::get('v1/people/~:(id,num-connections,picture-url,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)))');
+
+		SocialProfile::create([
+			'user_id' => $user->id,
+            'identifier' => $linkedinUser->id,
+            'provider' => 'linkedin',
+            'profile' => json_encode($linkedinProfile)
+        ]);
+	}
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $linkedinUser
+     * @return User
+     */
+    private function findOrCreateLinkedinUser($linkedinUser)
+    {
+        if ($user = User::where('linkedin_id', $linkedinUser->id)->first()) {
+
+			$this->fetchLinkedInProfile($linkedinUser, $user);
+
+            return $user;
+        }
+
+		$extension = 'jpg';
+
+	    $filename = sha1(time() . time()) . ".{$extension}";
+
+		$image_sizes = [
+			['name' => 'large', 'size' => 1280],
+			['name' => 'medium', 'size' => 960],
+			['name' => 'small', 'size' => 480],
+			['name' => 'thumb', 'size' => 240],
+		];
+
+		// Save image sizes
+		foreach ($image_sizes as $index => $size)
+		{
+			$img = Image::make(file_get_contents($linkedinUser->avatar_original));
+
+			$img->resize($size['size'], null, function ($constraint) {
+			    $constraint->aspectRatio();
+			});
+
+			$img = $img->stream();
+
+			$path = 'uploads/images/' . $size['name'] . '/';
+
+	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
+			{
+	        	Log::error('Failed to save user avatar from Linkedin - ' . $linkedinUser->email);
+	        }
+			else {
+				Log::error('Saved to - ' . $path.$filename);
+			}
+		}
+
+        $user = User::create([
+            'linkedin_id' => $linkedinUser->id,
+            'name' => $linkedinUser->name,
+            'email' => $linkedinUser->email,
+            'avatar' => $filename,
+            'token' => $linkedinUser->token
+        ]);
+
+		$this->fetchLinkedInProfile($linkedinUser, $user);
+		
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);

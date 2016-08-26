@@ -6,6 +6,9 @@ use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
 use Illuminate\Session\SessionManager;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+
+use App\Jobs\SendCommentReplyEmail;
 
 use App\User;
 use App\Comment;
@@ -21,6 +24,7 @@ use View;
 
 class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener implements MessageComponentInterface {
 
+	use DispatchesJobs;
 
 	public function onOpen(ConnectionInterface $conn) {
 
@@ -45,6 +49,8 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 
 		$idUser = $from->session->get(Auth::getName());
 
+		Log::info('Auth::getName() - ' . Auth::getName());
+
 		if (!isset($idUser)) {
 			Log::info('BrainSocket : The user is not logged via an http session');
 	    } else {
@@ -58,6 +64,8 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 		$in_reply_to_comment_id = json_decode($msg)->client->data->in_reply_to_comment_id;
 		$in_reply_to_comment_id = ($in_reply_to_comment_id == 0) ? NULL : $in_reply_to_comment_id;
 
+		$url = preg_replace("(^https?://)", "", $url);
+
 		if (json_decode($msg)->client->event == 'comment.posted')
 		{
 			$data = [
@@ -68,7 +76,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 			// Validate comment
 			$validator = Validator::make($data, [
 				'text' => 'required|between:2,500',
-				'url' => 'required|url',
+				'url' => 'required',
 			]);
 
 			$res = json_decode($msg);
@@ -87,6 +95,20 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 					'url' => $url,
 					'in_reply_to_comment_id' => $in_reply_to_comment_id
 				]);
+
+				if ($in_reply_to_comment_id)
+				{
+					// Send email notification to original commenter
+					$in_reply_to_comment = Comment::where('id', $in_reply_to_comment_id)->with('user')->first();
+					$reply = $comment;
+
+					if ($in_reply_to_comment->user->id != $user_id)
+					{
+						// Notify users via email
+						$job = (new SendCommentReplyEmail($currentUser, $in_reply_to_comment->user, $in_reply_to_comment, $reply))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
+					}
+				}
 
 				$res->client->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $currentUser])->render();
 			}

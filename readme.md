@@ -48,6 +48,11 @@ npm install --global gulp
 
 npm install
 
+Useful snippets
+----------------
+Update NULL translations from another translation table in the database:
+UPDATE translations INNER JOIN new_translations ON translations.key = new_translations.key AND translations.group = new_translations.group SET translations.value = new_translations.value WHERE translations.value IS NULL;
+
 Built with Laravel PHP Framework
 ----------------
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)

@@ -1,23 +1,21 @@
-<body>
+@extends('layouts.email')
 
-	@include('emails/email-header')
+@section('content')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		Hey {{ $receiver['name'] }},
-	<br /><br />
-		You've been invited by <a href="{{ action('UserController@profile', $sender) }}">{{ $sender['name'] }}</a> to support their {{ trans_choice('common.idea', 1) }} '<a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a>' on {{ trans('common.brand') }}.
-	<br /><br />
-		{{ trans('common.brand') }} is a new and exciting way to create and commission training events and courses.
-	</p>
+	@include('emails/components/header', ['text' => trans('invite_email.header', ['sender_name' => $sender->name])])
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		View and support their {{ trans_choice('common.idea', 1) }} <a href="{{ action('IdeaController@view', $idea) }}">here</a> and help it develop!
-	</p>
+	@include('emails/components/wrapper-start')
 
-	<p style="font-family: 'Segoe UI Light', 'Segoe UI Web Light', 'Segoe UI Web Regular', 'Segoe UI', 'Segoe UI Symbol', HelveticaNeue-Light, 'Helvetica Neue', Arial, sans-serif; font-size: 1.2em; font-weight: 200; margin: 30px 0; padding: 0;">
-		- The {{ trans('common.brand') }} team
-	</p>
+		@include('emails/components/line', ['text' => trans('invite_email.line_1', ['receiver_name' => $receiver->name])])
 
-	@include('emails/email-footer')
+		@include('emails/components/line', ['text' => trans('invite_email.line_2')])
 
-</body>
+		@include('emails/components/line', ['text' => trans('invite_email.line_3')])
+
+		@include('emails/components/link', ['text' => trans('emails.view_idea_page'), 'url' => action('IdeaController@view', $idea)])
+
+		@include('emails/components/signature')
+
+	@include('emails/components/wrapper-end')
+
+@endsection

@@ -104,15 +104,24 @@ class UploadController extends Controller
 				['name' => 'medium', 'size' => 960],
 				['name' => 'small', 'size' => 480],
 				['name' => 'thumb', 'size' => 240],
+				['name' => 'banner', 'size' => 200],
 			];
 
 			// Save image sizes
 			foreach ($image_sizes as $index => $size)
 			{
 				$img = Image::make($file);
-				$img->resize($size['size'], null, function ($constraint) {
-				    $constraint->aspectRatio();
-				});
+
+				if ($size['name'] == 'banner')
+				{
+					$img->fit(1080, 320);
+				}
+				else
+				{
+					$img->resize($size['size'], null, function ($constraint) {
+					    $constraint->aspectRatio();
+					});
+				}
 
 		        $img = $img->stream();
 
