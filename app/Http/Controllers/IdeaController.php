@@ -232,6 +232,8 @@ class IdeaController extends Controller
 
 	public function update(Request $request)
 	{
+		Log::info('Updating idea');
+
 		$idea = Idea::find($request->id);
 
 		if (Gate::denies('edit', $idea))
@@ -243,7 +245,6 @@ class IdeaController extends Controller
 		{
 			$this->validate($request, [
 				'name' => 'required|max:255',
-				'visibility' => 'required',
 				'description' => 'required|max:2000',
 				'photo' => 'required|max:255',
 			]);

@@ -11,13 +11,13 @@
 
 	@include('forms/idea/pages/3')
 
-	@if(env('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
-
-		@include('forms/idea/pages/4')
-
-	@endif
-
 	@unless($editing)
+
+		@if(env('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
+
+			@include('forms/idea/pages/4')
+
+		@endif
 
 		@include('forms/idea/pages/5')
 
