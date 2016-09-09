@@ -34,6 +34,11 @@ class Inspiration extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\InspirationCategory');
+    }
+
 	public function favourite()
 	{
 		// Set old favourites

@@ -29,6 +29,7 @@ elixir(function(mix) {
 		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.css',
 		'./resources/assets/vendor/easydropdown/easydropdown.css',
 		'./resources/assets/vendor/dropzone/dropzone.css',
+		'./bower_components/animate.css/animate.min.css'
 	], 'public/css/vendor.css');
 
 	mix.scripts([

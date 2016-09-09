@@ -14,13 +14,15 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.loading_inspirations = true;
 	$scope.inspirations = [];
 	$scope.selected_inspiration = {};
-	$scope.new_inspiration =
+	$scope.inspiration_form_data =
 	{
-		photo: { type:'photo', description:'', content:'' },
-		video: { type:'video', description:'', content:'' },
-		file: { type:'file', description:'', content:'' },
-		link: { type:'link', description:'', content:'' }
+		photo: { type:'photo', description:'', content:'', category:'' },
+		video: { type:'video', description:'', content:'', category:'' },
+		file: { type:'file', description:'', content:'', category:'' },
+		link: { type:'link', description:'', content:'', category:'' }
 	};
+
+	$scope.new_inspiration = $scope.inspiration_form_data;
 
 	$scope.$on('imagesLoaded:loaded', function(event, element){
 		// setTimeout(function() { $scope.layoutGrid(); }, 200);
@@ -112,6 +114,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		InspirationService.addInspiration({inspiration: $scope.new_inspiration[type] }).then(function(response) {
 
+			console.log(response);
+			console.log('^^ response');
 			if (response.meta.success)
 			{
 				var inspiration = response.data.inspiration;
@@ -125,13 +129,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				}, 2000);
 
 				// Reset form
-				$scope.new_inspiration =
-				{
-					photo: { type:'photo', description:'', content:'' },
-					video: { type:'video', description:'', content:'' },
-					file: { type:'file', description:'', content:'' },
-					link: { type:'link', description:'', content:'' }
-				};
+				$scope.new_inspiration = $scope.inspiration_form_data;
 			}
 		});
 	}

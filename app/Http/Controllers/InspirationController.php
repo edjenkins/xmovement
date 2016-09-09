@@ -17,6 +17,7 @@ use Session;
 
 use App\User;
 use App\Inspiration;
+use App\InspirationCategory;
 use App\InspirationFavourite;
 
 class ResponseObject {
@@ -51,7 +52,7 @@ class InspirationController extends Controller
 				break;
 
 			default:
-				$inspirations = Inspiration::with('user')->orderBy('created_at', 'desc')->get();
+				$inspirations = Inspiration::with('user')->with('categories')->orderBy('created_at', 'desc')->get();
 				break;
 		}
 
@@ -84,7 +85,9 @@ class InspirationController extends Controller
 			return redirect()->action('PageController@home');
 		}
 
-		$inspirations = Inspiration::with('user')->orderBy('created_at', 'desc');
+		$inspirations = Inspiration::with('user')->with('categories')->orderBy('created_at', 'desc')->get();
+
+		$inspiration_categories = InspirationCategory::where('enabled', true)->orderBy('name')->get();
 
 		# META
 		MetaTag::set('title', Lang::get('meta.ideas_index_title'));
@@ -93,6 +96,7 @@ class InspirationController extends Controller
 
 		return view('inspirations.index', [
 			'inspirations' => $inspirations,
+			'inspiration_categories' => $inspiration_categories
 		]);
 	}
 
@@ -128,12 +132,12 @@ class InspirationController extends Controller
 			'user_id' => Auth::user()->id,
 			'type' => $request->inspiration['type'],
             'description' => $request->inspiration['description'],
-            'content' => $content,
+            'content' => $content
         ]);
 
-		$inspiration = Inspiration::whereId($inspiration->id)->with('user')->first();
+		$inspiration->categories()->attach($request->inspiration['category']);
 
-		Log::info($inspiration);
+		$inspiration = Inspiration::whereId($inspiration->id)->with('user')->first();
 
 		if ($inspiration)
 		{

@@ -23,6 +23,26 @@
 		width calc((100% - 61px) / 2)
 	@media(max-width: 568px)
 		width calc(100% - 31px)
+
+	.inspiration-categories
+		left 0
+		position absolute
+		top 0
+		ul
+			cleanlist()
+			li
+				cleanlist()
+				background-color rgba(0, 0, 0, 0.2)
+				border-radius 4px
+				color white
+				display inline-block
+				font-size 12.5px
+				line-height 26px
+				margin 5px 0 0 5px
+				padding 0 6px
+				animate()
+	&:hover .inspiration-categories ul li
+		background-color main-color
 	img.photo-tile-image
 		width 100%
 	.video-tile-image

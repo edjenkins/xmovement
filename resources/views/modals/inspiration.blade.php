@@ -6,9 +6,12 @@
 
 			<ul class="inspiration-header">
 
-				<li class="pull-left inspiration-tag">
+				<li class="pull-left inspiration-tag" ng-show="selected_inspiration.categories.length">
 					<i class="fa fa-fw fa-tag"></i>
-					Dementia
+
+					<span ng-repeat="category in selected_inspiration.categories">
+						<% category.name %>
+					</span>
 				</li>
 
 				<li class="pull-right close-inspiration" data-dismiss="modal">
