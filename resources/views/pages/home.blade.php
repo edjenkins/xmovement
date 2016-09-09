@@ -6,9 +6,15 @@
         <div class="black-overlay"></div>
         <div class="text-container">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>
-            <a href="{{ action('IdeaController@add') }}">
-                <button>{{ trans('home.get_started') }}</button>
-            </a>
+			@if (env('CREATION_PHASE_ENABLED', true))
+	            <a href="{{ action('IdeaController@add') }}">
+	                <button>{{ trans('home.get_started') }}</button>
+	            </a>
+			@else
+				<a href="{{ action('IdeaController@index') }}">
+					<button>{{ trans('navbar.explore') }}</button>
+				</a>
+			@endif
         </div>
     </div>
 

@@ -21,9 +21,11 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
+				@if (env('CREATION_PHASE_ENABLED', true))
+	                <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
+				@endif
 
-				@if (env('IDEATION_PHASE_ENABLED'))
+				@if (env('IDEATION_PHASE_ENABLED', false))
 					<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
 				@endif
 

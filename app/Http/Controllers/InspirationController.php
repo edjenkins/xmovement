@@ -76,7 +76,7 @@ class InspirationController extends Controller
 
 	public function index(Request $request)
 	{
-		if (!env('IDEATION_PHASE_ENABLED'))
+		if (!env('IDEATION_PHASE_ENABLED', false))
 		{
 			// Ideation phase disabled
 			Session::flash('flash_message', trans('flash_message.page_not_found'));
