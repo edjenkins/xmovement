@@ -117,7 +117,7 @@ class AuthController extends Controller
 		}
 
         $user = User::create([
-            'linkedin_id' => $facebookUser->id,
+            'facebook_id' => $facebookUser->id,
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'avatar' => $filename,
@@ -208,7 +208,7 @@ class AuthController extends Controller
         ]);
 
 		$this->fetchLinkedInProfile($linkedinUser, $user);
-		
+
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
