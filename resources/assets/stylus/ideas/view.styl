@@ -86,12 +86,14 @@
 	.creator-tile
 		background white
 		border border-color 1px solid
+		margin-bottom 15px
 		padding 20px
 		text-align center
+		z-index 1
 		transition(all linear 0.2s)
 		.creator-avatar
 			background-color border-color
-			bacground-position center
+			background-position center
 			background-size cover
 			background-repeat no-repeat
 			border-radius 60px
@@ -123,6 +125,7 @@
 		margin 0
 		padding 0
 		text-align center
+		transition(all linear 0.2s)
 		h3
 			font-size 42px
 			font-weight bolder
@@ -145,6 +148,11 @@
 			p
 				margin 0
 				padding 0
+		&.supporters-tile
+			border-top border-color 1px solid
+			&:hover
+				border-color main-color
+				cursor pointer
 
 	.info-tile
 		list-style none
