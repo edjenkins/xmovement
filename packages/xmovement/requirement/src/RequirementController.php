@@ -48,36 +48,36 @@ class RequirementController extends Controller
 
     public function store(Request $request)
     {
-    	$user_id = Auth::user()->id;
-    	$idea_id = $request->idea_id;
+		$user_id = Auth::user()->id;
+		$idea_id = $request->idea_id;
 
-			$validation['name'] = 'required|max:50|unique:design_tasks,name,NULL,id,idea_id,' . $idea_id;
-			$validation['description'] = 'required|max:255';
-			$validation['item'] = 'required|max:255';
-			$validation['count'] = 'required|integer|between:0,10000';
+		$validation['name'] = 'required|max:50|unique:design_tasks,name,NULL,id,idea_id,' . $idea_id;
+		$validation['description'] = 'required|max:255';
+		$validation['item'] = 'required|max:255';
+		$validation['count'] = 'required|integer|between:0,10000';
 
-			$this->validate($request, $validation);
+		$this->validate($request, $validation);
 
-      $requirement_id = Requirement::create([
-          'user_id' => $user_id,
-          'item' => $request->item,
-          'count' => $request->count,
-      ])->id;
+		$requirement_id = Requirement::create([
+			'user_id' => $user_id,
+			'item' => $request->item,
+			'count' => $request->count,
+		])->id;
 
-      $design_task_id = DesignTask::create([
-          'user_id' => $user_id,
-          'idea_id' => $idea_id,
-          'name' => $request->name,
-          'description' => $request->description,
-          'xmovement_task_id' => $requirement_id,
-          'xmovement_task_type' => 'Requirement',
-          'proposal_interactivity' => false,
-		  'pinned' => ($request->pinned) ? $request->pinned : false,
-		  'locked' => ($request->locked) ? $request->locked : false,
-      ])->id;
+		$design_task = DesignTask::create([
+			'user_id' => $user_id,
+			'idea_id' => $idea_id,
+			'name' => $request->name,
+			'description' => $request->description,
+			'xmovement_task_id' => $requirement_id,
+			'xmovement_task_type' => 'Requirement',
+			'proposal_interactivity' => false,
+			'pinned' => ($request->pinned) ? $request->pinned : false,
+			'locked' => ($request->locked) ? $request->locked : false,
+		]);
 
-	    // Load the design_task view
-			return $this->view($design_task_id);
+		// Load the design_task view
+		return redirect()->action('\xmovement\requirement\RequirementController@view', ['design_task' => $design_task]);
     }
 
     public function submit(Request $request)

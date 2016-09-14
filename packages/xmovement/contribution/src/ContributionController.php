@@ -86,26 +86,26 @@ class ContributionController extends Controller
 		$this->validate($request, $validation);
 
 		$contribution_id = Contribution::create([
-		  'user_id' => $user_id,
-		  'contribution_type' => $contribution_type,
-		  'voting_type' => $voting_type,
+			'user_id' => $user_id,
+			'contribution_type' => $contribution_type,
+			'voting_type' => $voting_type,
 		])->id;
 
 		ContributionType::create([
-		  'xmovement_contribution_id' => $contribution_id,
-		  'id' => $contribution_type,
+			'xmovement_contribution_id' => $contribution_id,
+			'id' => $contribution_type,
 		]);
 
 		$design_task = DesignTask::create([
-		  'user_id' => $user_id,
-		  'idea_id' => $idea_id,
-		  'name' => $request->name,
-		  'description' => $request->description,
-		  'xmovement_task_id' => $contribution_id,
-		  'xmovement_task_type' => 'Contribution',
-		  'proposal_interactivity' => true,
-		  'pinned' => ($request->pinned) ? $request->pinned : false,
-		  'locked' => ($request->locked) ? $request->locked : false,
+			'user_id' => $user_id,
+			'idea_id' => $idea_id,
+			'name' => $request->name,
+			'description' => $request->description,
+			'xmovement_task_id' => $contribution_id,
+			'xmovement_task_type' => 'Contribution',
+			'proposal_interactivity' => true,
+			'pinned' => ($request->pinned) ? $request->pinned : false,
+			'locked' => ($request->locked) ? $request->locked : false,
 		]);
 
 	    // Load the design_task view

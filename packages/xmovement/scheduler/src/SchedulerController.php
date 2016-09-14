@@ -75,33 +75,33 @@ class SchedulerController extends Controller
 
     public function store(Request $request)
     {
-    	$user_id = Auth::user()->id;
-    	$idea_id = $request->idea_id;
-    	$voting_type = $request->voting_type;
+		$user_id = Auth::user()->id;
+		$idea_id = $request->idea_id;
+		$voting_type = $request->voting_type;
 
-			$validation['name'] = 'required|max:50|unique:design_tasks,name,NULL,id,idea_id,' . $idea_id;
-			$validation['description'] = 'required|max:255';
+		$validation['name'] = 'required|max:50|unique:design_tasks,name,NULL,id,idea_id,' . $idea_id;
+		$validation['description'] = 'required|max:255';
 
-			$this->validate($request, $validation);
+		$this->validate($request, $validation);
 
-      $scheduler_id = Scheduler::create([
-          'user_id' => $user_id,
-          'voting_type' => $voting_type,
-      ])->id;
+		$scheduler_id = Scheduler::create([
+			'user_id' => $user_id,
+			'voting_type' => $voting_type,
+		])->id;
 
-      $design_task = DesignTask::create([
-          'user_id' => $user_id,
-          'idea_id' => $idea_id,
-          'name' => $request->name,
-          'description' => $request->description,
-          'xmovement_task_id' => $scheduler_id,
-          'xmovement_task_type' => 'Scheduler',
-          'proposal_interactivity' => true,
-		  'pinned' => ($request->pinned) ? $request->pinned : false,
-		  'locked' => ($request->locked) ? $request->locked : false,
-      ]);
+		$design_task = DesignTask::create([
+			'user_id' => $user_id,
+			'idea_id' => $idea_id,
+			'name' => $request->name,
+			'description' => $request->description,
+			'xmovement_task_id' => $scheduler_id,
+			'xmovement_task_type' => 'Scheduler',
+			'proposal_interactivity' => true,
+			'pinned' => ($request->pinned) ? $request->pinned : false,
+			'locked' => ($request->locked) ? $request->locked : false,
+		]);
 
-	    // Load the design_task view
+		// Load the design_task view
 		return redirect()->action('\xmovement\scheduler\SchedulerController@view', ['design_task' => $design_task]);
     }
 
