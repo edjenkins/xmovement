@@ -2,7 +2,7 @@
 
 @section('content')
 
-	@include('emails/components/header', ['text' => trans('xmovement_invite_email.header', ['idea_name' => $idea->name])])
+	@include('emails/components/header', ['text' => trans('xmovement_invite_email.header')])
 
 	@include('emails/components/wrapper-start')
 
