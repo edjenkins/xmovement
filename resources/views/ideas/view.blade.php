@@ -167,6 +167,8 @@
 	    </div>
 	</div>
 
+	@include('modals/supporters')
+
 	@can('support', $idea)
 
 		@include('modals/support')

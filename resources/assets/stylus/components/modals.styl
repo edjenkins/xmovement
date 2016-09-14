@@ -47,3 +47,48 @@
 					color #666
 	.tab-content
 		margin-top 10px
+
+// Supporters modal
+
+ul.modal-list.supporters-list
+	cleanlist()
+	li.supporter-list-item
+		cleanlist()
+		line-height 50px
+		padding 0 50px 0 50px
+		position relative
+		a
+			display block
+			text-decoration none
+			.user-profile-arrow
+				color #999
+				line-height 50px
+				position absolute
+				right 5px
+				top 0px
+				animate()
+			.user-avatar
+				background-color border-color
+				background-position center
+				background-size cover
+				background-repeat no-repeat
+				border-radius 50%
+				height 40px
+				width 40px
+				position absolute
+				left 0px
+				top 5px
+			.user-name
+				border-bottom border-color 1px solid
+				color #444
+				text-align left
+				animate()
+			&:last-child
+				.user-name
+					border-bottom none
+			&:hover
+				cursor pointer
+				.user-name, .user-profile-arrow
+					color main-color
+				.user-profile-arrow
+					right 0px
