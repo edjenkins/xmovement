@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTextColumnTypeInUpdatesTable extends Migration
+class UpdateEmbedCodeInXmovementExternalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class UpdateTextColumnTypeInUpdatesTable extends Migration
      */
     public function up()
     {
-        Schema::table('updates', function ($table) {
-			$table->text('text')->change();
+        Schema::table('xmovement_externals', function ($table) {
+			$table->text('embed_code')->change();
         });
     }
 
@@ -24,8 +24,8 @@ class UpdateTextColumnTypeInUpdatesTable extends Migration
      */
     public function down()
     {
-        Schema::table('updates', function ($table) {
-			$table->string('text')->change();
+        Schema::table('xmovement_externals', function ($table) {
+			$table->string('embed_code')->change();
         });
     }
 }

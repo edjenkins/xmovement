@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTextColumnTypeInUpdatesTable extends Migration
+class UpdateTextColumnTypeInCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class UpdateTextColumnTypeInUpdatesTable extends Migration
      */
     public function up()
     {
-        Schema::table('updates', function ($table) {
+        Schema::table('comments', function ($table) {
 			$table->text('text')->change();
         });
     }
@@ -24,7 +24,7 @@ class UpdateTextColumnTypeInUpdatesTable extends Migration
      */
     public function down()
     {
-        Schema::table('updates', function ($table) {
+        Schema::table('comments', function ($table) {
 			$table->string('text')->change();
         });
     }
