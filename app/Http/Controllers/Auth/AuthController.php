@@ -29,7 +29,7 @@ use App\SocialProfile;
 class AuthController extends Controller
 {
     /**
-     * Redirect the user to the Facebook authentication page.
+     * Redirect the user to the authentication page.
      *
      * @return Response
      */
@@ -37,7 +37,14 @@ class AuthController extends Controller
     {
         Session::reflash();
 
-        return Socialite::driver($request->provider)->redirect();
+		if ($request->provider == 'shibboleth')
+		{
+			return Redirect::to('https://gateway.eventmovement.co.uk/shibboleth.php?requester=xm.local');
+		}
+		else
+		{
+			return Socialite::driver($request->provider)->redirect();
+		}
     }
 
     /**

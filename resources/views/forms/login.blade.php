@@ -47,7 +47,7 @@
 
     </div>
 
-	@if (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true))
+	@if (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true) || env('SHIBBOLETH_AUTH', true))
 	    <div class="text-linethru">
 	        <div class="line"></div>
 	        <div class="text">{{ trans('common.or') }}</div>
@@ -68,6 +68,15 @@
 			<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
 	            <i class="fa fa-fw fa-linkedin"></i>
 	            {{ trans('auth.linkedin_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('SHIBBOLETH_AUTH', true))
+	    <div class="form-group">
+			<a class="btn btn-shibboleth" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'shibboleth']) }}">
+	            <i class="fa fa-fw fa-university"></i>
+	            {{ trans('auth.shibboleth_login') }}
 	        </a>
 	    </div>
 	@endif

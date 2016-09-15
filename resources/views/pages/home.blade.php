@@ -75,4 +75,29 @@
 	    </div>
 	@endif
 
+	<div class="container-fluid shibboleth-container">
+
+		<div class="container">
+
+			<div class="col-md-12">
+
+				<?php
+				session_start();
+				echo '<table>';
+				foreach ($_SESSION as $key => $value)
+				{
+				        echo '<tr>';
+				        echo '<td>'.$key.'</td><td>'.$value.'</td>';
+				        echo '</tr>';
+
+				}
+				echo '</table>'
+				?>
+
+			</div>
+
+		</div>
+
+	</div>
+
 @endsection
