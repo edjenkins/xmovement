@@ -8,7 +8,7 @@
 
     @else
 
-        @can('editPreferences', $user)
+        @can('edit_preferences', $user)
 
             <p class="user-bio text-muted">{{ trans('profile.no_bio') }}</p>
 
@@ -24,7 +24,7 @@
 
 	<div class="tab-content">
 
-		@can('editPreferences', $user)
+		@can('edit_preferences', $user)
 
 			<div class="tab-pane fade {{ $viewing_own_profile ? 'in active' : '' }}" id="preferencestab">
 				@include('users.preferences')
@@ -32,7 +32,7 @@
 
 		@endcan
 
-        @can('viewNews', $user)
+        @can('view_news', $user)
 
             <div class="tab-pane fade {{ $viewing_own_profile ? '' : 'in active' }}" id="newstab">
                 @include('users.news')
@@ -40,7 +40,7 @@
 
         @endcan
 
-        @can('viewMessages', $user)
+        @can('view_messages', $user)
 
             <div class="tab-pane fade" id="messagestab">
             	@include('users.messages')

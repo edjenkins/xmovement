@@ -1,0 +1,69 @@
+#inspiration-modal
+	.modal-content
+		overflow hidden
+		.modal-body
+			padding 0 20px
+			.file-preview-wrapper, .link-preview-wrapper
+				text-align center
+				i
+					color #999
+					display block
+					font-size 28px
+					line-height 80px
+			.inspiration-description
+				margin 20px
+				padding 0
+
+	ul.inspiration-header
+		cleanlist()
+		border-top border-color 1px solid
+		padding 5px 10px
+		li
+			cleanlist()
+			float left
+			padding 10px
+			animate()
+			&.inspiration-tag
+				color #CCC
+			&.close-inspiration
+				i
+					color #CCC
+					animate()
+					&:hover
+						color #666
+						cursor pointer
+
+	ul.inspiration-toolbar
+		cleanlist()
+		border-top border-color 1px solid
+		padding 5px 10px
+		li
+			cleanlist()
+			float left
+			padding 10px
+			animate()
+			&.author-link
+				color #CCC
+				a
+					color #CCC
+			&.inspiration-action
+				color #CCC
+				animate()
+				&:hover
+					color #666
+					cursor pointer
+				&.favourited
+					color #d5c243
+					&:hover
+						color darken(#d5c243, 10%)
+					.fa-star
+						color #d5c243
+						&:hover
+							color darken(#d5c243, 10%)
+
+	.comments-section
+		background-color transparent
+		.post-comment-container, .post-reply-container
+			.comment-composer-wrapper
+				button.post-comment-button
+					bottom 32px

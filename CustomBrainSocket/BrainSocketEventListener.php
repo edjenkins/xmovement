@@ -45,22 +45,26 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 
 	public function onMessage(ConnectionInterface $from, $msg) {
 
-	    $from->session->start();
+		$from->session->start();
 
 		$idUser = $from->session->get(Auth::getName());
 
 		Log::info('Auth::getName() - ' . Auth::getName());
 
 		if (!isset($idUser)) {
-	        echo "the user is not logged via an http session";
+			Log::info('BrainSocket : The user is not logged via an http session');
 	    } else {
 	        $currentUser = User::find($idUser);
+			Log::info('BrainSocket : Current User - ' . $currentUser);
 	    }
 
 		$user_id = $currentUser->id;
 		$text = json_decode($msg)->client->data->comment;
 		$url = json_decode($msg)->client->data->url;
-		$in_reply_to_comment_id = (json_decode($msg)->client->data->in_reply_to_comment_id == "") ? NULL : json_decode($msg)->client->data->in_reply_to_comment_id;
+		$in_reply_to_comment_id = json_decode($msg)->client->data->in_reply_to_comment_id;
+		$in_reply_to_comment_id = ($in_reply_to_comment_id == 0) ? NULL : $in_reply_to_comment_id;
+
+		$url = preg_replace("(^https?://)", "", $url);
 
 		$url = preg_replace("(^https?://)", "", $url);
 

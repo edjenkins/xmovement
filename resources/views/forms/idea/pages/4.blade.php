@@ -1,60 +1,28 @@
-<div class="form-page <?php if (!$errors->isEmpty()) { echo 'visible'; } ?>" id="form-page-4" data-title="{{ trans('idea_form.settings') }}">
+<div class="form-page animated <?php if (!$errors->isEmpty()) { echo 'visible'; } ?>" id="form-page-4" data-title="{{ trans('idea_form.questions') }}">
 
 	<div class="form-page-content">
 
-		<div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}" id="duration-slider-wrapper">
+		<div class="form-group">
 
-			<div class="slider-wrapper">
+			<label>{{ trans('idea_form.questions_label') }}</label>
 
-				<label>{{ trans('idea_form.duration_label') }}</label>
+			<div id="pre-populated-design-tasks">
 
-				<input type="hidden" name="duration" id="duration-slider" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}">
+				<?php $questions = isset($idea) ? old('questions', $idea->questions) : ((old('questions') != null) ? old('questions') : []); ?>
 
-				<div class="slider" id="idea-duration-slider" data-input-id="duration-slider" data-value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}"></div>
-
-			</div>
-
-			@if ($errors->has('duration'))
-				<span class="help-block">
-					<strong>{{ $errors->first('duration') }}</strong>
-				</span>
-			@endif
-
-		</div>
-
-		<div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
-
-			<div class="toggle-switch-wrapper">
-
-				<label>{{ trans('idea_form.visibility_label') }}</label>
-
-				<label class="toggle-switch">
-
-					<input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('visibility', $idea->visibility) : old('visibility', 'public') }}">
-					@if (isset($idea))
-						<div class="toggle-button{{ (old('visibility', $idea->visibility) == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
-					@else
-						<div class="toggle-button{{ (old('visibility', 'public') == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
-					@endif
-				</label>
-
-				<div class="clearfloat"></div>
+				<textarea class="expanding text-center" name="questions[0]" rows="1" placeholder="{{ trans('idea_form.question_1_placeholder') }}">{{ $questions[0] or '' }}</textarea>
+				<textarea class="expanding text-center" name="questions[1]" rows="1" placeholder="{{ trans('idea_form.question_2_placeholder') }}">{{ $questions[1] or '' }}</textarea>
+				<textarea class="expanding text-center" name="questions[2]" rows="1" placeholder="{{ trans('idea_form.question_3_placeholder') }}">{{ $questions[2] or '' }}</textarea>
 
 			</div>
-
-			@if ($errors->has('visibility'))
-				<span class="help-block">
-					<strong>{{ $errors->first('visibility') }}</strong>
-				</span>
-			@endif
 
 		</div>
 
 		<div class="form-group">
-			<button class="btn btn-primary" type="submit">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
+			<div class="btn btn-primary step-button" onClick="showStep('next')">{{ trans('idea_form.next_step') }}</div>
 		</div>
 
-		<a class="step-button muted-link" onClick="previousStep()">{{ trans('idea_form.previous_step') }}</a>
+		<a class="step-button muted-link" onClick="showStep('previous')">{{ trans('idea_form.previous_step') }}</a>
 
 	</div>
 

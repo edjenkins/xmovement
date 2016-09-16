@@ -27,7 +27,16 @@
 
 					<div class="idea-section">
 
-		    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')"></div>
+		    			<div class="idea-media" style="background-image: url('{{ ResourceImage::getImage($idea->photo, 'large') }}')">
+
+							@if($idea->shortlisted)
+								<a class="shortlisted-banner" href="{{ action('IdeaController@index') }}">
+									<i class="fa fa-fw fa-star"></i>
+									<span class="shortlisted-text">shortlisted</span>
+								</a>
+							@endif
+
+						</div>
 
 						@include('ideas/progress')
 

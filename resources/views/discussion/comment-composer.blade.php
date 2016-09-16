@@ -1,6 +1,6 @@
 <div class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($authenticated_user, 'medium') }}')"></div>
 
-<div class="comment-composer-wrapper" data-in-reply-to-comment-id="{{ isset($comment) ? $comment->id : null }}">
+<div class="comment-composer-wrapper" data-in-reply-to-comment-id="{{ isset($comment) ? $comment->id : NULL }}">
 
 	<textarea class="expanding comment-text-input" rows="1" name="text" placeholder="{{ isset($comment) ? trans('discussion.reply_text_placeholder') : trans('discussion.comment_text_placeholder') }}"></textarea>
 
