@@ -50,14 +50,35 @@ class IdeaController extends Controller
 
 		$response->meta['success'] = true;
 
-		$response->data['ideas'] = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
+		$sort_type = $request->sort_type;
+
+		switch ($sort_type) {
+
+			case 'shortlist':
+				$ideas = Idea::where('shortlisted', true)->with('user')->orderBy('created_at', 'desc')->get();
+				break;
+
+			case 'recent':
+				$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
+				break;
+
+			case 'popular':
+				$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
+				break;
+
+			default:
+				$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
+				break;
+		}
+
+		$response->data['ideas'] = $ideas;
 
 		return Response::json($response);
 	}
 
 	public function index(Request $request)
 	{
-		$ideas = Idea::where('visibility', 'public')->orderBy('created_at', 'desc')->get();
+		$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
 
 		# META
 		MetaTag::set('title', Lang::get('meta.ideas_index_title'));

@@ -16,17 +16,25 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = 'created_at'">
+	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ env('SHORTLIST_ENABLED', false) ? 'shortlist' : 'popular' }}'">
 
-						<li class="module-control" ng-click="sort_type = 'created_at'" ng-class="{'active':sort_type == 'created_at'}">
+						@if(env('SHORTLIST_ENABLED', false))
+							<li class="module-control" ng-click="setSortType('shortlist')" ng-class="{'active':sort_type == 'shortlist'}">
 
-							<button type="button">{{ trans('idea.sort_recent') }}</button>
+								<button type="button">{{ trans('idea.sort_shortlist') }}</button>
+
+		    				</li>
+						@endif
+
+						<li class="module-control" ng-click="setSortType('popular')" ng-class="{'active':sort_type == 'popular'}">
+
+							<button type="button">{{ trans('idea.sort_popular') }}</button>
 
 	    				</li>
 
-						<li class="module-control" ng-click="sort_type = 'supporter_count'" ng-class="{'active':sort_type == 'supporter_count'}">
+						<li class="module-control" ng-click="setSortType('recent')" ng-class="{'active':sort_type == 'recent'}">
 
-							<button type="button">{{ trans('idea.sort_popular') }}</button>
+							<button type="button">{{ trans('idea.sort_recent') }}</button>
 
 	    				</li>
 
@@ -54,13 +62,28 @@
 
 		</div>
 
+		<div class="container">
+
+			<div class="shortlist-info-box" ng-show="sort_type == 'shortlist'">
+				<p>
+					{{ trans('idea.shortlist_message') }}
+				</p>
+			</div>
+
+		</div>
+
 	    <div class="container ideas-container">
 
 	        <div class="row">
 
-				<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="idea in ideas | orderBy:sort_type:true | filter:idea_search_term">
+				<div class="col-xs-12 col-sm-6 <% (sort_type == 'shortlist') ? 'col-md-4' : 'col-md-3' %>" ng-repeat="idea in ideas | orderBy:sort_order:true | filter:idea_search_term">
 
 					<div class="tile idea-tile">
+
+						<div class="shortlisted-banner" ng-show="idea.shortlisted" ng-click="setSortType('shortlist')">
+							<i class="fa fa-fw fa-star"></i>
+							<span class="shortlisted-text">shortlisted</span>
+						</div>
 
 						<a class="tile-image" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/large/<% idea.photo %>')" ng-href="/idea/<% idea.id %>"></a>
 						<div class="inner-container">
@@ -86,8 +109,16 @@
 
 				<div class="col-xs-12 no-results" ng-show="(ideas | filter:idea_search_term).length == 0">
 
+					<span ng-show="loading_ideas">{{ trans('common.loading') }}</span>
 
-					No Results<span ng-show="idea_search_term.length > 0"> for <% idea_search_term %></span>
+					<span ng-hide="loading_ideas">
+						<span ng-show="idea_search_term.length > 0">
+							{{ trans('common.no_results_for_x') }} <% idea_search_term %>
+						</span>
+						<span ng-hide="idea_search_term.length > 0">
+							{{ trans('common.no_results') }}
+						</span>
+					</span>
 
 				</div>
 
