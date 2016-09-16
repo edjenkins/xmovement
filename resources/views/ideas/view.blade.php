@@ -40,11 +40,7 @@
 
 						@include('ideas/progress')
 
-						@if($idea->design_state == 'open')
-							@include('ideas/notification', ['message' => trans('idea.design_phase_open_notification'), 'notification_type' => 'design-phase-notification'])
-						@elseif($idea->proposal_state == 'open')
-							@include('ideas/notification', ['message' => trans('idea.proposal_phase_open_notification'), 'notification_type' => 'proposal-phase-notification'])
-						@endif
+						@include('ideas/notification')
 
 		    			<p class="idea-description">
 		    				{{ $idea->description }}
@@ -58,93 +54,9 @@
 
     				</div>
 
-					@unless($idea->proposal_state == 'closed')
+					@include('ideas/widgets/proposals')
 
-						<div class="proposals-container hidden-xs">
-
-			    			<div class="section-header">
-								<h2>{{ trans('idea.proposals') }}</h2>
-								<a href="{{ action('ProposeController@index', $idea) }}">{{ trans('idea.view_all_proposals') }}</a>
-							</div>
-
-							<div class="proposals-wrapper">
-
-								@if (count($idea->proposals) > 0)
-
-									@foreach ($idea->proposals->take(3) as $index => $proposal)
-										<div class="col-xs-12 col-sm-6 col-md-4">
-											@include('propose/tile', ['proposal' => $proposal, 'index' => $index])
-										</div>
-									@endforeach
-
-									<div class="clearfloat"></div>
-
-								@else
-
-									<div class="idea-section padded first-to-add">
-										@can('add_proposal', $idea)
-											<a href="{{ action('ProposeController@add', $idea) }}">
-												{{ trans('idea.first_to_add_proposal') }}
-											</a>
-										@else
-											<a href="{{ action('ProposeController@index', $idea) }}">
-												{{ trans('idea.no_proposals_added_yet') }}
-											</a>
-										@endcan
-									</div>
-
-								@endif
-
-							</div>
-
-						</div>
-
-					@endunless
-
-					@unless($idea->design_state == 'closed')
-
-						<div class="design-tasks-container hidden-xs">
-
-			    			<div class="section-header">
-								<h2>{{ trans('idea.design_tasks') }}</h2>
-								<a href="{{ action('DesignController@dashboard', $idea) }}">{{ trans('idea.view_all_design_tasks') }}</a>
-							</div>
-
-							<div class="design-tasks-wrapper">
-
-								@if (count($idea->featuredDesignTasks) > 0)
-
-									@foreach ($idea->featuredDesignTasks as $design_task)
-
-										{!! $design_task->xmovement_task->renderTile($design_task) !!}
-
-									@endforeach
-
-									<div class="clearfloat"></div>
-
-								@else
-
-									<div class="idea-section padded first-to-add">
-										@can('contribute', $idea)
-											<a href="{{ action('DesignController@add', $idea) }}">
-												{{ trans('idea.first_to_add_design_task') }}
-											</a>
-										@else
-											<a href="{{ action('DesignController@dashboard', $idea) }}">
-												{{ trans('idea.no_design_tasks_added_yet') }}
-											</a>
-										@endcan
-									</div>
-
-								@endif
-
-								<div class="clearfloat"></div>
-
-							</div>
-
-						</div>
-
-					@endunless
+					@include('ideas/widgets/design-tasks')
 
 					@unless((count($updates) == 0) && (Gate::denies('postUpdate', $idea)))
 
@@ -178,17 +90,9 @@
 
 	@include('modals/supporters')
 
-	@can('support', $idea)
+	@include('modals/support')
 
-		@include('modals/support')
-
-	@endcan
-
-	@can('open_design_phase', $idea)
-
-		@include('modals/open-design-phase', ['idea' => $idea])
-
-	@endcan
+	@include('modals/open-design-phase', ['idea' => $idea])
 
 	<?php Session::set('redirect', Request::url()); ?>
 

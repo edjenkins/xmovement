@@ -1,33 +1,37 @@
-<div class="modal fade" id="support-modal" tabindex="-1" role="dialog">
+@can('support', $idea)
 
-	<div class="modal-dialog" role="document">
+	<div class="modal fade" id="support-modal" tabindex="-1" role="dialog">
 
-		<div class="modal-content">
+		<div class="modal-dialog" role="document">
 
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<div class="modal-content">
 
-				<h4 class="modal-title" id="support-modal">{{ trans('idea.confirm_support') }}</h4>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-			</div>
+					<h4 class="modal-title" id="support-modal">{{ trans('idea.confirm_support') }}</h4>
 
-			<div class="modal-body">
+				</div>
 
-				<p class="text-muted">
-					{{ trans('idea.confirm_support_description') }}
-				</p>
+				<div class="modal-body">
 
-				<ul class="error-list" id="support-errors"></ul>
+					<p class="text-muted">
+						{{ trans('idea.confirm_support_description') }}
+					</p>
 
-				<hr />
+					<ul class="error-list" id="support-errors"></ul>
 
-				<div class="g-recaptcha" data-sitekey="{{ getenv('CAPTCHA_SITE_KEY') }}"></div>
+					<hr />
 
-			</div>
+					<div class="g-recaptcha" data-sitekey="{{ getenv('CAPTCHA_SITE_KEY') }}"></div>
 
-			<div class="modal-footer">
+				</div>
 
-				<button type="button" class="btn btn-primary" id="confirm-support-button" data-action-type="support" data-idea-id="{{ $idea->id }}" data-user-id="{{ Auth::user()->id }}">{{ trans('idea.confirm_support') }}</button>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-primary" id="confirm-support-button" data-action-type="support" data-idea-id="{{ $idea->id }}" data-user-id="{{ Auth::user()->id }}">{{ trans('idea.confirm_support') }}</button>
+
+				</div>
 
 			</div>
 
@@ -35,6 +39,6 @@
 
 	</div>
 
-</div>
+	<script src="/js/ideas/support.js"></script>
 
-<script src="/js/ideas/support.js"></script>
+@endcan

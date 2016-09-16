@@ -1,37 +1,41 @@
-<div class="modal fade" id="open-design-phase-modal" tabindex="-1" role="dialog">
+@can('open_design_phase', $idea)
 
-	<div class="modal-dialog" role="document">
+	<div class="modal fade" id="open-design-phase-modal" tabindex="-1" role="dialog">
 
-		<div class="modal-content">
+		<div class="modal-dialog" role="document">
 
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<div class="modal-content">
 
-				<h4 class="modal-title" id="support-modal">{{ trans('idea.open_design_phase_early') }}</h4>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-			</div>
+					<h4 class="modal-title" id="support-modal">{{ trans('idea.open_design_phase_early') }}</h4>
 
-			<div class="modal-body">
+				</div>
 
-				<p>
-					{{ trans('idea.open_design_phase_early_header') }}
-				</p>
+				<div class="modal-body">
 
-				<br />
+					<p>
+						{{ trans('idea.open_design_phase_early_header') }}
+					</p>
 
-				<p class="text-muted">
-					{{ trans('idea.open_design_phase_early_subheader') }}
-				</p>
+					<br />
 
-			</div>
+					<p class="text-muted">
+						{{ trans('idea.open_design_phase_early_subheader') }}
+					</p>
 
-			<div class="modal-footer">
+				</div>
 
-		        <form action="{{ action('IdeaController@openDesignPhase', $idea) }}" method="POST">
-		            {!! csrf_field() !!}
+				<div class="modal-footer">
 
-					<button type="submit" class="btn btn-primary action-button">{{ trans('idea.open_design_phase') }}</button>
-		        </form>
+			        <form action="{{ action('IdeaController@openDesignPhase', $idea) }}" method="POST">
+			            {!! csrf_field() !!}
+
+						<button type="submit" class="btn btn-primary action-button">{{ trans('idea.open_design_phase') }}</button>
+			        </form>
+
+				</div>
 
 			</div>
 
@@ -39,4 +43,4 @@
 
 	</div>
 
-</div>
+@endcan
