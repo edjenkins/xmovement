@@ -29,6 +29,8 @@ use App\SocialProfile;
 
 class AuthController extends Controller
 {
+	use AuthenticatesAndRegistersUsers;
+
     /**
      * Redirect the user to the authentication page.
      *
@@ -377,19 +379,37 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        Session::flash('show_support', true);
+		if (env('STANDARD_AUTH', true))
+		{
+	        Session::flash('show_support', true);
+	        Session::flash('auth_type', 'login');
 
-        Session::flash('auth_type', 'login');
+	        return $this->parentLogin($request);
+		}
+		else
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
 
-        return $this->parentLogin($request);
+			return redirect('/');
+		}
     }
 
     public function register(Request $request)
     {
-        Session::flash('show_support', true);
+		if (env('STANDARD_AUTH', true))
+		{
+	        Session::flash('show_support', true);
+	        Session::flash('auth_type', 'register');
 
-        Session::flash('auth_type', 'register');
+	        return $this->parentRegister($request);
+		}
+		else
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
 
-        return $this->parentRegister($request);
+			return redirect('/');
+		}
     }
 }
