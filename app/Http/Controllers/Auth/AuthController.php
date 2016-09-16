@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Intervention\Image\ImageManager;
 
 use App\Jobs\SendWelcomeEmail;
@@ -39,7 +40,9 @@ class AuthController extends Controller
 
 		if ($request->provider == 'shibboleth')
 		{
-			return Redirect::to('https://gateway.eventmovement.co.uk/shibboleth.php?requester=xm.local');
+			$callback_url = URL::action('Auth\AuthController@handleProviderCallback', ['provider' => 'shibboleth']);
+
+			return Redirect::to('https://gateway.eventmovement.co.uk/shibboleth.php?callback_url=' . $callback_url . '&laravel_session=' . $request->cookie('laravel_session'));
 		}
 		else
 		{
@@ -54,13 +57,37 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(Request $request)
     {
-        try {
-            $user = Socialite::driver($request->provider)->user();
-        } catch (Exception $e) {
-            return Redirect::to('auth/' . $request->provider);
-        }
+		// Shibboleth auth
+		if ($request->provider == 'shibboleth')
+		{
+			$session_id = $request->cookie('laravel_session');
+
+			$user = [
+				'shibboleth_id' => Redis::get($session_id . 'SHIB-PERSISTENT-ID'),
+				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
+				'name' => Redis::get($session_id . 'SHIB-NAME'),
+				'affiliation' => Redis::get($session_id . 'SHIB-AFFILIATION')
+			];
+
+			// Remove objects from redis
+			Redis::del($session_id . 'SHIB-PERSISTENT-ID');
+			Redis::del($session_id . 'SHIB-EMAIL');
+			Redis::del($session_id . 'SHIB-NAME');
+			Redis::del($session_id . 'SHIB-AFFILIATION');
+		}
+		else
+		{
+			try {
+	            $user = Socialite::driver($request->provider)->user();
+	        } catch (Exception $e) {
+	            return Redirect::to('auth/' . $request->provider);
+	        }
+		}
 
         switch ($request->provider) {
+        	case 'shibboleth':
+        		$authUser = $this->findOrCreateShibbolethUser($user);
+        		break;
         	case 'facebook':
         		$authUser = $this->findOrCreateFacebookUser($user);
         		break;
@@ -76,6 +103,35 @@ class AuthController extends Controller
         Auth::login($authUser, true);
 
         return Redirect::to($this->getRedirectPath());
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $shibbolethUser
+     * @return User
+     */
+    private function findOrCreateShibbolethUser($shibbolethUser)
+    {
+        if ($authUser = User::where('shibboleth_id', $shibbolethUser['shibboleth_id'])->first()) {
+            return $authUser;
+        }
+
+		// TODO: If shibboleth passes an image then save it
+
+        $user = User::create([
+            'shibboleth_id' => $shibbolethUser['shibboleth_id'],
+            'name' => $shibbolethUser['name'],
+			'email' => $shibbolethUser['email'],
+            // 'avatar' => $filename,
+            // 'token' => $shibbolethUser['token']
+        ]);
+
+        $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
+
+        return $user;
     }
 
     /**

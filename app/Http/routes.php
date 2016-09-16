@@ -39,8 +39,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
     Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
-    // Route::get('auth/linkedin', 'Auth\AuthController@redirectToProvider');
-    // Route::get('auth/linkedin/callback', 'Auth\AuthController@handleProviderCallback');
 
     // User routes
     Route::get('/profile/{user?}', 'UserController@profile');
