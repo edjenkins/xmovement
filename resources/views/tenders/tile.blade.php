@@ -3,13 +3,13 @@
 	<div class="upper-section">
 
 		<div class="avatar-wrapper">
-			<div class="avatar" style="background-image: url('{{ ResourceImage::getProfileImage($tender->user, 'small') }}')"></div>
+			<div class="avatar" style="background-image: url('{{ ResourceImage::getImage($tender->company_logo, 'large') }}')"></div>
 		</div>
 
 		<div class="tile-body">
 
 			<h5 class="tender-company">
-				{{ str_limit($tender->company, $limit = 80, $end = '...') }}
+				{{ str_limit($tender->company_name, $limit = 80, $end = '...') }}
 			</h5>
 
 			<p>

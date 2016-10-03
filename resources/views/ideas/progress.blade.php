@@ -1,4 +1,4 @@
-<div class="idea-progress-bar">
+<div class="idea-progress-bar {{ (($idea->design_state == 'open') || ($idea->proposal_state == 'open')) ? 'has-notification' : '' }}">
 
 	<div class="ipb-line ipb-placeholder-line"></div>
 	<div class="ipb-line ipb-progress-line" style="right: {{ (100 - $idea->progress_percentage()) }}%"></div>

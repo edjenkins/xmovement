@@ -75,16 +75,20 @@
 
 						<div class="tender-avatar">
 							<a href="{{ action('UserController@profile', $tender->user) }}" class="avatar-wrapper">
-								<div class="avatar" style="background-image: url('{{ ResourceImage::getProfileImage($tender->user, 'small') }}')"></div>
+								<div class="avatar" style="background-image: url('{{ ResourceImage::getImage($tender->company_logo, 'large') }}')"></div>
 							</a>
 						</div>
 
 						<h3>
-							{{ str_limit($tender->company, $limit = 80, $end = '...') }}
+							{{ str_limit($tender->company_name, $limit = 80, $end = '...') }}
 						</h3>
 
 						<p>
 							{{ $tender->summary }}
+						</p>
+
+						<p>
+							Contact - <a href="mailto:{{ $tender->contact_email_address }}">{{ $tender->contact_email_address }}</a>
 						</p>
 
 					</div>

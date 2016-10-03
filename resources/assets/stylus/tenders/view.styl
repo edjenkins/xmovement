@@ -11,7 +11,7 @@
 			margin-left 0px
 
 	.timeline-column
-
+		margin-top 15px
 		.timeline-section
 			margin-left 30px
 			padding 15px 0 15px 30px
@@ -38,9 +38,9 @@
 				z-index 1
 			&:first-child
 				&:after
-					top 75px
+					top 90px
 				&:before
-					top 75px
+					top 90px
 			&:last-child
 				&:after
 					bottom calc(50% + 0px)
@@ -66,8 +66,6 @@
 				&.tender-author
 					min-height 120px
 					.tender-avatar
-						background-color light-grey
-						border-radius 50%
 						height 80px
 						left 20px
 						position absolute
@@ -77,11 +75,9 @@
 							position relative
 							text-align center
 							.avatar
-								background-color border-color
-								background-size cover
+								background-size contain
 								background-position center
 								background-repeat no-repeat
-								border-radius 50%
 								height 80px
 								margin 0 auto
 								width 80px

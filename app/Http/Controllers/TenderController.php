@@ -76,7 +76,9 @@ class TenderController extends Controller
 			return redirect()->action('IdeaController@view', $idea);
 		}
 
-        // TODO: Complete
+		return view('tenders.add', [
+			'idea' => $idea
+		]);
     }
 
     public function destroy(Request $request, Tender $tender)
@@ -98,7 +100,7 @@ class TenderController extends Controller
 
 	public function submit(Request $request)
 	{
-		$idea = Idea::find($request->session()->get('tender.idea_id'));
+		$idea = Idea::find($request->idea_id);
 
 		if (Gate::denies('add_tender', $idea))
 		{
@@ -111,18 +113,25 @@ class TenderController extends Controller
 
 		// Validate the tender
 	    $this->validate($request, [
-	        'description' => 'required|max:500'
+	        'company_name' => 'required',
+			'contact_email_address' => 'required',
+			'summary' => 'required'
 	    ]);
 
 	    // Create the tender
-	    Tender::create([
-	        'idea_id' => $idea->id,
+	    $tender = Tender::create([
+	        'idea_id' => $request->idea_id,
 	        'user_id' => $user->id,
-	        'description' => $request->description,
-	        'body' => $request->tender
+	        'company_name' => $request->company_name,
+			'contact_email_address' => $request->contact_email_address,
+			'company_logo' => $request->company_logo,
+			'summary' => $request->summary
 	    ]);
 
-		return redirect()->action('TenderController@index', $idea);
+        Session::flash('flash_message', trans('flash_message.tender_created'));
+        Session::flash('flash_type', 'flash-success');
+
+		return redirect()->action('TenderController@view', $tender);
 	}
 
 }

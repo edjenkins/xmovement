@@ -75,7 +75,9 @@
 						<p>
 							If you or your company are interested in submitting a tender document to this idea please read our guidelines prior to submitting your tender below.
 						</p>
-						<button class="btn" type="button" name="button">Submit Tender</button>
+						<a href="{{ action('TenderController@add', $idea) }}">
+							<button class="btn" type="button" name="button">Submit Tender</button>
+						</a>
 					</div>
 				</div>
 

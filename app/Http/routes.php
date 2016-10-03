@@ -101,6 +101,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/tender/{idea}', 'TenderController@index');
 	Route::get('/tender/view/{tender}', 'TenderController@view');
     Route::get('/tender/add/{idea}', 'TenderController@add');
+    Route::post('/tender/submit', 'TenderController@submit');
 
     // Vote routes
 	Route::post('/vote/design_task', 'DesignController@vote'); // Design task

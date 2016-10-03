@@ -15,7 +15,7 @@ class Tender extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'company', 'summary'
+        'idea_id', 'user_id', 'company_name', 'contact_email_address', 'company_logo', 'summary'
     ];
 
     protected $dates = ['deleted_at'];
