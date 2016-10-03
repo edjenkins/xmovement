@@ -59,36 +59,36 @@
 				&:active
 					outline 0
 
-	ul.updates-list
+ul.updates-list
+	cleanlist()
+	li.update
 		cleanlist()
-		li.update
-			cleanlist()
-			border-top border-color 1px dashed
-			padding 20px
-			position relative
-			h5
-				color light-font-color
-				margin 0 0 10px 0
-				padding 0
-				word-break break-all
-				i
-					color orange
-					width 20px
-			p
-				margin 0
-				padding 0 0 0 22px
-				word-break break-all
+		border-top border-color 1px dashed
+		padding 20px
+		position relative
+		h5
+			color light-font-color
+			margin 0 0 10px 0
+			padding 0
+			word-break break-all
+			i
+				color orange
+				width 20px
+		p
+			margin 0
+			padding 0 0 0 22px
+			word-break break-all
 
-			i.fa.fa-trash-o
-				color #CCC
-				padding 10px
-				position absolute
-				right 0
-				top 0
-				animate()
-				&:hover
-					cursor pointer
-					color danger-color
+		i.fa.fa-trash-o
+			color #CCC
+			padding 10px
+			position absolute
+			right 0
+			top 0
+			animate()
+			&:hover
+				cursor pointer
+				color danger-color
 
-			&:first-child
-				border-top border-color 1px solid
+		&:first-child
+			border-top border-color 1px solid

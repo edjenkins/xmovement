@@ -103,6 +103,16 @@ class Idea extends Model
     }
 
     /**
+     * The Tenders for the idea.
+     *
+     * @var array
+     */
+    public function tenders()
+    {
+        return $this->hasMany(Tender::class);
+    }
+
+    /**
      * The winning Proposal for the idea.
      *
      * @var array

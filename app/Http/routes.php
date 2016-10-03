@@ -97,6 +97,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/propose/submit', 'ProposeController@submit');
     Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
+	// Tender routes
+    Route::get('/tender/{idea}', 'TenderController@index');
+	Route::get('/tender/view/{tender}', 'TenderController@view');
+    Route::get('/tender/add/{idea}', 'TenderController@add');
+
     // Vote routes
 	Route::post('/vote/design_task', 'DesignController@vote'); // Design task
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal

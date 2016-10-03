@@ -239,7 +239,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		var url = $location.absUrl();
 
-		fetchComments(url);
+		$scope.fetchComments(url);
 
 		$scope.selected_inspiration = inspiration;
 
@@ -249,6 +249,29 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.setIframeUrl = function(url) {
 
 		return $sce.trustAsResourceUrl(url);
+	}
+	$scope.fetchComments = function(url) {
+
+		$('#comments-container').html('');
+
+		$.getJSON("/api/comment/view", {url: url} , function(response) {
+
+			if (response) {
+
+				$('#comments-container').html('');
+
+				$.each(response.data.comments, function(index, comment) {
+
+					$('#comments-container').append(comment.view);
+
+				})
+
+				attachHandlers();
+
+				// startListening();
+			}
+		});
+
 	}
 
 	$scope.loadInspirations('popular');

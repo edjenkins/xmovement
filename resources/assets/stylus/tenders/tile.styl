@@ -1,0 +1,131 @@
+// XMStyles
+
+.tile.tender-tile
+	background white
+	border border-color 1px solid
+	display block
+	margin 0 auto 30px auto
+	padding 0 0 60px 0
+	overflow hidden
+	position relative
+	.upper-section
+		height 110px
+		padding-left 120px
+		position relative
+		.avatar-wrapper
+			border-right border-color 1px solid
+			margin 20px 0px
+			padding 0px 20px
+			position absolute
+			text-align center
+			top 0
+			left 0
+			.avatar
+				background-color border-color
+				background-size cover
+				background-position center
+				background-repeat no-repeat
+				border-radius 50%
+				margin 0 auto
+				height 80px
+				width 80px
+		.tile-body
+			background #fff
+			overflow hidden
+			padding 20px
+			text-align left
+			transition(all linear 0.2s)
+			h5
+				color #333
+				font-size 20px
+				line-height 45px
+				margin 0
+				overflow hidden
+				padding-top 0
+				word-break break-word
+			p
+				color #999
+				line-height 20px
+				margin 0
+				padding 0
+				white-space nowrap
+	.lower-section
+		padding 0px 20px 20px 20px
+		.tender-summary
+			background-color main-color
+			border-radius 6px
+			color white
+			display inline-block
+			padding 10px
+			position relative
+			&:before
+				content ''
+				position absolute
+				border-style solid
+				border-width 6px 12px
+				border-color transparent transparent main-color transparent
+				display block
+				height 0
+				left 28px
+				z-index 1
+				top -12px
+
+
+	.tile-footer
+		background white
+		border-top border-color 1px solid
+		color white
+		height 60px
+		padding 0
+		position absolute
+		bottom 0
+		text-align center
+		width 100%
+		transition(all 0.2s linear)
+		ul
+			cleanlist()
+			li
+				cleanlist()
+				box-sizing border-box
+				float left
+				color #999
+				line-height 60px
+				text-align center
+				&:first-child
+					padding 0 20px
+					text-align left
+					width calc(100% - 200px)
+					i
+						color orange
+						margin-right 6px
+				&:last-child
+					border-left border-color 1px solid
+					width 200px
+					a
+						color #999
+						display block
+						height 60px
+						width 100%
+						animate()
+						&:hover
+							background-color darken(border-color, 0%)
+							cursor pointer
+							text-decoration none
+
+
+	.winner-banner
+		color #fff
+		font-size 12px
+		position absolute
+		top 20px
+		right -120px
+		background-color success-color
+		padding 4px 20px
+		z-index 2
+		text-align center
+		width 300px
+		-ms-transform rotate(45deg)
+		/* IE 9 */
+		-webkit-transform rotate(45deg)
+		/* Chrome, Safari, Opera */
+		transform rotate(45deg)
