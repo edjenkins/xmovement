@@ -71,7 +71,7 @@
 		        {!! csrf_field() !!}
 
 				<input type="hidden" name="idea_id" value="{{ $idea->id }}">
-				
+
 		        <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
 		            <label class="control-label">{{ trans('tender.company_name') }}</label>
 
@@ -92,6 +92,18 @@
 		            @if ($errors->has('contact_email_address'))
 		                <span class="help-block">
 		                    <strong>{{ $errors->first('contact_email_address') }}</strong>
+		                </span>
+		            @endif
+		        </div>
+
+		        <div class="form-group{{ $errors->has('company_bio') ? ' has-error' : '' }}">
+		            <label class="control-label">{{ trans('tender.company_bio') }}</label>
+
+		            <textarea class="expanding" name="company_bio" rows="3" placeholder="{{ trans('tender.company_bio_placeholder') }}">{{ old('company_bio') }}</textarea>
+
+		            @if ($errors->has('company_bio'))
+		                <span class="help-block">
+		                    <strong>{{ $errors->first('company_bio') }}</strong>
 		                </span>
 		            @endif
 		        </div>

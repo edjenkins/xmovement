@@ -22,9 +22,9 @@
 			@else
 
 				<div class="idea-section padded first-to-add">
-					@can('add_tender', $idea)
+					@can('submit_tender', $idea)
 						<a href="{{ action('TenderController@add', $idea) }}">
-							{{ trans('idea.first_to_add_tender') }}
+							{{ trans('idea.first_to_submit_tender') }}
 						</a>
 					@else
 						<a href="{{ action('TenderController@index', $idea) }}">

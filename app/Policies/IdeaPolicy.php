@@ -207,7 +207,7 @@ class IdeaPolicy
      * @param  Idea  $idea
      * @return bool
      */
-    public function add_tender(User $user, Idea $idea)
+    public function submit_tender(User $user, Idea $idea)
     {
         return ($idea->tender_state == 'open');
     }

@@ -84,7 +84,7 @@
 						</h3>
 
 						<p>
-							{{ $tender->summary }}
+							{{ $tender->company_bio }}
 						</p>
 
 						<p>
@@ -109,7 +109,7 @@
 						</p>
 
 						<p>
-							Our tender meets the expectations set in the design process. We aim to deliver a slick app which is intuituve for people of all ages. Read our full tender document on the left to see how we plan to meet the requirements for this application and deliver it to a national audience in a professional, reliable manner.
+							{{ $tender->summary }}
 						</p>
 
 					</div>

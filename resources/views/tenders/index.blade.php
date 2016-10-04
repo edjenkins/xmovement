@@ -33,7 +33,7 @@
 
     			</ul>
 
-				@can('add_tender', $idea)
+				@can('submit_tender', $idea)
 
 	    			<ul class="module-controls pull-right">
 
@@ -43,7 +43,7 @@
 
 		    					<i class="fa fa-plus"></i>
 
-		    					{{ trans('tenders.add_tender') }}
+		    					{{ trans('tenders.submit_tender') }}
 
 		    				</a>
 
@@ -91,10 +91,10 @@
 
 				@if (count($tenders) == 0)
 
-					@can('add_tender', $idea)
+					@can('submit_tender', $idea)
 
 						<a href="{{ action('TenderController@add', $idea) }}" class="action-panel">
-							{{ trans('tenders.add_tender') }}
+							{{ trans('tenders.submit_tender') }}
 						</a>
 
 					@endcan

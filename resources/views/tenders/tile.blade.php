@@ -23,7 +23,7 @@
 	<div class="lower-section">
 
 		<div class="tender-summary">
-			{{ str_limit($tender->summary, $limit = 260, $end = '...') }}
+			{{ str_limit($tender->company_bio, $limit = 260, $end = '...') }}
 		</div>
 
 	</div>
@@ -36,7 +36,7 @@
 				14 Updates
 			</li>
 			<li>
-				<a href="{{ action('TenderController@view', $tender) }}">Open Tender</a>
+				<a href="{{ action('TenderController@view', $tender) }}">View Tender</a>
 			</li>
 		</ul>
 

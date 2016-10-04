@@ -69,7 +69,7 @@ class TenderController extends Controller
 
     public function add(Request $request, Idea $idea)
     {
-		if (Gate::denies('add_tender', $idea))
+		if (Gate::denies('submit_tender', $idea))
 		{
 	        Session::flash('flash_message', trans('flash_message.no_permission'));
 	        Session::flash('flash_type', 'flash-danger');
@@ -102,7 +102,7 @@ class TenderController extends Controller
 	{
 		$idea = Idea::find($request->idea_id);
 
-		if (Gate::denies('add_tender', $idea))
+		if (Gate::denies('submit_tender', $idea))
 		{
 	        Session::flash('flash_message', trans('flash_message.no_permission'));
 	        Session::flash('flash_type', 'flash-danger');
@@ -114,6 +114,7 @@ class TenderController extends Controller
 		// Validate the tender
 	    $this->validate($request, [
 	        'company_name' => 'required',
+			'company_bio' => 'required',
 			'contact_email_address' => 'required',
 			'summary' => 'required'
 	    ]);
@@ -123,6 +124,7 @@ class TenderController extends Controller
 	        'idea_id' => $request->idea_id,
 	        'user_id' => $user->id,
 	        'company_name' => $request->company_name,
+			'company_bio' => $request->company_bio,
 			'contact_email_address' => $request->contact_email_address,
 			'company_logo' => $request->company_logo,
 			'summary' => $request->summary
