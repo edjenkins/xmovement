@@ -48,7 +48,7 @@ class UploadController extends Controller
 				// Image validators
 
 				$rules = array(
-				    'file' => 'image|max:3000',
+				    'file' => 'image|max:20000',
 				);
 
 				$validation = Validator::make($input, $rules);
@@ -64,7 +64,7 @@ class UploadController extends Controller
 				// File validators
 
 				$rules = array(
-				    'file' => 'required|max:10000|mimes:pdf,doc,docx,ppt,pptx,dotx,potx,ppsx,rtf,sldx,txt,xlam,xls,xlsb,xlsx,xltx,.zip',
+				    'file' => 'required|max:20000|mimes:pdf,doc,docx,ppt,pptx,dotx,potx,ppsx,rtf,sldx,txt,xlam,xls,xlsb,xlsx,xltx,.zip',
 				);
 
 				$validation = Validator::make($input, $rules);

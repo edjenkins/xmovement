@@ -20,7 +20,14 @@
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
+
+				@if (env('CREATION_PHASE_ENABLED', true))
+	                <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
+				@endif
+
+				@if (env('IDEATION_PHASE_ENABLED', false))
+					<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
+				@endif
 
                 <li><a href="{{ action('IdeaController@index') }}">{{ trans('navbar.explore') }}</a></li>
 
@@ -31,7 +38,7 @@
                     <li><a href="{{ action('Auth\AuthController@showRegistrationForm') }}">{{ trans('navbar.register') }}</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 

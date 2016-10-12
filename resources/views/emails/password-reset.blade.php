@@ -2,7 +2,7 @@
 
 @section('content')
 
-	@include('emails/components/header', ['text' => trans('password_reset_email.header', ['sender_name' => $sender->name])])
+	@include('emails/components/header', ['text' => trans('password_reset_email.header')])
 
 	@include('emails/components/wrapper-start')
 

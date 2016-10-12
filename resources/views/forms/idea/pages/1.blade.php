@@ -1,4 +1,4 @@
-<div class="form-page visible" id="form-page-1" data-title="{{ trans('idea_form.name_your_idea') }}">
+<div class="form-page animated visible" id="form-page-1" data-title="{{ trans('idea_form.name_your_idea') }}">
 
 	<div class="form-page-content">
 
@@ -6,7 +6,7 @@
 
 			<label>{{ trans('idea_form.name_label') }}</label>
 
-			<input type="text" class="form-control" name="name" value="{{ isset($idea) ? old('name', $idea->name) : old('name') }}" placeholder="{{ trans('idea_form.name_placeholder') }}">
+			<textarea class="expanding text-center" name="name" rows="1" placeholder="{{ trans('idea_form.name_placeholder') }}">{{ isset($idea) ? old('name', $idea->name) : old('name') }}</textarea>
 
 			@if ($errors->has('name'))
 				<span class="help-block">
@@ -17,7 +17,7 @@
 		</div>
 
 		<div class="form-group">
-			<div class="btn btn-primary step-button" onClick="nextStep()">{{ trans('idea_form.next_step') }}</div>
+			<div class="btn btn-primary step-button" onClick="showStep('next')">{{ trans('idea_form.next_step') }}</div>
 		</div>
 
 	</div>

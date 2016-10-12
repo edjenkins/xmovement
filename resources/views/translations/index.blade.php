@@ -16,19 +16,19 @@
 
 				<div class="view-controls-container">
 
-				<ul class="module-controls pull-left">
+					<ul class="module-controls pull-left">
 
-					<li class="module-control search-element">
-						<div id="search-button">
-							<i class="fa fa-search"></i>
-						</div>
-					</li>
+						<li class="module-control search-element">
+							<div id="search-button">
+								<i class="fa fa-search"></i>
+							</div>
+						</li>
 
-					<li class="module-control search-element" ng-init="translation_search_term = ''">
-						<input type="text" ng-model="translation_search_term" placeholder="Search Translations">
-					</li>
+						<li class="module-control search-element" ng-init="translation_search_term = ''">
+							<input type="text" ng-model="translation_search_term" placeholder="Search Translations">
+						</li>
 
-				</ul>
+					</ul>
 
 	    			<ul class="module-controls pull-right">
 
@@ -47,6 +47,13 @@
 						<li class="module-control" ng-click="exportAllTranslations($event)">
 
 							<button type="button">Export</button>
+
+	    				</li>
+
+						<li class="module-control active" ng-click="translation_search_term = (translation_search_term == 'empty') ? '' : 'empty'">
+
+							<button type="button" ng-show="translation_search_term == 'empty'">Missing</button>
+							<button type="button" ng-hide="translation_search_term == 'empty'">Everything</button>
 
 	    				</li>
 
@@ -109,5 +116,8 @@
         </div>
 
 	</div>
+
+	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
+	<script src="{{ URL::asset('js/angular.js') }}"></script>
 
 @endsection

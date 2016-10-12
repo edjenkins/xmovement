@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Idea;
+use View;
 
 use Cookie;
 use Lang;
@@ -40,7 +41,10 @@ class PageController extends Controller
 		MetaTag::set('description', Lang::get('meta.about_description'));
 		# META
 
-	    return view('pages.about');
+		// Check if custom page set
+		if (View::exists('custom.pages.about')) { return view('custom.pages.about'); }
+
+		return view('pages.about');
 	}
 
     public function contact(Request $request)

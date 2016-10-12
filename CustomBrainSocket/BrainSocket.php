@@ -14,6 +14,8 @@ class BrainSocket extends \BrainSocket\BrainSocket {
 	 */
 	public function fire()
 	{
+		Log::info('BrainSocket : Fired');
+		
 		$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 		$connection =  @socket_connect($socket, $_SERVER['HTTP_HOST'], env('BRAINSOCKET_PORT'));
 		socket_set_option($socket, SOL_SOCKET, SO_RCVTIMEO, array('sec' => 1, 'usec' => 0));

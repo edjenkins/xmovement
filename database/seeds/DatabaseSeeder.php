@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 		if (env('APP_DEBUG', false))
 		{
 	        $this->call(UsersTableSeeder::class);
+			$this->call(InspirationsTableSeeder::class);
 		}
 
 	    Model::reguard();

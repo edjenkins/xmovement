@@ -17,16 +17,38 @@ var jscookie = require('js-cookie');
 elixir(function(mix) {
 
 	mix.scripts([
-		'./bower_components/bootstrap/dist/js/bootstrap.js',
+		'./bower_components/underscore/underscore.js',
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.js',
-		'./bower_components/js-cookie/src/js.cookie.js'
+		'./bower_components/js-cookie/src/js.cookie.js',
+		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js',
+		'./resources/assets/vendor/easydropdown/jquery.easydropdown.js',
 	], 'public/js/vendor.js');
 
-	mix.copy('./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css', 'public/css/jquery-ui-slider-pips.css');
-	mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css', 'public/css/bootstrap.min.css');
-	mix.copy('./bower_components/bootstrap/dist/css/bootstrap.min.css.map', 'public/css/bootstrap.min.css.map');
+	mix.styles([
+		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css',
+		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.css',
+		'./resources/assets/vendor/easydropdown/easydropdown.css',
+		'./resources/assets/vendor/dropzone/dropzone.css',
+		'./bower_components/animate.css/animate.min.css'
+	], 'public/css/vendor.css');
 
-	mix.scriptsIn('resources/assets/js/angular', 'public/js/angular.js');
+	mix.scripts([
+		'./bower_components/angular/angular.js',
+		'./bower_components/ev-emitter/ev-emitter.js',
+		'./bower_components/imagesloaded/imagesloaded.js',
+		'./bower_components/angular-images-loaded/angular-images-loaded.js',
+		'./bower_components/isotope/jquery.isotope.js',
+		'./bower_components/angular-isotope/dist/angular-isotope.min.js',
+		'./bower_components/angular-route/angular-route.js',
+		'./bower_components/ngstorage/ngstorage.js',
+	], 'public/js/angular-dependencies.js');
+
+	mix.scriptsIn('resources/assets/angular', 'public/js/angular.js');
+
+	mix.copy('./resources/assets/vendor/*', 'public/js/vendor');
+
+	mix.copy('resources/assets/css', 'public/css');
+	mix.copy('resources/assets/js', 'public/js');
 
 	mix.stylus('resources/assets/stylus/email.styl', 'public/css/email.css');
 
