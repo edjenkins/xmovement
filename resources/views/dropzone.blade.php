@@ -4,7 +4,7 @@
 
 <input type="hidden" name="{{ $input_id }}" id="{{ $input_id }}" value="{{ isset($value) ? $value : "" }}" />
 
-<input type="hidden" name="type" value="{{ $type }}" />
+<input type="hidden" name="type-{{ $input_id }}" value="{{ $type }}" />
 
 @if ($cc)
 
@@ -88,7 +88,7 @@
 
 		theDropzone.on("sending", function(file, xhr, formData) {
 			formData.append("_token", $('input[name="_token"]').val());
-			formData.append("type", $('input[name="type"]').val());
+			formData.append("type", $('input[name="type-{{ $input_id }}"]').val());
 		});
 
 	})

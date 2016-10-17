@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use MartinBean\Database\Eloquent\Sluggable;
 
 use Auth;
+use App\Report;
 use Carbon\Carbon;
 use Log;
 
@@ -57,10 +58,10 @@ class Idea extends Model
      *
      * @var array
      */
-    public function updates()
-    {
-        return $this->hasMany(Update::class);
-    }
+	public function updates()
+	{
+		return $this->morphMany('App\Update', 'updateable');
+	}
 
     /**
      * The Design Tasks for the idea.

@@ -3,17 +3,17 @@
 	<div class="upper-section">
 
 		<div class="avatar-wrapper">
-			<div class="avatar" style="background-image: url('{{ ResourceImage::getImage($tender->company_logo, 'large') }}')"></div>
+			<div class="avatar" style="background-image: url('{{ ResourceImage::getImage($tender->team->avatar, 'large') }}')"></div>
 		</div>
 
 		<div class="tile-body">
 
 			<h5 class="tender-company">
-				{{ str_limit($tender->company_name, $limit = 80, $end = '...') }}
+				{{ str_limit($tender->team->name, $limit = 80, $end = '...') }}
 			</h5>
 
 			<p>
-				{{ trans('tenders.posted_by_x', ['url' => action('UserController@profile', [$tender->user]), 'name' => $tender->user->name]) }}
+				{{ count($tender->team->users) }} Members
 			</p>
 
 		</div>
@@ -23,7 +23,7 @@
 	<div class="lower-section">
 
 		<div class="tender-summary">
-			{{ str_limit($tender->company_bio, $limit = 260, $end = '...') }}
+			{{ str_limit($tender->team->bio, $limit = 260, $end = '...') }}
 		</div>
 
 	</div>
@@ -33,7 +33,7 @@
 		<ul>
 			<li>
 				<i class="fa fa-star"></i>
-				14 Updates
+				{{ count($tender->updates) }} Updates
 			</li>
 			<li>
 				<a href="{{ action('TenderController@view', $tender) }}">View Tender</a>

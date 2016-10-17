@@ -18,6 +18,8 @@ elixir(function(mix) {
 
 	mix.scripts([
 		'./bower_components/underscore/underscore.js',
+		'./bower_components/moment/moment.js',
+		'./bower_components/angular-moment/angular-moment.js',
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.js',
 		'./bower_components/js-cookie/src/js.cookie.js',
 		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js',

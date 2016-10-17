@@ -6,7 +6,7 @@ underscore.factory('_', function() {
 	return window._;
 });
 
-var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives', 'hj.imagesLoaded'], function($interpolateProvider) {
+var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives', 'hj.imagesLoaded', 'angularMoment'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 })
@@ -42,3 +42,9 @@ XMovement.filter('cut', function () {
 		return value + (tail || ' …');
 	};
 });
+
+XMovement.filter("trust", ['$sce', function($sce) {
+  return function(htmlCode){
+    return $sce.trustAsHtml(htmlCode);
+  }
+}]);

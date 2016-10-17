@@ -22,6 +22,8 @@
     "underscore": "^1.8.3",
     "angular-isotope": "^0.1.14",
     "angular-images-loaded": "^0.2.1",
-    "animate.css": "^3.5.2"
+    "animate.css": "^3.5.2",
+    "angular-momentjs": "^0.2.2",
+    "angular-moment": "^1.0.0"
   }
 }

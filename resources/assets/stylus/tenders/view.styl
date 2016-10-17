@@ -62,7 +62,6 @@
 				padding 15px 15px 15px 120px
 				position relative
 				text-align left
-
 				&.tender-author
 					min-height 120px
 					.tender-avatar
@@ -89,7 +88,7 @@
 
 				&.tender-preview
 					min-height 150px
-					.pdf-preview
+					a.pdf-preview
 						background-color light-grey
 						border-radius 6px
 						height 110px
@@ -108,6 +107,165 @@
 						&:hover
 							background-color darken(light-grey, 5%)
 							cursor pointer
+							text-decoration none
+
+			.tender-team
+				background-color white
+				border border-color 1px solid
+				border-top none
+				position relative
+				.team-label
+					background-color border-color
+					border-radius 6px
+					color #AAA
+					display inline-block
+					line-height 24px
+					padding 0 10px
+					position absolute
+					top -12px
+					left 50%
+					margin-left -40px
+				ul.team-members
+					cleanlist()
+					padding 10px
+					li
+						cleanlist()
+						float left
+						margin 10px
+						&.add-team-member
+							border border-color 1px solid
+							border-radius 50%
+							color border-color
+							line-height 70px
+							overflow hidden
+							height 70px
+							width 70px
+							text-align center
+							animate()
+							i.fa.fa-plus
+								font-size 24px
+								line-height 70px
+							&:hover
+								background-color main-color
+								border-color main-color
+								color white
+								cursor pointer
+
+						.tender-avatar
+							border-radius 50%
+							overflow hidden
+							height 70px
+							width 70px
+							.avatar-wrapper
+								position relative
+								text-align center
+								.avatar
+									background-size contain
+									background-position center
+									background-repeat no-repeat
+									height 70px
+									margin 0 auto
+									width 70px
+				.add-team-member-form-container
+					padding 0 20px 20px 20px
+					.form-group
+						position relative
+						&:last-child
+							margin-bottom 0
+						.form-control
+							margin 0
+							max-width 100%
+						input
+							margin 0
+							text-align left
+							width 100%
+						.searching-users
+							height 57px
+							line-height 57px
+							position absolute
+							bottom 0px
+							right 0px
+							width 57px
+							text-align center
+							i
+								color #999
+					ul.user-results
+						cleanlist()
+						background-color #f9f9f9
+						border border-color 1px solid
+						border-bottom-left-radius 4px
+						border-bottom-right-radius 4px
+						li
+							cleanlist()
+							border-bottom border-color 1px solid
+							height 50px
+							padding-left 15px
+							position relative
+							animate()
+							&:last-child
+								border-bottom none
+							&.user-search-result
+								padding-left 55px
+							p
+								color #444
+								font-size 15px
+								line-height 50px
+								margin 0
+								padding 0
+							.tender-avatar
+								border transparent 2px solid
+								border-radius 50%
+								position absolute
+								top 5px
+								left 5px
+								overflow hidden
+								height 40px
+								width 40px
+								animate()
+								.avatar-wrapper
+									position relative
+									text-align center
+									.avatar
+										background-size contain
+										background-position center
+										background-repeat no-repeat
+										height 40px
+										margin 0 auto
+										width 40px
+									.add-overlay
+										background-color white
+										border-radius 50%
+										line-height 40px
+										display none
+										position absolute
+										text-align center
+										top 0
+										bottom 0
+										left 0
+										right 0
+										animate()
+										i.fa.fa-plus
+											color main-color
+											font-size 18px
+							&.user-search-result:hover
+								background-color main-color
+								cursor pointer
+								.tender-avatar
+									border-color white
+									overflow hidden
+									.avatar-wrapper
+										.avatar
+											display none
+										.add-overlay
+											display block
+								p
+									color white
+					&.has-results
+						.add-team-member-search
+							border-bottom none
+							border-bottom-left-radius 0px
+							border-bottom-right-radius 0px
+
 
 			.tender-questions
 				background-color white
@@ -132,6 +290,10 @@
 						p
 							margin 0
 							padding 0
+
+			.updates-section
+				.post-update-container
+					border border-color 1px solid
 
 			.tender-update
 				background-color white

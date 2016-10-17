@@ -28,7 +28,7 @@ function postUpdate(button, user_id, idea_id)
         type:"POST",
         url: "/api/update/add",
         dataType: "json",
-        data:  JSON.stringify({user_id: user_id, idea_id: idea_id, text: text}),
+        data:  JSON.stringify({user_id: user_id, updateable_id: idea_id, updateable_type: 'idea', text: text}),
         processData: false,
         success: function(response) {
 
@@ -46,7 +46,6 @@ function postUpdate(button, user_id, idea_id)
         		})
         	}
 			button.removeClass('posting');
-			$('#update-text-input').input();
         },
         error: function(response) {
 			console.log(response);
