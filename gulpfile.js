@@ -19,7 +19,6 @@ elixir(function(mix) {
 	mix.scripts([
 		'./bower_components/underscore/underscore.js',
 		'./bower_components/moment/moment.js',
-		'./bower_components/angular-moment/angular-moment.js',
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.js',
 		'./bower_components/js-cookie/src/js.cookie.js',
 		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.js',
@@ -36,6 +35,7 @@ elixir(function(mix) {
 
 	mix.scripts([
 		'./bower_components/angular/angular.js',
+		'./bower_components/angular-moment/angular-moment.js',
 		'./bower_components/ev-emitter/ev-emitter.js',
 		'./bower_components/imagesloaded/imagesloaded.js',
 		'./bower_components/angular-images-loaded/angular-images-loaded.js',

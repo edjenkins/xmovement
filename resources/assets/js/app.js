@@ -1,5 +1,7 @@
 //app.js
 
+var discussionLoaded = false;
+
 $(document).ready(function() {
 
 	// Scroll function for animated navbar

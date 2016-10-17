@@ -1,6 +1,17 @@
 function startListening()
 {
+	if (discussionLoaded == true) return;
+
+	discussionLoaded = true;
+
 	window.app = {};
+
+	var attr = $('#comments-container').attr('data-url');
+
+	if (!(typeof attr !== typeof undefined && attr !== false))
+	{
+		$('#comments-container').attr('data-url', document.location);
+	}
 
 	app.BrainSocket = new BrainSocket(
 			new WebSocket(web_scoket_url),
@@ -19,7 +30,7 @@ function startListening()
 			}
 			else
 			{
-				$(msg.client.view).hide().appendTo($('#comments-container')).slideDown(300);
+				$(msg.client.view).hide().appendTo($('#comments-container[data-url="' + msg.client.data.url + '"]')).slideDown(300);
 			}
 			attachHandlers();
 		}
@@ -109,17 +120,19 @@ $(document).ready(function() {
 
 function fetchComments(url) {
 
-	$('#comments-container').html('');
+	console.log('Fetching comments for - ' + url);
+
+	$('#comments-container[data-url="' + url + '"]').html('');
 
 	$.getJSON("/api/comment/view", {url: url} , function(response) {
 
 		if (response) {
 
-			$('#comments-container').html('');
-			
+			$('#comments-container[data-url="' + url + '"]').html('');
+
 			$.each(response.data.comments, function(index, comment) {
 
-				$('#comments-container').append(comment.view);
+				$('#comments-container[data-url="' + url + '"]').append(comment.view);
 
 			})
 

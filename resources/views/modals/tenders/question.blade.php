@@ -7,21 +7,21 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-				<h4 class="modal-title">Tender Question</h4>
+				<h4 class="modal-title"><% selected_answer.question.question %></h4>
 
 			</div>
 
 			<div class="modal-body">
 
-				<p class="text-muted">
-					Some details...
+				<p>
+					<% selected_answer.answer %>
 				</p>
 
 			</div>
 
-			<div class="modal-footer">
+			<div class="comments-section">
 
-				<button type="button" class="btn btn-primary" data-dismiss="modal">{{ trans('common.done') }}</button>
+				@include('discussion')
 
 			</div>
 

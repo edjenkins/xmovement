@@ -277,9 +277,9 @@
 
 	    </div>
 
+		@include('modals/tenders/question')
+		
 	</div>
-
-	@include('modals/tenders/question')
 
 	<script type="text/javascript">
 		var tender = {!! json_encode($tender) !!};

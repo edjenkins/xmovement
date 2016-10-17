@@ -3,25 +3,13 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, Ten
 	$scope.tender = tender;
 	$scope.user_search_results = [];
 	$scope.no_search_results = false;
-	$scope.selected_question = {};
-
-	$scope.pageLoaded = function() {
-		var tender_id = $location.search().id;
-		if (tender_id) {
-			$scope.getTender(tender_id);
-		}
-	}
+	$scope.selected_answer = {};
 
 	$scope.$watch('user_search_term', function() {
 
 		$scope.searchUsers();
 
 	}, true);
-
-	$('#tender-question-modal').on('hide.bs.modal', function (e) {
-		$scope.selected_question = {};
-		$location.search('id', null);
-	});
 
 	$scope.getTender = function(tender_id) {
 
@@ -32,13 +20,27 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, Ten
 		})
 	}
 
+	$('#tender-question-modal').on('hide.bs.modal', function (e) {
+		$scope.selected_answer = {};
+
+		if (history.pushState) {
+		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+		    window.history.pushState({path:newurl},'',newurl);
+
+			$scope.fetchComments(newurl);
+		}
+	});
+
 	$scope.openQuestionModal = function(answer) {
 
-		$location.search('id', answer.id);
+		if (history.pushState) {
+		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?question_id=' + answer.id;
+		    window.history.pushState({path: newurl}, '', newurl);
 
-		var url = $location.absUrl();
+			$('#tender-question-modal #comments-container').attr('data-url', newurl);
 
-		$scope.fetchComments(url);
+			$scope.fetchComments(newurl);
+		}
 
 		$scope.selected_answer = answer;
 
@@ -47,17 +49,17 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, Ten
 
 	$scope.fetchComments = function(url) {
 
-		$('#comments-container').html('');
+		$('#comments-container[data-url="' + url + '"]').html('');
 
 		$.getJSON("/api/comment/view", {url: url} , function(response) {
 
 			if (response) {
 
-				$('#comments-container').html('');
+				$('#comments-container[data-url="' + url + '"]').html('');
 
 				$.each(response.data.comments, function(index, comment) {
 
-					$('#comments-container').append(comment.view);
+					$('#comments-container[data-url="' + url + '"]').append(comment.view);
 
 				})
 
@@ -206,5 +208,4 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, Ten
 	}
 
 	$scope.getTender($scope.tender.id);
-	// $scope.pageLoaded();
 });
