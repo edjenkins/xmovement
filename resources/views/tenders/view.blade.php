@@ -101,23 +101,28 @@
 
 							<ul class="team-members">
 
-								<li ng-repeat="user in tender.team.users">
+								<li class="team-member" ng-repeat="user in tender.team.users" ng-click="removeUserFromTeam(user)">
 									<div class="tender-avatar">
 										<a class="avatar-wrapper" href="/profile/<% user.id %>" target="_blank">
 											<div class="avatar" style="background-image: url('<% getProfileImage(user, 'thumb') %>')"></div>
 										</a>
+										@can('remove_user', $tender->team)
+											<div class="tender-avatar-overlay">
+												<i class="fa fa-trash"></i>
+											</div>
+										@endcan
 									</div>
 								</li>
 
-								@can('edit', $tender)
+								@can('add_user', $tender->team)
 
-									<li class="add-team-member" ng-click="adding_team_member = !adding_team_member" onClick="$('.add-team-member-search').focus();">
+									<li class="add-team-member team-member" ng-click="adding_team_member = !adding_team_member" onClick="$('.add-team-member-search').focus();">
 										<i class="fa fa-plus"></i>
 									</li>
 
-									<div class="clearfloat"></div>
-
 								@endcan
+
+								<div class="clearfloat"></div>
 
 							</ul>
 
@@ -233,29 +238,32 @@
 
 					</div>
 
+					@can('post_update', $tender)
 
-					<div class="timeline-section">
+						<div class="timeline-section">
 
-						<div class="updates-section">
+							<div class="updates-section">
 
-							<div class="post-update-container">
+								<div class="post-update-container">
 
-								<div class="creator-avatar" style="background-image:url('{{ ResourceImage::getProfileImage(Auth::user(), 'medium') }}')"></div>
+									<div class="creator-avatar" style="background-image:url('{{ ResourceImage::getProfileImage(Auth::user(), 'medium') }}')"></div>
 
-								<div class="update-composer-wrapper">
+									<div class="update-composer-wrapper">
 
-									<textarea class="expanding" rows="1" ng-model="update" name="text" placeholder="{{ trans('tender.update_text_placeholder') }}"></textarea>
+										<textarea class="expanding" rows="1" ng-model="update" name="text" placeholder="{{ trans('tender.update_text_placeholder') }}"></textarea>
 
-									<button type="button" class="post-update-button" ng-click="postUpdate()">
-										<span class="idle-state">
-											{{ trans('tender.update_button_idle') }}
-										</span>
-										<span class="posting-state">
-											{{ trans('tender.update_button_posting') }}
-										</span>
-									</button>
+										<button type="button" class="post-update-button" ng-click="postUpdate()">
+											<span class="idle-state">
+												{{ trans('tender.update_button_idle') }}
+											</span>
+											<span class="posting-state">
+												{{ trans('tender.update_button_posting') }}
+											</span>
+										</button>
 
-									<ul class="error-list" id="update-errors"></ul>
+										<ul class="error-list" id="update-errors"></ul>
+
+									</div>
 
 								</div>
 
@@ -263,7 +271,7 @@
 
 						</div>
 
-					</div>
+					@endcan
 
 	    		</div>
 
@@ -278,7 +286,7 @@
 	    </div>
 
 		@include('modals/tenders/question')
-		
+
 	</div>
 
 	<script type="text/javascript">

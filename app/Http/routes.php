@@ -128,6 +128,7 @@ Route::group(['middleware' => ['web']], function () {
 		Route::get('/api/teams', 'TeamController@api_index');
 		Route::get('/api/team/user/search', 'TeamController@api_search');
 		Route::post('/api/team/user/add', 'TeamController@api_add_user');
+		Route::post('/api/team/user/remove', 'TeamController@api_remove_user');
 
 		// Idea routes
 		Route::get('/api/ideas', 'IdeaController@api_index');

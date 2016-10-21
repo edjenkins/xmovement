@@ -207,5 +207,17 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, Ten
 		});
 	}
 
+	$scope.removeUserFromTeam = function(user) {
+
+		TeamService.removeUser({team_id:$scope.tender.team.id, user_id:user.id}).then(function(response) {
+
+			if (response.meta.success)
+			{
+				$scope.getTender($scope.tender.id);
+			}
+
+		});
+	}
+
 	$scope.getTender($scope.tender.id);
 });

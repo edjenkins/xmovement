@@ -18,6 +18,15 @@ XMovement.service('TeamService', function($http, $q) {
 			});
 			return defer.promise;
 		},
+		'removeUser': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/team/user/remove', body).success(function(resp){
+				defer.resolve(resp);
+			}).error( function(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
 		'getTeams': function(query) {
 			var defer = $q.defer();
 			$http.get('/api/teams', query).success(function(resp){

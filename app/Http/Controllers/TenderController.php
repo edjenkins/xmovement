@@ -76,8 +76,6 @@ class TenderController extends Controller
 			return redirect()->action('IdeaController@view', $tender->idea);
 		}
 
-		$user = Auth::user();
-
 		return view('tenders.view', [
 			'tender' => $tender
 		]);
