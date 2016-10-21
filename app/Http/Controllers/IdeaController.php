@@ -164,16 +164,6 @@ class IdeaController extends Controller
 
 	public function store(Request $request)
 	{
-		$questions = [];
-		foreach ($request->questions as $index => $question)
-		{
-			if (($question != "") && ($question !== null))
-			{
-				array_push($questions, $question);
-			}
-		}
-		$request->questions = $questions;
-
 		// Validate the idea
 		$this->validate($request, [
 			'name' => 'required|max:255',
@@ -198,6 +188,16 @@ class IdeaController extends Controller
 		// Pre-populate design tasks with user questions
 		if (env('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
 		{
+			$questions = [];
+			foreach ($request->questions as $index => $question)
+			{
+				if (($question != "") && ($question !== null))
+				{
+					array_push($questions, $question);
+				}
+			}
+			$request->questions = $questions;
+
 			foreach ($request->questions as $index => $question)
 			{
 				$this->addDesignTask($idea, $question, $question, 'Discussion');
