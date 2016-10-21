@@ -31,6 +31,6 @@ class ResourceImage
 
     public function getFile($file)
     {
-		return '/uploads/images/files/' . $file;
+		return 'https://s3.amazonaws.com/xmovement/uploads/files/' . $file;
     }
 }

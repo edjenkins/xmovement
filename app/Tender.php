@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Auth;
+use App\Report;
 
 class Tender extends Model
 {
@@ -15,12 +16,17 @@ class Tender extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'company_name', 'contact_email_address', 'company_bio', 'company_logo', 'summary'
+        'idea_id', 'user_id', 'team_id', 'summary', 'document'
     ];
 
     protected $dates = ['deleted_at'];
 
 	use SoftDeletes;
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     public function user()
     {
@@ -30,5 +36,21 @@ class Tender extends Model
     public function idea()
     {
         return $this->belongsTo(Idea::class);
+    }
+
+    public function questions()
+    {
+		return $this->hasManyThrough(TenderQuestion::class, TenderQuestionAnswer::class, 'tender_id', 'id', 'id');
+		// return $this->hasManyThrough(TenderQuestion::class, TenderQuestionAnswer::class, 'tender_question_id', 'id');
+    }
+
+    public function answers()
+    {
+        return $this->hasMany(TenderQuestionAnswer::class, 'tender_id');
+    }
+
+    public function updates()
+    {
+        return $this->morphMany('App\Update', 'updateable');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Contracts\Logging\Log;
 use Psr\Log\LoggerInterface;
 
@@ -16,7 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Relation::morphMap([
+		    'idea' => \App\Idea::class,
+			'tender' => \App\Tender::class,
+		]);
     }
 
     /**

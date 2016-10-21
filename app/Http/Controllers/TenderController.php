@@ -16,7 +16,10 @@ use Session;
 
 use App\Idea;
 use App\User;
+use App\Team;
 use App\Tender;
+use App\TenderQuestion;
+use App\TenderQuestionAnswer;
 
 class ResponseObject {
 
@@ -32,6 +35,19 @@ class ResponseObject {
 
 class TenderController extends Controller
 {
+	public function api_view(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$tender = Tender::whereId($request->tender_id)->with('team.users', 'answers', 'answers.question', 'updates')->first();
+
+		$response->data['tender'] = $tender;
+
+		return Response::json($response);
+	}
+
     public function index(Request $request, Idea $idea)
     {
 		if (Gate::denies('view_tenders', $idea))
@@ -60,8 +76,6 @@ class TenderController extends Controller
 			return redirect()->action('IdeaController@view', $tender->idea);
 		}
 
-		$user = Auth::user();
-
 		return view('tenders.view', [
 			'tender' => $tender
 		]);
@@ -76,8 +90,11 @@ class TenderController extends Controller
 			return redirect()->action('IdeaController@view', $idea);
 		}
 
+		$tender_questions = TenderQuestion::where(['enabled' => true])->get();
+
 		return view('tenders.add', [
-			'idea' => $idea
+			'idea' => $idea,
+			'tender_questions' => $tender_questions
 		]);
     }
 
@@ -109,26 +126,32 @@ class TenderController extends Controller
 			return redirect()->action('IdeaController@view', $idea);
 		}
 
-		$user = Auth::user();
+		Log::error($request);
 
 		// Validate the tender
 	    $this->validate($request, [
-	        'company_name' => 'required',
-			'company_bio' => 'required',
-			'contact_email_address' => 'required',
 			'summary' => 'required'
 	    ]);
 
 	    // Create the tender
 	    $tender = Tender::create([
 	        'idea_id' => $request->idea_id,
-	        'user_id' => $user->id,
-	        'company_name' => $request->company_name,
-			'company_bio' => $request->company_bio,
-			'contact_email_address' => $request->contact_email_address,
-			'company_logo' => $request->company_logo,
-			'summary' => $request->summary
+	        'user_id' => Auth::user()->id,
+			'team_id' => $request->team_id,
+			'summary' => $request->summary,
+			'document' => $request->document,
 	    ]);
+
+		foreach ($request->answers as $question_id => $answer)
+		{
+			$tender_question_answer = TenderQuestionAnswer::create([
+				'tender_id' => $tender->id,
+				'tender_question_id' => $question_id,
+				'answer' => $answer
+			]);
+
+			// $tender->questions()->attach($tender_question_answer->tender_question_id);
+		}
 
         Session::flash('flash_message', trans('flash_message.tender_created'));
         Session::flash('flash_type', 'flash-success');

@@ -9,12 +9,39 @@ use App\User;
 use App\Idea;
 use Auth;
 use Input;
+use Log;
+use Response;
 use Session;
 
 use Illuminate\Http\Request;
 
+class ResponseObject {
+
+	public $meta = array();
+	public $errors = array();
+	public $data = array();
+
+	public function __construct()
+	{
+		$this->meta['success'] = false;
+	}
+}
+
 class UserController extends Controller
 {
+	public function api_search(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$name = $request->name;
+
+		$response->data['users'] = (strlen($name) > 2) ? User::where('name', 'like', '%' . $name .'%')->select('id', 'name', 'avatar')->orderBy('name')->get() : [];
+
+		return Response::json($response);
+	}
+
     public function profile(Request $request, User $user)
 	{
 		if (is_null($user->id)) { $user = Auth::user(); }
