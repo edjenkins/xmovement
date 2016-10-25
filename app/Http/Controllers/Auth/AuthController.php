@@ -64,7 +64,7 @@ class AuthController extends Controller
 		{
 			$session_id = $request->cookie('laravel_session');
 
-			if (!$session_id)
+			if (!Redis::exists($session_id . 'SHIB-PERSISTENT-ID'))
 			{
 				return Redirect::to('auth/' . $request->provider);
 			}
