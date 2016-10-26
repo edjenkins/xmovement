@@ -25,6 +25,6 @@ class CreateTenderTenderQuestionTable extends Migration
      */
     public function down()
     {
-		Schema::drop('tenders_tender_question');
+		Schema::drop('tender_tender_question');
     }
 }
