@@ -20,8 +20,7 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-		// TODO: Check if user can create a team?
-        return false;
+        return true;
     }
 
     /**
