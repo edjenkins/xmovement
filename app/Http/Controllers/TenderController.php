@@ -142,15 +142,18 @@ class TenderController extends Controller
 			'document' => $request->document,
 	    ]);
 
-		foreach ($request->answers as $question_id => $answer)
+		if ($request->answers)
 		{
-			$tender_question_answer = TenderQuestionAnswer::create([
-				'tender_id' => $tender->id,
-				'tender_question_id' => $question_id,
-				'answer' => $answer
-			]);
+			foreach ($request->answers as $question_id => $answer)
+			{
+				$tender_question_answer = TenderQuestionAnswer::create([
+					'tender_id' => $tender->id,
+					'tender_question_id' => $question_id,
+					'answer' => $answer
+				]);
 
-			// $tender->questions()->attach($tender_question_answer->tender_question_id);
+				// $tender->questions()->attach($tender_question_answer->tender_question_id);
+			}
 		}
 
         Session::flash('flash_message', trans('flash_message.tender_created'));
