@@ -34,7 +34,7 @@ class TenderPolicy
     public function post_update(User $user, Tender $tender)
     {
 		// TODO: Check if user can post an update to tender?
-        return false;
+        return $user->id == $tender->user_id;
     }
 
     /**
