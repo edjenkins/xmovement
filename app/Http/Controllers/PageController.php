@@ -42,7 +42,7 @@ class PageController extends Controller
 		# META
 
 		// Check if custom page set
-		if (View::exists('custom.pages.about')) { return view('custom.pages.about'); }
+		if (View::exists('deployment.pages.about')) { return view('deployment.pages.about'); }
 
 		return view('pages.about');
 	}
