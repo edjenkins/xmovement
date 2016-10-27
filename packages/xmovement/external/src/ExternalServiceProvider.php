@@ -19,13 +19,13 @@ class ExternalServiceProvider extends ServiceProvider
             __DIR__ . '/migrations' => base_path('database/migrations'),
         ], 'migrations');
 
-        $this->publishes([
-            __DIR__ . '/seeds' => base_path('database/seeds'),
-        ], 'seeds');
+        // $this->publishes([
+        //     __DIR__ . '/seeds' => base_path('database/seeds'),
+        // ], 'seeds');
 
-        $this->publishes([
-            __DIR__ . '/factories' => base_path('database/factories'),
-        ], 'factories');
+        // $this->publishes([
+        //     __DIR__ . '/factories' => base_path('database/factories'),
+        // ], 'factories');
 
         $this->publishes([
             __DIR__.'/views' => base_path('resources/views/xmovement/external'),

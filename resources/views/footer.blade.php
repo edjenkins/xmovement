@@ -6,6 +6,15 @@
 	                <li>
 	                    <p>{{ trans('footer.brand') }}</p>
 	                </li>
+
+					@foreach (Config::get('custom-pages.pages') as $index => $custom_page)
+						@if($custom_page['footer'])
+							<li>
+								<a href="{{ $custom_page['route'] }}">{{ $custom_page['name'] }}</a>
+							</li>
+						@endif
+					@endforeach
+
 	                <li>
 	                    <a href="{{ action('PageController@contact') }}">{{ trans('footer.contact') }}</a>
 	                </li>

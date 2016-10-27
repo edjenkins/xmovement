@@ -31,6 +31,9 @@ class PageController extends Controller
 		MetaTag::set('description', Lang::get('meta.home_description'));
 		# META
 
+		// Check if custom page set
+		if (View::exists('deployment.pages.home')) { return view('deployment.pages.home', ['ideas' => $ideas]); }
+
 	    return view('pages.home', ['ideas' => $ideas]);
 	}
 
@@ -54,6 +57,9 @@ class PageController extends Controller
 		MetaTag::set('description', Lang::get('meta.contact_description'));
 		# META
 
+		// Check if custom page set
+		if (View::exists('deployment.pages.contact')) { return view('deployment.pages.contact'); }
+
 	    return view('pages.contact');
 	}
 
@@ -63,6 +69,9 @@ class PageController extends Controller
 		MetaTag::set('title', Lang::get('meta.terms_title'));
 		MetaTag::set('description', Lang::get('meta.terms_description'));
 		# META
+
+		// Check if custom page set
+		if (View::exists('deployment.pages.terms')) { return view('deployment.pages.terms'); }
 
 	    return view('pages.terms');
 	}
