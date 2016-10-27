@@ -1,57 +1,64 @@
 <form class="auth-form" role="form" method="POST" action="{{ url('/login') }}">
     {!! csrf_field() !!}
 
-    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('auth.email_address') }}</label>
+	@if (env('STANDARD_AUTH', true))
 
-        <input type="email" class="form-control input-field" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
+	    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+	        <label class="control-label">{{ trans('auth.email_address') }}</label>
 
-        @if ($errors->has('email'))
-            <span class="help-block">
-                <strong>{{ $errors->first('email') }}</strong>
-            </span>
-        @endif
+	        <input type="email" class="form-control input-field" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
 
-    </div>
+	        @if ($errors->has('email'))
+	            <span class="help-block">
+	                <strong>{{ $errors->first('email') }}</strong>
+	            </span>
+	        @endif
 
-    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('auth.password') }}</label>
+	    </div>
 
-        <input type="password" class="form-control input-field" name="password" placeholder="{{ trans('auth.password') }}">
+	    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+	        <label class="control-label">{{ trans('auth.password') }}</label>
 
-        @if ($errors->has('password'))
-            <span class="help-block">
-                <strong>{{ $errors->first('password') }}</strong>
-            </span>
-        @endif
+	        <input type="password" class="form-control input-field" name="password" placeholder="{{ trans('auth.password') }}">
 
-    </div>
+	        @if ($errors->has('password'))
+	            <span class="help-block">
+	                <strong>{{ $errors->first('password') }}</strong>
+	            </span>
+	        @endif
 
-    <div class="form-group visuallyhidden">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="remember"> {{ trans('auth.remember_me') }}
-            </label>
-        </div>
-    </div>
+	    </div>
 
-    <div class="form-group">
+	    <div class="form-group visuallyhidden">
+	        <div class="checkbox">
+	            <label>
+	                <input type="checkbox" name="remember"> {{ trans('auth.remember_me') }}
+	            </label>
+	        </div>
+	    </div>
 
-        <button type="submit" class="btn btn-primary">
-            {{ trans('auth.login') }}
-        </button>
+	    <div class="form-group">
 
-        <br />
+	        <button type="submit" class="btn btn-primary">
+	            {{ trans('auth.login') }}
+	        </button>
 
-        <a class="btn btn-link muted-link" href="{{ url('/password/reset') }}">{{ trans('auth.forgot_your_password') }}</a>
+	        <br />
 
-    </div>
+	        <a class="btn btn-link muted-link" href="{{ url('/password/reset') }}">{{ trans('auth.forgot_your_password') }}</a>
 
-	@if (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true))
+	    </div>
+
+	@endif
+
+	@if (env('STANDARD_AUTH', true) && (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true) || env('SHIBBOLETH_AUTH', true)))
 	    <div class="text-linethru">
 	        <div class="line"></div>
 	        <div class="text">{{ trans('common.or') }}</div>
 	    </div>
+	@else
+		<p>{{ trans('auth.authenticate_with_a_provider') }}</p>
+		<br />
 	@endif
 
 	@if (env('FACEBOOK_AUTH', true))
@@ -68,6 +75,15 @@
 			<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
 	            <i class="fa fa-fw fa-linkedin"></i>
 	            {{ trans('auth.linkedin_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('SHIBBOLETH_AUTH', true))
+	    <div class="form-group">
+			<a class="btn btn-shibboleth" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'shibboleth']) }}">
+	            <i class="fa fa-fw fa-university"></i>
+	            {{ trans('auth.shibboleth_login') }}
 	        </a>
 	    </div>
 	@endif

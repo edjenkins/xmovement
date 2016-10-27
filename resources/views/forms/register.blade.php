@@ -1,84 +1,91 @@
 <form class="auth-form" role="form" method="POST" action="{{ url('/register') }}">
     {!! csrf_field() !!}
 
-    <input type="hidden" name="type" value="{{ $type }}">
+	@if (env('STANDARD_AUTH', true))
 
-    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('auth.name') }}</label>
+	    <input type="hidden" name="type" value="{{ $type }}">
 
-        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="{{ trans('auth.name') }}">
+	    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+	        <label class="control-label">{{ trans('auth.name') }}</label>
 
-        @if ($errors->has('name'))
-            <span class="help-block">
-                <strong>{{ $errors->first('name') }}</strong>
-            </span>
-        @endif
+	        <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="{{ trans('auth.name') }}">
 
-    </div>
+	        @if ($errors->has('name'))
+	            <span class="help-block">
+	                <strong>{{ $errors->first('name') }}</strong>
+	            </span>
+	        @endif
 
-    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('auth.email_address') }}</label>
+	    </div>
 
-        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
+	    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+	        <label class="control-label">{{ trans('auth.email_address') }}</label>
 
-        @if ($errors->has('email'))
-            <span class="help-block">
-                <strong>{{ $errors->first('email') }}</strong>
-            </span>
-        @endif
+	        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('auth.email') }}">
 
-    </div>
+	        @if ($errors->has('email'))
+	            <span class="help-block">
+	                <strong>{{ $errors->first('email') }}</strong>
+	            </span>
+	        @endif
 
-    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label class="control-label">{{ trans('auth.password') }}</label>
+	    </div>
 
-        <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.password') }}">
+	    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+	        <label class="control-label">{{ trans('auth.password') }}</label>
 
-        @if ($errors->has('password'))
-            <span class="help-block">
-                <strong>{{ $errors->first('password') }}</strong>
-            </span>
-        @endif
+	        <input type="password" class="form-control" name="password" placeholder="{{ trans('auth.password') }}">
 
-    </div>
+	        @if ($errors->has('password'))
+	            <span class="help-block">
+	                <strong>{{ $errors->first('password') }}</strong>
+	            </span>
+	        @endif
 
-    @if ($type == 'standard')
+	    </div>
 
-        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-            <label class="control-label">{{ trans('auth.confirm_password') }}</label>
+	    @if ($type == 'standard')
 
-            <input type="password" class="form-control" name="password_confirmation" placeholder="{{ trans('auth.password') }}">
+	        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+	            <label class="control-label">{{ trans('auth.confirm_password') }}</label>
 
-            @if ($errors->has('password_confirmation'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password_confirmation') }}</strong>
-                </span>
-            @endif
+	            <input type="password" class="form-control" name="password_confirmation" placeholder="{{ trans('auth.password') }}">
 
-        </div>
+	            @if ($errors->has('password_confirmation'))
+	                <span class="help-block">
+	                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+	                </span>
+	            @endif
 
-    @endif
+	        </div>
 
-    <div class="form-group">
+	    @endif
 
-        <button type="submit" class="btn btn-primary">
-            {{ trans('auth.register') }}
-        </button>
+	    <div class="form-group">
 
-        @if ($type == 'standard')
+	        <button type="submit" class="btn btn-primary">
+	            {{ trans('auth.register') }}
+	        </button>
 
-            <br />
-            <a class="btn btn-link muted-link" href="{{ url('/login') }}">{{ trans('auth.have_an_account') }}</a>
+	        @if ($type == 'standard')
 
-        @endif
+	            <br />
+	            <a class="btn btn-link muted-link" href="{{ url('/login') }}">{{ trans('auth.have_an_account') }}</a>
 
-    </div>
+	        @endif
 
-	@if (env('FACEBOOK_AUTH') || env('LINKEDIN_AUTH'))
+	    </div>
+
+	@endif
+	
+	@if (env('STANDARD_AUTH', true) && (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true) || env('SHIBBOLETH_AUTH', true)))
 	    <div class="text-linethru">
 	        <div class="line"></div>
 	        <div class="text">{{ trans('common.or') }}</div>
 	    </div>
+	@else
+		<p>{{ trans('auth.authenticate_with_a_provider') }}</p>
+		<br />
 	@endif
 
 	@if (env('FACEBOOK_AUTH'))
@@ -95,6 +102,15 @@
 			<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
 	            <i class="fa fa-fw fa-linkedin"></i>
 	            {{ trans('auth.linkedin_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('SHIBBOLETH_AUTH', true))
+	    <div class="form-group">
+			<a class="btn btn-shibboleth" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'shibboleth']) }}">
+	            <i class="fa fa-fw fa-university"></i>
+	            {{ trans('auth.shibboleth_login') }}
 	        </a>
 	    </div>
 	@endif

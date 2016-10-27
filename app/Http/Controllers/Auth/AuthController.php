@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Intervention\Image\ImageManager;
 
 use App\Jobs\SendWelcomeEmail;
@@ -28,8 +29,10 @@ use App\SocialProfile;
 
 class AuthController extends Controller
 {
+	use AuthenticatesAndRegistersUsers;
+
     /**
-     * Redirect the user to the Facebook authentication page.
+     * Redirect the user to the authentication page.
      *
      * @return Response
      */
@@ -37,7 +40,16 @@ class AuthController extends Controller
     {
         Session::reflash();
 
-        return Socialite::driver($request->provider)->redirect();
+		if ($request->provider == 'shibboleth')
+		{
+			$callback_url = URL::action('Auth\AuthController@handleProviderCallback', ['provider' => 'shibboleth']);
+
+			return Redirect::to('https://gateway.eventmovement.co.uk/shibboleth.php?callback_url=' . $callback_url . '&laravel_session=' . $request->cookie('laravel_session'));
+		}
+		else
+		{
+			return Socialite::driver($request->provider)->redirect();
+		}
     }
 
     /**
@@ -47,13 +59,42 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(Request $request)
     {
-        try {
-            $user = Socialite::driver($request->provider)->user();
-        } catch (Exception $e) {
-            return Redirect::to('auth/' . $request->provider);
-        }
+		// Shibboleth auth
+		if ($request->provider == 'shibboleth')
+		{
+			$session_id = $request->cookie('laravel_session');
+
+			if (!Redis::exists($session_id . 'SHIB-PERSISTENT-ID'))
+			{
+				return Redirect::to('auth/' . $request->provider);
+			}
+
+			$user = [
+				'shibboleth_id' => Redis::get($session_id . 'SHIB-PERSISTENT-ID'),
+				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
+				'name' => Redis::get($session_id . 'SHIB-NAME'),
+				'affiliation' => Redis::get($session_id . 'SHIB-AFFILIATION')
+			];
+
+			// Remove objects from redis
+			Redis::del($session_id . 'SHIB-PERSISTENT-ID');
+			Redis::del($session_id . 'SHIB-EMAIL');
+			Redis::del($session_id . 'SHIB-NAME');
+			Redis::del($session_id . 'SHIB-AFFILIATION');
+		}
+		else
+		{
+			try {
+	            $user = Socialite::driver($request->provider)->user();
+	        } catch (Exception $e) {
+	            return Redirect::to('auth/' . $request->provider);
+	        }
+		}
 
         switch ($request->provider) {
+        	case 'shibboleth':
+        		$authUser = $this->findOrCreateShibbolethUser($user);
+        		break;
         	case 'facebook':
         		$authUser = $this->findOrCreateFacebookUser($user);
         		break;
@@ -69,6 +110,35 @@ class AuthController extends Controller
         Auth::login($authUser, true);
 
         return Redirect::to($this->getRedirectPath());
+    }
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $shibbolethUser
+     * @return User
+     */
+    private function findOrCreateShibbolethUser($shibbolethUser)
+    {
+        if ($authUser = User::where('shibboleth_id', $shibbolethUser['shibboleth_id'])->first()) {
+            return $authUser;
+        }
+
+		// TODO: If shibboleth passes an image then save it
+
+        $user = User::create([
+            'shibboleth_id' => $shibbolethUser['shibboleth_id'],
+            'name' => $shibbolethUser['name'],
+			'email' => $shibbolethUser['email'],
+            // 'avatar' => $filename,
+            // 'token' => $shibbolethUser['token']
+        ]);
+
+        $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
+
+        $this->dispatch($job);
+
+        return $user;
     }
 
     /**
@@ -314,19 +384,37 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        Session::flash('show_support', true);
+		if (env('STANDARD_AUTH', true))
+		{
+	        Session::flash('show_support', true);
+	        Session::flash('auth_type', 'login');
 
-        Session::flash('auth_type', 'login');
+	        return $this->parentLogin($request);
+		}
+		else
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
 
-        return $this->parentLogin($request);
+			return redirect('/');
+		}
     }
 
     public function register(Request $request)
     {
-        Session::flash('show_support', true);
+		if (env('STANDARD_AUTH', true))
+		{
+	        Session::flash('show_support', true);
+	        Session::flash('auth_type', 'register');
 
-        Session::flash('auth_type', 'register');
+	        return $this->parentRegister($request);
+		}
+		else
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
 
-        return $this->parentRegister($request);
+			return redirect('/');
+		}
     }
 }
