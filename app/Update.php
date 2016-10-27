@@ -8,12 +8,18 @@ class Update extends Model
 {
 	protected $fillable = [
 	   'user_id',
-	   'idea_id',
+	   'updateable_type',
+	   'updateable_id',
 	   'text',
 	];
 
-    public function idea()
+    public function updateable()
     {
-        return $this->belongsTo(Idea::class);
+        return $this->morphTo();
     }
+
+    // public function idea()
+    // {
+    //     return $this->belongsTo(Idea::class, 'updateable_id');
+    // }
 }

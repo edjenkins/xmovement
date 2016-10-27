@@ -16,3 +16,4 @@ bower_components/**
 
 **/.DS_Store
 resources/assets/stylus/variables.styl
+assets/**

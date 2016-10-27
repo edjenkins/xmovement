@@ -38,9 +38,9 @@
 
 						</div>
 
-						@include('ideas/progress')
-
 						@include('ideas/notification')
+
+						@include('ideas/progress')
 
 		    			<p class="idea-description">
 		    				{{ $idea->description }}
@@ -53,6 +53,8 @@
     					@include('ideas/side-column')
 
     				</div>
+
+					@include('ideas/widgets/tenders')
 
 					@include('ideas/widgets/proposals')
 

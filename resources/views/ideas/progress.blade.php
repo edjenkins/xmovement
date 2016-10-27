@@ -1,7 +1,9 @@
-<div class="idea-progress-bar">
+<div class="idea-progress-bar {{ (($idea->design_state == 'open') || ($idea->proposal_state == 'open')) ? 'has-notification' : '' }}">
 
 	<div class="ipb-line ipb-placeholder-line"></div>
 	<div class="ipb-line ipb-progress-line" style="right: {{ (100 - $idea->progress_percentage()) }}%"></div>
+
+	<div class="ipb-progress-arrow" style="right: {{ (100 - $idea->progress_percentage()) }}%"></div>
 
 	<div class="ipb-dot ipb-start-dot complete">
 		<div class="ipb-label">
@@ -25,7 +27,7 @@
 	</div>
 
 	@if(($idea->design_percentage() + $idea->proposal_percentage()) == 0)
-		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
+		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%" onClick="document.location = '{{ action('IdeaController@view', $idea) }}'">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
 					{{ trans('idea.progress_support_design_propose') }}

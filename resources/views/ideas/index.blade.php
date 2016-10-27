@@ -80,7 +80,7 @@
 
 					<div class="tile idea-tile">
 
-						<div class="shortlisted-banner" ng-show="idea.shortlisted" ng-click="setSortType('shortlist')">
+						<div class="shortlisted-banner" ng-show="idea.shortlisted == 1" ng-click="setSortType('shortlist')">
 							<i class="fa fa-fw fa-star"></i>
 							<span class="shortlisted-text">shortlisted</span>
 						</div>

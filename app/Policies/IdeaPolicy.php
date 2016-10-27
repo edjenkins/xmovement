@@ -189,6 +189,30 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can view proposals for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function view_tenders(User $user, Idea $idea)
+    {
+		return ($idea->tender_state != 'closed');
+    }
+
+    /**
+     * Determine if the given user can submit a tender for the given idea.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function submit_tender(User $user, Idea $idea)
+    {
+        return ($idea->tender_state == 'open');
+    }
+
+    /**
      * Override all policy restrictions if the user is a super admin
      *
      * @param  User  $user

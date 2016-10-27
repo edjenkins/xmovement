@@ -67,7 +67,7 @@
 
 				<div class="col-sm-4 col-md-3 col-sm-push-8 col-md-push-9">
 
-					<div class="side-panel">
+					<div class="side-panel inspirations-side-panel">
 
 						<div class="side-panel-box submission-box">
 							<div class="side-panel-box-header">
@@ -144,7 +144,7 @@
 					</div>
 
 				</div>
-
+				
 				<div class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
 					<div class="loader" ng-show="loading_inspirations">Loading...</div>

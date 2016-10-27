@@ -20,20 +20,8 @@
 		border-radius 6px
 		color white
 		margin 0 15px
-		padding 15px 20px
+		padding 12px 15px
 		position relative
-		&:before
-			content ''
-			position absolute
-			border-style solid
-			border-width 0 12px 6px
-			border-color transparent transparent main-color
-			display block
-			width 0
-			z-index 1
-			top -6px
-			left 50%
-			margin-left -3px
 		&.design-phase-notification:before
 			left 33%
 		&.proposal-phase-notification:before
@@ -251,3 +239,20 @@ ul.sidebar-social-links
 				padding 0 0 0 15px
 			.proposal-tile
 				margin 0
+
+.tenders-container
+	margin-bottom 20px
+	.tenders-wrapper
+		.col-md-6
+			padding 0
+			&:nth-child(1)
+				padding 0 15px 0 0
+			&:nth-child(2)
+				padding 0 0 0 15px
+			.tender-tile
+				margin 0
+				padding-bottom 60px
+				.lower-section
+					display none
+				.tile-footer ul li:first-child
+					text-align center

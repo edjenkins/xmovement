@@ -37,11 +37,18 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$('#inspiration-modal').on('hide.bs.modal', function (e) {
 		$scope.selected_inspiration = {};
-		$location.search('id', null);
+
+		if (history.pushState) {
+		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+		    window.history.pushState({path:newurl},'',newurl);
+
+			$scope.fetchComments(newurl);
+		}
 	});
 
 	$scope.pageLoaded = function() {
-		var inspiration_id = $location.search().id;
+
+		var inspiration_id = $location.search().inspiration_id;
 		if (inspiration_id) {
 			$scope.loadInspiration(inspiration_id);
 		}
@@ -235,11 +242,14 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.openInspirationModal = function(inspiration) {
 
-		$location.search('id', inspiration.id);
+		if (history.pushState) {
+		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?inspiration_id=' + inspiration.id;
+		    window.history.pushState({path: newurl}, '', newurl);
 
-		var url = $location.absUrl();
+			$('#inspiration-modal #comments-container').attr('data-url', newurl);
 
-		fetchComments(url);
+			$scope.fetchComments(newurl);
+		}
 
 		$scope.selected_inspiration = inspiration;
 
@@ -249,6 +259,29 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.setIframeUrl = function(url) {
 
 		return $sce.trustAsResourceUrl(url);
+	}
+	$scope.fetchComments = function(url) {
+
+		$('#comments-container').html('');
+
+		$.getJSON("/api/comment/view", {url: url} , function(response) {
+
+			if (response) {
+
+				$('#comments-container').html('');
+
+				$.each(response.data.comments, function(index, comment) {
+
+					$('#comments-container').append(comment.view);
+
+				})
+
+				attachHandlers();
+
+				// startListening();
+			}
+		});
+
 	}
 
 	$scope.loadInspirations('popular');

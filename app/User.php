@@ -11,8 +11,7 @@ use App\Comment;
 use App\DesignTask;
 use App\DesignTaskVote;
 use App\Inspiration;
-// use App\InspirationFavourite;
-// use Auth;
+use App\Team;
 
 class User extends Authenticatable
 {
@@ -33,6 +32,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'token', 'phone', 'shibboleth_id', 'facebook_id', 'linkedin_id', 'email'
     ];
+
+    /**
+     * The Teams the user belongs to.
+     *
+     * @var array
+     */
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
 
     /**
      * The Inspirations the user has created.

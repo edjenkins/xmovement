@@ -37,45 +37,65 @@ class UpdatesController extends Controller
 {
 	public function add(Request $request)
 	{
-		// Get the idea
+		$response = new ResponseObject();
 
-		$idea = Idea::whereId($request->idea_id)->first();
+		// TODO: Validation
 
 		// Save update
-
 		$update = Update::create([
 			'user_id' => Auth::user()->id,
-			'idea_id' => $idea->id,
+			'updateable_type' => $request->updateable_type,
+			'updateable_id' => $request->updateable_id,
 			'text' => nl2br(htmlentities($request->text, ENT_QUOTES, 'UTF-8'))
 		]);
 
-		// Notify users via email
+		$response->data['update'] = $update;
 
-		// Check if users are being spammed
-		$recent_update_count = Update::where([['idea_id', $idea->id], ['created_at', '>=', Carbon::now()->subDay()]])->count();
+		switch ($update->updateable_type) {
+			case 'idea':
 
-		Log::info('Updates sent today - ' . $recent_update_count);
+				Log::info('Posting idea update');
 
-		if ($recent_update_count < 2)
-		{
-			foreach ($idea->get_supporters() as $index => $supporter)
-			{
-				$job = (new SendUpdatePostedEmail(Auth::user(), $supporter->user, $idea, $update))->delay(5)->onQueue('emails');
-				$this->dispatch($job);
-			}
-		}
-		else
-		{
-			Log::error('Can only send 2 updates per day');
+				$idea = Idea::whereId($update->updateable_id)->first();
+
+				// Notify users unless they have received more than two emails in past day
+				$recent_update_count = Update::where([['updateable_id', $idea->id], ['updateable_type', 'idea'], ['created_at', '>=', Carbon::now()->subDay()]])->count();
+
+				if ($recent_update_count < 2)
+				{
+					foreach ($idea->get_supporters() as $index => $supporter)
+					{
+						$job = (new SendUpdatePostedEmail(Auth::user(), $supporter->user, $idea, $update))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
+					}
+				}
+
+				// Render element for response
+				$response->data['element'] = View::make('ideas.update', ['update' => $update])->render();
+
+				$response->meta['success'] = true;
+
+				break;
+
+			case 'tender':
+
+				Log::info('Posting tender update');
+
+				// Render element for response
+				$response->data['element'] = View::make('tenders.update', ['update' => $update])->render();
+
+				$response->meta['success'] = true;
+
+				break;
+
+			default:
+
+				$response->meta['success'] = false;
+
+				break;
 		}
 
 		// Return JSON response
-
-		$response = new ResponseObject();
-
-		$response->meta['success'] = true;
-
-		$response->data['element'] = View::make('ideas.update', ['update' => $update])->render();
 
 		return Response::json($response);
 	}

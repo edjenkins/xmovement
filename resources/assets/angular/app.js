@@ -6,18 +6,17 @@ underscore.factory('_', function() {
 	return window._;
 });
 
-var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives', 'hj.imagesLoaded'], function($interpolateProvider) {
+var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives', 'hj.imagesLoaded', 'angularMoment'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
 })
 
-XMovement.config(['$locationProvider',
+XMovement.config(function($routeProvider, $locationProvider) {
 
-	function($locationProvider) {
-		$locationProvider.html5Mode(true);
-	}
+	// TODO: Issue causing digest infinte loop when html5 mode set to true
+	$locationProvider.html5Mode(true);
 
-]);
+});
 
 XMovement.filter('cut', function () {
 	return function (value, wordwise, max, tail) {
@@ -42,3 +41,9 @@ XMovement.filter('cut', function () {
 		return value + (tail || ' …');
 	};
 });
+
+XMovement.filter("trust", ['$sce', function($sce) {
+  return function(htmlCode){
+    return $sce.trustAsHtml(htmlCode);
+  }
+}]);

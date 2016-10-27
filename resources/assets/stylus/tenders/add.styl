@@ -1,0 +1,56 @@
+.team-form, .tender-form
+	background-color white
+	border border-color 1px solid
+	margin-top 30px
+	padding 20px
+	text-align left
+	h3
+		color #999
+		margin 0 0 15px 0
+	.form-group
+		&:last-child
+			margin-bottom 0px !important
+		.form-control
+			margin 0
+			max-width 100%
+			text-align left
+		select
+			display block
+			line-height 50px
+			padding 10px
+	.dropzone-container
+		border border-color 1px solid
+		border-radius 4px
+
+ul.team-selector
+	cleanlist()
+	border border-color 1px solid
+	border-radius 4px
+	display inline-block
+	li
+		cleanlist()
+		line-height 50px
+		margin 0
+		padding 0px 20px
+		animate()
+		&.selected
+			background-color success-color
+			color white
+			display block
+			font-size 16px
+		&:hover
+			background-color border-color
+			cursor pointer
+		&:last-child
+			border-bottom none
+	&.team-selected
+		border-color success-color
+		li
+			display none
+			&.selected
+				display block
+				&:hover
+					background-color success-color
+
+.add-team-form
+	margin-top 20px

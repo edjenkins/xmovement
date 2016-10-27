@@ -95,6 +95,16 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/propose/submit', 'ProposeController@submit');
     Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
+	// Tender routes
+    Route::get('/tender/{idea}', 'TenderController@index');
+	Route::get('/tender/view/{tender}', 'TenderController@view');
+    Route::get('/tender/add/{idea}', 'TenderController@add');
+    Route::post('/tender/submit', 'TenderController@submit');
+    Route::delete('/tender/destroy/{tender}', 'TenderController@destroy');
+
+	// Team routes
+	Route::post('/team/submit', 'TeamController@submit');
+
     // Vote routes
 	Route::post('/vote/design_task', 'DesignController@vote'); // Design task
     Route::post('/vote/proposal', 'ProposeController@vote'); // Proposal
@@ -112,8 +122,17 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/api/inspiration/favourite', 'InspirationController@favourite');
 		Route::post('/api/inspiration/delete', 'InspirationController@destroy');
 
+		// Team routes
+		Route::get('/api/teams', 'TeamController@api_index');
+		Route::get('/api/team/user/search', 'TeamController@api_search');
+		Route::post('/api/team/user/add', 'TeamController@api_add_user');
+		Route::post('/api/team/user/remove', 'TeamController@api_remove_user');
+
 		// Idea routes
 		Route::get('/api/ideas', 'IdeaController@api_index');
+
+		// Idea routes
+		Route::get('/api/tender', 'TenderController@api_view');
 
 		// Action routes
 		Route::post('/api/action/log', 'ActionController@log');
