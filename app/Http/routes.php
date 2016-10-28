@@ -62,16 +62,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/analytics', 'AnalyticsController@index');
 
     // Inspiration routes
-    Route::get('/inspiration', 'InspirationController@index');
+    Route::get('/inspiration', 'InspirationController@index')->middleware('phase:inspiration');
 
     // Idea routes
     Route::get('/explore', 'IdeaController@index');
-    Route::get('/idea/create', 'IdeaController@add');
-    Route::get('/idea/invite/{idea}', 'IdeaController@invite');
+    Route::get('/idea/create', 'IdeaController@add')->middleware('phase:creation');
+	Route::post('/idea/store', 'IdeaController@store')->middleware('phase:creation');
+	Route::get('/idea/invite/{idea}', 'IdeaController@invite');
     Route::post('/idea/invites/send', 'IdeaController@sendInvites');
     Route::get('/idea/edit/{idea}', 'IdeaController@edit');
     Route::post('/idea/update', 'IdeaController@update');
-    Route::post('/idea/store', 'IdeaController@store');
     Route::get('/idea/{idea}/{slug?}', 'IdeaController@view');
     Route::post('/idea/open_design_phase/{idea}', 'IdeaController@openDesignPhase');
     Route::delete('/idea/{idea}', 'IdeaController@destroy');
@@ -96,11 +96,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete('/propose/destroy/{proposal}', 'ProposeController@destroy');
 
 	// Tender routes
-    Route::get('/tender/{idea}', 'TenderController@index');
-	Route::get('/tender/view/{tender}', 'TenderController@view');
-    Route::get('/tender/add/{idea}', 'TenderController@add');
-    Route::post('/tender/submit', 'TenderController@submit');
-    Route::delete('/tender/destroy/{tender}', 'TenderController@destroy');
+	Route::group(['middleware' => ['phase:tender']], function () {
+
+	    Route::get('/tender/{idea}', 'TenderController@index');
+		Route::get('/tender/view/{tender}', 'TenderController@view');
+	    Route::get('/tender/add/{idea}', 'TenderController@add');
+	    Route::post('/tender/submit', 'TenderController@submit');
+	    Route::delete('/tender/destroy/{tender}', 'TenderController@destroy');
+	});
 
 	// Team routes
 	Route::post('/team/submit', 'TeamController@submit');
@@ -112,58 +115,6 @@ Route::group(['middleware' => ['web']], function () {
 
     // Contact routes
 	Route::post('/contact/send', 'ContactController@send');
-
-    // API routes
-
-		// Inspiration routes
-		Route::get('/api/inspirations', 'InspirationController@api_index');
-		Route::get('/api/inspiration', 'InspirationController@api_view');
-		Route::post('/api/inspiration/add', 'InspirationController@add');
-		Route::post('/api/inspiration/favourite', 'InspirationController@favourite');
-		Route::post('/api/inspiration/delete', 'InspirationController@destroy');
-
-		// Team routes
-		Route::get('/api/teams', 'TeamController@api_index');
-		Route::get('/api/team/user/search', 'TeamController@api_search');
-		Route::post('/api/team/user/add', 'TeamController@api_add_user');
-		Route::post('/api/team/user/remove', 'TeamController@api_remove_user');
-
-		// Idea routes
-		Route::get('/api/ideas', 'IdeaController@api_index');
-
-		// Idea routes
-		Route::get('/api/tender', 'TenderController@api_view');
-
-		// Action routes
-		Route::post('/api/action/log', 'ActionController@log');
-
-		// Support routes
-	    Route::post('/api/support', 'IdeaController@support');
-
-		// Updates routes
-	    Route::post('/api/update/add', 'UpdatesController@add');
-	    Route::delete('/api/update/destroy', 'UpdatesController@destroy');
-
-		// Message routes
-		Route::post('/api/messages/send', 'MessagesController@send');
-
-		// Discussion routes
-		Route::get('/api/comment/view', 'CommentController@view');
-	    Route::delete('/api/comment/destroy', 'CommentController@destroy');
-
-		// Report routes
-		Route::post('/api/report', 'ReportController@add');
-
-		// Translation routes
-		Route::get('/api/translations', 'TranslationController@api_index');
-		Route::get('/api/translations/find', 'TranslationController@api_find');
-		Route::post('/api/translation/update', 'TranslationController@api_update');
-		Route::get('/api/translations/export', 'TranslationController@api_export');
-
-		// Analytics routes
-		Route::get('api/analytics/overview', 'AnalyticsController@api_overview');
-		Route::get('api/analytics/users', 'AnalyticsController@api_users');
-		Route::get('api/analytics/ideas', 'AnalyticsController@api_ideas');
 
     // File upload
     Route::post('/upload', 'UploadController@upload');
@@ -216,4 +167,57 @@ Route::group(['middleware' => ['web']], function () {
 		});
 		return $img->response('jpg');
 	});
+});
+
+Route::group(['middleware' => ['api']], function () {
+
+	// Inspiration routes
+	Route::get('/api/inspirations', 'InspirationController@api_index')->middleware('phase:inspiration');
+	Route::get('/api/inspiration', 'InspirationController@api_view')->middleware('phase:inspiration');
+	Route::post('/api/inspiration/add', 'InspirationController@add')->middleware('phase:inspiration');
+	Route::post('/api/inspiration/favourite', 'InspirationController@favourite')->middleware('phase:inspiration');
+	Route::post('/api/inspiration/delete', 'InspirationController@destroy')->middleware('phase:inspiration');
+
+	// Team routes
+	Route::get('/api/teams', 'TeamController@api_index');
+	Route::get('/api/team/user/search', 'TeamController@api_search');
+	Route::post('/api/team/user/add', 'TeamController@api_add_user');
+	Route::post('/api/team/user/remove', 'TeamController@api_remove_user');
+
+	// Idea routes
+	Route::get('/api/ideas', 'IdeaController@api_index');
+
+	// Idea routes
+	Route::get('/api/tender', 'TenderController@api_view');
+
+	// Action routes
+	Route::post('/api/action/log', 'ActionController@log');
+
+	// Support routes
+    Route::post('/api/support', 'IdeaController@support');
+
+	// Updates routes
+    Route::post('/api/update/add', 'UpdatesController@add');
+    Route::delete('/api/update/destroy', 'UpdatesController@destroy');
+
+	// Message routes
+	Route::post('/api/messages/send', 'MessagesController@send');
+
+	// Discussion routes
+	Route::get('/api/comment/view', 'CommentController@view');
+    Route::delete('/api/comment/destroy', 'CommentController@destroy');
+
+	// Report routes
+	Route::post('/api/report', 'ReportController@add');
+
+	// Translation routes
+	Route::get('/api/translations', 'TranslationController@api_index');
+	Route::get('/api/translations/find', 'TranslationController@api_find');
+	Route::post('/api/translation/update', 'TranslationController@api_update');
+	Route::get('/api/translations/export', 'TranslationController@api_export');
+
+	// Analytics routes
+	Route::get('api/analytics/overview', 'AnalyticsController@api_overview');
+	Route::get('api/analytics/users', 'AnalyticsController@api_users');
+	Route::get('api/analytics/ideas', 'AnalyticsController@api_ideas');
 });

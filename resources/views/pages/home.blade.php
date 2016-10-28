@@ -11,9 +11,15 @@
 	                <button>{{ trans('home.get_started') }}</button>
 	            </a>
 			@else
-				<a href="{{ action('IdeaController@index') }}">
-					<button>{{ trans('navbar.explore') }}</button>
-				</a>
+				@if (env('INSPIRATION_PHASE_ENABLED', false))
+					<a href="{{ action('InspirationController@index') }}">
+						<button>{{ trans('home.be_inspired') }}</button>
+					</a>
+				@else
+					<a href="{{ action('IdeaController@index') }}">
+						<button>{{ trans('navbar.explore') }}</button>
+					</a>
+				@endif
 			@endif
         </div>
     </div>

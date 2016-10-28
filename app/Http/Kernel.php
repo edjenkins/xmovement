@@ -34,6 +34,9 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \App\Http\Middleware\LogActivity::class,
+			\App\Http\Middleware\SetLocale::class,
             'throttle:60,1',
         ],
     ];
@@ -50,5 +53,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+		'phase' => \App\Http\Middleware\CheckPhase::class,
     ];
 }

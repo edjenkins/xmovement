@@ -21,7 +21,7 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-				@if (env('IDEATION_PHASE_ENABLED', false))
+				@if (env('INSPIRATION_PHASE_ENABLED', false))
 					<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
 				@endif
 

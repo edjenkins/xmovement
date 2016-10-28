@@ -127,15 +127,6 @@ class IdeaController extends Controller
 
 	public function add(Request $request)
 	{
-		if (!env('CREATION_PHASE_ENABLED', true))
-		{
-			// Creation phase disabled
-			Session::flash('flash_message', trans('flash_message.page_not_found'));
-            Session::flash('flash_type', 'flash-danger');
-
-			return redirect()->action('PageController@home');
-		}
-
 		if (Auth::check())
 		{
 			return view('ideas.add');

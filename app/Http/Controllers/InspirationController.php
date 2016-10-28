@@ -76,15 +76,6 @@ class InspirationController extends Controller
 
 	public function index(Request $request)
 	{
-		if (!env('IDEATION_PHASE_ENABLED', false))
-		{
-			// Ideation phase disabled
-			Session::flash('flash_message', trans('flash_message.page_not_found'));
-            Session::flash('flash_type', 'flash-danger');
-
-			return redirect()->action('PageController@home');
-		}
-
 		$inspirations = Inspiration::with('user')->with('categories')->orderBy('created_at', 'desc')->get();
 
 		$inspiration_categories = InspirationCategory::where('enabled', true)->orderBy('name')->get();
