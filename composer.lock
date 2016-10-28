@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cc047c3e3e91e19eff9138bbe9fe8903",
+    "hash": "3fcbe43d41f9f0029747687d375ad72b",
     "content-hash": "c41a29c1ce16f69c2bf7a719ee39135d",
     "packages": [
         {
@@ -4171,20 +4171,20 @@
         },
         {
             "name": "torann/laravel-meta-tags",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Torann/laravel-meta-tags.git",
-                "reference": "2e520889e1be59ce8f256f805f248063bc1ee740"
+                "reference": "541878d3063fccf454201cdfb688f90b324986c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Torann/laravel-meta-tags/zipball/2e520889e1be59ce8f256f805f248063bc1ee740",
-                "reference": "2e520889e1be59ce8f256f805f248063bc1ee740",
+                "url": "https://api.github.com/repos/Torann/laravel-meta-tags/zipball/541878d3063fccf454201cdfb688f90b324986c9",
+                "reference": "541878d3063fccf454201cdfb688f90b324986c9",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.1.*|5.2.*",
+                "illuminate/support": "~5.1",
                 "php": ">=5.5.9"
             },
             "require-dev": {
@@ -4219,7 +4219,7 @@
                 "meta tags",
                 "tags"
             ],
-            "time": "2016-07-13 13:30:31"
+            "time": "2016-09-01 18:01:00"
         },
         {
             "name": "vlucas/phpdotenv",

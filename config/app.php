@@ -186,6 +186,9 @@ return [
         XMovement\External\ExternalServiceProvider::class,
         XMovement\Scheduler\SchedulerServiceProvider::class,
 
+		// Deployment
+		Deployment\Deployment\DeploymentServiceProvider::class,
+
 		Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
 
     ],
@@ -267,6 +270,9 @@ return [
 
         'SchedulerServiceProvider' => XMovement\Scheduler\SchedulerServiceProvider::class,
         'Scheduler' => XMovement\Scheduler\Scheduler::class,
+
+		// Deployment
+		'DeploymentServiceProvider' => Deployment\Deployment\DeploymentServiceProvider::class,
 
     ],
 

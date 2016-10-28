@@ -16,4 +16,8 @@ bower_components/**
 
 **/.DS_Store
 resources/assets/stylus/variables.styl
-assets/**
+
+resources/views/deployment
+config/custom-pages.php
+
+resources/assets/stylus/deployment/home.styl
