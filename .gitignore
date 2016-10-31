@@ -6,6 +6,9 @@ Homestead.json
 
 /assets/**/*
 
+public/js/vendor.js
+public/js/vendor.js.map
+
 storage/framework/views/*
 /public/css/**
 /public/js/**
