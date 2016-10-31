@@ -73,14 +73,14 @@ class AuthController extends Controller
 				'shibboleth_id' => Redis::get($session_id . 'SHIB-PERSISTENT-ID'),
 				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
 				'name' => Redis::get($session_id . 'SHIB-NAME'),
-				'affiliation' => Redis::get($session_id . 'SHIB-AFFILIATION')
+				'shibboleth_data' => Redis::get($session_id . 'SHIB-DATA')
 			];
 
 			// Remove objects from redis
 			Redis::del($session_id . 'SHIB-PERSISTENT-ID');
 			Redis::del($session_id . 'SHIB-EMAIL');
 			Redis::del($session_id . 'SHIB-NAME');
-			Redis::del($session_id . 'SHIB-AFFILIATION');
+			Redis::del($session_id . 'SHIB-DATA');
 		}
 		else
 		{
@@ -130,8 +130,7 @@ class AuthController extends Controller
             'shibboleth_id' => $shibbolethUser['shibboleth_id'],
             'name' => $shibbolethUser['name'],
 			'email' => $shibbolethUser['email'],
-            // 'avatar' => $filename,
-            // 'token' => $shibbolethUser['token']
+			'shibboleth_data' => $shibbolethUser['shibboleth_data'],
         ]);
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
