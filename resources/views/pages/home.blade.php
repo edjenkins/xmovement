@@ -70,8 +70,8 @@
 	</div>
 
 	@if(count($ideas) > 0)
-	    <div class="container">
-	        <div class="row">
+	    <div class="container-fluid featured-ideas-container">
+	        <div class="container">
 	            <div class="panel-heading text-center">
 	                <h2>{{ trans('home.featured_ideas', ['idea' => trans_choice('common.idea', count($ideas))]) }}</h2>
 	            </div>

@@ -24,3 +24,9 @@ resources/views/deployment
 config/custom-pages.php
 
 resources/assets/stylus/deployment/home.styl
+
+public/js/vendor.js
+
+public/js/vendor.js.map
+
+public/js/vendor.js
