@@ -10,6 +10,18 @@
 	background-color white
 	border-bottom border-color 1px solid
 	padding 20px 0
+	position relative
+	&:before
+		content ''
+		background-color white
+		height 30px
+		width 100%
+		position absolute
+		z-index 1
+		top -15px
+		-ms-transform skewY(-0.5deg)
+		-webkit-transform skewY(-0.5deg)
+		transform skewY(-0.5deg)
 	.about-summary-tile
 		background transparent
 		border none
@@ -20,15 +32,3 @@
 .featured-ideas-container
 	margin-top 0
 	padding 0
-	position relative
-	&:before
-		content ''
-		background-color white
-		height 30px
-		width 100%
-		position absolute
-		z-index 1
-		top -15px
-		-ms-transform skewY(0.5deg)
-		-webkit-transform skewY(0.5deg)
-		transform skewY(0.5deg)

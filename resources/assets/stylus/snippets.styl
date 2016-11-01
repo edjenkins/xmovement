@@ -6,6 +6,12 @@ animate()
   -o-transition all 0.2s ease-in-out
   transition all 0.2s ease-in-out
 
+animation-delay()
+  -webkit-animation-delay arguments
+  -moz-animation-delay arguments
+  -o-animation-delay arguments
+  animation-delay arguments
+
 transition()
   -webkit-transition arguments
   -moz-transition arguments
@@ -20,3 +26,34 @@ cleanlist()
 	list-style none
 	margin 0
 	padding 0
+
+outer-border()
+	border border-color 1px solid
+
+rounded-corners()
+	-webkit-border-radius 6px
+	-moz-border-radius 6px
+	border-radius 6px
+
+light-shadow()
+	-webkit-box-shadow 0px 0px 5px 0px rgba(0,0,0,0.01)
+	-moz-box-shadow 0px 0px 5px 0px rgba(0,0,0,0.01)
+	box-shadow 0px 0px 5px 0px rgba(0,0,0,0.01)
+
+dark-shadow()
+	-webkit-box-shadow 0px 0px 10px 0px rgba(0,0,0,0.05)
+	-moz-box-shadow 0px 0px 10px 0px rgba(0,0,0,0.05)
+	box-shadow 0px 0px 10px 0px rgba(0,0,0,0.05)
+
+dark-inset-shadow()
+	-webkit-box-shadow 0px 0px 20px 0px rgba(0,0,0,0.1) inset
+	-moz-box-shadow 0px 0px 20px 0px rgba(0,0,0,0.1) inset
+	box-shadow 0px 0px 20px 0px rgba(0,0,0,0.1) inset
+
+white-panel()
+	background-color white
+	overflow hidden
+	rounded-corners()
+	outer-border()
+	// light-shadow()
+	// outer-border()

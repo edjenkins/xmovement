@@ -1,4 +1,4 @@
-@extends('layouts.app', ['bodyclasses' => 'transparent'])
+@extends('layouts.app', ['bodyclasses' => 'transparent medium-grey'])
 
 @section('content')
     <div class="container-fluid hero-container" id="contact-hero-container" style="background-image:url('{{ getenv('APP_CONTACT_HEADER_IMG') }}')">

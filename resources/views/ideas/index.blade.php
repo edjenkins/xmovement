@@ -1,4 +1,4 @@
-@extends('layouts.app', ['bodyclasses' => 'grey'])
+@extends('layouts.app', ['bodyclasses' => 'medium-grey'])
 
 @section('content')
 

@@ -34,8 +34,7 @@
 			padding 0
 
 	.idea-section
-		background white
-		border border-color 1px solid
+		white-panel()
 		&.padded
 			padding 20px
 	.section-header
@@ -72,22 +71,24 @@
 
 .side-column
 	.creator-tile
-		background white
-		border border-color 1px solid
 		margin-bottom 15px
 		padding 20px
 		text-align center
 		z-index 1
+		rounded-corners()
+		white-panel()
 		transition(all linear 0.2s)
 		.creator-avatar
 			background-color border-color
 			background-position center
 			background-size cover
 			background-repeat no-repeat
+			border transparent 2px solid
 			border-radius 60px
 			margin 5px auto
 			height 120px
 			width 120px
+			animate()
 		h4
 			color #444
 			font-size 1.5em
@@ -102,23 +103,23 @@
 			padding 5px 10px
 
 		&:hover
-			border-color main-color
 			cursor pointer
+			.creator-avatar
+				border-color main-color
 
 	.stats-tile
-		background white
-		border border-color 1px solid
-		border-top none
 		list-style none
-		margin 0
+		margin 0 0 15px 0
 		padding 0
 		text-align center
+		white-panel()
 		transition(all linear 0.2s)
 		h3
 			font-size 42px
 			font-weight bolder
 			margin 0
 			padding 20px 20px 5px 20px
+			animate()
 		h5
 			color #999
 			font-size 16px
@@ -126,21 +127,55 @@
 			padding 5px 20px 20px 20px
 		.stats-tile-footer
 			background main-color
-			border-radius 5px
 			color white
 			display none
 			margin 0 10px 10px 10px
 			padding 5px 10px
+			rounded-corners()
 			&.visible
 				display block
 			p
 				margin 0
 				padding 0
 		&.supporters-tile
-			border-top border-color 1px solid
 			&:hover
-				border-color main-color
 				cursor pointer
+				h3
+					color main-color
+		ul.sidebar-social-links
+			cleanlist()
+			background white
+			border-top border-color 1px solid
+			box-sizing border-box
+			li
+				cleanlist()
+				box-sizing border-box
+				float left
+				font-size 20px
+				height 50px
+				line-height 50px
+				text-align center
+				width 25%
+				animate()
+				i
+					color #999
+					animate()
+				&:hover
+					cursor pointer
+					i
+						color white
+				&.share-fb:hover
+					background-color facebook-color
+					border-color facebook-color
+				&.share-twitter:hover
+					background-color twitter-color
+					border-color twitter-color
+				&.share-googleplus:hover
+					background-color googleplus-color
+					border-color googleplus-color
+				&.share-email:hover
+					background-color #4875B4
+					border-color #4875B4
 
 	.info-tile
 		list-style none
@@ -161,45 +196,6 @@
 		margin-top 15px
 		.creator-tile
 			display none
-		.stats-tile
-			border-top border-color 1px solid
-
-ul.sidebar-social-links
-	cleanlist()
-	background white
-	border border-color 1px solid
-	border-top none
-	box-sizing border-box
-	margin-bottom 15px
-	li
-		cleanlist()
-		box-sizing border-box
-		float left
-		font-size 20px
-		height 50px
-		line-height 50px
-		text-align center
-		width 25%
-		animate()
-		i
-			color #999
-			animate()
-		&:hover
-			cursor pointer
-			i
-				color white
-		&.share-fb:hover
-			background-color facebook-color
-			border-color facebook-color
-		&.share-twitter:hover
-			background-color twitter-color
-			border-color twitter-color
-		&.share-googleplus:hover
-			background-color googleplus-color
-			border-color googleplus-color
-		&.share-email:hover
-			background-color #4875B4
-			border-color #4875B4
 
 .first-to-add
 	text-align center
