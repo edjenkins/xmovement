@@ -40,12 +40,16 @@ class DesignPhaseUpdates extends Command
     {
 		Log::info('Sending design phase updates');
 
-		$ideas = Idea::where('design_state', 'open');
+		$ideas = Idea::where('design_state', 'open')->get();
 
 		foreach ($ideas as $index => $idea)
 		{
+			Log::info('Idea - ' . $idea->id);
+
 			foreach ($idea->get_supporters() as $index => $supporter)
 			{
+				Log::info('Supporter - ' . $supporter->user_id);
+				
 				$job = (new SendDesignPhaseUpdatesEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 				$this->dispatch($job);
 			}
