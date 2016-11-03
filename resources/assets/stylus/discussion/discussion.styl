@@ -1,5 +1,8 @@
 .comments-section
-	border border-color 1px solid
+	&.with-border
+		overflow hidden
+		rounded-corners()
+		outer-border()
 	.post-comment-container, .post-reply-container
 		background white
 		min-height 50px

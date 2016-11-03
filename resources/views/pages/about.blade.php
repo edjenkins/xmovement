@@ -1,4 +1,4 @@
-@extends('layouts.app', ['bodyclasses' => 'transparent grey'])
+@extends('layouts.app', ['bodyclasses' => 'transparent medium-grey'])
 
 @section('content')
     <div class="container-fluid hero-container" id="about-hero-container" style="background-image:url('{{ getenv('APP_ABOUT_HEADER_IMG') }}')">
@@ -19,7 +19,7 @@
 		<div class="row about-summary-row">
 
 			<div class="col-md-4">
-				<div class="about-summary-tile">
+				<div class="about-summary-tile animated fadeInUp">
 					<img src="{{ asset(env('S3_URL') . '/icons/support.png') }}" />
 					<h3>
 						{{ trans('about.summary-first-title') }}
@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="about-summary-tile">
+				<div class="about-summary-tile animated fadeInUp">
 					<img src="{{ asset(env('S3_URL') . '/icons/design.png') }}" />
 					<h3>
 						{{ trans('about.summary-second-title') }}
@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="about-summary-tile">
+				<div class="about-summary-tile animated fadeInUp">
 					<img src="{{ asset(env('S3_URL') . '/icons/propose.png') }}" />
 					<h3>
 						{{ trans('about.summary-third-title') }}
@@ -61,9 +61,7 @@
 
 			<div class="col-md-12">
 
-				<h3 class="about-phase-title">{{ trans('about.about-phase-title') }}</h3>
-
-				<div class="about-phase-tile">
+				<div class="about-phase-tile animated fadeIn">
 
 					<div class="phase-step-indicator">
 						1
@@ -84,7 +82,7 @@
 					</p>
 				</div>
 
-				<div class="about-phase-tile">
+				<div class="about-phase-tile animated fadeIn">
 
 					<div class="phase-step-indicator">
 						2
@@ -105,7 +103,7 @@
 					</p>
 				</div>
 
-				<div class="about-phase-tile">
+				<div class="about-phase-tile animated fadeIn">
 
 					<div class="phase-step-indicator">
 						3

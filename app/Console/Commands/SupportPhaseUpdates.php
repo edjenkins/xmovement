@@ -45,9 +45,11 @@ class SupportPhaseUpdates extends Command
 		foreach ($ideas as $index => $idea)
 		{
 			Log::info('Idea - ' . $idea->id);
+
 			foreach ($idea->get_supporters() as $index => $supporter)
 			{
-				Log::info('Supporter - ' . $supporter->id);
+				Log::info('Supporter - ' . $supporter->user_id);
+
 				$job = (new SendSupportPhaseUpdatesEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 				$this->dispatch($job);
 			}

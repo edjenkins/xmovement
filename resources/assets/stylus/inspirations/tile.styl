@@ -5,16 +5,11 @@
 	width 30%
 
 .tile.inspiration-tile
-	background white
-	border-radius 5px
 	box-sizing border-box
 	margin 30px 15px 0px 15px
 	padding-bottom 44px
-	overflow hidden
-	// opacity 1
 	width calc((100% - 91px) / 3)//width calc((100% - 120px) / 4)
-	&.loaded
-		opacity 1
+	white-panel()
 	&:hover
 		cursor pointer
 	@media(max-width: 1120px)

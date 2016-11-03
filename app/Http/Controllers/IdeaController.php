@@ -381,11 +381,20 @@ class IdeaController extends Controller
 	{
 		$response = new ResponseObject();
 
-		$recaptcha = new \ReCaptcha\ReCaptcha(env('CAPTCHA_SECRET'));
+		$resp_success = false;
 
-		$resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
+		if (env('APP_ENV') == 'local')
+		{
+			$resp_success = true;
+		}
+		else
+		{
+			$recaptcha = new \ReCaptcha\ReCaptcha(env('CAPTCHA_SECRET'));
+			$resp = $recaptcha->verify($request->captcha, $_SERVER['REMOTE_ADDR']);
+			$resp_success = $resp->isSuccess();
+		}
 
-		if ($resp->isSuccess() || (env('APP_ENV') == 'local'))
+		if ($resp_success)
 		{
 			$idea = Idea::find($request->idea_id);
 
@@ -402,8 +411,6 @@ class IdeaController extends Controller
 			$response->meta['success'] = true;
 
 		} else {
-
-			// $resp->getErrorCodes()
 
 			array_push($response->errors, 'Please complete the CAPTCHA below');
 

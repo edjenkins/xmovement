@@ -16,6 +16,6 @@ class AdminController extends Controller
 
 		$this->dispatch($job);
 
-		// return 'Test emails sent!';
+		return 'Test emails sent!';
     }
 }

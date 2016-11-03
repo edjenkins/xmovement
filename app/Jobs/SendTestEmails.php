@@ -51,7 +51,7 @@ class SendTestEmails extends Job implements ShouldQueue
     {
 		Log::info('Sending test emails');
 
-		$user = User::where('id', 1)->first();
+		$user = User::where('id', 5)->first();
 		$idea = Idea::where('id', 1)->first();
 		$proposal = Proposal::where('id', 1)->first();
 
@@ -65,22 +65,22 @@ class SendTestEmails extends Job implements ShouldQueue
 		$link = action('PageController@home');
 
 		//$job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
-		$job = (new SendWelcomeEmail($user, false))->onQueue('emails');
-		dispatch($job);
+		// $job = (new SendWelcomeEmail($user, false))->onQueue('emails');
+		// dispatch($job);
 
 		//$job = (new SendCreateIdeaEmail($user, $idea))->delay(30)->onQueue('emails');
-		$job = (new SendCreateIdeaEmail($user, $idea))->onQueue('emails');
-		$this->dispatch($job);
+		// $job = (new SendCreateIdeaEmail($user, $idea))->onQueue('emails');
+		// $this->dispatch($job);
 
 		$receiver = ['name' => $user->name, 'email' => $user->email];
 		//$job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
-		$job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
-		$this->dispatch($job);
+		// $job = (new SendInviteEmail($user, $receiver, $idea))->onQueue('emails');//->delay(30)
+		// $this->dispatch($job);
 
 		$receiver = $user;
 		//$job = (new SendDidSupportEmail($idea->user, $receiver, $idea))->onQueue('emails');
-		$job = (new SendDidSupportEmail($user, $receiver, $idea))->onQueue('emails');
-		$this->dispatch($job);
+		// $job = (new SendDidSupportEmail($user, $receiver, $idea))->onQueue('emails');
+		// $this->dispatch($job);
 
 		//$job = (new SendSupportPhaseUpdatesEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 		$job = (new SendSupportPhaseUpdatesEmail($user, $idea))->onQueue('emails');
@@ -97,21 +97,21 @@ class SendTestEmails extends Job implements ShouldQueue
 
 
 		//$job = (new SendDesignPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
-		$job = (new SendDesignPhaseOpenEmail($user, $idea))->onQueue('emails');
-		$this->dispatch($job);
+		// $job = (new SendDesignPhaseOpenEmail($user, $idea))->onQueue('emails');
+		// $this->dispatch($job);
 
 		//$job = (new SendProposalPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
-		$job = (new SendProposalPhaseOpenEmail($user, $idea))->onQueue('emails');
-		$this->dispatch($job);
+		// $job = (new SendProposalPhaseOpenEmail($user, $idea))->onQueue('emails');
+		// $this->dispatch($job);
 
 		//$job = (new SendProposalPhaseCompleteEmail($supporter->user, $idea, $proposal))->delay(5)->onQueue('emails');
-		$job = (new SendProposalPhaseCompleteEmail($user, $idea, $proposal))->onQueue('emails');
-		$this->dispatch($job);
+		// $job = (new SendProposalPhaseCompleteEmail($user, $idea, $proposal))->onQueue('emails');
+		// $this->dispatch($job);
 
 
 
 		//$job = (new SendXMovementRequirementInviteEmail($name, $email, $personal_message, $link, $user))->onQueue('emails');
-		$job = (new SendXMovementRequirementInviteEmail($name, $email, $personal_message, $link, $user))->onQueue('emails');
-		$this->dispatch($job);
+		// $job = (new SendXMovementRequirementInviteEmail($name, $email, $personal_message, $link, $user))->onQueue('emails');
+		// $this->dispatch($job);
     }
 }

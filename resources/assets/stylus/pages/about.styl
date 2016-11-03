@@ -5,15 +5,17 @@
 
 .about-summary-row
 	position relative
-	margin-top -40px
+	margin-top -30px
 
 .about-summary-tile
-	background white
-	border border-color 1px solid
-	margin 20px auto
+	margin 0 auto 20px auto
 	max-width 500px
 	padding 20px
 	text-align center
+	white-panel()
+	for num in (1..5)
+		&:nth-child({num})
+			animation-delay((num * 0.2))
 	img
 		height 60px
 		margin-bottom 15px
@@ -28,19 +30,15 @@
 		font-size 1.1em
 
 .about-phase-row
-	padding-top 30px
-	text-align center
-	.about-phase-title
-		color main-color
-		margin-bottom 20px
 	.about-phase-tile
-		background white
-		border border-color 1px solid
 		margin 60px auto
-		max-width 960px
 		padding 30px
 		position relative
 		text-align center
+		white-panel()
+		overflow visible
+		&:first-child
+			margin 40px auto 60px auto			
 		.phase-step-indicator
 			background-color main-color
 			border-radius 50%
