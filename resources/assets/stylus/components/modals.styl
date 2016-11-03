@@ -21,7 +21,17 @@
 	&.wide-modal
 		.modal-dialog
 			max-width 600px
-
+	&.video-modal
+		.modal-dialog
+			background-color white
+			padding 15px
+			max-width 800px
+			width 800px
+			@media(max-width:800px)
+				max-width 100%
+				margin 15px
+				padding 15px
+				width auto
 
 // Support modal
 .modal
