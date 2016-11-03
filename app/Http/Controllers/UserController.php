@@ -87,7 +87,7 @@ class UserController extends Controller
 		$validation = ['phone' => 'phone:LENIENT,GB,US', 'bio' => 'max:2000'];
 
 		if (isset($request->name)) {
-			$validation['name'] = 'required|max:20';
+			$validation['name'] = 'required|max:50';
 			$user->name = $request->name;
 		}
 
