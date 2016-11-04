@@ -110,7 +110,7 @@ class AuthController extends Controller
 				'name' => Redis::get($session_id . 'SHIB-NAME'),
 				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
 				'bio' => $bio,
-				'shibboleth_data' => $shib_data
+				'shibboleth_data' => Redis::get($session_id . 'SHIB-DATA')
 			];
 
 			// Remove objects from redis
@@ -158,10 +158,11 @@ class AuthController extends Controller
     private function findOrCreateShibbolethUser($shibbolethUser)
     {
         if ($authUser = User::where('shibboleth_id', $shibbolethUser['shibboleth_id'])->first()) {
+
+			// TODO: If bio not set then update
+
             return $authUser;
         }
-
-		// TODO: If shibboleth passes an image then save it
 
         $user = User::create([
             'shibboleth_id' => $shibbolethUser['shibboleth_id'],
