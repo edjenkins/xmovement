@@ -93,7 +93,7 @@ class AuthController extends Controller
 				// dept, position
 				if (property_exists($shib_data, 'position') && property_exists($shib_data, 'dept'))
 				{
-					$bio = $shib_data->position . ' at ' . $shib_data->dept;
+					$bio = $shib_data->position . ', ' . $shib_data->dept;
 				}
 				else if (property_exists($shib_data, 'position'))
 				{
