@@ -39,7 +39,9 @@ class UpdatesController extends Controller
 	{
 		$response = new ResponseObject();
 
-		// TODO: Validation
+		$this->validate($request, [
+			'text' => 'required'
+		]);
 
 		// Save update
 		$update = Update::create([
@@ -94,8 +96,6 @@ class UpdatesController extends Controller
 
 				break;
 		}
-
-		// Return JSON response
 
 		return Response::json($response);
 	}
