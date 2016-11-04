@@ -42,7 +42,7 @@ elixir(function(mix) {
 		'./bower_components/isotope/jquery.isotope.js',
 		'./bower_components/angular-isotope/dist/angular-isotope.min.js',
 		'./bower_components/angular-route/angular-route.js',
-		'./bower_components/ngstorage/ngstorage.js',
+		'./bower_components/ngstorage/ngStorage.js',
 	], 'public/js/angular-dependencies.js');
 
 	mix.scriptsIn('resources/assets/angular', 'public/js/angular.js');
