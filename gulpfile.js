@@ -58,6 +58,6 @@ elixir(function(mix) {
 
     mix.browserSync({
         proxy: 'xm.local',
-        notify: true
+        notify: false
     });
 });
