@@ -69,17 +69,54 @@ class AuthController extends Controller
 				return Redirect::to('auth/' . $request->provider);
 			}
 
+			$shib_data = Redis::get($session_id . 'SHIB-DATA');
+
+			$shib_data = json_decode($shib_data);
+
+			$bio = NULL;
+
+			if ($shib_data->stafforstudent == 'student')
+			{
+				// coursetitle/awardtitle
+				if (property_exists($shib_data, 'coursetitle'))
+				{
+					$bio = $shib_data->coursetitle;
+				}
+				else if (property_exists($shib_data, 'awardtitle'))
+				{
+					$bio = $shib_data->awardtitle;
+				}
+
+			}
+			else if ($shib_data->stafforstudent == 'staff')
+			{
+				// dept, position
+				if (property_exists($shib_data, 'position') && property_exists($shib_data, 'dept'))
+				{
+					$bio = $shib_data->position . ' at ' . $shib_data->dept;
+				}
+				else if (property_exists($shib_data, 'position'))
+				{
+					$bio = $shib_data->position;
+				}
+				else if (property_exists($shib_data, 'dept'))
+				{
+					$bio = $shib_data->dept;
+				}
+			}
+
 			$user = [
 				'shibboleth_id' => Redis::get($session_id . 'SHIB-PERSISTENT-ID'),
-				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
 				'name' => Redis::get($session_id . 'SHIB-NAME'),
-				'shibboleth_data' => Redis::get($session_id . 'SHIB-DATA')
+				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
+				'bio' => $bio,
+				'shibboleth_data' => $shib_data
 			];
 
 			// Remove objects from redis
 			Redis::del($session_id . 'SHIB-PERSISTENT-ID');
-			Redis::del($session_id . 'SHIB-EMAIL');
 			Redis::del($session_id . 'SHIB-NAME');
+			Redis::del($session_id . 'SHIB-EMAIL');
 			Redis::del($session_id . 'SHIB-DATA');
 		}
 		else
@@ -130,6 +167,7 @@ class AuthController extends Controller
             'shibboleth_id' => $shibbolethUser['shibboleth_id'],
             'name' => $shibbolethUser['name'],
 			'email' => $shibbolethUser['email'],
+			'bio' => $shibbolethUser['bio'],
 			'shibboleth_data' => $shibbolethUser['shibboleth_data'],
         ]);
 
