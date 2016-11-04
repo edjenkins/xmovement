@@ -13,6 +13,7 @@
     "tests"
   ],
   "dependencies": {
+	"animate.css": "^3.5.2",
     "moment-timezone": ">=0.4.0",
     "jQuery-ui-Slider-Pips": "jquery-ui-slider-pips#^1.11.3",
     "js-cookie": "^2.1.2",
