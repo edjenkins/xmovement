@@ -270,10 +270,10 @@ class IdeaController extends Controller
 				'photo' => 'required|max:255',
 			]);
 
-			$idea->name = $request->name;
-			$idea->visibility = $request->visibility;
-			$idea->description = $request->description;
-			$idea->photo = $request->photo;
+			if ($request->name) { $idea->name = $request->name; }
+			if ($request->visibility) { $idea->visibility = $request->visibility; }
+			if ($request->description) { $idea->description = $request->description; }
+			if ($request->photo) { $idea->photo = $request->photo; }
 
 			$idea->save();
 
