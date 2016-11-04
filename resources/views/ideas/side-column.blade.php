@@ -4,14 +4,16 @@
 	<h5 class="subtitle">{{ trans('idea.creator') }}</h5>
 </div>
 
-<div class="stats-tile supporters-tile" data-toggle="modal" data-target="#supporters-modal">
-	<h3 class="supporter-count">
-		{{ $idea->supporterCount() }}
-	</h3>
-	<h5 class="supporter-subtitle">
-		{{ trans_choice('idea.supporters', $idea->supporterCount()) }}
-	</h5>
-	<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">{{ trans('common.you_supported_idea') }}</div>
+<div class="stats-tile supporters-tile">
+	<div class="supporters-tile-inner" data-toggle="modal" data-target="#supporters-modal">
+		<h3 class="supporter-count">
+			{{ $idea->supporterCount() }}
+		</h3>
+		<h5 class="supporter-subtitle">
+			{{ trans_choice('idea.supporters', $idea->supporterCount()) }}
+		</h5>
+		<div class="stats-tile-footer supporters-tile-footer{{ $supported ? ' visible' : '' }}">{{ trans('common.you_supported_idea') }}</div>
+	</div>
 
 	<ul class="sidebar-social-links">
 		<li class="share-fb"><i class="fa fa-facebook"></i></li>
