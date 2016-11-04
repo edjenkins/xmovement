@@ -349,7 +349,7 @@ class AuthController extends Controller
     {
         if (Session::has('redirect'))
         {
-            Session::flash('show_support', true);
+			Session::flash('show_support', true);
             return Session::pull('redirect');
         }
 

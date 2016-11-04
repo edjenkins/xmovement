@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\LogActivity::class,
 			\App\Http\Middleware\SetLocale::class,
+			\App\Http\Middleware\SetReferer::class,
         ],
 
         'api' => [
