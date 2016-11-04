@@ -19,17 +19,17 @@ class PageController extends Controller
 {
     public function home(Request $request)
 	{
+		# META
+		MetaTag::set('title', Lang::get('meta.home_title'));
+		MetaTag::set('description', Lang::get('meta.home_description'));
+		# META
+
 		if ($request->has('cookie_library_study'))
 		{
 			$request->session()->flash('cookie_library_study', 'no');
 		}
 
 	    $ideas = Idea::take(3)->get();
-
-		# META
-		MetaTag::set('title', Lang::get('meta.home_title'));
-		MetaTag::set('description', Lang::get('meta.home_description'));
-		# META
 
 		// Check if custom page set
 		if (View::exists('deployment.pages.home')) { return view('deployment.pages.home', ['ideas' => $ideas]); }

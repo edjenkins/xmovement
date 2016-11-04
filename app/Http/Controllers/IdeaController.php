@@ -140,6 +140,12 @@ class IdeaController extends Controller
 
 	public function edit(Request $request, Idea $idea)
 	{
+		# META
+		MetaTag::set('title',  Lang::get('meta.ideas_view_title', ['idea_name' => $idea->name]));
+		MetaTag::set('description',  Lang::get('meta.ideas_view_description', ['idea_name' => $idea->name, 'user_name' => $idea->user->name]));
+		MetaTag::set('image', ResourceImage::getImage($idea->photo, 'large'));
+		# META
+
 		if (Gate::denies('edit', $idea))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
@@ -332,6 +338,11 @@ class IdeaController extends Controller
 
 	public function invite(Request $request, Idea $idea)
 	{
+		# META
+		MetaTag::set('title',  Lang::get('meta.ideas_view_title', ['idea_name' => $idea->name]));
+		MetaTag::set('description',  Lang::get('meta.ideas_view_description', ['idea_name' => $idea->name, 'user_name' => $idea->user->name]));
+		# META
+
 		if (Gate::denies('invite', $idea))
 		{
 			return redirect()->action('IdeaController@view', $idea);

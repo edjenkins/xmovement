@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Gate;
 use Log;
+use Lang;
+use MetaTag;
 use Response;
 use Session;
 
@@ -118,6 +120,11 @@ class TranslationController extends Controller
 
     public function index()
     {
+		# META
+		MetaTag::set('title', Lang::get('meta.translation_title'));
+		MetaTag::set('description', Lang::get('meta.translation_description'));
+		# META
+
 		if (Gate::denies('translate', Auth::user()))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));

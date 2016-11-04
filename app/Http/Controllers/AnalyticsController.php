@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Gate;
 use Log;
+use Lang;
+use MetaTag;
 use Response;
 use Session;
 
@@ -38,6 +40,11 @@ class AnalyticsController extends Controller
 {
     public function index()
     {
+		# META
+		MetaTag::set('title', Lang::get('meta.analytics_title'));
+		MetaTag::set('description', Lang::get('meta.analytics_description'));
+		# META
+
 		if (Gate::denies('view_analytics', Auth::user()))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
