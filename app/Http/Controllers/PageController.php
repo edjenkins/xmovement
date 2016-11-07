@@ -29,7 +29,7 @@ class PageController extends Controller
 			$request->session()->flash('cookie_library_study', 'no');
 		}
 
-	    $ideas = Idea::take(3)->get();
+	    $ideas = Idea::where('visibility','public')->take(3)->get();
 
 		// Check if custom page set
 		if (View::exists('deployment.pages.home')) { return view('deployment.pages.home', ['ideas' => $ideas]); }
