@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use MartinBean\Database\Eloquent\Sluggable;
 
 use Auth;
+use App\DesignTask;
 use App\Report;
 use Carbon\Carbon;
 use Log;
@@ -200,6 +201,43 @@ class Idea extends Model
 			return 'Support Phase';
 		}
     }
+
+	/**
+	 * Add a design task to an idea (pre-populate)
+	 */
+	public function addDesignTask($name, $description, $xmovement_task_type)
+	{
+		switch ($xmovement_task_type) {
+			case 'Poll':
+				if (!env('APP_XM_MODULE_POLL')) { return; }
+				$xmovement_task_id = \XMovement\Poll\Poll::create([
+					'user_id' => $this->user_id,
+					'contribution_type' => 'text',
+					'voting_type' => 'standard'
+				])->id;
+				break;
+
+			case 'Discussion':
+				if (!env('APP_XM_MODULE_DISCUSSION')) { return; }
+				$xmovement_task_id = \XMovement\Discussion\Discussion::create([
+					'user_id' => $this->user_id,
+				])->id;
+				break;
+		}
+
+		$design_task = DesignTask::create([
+			'idea_id' => $this->id,
+			'user_id' => $this->user_id,
+			'name' => $name,
+			'description' => $description,
+			'xmovement_task_id' => $xmovement_task_id,
+			'xmovement_task_type' => $xmovement_task_type,
+			'proposal_interactivity' => false,
+			'pinned' => true,
+			'locked' => false,
+			'pre_populated' => true,
+		]);
+	}
 
     /**
      * The supporters of the Idea.

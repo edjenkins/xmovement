@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+		\App\Console\Commands\PopulateDesignTasks::class,
         \App\Console\Commands\UpdateIdeaStates::class,
         \App\Console\Commands\SupportPhaseUpdates::class,
         \App\Console\Commands\DesignPhaseUpdates::class,
@@ -22,33 +23,16 @@ class Kernel extends ConsoleKernel
 
 	protected function schedule(Schedule $schedule)
 	{
-		if (true) {
-			// Update the states of ideas
-			$schedule->command('update-idea-states')->everyMinute()->withoutOverlapping();
+		// Update the states of ideas
+		$schedule->command('update-idea-states')->everyTenMinutes()->withoutOverlapping();
 
-			// Send support phase update emails (at 11am every 3 days)
-			// $schedule->command('support-phase-updates')->everyMinute()->withoutOverlapping();
+		// Send support phase update emails (at 11am every 3 days)
+		$schedule->command('support-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
 
-			// Send design phase update emails (at 11am every 3 days)
-			// $schedule->command('design-phase-updates')->everyMinute()->withoutOverlapping();
+		// Send design phase update emails (at 11am every 3 days)
+		$schedule->command('design-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
 
-			// Send proposal phase update emails (at 11am every 3 days)
-			// $schedule->command('proposal-phase-updates')->everyMinute()->withoutOverlapping();
-
-		}
-		else
-		{
-			// Update the states of ideas
-			$schedule->command('update-idea-states')->everyTenMinutes()->withoutOverlapping();
-
-			// Send support phase update emails (at 11am every 3 days)
-			$schedule->command('support-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
-
-			// Send design phase update emails (at 11am every 3 days)
-			$schedule->command('design-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
-
-			// Send proposal phase update emails (at 11am every 3 days)
-			$schedule->command('proposal-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
-		}
+		// Send proposal phase update emails (at 11am every 3 days)
+		$schedule->command('proposal-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
     }
 }

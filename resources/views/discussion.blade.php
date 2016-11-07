@@ -2,9 +2,9 @@
 
 @if (Auth::guest())
 
-<p class="sign-in-required">
+<a href="{{ action('Auth\AuthController@login') }}" class="sign-in-required">
 	{{ trans('discussion.signin') }}
-</p>
+</a>
 
 @else
 
