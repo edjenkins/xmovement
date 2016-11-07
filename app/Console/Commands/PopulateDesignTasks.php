@@ -38,13 +38,18 @@ class PopulateDesignTasks extends Command
     {
 		$idea_id = $this->ask('Please enter the id for the idea you wish to populate');
 
-		$idea = Idea::whereId($idea_id)->first();
+		$idea = Idea::where('id', $idea_id)->first();
 
-		$this->info('Populating design tasks for idea - ' . $idea->name);
+		if ($idea)
+		{
+			$this->info('Populating design tasks for idea - ' . $idea->name);
 
-		$job = (new PrePopulateDesignTasks($idea));
-		$this->dispatch($job);
-
-		$this->info('Population of design tasks complete');
+			$job = (new PrePopulateDesignTasks($idea))->delay(5);
+			$this->dispatch($job);
+		}
+		else
+		{
+			$this->info('No idea found for given id - ' . $idea_id);
+		}
     }
 }
