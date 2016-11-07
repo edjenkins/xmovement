@@ -24,6 +24,7 @@ use App\Jobs\SendCreateIdeaEmail;
 use App\Jobs\SendInviteEmail;
 use App\Jobs\SendDidSupportEmail;
 use App\Jobs\SendDesignPhaseOpenEmail;
+use App\Jobs\PrePopulateDesignTasks;
 
 use App\Idea;
 use App\User;
@@ -197,23 +198,19 @@ class IdeaController extends Controller
 
 			foreach ($request->questions as $index => $question)
 			{
-				$this->addDesignTask($idea, $question, $question, 'Discussion');
+				$idea->addDesignTask($question, $question, 'Discussion');
 			}
 		}
 
 		// Populate design tasks from configuration file
 		if (env('PRE_POPULATE_DESIGN_TASKS', false))
 		{
-			$discussions = Config::get('design-tasks.discussions');
-
-			foreach ($discussions as $index => $discussion)
-			{
-				$this->addDesignTask($idea, $discussion['name'], $discussion['description'], 'Discussion');
-			}
+	        $job = (new PrePopulateDesignTasks($idea))->onQueue('emails');
+	        $this->dispatch($job);
 		}
 
+		// Send user an email to tell them the idea was created
         $job = (new SendCreateIdeaEmail($request->user(), $idea))->delay(30)->onQueue('emails');
-
         $this->dispatch($job);
 
 		// Set creator as a supporter
@@ -221,40 +218,6 @@ class IdeaController extends Controller
 
 		// Redirect to invite view
 		return redirect()->action('IdeaController@invite', $idea);
-	}
-
-	private function addDesignTask($idea, $name, $description, $xmovement_task_type)
-	{
-		switch ($xmovement_task_type) {
-			case 'Poll':
-				if (!env('APP_XM_MODULE_POLL')) { return; }
-				$xmovement_task_id = \XMovement\Poll\Poll::create([
-					'user_id' => Auth::user()->id,
-					'contribution_type' => 'text',
-					'voting_type' => 'standard'
-				])->id;
-				break;
-
-			case 'Discussion':
-				if (!env('APP_XM_MODULE_DISCUSSION')) { return; }
-				$xmovement_task_id = \XMovement\Discussion\Discussion::create([
-					'user_id' => Auth::user()->id,
-				])->id;
-				break;
-		}
-
-		$design_task = DesignTask::create([
-			'idea_id' => $idea->id,
-			'user_id' => Auth::user()->id,
-			'name' => $name,
-			'description' => $description,
-			'xmovement_task_id' => $xmovement_task_id,
-			'xmovement_task_type' => $xmovement_task_type,
-			'proposal_interactivity' => false,
-			'pinned' => true,
-			'locked' => false,
-			'pre_populated' => true,
-		]);
 	}
 
 	public function update(Request $request)
