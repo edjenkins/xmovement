@@ -30,3 +30,5 @@ public/js/vendor.js
 public/js/vendor.js.map
 
 public/js/vendor.js
+
+config/bugsnag.php
