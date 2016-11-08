@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
 
 use App\Jobs\SendSupportPhaseUpdatesEmail;
 

@@ -37,20 +37,20 @@ class PrePopulateDesignTasks extends Job implements ShouldQueue
      */
     public function handle()
     {
+		Log::info('Populating design tasks for - ' . $this->idea->name);
+
 		// Populate polls
-		Log::info('Populating polls');
 		foreach (Config::get('design-tasks.polls') as $index => $poll)
 		{
 			$this->idea->addDesignTask($poll['name'], $poll['description'], 'Poll');
 		}
 
 		// Populate discussions
-		Log::info('Populating discussions');
 		foreach (Config::get('design-tasks.discussions') as $index => $discussion)
 		{
 			$this->idea->addDesignTask($discussion['name'], $discussion['description'], 'Discussion');
 		}
 
-		Log::info('Design tasks populated!');
+		Log::info('Design tasks populated');
     }
 }

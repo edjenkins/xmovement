@@ -15,9 +15,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
-        ],
+        'Illuminate\Mail\Events\MessageSending' => [
+			'App\Listeners\LogSentEmail',
+		],
     ];
 
     /**

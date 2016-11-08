@@ -202,6 +202,7 @@ Route::group(['middleware' => ['api']], function () {
 
 	// Message routes
 	Route::post('/api/messages/send', 'MessagesController@send');
+	Route::post('/api/quote/send', 'MessagesController@sendQuote');
 
 	// Discussion routes
 	Route::get('/api/comment/view', 'CommentController@view');

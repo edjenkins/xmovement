@@ -17,6 +17,7 @@ use View;
 use Carbon\Carbon;
 
 use App\Jobs\SendDirectMessageEmail;
+use App\Jobs\SendQuoteEmail;
 
 use App\Idea;
 use App\User;
@@ -77,6 +78,19 @@ class MessagesController extends Controller
 		}
 
 		return redirect()->action('UserController@profile', $request->user_id);
+	}
+
+	public function sendQuote(Request $request, User $user)
+	{
+		// Send quote via email
+
+		$job = (new SendQuoteEmail(Auth::user()))->onQueue('emails');
+		$this->dispatch($job);
+
+		Session::flash('flash_message', trans('flash_message.quote_sent_via_email'));
+		Session::flash('flash_type', 'flash-success');
+
+		return redirect()->action('UserController@profile');
 	}
 
 }

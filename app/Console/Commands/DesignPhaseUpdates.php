@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Inspiring;
 
 use App\Jobs\SendDesignPhaseUpdatesEmail;
 
@@ -49,7 +48,7 @@ class DesignPhaseUpdates extends Command
 			foreach ($idea->get_supporters() as $index => $supporter)
 			{
 				Log::info('Supporter - ' . $supporter->user_id);
-				
+
 				$job = (new SendDesignPhaseUpdatesEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
 				$this->dispatch($job);
 			}

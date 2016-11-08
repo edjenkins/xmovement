@@ -44,15 +44,19 @@ h2.user-name
 			@media(min-width: $screen-sm-min)
 				height 180px
 				width 180px
-	.contact-button
+	.contact-button, .quote-button
+		background-color white
 		border #e1e1e1 1px solid
+		border-radius 4px
 		color #ccc
+		display block
 		font-size 16px
 		margin 20px auto
 		max-width 250px
 		padding 12px 20px
 		text-align center
-		transition(all 0.2 linear)
+		width 100%
+		animate()
 		&:hover
 			background main-color
 			border main-color 1px solid
