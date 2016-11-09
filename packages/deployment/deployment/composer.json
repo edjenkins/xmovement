@@ -1,0 +1,12 @@
+{
+    "name": "deployment/master",
+    "description": "Base files extended when overriding content.",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Edward Jenkins",
+            "email": "info@edjenkins.co.uk"
+        }
+    ],
+    "require": {}
+}
