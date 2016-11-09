@@ -1,0 +1,12 @@
+{
+    "name": "deployment/library",
+    "description": "Custom content for a specific deployment.",
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Edward Jenkins",
+            "email": "info@edjenkins.co.uk"
+        }
+    ],
+    "require": {}
+}
