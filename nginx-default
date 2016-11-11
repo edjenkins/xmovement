@@ -1,5 +1,5 @@
 upstream websocket {
-	server localhost:8082;
+	server app:8082;
 }
 
 server {
