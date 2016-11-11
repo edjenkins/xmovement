@@ -52,7 +52,7 @@ RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer
 COPY composer.json ./
 COPY composer.lock ./
-RUN composer install --no-scripts --no-dev --no-autoloader
+#RUN composer install --no-scripts --no-dev --no-autoloader
 
 
 
@@ -61,12 +61,10 @@ WORKDIR /app
 COPY . /app
 
 
-RUN /composer.phar install --no-dev
 
-#RUN composer dump-autoload --optimize
-# && composer run-script post-install-cmd
+RUN composer update --no-scripts
+#RUN /composer.phar install --no-dev
 
-#RUN /composer.phar install
 
 
 RUN chown -R www-data:www-data /app
@@ -83,16 +81,10 @@ RUN chmod -R 775 bootstrap/cache
 RUN chown www-data:www-data -R storage
 RUN chmod -R 775 storage
 
-#RUN chown www-data:www-data -R resources/lang
-#RUN chmod -R 775 resources/lang
 
-
-
-
-
-RUN php artisan cache:clear
-
+#RUN php artisan cache:clear
 RUN php artisan vendor:publish --force
+
 
 # Install and run gulp
 RUN npm -v

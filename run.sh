@@ -15,9 +15,11 @@ npm install bower -g
 npm install gulp -g
 gulp
 
+chown www-data:www-data -R resources/lang
+chmod -R 775 resources/lang
+
 mysql -u root --password < create-db.sql
 php artisan migrate:install
-php artisan migrate
-# php artisan db:seed --class=InspirationTableSeeder
+php artisan migrate --seed
 
 tail -F /var/log/nginx/access.log /var/log/nginx/error.log
