@@ -65,6 +65,8 @@ COPY . /app
 RUN composer update --no-scripts
 #RUN /composer.phar install --no-dev
 
+RUN composer install
+
 
 
 RUN chown -R www-data:www-data /app
