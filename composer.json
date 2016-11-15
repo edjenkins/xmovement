@@ -32,6 +32,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+			"Deployment\\Deployment\\" : "packages/deployment/deployment/src",
 			"CustomBrainSocket\\" : "CustomBrainSocket/",
 			"ResourceImage\\" : "ResourceImage/",
 			"TranslateMate\\" : "TranslateMate/",
@@ -40,8 +41,7 @@
             "XMovement\\Requirement\\": "packages/xmovement/requirement/src",
             "XMovement\\Contribution\\": "packages/xmovement/contribution/src",
             "XMovement\\External\\": "packages/xmovement/external/src",
-            "XMovement\\Scheduler\\": "packages/xmovement/scheduler/src",
-            "Deployment\\Deployment\\": "packages/deployment/deployment/src"
+            "XMovement\\Scheduler\\": "packages/xmovement/scheduler/src"
         }
     },
     "autoload-dev": {

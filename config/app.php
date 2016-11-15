@@ -178,6 +178,9 @@ return [
 
 		App\Providers\ResourceImageProvider::class,
 
+		// Deployment Service Provider
+		Deployment\Deployment\DeploymentServiceProvider::class,
+
         // XMovement Design Modules
         XMovement\Poll\PollServiceProvider::class,
         XMovement\Discussion\DiscussionServiceProvider::class,
@@ -186,11 +189,7 @@ return [
         XMovement\External\ExternalServiceProvider::class,
         XMovement\Scheduler\SchedulerServiceProvider::class,
 
-		// Deployment
-		Deployment\Deployment\DeploymentServiceProvider::class,
-
-		Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
-
+		Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class
     ],
 
     /*
@@ -253,6 +252,9 @@ return [
 		'Image'     => Intervention\Image\Facades\Image::class,
 		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,
 
+		// Deployment Service Provider
+		'DeploymentServiceProvider' => Deployment\Deployment\DeploymentServiceProvider::class,
+
         'PollServiceProvider' => XMovement\Poll\PollServiceProvider::class,
         'Poll' => XMovement\Poll\Poll::class,
 
@@ -269,10 +271,7 @@ return [
         'External' => XMovement\External\External::class,
 
         'SchedulerServiceProvider' => XMovement\Scheduler\SchedulerServiceProvider::class,
-        'Scheduler' => XMovement\Scheduler\Scheduler::class,
-
-		// Deployment
-		'DeploymentServiceProvider' => Deployment\Deployment\DeploymentServiceProvider::class,
+        'Scheduler' => XMovement\Scheduler\Scheduler::class
 
     ],
 
