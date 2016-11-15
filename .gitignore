@@ -38,5 +38,3 @@ config/bugsnag.php
 
 resources/lang
 packages/deployment
-
-run.sh
