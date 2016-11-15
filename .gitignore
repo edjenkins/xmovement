@@ -21,6 +21,8 @@ bower_components/**
 resources/assets/stylus/variables.styl
 
 resources/views/deployment
+
+
 config/custom-pages.php
 
 resources/assets/stylus/deployment/home.styl
@@ -32,3 +34,9 @@ public/js/vendor.js.map
 public/js/vendor.js
 
 config/bugsnag.php
+
+
+resources/lang
+packages/deployment
+
+run.sh
