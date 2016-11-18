@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-		factory(App\User::class, 4)->create()->each(function($u) {
+		factory(App\User::class, 1)->create()->each(function($u) {
 
 	        $u->proposals()->save(factory(App\Proposal::class)->make());
 
@@ -20,24 +20,9 @@ class UsersTableSeeder extends Seeder
 
 			$events = array(
 				array(
-					'name' => 'BBQ in the Park',
-					'description' => 'The weather is amazing in Newcastle, let\'s have a BBQ on the park sometime soon. Everyone\'s welcome!',
-					'photo' => '198aaf05f750ec4c7b3c09279565cf870b604871.jpg',
-				),
-				array(
-					'name' => 'Python Class',
-					'description' => 'I have started to learn Python and would like to run a weekly course in Open Lab for anyone else interested in programming.',
-					'photo' => '5f481255368a90335100fcc418d3688af2894336.jpg',
-				),
-				array(
-					'name' => 'Go Karting',
-					'description' => 'Let\'s get a big group together to do some karting at the Gateshead track, anyone is welcome and your ideas towards making this awesome are welcomed.',
-					'photo' => 'c46d19daead42a1a2a6230d3780d584da89dcbb8.jpg',
-				),
-				array(
-					'name' => 'Wedding Party',
-					'description' => 'I\'m planning my wedding party and would love any ideas or suggestions towards making it the best ever.',
-					'photo' => 'e6bde9717001b7cfeb6ec67987734d96007bdeed.jpg',
+					'name' => 'Friends Chat',
+					'description' => 'An app to connect people with their family and close friends. Using intelligent prompts to initiate conversations based on common activities.',
+					'photo' => 'fce80ca77cf9e738b1c3c70e0712d27332971c0f.jpg',
 				),
 			);
 

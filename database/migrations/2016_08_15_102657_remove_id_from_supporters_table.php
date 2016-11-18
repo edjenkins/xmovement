@@ -26,7 +26,7 @@ class RemoveIdFromSupportersTable extends Migration
     public function down()
     {
         Schema::table('supporters', function ($table) {
-            $table->increments('id');
+			$table->integer('id');
         });
     }
 }
