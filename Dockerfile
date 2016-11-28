@@ -116,5 +116,10 @@ RUN chmod 777 /app/run.sh
 #RUN rm -fr /app
 #RUN ln -s /app /data/app
 
+ARG deployment_name
+ENV DEPLOYMENT_NAME $deployment_name
+
+RUN mysql -u root --password -e "CREATE DATABASE $DEPLOYMENT_NAME";
+
 # Start our application
 CMD /app/run.sh
