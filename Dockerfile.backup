@@ -1,4 +1,7 @@
-FROM nodesource/jessie:0.12.7
+# Dockerfile to deploy a XMovement
+
+# Begin with a base Debian system (https://www.debian.org/), we are using the 'jessie' version
+FROM debian:jessie
 
 # Download the latest updates and
 # install the packages we will need
@@ -35,6 +38,23 @@ RUN sed -i 's/listen = .\+/listen = 127.0.0.1:9000/' /etc/php5/fpm/pool.d/www.co
 # Create the empty directories we will use
 RUN mkdir -p /var/www/html
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
+
+RUN apt-get update -y && apt-get install --no-install-recommends -y -q curl python build-essential git ca-certificates
+RUN mkdir /nodejs && curl https://nodejs.org/dist/v6.9.1/node-v6.9.1.tar.gz | tar xvzf - -C /nodejs --strip-components=1
+
+WORKDIR /nodejs
+RUN ./configure \
+   && make -j$(getconf _NPROCESSORS_ONLN) \
+   && make install
+
+RUN ls -la /nodejs
+
+ENV PATH $PATH:/nodejs/bin
+
+# Install node
+#RUN apt-get -y install nodejs
+#RUN ln -s /usr/bin/nodejs /usr/bin/node
+#RUN apt-get -y install nodejs-legacy
 
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer
@@ -127,6 +147,6 @@ ADD ./supervisord.conf /etc/supervisor/conf.d/supervisor.conf
 
 
 RUN ["chmod", "+x", "./run.sh"]
-ENTRYPOINT ["./run.sh"]
+RUN ["./run.sh"]
 
-#ENTRYPOINT ["/usr/bin/supervisord"]
+ENTRYPOINT ["/usr/bin/supervisord"]

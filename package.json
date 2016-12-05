@@ -2,6 +2,7 @@
   "private": true,
   "devDependencies": {
     "gulp": "~3.9.1",
+	"gulp-util": "^3.0.7",
     "laravel-elixir-stylus": "^1.0.1"
   },
   "dependencies": {
