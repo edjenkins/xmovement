@@ -15,6 +15,7 @@ use Log;
 use Session;
 
 use App\Idea;
+use App\Supporter;
 use App\User;
 use App\Proposal;
 use App\DesignModule;
@@ -37,7 +38,11 @@ class ProposeController extends Controller
 {
     public function index(Request $request, Idea $idea)
     {
-		if (Gate::denies('view_proposals', $idea))
+		$user = Auth::user();
+
+		$is_existing_supporter = ($user) ? Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists() : false;
+
+		if ($idea->visibility == 'private' && !$is_existing_supporter)
 		{
 	        Session::flash('flash_message', trans('flash_message.proposal_phase_closed'));
 	        Session::flash('flash_type', 'flash-danger');
@@ -60,7 +65,11 @@ class ProposeController extends Controller
 
     public function view(Request $request, Proposal $proposal)
     {
-		if (Gate::denies('view_proposals', $proposal->idea))
+		$user = Auth::user();
+
+		$is_existing_supporter = ($user) ? Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists() : false;
+
+		if ($idea->visibility == 'private' && !$is_existing_supporter)
 		{
 	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
 	        Session::flash('flash_type', 'flash-danger');

@@ -5,7 +5,7 @@
 
 	<div class="ipb-progress-arrow" style="right: {{ (100 - $idea->progress_percentage()) }}%"></div>
 
-	<div class="ipb-dot ipb-start-dot complete">
+	<a href="{{ action('IdeaController@view', $idea) }}" class="ipb-dot ipb-start-dot complete">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				@if(($idea->design_percentage() + $idea->proposal_percentage()) == 0)
@@ -17,7 +17,7 @@
 				@endif
 			</div>
 		</div>
-	</div>
+	</a>
 	<div class="ipb-dot ipb-end-dot {{ ($idea->progress_percentage() >= 100) ? 'complete' : '' }}">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
@@ -27,38 +27,38 @@
 	</div>
 
 	@if(($idea->design_percentage() + $idea->proposal_percentage()) == 0)
-		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%" onClick="document.location = '{{ action('IdeaController@view', $idea) }}'">
+		<a href="{{ action('DesignController@dashboard', $idea) }}" class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
 					{{ trans('idea.progress_support_design_propose') }}
 				</div>
 			</div>
-		</div>
+		</a>
 	@elseif($idea->design_percentage() == $idea->proposal_percentage())
-		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
+		<a href="{{ action('DesignController@dashboard', $idea) }}" class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
 					{{ trans('idea.progress_design_propose') }}
 				</div>
 			</div>
-		</div>
+		</a>
 	@else
 		@unless($idea->design_percentage() == 0)
-			<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%">
+			<a href="{{ action('DesignController@dashboard', $idea) }}" class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->design_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->design_percentage() }}%" onClick="document.location='{{ action('DesignController@dashboard', $idea) }}'">
 				<div class="ipb-label">
 					<div class="ipb-label-text">
 						{{ trans('idea.progress_design') }}
 					</div>
 				</div>
-			</div>
+			</a>
 		@endunless
-		<div class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->proposal_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->proposal_percentage() }}%">
+		<a href="{{ action('ProposeController@index', $idea) }}" class="ipb-dot ipb-milestone-dot {{ ($idea->progress_percentage() > $idea->proposal_percentage()) ? 'complete' : '' }}" style="left: {{ $idea->proposal_percentage() }}%">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
 					{{ trans('idea.progress_propose') }}
 				</div>
 			</div>
-		</div>
+		</a>
 	@endif
 
 </div>
