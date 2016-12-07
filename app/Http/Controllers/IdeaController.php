@@ -162,6 +162,11 @@ class IdeaController extends Controller
 
 	public function store(Request $request)
 	{
+		if (env('FIXED_IDEA_DURATION', 0) != 0)
+		{
+			$request->duration = env('FIXED_IDEA_DURATION');
+		}
+		
 		// Validate the idea
 		$this->validate($request, [
 			'name' => 'required|max:255',

@@ -2,25 +2,30 @@
 
 	<div class="form-page-content">
 
-		<div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}" id="duration-slider-wrapper">
+		<!-- Check if user can set duration of idea -->
+		@if (env('FIXED_IDEA_DURATION', 0) == 0)
 
-			<div class="slider-wrapper">
+			<div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}" id="duration-slider-wrapper">
 
-				<label>{{ trans('idea_form.duration_label') }}</label>
+				<div class="slider-wrapper">
 
-				<input type="hidden" name="duration" id="duration-slider" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}">
+					<label>{{ trans('idea_form.duration_label') }}</label>
 
-				<div class="slider" id="idea-duration-slider" data-input-id="duration-slider" data-value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}"></div>
+					<input type="hidden" name="duration" id="duration-slider" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}">
+
+					<div class="slider" id="idea-duration-slider" data-input-id="duration-slider" data-value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}"></div>
+
+				</div>
+
+				@if ($errors->has('duration'))
+					<span class="help-block">
+						<strong>{{ $errors->first('duration') }}</strong>
+					</span>
+				@endif
 
 			</div>
 
-			@if ($errors->has('duration'))
-				<span class="help-block">
-					<strong>{{ $errors->first('duration') }}</strong>
-				</span>
-			@endif
-
-		</div>
+		@endif
 
 		<div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
 
