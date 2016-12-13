@@ -4,14 +4,14 @@
 
     <div class="container-fluid hero-container" id="home-hero-container" style="background-image:url('{{ asset(getenv('APP_HOME_HEADER_IMG')) }}')">
         <div class="black-overlay"></div>
-        <div class="text-container">
+        <div class="container text-container text-left">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>
-			@if (env('CREATION_PHASE_ENABLED', true))
+			@if (DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
 	            <a href="{{ action('IdeaController@add') }}">
 	                <button>{{ trans('home.get_started') }}</button>
 	            </a>
 			@else
-				@if (env('INSPIRATION_PHASE_ENABLED', false))
+				@if (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
 					<a href="{{ action('InspirationController@index') }}">
 						<button>{{ trans('home.be_inspired') }}</button>
 					</a>

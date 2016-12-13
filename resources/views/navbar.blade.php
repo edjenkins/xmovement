@@ -21,11 +21,11 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-				@if (env('INSPIRATION_PHASE_ENABLED', false))
+				@if (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
 					<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
 				@endif
 
-				@if (env('CREATION_PHASE_ENABLED', true))
+				@if (DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
 	                <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
 				@endif
 
@@ -57,6 +57,9 @@
 							@endcan
 							@can('view_analytics', Auth::user())
 								<li><a href="{{ action('AnalyticsController@index') }}"></i>{{ trans('navbar.analytics') }}</a></li>
+							@endcan
+							@can('manage_platform', Auth::user())
+								<li><a href="{{ action('AdminController@managePlatform') }}"></i>{{ trans('navbar.manage_platform') }}</a></li>
 							@endcan
 							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>

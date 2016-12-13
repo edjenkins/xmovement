@@ -16,9 +16,9 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ env('SHORTLIST_ENABLED', false) ? 'shortlist' : 'popular' }}'">
+	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_ENABLED', false) ? 'shortlist' : 'popular' }}'">
 
-						@if(env('SHORTLIST_ENABLED', false))
+						@if(DynamicConfig::fetchConfig('SHORTLIST_ENABLED', false))
 							<li class="module-control" ng-click="setSortType('shortlist')" ng-class="{'active':sort_type == 'shortlist'}">
 
 								<button type="button">{{ trans('idea.sort_shortlist') }}</button>

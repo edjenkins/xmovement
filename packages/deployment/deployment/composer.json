@@ -1,6 +1,6 @@
 {
-    "name": "deployment/library",
-    "description": "Custom content for a specific deployment.",
+    "name": "deployment/master",
+    "description": "Base files extended when overriding content.",
     "license": "Apache 2.0",
     "authors": [
         {

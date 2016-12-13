@@ -29,22 +29,17 @@ class DeploymentServiceProvider extends ServiceProvider
         //     __DIR__ . '/factories' => base_path('database/factories'),
         // ], 'factories');
 
-        $this->publishes([
-            __DIR__.'/images' => base_path('resources/assets/images/deployment'),
-        ], 'public');
-
-        $this->publishes([
-            __DIR__.'/views' => base_path('resources/views/deployment'),
-        ], 'views');
+        // $this->publishes([
+        //     __DIR__.'/views' => base_path('resources/views/deployment'),
+        // ], 'views');
 
         $this->publishes([
             __DIR__.'/stylus' => base_path('resources/assets/stylus/deployment'),
         ], 'public');
 
-	    $this->publishes([
-	        __DIR__.'/config/custom-pages.php' => config_path('custom-pages.php'),
-			__DIR__.'/config/design-tasks.php' => config_path('design-tasks.php')			
-	    ]);
+	    // $this->publishes([
+	    //     __DIR__.'/config/custom-pages.php' => config_path('custom-pages.php')
+	    // ]);
     }
 
     /**

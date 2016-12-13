@@ -48,11 +48,11 @@
 
         <div class="container analytics-container" ng-switch="$storage.analytics_type">
 
-			@include('analytics/panels/overview')
+			@include('admin/analytics/panels/overview')
 
-			@include('analytics/panels/users')
+			@include('admin/analytics/panels/users')
 
-			@include('analytics/panels/ideas')
+			@include('admin/analytics/panels/ideas')
 
         </div>
 

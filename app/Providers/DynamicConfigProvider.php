@@ -2,9 +2,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use TranslateMate\TranslateMate;
+use DynamicConfig\DynamicConfig;
 
-class TranslateMateProvider extends ServiceProvider
+class DynamicConfigProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -23,8 +23,8 @@ class TranslateMateProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('TranslateMate', function () {
-            return new TranslateMate;
+        $this->app->bind('DynamicConfig', function () {
+            return new DynamicConfig;
         });
     }
 }

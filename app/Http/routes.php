@@ -54,6 +54,11 @@ Route::group(['middleware' => ['web']], function () {
 
 	// Admin routes
 	Route::get('/admin/email/test', 'AdminController@emailTest');
+	Route::get('/admin/manage/platform', 'AdminController@managePlatform');
+	Route::post('/admin/config/fetch', 'AdminController@fetchConfig');
+	Route::post('/admin/config/update', 'AdminController@updateConfig');
+	Route::post('/admin/permissions/fetch', 'AdminController@fetchPermissions');
+	Route::post('/admin/permissions/update', 'AdminController@updatePermissions');
 
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
@@ -115,6 +120,11 @@ Route::group(['middleware' => ['web']], function () {
 
     // Contact routes
 	Route::post('/contact/send', 'ContactController@send');
+
+	// Angular Directives
+	Route::get('/directives/{directive_id}', function($directive_id) {
+		return Response::view('directives/' . $directive_id);
+	});
 
     // File upload
     Route::post('/upload', 'UploadController@upload');

@@ -162,11 +162,14 @@ return [
 		// Translations
 		App\Providers\TranslateMateProvider::class,
 
+		// Dynamic Config
+		App\Providers\DynamicConfigProvider::class,
+
         /*
          * Custom Service Providers...
          */
 
- 		BrainSocket\BrainSocketServiceProvider::class,
+		BrainSocket\BrainSocketServiceProvider::class,
 		App\Providers\CustomBrainSocketServiceProvider::class,
 
 		// Auth
@@ -210,7 +213,8 @@ return [
         'Auth'      => Illuminate\Support\Facades\Auth::class,
         'Blade'     => Illuminate\Support\Facades\Blade::class,
         'Cache'     => Illuminate\Support\Facades\Cache::class,
-        'Config'    => Illuminate\Support\Facades\Config::class,
+        // 'Config'    => Illuminate\Support\Facades\Config::class,
+		'Config'    => Larapack\ConfigWriter\Facade::class,
         'Cookie'    => Illuminate\Support\Facades\Cookie::class,
         'Crypt'     => Illuminate\Support\Facades\Crypt::class,
         'DB'        => Illuminate\Support\Facades\DB::class,
@@ -248,6 +252,7 @@ return [
 		'CustomBrainSocket'     => CustomBrainSocket\Facades\BrainSocket::class,
 
 		'TranslateMate'     => TranslateMate\Facades\TranslateMate::class,
+		'DynamicConfig'     => DynamicConfig\Facades\DynamicConfig::class,
 
 		'Image'     => Intervention\Image\Facades\Image::class,
 		'ResourceImage' => ResourceImage\Facades\ResourceImage::class,

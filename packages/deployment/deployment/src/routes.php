@@ -2,6 +2,6 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('competition', 'deployment\deployment\PageController@competition');
+    // Route::get('example', 'deployment\deployment\PageController@example');
 
 });

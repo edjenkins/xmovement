@@ -54,7 +54,7 @@ class AnalyticsController extends Controller
 		}
 		else
 		{
-			return view('analytics.index');
+			return view('admin.analytics.index');
 		}
     }
 

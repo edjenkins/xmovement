@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
 	    Model::unguard();
 
+		$this->call(DynamicConfigSeeder::class);
 		$this->call(DesignModulesTableSeeder::class);
 
 		if (env('APP_DEBUG', false))

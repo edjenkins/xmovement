@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use MartinBean\Database\Eloquent\Sluggable;
 
 use Auth;
+use Carbon\Carbon;
+use DynamicConfig;
+use Log;
+
 use App\DesignTask;
 use App\Report;
-use Carbon\Carbon;
-use Log;
 
 class Idea extends Model
 {
@@ -209,7 +211,7 @@ class Idea extends Model
 	{
 		switch ($xmovement_task_type) {
 			case 'Poll':
-				if (!env('APP_XM_MODULE_POLL')) { return; }
+				if (!DynamicConfig::fetchConfig('XMOVEMENT_POLL')) { return; }
 				$xmovement_task_id = \XMovement\Poll\Poll::create([
 					'user_id' => $this->user_id,
 					'contribution_type' => 'text',
@@ -218,7 +220,7 @@ class Idea extends Model
 				break;
 
 			case 'Discussion':
-				if (!env('APP_XM_MODULE_DISCUSSION')) { return; }
+				if (!DynamicConfig::fetchConfig('XMOVEMENT_DISCUSSION')) { return; }
 				$xmovement_task_id = \XMovement\Discussion\Discussion::create([
 					'user_id' => $this->user_id,
 				])->id;

@@ -17,77 +17,44 @@ class DesignModulesTableSeeder extends Seeder
 
 		$design_modules = [];
 
-		if (env('APP_XM_MODULE_SCHEDULER', true))
-		{
-			array_push($design_modules,
-				array(
-					'name' => 'xmovement.scheduler',
-					'description' => 'xmovement.scheduler_description',
-					'class' => 'scheduler',
-					'icon' => 'fa-calendar',
-				)
-			);
-		}
-
-		if (env('APP_XM_MODULE_POLL', true))
-		{
-			array_push($design_modules,
-				array(
-					'name' => 'xmovement.poll',
-					'description' => 'xmovement.poll_description',
-					'class' => 'poll',
-					'icon' => 'fa-th-list',
-				)
-			);
-		}
-
-		if (env('APP_XM_MODULE_REQUIREMENT', true))
-		{
-			array_push($design_modules,
-				array(
-					'name' => 'xmovement.requirement',
-					'description' => 'xmovement.requirement_description',
-					'class' => 'requirement',
-					'icon' => 'fa-check-circle-o',
-				)
-			);
-		}
-
-		if (env('APP_XM_MODULE_CONTRIBUTION', true))
-		{
-			array_push($design_modules,
-				array(
-					'name' => 'xmovement.contribution',
-					'description' => 'xmovement.contribution_description',
-					'class' => 'contribution',
-					'icon' => 'fa-thumbs-o-up',
-				)
-			);
-		}
-
-		if (env('APP_XM_MODULE_EXTERNAL', true))
-		{
-			array_push($design_modules,
-				array(
-					'name' => 'xmovement.external',
-					'description' => 'xmovement.external_description',
-					'class' => 'external',
-					'icon' => 'fa-external-link',
-				)
-			);
-		}
-
-		if (env('APP_XM_MODULE_DISCUSSION', true))
-		{
-			array_push($design_modules,
-				array(
-					'name' => 'xmovement.discussion',
-					'description' => 'xmovement.discussion_description',
-					'class' => 'discussion',
-					'icon' => 'fa-comments-o',
-				)
-			);
-		}
+		array_push($design_modules,
+			array(
+				'name' => 'xmovement.scheduler',
+				'description' => 'xmovement.scheduler_description',
+				'class' => 'scheduler',
+				'icon' => 'fa-calendar',
+			),
+			array(
+				'name' => 'xmovement.poll',
+				'description' => 'xmovement.poll_description',
+				'class' => 'poll',
+				'icon' => 'fa-th-list',
+			),
+			array(
+				'name' => 'xmovement.requirement',
+				'description' => 'xmovement.requirement_description',
+				'class' => 'requirement',
+				'icon' => 'fa-check-circle-o',
+			),
+			array(
+				'name' => 'xmovement.contribution',
+				'description' => 'xmovement.contribution_description',
+				'class' => 'contribution',
+				'icon' => 'fa-thumbs-o-up',
+			),
+			array(
+				'name' => 'xmovement.external',
+				'description' => 'xmovement.external_description',
+				'class' => 'external',
+				'icon' => 'fa-external-link',
+			),
+			array(
+				'name' => 'xmovement.discussion',
+				'description' => 'xmovement.discussion_description',
+				'class' => 'discussion',
+				'icon' => 'fa-comments-o',
+			)
+		);
 
 		foreach ($design_modules as $design_module)
 		{

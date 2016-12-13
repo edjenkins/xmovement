@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use Auth;
 use Config;
+use DynamicConfig;
 use Log;
 
 use App\Idea;

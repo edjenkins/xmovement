@@ -17,7 +17,7 @@ class CheckTenderPhase
      */
     public function handle($request, Closure $next)
     {
-		if (!env('TENDER_PHASE_ENABLED', false))
+		if (!DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
 		{
 			// Creation phase disabled
 			Session::flash('flash_message', trans('flash_message.page_not_found'));

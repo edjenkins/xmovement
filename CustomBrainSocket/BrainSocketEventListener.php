@@ -16,6 +16,7 @@ use App\Comment;
 use Auth;
 use Config;
 use Crypt;
+use DynamicConfig;
 use Lang;
 use Log;
 use Validator;

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
+use DynamicConfig;
 use Session;
 
 class CheckPhase
@@ -21,7 +22,7 @@ class CheckPhase
 
 			case 'inspiration':
 
-				if (!env('INSPIRATION_PHASE_ENABLED', false))
+				if (!DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
 				{
 					// Creation phase disabled
 					Session::flash('flash_message', trans('flash_message.page_not_found'));
@@ -34,7 +35,7 @@ class CheckPhase
 
 			case 'creation':
 
-				if (!env('CREATION_PHASE_ENABLED', true))
+				if (!DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
 				{
 					// Creation phase disabled
 					Session::flash('flash_message', trans('flash_message.page_not_found'));
@@ -47,7 +48,7 @@ class CheckPhase
 
 			case 'tender':
 
-				if (!env('TENDER_PHASE_ENABLED', false))
+				if (!DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
 				{
 					// Creation phase disabled
 					Session::flash('flash_message', trans('flash_message.page_not_found'));

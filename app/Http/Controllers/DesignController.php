@@ -19,6 +19,7 @@ use App\User;
 use App\DesignModule;
 use App\DesignTask;
 use App\DesignTaskVote;
+use App\Supporter;
 
 class ResponseObject {
 
@@ -71,8 +72,18 @@ class DesignController extends Controller
 		}
 
         // Fetch available design modules
-        $design_modules = DesignModule::where('available','1')->get();
+        $all_design_modules = DesignModule::where('available','1')->get();
 
+		$design_modules = Array();
+
+		foreach ($all_design_modules as $index => $design_module)
+		{
+			if ($design_module->isAvailable())
+			{
+				array_push($design_modules, $design_module);
+			}
+		}
+		
         return view('design.add', [
             'idea' => $idea,
             'design_modules' => $design_modules,

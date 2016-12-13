@@ -134,7 +134,7 @@ class TranslationController extends Controller
 		}
 		else
 		{
-			return view('translations.index');
+			return view('admin.translations.index');
 		}
     }
 

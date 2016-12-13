@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3fcbe43d41f9f0029747687d375ad72b",
-    "content-hash": "c41a29c1ce16f69c2bf7a719ee39135d",
+    "hash": "4920723fd1e35a768e9885fb598d3872",
+    "content-hash": "bbb9fc8cb5f3ded19b47ae5d128d7ac1",
     "packages": [
         {
             "name": "artesaos/laravel-linkedin",
@@ -1946,6 +1946,41 @@
             "time": "2015-12-15 15:40:03"
         },
         {
+            "name": "larapack/config-writer",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/larapack/config-writer.git",
+                "reference": "b36a716833240fe9e8b4b4d007b68ef9e91a1124"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/larapack/config-writer/zipball/b36a716833240fe9e8b4b4d007b68ef9e91a1124",
+                "reference": "b36a716833240fe9e8b4b4d007b68ef9e91a1124",
+                "shasum": ""
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Save changes to the configuration file in script.",
+            "keywords": [
+                "config",
+                "larapack",
+                "laravel",
+                "package",
+                "save",
+                "writer"
+            ],
+            "time": "2016-04-28 12:45:27"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.2.39",
             "source": {
@@ -2127,6 +2162,60 @@
                 "oauth"
             ],
             "time": "2016-06-22 12:40:16"
+        },
+        {
+            "name": "laravelcollective/html",
+            "version": "v5.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelCollective/html.git",
+                "reference": "3a312d39ffe37da0f57b602618b61fd07c1fcec5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/3a312d39ffe37da0f57b602618b61fd07c1fcec5",
+                "reference": "3a312d39ffe37da0f57b602618b61fd07c1fcec5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "5.2.*",
+                "illuminate/routing": "5.2.*",
+                "illuminate/session": "5.2.*",
+                "illuminate/support": "5.2.*",
+                "illuminate/view": "5.2.*",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "illuminate/database": "5.2.*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Collective\\Html\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Adam Engebretson",
+                    "email": "adam@laravelcollective.com"
+                }
+            ],
+            "description": "HTML and Form Builders for the Laravel Framework",
+            "homepage": "http://laravelcollective.com",
+            "time": "2016-01-27 22:29:54"
         },
         {
             "name": "league/flysystem",
@@ -4541,6 +4630,55 @@
                 "testing"
             ],
             "time": "2016-05-22 21:52:33"
+        },
+        {
+            "name": "offline/laravel-config-writer",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OFFLINE-GmbH/laravel-config-writer.git",
+                "reference": "dcba6accda9f3d0057aeb5c352d31ddab11f9d77"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OFFLINE-GmbH/laravel-config-writer/zipball/dcba6accda9f3d0057aeb5c352d31ddab11f9d77",
+                "reference": "dcba6accda9f3d0057aeb5c352d31ddab11f9d77",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0.",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "October\\Rain\\Config\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com"
+                }
+            ],
+            "description": "Configuration extension",
+            "homepage": "http://octobercms.com",
+            "keywords": [
+                "config",
+                "laravel",
+                "october",
+                "october cms",
+                "write"
+            ],
+            "time": "2016-03-30 05:52:31"
         },
         {
             "name": "phpdocumentor/reflection-common",

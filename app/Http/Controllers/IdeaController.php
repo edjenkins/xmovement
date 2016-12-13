@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Config;
 use DB;
+use DynamicConfig;
 use Gate;
 use Response;
 use Input;
@@ -162,11 +163,11 @@ class IdeaController extends Controller
 
 	public function store(Request $request)
 	{
-		if (env('FIXED_IDEA_DURATION', 0) != 0)
+		if (DynamicConfig::fetchConfig('FIXED_IDEA_DURATION', 0) != 0)
 		{
-			$request->duration = env('FIXED_IDEA_DURATION');
+			$request->duration = DynamicConfig::fetchConfig('FIXED_IDEA_DURATION');
 		}
-		
+
 		// Validate the idea
 		$this->validate($request, [
 			'name' => 'required|max:255',
@@ -189,7 +190,7 @@ class IdeaController extends Controller
 		]);
 
 		// Pre-populate design tasks with user questions
-		if (env('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
+		if (DynamicConfig::fetchConfig('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
 		{
 			$questions = [];
 			foreach ($request->questions as $index => $question)
@@ -208,7 +209,7 @@ class IdeaController extends Controller
 		}
 
 		// Populate design tasks from configuration file
-		if (env('PRE_POPULATE_DESIGN_TASKS', false))
+		if (DynamicConfig::fetchConfig('PRE_POPULATE_DESIGN_TASKS', false))
 		{
 	        $job = (new PrePopulateDesignTasks($idea))->onQueue('emails');
 	        $this->dispatch($job);

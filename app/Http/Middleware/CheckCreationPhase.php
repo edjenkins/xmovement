@@ -17,7 +17,7 @@ class CheckCreationPhase
      */
     public function handle($request, Closure $next)
     {
-		if (!env('CREATION_PHASE_ENABLED', true))
+		if (!DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
 		{
 			// Creation phase disabled
 			Session::flash('flash_message', trans('flash_message.page_not_found'));

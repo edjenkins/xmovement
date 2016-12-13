@@ -7,8 +7,37 @@
 	position relative
 	margin-top -20px
 	.text-container
+		padding 0 30px
 		position relative
 		z-index 1
+		text-align center
+		h1
+			color white
+			font-weight bold
+			margin 0 auto 30px auto
+			max-width 600px
+		button
+			background main-color
+			border none
+			border-radius 6px
+			color white
+			font-size 18px
+			font-weight normal
+			margin 0 auto
+			outline 0
+			padding 8px 24px
+			text-align center
+			animate()
+			&:hover
+				background-color white
+				color dark-font-color
+		&.text-left
+			text-align left
+			h1
+				font-size 42px
+				margin 0 0 50px 0
+				max-width 640px
+
 	.black-overlay
 		background-color hero-overlay-color
 		position absolute

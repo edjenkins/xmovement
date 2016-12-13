@@ -13,7 +13,7 @@
 
 	@unless($editing)
 
-		@if(env('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
+		@if(DynamicConfig::fetchConfig('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
 
 			@include('forms/idea/pages/4')
 

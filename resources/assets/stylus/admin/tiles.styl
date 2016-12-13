@@ -1,0 +1,45 @@
+.admin-panel
+	.admin-tile
+		background-color white
+		border border-color 1px solid
+		margin-bottom 20px
+		min-height 120px
+		padding 60px 20px 20px 20px
+		position relative
+		p
+			&:last-child
+				margin-bottom 0
+				padding-bottom 0
+		.admin-tile--label
+			background-color border-color
+			border-bottom-right-radius 6px
+			border-top-right-radius 6px
+			color #444
+			font-weight bold
+			left 0
+			line-height 30px
+			padding 0 10px
+			position absolute
+			top 10px
+
+		table
+			&:last-child
+				margin-bottom 0
+			.state-table-header
+				text-align center
+			.state-table-cell
+				text-align center
+				input
+					width 100%
+					text-align center
+				.fa-spinner
+					color #999
+				.fa-angle-down
+					color #999
+					margin-left 6px
+				&.state-enabled .fa-circle
+					color success-color
+					cursor pointer
+				&.state-disabled .fa-circle
+					color danger-color
+					cursor pointer

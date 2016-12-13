@@ -1,4 +1,4 @@
-@if (env('TENDER_PHASE_ENABLED', false))
+@if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
 	@unless($idea->tender_state == 'closed')
 
 		<div class="tenders-container hidden-xs">
