@@ -59,6 +59,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/admin/config/update', 'AdminController@updateConfig');
 	Route::post('/admin/permissions/fetch', 'AdminController@fetchPermissions');
 	Route::post('/admin/permissions/update', 'AdminController@updatePermissions');
+	Route::post('/admin/phases/update', 'AdminController@updatePhases');
 
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
@@ -120,6 +121,11 @@ Route::group(['middleware' => ['web']], function () {
 
     // Contact routes
 	Route::post('/contact/send', 'ContactController@send');
+
+	// Angular Components
+	Route::get('/components/{component_id}', function($component_id) {
+		return Response::view('components/' . $component_id);
+	});
 
 	// Angular Directives
 	Route::get('/directives/{directive_id}', function($directive_id) {

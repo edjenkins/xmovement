@@ -8,5 +8,14 @@
 		<span ng-switch-when="integer">
 			<input type="text" ng-model="config.value" ng-blur="configController.updateConfig()" />
 		</span>
+		<span ng-switch-when="string">
+			<input type="text" ng-model="config.value" ng-blur="configController.updateConfig()" />
+		</span>
+		<span ng-switch-when="timestamp">
+			<!-- <input type="text" ng-model="config.value" ng-blur="configController.updateConfig()" /> -->
+
+			<xm-date-picker xm-date="config.value" xm-config-controller="configController"></xm-date-picker>
+
+		</span>
 	</span>
 </td>

@@ -13,7 +13,7 @@
     "tests"
   ],
   "dependencies": {
-	"animate.css": "^3.5.2",
+    "animate.css": "^3.5.2",
     "moment-timezone": ">=0.4.0",
     "jQuery-ui-Slider-Pips": "jquery-ui-slider-pips#^1.11.3",
     "js-cookie": "^2.1.2",
@@ -23,15 +23,14 @@
     "underscore": "^1.8.3",
     "angular-isotope": "^0.1.14",
     "angular-images-loaded": "^0.2.1",
-    "animate.css": "^3.5.2",
     "angular-momentjs": "^0.2.2",
     "angular-moment": "^1.0.0"
   },
   "resolutions": {
-    "angular": "1.5.8",
     "get-size": "~2.0.2",
     "masonry": "~4.0.0",
     "outlayer": "~2.0.0",
-    "fizzy-ui-utils": "~2.0.0"
+    "fizzy-ui-utils": "~2.0.0",
+    "angular": "1.6.0"
   }
 }

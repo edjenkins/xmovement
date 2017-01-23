@@ -4,20 +4,22 @@
 
     <div class="container-fluid hero-container" id="home-hero-container" style="background-image:url('{{ asset(getenv('APP_HOME_HEADER_IMG')) }}')">
         <div class="black-overlay"></div>
-        <div class="text-container">
+        <div class="container text-container text-left">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>
-			@if (env('INTRO_VIDEO_ID', false))
-	            <a data-toggle="modal" data-target="#intro-video-modal">
-	                <button>{{ trans('home.watch_the_video') }}</button>
-	            </a>
-			@elseif (env('CREATION_PHASE_ENABLED', true))
+			@if (DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
 	            <a href="{{ action('IdeaController@add') }}">
 	                <button>{{ trans('home.get_started') }}</button>
 	            </a>
 			@else
-				<a href="{{ action('IdeaController@index') }}">
-					<button>{{ trans('navbar.explore') }}</button>
-				</a>
+				@if (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
+					<a href="{{ action('InspirationController@index') }}">
+						<button>{{ trans('home.be_inspired') }}</button>
+					</a>
+				@else
+					<a href="{{ action('IdeaController@index') }}">
+						<button>{{ trans('navbar.explore') }}</button>
+					</a>
+				@endif
 			@endif
         </div>
     </div>
@@ -67,28 +69,20 @@
 
 	</div>
 
-	<div class="container-fluid competition-container">
-
+	<div class="container-fluid info-container">
 		<div class="container">
-
-			<div class="competition-banner">
-
-				<h3>Win £250</h3>
+			<div class="info-banner">
+				<h3>Our Mission</h3>
 				<p>
-					We are currently running a competition for the best hosted events, you could be in with the chance of winning a large cash prize by simply organising an event for your fellow students through our platform and documenting it with photos and videos.
-					If you want to learn more about our competition then click below for the full details and terms.
+					Launchspot gives your ideas life. Whether you’re someone with an idea or a developer looking to work with communities to make an impact, Launchspot is an iterative, collaborative co-design platform which helps communities to make their ideas concrete and ready for further funding and development.
 				</p>
-				<a href="/competition">Learn More</a>
-
 			</div>
-
 		</div>
-
 	</div>
 
 	@if(count($ideas) > 0)
-		<div class="container-fluid featured-ideas-container">
-			<div class="container">
+	    <div class="container-fluid featured-ideas-container">
+	        <div class="container">
 	            <div class="panel-heading text-center">
 	                <h2>{{ trans('home.featured_ideas', ['idea' => trans_choice('common.idea', count($ideas))]) }}</h2>
 	            </div>
@@ -102,18 +96,6 @@
 	            </div>
 	        </div>
 	    </div>
-	@endif
-
-	@if (env('INTRO_VIDEO_ID', false))
-		<div class="modal fade video-modal" id="intro-video-modal" tabindex="-1" role="dialog">
-
-			<div class="modal-dialog" role="document">
-
-				<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='//www.youtube.com/embed/{{ env('INTRO_VIDEO_ID') }}?rel=0&amp;showinfo=0' frameborder='0' allowfullscreen></iframe></div>
-
-			</div>
-
-		</div>
 	@endif
 
 @endsection

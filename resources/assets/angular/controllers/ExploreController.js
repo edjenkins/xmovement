@@ -44,8 +44,6 @@ XMovement.controller('ExploreController', function($scope, $http, $rootScope, Ex
 
 		ExploreService.getIdeas({'sort_type': sort_type}).then(function(response) {
 
-			console.log(response);
-
 			$scope.ideas = response.data.ideas;
 
 			$scope.loading_ideas = false;

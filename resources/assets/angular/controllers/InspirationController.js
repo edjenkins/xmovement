@@ -121,8 +121,6 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		InspirationService.addInspiration({inspiration: $scope.new_inspiration[type] }).then(function(response) {
 
-			console.log(response);
-			console.log('^^ response');
 			if (response.meta.success)
 			{
 				var inspiration = response.data.inspiration;
@@ -220,8 +218,11 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.formatInspirations = function(inspirations) {
 
-		for (var i = 0; i < inspirations.length; i++) {
-			$scope.formatInspiration(inspirations[i]);
+		if (inspirations)
+		{
+			for (var i = 0; i < inspirations.length; i++) {
+				$scope.formatInspiration(inspirations[i]);
+			}
 		}
 
 		return inspirations;

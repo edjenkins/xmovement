@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div ng-controller="ExploreController" ng-cloak>
+	<div ng-controller="ExploreController">
 
 		<div class="page-header">
 
