@@ -20,7 +20,8 @@ bower_components/**
 **/.DS_Store
 resources/assets/stylus/variables.styl
 
-resources/views/deployment
+resources/views/deployment/*
+resources/assets/stylus/deployment/*
 
 
 config/custom-pages.php
@@ -35,6 +36,7 @@ public/js/vendor.js
 
 config/bugsnag.php
 
-
 resources/lang
 packages/deployment
+
+packages/deployment/deployment/composer.json

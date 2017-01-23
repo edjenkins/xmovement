@@ -36,7 +36,11 @@ class DesignController extends Controller
 {
     public function dashboard(Request $request, Idea $idea)
     {
-		if (Gate::denies('design', $idea))
+		$user = Auth::user();
+
+		$is_existing_supporter = ($user) ? Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists() : false;
+
+		if ($idea->visibility == 'private' && !$is_existing_supporter)
 		{
 	        Session::flash('flash_message', trans('flash_message.design_phase_closed'));
 	        Session::flash('flash_type', 'flash-danger');
