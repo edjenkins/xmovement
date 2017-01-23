@@ -35,6 +35,7 @@
 
 	.idea-section
 		white-panel()
+		overflow visible
 		&.padded
 			padding 20px
 	.section-header
@@ -59,8 +60,11 @@
 		background-position center
 		background-repeat no-repeat
 		background-size cover
+		border-top-left-radius 6px
+		border-top-right-radius 6px
 		height 0
 		margin-bottom 15px
+		overflow hidden
 		padding-bottom 40%
 		position relative
 	p.idea-description
@@ -194,8 +198,8 @@
 
 	&.mobile-sidebar
 		margin-top 15px
-		.creator-tile
-			display none
+		// .creator-tile
+		// 	display none
 
 .first-to-add
 	text-align center
