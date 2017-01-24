@@ -41,3 +41,7 @@ resources/lang
 packages/deployment
 
 packages/deployment/deployment/composer.json
+
+public/js/angular-dependencies.js
+
+public/js/angular-dependencies.js.map
