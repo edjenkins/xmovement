@@ -186,21 +186,25 @@ class Idea extends Model
      */
     public function getLatestPhaseAttribute()
     {
-		if ($this->proposal_state == 'locked')
+		if ($this->tender_state == 'open')
 		{
-			return 'Complete';
+			return 'Tender Phase';
 		}
-		if ($this->proposal_state == 'open')
+		else if ($this->proposal_state == 'open')
 		{
 			return 'Proposal Phase';
 		}
-		if ($this->design_state == 'open' && $this->proposal_state != 'open')
+		else if ($this->design_state == 'open')
 		{
 			return 'Design Phase';
 		}
-		if ($this->support_state == 'open' && $this->design_state != 'open')
+		else if ($this->support_state == 'open')
 		{
 			return 'Support Phase';
+		}
+		else
+		{
+			return 'Complete';
 		}
     }
 
@@ -306,103 +310,60 @@ class Idea extends Model
 
 	public function timescales($phase, $point)
 	{
-		$now = Carbon::now();
+		$progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
 
-		$created = Carbon::parse($this->created_at);
+		$process_start_date = ($progression_type == 'fixed') ? strtotime(DynamicConfig::fetchConfig('PROCESS_START_DATE')) : strtotime($this->created_at);
 
-		$support_start = $design_start = $proposal_start = $created->copy();
+		$support_phase = json_decode(DynamicConfig::fetchConfig('SUPPORT_PHASE'));
+		$support_start = Carbon::createFromTimestamp(strtotime("+" . $support_phase->start . " days", $process_start_date));
+		$support_end = Carbon::createFromTimestamp(strtotime("+" . $support_phase->end . " days", $process_start_date));
 
-		$support_end = $design_end = $proposal_end = Carbon::now();
+		$design_phase = json_decode(DynamicConfig::fetchConfig('DESIGN_PHASE'));
+		$design_start = Carbon::createFromTimestamp(strtotime("+" . $design_phase->start . " days", $process_start_date));
+		$design_end = Carbon::createFromTimestamp(strtotime("+" . $design_phase->end . " days", $process_start_date));
 
-		$idea_duration_in_hours = ($this->duration * 24);
+		$proposal_phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
+		$proposal_start = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->start . " days", $process_start_date));
+		$proposal_end = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->end . " days", $process_start_date));
 
-		if (($this->design_during_support) && ($this->proposals_during_design))
-		{
-			$support_duration = $design_duration = $proposal_duration = $idea_duration_in_hours;
-
-			$support_end = $design_end = $proposal_end = $created->copy()->addHours($idea_duration_in_hours);
-		}
-		else if ($this->design_during_support)
-		{
-			$support_duration = $design_duration = $proposal_duration = ($idea_duration_in_hours / 2);
-
-			$proposal_start = $created->copy()->addHours($support_duration);
-
-			$support_end = $support_start->copy()->addHours($support_duration);
-			$design_end = $design_start->copy()->addHours($design_duration);
-			$proposal_end = $design_end->copy()->addHours($proposal_duration);
-		}
-		else if ($this->proposals_during_design)
-		{
-			$support_duration = $design_duration = $proposal_duration = ($idea_duration_in_hours / 2);
-
-			$design_start = $proposal_start = $created->copy()->addHours($support_duration);
-
-			$support_end = $support_start->copy()->addHours($support_duration);
-			$design_end = $support_end->copy()->addHours($design_duration);
-			$proposal_end = $support_end->copy()->addHours($proposal_duration);
-		}
-		else
-		{
-			$support_duration = $design_duration = $proposal_duration = ($idea_duration_in_hours / 3);
-
-			$design_start = $support_start->copy()->addHours($support_duration);
-			$proposal_start = $design_start->copy()->addHours($design_duration);
-
-			$support_end = $created->copy()->addHours($support_duration);
-			$design_end = $support_end->copy()->addHours($design_duration);
-			$proposal_end = $design_end->copy()->addHours($proposal_duration);
-		}
+		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+		$tender_start = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->start . " days", $process_start_date));
+		$tender_end = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->end . " days", $process_start_date));
 
 		switch ($phase) {
 			case 'support':
 
 				switch ($point) {
-					case 'start':
-						return $support_start;
-						break;
-
-					case 'duration':
-						return $support_duration;
-						break;
-
-					case 'end':
-						return $support_end;
-						break;
+					case 'start': return $support_start; break;
+					case 'duration': return $support_duration; break;
+					case 'end': return $support_end; break;
 				}
 				break;
 
 			case 'design':
 
 				switch ($point) {
-					case 'start':
-						return $design_start;
-						break;
-
-					case 'duration':
-						return $design_duration;
-						break;
-
-					case 'end':
-						return $design_end;
-						break;
+					case 'start': return $design_start; break;
+					case 'duration': return $design_duration; break;
+					case 'end': return $design_end; break;
 				}
 				break;
 
 			case 'proposal':
 
 				switch ($point) {
-					case 'start':
-						return $proposal_start;
-						break;
+					case 'start': return $proposal_start; break;
+					case 'duration': return $proposal_duration; break;
+					case 'end': return $proposal_end; break;
+				}
+				break;
 
-					case 'duration':
-						return $proposal_duration;
-						break;
+			case 'tender':
 
-					case 'end':
-						return $proposal_end;
-						break;
+				switch ($point) {
+					case 'start': return $tender_start; break;
+					case 'duration': return $tender_duration; break;
+					case 'end': return $tender_end; break;
 				}
 				break;
 		}
@@ -410,30 +371,42 @@ class Idea extends Model
 
 	public function progress_percentage()
 	{
-		$diff = Carbon::parse($this->timescales('support', 'start'))->diffInHours();
-		$progress = 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+		$start = Carbon::now()->diffInHours(Carbon::parse($this->timescales('support', 'start')), false);
+		$end = Carbon::now()->diffInHours(Carbon::parse($this->timescales('tender', 'end')), false);
+
+		$duration = $this->timescales('support', 'start')->diffInHours(Carbon::parse($this->timescales('tender', 'end')));
+
+		$progress = ((($duration - $end) / $duration) * 100);
+
 		return ($progress > 100) ? 100 : $progress;
 	}
 
 	public function support_percentage()
 	{
-		$created = Carbon::parse($this->created_at);
-		$diff = $created->diffInHours(Carbon::parse($this->timescales('support', 'start')));
-		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+		$phase = json_decode(DynamicConfig::fetchConfig('SUPPORT_PHASE'));
+		return ($phase->start / $tender_phase->end) * 100;
 	}
 
 	public function design_percentage()
 	{
-		$created = Carbon::parse($this->created_at);
-		$diff = $created->diffInHours(Carbon::parse($this->timescales('design', 'start')));
-		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+		$phase = json_decode(DynamicConfig::fetchConfig('DESIGN_PHASE'));
+		return ($phase->start / $tender_phase->end) * 100;
 	}
 
 	public function proposal_percentage()
 	{
-		$created = Carbon::parse($this->created_at);
-		$diff = $created->diffInHours(Carbon::parse($this->timescales('proposal', 'start')));
-		return 100 - ((($this->duration * 24) - $diff) / ($this->duration * 24) * 100);
+		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+		$phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
+		return ($phase->start / $tender_phase->end) * 100;
+	}
+
+	public function tender_percentage()
+	{
+		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+		$phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+		return ($phase->start / $tender_phase->end) * 100;
 	}
 
 }

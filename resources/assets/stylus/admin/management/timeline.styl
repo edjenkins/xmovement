@@ -1,0 +1,175 @@
+// Process Timeline
+$grid-width = 60px;
+
+.date-picker-wrapper
+	cursor pointer
+	height 26px
+	width 160px
+	position relative
+	.date-picker-button
+		background-color border-color
+		border-radius 6px
+		pointer-events none
+		position absolute
+		line-height 26px
+		height 26px
+		text-align center
+		width 160px
+		z-index 1
+		animate()
+		.date-picker-button--value
+			color #444
+			display inline-block
+			padding 0 6px
+			animate()
+	input
+		cursor pointer
+		position absolute
+		height 26px
+		opacity 0
+		bottom 0
+		top 0
+		right 0
+		left 0
+		width 160px
+	&:hover
+		cursor pointer
+		.date-picker-button
+			background-color darken(info-color, 10%)
+			.date-picker-button--value
+				color white
+
+.process-timeline
+	.key-dates
+		top 0
+		bottom 0
+		left 0
+		right 0
+		position absolute
+		.key-date
+			background-color info-color
+			bottom 0
+			border-radius 2px
+			position absolute
+			top 0
+			width 4px
+			z-index 1
+			&.start-date
+				background-color success-color
+				left 0px
+			&.end-date
+				background-color danger-color
+				left 120px
+			&.current-date
+				left 60px
+			.key-date-label
+				background-color inherit
+				border-top-right-radius 4px
+				border-bottom-right-radius 4px
+				color white
+				padding 3px 10px
+				position absolute
+				font-size 13px
+				top 0
+				left 0
+				white-space nowrap
+				animate()
+				.key-date-label-timestamp
+					display none
+				&:hover
+					z-index 5
+					.key-date-label-label
+						display none
+					.key-date-label-timestamp
+						display inline-block
+
+.process-timeline
+	background-color white
+	border-left border-color 1px solid
+	border-right border-color 1px solid
+	overflow hidden
+	overflow-x scroll
+	padding 20px 0px
+	position relative
+	.grid
+		background-size 60px
+		background-image repeating-linear-gradient(-90deg, border-color, border-color 1px, transparent 1px, transparent 60px)
+		opacity 0
+		pointer-events none
+		position absolute
+		top 0
+		bottom 0
+		left 0
+		right 0
+		width 6000px
+		animate()
+	&:hover .grid
+		opacity 1
+	.tab-container
+		padding-top 20px
+		.tab
+			display block
+			height 40px
+			padding 5px 0
+			.inner-tab
+				background-color info-color
+				border-radius 4px
+				height 30px
+				position relative
+				min-width ($grid-width * 2)px
+				max-width ($grid-width * 60)px
+				no-select()
+				transition(background 0.2s linear)
+				&.animated
+					animate()
+				.phase-name, .phase-duration
+					color white
+					font-size 13px
+					line-height 30px
+					max-width 40%
+					overflow hidden
+					position absolute
+					animate()
+					&.phase-name
+						left 10px
+					&.phase-duration
+						right 10px
+				.grab-handle
+					color white
+					height 30px
+					line-height 30px
+					opacity 0
+					padding 0 5px
+					position absolute
+					animate()
+					&.left-grab-handle
+						left 0
+					&.right-grab-handle
+						right 0
+					&:hover
+						cursor ew-resize !important
+						opacity 1
+				&:hover
+					cursor move
+					background-color darken(info-color, 10%)
+					.phase-name
+						left 25px
+					.phase-duration
+						right 25px
+					.grab-handle
+						opacity 0.5
+
+			for $index in (0...180)
+				&[data-start=\"{$index}\"] .inner-tab
+					left (60 * $index)px
+
+				&[data-duration=\"{$index}\"] .inner-tab
+					width (60 * $index)px
+
+ul.process-timeline-alerts
+	cleanlist()
+	li.process-timeline-alert
+		cleanlist()
+		color #999
+		margin-top 10px
+		padding 0 5px

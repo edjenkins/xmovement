@@ -25,6 +25,7 @@ resources/assets/stylus/deployment/*
 
 
 config/custom-pages.php
+config/design-tasks.php
 
 resources/assets/stylus/deployment/home.styl
 

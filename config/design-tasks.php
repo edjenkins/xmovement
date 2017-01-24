@@ -4,19 +4,19 @@ return array(
 
     'polls' => [
         [
-	        'name' => 'Event Facilitator',
-	        'description' => 'Who would be the best person to lead/facilitate this event? (Student, Library staff, other University staff, external)'
+	        'name' => 'Audience',
+	        'description' => 'Who will your audience or userbase be? Who will your idea help?'
         ],
     ],
 
     'discussions' => [
         [
-	        'name' => 'Time',
-	        'description' => 'When would be the best time to hold this event? (Time of day, day of the week, month/semester)'
+	        'name' => 'Benefits',
+	        'description' => 'What benefits do you see of those who will engage or use your idea?'
         ],
         [
-	        'name' => 'Capacity',
-	        'description' => 'How many people can attend this event? (The Library has rooms suitable for 2-40 people, other buildings on campus can hold more)'
+	        'name' => 'Promotion',
+	        'description' => 'Do you have any ideas about how we might spread the word about the technology, and increase its use?'
         ],
     ]
 

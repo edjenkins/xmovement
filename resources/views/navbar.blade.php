@@ -21,11 +21,11 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-				@if (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
+				@if (DynamicConfig::fetchConfig('INSPIRATION_MODE_ENABLED', false))
 					<li><a href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
 				@endif
 
-				@if (DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
+				@if (DynamicConfig::fetchConfig('CREATION_MODE_ENABLED', true))
 	                <li><a href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
 				@endif
 

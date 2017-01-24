@@ -139,7 +139,7 @@
 								<p>
 									Please be sure to read our simple competition guidelines before getting involved.
 								</p>
-								<button class="btn" type="button" name="button">Read Guidelines</button>
+								<a href="/guidelines" target="_self"><button class="btn" type="button" name="button">Read Guidelines</button></a>
 							</div>
 						</div>
 
@@ -153,7 +153,7 @@
 
 				</div>
 
-				<div ng-cloak isotope-container="isotope-container" id="isotopeContainer" isotope-container class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
+				<div ng-cloak isotope-container="isotope-container" id="isotopeContainer" isotope-container data-isotope='{ "transitionDuration": "0.2s" }' class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
 					<div ng-cloak isotope-item="isotope-item" class="tile inspiration-tile isotope-item images-loaded" ng-repeat="inspiration in inspirations" ng-show="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" ng-click="openInspirationModal(inspiration)">
 

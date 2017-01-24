@@ -4,10 +4,10 @@ return array(
 
     'pages' => [
         [
-			// 'route' => '/example',
-			// 'name' => 'Example',
-			// 'nav' => false,
-			// 'footer' => false
+			'route' => '/guidelines',
+			'name' => 'Guidelines',
+			'nav' => false,
+			'footer' => true
 		]
     ]
 

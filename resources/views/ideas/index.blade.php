@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div ng-controller="ExploreController" ng-cloak>
+	<div ng-controller="ExploreController">
 
 		<div class="page-header">
 
@@ -16,9 +16,9 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_ENABLED', false) ? 'shortlist' : 'popular' }}'">
+	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false) ? 'shortlist' : 'popular' }}'">
 
-						@if(DynamicConfig::fetchConfig('SHORTLIST_ENABLED', false))
+						@if(DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false))
 							<li class="module-control" ng-click="setSortType('shortlist')" ng-class="{'active':sort_type == 'shortlist'}">
 
 								<button type="button">{{ trans('idea.sort_shortlist') }}</button>

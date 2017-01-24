@@ -6,12 +6,12 @@
         <div class="black-overlay"></div>
         <div class="container text-container text-left">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>
-			@if (DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
+			@if (DynamicConfig::fetchConfig('CREATION_MODE_ENABLED', true))
 	            <a href="{{ action('IdeaController@add') }}">
 	                <button>{{ trans('home.get_started') }}</button>
 	            </a>
 			@else
-				@if (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
+				@if (DynamicConfig::fetchConfig('INSPIRATION_MODE_ENABLED', false))
 					<a href="{{ action('InspirationController@index') }}">
 						<button>{{ trans('home.be_inspired') }}</button>
 					</a>

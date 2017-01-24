@@ -1,8 +1,8 @@
-@if ($idea->design_state == 'open')
+@if ($idea->tender_state == 'open')
 
-	<div class="notification design-phase-notification">
+	<div class="notification tender-phase-notification">
 		<p>
-			{{ trans('idea.design_phase_open_notification') }}
+			{{ trans('idea.tender_phase_open_notification') }}
 		</p>
 	</div>
 
@@ -13,5 +13,13 @@
 			{{ trans('idea.proposal_phase_open_notification') }}
 		</p>
 	</div>
+
+@elseif ($idea->design_state == 'open')
+
+		<div class="notification design-phase-notification">
+			<p>
+				{{ trans('idea.design_phase_open_notification') }}
+			</p>
+		</div>
 
 @endif

@@ -60,7 +60,7 @@ class DynamicConfigSeeder extends Seeder
 				'type' => 'boolean'
 			),
 			array(
-				'key' => 'SHORTLIST_ENABLED',
+				'key' => 'SHORTLIST_PHASE_ENABLED',
 				'value' => true,
 				'type' => 'boolean'
 			),
@@ -68,11 +68,25 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'TENDER_PHASE_ENABLED',
 				'value' => true,
 				'type' => 'boolean'
+			)
+		);
+
+		// Add mode configs
+		array_push($configs,
+			array(
+				'key' => 'INSPIRATION_MODE_ENABLED',
+				'value' => true,
+				'type' => 'boolean'
 			),
 			array(
-				'key' => 'FIXED_IDEA_DURATION',
-				'value' => 0,
-				'type' => 'integer'
+				'key' => 'CREATION_MODE_ENABLED',
+				'value' => true,
+				'type' => 'boolean'
+			),
+			array(
+				'key' => 'SHORTLIST_MODE_ENABLED',
+				'value' => true,
+				'type' => 'boolean'
 			)
 		);
 
@@ -87,6 +101,15 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS',
 				'value' => true,
 				'type' => 'boolean'
+			)
+		);
+
+		// Add other configs
+		array_push($configs,
+			array(
+				'key' => 'FIXED_IDEA_DURATION',
+				'value' => 0,
+				'type' => 'integer'
 			)
 		);
 

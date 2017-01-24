@@ -11,15 +11,21 @@ use DB;
 use Gate;
 use Response;
 use Input;
+use Lang;
 use Log;
+use MetaTag;
 use Session;
 use View;
 
 class PageController extends Controller
 {
-    // public function example(Request $request)
-	// {
-	//     return view('deployment.pages.example');
-	// }
+	public function guidelines(Request $request)
+	{
+		# META
+		MetaTag::set('title', Lang::get('meta.guidelines_title'));
+		MetaTag::set('description', Lang::get('meta.guidelines_description'));
+		# META
 
+	    return view('deployment.pages.guidelines');
+	}
 }

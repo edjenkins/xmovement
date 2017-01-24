@@ -27,10 +27,10 @@
     "angular-moment": "^1.0.0"
   },
   "resolutions": {
-    "angular": "1.5.9",
     "get-size": "~2.0.2",
     "masonry": "~4.0.0",
     "outlayer": "~2.0.0",
-    "fizzy-ui-utils": "~2.0.0"
+    "fizzy-ui-utils": "~2.0.0",
+    "angular": "~1.6.0"
   }
 }

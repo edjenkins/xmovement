@@ -13,6 +13,7 @@ use App\Jobs\SendProposalPhaseFailedEmail;
 
 use Carbon\Carbon;
 use App\Idea;
+use DynamicConfig;
 use Log;
 
 class UpdateIdeaStates extends Command
@@ -40,7 +41,9 @@ class UpdateIdeaStates extends Command
      */
     public function handle()
     {
-		Log::info('Updating idea states');
+		$progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
+
+		Log::info('Updating idea states for progression type - ' . $progression_type);
 
 		$ideas = Idea::all();
 
@@ -50,20 +53,17 @@ class UpdateIdeaStates extends Command
 
 			$now = Carbon::now();
 
-			$created = Carbon::parse($idea->created_at);
-
 			$support_start = $idea->timescales('support', 'start');
-			$support_duration = $idea->timescales('support', 'duration');
 			$support_end = $idea->timescales('support', 'end');
 
 			$design_start = $idea->timescales('design', 'start');
-			$design_duration = $idea->timescales('design', 'duration');
 			$design_end = $idea->timescales('design', 'end');
 
 			$proposal_start = $idea->timescales('proposal', 'start');
-			$proposal_duration = $idea->timescales('proposal', 'duration');
 			$proposal_end = $idea->timescales('proposal', 'end');
 
+			$tender_start = $idea->timescales('tender', 'start');
+			$tender_end = $idea->timescales('tender', 'end');
 
 			/* Update states */
 
@@ -71,7 +71,7 @@ class UpdateIdeaStates extends Command
 
 			if ((!$now->between($support_start, $support_end)) && ($idea->support_state == 'open'))
 			{
-				$idea->support_state = ($now->lt($support_start)) ? 'closed' : $idea->support_state;
+				$idea->support_state = ($now->gt($support_end)) ? 'locked' : 'closed';
 			}
 			else if (($idea->support_state != 'open') && ($now->between($support_start, $support_end)))
 			{
@@ -140,9 +140,38 @@ class UpdateIdeaStates extends Command
 				}
 			}
 
+			// Tender state
+
+			if ($progression_type == 'fixed')
+			{
+				if ((!$now->between($tender_start, $tender_end)) && ($idea->tender_state == 'open'))
+				{
+					$idea->tender_state = ($now->gt($tender_end)) ? 'locked' : 'closed';
+				}
+				else if (($idea->tender_state != 'open') && ($now->between($tender_start, $tender_end)))
+				{
+					$idea->tender_state = 'open';
+
+					// TODO: Send tender phase open email
+				}
+			}
+			else
+			{
+				if ((!$now->gt($tender_start)) && ($idea->tender_state == 'open'))
+				{
+					$idea->tender_state = ($now->gt($tender_start)) ? 'locked' : 'closed';
+				}
+				else if (($idea->tender_state != 'open') && ($now->gt($tender_start)))
+				{
+					$idea->tender_state = 'open';
+
+					// TODO: Send tender phase open email
+				}
+			}
+
 			// Update the idea
 			$idea->save();
 
 		}
-    }
+	}
 }

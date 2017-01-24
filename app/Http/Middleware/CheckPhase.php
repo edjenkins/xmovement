@@ -22,7 +22,7 @@ class CheckPhase
 
 			case 'inspiration':
 
-				if (!DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
+				if (!DynamicConfig::fetchConfig('INSPIRATION_MODE_ENABLED', false))
 				{
 					// Creation phase disabled
 					Session::flash('flash_message', trans('flash_message.page_not_found'));
@@ -35,7 +35,7 @@ class CheckPhase
 
 			case 'creation':
 
-				if (!DynamicConfig::fetchConfig('CREATION_PHASE_ENABLED', true))
+				if (!DynamicConfig::fetchConfig('CREATION_MODE_ENABLED', true))
 				{
 					// Creation phase disabled
 					Session::flash('flash_message', trans('flash_message.page_not_found'));
@@ -48,7 +48,7 @@ class CheckPhase
 
 			case 'tender':
 
-				if (!DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
+				if (!DynamicConfig::fetchConfig('TENDER_MODE_ENABLED', false))
 				{
 					// Creation phase disabled
 					Session::flash('flash_message', trans('flash_message.page_not_found'));
