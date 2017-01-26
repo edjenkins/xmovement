@@ -50,3 +50,104 @@ ul.progression-selector
 				color white
 				&:hover
 					background-color darken(main-color, 10%)
+
+
+.add-admin-form-container
+	padding 0
+	.form-group
+		position relative
+		&:last-child
+			margin-bottom 0
+		.form-control
+			margin 0
+			max-width 100%
+		input
+			margin 0
+			text-align left
+			width 100%
+		.searching-users
+			height 57px
+			line-height 57px
+			position absolute
+			bottom 0px
+			right 0px
+			width 57px
+			text-align center
+			i
+				color #999
+	.add-admin-search
+		text-align left
+	ul.user-results
+		cleanlist()
+		li
+			cleanlist()
+			border-bottom border-color 1px solid
+			height 50px
+			padding-left 15px
+			position relative
+			animate()
+			&:last-child
+				border-bottom none
+			&.user-search-result
+				padding-left 55px
+			p
+				color #444
+				font-size 15px
+				line-height 50px
+				margin 0
+				padding 0
+			.admin-avatar
+				border transparent 2px solid
+				border-radius 50%
+				position absolute
+				top 5px
+				left 5px
+				overflow hidden
+				height 40px
+				width 40px
+				animate()
+				.avatar-wrapper
+					position relative
+					text-align center
+					.avatar
+						background-size contain
+						background-position center
+						background-repeat no-repeat
+						height 40px
+						margin 0 auto
+						width 40px
+					.add-overlay
+						background-color white
+						border-radius 50%
+						line-height 40px
+						display none
+						position absolute
+						text-align center
+						top 0
+						bottom 0
+						left 0
+						right 0
+						animate()
+						i.fa.fa-plus
+							color main-color
+							font-size 18px
+			&.user-search-result:hover
+				background-color main-color
+				cursor pointer
+				.admin-avatar
+					border-color white
+					overflow hidden
+					.avatar-wrapper
+						.avatar
+							display none
+						.add-overlay
+							display block
+							i.fa.fa-plus
+								color white
+				p
+					color white
+	&.has-results
+		.add-admin-search
+			border-bottom none
+			border-bottom-left-radius 0px
+			border-bottom-right-radius 0px

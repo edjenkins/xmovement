@@ -1,8 +1,25 @@
-<td><% user.name %></td>
+<td>
+	<a href="/profile/<% user.id %>" target="_blank"><% user.name %></a>
+</td>
+
 <td ng-class="{'state-enabled':user.super_admin, 'state-disabled':!user.super_admin}" class="state-table-cell">
 	<span ng-click="user.super_admin = !user.super_admin; configController.updatePermission($event, 'super_admin')">
 		<i ng-show="(user.super_admin == null)" class="fa fa-spinner fa-pulse"></i>
 		<i ng-show="(user.super_admin != null)" class="fa fa-circle"></i>
+	</span>
+</td>
+
+<td ng-class="{'state-enabled':user.can_manage_admins, 'state-disabled':!user.can_manage_admins}" class="state-table-cell">
+	<span ng-click="user.can_manage_admins = !user.can_manage_admins; configController.updatePermission($event, 'can_manage_admins')">
+		<i ng-show="(user.can_manage_admins == null)" class="fa fa-spinner fa-pulse"></i>
+		<i ng-show="(user.can_manage_admins != null)" class="fa fa-circle"></i>
+	</span>
+</td>
+
+<td ng-class="{'state-enabled':user.can_manage_platform, 'state-disabled':!user.can_manage_platform}" class="state-table-cell">
+	<span ng-click="user.can_manage_platform = !user.can_manage_platform; configController.updatePermission($event, 'can_manage_platform')">
+		<i ng-show="(user.can_manage_platform == null)" class="fa fa-spinner fa-pulse"></i>
+		<i ng-show="(user.can_manage_platform != null)" class="fa fa-circle"></i>
 	</span>
 </td>
 

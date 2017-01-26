@@ -36,6 +36,28 @@ class UserPolicy
     }
 
     /**
+     * Determine if the given user can manage the platform.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function manage_platform(User $user)
+    {
+        return $user->can_manage_platform;
+    }
+
+    /**
+     * Determine if the given user can manage admins of the platform and their permissions.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function manage_admins(User $user)
+    {
+        return $user->can_manage_admins;
+    }
+
+    /**
      * Determine if the given user can view the news stream of the user.
      *
      * @param  User  $user

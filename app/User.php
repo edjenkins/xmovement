@@ -170,7 +170,18 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user is a super admin
+     * Check if the user has any admin rights.
+     *
+     * @var array
+     */
+    public function isAdmin()
+    {
+		return true;
+        // return $this->super_admin;
+    }
+
+    /**
+     * Check if the user is a super admin.
      *
      * @var array
      */

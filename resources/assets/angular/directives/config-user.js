@@ -19,6 +19,9 @@ XMovement.directive('xmConfigUser', ['$document', '$rootScope', '$filter', '$tim
 					// Update UI with returned config value
 					$scope.user.value = response.data;
 
+					// Broadcast updated permission
+					$rootScope.$broadcast('AdminPermission::permissionsUpdated');
+
 				});
 			}
 

@@ -61,11 +61,31 @@ class AdminController extends Controller
 		}
     }
 
+	public function manageAdmins()
+	{
+		# META
+		MetaTag::set('title', Lang::get('meta.admin_title'));
+		MetaTag::set('description', Lang::get('meta.admin_description'));
+		# META
+
+		if (Gate::denies('manage_admins', Auth::user()))
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
+
+			return redirect()->action('PageController@home');
+		}
+		else
+		{
+			return view('admin.management.admins');
+		}
+    }
+
 	public function updateConfig(Request $request)
 	{
 		$response = new ResponseObject();
 
-		if (Gate::denies('platform_configuration', Auth::user()))
+		if (Gate::denies('manage_platform', Auth::user()))
 		{
             array_push($response->errors, trans('flash_message.no_permission'));
 		}
@@ -83,7 +103,7 @@ class AdminController extends Controller
 	{
 		$response = new ResponseObject();
 
-		if (Gate::denies('platform_configuration', Auth::user()))
+		if (Gate::denies('manage_platform', Auth::user()))
 		{
             array_push($response->errors, trans('flash_message.no_permission'));
 		}
@@ -103,12 +123,12 @@ class AdminController extends Controller
 	{
 		$response = new ResponseObject();
 
-		// if (Gate::denies('platform_configuration', Auth::user()))
-		// {
-        //     array_push($response->errors, trans('flash_message.no_permission'));
-		// }
-		// else
-		// {
+		if (Gate::denies('manage_admins', Auth::user()))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
+		}
+		else
+		{
 			$response->meta['success'] = true;
 
 			$user = User::where(['id' => $request->user_id])->first();
@@ -120,7 +140,7 @@ class AdminController extends Controller
 			$user->save();
 
 			$response->data = $user;
-		// }
+		}
 
 		return Response::json($response);
 	}
@@ -129,28 +149,22 @@ class AdminController extends Controller
 	{
 		$response = new ResponseObject();
 
-		// if (Gate::denies('platform_configuration', Auth::user()))
-		// {
-        //     array_push($response->errors, trans('flash_message.no_permission'));
-		// }
-		// else
-		// {
+		if (Gate::denies('manage_admins', Auth::user()))
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
+		}
+		else
+		{
 			$response->meta['success'] = true;
 
-			// $value = DynamicPermissions::fetchPermissions($request->key);
-
 			$response->data = User::where(['id' => $request->user_id])->first();
-		// }
+		}
 
 		return Response::json($response);
 	}
 
 	public function setPlatformState($phases)
 	{
-		// $response = new ResponseObject();
-
-		// $response->meta['success'] = true;
-
 		// // Fixed
 		$progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
 
@@ -186,8 +200,6 @@ class AdminController extends Controller
 
 		// Update Idea states
 		Artisan::call('update-idea-states');
-
-		// return Response::json($response);
 	}
 
 	public function updatePhases(Request $request)

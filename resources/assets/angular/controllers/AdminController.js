@@ -1,4 +1,27 @@
-XMovement.controller('AdminController', function($scope, $http, $rootScope, $localStorage, $sessionStorage, AdminService) {
+XMovement.controller('AdminController', function($scope, $http, $rootScope, $localStorage, $sessionStorage, AdminService, UserService) {
+
+	$scope.current_view = '';
+
+	$scope.user_search_results = [];
+	$scope.original_user_search_results = [];
+
+	$scope.admins = [];
+
+	$scope.fetchAdmins = function() {
+
+		UserService.getAdmins().then(function(response) {
+
+			$scope.admins = response.data.users;
+
+			// Remove existing admins from results
+			$scope.user_search_results = _.filter($scope.original_user_search_results, function(result) {
+				return !_.find($scope.admins, function(admin) {
+					return admin.id === result.id;
+				});
+			});
+
+		});
+	}
 
 	$scope.setProgressionType = function(progression_type) {
 
@@ -18,22 +41,11 @@ XMovement.controller('AdminController', function($scope, $http, $rootScope, $loc
 		$rootScope.$broadcast('PhaseTimeline::updatePhases');
 	}
 
-	$scope.$storage = $localStorage.$default({
-		current_view: 'general'
-	});
-
-	// TODO: Fetch all users with admin privileges
-	$scope.users = [
-		{ id: 1 }
-	];
-
 	$scope.setCurrentView = function(current_view) {
 
-		$scope.$storage['current_view'] = current_view;
+		$scope.current_view = current_view;
 
 	}
-
-	$scope.setCurrentView($scope.$storage['current_view']);
 
 	// Fetch the current progression type
 	AdminService.fetchConfig({key:'PROGRESSION_TYPE'}).then(function(response) {
@@ -43,4 +55,55 @@ XMovement.controller('AdminController', function($scope, $http, $rootScope, $loc
 
 	});
 
+	$rootScope.$on('AdminPermission::permissionsUpdated', function() {
+
+		$scope.fetchAdmins();
+	});
+
+	$scope.searchUsers = function(user_search_query) {
+
+		console.log("Loading users");
+
+		$scope.user_search_results = [];
+
+		$scope.searching_users = true;
+
+		if (user_search_query.length > 1)
+		{
+			UserService.searchUsers({name:user_search_query}).then(function(response) {
+
+				console.log(response);
+
+				$scope.original_user_search_results = response.data.users;
+
+				// Remove existing admins from results
+				$scope.user_search_results = _.filter(response.data.users, function(result) {
+					return !_.find($scope.admins, function(admin) {
+				        return admin.id === result.id;
+				    });
+				});
+
+				$scope.searching_users = false;
+
+			});
+		}
+		else
+		{
+			$scope.searching_users = false;
+		}
+	}
+
+	$scope.getProfileImage = function(user, size) {
+
+		if (user.avatar == 'avatar')
+		{
+			return '/dynamic/avatar/' + size + '?name=' + encodeURIComponent(user.name);
+		}
+		else
+		{
+			return 'https://s3.amazonaws.com/xmovement/uploads/images/' + size + '/' + user.avatar;
+		}
+	}
+
+	$scope.fetchAdmins();
 });

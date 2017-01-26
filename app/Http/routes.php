@@ -55,6 +55,7 @@ Route::group(['middleware' => ['web']], function () {
 	// Admin routes
 	Route::get('/admin/email/test', 'AdminController@emailTest');
 	Route::get('/admin/manage/platform', 'AdminController@managePlatform');
+	Route::get('/admin/manage/admins', 'AdminController@manageAdmins');
 	Route::post('/admin/config/fetch', 'AdminController@fetchConfig');
 	Route::post('/admin/config/update', 'AdminController@updateConfig');
 	Route::post('/admin/permissions/fetch', 'AdminController@fetchPermissions');
@@ -202,6 +203,10 @@ Route::group(['middleware' => ['api']], function () {
 
 	// Idea routes
 	Route::get('/api/ideas', 'IdeaController@api_index');
+
+	// User routes
+	Route::get('/api/user/search', 'UserController@api_search');
+	Route::get('/api/user/admins', 'UserController@api_get_admins');
 
 	// Idea routes
 	Route::get('/api/tender', 'TenderController@api_view');

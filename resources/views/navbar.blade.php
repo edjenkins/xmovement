@@ -61,6 +61,9 @@
 							@can('manage_platform', Auth::user())
 								<li><a href="{{ action('AdminController@managePlatform') }}"></i>{{ trans('navbar.manage_platform') }}</a></li>
 							@endcan
+							@can('manage_admins', Auth::user())
+								<li><a href="{{ action('AdminController@manageAdmins') }}"></i>{{ trans('navbar.manage_admins') }}</a></li>
+							@endcan
 							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>

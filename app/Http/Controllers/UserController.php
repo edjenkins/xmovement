@@ -42,6 +42,22 @@ class UserController extends Controller
 		return Response::json($response);
 	}
 
+	public function api_get_admins(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$response->data['users'] = User::where('super_admin', true)
+		->orWhere('can_manage_admins', true)
+		->orWhere('can_manage_platform', true)
+		->orWhere('can_translate', true)
+		->orWhere('can_view_analytics', true)
+		->select('id', 'name', 'avatar')->orderBy('name')->get();
+
+		return Response::json($response);
+	}
+
     public function profile(Request $request, User $user)
 	{
 		if (is_null($user->id)) { $user = Auth::user(); }

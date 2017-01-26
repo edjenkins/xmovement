@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div ng-controller="AdminController" ng-cloak>
+	<div ng-controller="AdminController" ng-cloak ng-init="available_views = ['general', 'state']; setCurrentView(available_views[0])">
 
 		<div class="page-header">
 
@@ -18,23 +18,19 @@
 
 	    			<ul class="module-controls pull-left">
 
-						<li class="module-control" ng-class="{'active' : ($storage.current_view == 'general')}" ng-click="setCurrentView('general')">
+						@can('manage_platform', Auth::user())
+							<li class="module-control" ng-class="{'active' : (current_view == 'general')}" ng-click="setCurrentView('general')">
 
-							<button type="button">{{ trans('admin.view_general') }}</button>
+								<button type="button">{{ trans('admin.view_general') }}</button>
 
-	    				</li>
+		    				</li>
 
-						<li class="module-control" ng-class="{'active' : ($storage.current_view == 'state')}" ng-click="setCurrentView('state')">
+							<li class="module-control" ng-class="{'active' : (current_view == 'state')}" ng-click="setCurrentView('state')">
 
-							<button type="button">{{ trans('admin.view_state') }}</button>
+								<button type="button">{{ trans('admin.view_state') }}</button>
 
-	    				</li>
-
-						<li class="module-control" ng-class="{'active' : ($storage.current_view == 'permissions')}" ng-click="setCurrentView('permissions')">
-
-							<button type="button">{{ trans('admin.view_permissions') }}</button>
-
-	    				</li>
+		    				</li>
+						@endcan
 
 	    			</ul>
 
@@ -46,11 +42,12 @@
 
 		</div>
 
-        <div class="container admin-container" ng-switch="$storage.current_view">
+        <div class="container admin-container" ng-switch="current_view">
 
-			@include('admin/management/panels/general')
-			@include('admin/management/panels/state')
-			@include('admin/management/panels/permissions')
+			@can('manage_platform', Auth::user())
+				@include('admin/management/panels/general')
+				@include('admin/management/panels/state')
+			@endcan
 
         </div>
 
