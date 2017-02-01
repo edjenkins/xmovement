@@ -1,14 +1,16 @@
 php artisan migrate
 
+composer dump-autoload
+
 composer install
 
 php artisan cache:clear 
 
-chmod -R ug+rw resources/lang
+sudo chmod -R ugo+rw resources/lang
 
-chmod -R ug+rw storage 
+sudo chmod -R ugo+rw storage 
 
-chmod -R ug+rw bootstrap/cache 
+sudo chmod -R ugo+rw bootstrap/cache 
 
 composer dump-autoload
 
