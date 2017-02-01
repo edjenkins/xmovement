@@ -1468,3 +1468,63 @@ Stack trace:
 #3 /var/www/selfharm/vendor/laravel/framework/src/Illuminate/Container/Container.php(849): Illuminate\Foundation\Application->make('Psr\Log\LoggerI...')
 #4 /var/www/selfharm/vendor/laravel/framework/src/Illuminate/Container/Container.php(804): Illuminate\Container\Container->resolveClass(Object(ReflectionParameter))
 #5 /var/www/selfharm/vendor/laravel/framework/src/Illuminate/Container/Container.php(775): Illuminate\Contai in /var/www/selfharm/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 734
+[2017-01-27 09:54:02] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:54:02] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:54:02] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:54:02] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:54:02] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:59:32] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:59:32] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:59:32] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:59:33] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 09:59:33] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 10:00:10] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 10:00:10] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 10:00:10] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 10:00:11] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 10:00:11] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 10:03:13] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-27 10:03:13] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-27 10:03:13] Processed: App\Jobs\SendProposalPhaseFailedEmail
+[2017-01-27 10:03:13] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-27 10:03:13] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-27 10:06:29] Processed: App\Jobs\SendQuoteEmail
+[2017-01-27 12:52:29] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 12:52:29] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 12:52:30] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 12:52:30] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 12:52:30] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:01] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:02] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:03] Processed: App\Jobs\SendDesignPhaseOpenEmail[2017-01-27 17:03:03] Processed: App\Jobs\SendDesignPhaseOpenEmail
+
+[2017-01-27 17:03:03] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:03] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:03] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:03] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:18] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:18] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:19] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:19] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:19] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:19] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:03:20] Processed: App\Jobs\SendDesignPhaseOpenEmail[2017-01-27 17:03:20] Processed: App\Jobs\SendDesignPhaseOpenEmail
+
+[2017-01-27 17:04:05] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:05] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:05] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:06] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:06] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:06] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:07] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:04:07] Processed: App\Jobs\SendDesignPhaseOpenEmail
+[2017-01-27 17:05:50] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 17:05:50] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 17:05:50] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 17:05:50] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-27 17:05:52] Processed: App\Jobs\SendProposalPhaseOpenEmail
+[2017-01-30 09:21:41] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-30 09:21:41] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-30 09:21:42] Processed: App\Jobs\SendProposalPhaseFailedEmail
+[2017-01-30 09:21:42] Processed: App\Jobs\SendProposalPhaseCompleteEmail
+[2017-01-30 09:21:42] Processed: App\Jobs\SendProposalPhaseCompleteEmail

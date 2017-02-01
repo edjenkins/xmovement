@@ -3,7 +3,7 @@
 	<span ng-switch="config.type">
 		<span ng-switch-when="boolean" ng-click="config.value = !config.value; configController.updateConfig()">
 			<i ng-show="(config.value == null)" class="fa fa-spinner fa-pulse"></i>
-			<i ng-show="(config.value != null)" class="fa fa-circle"></i>
+			<i ng-show="(config.value != null)" class="fa fa-lg fa-toggle-on" ng-class="{'fa-flip-horizontal':!config.value}"></i>
 		</span>
 		<span ng-switch-when="integer">
 			<input type="text" ng-model="config.value" ng-blur="configController.updateConfig()" />
