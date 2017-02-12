@@ -48,10 +48,7 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-			"database",
-            "tests/TestCase.php"
-        ]
+        "classmap": []
     },
     "scripts": {
         "post-root-package-install": [
