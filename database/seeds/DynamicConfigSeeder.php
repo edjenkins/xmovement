@@ -2,8 +2,6 @@
 
 use Illuminate\Database\Seeder;
 
-use App\DynamicConfig;
-
 class DynamicConfigSeeder extends Seeder
 {
     /**
@@ -173,9 +171,9 @@ class DynamicConfigSeeder extends Seeder
 		foreach ($configs as $config)
 		{
 
-			$dynamic_config = DynamicConfig::where('key', '=', $config['key'])->first();
+			$dynamic_config = DynamicConfig\Config::where('key', '=', $config['key'])->first();
 			if ($dynamic_config === null) {
-				DynamicConfig::firstOrCreate([
+				DynamicConfig\Config::firstOrCreate([
     				'key' => $config['key'],
     				'value' => $config['value'],
     				'type' => $config['type']
