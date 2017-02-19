@@ -47,6 +47,45 @@ class DynamicConfigSeeder extends Seeder
 			)
 		);
 
+		// Add phase defaults
+		array_push($configs,
+			array(
+				'key' => 'SUPPORT_PHASE',
+				'value' => '{\"name\":\"Support\",\"start\":0,\"end\":2,\"duration\":2,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60}]}',
+				'type' => 'json'
+			),
+			array(
+				'key' => 'INSPIRATION_PHASE',
+				'value' => '{\"name\":\"Inspiration\",\"start\":0,\"end\":13,\"duration\":13,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60}]}',
+				'type' => 'json'
+			),
+			array(
+				'key' => 'CREATION_PHASE',
+				'value' => '{\"name\":\"Creation\",\"start\":0,\"end\":2,\"duration\":2,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60},{\"type\":\"START_EQUAL\",\"target_phase\":\"SUPPORT_PHASE\"},{\"type\":\"END_NOT_AFTER_END\",\"target_phase\":\"SUPPORT_PHASE\"}]}',
+				'type' => 'json'
+			),
+			array(
+				'key' => 'DESIGN_PHASE',
+				'value' => '{\"name\":\"Design\",\"start\":2,\"end\":4,\"duration\":2,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60},{\"type\":\"NOT_BEFORE_START\",\"target_phase\":\"SUPPORT_PHASE\"}]}',
+				'type' => 'json'
+			),
+			array(
+				'key' => 'PLAN_PHASE',
+				'value' => '{\"name\":\"Plan\",\"start\":4,\"end\":8,\"duration\":4,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60},{\"type\":\"NOT_BEFORE_END\",\"target_phase\":\"DESIGN_PHASE\"}]}',
+				'type' => 'json'
+			),
+			array(
+				'key' => 'SHORTLIST_PHASE',
+				'value' => '{\"name\":\"Shortlist\",\"start\":13,\"end\":16,\"duration\":3,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60},{\"type\":\"NOT_BEFORE_END\",\"target_phase\":\"PLAN_PHASE\"}]}',
+				'type' => 'json'
+			),
+			array(
+				'key' => 'TENDER_PHASE',
+				'value' => '{\"name\":\"Tender\",\"start\":8,\"end\":14,\"duration\":6,\"enabled\":true,\"rules\":[{\"type\":\"MIN_DURATION\",\"value\":2},{\"type\":\"MAX_DURATION\",\"value\":60},{\"type\":\"NOT_BEFORE_END\",\"target_phase\":\"PLAN_PHASE\"},{\"type\":\"NOT_BEFORE_END\",\"target_phase\":\"PLAN_PHASE\"}]}',
+				'type' => 'json'
+			)
+		);
+
 		// Add phase configs
 		array_push($configs,
 			array(
