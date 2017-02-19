@@ -149,7 +149,23 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'FIXED_IDEA_DURATION',
 				'value' => 0,
 				'type' => 'integer'
+			),
+			array(
+				'key' => 'PROGRESSION_TYPE',
+				'value' => 'fluid',
+				'type' => 'string'
+			),
+			array(
+				'key' => 'TENDER_SHORTLIST_ONLY',
+				'value' => true,
+				'type' => 'boolean'
+			),
+			array(
+				'key' => 'PROCESS_START_DATE',
+				'value' => '2017-02-01T00:00:00.000Z',
+				'type' => 'timestamp'
 			)
+
 		);
 
 		foreach ($configs as $config)
