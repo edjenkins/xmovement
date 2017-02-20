@@ -14,7 +14,7 @@ var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore
 XMovement.config(function($routeProvider, $locationProvider) {
 
 	// TODO: Issue causing digest infinte loop when html5 mode set to true
-	// $locationProvider.html5Mode(true);
+	$locationProvider.html5Mode(true);
 
 });
 

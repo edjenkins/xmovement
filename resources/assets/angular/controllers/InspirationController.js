@@ -25,7 +25,6 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.new_inspiration = $scope.inspiration_form_data;
 
 	$scope.$on('imagesLoaded:loaded', function(event, element){
-		// setTimeout(function() { $scope.layoutGrid(); }, 200);
 		$scope.layoutGrid();
     });
 
@@ -38,17 +37,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$('#inspiration-modal').on('hide.bs.modal', function (e) {
 		$scope.selected_inspiration = {};
 
-		if (history.pushState) {
-
-			$location.search('');
-
-			$scope.fetchComments($location.url());
-		}
+		$location.hash('');
+		$scope.fetchComments($location.absUrl());
 	});
 
 	$scope.pageLoaded = function() {
 
-		var inspiration_id = $location.search().inspiration_id;
+		var inspiration_id = $location.hash();
 		if (inspiration_id) {
 			$scope.loadInspiration(inspiration_id);
 		}
@@ -245,16 +240,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.openInspirationModal = function(inspiration) {
 
-		if (history.pushState) {
+		$location.hash(inspiration.id);
 
-			$location.search('inspiration_id', inspiration.id);
+		$('#inspiration-modal #comments-container').attr('data-url', $location.absUrl());
 
-			$('#inspiration-modal #comments-container').attr('data-url', $location.url());
+		$scope.fetchComments($location.absUrl());
 
-			$scope.fetchComments($location.url());
-
-			$('#inspiration-modal').modal('show');
-		}
+		$('#inspiration-modal').modal('show');
 
 		$scope.selected_inspiration = inspiration;
 
