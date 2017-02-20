@@ -165,17 +165,19 @@
 							</ul>
 						</div>
 
-						<img ng-show="inspiration.type == 'photo'" class="photo-tile-image" src="https://s3.amazonaws.com/xmovement/uploads/images/large/<% inspiration.content %>"></img>
+						<img ng-if="inspiration.type == 'photo'" class="photo-tile-image" ng-src="<% inspiration.content.indexOf('http') == 0) ? inspiration.content : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content %>"></img>
 
-						<div ng-show="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
+						https://s3.amazonaws.com/xmovement/uploads/images/medium/<% inspiration.content %>
+
+						<div ng-if="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
 							<i class="fa fa-play"></i>
 						</div>
 
-						<div ng-show="inspiration.type == 'file'" class="file-tile-icon">
+						<div ng-if="inspiration.type == 'file'" class="file-tile-icon">
 							<i class="fa fa-file-text-o"></i>
 						</div>
 
-						<div ng-show="inspiration.type == 'link'" class="link-tile-icon">
+						<div ng-if="inspiration.type == 'link'" class="link-tile-icon">
 							<i class="fa fa-link"></i>
 						</div>
 
