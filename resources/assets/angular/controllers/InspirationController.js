@@ -39,10 +39,10 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		$scope.selected_inspiration = {};
 
 		if (history.pushState) {
-		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-		    window.history.pushState({path:newurl},'',newurl);
 
-			$scope.fetchComments(newurl);
+			$location.search('');
+
+			$scope.fetchComments($location.url());
 		}
 	});
 
@@ -246,12 +246,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.openInspirationModal = function(inspiration) {
 
 		if (history.pushState) {
-		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?inspiration_id=' + inspiration.id;
-		    window.history.pushState({path: newurl}, '', newurl);
 
-			$('#inspiration-modal #comments-container').attr('data-url', newurl);
+			$location.search('inspiration_id', inspiration.id);
 
-			// $scope.fetchComments(newurl);
+			$('#inspiration-modal #comments-container').attr('data-url', $location.url());
+
+			$scope.fetchComments($location.url());
+
 			$('#inspiration-modal').modal('show');
 		}
 

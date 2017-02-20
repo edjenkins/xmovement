@@ -33,6 +33,10 @@ elixir(function(mix) {
 		'./bower_components/animate.css/animate.min.css'
 	], 'public/css/vendor.css');
 
+	mix.styles([
+		'./resources/assets/vendor/dropzone/dropzone.css'
+	], 'public/css/dropzone/dropzone.css');
+
 	mix.scripts([
 		'./bower_components/angular/angular.js',
 		'./bower_components/angular-moment/angular-moment.js',
