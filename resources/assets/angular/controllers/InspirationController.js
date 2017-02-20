@@ -251,12 +251,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			$('#inspiration-modal #comments-container').attr('data-url', newurl);
 
-			$scope.fetchComments(newurl);
+			// $scope.fetchComments(newurl);
+			$('#inspiration-modal').modal('show');
 		}
 
 		$scope.selected_inspiration = inspiration;
 
-		$('#inspiration-modal').modal('show')
+		$('#inspiration-modal').modal('show');
 	}
 
 	$scope.setIframeUrl = function(url) {
