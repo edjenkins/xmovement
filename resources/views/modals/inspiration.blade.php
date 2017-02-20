@@ -29,7 +29,7 @@
 				</div>
 
 				<div ng-show="selected_inspiration.type == 'photo'" class="photo-preview-wrapper">
-					<img style="width:100%" ng-src="<% (selected_inspiration.content.indexOf('http') == 0) ? selected_inspiration.content : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + selected_inspiration.content %>"></img>
+					<img style="width:100%" src="<% (selected_inspiration.content.indexOf('http') == 0) ? selected_inspiration.content : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + selected_inspiration.content %>"></img>
 				</div>
 
 				<div ng-show="selected_inspiration.type == 'file'" class="file-preview-wrapper">

@@ -165,7 +165,7 @@
 							</ul>
 						</div>
 
-						<img ng-if="inspiration.type == 'photo'" class="photo-tile-image" ng-src="<% (inspiration.content.indexOf('http') == 0) ? inspiration.content : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content %>"></img>
+						<img ng-if="inspiration.type == 'photo'" class="photo-tile-image" src="<% (inspiration.content.indexOf('http') == 0) ? inspiration.content : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content %>"></img>
 
 						<div ng-if="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
 							<i class="fa fa-play"></i>
