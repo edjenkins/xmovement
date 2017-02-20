@@ -211,7 +211,7 @@ class InspirationController extends Controller
         if (preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $value, $matches))
         {
             // Valid youtube ID
-            return 'http://www.youtube.com/embed/' . $matches[0];
+            return 'https://www.youtube.com/embed/' . $matches[0];
         }
         else
         {

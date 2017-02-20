@@ -41,11 +41,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		$scope.selected_inspiration = {};
 
 		history.replaceState({}, document.title, ".");
-		
+
 		$scope.fetchComments($location.absUrl());
 	});
 
 	$scope.pageLoaded = function() {
+
+		console.log('pageLoaded');
 
 		var inspiration_id = $location.hash();
 		if (inspiration_id) {
