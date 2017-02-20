@@ -7,7 +7,7 @@
 	<div class="page-header">
 
 	    <h2 class="main-title">{{ trans('proposals.proposals') }}</h2>
-		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
+		<h5 class="sub-title"><a target="_self" href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 	</div>
 
@@ -21,7 +21,7 @@
 
 					<li class="module-control">
 
-						<a href="{{ action('IdeaController@view', $idea) }}">
+						<a target="_self" href="{{ action('IdeaController@view', $idea) }}">
 
 	    					<i class="fa fa-chevron-left"></i>
 
@@ -33,7 +33,7 @@
 
 					<li class="module-control hidden-xs">
 
-						<a href="{{ action('DesignController@dashboard', $idea) }}">
+						<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}">
 
 	    					{{ trans('design.design_dashboard') }}
 
@@ -49,7 +49,7 @@
 
 						<li class="module-control">
 
-							<a href="{{ action('ProposeController@add', $idea) }}">
+							<a target="_self" href="{{ action('ProposeController@add', $idea) }}">
 
 		    					<i class="fa fa-plus"></i>
 
@@ -77,7 +77,7 @@
 
 			@can('add_proposal', $idea)
 
-				<a href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
+				<a target="_self" href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
 					{{ trans('proposals.add_proposal') }}
 				</a>
 

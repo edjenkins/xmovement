@@ -39,14 +39,14 @@
 					@endif
 				@endforeach
 
-                <li><a href="{{ action('PageController@about') }}">{{ trans('navbar.about') }}</a></li>
+                <li><a target="_self" href="{{ action('PageController@about') }}">{{ trans('navbar.about') }}</a></li>
 
                 @if (Auth::guest())
                     <li><a target="_self" href="{{ action('Auth\AuthController@showLoginForm') }}">{{ trans('navbar.login') }}</a></li>
                     <li><a target="_self" href="{{ action('Auth\AuthController@showRegistrationForm') }}">{{ trans('navbar.register') }}</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a target="_self" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
@@ -64,7 +64,7 @@
 							@can('manage_admins', Auth::user())
 								<li><a target="_self" href="{{ action('AdminController@manageAdmins') }}"></i>{{ trans('navbar.manage_admins') }}</a></li>
 							@endcan
-							<li><a href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
+							<li><a target="_self" href="{{ action('Auth\AuthController@logout') }}"></i>{{ trans('navbar.logout') }}</a></li>
                         </ul>
                     </li>
                 @endif

@@ -19,7 +19,7 @@
 
     					<li class="module-control">
 
-    						<a href="{{ action('DesignController@dashboard', $idea) }}">
+    						<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}">
 
 		    					<i class="fa fa-chevron-left"></i>
 

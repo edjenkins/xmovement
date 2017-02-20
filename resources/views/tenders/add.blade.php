@@ -7,7 +7,7 @@
 		<div class="page-header">
 
 		    <h2 class="main-title">{{ trans('tenders.submit_tender') }}</h2>
-			<h5 class="sub-title"><a href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
+			<h5 class="sub-title"><a target="_self" href="{{ action('IdeaController@view', $idea) }}">{{ $idea->name }}</a></h5>
 
 		</div>
 
@@ -21,7 +21,7 @@
 
 						<li class="module-control">
 
-							<a href="{{ action('IdeaController@view', $idea) }}">
+							<a target="_self" href="{{ action('IdeaController@view', $idea) }}">
 
 		    					<i class="fa fa-chevron-left"></i>
 
@@ -55,7 +55,7 @@
 							<p>
 								If you have any questions about the tender process, need help writing your tender or want to know what should be included please contact us below.
 							</p>
-							<a href="{{ action('PageController@contact') }}">
+							<a target="_self" href="{{ action('PageController@contact') }}">
 								<button class="btn" type="button" name="button">Contact Us</button>
 							</a>
 						</div>

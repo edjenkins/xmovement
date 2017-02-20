@@ -2,7 +2,7 @@
 
 <li class="contribution-submission-item" data-contribution-type-id="{{ $contributionSubmission->contributionAvailableType->id }}">
 
-	<a href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('{{ ResourceImage::getProfileImage($contributionSubmission->user, 'small') }}')"></a>
+	<a target="_self" href="{{ action('UserController@profile', $contributionSubmission->user) }}" title="{{ $contributionSubmission->user['name'] }}" class="contribution-submission-user" style="background-image: url('{{ ResourceImage::getProfileImage($contributionSubmission->user, 'small') }}')"></a>
 
 	<div class="contribution-submission-value">
 
@@ -11,7 +11,7 @@
 		<?php if ($contributionSubmission->contributionAvailableType->id == '1') { ?>
 
 			<h5>{{ $value->text }}</h5>
-			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
+			<p class="author-subtitle"> by <a target="_self" href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
 
 		<?php } ?>
 
@@ -19,9 +19,9 @@
 
 
 			<h5>{{ $value->description }}</h5>
-			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
+			<p class="author-subtitle"> by <a target="_self" href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
 
-			<a href="{{ ResourceImage::getImage($value->image, 'large') }}" target="_blank">
+			<a target="_blank" href="{{ ResourceImage::getImage($value->image, 'large') }}">
 				<img src="{{ ResourceImage::getImage($value->image, 'small') }}"/>
 			</a>
 
@@ -31,7 +31,7 @@
 
 
 			<h5>{{ $value->description }}</h5>
-			<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
+			<p class="author-subtitle"> by <a target="_self" href="{{ action('UserController@profile', $contributionSubmission['user']) }}">{{ $contributionSubmission['user']['name'] }}</a></p>
 
 			<div class="video-wrapper">
 				<div class="video-container">
@@ -79,7 +79,7 @@
 					<i class="fa {{ $class }}" aria-hidden="true"></i>
 				</div>
 				<div class="file-name">
-					<a href="{{ ResourceImage::getFile($value->file) }}" target="_blank">{{ $value->file }}</a>
+					<a target="_blank" href="{{ ResourceImage::getFile($value->file) }}">{{ $value->file }}</a>
 				</div>
 			</div>
 

@@ -5,7 +5,7 @@
 
 			<div class="section-header">
 				<h2>{{ trans('idea.tenders') }}</h2>
-				<a href="{{ action('TenderController@index', $idea) }}">{{ trans('idea.view_all_tenders') }}</a>
+				<a target="_self" href="{{ action('TenderController@index', $idea) }}">{{ trans('idea.view_all_tenders') }}</a>
 			</div>
 
 			<div class="tenders-wrapper">
@@ -24,11 +24,11 @@
 
 					<div class="idea-section padded first-to-add">
 						@can('submit_tender', $idea)
-							<a href="{{ action('TenderController@add', $idea) }}">
+							<a target="_self" href="{{ action('TenderController@add', $idea) }}">
 								{{ trans('idea.first_to_submit_tender') }}
 							</a>
 						@else
-							<a href="{{ action('TenderController@index', $idea) }}">
+							<a target="_self" href="{{ action('TenderController@index', $idea) }}">
 								{{ trans('idea.no_tenders_added_yet') }}
 							</a>
 						@endcan

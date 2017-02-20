@@ -10,8 +10,8 @@
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#search" aria-controls="search" role="tab" data-toggle="tab">{{ trans('dropzone.search') }}</a></li>
-	<li role="presentation"><a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">{{ trans('dropzone.upload') }}</a></li>
+	<li role="presentation" class="active"><a target="_self" href="#search" aria-controls="search" role="tab" data-toggle="tab">{{ trans('dropzone.search') }}</a></li>
+	<li role="presentation"><a target="_self" href="#upload" aria-controls="upload" role="tab" data-toggle="tab">{{ trans('dropzone.upload') }}</a></li>
 </ul>
 
 @endif

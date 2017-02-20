@@ -1,9 +1,9 @@
 <li class="comment" id="comment-{{ $comment->id }}">
 
-	<a href="{{ action('UserController@profile', $comment->user) }}" class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($comment->user, 'medium') }}')"></a>
+	<a target="_self" href="{{ action('UserController@profile', $comment->user) }}" class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($comment->user, 'medium') }}')"></a>
 
 	<p class="comment-header">
-		<a href="{{ action('UserController@profile', $comment->user) }}">
+		<a target="_self" href="{{ action('UserController@profile', $comment->user) }}">
 			{{ $comment->user->name }}
 		</a>
 

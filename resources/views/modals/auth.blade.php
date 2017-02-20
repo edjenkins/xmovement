@@ -8,8 +8,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
 				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="{{ ((Session::pull('auth_type') or 'register') == 'register') ? 'active' : '' }}" id="register-tab"><a href="#register-panel" aria-controls="register-panel" role="tab" data-toggle="tab">{{ trans('auth.register') }}</a></li>
-					<li role="presentation" class="{{ ((Session::pull('auth_type') or '') == 'login') ? 'active' : '' }}" id="login-tab"><a href="#login-panel" aria-controls="login-panel" role="tab" data-toggle="tab">{{ trans('auth.login') }}</a></li>
+					<li role="presentation" class="{{ ((Session::pull('auth_type') or 'register') == 'register') ? 'active' : '' }}" id="register-tab"><a target="_self" href="#register-panel" aria-controls="register-panel" role="tab" data-toggle="tab">{{ trans('auth.register') }}</a></li>
+					<li role="presentation" class="{{ ((Session::pull('auth_type') or '') == 'login') ? 'active' : '' }}" id="login-tab"><a target="_self" href="#login-panel" aria-controls="login-panel" role="tab" data-toggle="tab">{{ trans('auth.login') }}</a></li>
 				</ul>
 
 			</div>

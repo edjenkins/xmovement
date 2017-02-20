@@ -21,7 +21,7 @@
 
 					@foreach($idea->supporters as $supporter)
 						<li class="supporter-list-item">
-							<a href="{{ action('UserController@profile', $supporter) }}" target="_blank">
+							<a target="_blank" href="{{ action('UserController@profile', $supporter) }}">
 								<div class="user-avatar" style="background-image:url('{{ ResourceImage::getProfileImage($supporter, 'medium') }}')"></div>
 								<div class="user-name">
 									{{ $supporter->name }}

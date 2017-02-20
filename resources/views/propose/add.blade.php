@@ -29,7 +29,7 @@
 						{{ trans('proposals.step_three') }}
 					</p>
 
-					<a href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">{{ trans('proposals.get_started') }}</a>
+					<a target="_self" href="{{ action('ProposeController@tasks', ['idea' => $idea]) }}" class="btn btn-primary">{{ trans('proposals.get_started') }}</a>
 
 					<br />
 

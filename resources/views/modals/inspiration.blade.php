@@ -34,12 +34,12 @@
 
 				<div ng-show="selected_inspiration.type == 'file'" class="file-preview-wrapper">
 					<i class="fa fa-file-text-o"></i>
-					<a href="https://s3.amazonaws.com/xmovement/uploads/files/<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
+					<a target="_self" href="https://s3.amazonaws.com/xmovement/uploads/files/<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
 				</div>
 
 				<div ng-show="selected_inspiration.type == 'link'" class="link-preview-wrapper">
 					<i class="fa fa-link"></i>
-					<a href="<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
+					<a target="_self" href="<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
 				</div>
 
 				<p class="inspiration-description">
@@ -52,7 +52,7 @@
 
 				<li class="pull-left author-link">
 					Shared by
-					<a href="/profile/<% selected_inspiration.user.id %>"><% selected_inspiration.user.name %></a>
+					<a target="_self" href="/profile/<% selected_inspiration.user.id %>"><% selected_inspiration.user.name %></a>
 				</li>
 
 				<li class="pull-right inspiration-action" ng-click="deleteInspiration(selected_inspiration)">

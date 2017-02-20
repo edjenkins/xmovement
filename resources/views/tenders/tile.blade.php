@@ -36,7 +36,7 @@
 				{{ count($tender->updates) }} Updates
 			</li>
 			<li>
-				<a href="{{ action('TenderController@view', $tender) }}">View Tender</a>
+				<a target="_self" href="{{ action('TenderController@view', $tender) }}">View Tender</a>
 			</li>
 		</ul>
 

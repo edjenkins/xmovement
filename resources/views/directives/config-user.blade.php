@@ -1,5 +1,5 @@
 <td>
-	<a href="/profile/<% user.id %>" target="_blank"><% user.name %></a>
+	<a target="_blank" href="/profile/<% user.id %>"><% user.name %></a>
 </td>
 
 <td ng-class="{'state-enabled':user.super_admin, 'state-disabled':!user.super_admin}" class="state-table-cell">

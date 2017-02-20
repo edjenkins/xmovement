@@ -12,7 +12,7 @@
 		</div>
 	</div>
 
-	<a href="{{ action('IdeaController@view', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->support_percentage() }}%)">
+	<a target="_self" href="{{ action('IdeaController@view', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->support_percentage() }}%)">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				{{ trans('idea.progress_support') }}
@@ -20,7 +20,7 @@
 		</div>
 	</a>
 
-	<a href="{{ action('DesignController@dashboard', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->design_percentage() }}%)">
+	<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->design_percentage() }}%)">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				{{ trans('idea.progress_design') }}
@@ -28,7 +28,7 @@
 		</div>
 	</a>
 
-	<a href="{{ action('ProposeController@index', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->proposal_percentage() }}%)">
+	<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->proposal_percentage() }}%)">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				{{ trans('idea.progress_propose') }}
@@ -36,7 +36,7 @@
 		</div>
 	</a>
 
-	<a href="{{ action('TenderController@index', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->tender_percentage() }}%)">
+	<a target="_self" href="{{ action('TenderController@index', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(3px + {{ $idea->tender_percentage() }}%)">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				{{ trans('idea.progress_tender') }}

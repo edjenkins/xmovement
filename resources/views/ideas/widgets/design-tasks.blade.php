@@ -4,7 +4,7 @@
 
 		<div class="section-header">
 			<h2>{{ trans('idea.design_tasks') }}</h2>
-			<a href="{{ action('DesignController@dashboard', $idea) }}">{{ trans('idea.view_all_design_tasks') }}</a>
+			<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}">{{ trans('idea.view_all_design_tasks') }}</a>
 		</div>
 
 		<div class="design-tasks-wrapper">
@@ -23,11 +23,11 @@
 
 				<div class="idea-section padded first-to-add">
 					@can('contribute', $idea)
-						<a href="{{ action('DesignController@add', $idea) }}">
+						<a target="_self" href="{{ action('DesignController@add', $idea) }}">
 							{{ trans('idea.first_to_add_design_task') }}
 						</a>
 					@else
-						<a href="{{ action('DesignController@dashboard', $idea) }}">
+						<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}">
 							{{ trans('idea.no_design_tasks_added_yet') }}
 						</a>
 					@endcan

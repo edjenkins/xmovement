@@ -91,7 +91,7 @@
 							    <% idea.name | cut:true:50:'...' %>
 							</a>
 							<p class="idea-author">
-								{{ trans('idea.posted_by') }} <a href="/profile/<% idea.user.id %>"><% idea.user.name %></a>
+								{{ trans('idea.posted_by') }} <a target="_self" href="/profile/<% idea.user.id %>"><% idea.user.name %></a>
 							</p>
 							<p class="idea-description">
 								<% idea.description | cut:true:100:'...' %>

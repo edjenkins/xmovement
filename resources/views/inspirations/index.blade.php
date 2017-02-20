@@ -139,7 +139,7 @@
 								<p>
 									Please be sure to read our simple competition guidelines before getting involved.
 								</p>
-								<a href="/guidelines" target="_self"><button class="btn" type="button" name="button">Read Guidelines</button></a>
+								<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">Read Guidelines</button></a>
 							</div>
 						</div>
 

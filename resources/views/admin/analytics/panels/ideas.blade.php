@@ -24,7 +24,7 @@
 				<td colspan="<% headers.ideas.length %>" ng-show="idea.visible_detail_row == 'proposals'">
 					<ul>
 						<li ng-repeat="proposal in idea.proposals">
-							<a href="/propose/view/<% proposal.id %>" target="_blank">
+							<a target="_blank" href="/propose/view/<% proposal.id %>">
 								<% proposal.description %>
 							</a>
 						</li>
@@ -33,7 +33,7 @@
 				<td colspan="<% headers.ideas.length %>" ng-show="idea.visible_detail_row == 'comments'">
 					<ul>
 						<li ng-repeat="comment in idea.comments">
-							<a href="<% comment.url %>" target="_blank">
+							<a target="_blank" href="<% comment.url %>">
 								<% comment.text %>
 							</a>
 						</li>
@@ -42,7 +42,7 @@
 				<td colspan="<% headers.ideas.length %>" ng-show="idea.visible_detail_row == 'design_tasks'">
 					<ul>
 						<li ng-repeat="design_task in idea.design_tasks">
-							<a href="/design/<% design_task.xmovement_task_type.toLowerCase() %>/<% design_task.id %>">
+							<a target="_self" href="/design/<% design_task.xmovement_task_type.toLowerCase() %>/<% design_task.id %>">
 								<% design_task.name %>
 							</a>
 						</li>

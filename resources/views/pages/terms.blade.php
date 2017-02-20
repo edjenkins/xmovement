@@ -131,9 +131,9 @@
 
 					<p><strong>Changes to this Privacy Policy:</strong> We reserve the right, at our discretion, to change, modify, add, or remove portions from this Privacy Policy at any time. Your continued use of the Site following the posting of any changes to this Privacy Policy means you accept and consent to such changes.</p>
 
-					<p><strong>Opt-Out Process:</strong> If you do not want to receive email communications (including email digests) from us in the future, please send an email to us at <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">{{ env('APP_CONTACT_EMAIL') }}</a> requesting to be removed from our mailing list. You will also have the option of clicking on a link included in email correspondence you receive from us in order to remove yourself from our mailing list.</p>
+					<p><strong>Opt-Out Process:</strong> If you do not want to receive email communications (including email digests) from us in the future, please send an email to us at <a target="_self" href="mailto:{{ env('APP_CONTACT_EMAIL') }}">{{ env('APP_CONTACT_EMAIL') }}</a> requesting to be removed from our mailing list. You will also have the option of clicking on a link included in email correspondence you receive from us in order to remove yourself from our mailing list.</p>
 
-					<p>If you do not want to want to receive our newsletters in the future, please send an email to us at <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">{{ env('APP_CONTACT_EMAIL') }}</a> requesting to be removed from our mailing list. You will also have the option of clicking on a link included in the newsletters you receive from us in order to remove yourself from our mailing list.</p>
+					<p>If you do not want to want to receive our newsletters in the future, please send an email to us at <a target="_self" href="mailto:{{ env('APP_CONTACT_EMAIL') }}">{{ env('APP_CONTACT_EMAIL') }}</a> requesting to be removed from our mailing list. You will also have the option of clicking on a link included in the newsletters you receive from us in order to remove yourself from our mailing list.</p>
 
 					<p>We are not, however, responsible for removing your personal information from the lists of any third party who has previously been provided your information in accordance with this Privacy Policy or your consent, such as a sponsor. You should contact such third parties directly if you wish to have your personal information removed from their lists.</p>
 
@@ -147,7 +147,7 @@
 
 					<p><strong>Transfers of Personal Data Outside the EEA:</strong> The personal data that we collect from you may be transferred to, and stored at, a destination outside the European Economic Area ("EEA"). It may also be processed by staff operating outside the EEA who work for us or for one of our suppliers. By submitting your personal data, you agree to this transfer, storing or processing. We will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this privacy policy.</p>
 
-					<p><strong>Contact:</strong> For questions or concerns relating to privacy, we can be contacted at: <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">{{ env('APP_CONTACT_EMAIL') }}</a>.</p>
+					<p><strong>Contact:</strong> For questions or concerns relating to privacy, we can be contacted at: <a target="_self" href="mailto:{{ env('APP_CONTACT_EMAIL') }}">{{ env('APP_CONTACT_EMAIL') }}</a>.</p>
 
 					<p><strong>EFFECTIVE DATE.</strong> This Privacy Policy was last updated on 28th July 2016.</p>
 

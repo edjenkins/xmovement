@@ -7,7 +7,7 @@
 	<div class="page-header">
 
         <h2 class="main-title">{{ trans('proposals.proposal') }}</h2>
-		<h5 class="sub-title"><a href="{{ action('IdeaController@view', $proposal->idea) }}">{{ $proposal->idea->name }}</a></h5>
+		<h5 class="sub-title"><a target="_self" href="{{ action('IdeaController@view', $proposal->idea) }}">{{ $proposal->idea->name }}</a></h5>
 
 	</div>
 
@@ -21,7 +21,7 @@
 
 					<li class="module-control">
 
-						<a href="{{ action('ProposeController@index', $proposal->idea) }}">
+						<a target="_self" href="{{ action('ProposeController@index', $proposal->idea) }}">
 
 							<i class="fa fa-chevron-left"></i>
 
@@ -72,7 +72,7 @@
 				<ul class="proposal-preview">
 
 					<li class="proposal-item user-header">
-						<a href="{{ action('UserController@profile', $proposal->user) }}" class="avatar-wrapper">
+						<a target="_self" href="{{ action('UserController@profile', $proposal->user) }}" class="avatar-wrapper">
 							<div class="avatar" style="background-image: url('{{ ResourceImage::getProfileImage($proposal->user, 'small') }}')"></div>
 						</a>
 						<br>
@@ -88,7 +88,7 @@
 
 							<li class="proposal-item">
 
-								<a href="{{ $proposal_item->design_task->getLink() }}" target="_blank">
+								<a target="_blank" href="{{ $proposal_item->design_task->getLink() }}">
 									<i class="fa fa-external-link"></i>
 								</a>
 
@@ -150,7 +150,7 @@
 				</ul>
 
 				<div class="clearfloat"></div>
-				
+
 				<div class="comments-section">
 
 					@include('discussion')

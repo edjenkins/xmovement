@@ -22,19 +22,19 @@
 
 		@can('design', $idea)
 
-			<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
+			<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
 
 		@else
 
 			@if ($idea->design_state == 'locked')
 
-				<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
+				<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.design_dashboard') }}</a>
 
 			@endif
 
 			@can('design_after_support', $idea)
 
-				<a href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button temp-design-button">{{ trans('idea.design_dashboard') }}</a>
+				<a target="_self" href="{{ action('DesignController@dashboard', $idea) }}" class="btn btn-primary action-button temp-design-button">{{ trans('idea.design_dashboard') }}</a>
 
 			@endcan
 
@@ -42,13 +42,13 @@
 
 		@can('view_proposals', $idea)
 
-			<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
+			<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
 
 		@else
 
 			@if ($idea->design_state == 'locked')
 
-				<a href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
+				<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
 
 			@endif
 
@@ -64,7 +64,7 @@
 
 	@can('edit', $idea)
 
-		<a href="{{ action('IdeaController@edit', $idea) }}" class="btn btn-warning action-button">{{ trans('idea.edit_idea') }}</a>
+		<a target="_self" href="{{ action('IdeaController@edit', $idea) }}" class="btn btn-warning action-button">{{ trans('idea.edit_idea') }}</a>
 
 	@endcan
 

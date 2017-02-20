@@ -7,7 +7,7 @@
 		<div class="page-header">
 
 	        <h2 class="main-title">{{ trans('tenders.tender') }}</h2>
-			<h5 class="sub-title"><a href="{{ action('IdeaController@view', $tender->idea) }}">{{ $tender->idea->name }}</a></h5>
+			<h5 class="sub-title"><a target="_self" href="{{ action('IdeaController@view', $tender->idea) }}">{{ $tender->idea->name }}</a></h5>
 
 		</div>
 
@@ -21,7 +21,7 @@
 
 						<li class="module-control">
 
-							<a href="{{ action('TenderController@index', $tender->idea) }}">
+							<a target="_self" href="{{ action('TenderController@index', $tender->idea) }}">
 
 								<i class="fa fa-chevron-left"></i>
 
@@ -88,7 +88,7 @@
 							</p>
 
 							<p>
-								Contact - <a href="mailto:{{ $tender->team->email }}">{{ $tender->team->email }}</a>
+								Contact - <a target="_self" href="mailto:{{ $tender->team->email }}">{{ $tender->team->email }}</a>
 							</p>
 
 						</div>
@@ -103,7 +103,7 @@
 
 								<li class="team-member" ng-repeat="user in tender.team.users" ng-click="removeUserFromTeam(user)">
 									<div class="tender-avatar">
-										<a class="avatar-wrapper" href="/profile/<% user.id %>" target="_blank">
+										<a target="_blank" class="avatar-wrapper" href="/profile/<% user.id %>">
 											<div class="avatar" style="background-image: url('<% getProfileImage(user, 'thumb') %>')"></div>
 										</a>
 										@can('remove_user', $tender->team)
@@ -178,7 +178,7 @@
 
 						<div class="tender-preview">
 
-							<a class="pdf-preview" target="_blank" href="{{ ResourceImage::getFile($tender->document) }}">
+							<a target="_blank" class="pdf-preview" href="{{ ResourceImage::getFile($tender->document) }}">
 								<i class="fa fa-file-pdf-o"></i>
 								<h5>View PDF</h5>
 							</a>

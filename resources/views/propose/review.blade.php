@@ -60,7 +60,7 @@
 
 									<i class="fa fa-trash-o"></i>
 
-									<a href="{{ $design_task->getLink() }}" target="_blank">
+									<a target="_blank" href="{{ $design_task->getLink() }}">
 										<i class="fa fa-external-link"></i>
 									</a>
 

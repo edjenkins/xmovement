@@ -7,16 +7,16 @@
         <div class="container text-container text-left">
             <h1>{{ trans('home.tagline', ['idea' => trans_choice('common.idea', 1)]) }}</h1>
 			@if (DynamicConfig::fetchConfig('CREATION_MODE_ENABLED', true))
-	            <a href="{{ action('IdeaController@add') }}">
+	            <a target="_self" href="{{ action('IdeaController@add') }}">
 	                <button>{{ trans('home.get_started') }}</button>
 	            </a>
 			@else
 				@if (DynamicConfig::fetchConfig('INSPIRATION_MODE_ENABLED', false))
-					<a href="{{ action('InspirationController@index') }}">
+					<a target="_self" href="{{ action('InspirationController@index') }}">
 						<button>{{ trans('home.be_inspired') }}</button>
 					</a>
 				@else
-					<a href="{{ action('IdeaController@index') }}">
+					<a target="_self" href="{{ action('IdeaController@index') }}">
 						<button>{{ trans('navbar.explore') }}</button>
 					</a>
 				@endif

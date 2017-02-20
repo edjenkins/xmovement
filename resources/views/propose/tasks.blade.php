@@ -11,7 +11,7 @@
 
 	<div class="proposal-toolbar colorful">
 
-		<a href="{{ action('IdeaController@view', $idea) }}">
+		<a target="_self" href="{{ action('IdeaController@view', $idea) }}">
 			<button class="next-button pull-left">
 				{{ trans('proposals.cancel') }}
 			</button>

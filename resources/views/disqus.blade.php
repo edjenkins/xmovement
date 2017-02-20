@@ -19,4 +19,4 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+<noscript>Please enable JavaScript to view the <a target="_self" href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
