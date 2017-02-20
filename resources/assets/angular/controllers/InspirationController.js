@@ -1,4 +1,4 @@
-XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, $location, $window, InspirationService) {
+XMovement.controller('InspirationController', ['$scope', '$http', '$rootScope', '$sce', '$location', '$window', 'InspirationService', function($scope, $http, $rootScope, $sce, $location, $window, InspirationService) {
 
 	var w = angular.element($window);
 
@@ -48,7 +48,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.pageLoaded = function() {
 
-		var inspiration_id = $location.search().inspiration_id;
+		var inspiration_id = $loca]tion.search().inspiration_id;
 		if (inspiration_id) {
 			$scope.loadInspiration(inspiration_id);
 		}
@@ -90,7 +90,9 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			if (response.meta.success)
 			{
-				$scope.openInspirationModal(response.data.inspiration);
+				setTimeout(function() {
+					$scope.openInspirationModal(response.data.inspiration);
+				}, 2000);
 			}
 			else
 			{
@@ -288,4 +290,4 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.loadInspirations('popular');
 	$scope.pageLoaded();
 
-});
+}]);
