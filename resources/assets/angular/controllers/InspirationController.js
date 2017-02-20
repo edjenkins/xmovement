@@ -35,9 +35,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	}
 
 	$('#inspiration-modal').on('hide.bs.modal', function (e) {
+
+		console.log('Hiding inspiration modal');
+
 		$scope.selected_inspiration = {};
 
-		$location.hash('');
+		history.replaceState({}, document.title, ".");
+		
 		$scope.fetchComments($location.absUrl());
 	});
 
