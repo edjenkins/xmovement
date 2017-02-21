@@ -30,7 +30,7 @@ class DynamicConfig {
 
 	public function fetchConfig($key, $default = null)
 	{
-		$config = Config::where(['key' => $key])->first();
+		$config = Config::where(['key' => $key])->remember(60)->first();
 
 		if (!$config)
 		{

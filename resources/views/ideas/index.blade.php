@@ -18,14 +18,6 @@
 
 	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false) ? 'shortlist' : 'popular' }}'">
 
-						@if(DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false))
-							<li class="module-control" ng-click="setSortType('shortlist')" ng-class="{'active':sort_type == 'shortlist'}">
-
-								<button type="button">{{ trans('idea.sort_shortlist') }}</button>
-
-		    				</li>
-						@endif
-
 						<li class="module-control" ng-click="setSortType('popular')" ng-class="{'active':sort_type == 'popular'}">
 
 							<button type="button">{{ trans('idea.sort_popular') }}</button>
@@ -37,6 +29,14 @@
 							<button type="button">{{ trans('idea.sort_recent') }}</button>
 
 	    				</li>
+
+						@if(DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false))
+							<li class="module-control" ng-click="setSortType('shortlist')" ng-class="{'active':sort_type == 'shortlist'}">
+
+								<button type="button">{{ trans('idea.sort_shortlist') }}</button>
+
+		    				</li>
+						@endif
 
 	    			</ul>
 
