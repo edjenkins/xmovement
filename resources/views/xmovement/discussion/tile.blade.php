@@ -1,6 +1,6 @@
 <div class="xmovement-tile">
 
-    <a href="/design/discussion/{{ $design_task['id'] }}">
+    <a target="_self" href="/design/discussion/{{ $design_task['id'] }}">
     	<div class="tile-body">
 
 		    <span class="vertically-aligned-text">

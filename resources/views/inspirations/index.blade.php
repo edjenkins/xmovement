@@ -12,7 +12,7 @@
 
 		<div class="white-controls-row">
 
-			<div class="container inspirations-container">
+			<div class="container inspirations-container" ng-cloak>
 
 				<div class="view-controls-container">
 

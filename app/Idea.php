@@ -314,6 +314,10 @@ class Idea extends Model
 
 		$process_start_date = ($progression_type == 'fixed') ? strtotime(DynamicConfig::fetchConfig('PROCESS_START_DATE')) : strtotime($this->created_at);
 
+		$inspiration_phase = json_decode(DynamicConfig::fetchConfig('INSPIRATION_PHASE'));
+		$inspiration_start = Carbon::createFromTimestamp(strtotime("+" . $inspiration_phase->start . " days", $process_start_date));
+		$inspiration_end = Carbon::createFromTimestamp(strtotime("+" . $inspiration_phase->end . " days", $process_start_date));
+
 		$support_phase = json_decode(DynamicConfig::fetchConfig('SUPPORT_PHASE'));
 		$support_start = Carbon::createFromTimestamp(strtotime("+" . $support_phase->start . " days", $process_start_date));
 		$support_end = Carbon::createFromTimestamp(strtotime("+" . $support_phase->end . " days", $process_start_date));
@@ -331,6 +335,15 @@ class Idea extends Model
 		$tender_end = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->end . " days", $process_start_date));
 
 		switch ($phase) {
+			case 'inspiration':
+
+				switch ($point) {
+					case 'start': return $inspiration_start; break;
+					case 'duration': return $inspiration_duration; break;
+					case 'end': return $inspiration_end; break;
+				}
+				break;
+
 			case 'support':
 
 				switch ($point) {
@@ -369,44 +382,54 @@ class Idea extends Model
 		}
 	}
 
+	public function process_end()
+	{
+		$final_phase = (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? json_decode(DynamicConfig::fetchConfig('TENDER_PHASE')) : json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
+
+		return $final_phase->end;
+	}
+
 	public function progress_percentage()
 	{
-		$start = Carbon::now()->diffInHours(Carbon::parse($this->timescales('support', 'start')), false);
-		$end = Carbon::now()->diffInHours(Carbon::parse($this->timescales('tender', 'end')), false);
+		$start = (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false)) ? $this->timescales('inspiration', 'start') : $this->timescales('support', 'start');
 
-		$duration = $this->timescales('support', 'start')->diffInHours(Carbon::parse($this->timescales('tender', 'end')));
+		$end = (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? $this->timescales('tender', 'end') : $this->timescales('proposal', 'end');
 
-		$progress = ((($duration - $end) / $duration) * 100);
+		$duration = Carbon::parse($start)->diffInHours($end);
+
+		$progress = ((($duration - Carbon::now()->diffInHours($end)) / $duration) * 100);
 
 		return ($progress > 100) ? 100 : $progress;
 	}
 
+	public function inspiration_percentage()
+	{
+		$phase = json_decode(DynamicConfig::fetchConfig('INSPIRATION_PHASE'));
+		return ($phase->start / $this->process_end()) * 100;
+	}
+
 	public function support_percentage()
 	{
-		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
 		$phase = json_decode(DynamicConfig::fetchConfig('SUPPORT_PHASE'));
-		return ($phase->start / $tender_phase->end) * 100;
+		return ($phase->start / $this->process_end()) * 100;
 	}
 
 	public function design_percentage()
 	{
-		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
 		$phase = json_decode(DynamicConfig::fetchConfig('DESIGN_PHASE'));
-		return ($phase->start / $tender_phase->end) * 100;
+		return ($phase->start / $this->process_end()) * 100;
 	}
 
 	public function proposal_percentage()
 	{
-		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
 		$phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
-		return ($phase->start / $tender_phase->end) * 100;
+		return ($phase->start / $this->process_end()) * 100;
 	}
 
 	public function tender_percentage()
 	{
-		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
 		$phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
-		return ($phase->start / $tender_phase->end) * 100;
+		return ($phase->start / $this->process_end()) * 100;
 	}
 
 }
