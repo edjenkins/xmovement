@@ -16,7 +16,7 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ true ? 'shortlist' : 'popular' }}'">
+	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false) ? 'shortlist' : 'popular' }}'">
 
 						<li class="module-control" ng-click="setSortType('popular')" ng-class="{'active':sort_type == 'popular'}">
 
@@ -64,7 +64,7 @@
 
 		<div class="container">
 
-			<div class="shortlist-info-box" ng-show="sort_type == 'shortlist'">
+			<div class="shortlist-info-box" ng-cloak ng-show="sort_type == 'shortlist'">
 				<p>
 					{{ trans('idea.shortlist_message') }}
 				</p>
@@ -72,7 +72,7 @@
 
 		</div>
 
-	    <div class="container ideas-container">
+	    <div class="container ideas-container" ng-cloak>
 
 	        <div class="row">
 
