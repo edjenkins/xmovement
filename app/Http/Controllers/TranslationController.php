@@ -35,7 +35,7 @@ class TranslationController extends Controller
 
         $this->manager = $manager;
     }
-
+	
 	public function api_index(Request $request)
 	{
 		$response = new ResponseObject();
