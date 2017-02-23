@@ -2,11 +2,11 @@
 
 <li class="proposal-item">
 
-	<a target="_self" href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('{{ ResourceImage::getProfileImage($pollOption->user, 'small') }}')"></a>
+	<a href="{{ action('UserController@profile', $pollOption->user) }}" title="{{ $pollOption->user['name'] }}" class="poll-option-user" style="background-image: url('{{ ResourceImage::getProfileImage($pollOption->user, 'small') }}')"></a>
 
 	<div class="poll-option-value">
 		<h5>{{ $pollOption['value'] }}</h5>
-		<p class="author-subtitle"> by <a target="_self" href="{{ action('UserController@profile', $pollOption['user']) }}">{{ $pollOption['user']['name'] }}</a></p>
+		<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $pollOption['user']) }}">{{ $pollOption['user']['name'] }}</a></p>
 	</div>
 
 	<div class="vote-container poll-option-vote-container {{ ($pollOption->voteCount() == 0) ? '' : (($pollOption->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">

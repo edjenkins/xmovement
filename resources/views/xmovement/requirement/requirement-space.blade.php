@@ -34,7 +34,7 @@
 							<a class="withdraw-from-requirement" href="#">{{ trans('xmovement_requirement.you_filled_this_requirement') }}</a>
 							<span class="not-filled-temp" style="display: none">{{ trans('xmovement_requirement.requirement_not_filled') }}</span>
 						@else
-							<a target="_self" href="{{ action('UserController@profile', $requirementFilled->user) }}">{{ $requirementFilled->user->name }}</a>
+							<a href="{{ action('UserController@profile', $requirementFilled->user) }}">{{ $requirementFilled->user->name }}</a>
 							<span class="not-filled-temp" style="display: none">{{ trans('xmovement_requirement.requirement_not_filled') }}</span>
 						@endif
 					@else

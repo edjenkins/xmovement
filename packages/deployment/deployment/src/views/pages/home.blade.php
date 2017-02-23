@@ -69,17 +69,6 @@
 
 	</div>
 
-	<div class="container-fluid info-container">
-		<div class="container">
-			<div class="info-banner">
-				<h3>Our Mission</h3>
-				<p>
-					Launchspot gives your ideas life. Whether you’re someone with an idea or a developer looking to work with communities to make an impact, Launchspot is an iterative, collaborative co-design platform which helps communities to make their ideas concrete and ready for further funding and development.
-				</p>
-			</div>
-		</div>
-	</div>
-
 	@if(count($ideas) > 0)
 	    <div class="container-fluid featured-ideas-container">
 	        <div class="container">

@@ -70,7 +70,7 @@
 				<i class="fa {{ $class }}" aria-hidden="true"></i>
 			</div>
 			<div class="file-name">
-				<a target="_blank" href="{{ ResourceImage::getFile($value->file) }}">{{ $value->file }}</a>
+				<a href="{{ ResourceImage::getFile($value->file) }}" target="_blank">{{ $value->file }}</a>
 			</div>
 		</div>
 

@@ -41,7 +41,7 @@
 
 	    					<li class="module-control">
 
-	    						<a target="_self" href="{{ action('DesignController@dashboard', $design_task->idea) }}">
+	    						<a href="{{ action('DesignController@dashboard', $design_task->idea) }}">
 
 			    					<i class="fa fa-chevron-left"></i>
 
@@ -88,7 +88,7 @@
 	    		<div class="column main-column">
 
 	    			<div class="module-description">
-	    				<a target="_self" href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('{{ ResourceImage::getProfileImage($design_task->user, 'small') }}')"></a>
+	    				<a href="{{ action('UserController@profile', $design_task->user) }}" title="{{ $design_task->user->name }}" class="module-description-user" style="background-image: url('{{ ResourceImage::getProfileImage($design_task->user, 'small') }}')"></a>
 	    				<div class="description-text">{{ $design_task['description'] }}</div>
 	    			</div>
 

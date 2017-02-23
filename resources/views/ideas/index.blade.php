@@ -16,7 +16,7 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false) ? 'shortlist' : 'popular' }}'">
+	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ true ? 'shortlist' : 'popular' }}'">
 
 						<li class="module-control" ng-click="setSortType('popular')" ng-class="{'active':sort_type == 'popular'}">
 

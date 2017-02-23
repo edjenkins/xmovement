@@ -2,11 +2,11 @@
 
 <li class="proposal-item">
 
-	<a target="_self" href="{{ action('UserController@profile', $schedulerOption->user) }}" title="{{ $schedulerOption->user['name'] }}" class="scheduler-option-user" style="background-image: url('{{ ResourceImage::getProfileImage($schedulerOption->user, 'small') }}')"></a>
+	<a href="{{ action('UserController@profile', $schedulerOption->user) }}" title="{{ $schedulerOption->user['name'] }}" class="scheduler-option-user" style="background-image: url('{{ ResourceImage::getProfileImage($schedulerOption->user, 'small') }}')"></a>
 
 	<div class="scheduler-option-value">
 		<h5>{{ $schedulerOption->getDate() }} - {{ $schedulerOption->getTime() }}</h5>
-		<p class="author-subtitle"> by <a target="_self" href="{{ action('UserController@profile', $schedulerOption['user']) }}">{{ $schedulerOption['user']['name'] }}</a></p>
+		<p class="author-subtitle"> by <a href="{{ action('UserController@profile', $schedulerOption['user']) }}">{{ $schedulerOption['user']['name'] }}</a></p>
 	</div>
 
 	<div class="vote-container scheduler-option-vote-container {{ ($schedulerOption->voteCount() == 0) ? '' : (($schedulerOption->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">

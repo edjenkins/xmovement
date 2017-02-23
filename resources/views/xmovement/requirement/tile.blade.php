@@ -1,6 +1,6 @@
 <div class="xmovement-tile">
 
-    <a target="_self" href="/design/requirement/{{ $design_task['id'] }}">
+    <a href="/design/requirement/{{ $design_task['id'] }}">
     	<div class="tile-body">
 
 		    <span class="vertically-aligned-text">

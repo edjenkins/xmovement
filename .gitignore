@@ -18,7 +18,6 @@ public/uploads/**
 bower_components/**
 
 **/.DS_Store
-resources/assets/stylus/variables.styl
 
 resources/views/deployment/*
 resources/assets/stylus/deployment/*
