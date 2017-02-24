@@ -32,8 +32,8 @@
 			font-weight 400
 		img
 			display none
-			height ($navbar-height - 30px)
-			margin 15px 10px
+			height ($navbar-height - 40px)
+			margin 20px 10px
 			@media(max-width: $grid-float-breakpoint - 1)
 				height ($navbar-height - 40px)
 				margin 20px 10px
@@ -60,19 +60,7 @@
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus
 	background-color transparent
-.dropdown-menu
-	border none
-	top auto
-	margin 0
-	overflow hidden
-	padding 0
-	li
-		background white
-		&:hover
-			background darken(#f2f2f2, 10%)
-		a
-			background #f2f2f2
-			padding 20px 40px !important
+
 .navbar-toggle
 	border none
 	height 40px
@@ -114,8 +102,6 @@ body.fade-nav.transparent
 		.navbar-nav
 			margin 0 -15px
 			padding 0 -15px
-		.navbar-nav li a
-			color #666
 		.navbar-nav > li > a
 			color white
 			line-height $navbar-height
@@ -132,6 +118,30 @@ body.fade-nav.transparent
 			&:hover
 				.icon-bar
 					background-color alpha(white, 0.8)
+
+.dropdown-menu
+	border none
+	top auto
+	margin 0
+	overflow visible
+	padding 0
+	@media(min-width: $grid-float-breakpoint)
+		&:before
+			content ''
+			top -6px
+			margin-left 100px
+			position absolute
+			border-style solid
+			border-width 0 10px 6px 10px
+			border-color main-color transparent
+
+	li a
+		background-color main-color
+		color white
+		padding 20px 30px !important
+		&:hover
+			background lighten(main-color, 10%)
+			color white
 
 @media(max-width: $grid-float-breakpoint - 1)
 	.navbar-collapse
