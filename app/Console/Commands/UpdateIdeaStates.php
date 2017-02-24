@@ -169,6 +169,11 @@ class UpdateIdeaStates extends Command
 				}
 			}
 
+			if (!DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
+			{
+				$idea->tender_state = 'closed';
+			}
+
 			// Update the idea
 			$idea->save();
 
