@@ -397,8 +397,8 @@ class Idea extends Model
 
 		$duration = Carbon::parse($start)->diffInHours($end);
 
-		$progress = ((($duration - Carbon::now()->diffInHours($end)) / $duration) * 100);
-
+		$progress = ((($duration - Carbon::now()->diffInHours($end, false)) / $duration) * 100);
+		Log::error(Carbon::now()->diffInHours($end, false));
 		return ($progress > 100) ? 100 : $progress;
 	}
 
