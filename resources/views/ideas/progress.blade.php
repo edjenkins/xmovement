@@ -33,14 +33,14 @@
 	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->design_percentage() }}%); right: calc(100% - {{ ($idea->progress_percentage() > $idea->proposal_percentage()) ? $idea->proposal_percentage() : $idea->progress_percentage() }}%);"></div>
 
 	<!-- Propose -->
-	<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? $idea->tender_percentage() : 0 }}%)">
+	<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="ipb-dot ipb-milestone-dot" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? $idea->tender_percentage() : 100 }}%)">
 		<div class="ipb-label">
 			<div class="ipb-label-text">
 				{{ trans('idea.progress_propose') }}
 			</div>
 		</div>
 	</a>
-	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ ($idea->progress_percentage() > $idea->tender_percentage()) ? $idea->tender_percentage() : $idea->progress_percentage() }}%);"></div>
+	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? (  ($idea->progress_percentage() > $idea->tender_percentage()) ? $idea->tender_percentage() : $idea->progress_percentage()  ) : 100 }}%);"></div>
 
 	<!-- Tender -->
 	@if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
