@@ -2,7 +2,7 @@
 
 	<!-- Inspiration -->
 	@if (DynamicConfig::fetchConfig('INSPIRATION_PHASE_ENABLED', false))
-		<a target="_self" href="{{ action('IdeaController@view', $idea) }}" class="ipb-dot ipb-milestone-dot" style="right: calc(100% - {{ ($idea->support_percentage()) }}%)">
+		<a target="_self" href="{{ action('InspirationController@index') }}" class="ipb-dot ipb-milestone-dot" style="right: calc(100% - {{ ($idea->support_percentage()) }}%)">
 			<div class="ipb-label">
 				<div class="ipb-label-text">
 					{{ trans('idea.progress_inspiration') }}

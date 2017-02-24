@@ -16,7 +16,7 @@
 
 				<div class="view-controls-container">
 
-	    			<ul class="module-controls pull-left" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false) ? 'shortlist' : 'popular' }}'">
+	    			<ul class="module-controls" ng-init="sort_type = '{{ DynamicConfig::fetchConfig('SHORTLIST_MODE_ENABLED', false) ? 'shortlist' : 'popular' }}'">
 
 						<li class="module-control" ng-click="setSortType('popular')" ng-class="{'active':sort_type == 'popular'}">
 
@@ -38,18 +38,13 @@
 		    				</li>
 						@endif
 
-	    			</ul>
-
-					<ul class="module-controls pull-right">
-
-						<li class="module-control search-element">
-							<div id="search-button">
+						<li class="module-control search-element pull-right" ng-class="{'open':search_open}">
+							<div class="search-bar" ng-init="idea_search_term = ''">
+								<input type="text" ng-model="idea_search_term" placeholder="{{ trans('placeholders.search_ideas') }}">
+							</div>
+							<div id="search-button" ng-click="search_open = !search_open">
 								<i class="fa fa-search"></i>
 							</div>
-						</li>
-
-						<li class="module-control search-element" ng-init="idea_search_term = ''">
-							<input type="text" ng-model="idea_search_term" placeholder="{{ trans('placeholders.search_ideas') }}">
 						</li>
 
 					</ul>

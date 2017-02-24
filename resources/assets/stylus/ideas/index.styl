@@ -1,26 +1,58 @@
 // XMStyles
 
 .ideas-container
-	margin-top 20px
+	margin-top 15px
+	@media(max-width: $screen-sm-min)
+		margin-top 0
 
 .module-control.search-element
-	input
-		border none
-		height 36px
-		line-height 36px
-		margin 12px 0
-		padding 0
-		outline 0
-		&:active
+	height 60px
+	position relative
+	width 40px
+	.search-bar
+		display none
+		input
+			border none
+			height 36px
+			line-height 36px
+			margin 12px 0
+			padding 0
 			outline 0
+			position absolute
+			right 0
+			width 150px
+			&:active
+				outline 0
 	#search-button
 		margin 10px 0
 		height 40px
 		line-height 40px
+		position absolute
+		left 0
 		text-align center
 		width 40px
 		i
 			color #CCC
+			animate()
+		&:hover
+			cursor pointer
+			i
+				color darken(#CCC, 10%)
+	&.open
+		width 190px
+		.search-bar
+			display block
+
+@media(max-width: $screen-sm-min)
+	.module-controls
+		.module-control.search-element
+			&.open
+				border-top border-color 1px solid
+				width 100%
+				.search-bar
+					display block
+					input
+						width calc(100% - 40px)
 
 .no-results
 	color #CCC

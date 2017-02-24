@@ -32,8 +32,11 @@
 			font-weight 400
 		img
 			display none
-			height ($navbar-height - 20px)
-			margin 10px
+			height ($navbar-height - 30px)
+			margin 15px 10px
+			@media(max-width: $screen-sm-min)
+				height ($navbar-height - 40px)
+				margin 20px 10px
 	a.navbar-brand .logo-color
 		display block
 
@@ -66,9 +69,10 @@
 	li
 		background white
 		&:hover
-			background #f2f2f2
+			background darken(#f2f2f2, 10%)
 		a
-			padding 15px 20px !important
+			background #f2f2f2
+			padding 20px 40px !important
 .navbar-toggle
 	border none
 	height 40px
@@ -131,8 +135,26 @@ body.fade-nav.transparent
 
 @media(max-width: $screen-sm-min)
 	.navbar-collapse
-		background-color white
-		.navbar-nav li:hover
-			background #f2f2f2
+		position fixed
+		top $navbar-height - 4px
+		left 0
+		right 0
+		overflow scroll
+		bottom 0
+		&:after
+			background-color main-color
+			content ""
+			height 4px
+			margin 0 auto
+			opacity 1
+			width 100%
+			transition(all 0.4s linear)
+		.navbar-nav
+			li
+				background white
+				&:hover
+					background #f2f2f2
 		.navbar-nav > li > a
 			color #666 !important
+			display block
+			padding 0 40px
