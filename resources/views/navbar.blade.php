@@ -48,6 +48,7 @@
                     <li class="dropdown">
                         <a target="_self" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
+							<i class="fa fa-fw fa-angle-down"></i>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">

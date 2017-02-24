@@ -128,43 +128,42 @@ body.fade-nav.transparent
 	@media(min-width: $grid-float-breakpoint)
 		&:before
 			content ''
-			top -6px
-			margin-left 100px
+			top -4px
+			right 60px
 			position absolute
 			border-style solid
-			border-width 0 10px 6px 10px
-			border-color main-color transparent
-
+			border-width 0 20px 4px 20px
+			border-color white transparent
 	li a
-		background-color main-color
-		color white
-		padding 20px 30px !important
+		background-color white
+		color #444
+		padding 18px 20px 18px 20px !important
 		&:hover
-			background lighten(main-color, 10%)
-			color white
+			background #f2f2f2
+			color #222
 
 @media(max-width: $grid-float-breakpoint - 1)
-	.navbar-collapse
-		position fixed
-		top $navbar-height - 4px
-		left 0
-		right 0
-		overflow scroll
-		bottom 0
-		&:after
-			background-color main-color
-			content ""
-			height 4px
-			margin 0 auto
-			opacity 1
-			width 100%
-			transition(all 0.4s linear)
-		.navbar-nav
-			li
-				background white
-				&:hover
-					background #f2f2f2
-		.navbar-nav > li > a
-			color #666 !important
-			display block
-			padding 0 40px
+	.navbar
+		.navbar-collapse
+			border-bottom main-color 4px solid
+			position fixed
+			top $navbar-height - 4px
+			left 0
+			right 0
+			overflow scroll
+			bottom 0
+			&:after
+				background-color white
+				content ""
+				height 4px
+				margin 0 auto
+				opacity 1
+				width 100%
+				transition(all 0.4s linear)
+		li a
+			background-color white !important
+			color #444 !important
+			line-height 70px !important
+			padding 0 40px !important
+			&:hover
+				background-color #f2f2f2 !important
