@@ -51,12 +51,9 @@ function showStep(direction)
 	}
 
     $('.idea-form').attr('data-current-step', next_step);
-    $('.form-page').removeClass('fadeInRight fadeInLeft fadeOutRight fadeOutLeft');
+    $('.form-page').removeClass('fadeIn fadeOut');
 
-	var animateIn = (direction == 'next') ? 'fadeInRight': 'fadeInLeft';
-	var animateOut = (direction == 'next') ? 'fadeOutLeft': 'fadeOutRight';
-
-	$('#form-page-' + current_step).animateCss(animateOut);
+	$('#form-page-' + current_step).animateCss('fadeOut');
 
 	setTimeout(function() {
 
@@ -66,7 +63,7 @@ function showStep(direction)
 		// Animate page transition
 		$('#form-page-' + current_step).removeClass('visible');
 		$('#form-page-' + next_step).addClass('visible');
-		$('#form-page-' + next_step).animateCss(animateIn);
+		$('#form-page-' + next_step).animateCss('fadeIn');
 
 		// Focus on first field
 		$('#form-page-' + next_step + ' input:text, #form-page-' + next_step + ' textarea').first().focus();

@@ -24,7 +24,7 @@
 		font-weight 300
 		height $navbar-height
 		line-height $navbar-height
-		padding 0 20px
+		padding 0 0 0 20px
 		transition(color 0.2s linear)
 		&:hover
 			color main-color
@@ -34,7 +34,7 @@
 			display none
 			height ($navbar-height - 30px)
 			margin 15px 10px
-			@media(max-width: $screen-sm-min)
+			@media(max-width: $grid-float-breakpoint - 1)
 				height ($navbar-height - 40px)
 				margin 20px 10px
 	a.navbar-brand .logo-color
@@ -50,7 +50,7 @@
 		font-size 14px
 		font-weight 500
 		line-height $navbar-height
-		padding 0 20px
+		padding 0 15px
 		transition(color 0.2s linear)
 		&:hover
 			background transparent
@@ -104,7 +104,7 @@ body.fade-nav.transparent
 		a.navbar-brand
 			color white
 			line-height $navbar-height
-			padding 0 20px
+			padding 0 15px
 			strong
 				color white
 			.logo-white
@@ -133,7 +133,7 @@ body.fade-nav.transparent
 				.icon-bar
 					background-color alpha(white, 0.8)
 
-@media(max-width: $screen-sm-min)
+@media(max-width: $grid-float-breakpoint - 1)
 	.navbar-collapse
 		position fixed
 		top $navbar-height - 4px
