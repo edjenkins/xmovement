@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\SupportPhaseUpdates::class,
         \App\Console\Commands\DesignPhaseUpdates::class,
         \App\Console\Commands\ProposalPhaseUpdates::class,
+		\App\Console\Commands\ImportTranslations::class,
 		\App\Console\Commands\ExportTranslations::class
     ];
 

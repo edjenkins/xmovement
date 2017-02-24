@@ -6,13 +6,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Console\Command;
 use Illuminate\Queue\SerializesModels;
 
-use App\Jobs\ExportAllTranslations;
-
 use Carbon\Carbon;
 use App\Idea;
 use Log;
 
-class ExportTranslations extends Command
+class ImportTranslations extends Command
 {
 	use SerializesModels;
 	use DispatchesJobs;
@@ -24,14 +22,14 @@ class ExportTranslations extends Command
      *
      * @var string
      */
-    protected $signature = 'translate:export';
+    protected $signature = 'translate:import';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Exports all of the translations in the database into application readable files';
+    protected $description = 'Imports all of the translations from the database';
 
 	public function __construct(\TranslateMate\Manager $manager)
 	{
@@ -47,8 +45,8 @@ class ExportTranslations extends Command
      */
     public function handle()
     {
-		$this->info('Exporting translations...');
+		$this->info('Importing translations...');
 
-		$this->manager->exportAllTranslations();
+		$this->manager->importTranslations(true);
     }
 }
