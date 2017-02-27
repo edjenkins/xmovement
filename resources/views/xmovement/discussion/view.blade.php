@@ -78,7 +78,7 @@
 
 	    			<div class="comments-section">
 
-		    			@include('discussion')
+		    			@include('discussion', ['locked' => true])
 
 		    		</div>
 

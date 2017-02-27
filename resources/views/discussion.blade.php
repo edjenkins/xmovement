@@ -1,3 +1,5 @@
+<?php $locked = isset($locked) ? $locked : false; ?>
+
 <ul id="comments-container"></ul>
 
 @if (Auth::guest())
@@ -8,11 +10,13 @@
 
 @else
 
-<div class="post-comment-container">
+	@unless($locked)
+		<div class="post-comment-container">
 
-	@include('discussion.comment-composer', ['authenticated_user' => Auth::user()])
+			@include('discussion.comment-composer', ['authenticated_user' => Auth::user()])
 
-</div>
+		</div>
+	@endunless
 
 @endif
 
