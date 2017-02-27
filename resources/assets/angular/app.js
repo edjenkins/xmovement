@@ -9,16 +9,16 @@ underscore.factory('_', function() {
 var XMovement = angular.module('XMovement', ['ngRoute', 'ngStorage', 'underscore', 'iso.directives', 'hj.imagesLoaded', 'angularMoment'], function($interpolateProvider) {
 	$interpolateProvider.startSymbol('<%');
 	$interpolateProvider.endSymbol('%>');
-})
+});
 
 XMovement.config(function($routeProvider, $locationProvider) {
 
 	// TODO: Issue causing digest infinte loop when html5 mode set to true
 	$locationProvider.html5Mode(true);
-
 });
 
-XMovement.config(function($logProvider){
+XMovement.config(function($logProvider) {
+	
     $logProvider.debugEnabled(true);
 });
 

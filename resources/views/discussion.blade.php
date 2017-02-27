@@ -1,24 +1,31 @@
-<?php $locked = isset($locked) ? $locked : false; ?>
+<?php
+$locked = isset($locked) ? $locked : false;
+$target_id = isset($target_id) ? $target_id : null;
+$target_type = isset($target_type) ? $target_type : null;
+$idea_id = isset($idea_id) ? $idea_id : null;
+?>
 
-<ul id="comments-container"></ul>
+<div class="discussion-wrapper" data-target-id="{{ $target_id }}" data-target-type="{{ $target_type }}" data-idea-id="{{ $idea_id }}">
 
-@if (Auth::guest())
+	<ul class="comments-container"></ul>
 
-<a target="_self" href="{{ action('Auth\AuthController@login') }}" class="sign-in-required">
-	{{ trans('discussion.signin') }}
-</a>
+	@if (Auth::guest())
 
-@else
+	<a target="_self" href="{{ action('Auth\AuthController@login') }}" class="sign-in-required">
+		{{ trans('discussion.signin') }}
+	</a>
 
-	@unless($locked)
+	@else
+
 		<div class="post-comment-container">
 
 			@include('discussion.comment-composer', ['authenticated_user' => Auth::user()])
 
 		</div>
-	@endunless
 
-@endif
+	@endif
+
+</div>
 
 <script type="text/javascript">
 	var current_user_id = <?php if (Auth::guest()) { echo '0'; } else { echo Auth::user()->id; } ?>;

@@ -78,7 +78,7 @@
 
 	    			<div class="comments-section">
 
-		    			@include('discussion', ['locked' => ($design_task->idea->design_state != 'open')])
+		    			@include('discussion', ['target_id' => $design_task->id, 'target_type' => 'DesignTask'])
 
 		    		</div>
 

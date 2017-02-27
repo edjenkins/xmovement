@@ -9,6 +9,8 @@
 		padding 20px
 		padding-left 80px
 		position relative
+		&.post-comment-container
+			display none
 		&.post-reply-container
 			padding-bottom 16px
 			position relative
@@ -29,7 +31,7 @@
 				background very-light-grey
 				border border-color 1px solid
 				border-radius 4px
-				bottom 28px
+				bottom 33px
 				line-height 34px
 				padding 0 20px
 				right 28px
@@ -71,7 +73,7 @@
 				button.post-comment-button
 					bottom 24px
 
-	ul#comments-container
+	ul.comments-container
 		cleanlist()
 		li.comment
 			cleanlist()
@@ -81,6 +83,8 @@
 			padding 15px 20px 15px 75px
 			position relative
 			word-break break-word
+			&:last-child
+				border-bottom none
 			.user-avatar
 				background-color border-color
 				bacground-position center

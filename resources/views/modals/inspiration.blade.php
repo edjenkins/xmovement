@@ -73,7 +73,7 @@
 
 			<div class="comments-section">
 
-				@include('discussion')
+				@include('discussion', ['target_type' => 'Inspiration'])
 
 			</div>
 

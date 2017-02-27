@@ -6,11 +6,14 @@ function startListening()
 
 	window.app = {};
 
-	var attr = $('#comments-container').attr('data-url');
+	var attr = $('.discussion-wrapper').attr('data-url');
+	var target_id = $('.discussion-wrapper').attr('data-target-id');
+	var target_type = $('.discussion-wrapper').attr('data-target-type');
+	var idea_id = $('.discussion-wrapper').attr('data-idea-id');
 
 	if (!(typeof attr !== typeof undefined && attr !== false))
 	{
-		$('#comments-container').attr('data-url', document.location);
+		$('.discussion-wrapper').attr('data-url', document.location);
 	}
 
 	app.BrainSocket = new BrainSocket(
@@ -30,7 +33,7 @@ function startListening()
 			}
 			else
 			{
-				$(msg.client.view).hide().appendTo($('#comments-container[data-url="' + msg.client.data.url + '"]')).slideDown(300);
+				$(msg.client.view).hide().appendTo($('.discussion-wrapper[data-url="' + msg.client.data.url + '"] .comments-container')).slideDown(300);
 			}
 			attachHandlers();
 		}
@@ -122,23 +125,41 @@ function fetchComments(url) {
 
 	console.log('Fetching comments for - ' + url);
 
-	$('#comments-container[data-url="' + url + '"]').html('');
+	$('.discussion-wrapper[data-url="' + url + '"] .comments-container').html('');
 
-	$.getJSON("/api/comment/view", {url: url} , function(response) {
+	var data = {
+		url: url,
+		target_id: $('.discussion-wrapper').attr('data-target-id'),
+		target_type: $('.discussion-wrapper').attr('data-target-type'),
+		idea_id: $('.discussion-wrapper').attr('data-idea-id')
+	};
 
+	$.getJSON("/api/comment/view", data, function(response) {
+
+		console.log(response);
 		if (response) {
 
-			$('#comments-container[data-url="' + url + '"]').html('');
+			$('.discussion-wrapper[data-url="' + url + '"] .comments-container').html('');
 
 			$.each(response.data.comments, function(index, comment) {
 
-				$('#comments-container[data-url="' + url + '"]').append(comment.view);
+				$('.discussion-wrapper[data-url="' + url + '"] .comments-container').append(comment.view);
 
 			})
 
 			attachHandlers();
 
 			// startListening();
+
+			// Check if locked
+			if (response.data.comment_target.locked)
+			{
+				$('.discussion-wrapper[data-url="' + url + '"] .post-comment-container').hide();
+			}
+			else
+			{
+				$('.discussion-wrapper[data-url="' + url + '"] .post-comment-container').show();
+			}
 		}
 	});
 

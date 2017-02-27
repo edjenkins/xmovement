@@ -21,6 +21,7 @@ use App\Jobs\SendUpdatePostedEmail;
 use App\Idea;
 use App\User;
 use App\Comment;
+use App\CommentTarget;
 
 class ResponseObject {
 
@@ -44,11 +45,26 @@ class CommentController extends Controller
 
 		$url = preg_replace("(^https?://)", "", $url);
 
-		$comments = Comment::where([['url', $url], ['in_reply_to_comment_id', null]])->get();
+		$comment_target = CommentTarget::where('url', $url)->first();
+
+		if (!$comment_target)
+		{
+			$comment_target = CommentTarget::create([
+	            'target_id' => $request->target_id,
+	            'target_type' => $request->target_type,
+				'idea_id' => $request->idea_id,
+				'url' => $url,
+				'locked' => false
+	        ]);
+        }
+
+		$comments = Comment::where([['comment_target_id', $comment_target->id], ['in_reply_to_comment_id', null]])->get();
 
 		$response->meta['success'] = true;
 
 		$response->data['comments'] = $comments;
+
+		$response->data['comment_target'] = $comment_target;
 
 		$authenticated_user = (Auth::user()) ? Auth::user() : null;
 

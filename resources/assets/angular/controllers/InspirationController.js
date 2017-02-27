@@ -1,4 +1,4 @@
-XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, $location, $window, InspirationService) {
+XMovement.controller('InspirationController', function($scope, $http, $rootScope, $sce, $location, $window, InspirationService, DiscussionService) {
 
 	var w = angular.element($window);
 
@@ -34,15 +34,33 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		$scope.$emit('iso-method', 'reloadItems');
 	}
 
-	$('#inspiration-modal').on('hide.bs.modal', function (e) {
+	$('#inspiration-modal').on('show.bs.modal', function (e) {
 
-		console.log('Hiding inspiration modal');
+		$('#inspiration-modal .discussion-wrapper .comments-container').html('');
+	});
 
-		$scope.selected_inspiration = {};
+	$('#inspiration-modal').on('shown.bs.modal', function (e) {
 
-		history.replaceState({}, document.title, ".");
+		$scope.$apply(function() {
 
-		$scope.fetchComments($location.absUrl());
+			$location.hash($scope.selected_inspiration.id);
+
+			$('#inspiration-modal .discussion-wrapper').attr('data-url', $location.absUrl());
+			$('#inspiration-modal .discussion-wrapper').attr('data-target-id', $scope.selected_inspiration.id);
+			$('#inspiration-modal .discussion-wrapper').attr('data-target-type', 'Inspiration');
+
+			$scope.fetchComments($location.absUrl());
+        });
+	});
+
+	$('#inspiration-modal').on('hidden.bs.modal', function (e) {
+
+		$scope.$apply(function() {
+
+			$scope.selected_inspiration = {};
+
+			$location.hash('');
+        });
 	});
 
 	$scope.pageLoaded = function() {
@@ -74,7 +92,6 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				default:
 					response.data.inspirations = response.data.inspirations;
 					break;
-
 			}
 
 			$scope.inspirations = $scope.formatInspirations(response.data.inspirations);
@@ -91,15 +108,12 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			if (response.meta.success)
 			{
-				setTimeout(function() {
-					$scope.openInspirationModal(response.data.inspiration);
-				}, 2000);
+				$scope.openInspirationModal(response.data.inspiration);
 			}
 			else
 			{
 				console.log('Request failed');
 			}
-
 		});
 	}
 
@@ -131,10 +145,10 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 				// $scope.inspirations.push($scope.formatInspiration(inspiration));
 				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
 
-				setTimeout(function() {
+				$scope.$apply(function() {
 					$scope.layoutGrid();
 					$scope.openInspirationModal(inspiration);
-				}, 2000);
+				});
 
 				// Reset form
 				$scope.new_inspiration = $scope.inspiration_form_data;
@@ -246,14 +260,6 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.openInspirationModal = function(inspiration) {
 
-		$location.hash(inspiration.id);
-
-		$('#inspiration-modal #comments-container').attr('data-url', $location.absUrl());
-
-		$scope.fetchComments($location.absUrl());
-
-		$('#inspiration-modal').modal('show');
-
 		$scope.selected_inspiration = inspiration;
 
 		$('#inspiration-modal').modal('show');
@@ -263,28 +269,36 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		return $sce.trustAsResourceUrl(url);
 	}
+
 	$scope.fetchComments = function(url) {
 
-		$('#comments-container').html('');
+		var discussion_wrapper = $('.discussion-wrapper[data-url="' + url + '"]');
+		var post_comment_container = discussion_wrapper.find('.post-comment-container');
+		var comments_container = discussion_wrapper.find('.comments-container');
 
-		$.getJSON("/api/comment/view", {url: url} , function(response) {
+		comments_container.html('');
 
-			if (response) {
+		var data = {
+			url: url,
+			target_id: discussion_wrapper.attr('data-target-id'),
+			target_type: discussion_wrapper.attr('data-target-type'),
+			idea_id: discussion_wrapper.attr('data-idea-id')
+		};
 
-				$('#comments-container').html('');
+		DiscussionService.fetchComments(data).then(function(response) {
 
-				$.each(response.data.comments, function(index, comment) {
+			comments_container.html('');
 
-					$('#comments-container').append(comment.view);
+			$.each(response.data.comments, function(index, comment) {
 
-				})
+				comments_container.append(comment.view);
+			});
 
-				attachHandlers();
+			attachHandlers();
 
-				// startListening();
-			}
+			// Hide comment input if locked
+			post_comment_container.toggle(!response.data.comment_target.locked);
 		});
-
 	}
 
 	$scope.loadInspirations('popular');

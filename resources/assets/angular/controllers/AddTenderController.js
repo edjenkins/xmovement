@@ -1,4 +1,4 @@
-XMovement.controller('AddTenderController', function($scope, $http, $rootScope, TenderService, TeamService) {
+XMovement.controller('AddTenderController', function($scope, $http, $rootScope, $location, TenderService, TeamService) {
 
 	$scope.adding_team = false;
 	$scope.selected_team = null;
@@ -37,7 +37,7 @@ XMovement.controller('AddTenderController', function($scope, $http, $rootScope, 
 		setTimeout(function() {
 
 			$('textarea').expanding();
-			
+
 		}, 500);
 	}
 

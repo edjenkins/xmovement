@@ -151,9 +151,9 @@
 
 				<div class="clearfloat"></div>
 
-				<div class="comments-section">
+				<div class="comments-section with-border">
 
-					@include('discussion')
+					@include('discussion', ['target_id' => $proposal->id, 'target_type' => 'Proposal', 'idea_id' => $proposal->idea->id])
 
 				</div>
 

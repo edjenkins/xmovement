@@ -32,7 +32,7 @@
 							@if($idea->shortlisted)
 								<a class="shortlisted-banner" href="{{ action('IdeaController@index') }}">
 									<i class="fa fa-fw fa-star"></i>
-									<span class="shortlisted-text">shortlisted</span>
+									<span class="shortlisted-text">{{ trans('common.shortlisted') }}</span>
 								</a>
 							@endif
 
@@ -80,7 +80,7 @@
 
 					<div class="idea-section comments-section">
 
-						@include('discussion')
+						@include('discussion', ['target_id' => $idea->id, 'target_type' => 'Idea', 'idea_id' => $idea->id])
 
 					</div>
 
