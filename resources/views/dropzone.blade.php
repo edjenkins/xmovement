@@ -80,6 +80,10 @@
 			dropzone_uploaded_file = response.filename;
 			if ($('#{{ $input_id }}').length) {
 				$('#{{ $input_id }}').val(response.filename);
+
+				$('#{{ $input_id }}').attr('data-file-height', file.height);
+				$('#{{ $input_id }}').attr('data-file-width', file.width);
+
 				$('.current-file-preview-{{ $dropzone_id }} #file-preview-filename').html(response.filename);
 				$('.current-file-preview-{{ $dropzone_id }} #file-preview-thumbnail').css('background-image','url(https://s3.amazonaws.com/xmovement/uploads/images/small/' + response.filename + ')');
 				$('.current-file-preview-{{ $dropzone_id }}').addClass('visible');

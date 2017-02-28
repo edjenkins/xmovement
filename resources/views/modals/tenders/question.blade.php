@@ -1,4 +1,4 @@
-<div class="modal fade" id="tender-question-modal" tabindex="-1" role="dialog">
+<div class="modal modal wide-modal fade" id="tender-question-modal" tabindex="-1" role="dialog">
 
 	<div class="modal-dialog" role="document">
 

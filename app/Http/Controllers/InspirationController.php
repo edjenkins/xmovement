@@ -99,7 +99,8 @@ class InspirationController extends Controller
 
 		switch ($request->inspiration['type']) {
 			case 'photo':
-				# code...
+				$dimensions = $request->inspiration['dimensions'];
+				$content = '{"thumbnail":"' . $request->inspiration['content'] . '","height":"' . $dimensions[0] . '","width":"' . $dimensions[1] . '"}';
 				break;
 
 			case 'video':
