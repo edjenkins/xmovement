@@ -78,7 +78,7 @@
 						<h2>{{ trans('idea.discussion') }}</h2>
 					</div>
 
-					<div class="idea-section comments-section">
+					<div class="idea-section comments-section with-border">
 
 						@include('discussion', ['target_id' => $idea->id, 'target_type' => 'Idea', 'idea_id' => $idea->id])
 

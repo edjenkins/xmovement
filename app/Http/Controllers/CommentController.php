@@ -47,6 +47,15 @@ class CommentController extends Controller
 
 		$comment_target = CommentTarget::where('url', $url)->first();
 
+		if ($comment_target)
+		{
+			$comment_target->target_id = $request->target_id;
+			$comment_target->target_type = $request->target_type;
+			$comment_target->idea_id = $request->idea_id;
+
+			$comment_target->save();
+		}
+
 		if (!$comment_target)
 		{
 			$comment_target = CommentTarget::create([
