@@ -126,6 +126,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		switch (type) {
 			case 'photo':
 				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
+				$scope.new_inspiration['photo'].dimensions = [$('#dropzone-photo').attr('data-file-height'), $('#dropzone-photo').attr('data-file-width')];
 				break;
 
 			case 'file':
@@ -249,15 +250,28 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.formatInspiration = function(inspiration) {
 
 		if (!inspiration) { return inspiration; }
-		
+
 		inspiration["prepended"] = (inspiration["prepended"]) ? inspiration["prepended"] : false;
 
-		if (inspiration.type == 'video')
-		{
-			inspiration.content = JSON.parse(inspiration.content);
-		}
+		try {
+			switch (inspiration.type) {
+				case 'photo':
+					inspiration.content = JSON.parse(inspiration.content);
+					break;
+				case 'video':
+					inspiration.content = JSON.parse(inspiration.content);
+					break;
+				default:
+			}
 
-		return inspiration;
+		} catch (e) {
+
+			console.error(e);
+
+		} finally {
+
+			return inspiration;
+		}
 	}
 
 	$scope.openInspirationModal = function(inspiration) {
