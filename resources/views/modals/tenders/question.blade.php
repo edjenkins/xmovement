@@ -7,21 +7,21 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-				<h4 class="modal-title"><% selected_answer.question.question %></h4>
+				<h4 class="modal-title"><% selected_tender_question.question.question %></h4>
 
 			</div>
 
 			<div class="modal-body">
 
 				<p>
-					<% selected_answer.answer %>
+					<% selected_tender_question.answer %>
 				</p>
 
 			</div>
 
 			<div class="comments-section">
 
-				@include('discussion')
+				@include('discussion', ['target_type' => 'TenderQuestionAnswer'])
 
 			</div>
 

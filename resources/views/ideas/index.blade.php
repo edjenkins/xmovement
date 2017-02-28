@@ -80,9 +80,9 @@
 							<span class="shortlisted-text">shortlisted</span>
 						</div>
 
-						<a class="tile-image" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/large/<% idea.photo %>')" ng-href="/idea/<% idea.id %>"></a>
+						<a target="_self" class="tile-image" style="background-image:url('https://s3.amazonaws.com/xmovement/uploads/images/large/<% idea.photo %>')" ng-href="/idea/<% idea.id %>"></a>
 						<div class="inner-container">
-							<a class="idea-name" ng-href="/idea/<% idea.id %>">
+							<a target="_self" class="idea-name" ng-href="/idea/<% idea.id %>">
 							    <% idea.name | cut:true:50:'...' %>
 							</a>
 							<p class="idea-author">

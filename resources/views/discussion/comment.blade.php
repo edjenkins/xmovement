@@ -23,7 +23,7 @@
 		{!! nl2br($comment->text) !!}
 	</p>
 
-	@if($authenticated_user)
+	@if($authenticated_user && !$comment->commentTarget->locked)
 
 		<div class="comment-footer">
 

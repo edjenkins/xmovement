@@ -12,6 +12,7 @@ use App\Jobs\SendProposalPhaseCompleteEmail;
 use App\Jobs\SendProposalPhaseFailedEmail;
 
 use Carbon\Carbon;
+use App\CommentTarget;
 use App\Idea;
 use DynamicConfig;
 use Log;
@@ -83,10 +84,17 @@ class UpdateIdeaStates extends Command
 			if ((!$now->between($design_start, $design_end)) && ($idea->design_state == 'open'))
 			{
 				$idea->design_state = ($now->gt($design_end)) ? 'locked' : 'closed';
+
+				// Lock discussion design tasks
+				CommentTarget::where('idea_id', $idea->id)->where('target_type', 'DesignTask')->update(['locked' => 1]);
 			}
 			else if (($idea->design_state != 'open') && ($now->between($design_start, $design_end)))
 			{
 				$idea->design_state = 'open';
+
+				// Unlock discussion design tasks
+				CommentTarget::where('idea_id', $idea->id)->where('target_type', 'DesignTask')->update(['locked' => 0]);
+
 				// Send design phase open email
 				foreach ($idea->get_supporters() as $index => $supporter)
 				{

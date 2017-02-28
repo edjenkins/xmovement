@@ -1,9 +1,9 @@
-XMovement.controller('TenderController', function($scope, $http, $rootScope, TenderService, TeamService, UpdateService) {
+XMovement.controller('TenderController', function($scope, $http, $rootScope, $location, TenderService, TeamService, UpdateService, DiscussionService) {
 
 	$scope.tender = tender;
 	$scope.user_search_results = [];
 	$scope.no_search_results = false;
-	$scope.selected_answer = {};
+	$scope.selected_tender_question = {};
 
 	$scope.$watch('user_search_term', function() {
 
@@ -16,59 +16,72 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, Ten
 		TenderService.getTender({tender_id:tender_id}).then(function(response) {
 
 			$scope.tender = response.data.tender;
-
 		})
 	}
 
-	$('#tender-question-modal').on('hide.bs.modal', function (e) {
-		$scope.selected_answer = {};
+	$('#tender-question-modal').on('show.bs.modal', function (e) {
 
-		if (history.pushState) {
-		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-		    window.history.pushState({path:newurl},'',newurl);
+		$('#tender-question-modal .discussion-wrapper .comments-container').html('');
+	});
 
-			$scope.fetchComments(newurl);
-		}
+	$('#tender-question-modal').on('shown.bs.modal', function (e) {
+
+		$scope.$apply(function() {
+
+			$location.hash($scope.selected_tender_question.id);
+
+			$('#tender-question-modal .discussion-wrapper').attr('data-url', $location.absUrl());
+
+			$scope.fetchComments($location.absUrl());
+        });
+	});
+
+	$('#tender-question-modal').on('hidden.bs.modal', function (e) {
+
+		$scope.$apply(function() {
+
+			$scope.selected_tender_question = {};
+
+			$location.hash('');
+        });
 	});
 
 	$scope.openQuestionModal = function(answer) {
 
-		if (history.pushState) {
-		    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?question_id=' + answer.id;
-		    window.history.pushState({path: newurl}, '', newurl);
-
-			$('#tender-question-modal #comments-container').attr('data-url', newurl);
-
-			$scope.fetchComments(newurl);
-		}
-
-		$scope.selected_answer = answer;
+		$scope.selected_tender_question = answer;
 
 		$('#tender-question-modal').modal('show');
 	}
 
 	$scope.fetchComments = function(url) {
 
-		$('#comments-container[data-url="' + url + '"]').html('');
+		var discussion_wrapper = $('.discussion-wrapper[data-url="' + url + '"]');
+		var post_comment_container = discussion_wrapper.find('.post-comment-container');
+		var comments_container = discussion_wrapper.find('.comments-container');
 
-		$.getJSON("/api/comment/view", {url: url} , function(response) {
+		comments_container.html('');
 
-			if (response) {
+		var data = {
+			url: url,
+			target_id: discussion_wrapper.attr('data-target-id'),
+			target_type: discussion_wrapper.attr('data-target-type'),
+			idea_id: discussion_wrapper.attr('data-idea-id')
+		};
 
-				$('#comments-container[data-url="' + url + '"]').html('');
+		DiscussionService.fetchComments(data).then(function(response) {
 
-				$.each(response.data.comments, function(index, comment) {
+			comments_container.html('');
 
-					$('#comments-container[data-url="' + url + '"]').append(comment.view);
+			$.each(response.data.comments, function(index, comment) {
 
-				})
+				comments_container.append(comment.view);
+			});
 
-				attachHandlers();
+			attachHandlers();
 
-				// startListening();
-			}
+			// Hide comment input if locked
+			post_comment_container.toggle(!response.data.comment_target.locked);
 		});
-
 	}
 
 	$scope.postUpdate = function() {

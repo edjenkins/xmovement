@@ -107,7 +107,7 @@
 
 					<div class="comments-section with-border">
 
-						@include('discussion')
+						@include('discussion', ['target_type' => 'DesignDashboard', 'idea_id' => $idea->id])
 
 					</div>
 

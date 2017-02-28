@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\CommentVote;
+use App\CommentTarget;
 use App\Report;
 use Auth;
 use App\Comment;
@@ -15,7 +16,7 @@ use Response;
 class Comment extends Model
 {
 	protected $fillable = [
-	   'user_id', 'text', 'url', 'in_reply_to_comment_id'
+	   'user_id', 'text', 'url', 'comment_target_id', 'in_reply_to_comment_id'
 	];
 
     protected $dates = ['deleted_at'];
@@ -35,6 +36,11 @@ class Comment extends Model
     public function parent()
     {
         return $this->belongsTo('App\Comment', 'in_reply_to_comment_id');
+    }
+
+    public function commentTarget()
+    {
+        return $this->belongsTo(CommentTarget::class);
     }
 
     public function reports()

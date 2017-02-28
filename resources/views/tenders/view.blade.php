@@ -277,7 +277,7 @@
 
 				<div class="comments-section">
 
-					@include('discussion')
+					@include('discussion', ['target_id' => $tender->id, 'target_type' => 'Tender', 'idea_id' => $tender->idea->id])
 
 				</div>
 

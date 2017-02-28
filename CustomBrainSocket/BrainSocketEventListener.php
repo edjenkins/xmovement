@@ -12,6 +12,7 @@ use App\Jobs\SendCommentReplyEmail;
 
 use App\User;
 use App\Comment;
+use App\CommentTarget;
 
 use Auth;
 use Config;
@@ -84,7 +85,9 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 
 			$res = json_decode($msg);
 
-	        if ($validator->fails())
+			$comment_target = CommentTarget::where('url', $url)->first();
+
+	        if ($validator->fails() || $comment_target->locked)
 			{
 				$res->client->event = "comment.error";
 				$res->client->user_id = $user_id;
@@ -95,6 +98,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 				$comment = Comment::create([
 					'user_id' => $user_id,
 					'text' => $text,
+					'comment_target_id' => $comment_target->id,
 					'url' => $url,
 					'in_reply_to_comment_id' => $in_reply_to_comment_id
 				]);

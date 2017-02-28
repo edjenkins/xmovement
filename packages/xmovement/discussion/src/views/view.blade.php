@@ -78,7 +78,7 @@
 
 	    			<div class="comments-section">
 
-		    			@include('discussion')
+		    			@include('discussion', ['target_id' => $design_task->id, 'target_type' => 'DesignTask', 'idea_id' => $design_task->idea->id])
 
 		    		</div>
 
