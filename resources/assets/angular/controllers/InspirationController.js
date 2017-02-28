@@ -248,6 +248,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.formatInspiration = function(inspiration) {
 
+		if (!inspiration) { return inspiration; }
+		
 		inspiration["prepended"] = (inspiration["prepended"]) ? inspiration["prepended"] : false;
 
 		if (inspiration.type == 'video')
