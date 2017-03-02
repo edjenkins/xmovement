@@ -6,10 +6,12 @@
 
 	<button type="button" class="post-comment-button">
 		<span class="idle-state">
-			{{ isset($comment) ? trans('discussion.reply_button_idle') : trans('discussion.comment_button_idle') }}
+			<span class="action-icon"><i class="fa fa-paper-plane fa-fw"></i></span>
+			<span class="action-label">{{ isset($comment) ? trans('discussion.reply_button_idle') : trans('discussion.comment_button_idle') }}</span>
 		</span>
 		<span class="posting-state">
-			{{ isset($comment) ? trans('discussion.reply_button_posting') : trans('discussion.comment_button_posting') }}
+			<span class="action-icon"><i class="fa fa-spinner fa-pulse fa-fw"></i>
+			<span class="action-label">{{ isset($comment) ? trans('discussion.reply_button_posting') : trans('discussion.comment_button_posting') }}</span>
 		</span>
 	</button>
 

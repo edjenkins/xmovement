@@ -14,15 +14,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.loading_inspirations = true;
 	$scope.inspirations = [];
 	$scope.selected_inspiration = {};
-	$scope.inspiration_form_data =
-	{
+
+	$scope.new_inspiration = {
 		photo: { type:'photo', description:'', content:'', category:'' },
 		video: { type:'video', description:'', content:'', category:'' },
 		file: { type:'file', description:'', content:'', category:'' },
 		link: { type:'link', description:'', content:'', category:'' }
 	};
-
-	$scope.new_inspiration = $scope.inspiration_form_data;
 
 	$scope.$on('imagesLoaded:loaded', function(event, element){
 		$scope.layoutGrid();
@@ -117,7 +115,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		});
 	}
 
-	$scope.addInspiration = function(type) {
+	$scope.addInspiration = function(type, input_id) {
 
 		console.log("Adding inspiration");
 
@@ -125,12 +123,22 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		switch (type) {
 			case 'photo':
-				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
 				$scope.new_inspiration['photo'].dimensions = [$('#dropzone-photo').attr('data-file-height'), $('#dropzone-photo').attr('data-file-width')];
+				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
+				if ($('#dropzone-photo').val() == '')
+				{
+					alert('Please wait for upload to complete');
+					return false;
+				}
 				break;
 
 			case 'file':
 				$scope.new_inspiration['file'].content = $('#dropzone-file').val();
+				if ($('#dropzone-file').val() == '')
+				{
+					alert('Please wait for upload to complete');
+					return false;
+				}
 				break;
 
 			default:
@@ -143,16 +151,22 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 			{
 				var inspiration = response.data.inspiration;
 
-				// $scope.inspirations.push($scope.formatInspiration(inspiration));
 				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
 
-				$scope.$apply(function() {
-					$scope.layoutGrid();
-					$scope.openInspirationModal(inspiration);
-				});
+				$scope.layoutGrid();
+				$scope.openInspirationModal(inspiration);
 
 				// Reset form
-				$scope.new_inspiration = $scope.inspiration_form_data;
+				$scope.new_inspiration = {
+					photo: { type:'photo', description:'', content:'', category:'' },
+					video: { type:'video', description:'', content:'', category:'' },
+					file: { type:'file', description:'', content:'', category:'' },
+					link: { type:'link', description:'', content:'', category:'' }
+				};
+
+				// Reset dropzones
+				$('.dropzone').each(function(index) { Dropzone.forElement('#' + $(this).attr('id')).removeAllFiles(); });
+
 			}
 		});
 	}

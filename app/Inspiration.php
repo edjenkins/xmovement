@@ -103,6 +103,11 @@ class Inspiration extends Model
 
 	public function getHasFavouritedAttribute()
 	{
+		if (!Auth::user())
+		{
+			return false;
+		}
+		
 		return InspirationFavourite::where([
 			'inspiration_id' => $this->id,
 			'user_id' => Auth::user()->id,

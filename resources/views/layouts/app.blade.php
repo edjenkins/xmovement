@@ -21,6 +21,7 @@
 	<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
 
 	<link href="{{ URL::asset('css/vendor.css') }}" rel="stylesheet">
+	<link href="{{ URL::asset('css/dropzone/dropzone.css') }}" rel="stylesheet">
 	<link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
     {!! MetaTag::tag('description') !!}
@@ -74,6 +75,7 @@
 
 	<script src="{{ URL::asset('js/vendor.js') }}"></script>
 	<script src="{{ URL::asset('js/expanding.js') }}"></script>
+	<script src="{{ URL::asset('js/vendor/dropzone/dropzone.js') }}"></script>
 
 	<script src="{{ URL::asset('js/app.js') }}"></script>
 

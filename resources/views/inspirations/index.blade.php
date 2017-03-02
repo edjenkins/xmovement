@@ -30,11 +30,13 @@
 
 		    				</li>
 
-						<li class="module-control" ng-click="loadInspirations('favourites')" ng-class="{'active':sort_type == 'favourites'}">
+						@unless (Auth::guest())
+							<li class="module-control" ng-click="loadInspirations('favourites')" ng-class="{'active':sort_type == 'favourites'}">
 
-							<button type="button">{{ trans('idea.sort_favourites') }}</button>
+								<button type="button">{{ trans('idea.sort_favourites') }}</button>
 
-	    				</li>
+		    				</li>
+						@endunless
 
 	    			</ul>
 

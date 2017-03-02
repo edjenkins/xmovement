@@ -53,17 +53,27 @@
 					<a target="_self" href="/profile/<% selected_inspiration.user.id %>"><% selected_inspiration.user.name %></a>
 				</li>
 
-				<li class="pull-right inspiration-action" ng-click="deleteInspiration(selected_inspiration)">
-					<i class="fa fa-fw fa-trash"></i>
-				</li>
-
 				<li class="pull-right inspiration-action" ng-click="reportInspiration(selected_inspiration)">
 					<i class="fa fa-fw fa-flag"></i>
 				</li>
 
-				<li class="pull-right inspiration-action" ng-click="favouriteInspiration(selected_inspiration)" ng-class="{ 'favourited' : selected_inspiration.has_favourited }">
-					<% selected_inspiration.favourited_count %> <i class="fa fa-fw" ng-class="selected_inspiration.favouriting ? 'fa-spinner fa-pulse' : 'fa-star'"></i>
-				</li>
+				@if (Auth::guest())
+
+					<li class="pull-right inspiration-action">
+						<% selected_inspiration.favourited_count %> <i class="fa fa-fw fa-star"></i>
+					</li>
+
+				@else
+
+					<li class="pull-right inspiration-action" ng-click="deleteInspiration(selected_inspiration)" ng-show="selected_inspiration.user.id == {{ Auth::user()->id }}">
+						<i class="fa fa-fw fa-trash"></i>
+					</li>
+
+					<li class="pull-right inspiration-action" ng-click="favouriteInspiration(selected_inspiration)" ng-class="{ 'favourited' : selected_inspiration.has_favourited }">
+						<% selected_inspiration.favourited_count %> <i class="fa fa-fw" ng-class="selected_inspiration.favouriting ? 'fa-spinner fa-pulse' : 'fa-star'"></i>
+					</li>
+
+				@endif
 
 				<div class="clearfloat"></div>
 

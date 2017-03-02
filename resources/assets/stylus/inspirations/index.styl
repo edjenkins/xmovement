@@ -1,6 +1,8 @@
 .inspirations-container
 	max-width 1500px
 	padding 0 30px
+	@media(max-width: 987px)
+		padding 0 15px
 
 .side-panel.inspirations-side-panel
 	.side-panel-box
@@ -9,6 +11,8 @@
 		margin-top 30px
 		text-align center
 		white-panel()
+		@media(max-width: 987px)
+			margin-top 15px
 		.side-panel-box-header
 			border-bottom border-color 1px solid
 			margin 0 15px
@@ -66,11 +70,12 @@
 				overflow hidden
 				li
 					cleanlist()
-					border-bottom border-color 3px solid
+					border-bottom transparent 3px solid
 					box-sizing border-box
 					color #999
 					float left
 					line-height 43px
+					margin-top 3px
 					width 25%
 					animate()
 					&:last-child
