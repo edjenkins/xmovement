@@ -341,3 +341,24 @@ body.colorful
 		color #777
 		font-size 1.1em
 		margin 20px 0
+
+// Category Pills
+ul.category-pills
+	cleanlist()
+	li.category-pill
+		cleanlist()
+		background-color border-color
+		color #888
+		border-radius 4px
+		display inline-block
+		margin 5px
+		padding 10px 15px
+		animate()
+		&:hover
+			cursor pointer
+			background-color darken(border-color, 10%)
+		&.active
+			background-color success-color
+			color white
+			&:hover
+				background-color darken(success-color, 10%)

@@ -201,6 +201,10 @@ Route::group(['middleware' => ['api']], function () {
 	Route::post('/api/team/user/add', 'TeamController@api_add_user');
 	Route::post('/api/team/user/remove', 'TeamController@api_remove_user');
 
+
+	// Category routes
+	Route::get('/api/categories/idea', 'IdeaController@api_categories');
+
 	// Idea routes
 	Route::get('/api/ideas', 'IdeaController@api_index');
 

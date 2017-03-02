@@ -46,6 +46,14 @@
 		    				{{ $idea->description }}
 		    			</p>
 
+						<ul class="category-pills">
+							@foreach ($idea->categories as $category)
+
+								<li class="category-pill">{{ $category->name }}</li>
+
+							@endforeach
+						</ul>
+
 					</div>
 
 	    			<div class="mobile-sidebar side-column hidden-md hidden-lg">

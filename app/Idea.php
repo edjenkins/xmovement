@@ -46,6 +46,11 @@ class Idea extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\IdeaCategory');
+    }
+
     /**
      * The actions performed in relation to an idea.
      *

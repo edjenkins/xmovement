@@ -28,6 +28,7 @@ use App\Jobs\SendDesignPhaseOpenEmail;
 use App\Jobs\PrePopulateDesignTasks;
 
 use App\Idea;
+use App\IdeaCategory;
 use App\User;
 use App\Supporter;
 use App\DesignTask;
@@ -78,18 +79,26 @@ class IdeaController extends Controller
 		return Response::json($response);
 	}
 
+	public function api_categories(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$response->data['primary_categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
+		$response->data['secondary_categories'] = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
+
+		return Response::json($response);
+	}
+
 	public function index(Request $request)
 	{
-		$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
-
 		# META
 		MetaTag::set('title', Lang::get('meta.ideas_index_title'));
 		MetaTag::set('description', Lang::get('meta.ideas_index_description'));
 		# META
 
-		return view('ideas.index', [
-			'ideas' => $ideas,
-		]);
+		return view('ideas.index');
 	}
 
 	public function view(Request $request, Idea $idea, $slug = null)
@@ -131,7 +140,10 @@ class IdeaController extends Controller
 	{
 		if (Auth::check())
 		{
-			return view('ideas.add');
+			$primary_categories = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
+			$secondary_categories = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
+
+			return view('ideas.add', ['primary_categories' => $primary_categories, 'secondary_categories' => $secondary_categories]);
 		}
 		else
 		{
@@ -188,6 +200,12 @@ class IdeaController extends Controller
 			'proposal_state' => 'closed',
 			'duration' => $request->duration
 		]);
+
+		// Update idea categories
+		Log::error($request->primary_category);
+		Log::error($request->secondary_category);
+		$idea->categories()->attach($request->primary_category);
+		$idea->categories()->attach($request->secondary_category);
 
 		// Pre-populate design tasks with user questions
 		if (DynamicConfig::fetchConfig('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
