@@ -107,7 +107,7 @@
 							</ul>
 						</div>
 
-						<div ng-if="inspiration.type == 'photo'" class="photo-tile-image" style="padding-bottom: <%(( inspiration.content.height / inspiration.content.width) * 100) + '%' %>; background-image:url('<% (inspiration.content.thumbnail.indexOf('http') == 0) ? inspiration.content.thumbnail : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content.thumbnail %>')" data-file-height="<% inspiration.content.height %>" data-file-width="<% inspiration.content.width %>"></div>
+						<div ng-if="inspiration.type == 'photo'" class="photo-tile-image" ng-style="{'padding-bottom': (( inspiration.content.height / inspiration.content.width) * 100) + '%', 'background-image': 'url(' + 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content.thumbnail + ')'}" data-file-height="<% inspiration.content.height %>" data-file-width="<% inspiration.content.width %>"></div>
 
 						<div ng-if="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
 							<i class="fa fa-play"></i>

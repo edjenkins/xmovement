@@ -48,6 +48,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-type', 'Inspiration');
 
 			$scope.fetchComments($location.absUrl());
+
+			$('textarea').expanding();
         });
 	});
 
