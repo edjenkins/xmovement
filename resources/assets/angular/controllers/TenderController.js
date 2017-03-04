@@ -55,7 +55,7 @@ XMovement.controller('TenderController', function($scope, $http, $rootScope, $lo
 
 	$scope.fetchComments = function(url) {
 
-		var discussion_wrapper = $('.discussion-wrapper[data-url="' + url + '"]');
+		var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
 		var post_comment_container = discussion_wrapper.find('.post-comment-container');
 		var comments_container = discussion_wrapper.find('.comments-container');
 

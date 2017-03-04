@@ -1,41 +1,58 @@
+window.app = {};
+
+console.log('Opening socket connection');
+
+app.BrainSocket = new BrainSocket(
+		new WebSocket(web_socket_url),
+		new BrainSocketPubSub()
+);
+
+console.log(app.BrainSocket);
+
+function appendComment(object)
+{
+	if (object.data.in_reply_to_comment_id)
+	{
+		// This is a reply
+		$(object.view).hide().appendTo($('#comment-' + object.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
+	}
+	else
+	{
+		$(object.view).hide().appendTo($('.discussion-wrapper').find('.comments-container')).slideDown(300);
+	}
+	attachHandlers();
+}
+
 function startListening()
 {
 	if (discussionLoaded == true) return;
 
 	discussionLoaded = true;
 
-	window.app = {};
-
 	var attr = $('.discussion-wrapper').attr('data-url');
-	var target_id = $('.discussion-wrapper').attr('data-target-id');
-	var target_type = $('.discussion-wrapper').attr('data-target-type');
-	var idea_id = $('.discussion-wrapper').attr('data-idea-id');
+	// var target_id = $('.discussion-wrapper').attr('data-target-id');
+	// var target_type = $('.discussion-wrapper').attr('data-target-type');
+	// var idea_id = $('.discussion-wrapper').attr('data-idea-id');
 
 	if (!(typeof attr !== typeof undefined && attr !== false))
 	{
-		$('.discussion-wrapper').attr('data-url', document.location);
-	}
+		var url = window.location.href.replace(/^https?:\/\//,'');
 
-	app.BrainSocket = new BrainSocket(
-			new WebSocket(web_scoket_url),
-			new BrainSocketPubSub()
-	);
+		$('.discussion-wrapper').attr('data-url', url);
+
+		fetchComments();
+	}
 
 	app.BrainSocket.Event.listen('comment.posted',function(msg)
 	{
+		console.log(msg);
+
+		var url = window.location.href.replace(/^https?:\/\//,'');
+
 		// Check comment is for current page
-		if (msg.client.data.url == window.location.href)
+		if (msg.client.data.url == url)
 		{
-			if (msg.client.data.in_reply_to_comment_id)
-			{
-				// This is a reply
-				$(msg.client.view).hide().appendTo($('#comment-' + msg.client.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
-			}
-			else
-			{
-				$(msg.client.view).hide().appendTo($('.discussion-wrapper[data-url="' + msg.client.data.url + '"] .comments-container')).slideDown(300);
-			}
-			attachHandlers();
+			appendComment(msg.client);
 		}
 	});
 
@@ -115,23 +132,26 @@ function attachHandlers()
 
 $(document).ready(function() {
 
-	fetchComments(window.location.href);
-
 	startListening();
-
 });
 
-function fetchComments(url) {
+function fetchComments() {
+
+	var url = window.location.href.replace(/^https?:\/\//,'');
 
 	console.log('Fetching comments for - ' + url);
 
-	$('.discussion-wrapper[data-url="' + url + '"] .comments-container').html('');
+	var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
+	console.log(discussion_wrapper);
+	var comments_container = discussion_wrapper.find('.comments-container');
+
+	comments_container.html('');
 
 	var data = {
 		url: url,
-		target_id: $('.discussion-wrapper').attr('data-target-id'),
-		target_type: $('.discussion-wrapper').attr('data-target-type'),
-		idea_id: $('.discussion-wrapper').attr('data-idea-id')
+		target_id: discussion_wrapper.attr('data-target-id'),
+		target_type: discussion_wrapper.attr('data-target-type'),
+		idea_id: discussion_wrapper.attr('data-idea-id')
 	};
 
 	$.getJSON("/api/comment/view", data, function(response) {
@@ -139,26 +159,24 @@ function fetchComments(url) {
 		console.log(response);
 		if (response) {
 
-			$('.discussion-wrapper[data-url="' + url + '"] .comments-container').html('');
+			discussion_wrapper.find('.comments-container').html('');
 
 			$.each(response.data.comments, function(index, comment) {
 
-				$('.discussion-wrapper[data-url="' + url + '"] .comments-container').append(comment.view);
+				comments_container.append(comment.view);
 
-			})
+			});
 
 			attachHandlers();
-
-			// startListening();
 
 			// Check if locked
 			if (response.data.comment_target.locked)
 			{
-				$('.discussion-wrapper[data-url="' + url + '"] .post-comment-container').hide();
+				discussion_wrapper.find('.post-comment-container').hide();
 			}
 			else
 			{
-				$('.discussion-wrapper[data-url="' + url + '"] .post-comment-container').show();
+				discussion_wrapper.find('.post-comment-container').show();
 			}
 		}
 	});
@@ -169,7 +187,7 @@ function postComment(wrapper)
 {
 	var in_reply_to_comment_id = wrapper.attr('data-in-reply-to-comment-id');
 
-	in_reply_to_comment_id = (in_reply_to_comment_id) ? in_reply_to_comment_id : 0;
+	in_reply_to_comment_id = (in_reply_to_comment_id) ? in_reply_to_comment_id : undefined;
 
 	// Get comment from textarea
 	var comment = wrapper.find('textarea').val();
@@ -182,7 +200,54 @@ function postComment(wrapper)
 
 	// Post message
 	var data = { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
+
+	console.log('data');
+	console.log(data);
+
 	app.BrainSocket.message('comment.posted', data);
+
+	try {
+		app.BrainSocket.message('comment.posted', data);
+	} catch (e) {
+		console.log('Failed to post comment via BrainSocket');
+	} finally {
+
+		// Perform standard request as a fallback
+
+		// $.ajaxSetup({
+	    //     headers: {
+	    //     	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+	    //     	'Content-type': 'application/json'
+	    //     }
+		// });
+		//
+	    // $.ajax({
+	    //     type:"POST",
+	    //     url: "/api/comment/post",
+	    //     dataType: "json",
+	    //     data:  JSON.stringify(data),
+	    //     processData: false,
+	    //     success: function(response) {
+		//
+	    //     	if (response.meta.success)
+	    //     	{
+		// 			console.log(response);
+		// 			appendComment(response);
+		// 		}
+	    //     	else
+	    //     	{
+	    //     		// Output errors
+	    //     		$.each(response.errors, function(index, value) {
+	    //     			alert(value);
+	    //     		})
+	    //     	}
+	    //     },
+	    //     error: function(response) {
+		// 		console.log(response);
+	    //     	alert('Something went wrong!');
+	    //     }
+	    // });
+	}
 }
 
 function destroyComment(delete_button)

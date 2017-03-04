@@ -28,6 +28,18 @@ class CommentPolicy
     }
 
     /**
+     * Determine if the given user can post a comment.
+     *
+     * @param  User  $user
+     * @param  Comment  $comment
+     * @return bool
+     */
+    public function post(User $user)
+    {
+        return Auth::user();
+    }
+
+    /**
      * Determine if the given user can report the given comment.
      *
      * @param  User  $user
