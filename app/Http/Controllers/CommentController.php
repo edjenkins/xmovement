@@ -37,6 +37,8 @@ class ResponseObject {
 
 class CommentController extends Controller
 {
+    use \App\PostsComments;
+
 	public function view(Request $request)
 	{
 		$response = new ResponseObject();
@@ -107,6 +109,38 @@ class CommentController extends Controller
         return Response::json($response);
     }
 
+	public function post(Request $request)
+	{
+		$response = new ResponseObject();
+
+		if (Auth::guest())
+		{
+            array_push($response->errors, trans('flash_message.no_permission'));
+
+            return Response::json($response);
+		}
+		else
+		{
+
+			$url = $request->url;
+			$text = $request->comment;
+			$in_reply_to_comment_id = isset($request->in_reply_to_comment_id) ? $request->in_reply_to_comment_id : NULL;
+			$user_id = Auth::user()->id;
+
+			$comment = $this->postComment($text, $url, $in_reply_to_comment_id, $user_id);
+
+			if ($comment)
+			{
+				$response->data = $comment;
+				$response->view = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => Auth::user()])->render();
+
+				$response->meta['success'] = true;
+			}
+
+			return Response::json($response);
+		}
+	}
+
 	public function destroy(Request $request)
 	{
 		$comment = Comment::whereId($request->comment_id)->first();
@@ -127,6 +161,5 @@ class CommentController extends Controller
 
 			return Response::json($response);
 		}
-
 	}
 }

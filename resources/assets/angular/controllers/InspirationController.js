@@ -43,11 +43,14 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			$location.hash($scope.selected_inspiration.id);
 
-			$('#inspiration-modal .discussion-wrapper').attr('data-url', $location.absUrl());
+			var url = $location.absUrl();
+			url = url.replace($location.protocol() + '://', '');
+
+			$('#inspiration-modal .discussion-wrapper').attr('data-url', url);
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-id', $scope.selected_inspiration.id);
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-type', 'Inspiration');
 
-			$scope.fetchComments($location.absUrl());
+			$scope.fetchComments(url);
 
 			$('textarea').expanding();
         });
@@ -304,7 +307,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 	$scope.fetchComments = function(url) {
 
-		var discussion_wrapper = $('.discussion-wrapper[data-url="' + url + '"]');
+		var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
 		var post_comment_container = discussion_wrapper.find('.post-comment-container');
 		var comments_container = discussion_wrapper.find('.comments-container');
 
