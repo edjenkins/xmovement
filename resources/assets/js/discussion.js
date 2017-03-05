@@ -1,3 +1,8 @@
+$(document).ready(function() {
+
+	fetchComments();
+});
+
 function appendComment(comment)
 {
 	if (comment.data.in_reply_to_comment_id)
@@ -75,11 +80,6 @@ function attachHandlers()
 	});
 }
 
-$(document).ready(function() {
-
-	fetchComments();
-});
-
 function fetchComments(url) {
 
 	console.log(url);
@@ -88,7 +88,12 @@ function fetchComments(url) {
 
 	console.log('Fetching comments for - ' + url);
 
-	var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
+	var discussion_wrapper = $('.discussion-wrapper');
+
+	if (discussion_wrapper.length > 1)
+	{
+		discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
+	}
 
 	var comments_container = discussion_wrapper.find('.comments-container');
 
