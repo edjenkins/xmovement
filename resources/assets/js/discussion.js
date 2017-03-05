@@ -1,13 +1,13 @@
-window.app = {};
+// window.app = {};
+//
+// console.log('Opening socket connection');
+//
+// app.BrainSocket = new BrainSocket(
+// 		new WebSocket(web_socket_url),
+// 		new BrainSocketPubSub()
+// );
 
-console.log('Opening socket connection');
-
-app.BrainSocket = new BrainSocket(
-		new WebSocket(web_socket_url),
-		new BrainSocketPubSub()
-);
-
-console.log(app.BrainSocket);
+// console.log(app.BrainSocket);
 
 function appendComment(object)
 {
@@ -25,50 +25,65 @@ function appendComment(object)
 
 function startListening()
 {
-	if (discussionLoaded == true) return;
+	setInterval(function() {
 
-	discussionLoaded = true;
+		console.log('Checking for new comments...');
+		updateDiscussion();
 
-	var attr = $('.discussion-wrapper').attr('data-url');
-	// var target_id = $('.discussion-wrapper').attr('data-target-id');
-	// var target_type = $('.discussion-wrapper').attr('data-target-type');
-	// var idea_id = $('.discussion-wrapper').attr('data-idea-id');
-
-	if (!(typeof attr !== typeof undefined && attr !== false))
-	{
-		var url = window.location.href.replace(/^https?:\/\//,'');
-
-		$('.discussion-wrapper').attr('data-url', url);
-
-		fetchComments();
-	}
-
-	app.BrainSocket.Event.listen('comment.posted',function(msg)
-	{
-		var url = window.location.href.replace(/^https?:\/\//,'');
-
-		// Check comment is for current page
-		console.log('msg.client.user_id - ' + msg.client.user_id);
-		if (msg.client.user_id != current_user_id)
-		{
-			console.log('msg.client.data.url - ' + msg.client.data.url);
-			if (msg.client.data.url == url)
-			{
-				appendComment(msg.client);
-			}
-		}
-	});
-
-	app.BrainSocket.Event.listen('comment.error',function(msg)
-	{
-		if (msg.client.user_id == current_user_id)
-		{
-			alert(msg.client.errors[0]);
-		}
-
-		attachHandlers();
-	});
+	}, 500);
 }
+
+function updateDiscussion()
+{
+	fetchComments();
+}
+
+// function startListening()
+// {
+// 	if (discussionLoaded == true) return;
+//
+// 	discussionLoaded = true;
+//
+// 	var attr = $('.discussion-wrapper').attr('data-url');
+// 	// var target_id = $('.discussion-wrapper').attr('data-target-id');
+// 	// var target_type = $('.discussion-wrapper').attr('data-target-type');
+// 	// var idea_id = $('.discussion-wrapper').attr('data-idea-id');
+//
+// 	if (!(typeof attr !== typeof undefined && attr !== false))
+// 	{
+// 		var url = window.location.href.replace(/^https?:\/\//,'');
+//
+// 		$('.discussion-wrapper').attr('data-url', url);
+//
+// 		fetchComments();
+// 	}
+//
+// 	app.BrainSocket.Event.listen('comment.posted',function(msg)
+// 	{
+// 		var url = window.location.href.replace(/^https?:\/\//,'');
+//
+// 		// Check comment is for current page
+// 		console.log('msg.client.user_id - ' + msg.client.user_id);
+// 		if (msg.client.user_id != current_user_id)
+// 		{
+// 			console.log('msg.client.data.url - ' + msg.client.data.url);
+// 			if (msg.client.data.url == url)
+// 			{
+// 				appendComment(msg.client);
+// 			}
+// 		}
+// 	});
+//
+// 	app.BrainSocket.Event.listen('comment.error',function(msg)
+// 	{
+// 		if (msg.client.user_id == current_user_id)
+// 		{
+// 			alert(msg.client.errors[0]);
+// 		}
+//
+// 		attachHandlers();
+// 	});
+// }
 
 function attachHandlers()
 {

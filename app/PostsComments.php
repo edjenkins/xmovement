@@ -72,12 +72,6 @@ trait PostsComments
 				}
 			}
 
-			// BrainSocket::message('comment.posted', $comment);
-
-			$AppResponse = new BrainSocketAppResponse();
-
-			$response = $AppResponse->message('comment.posted', $comment);
-
 	        return $comment;
 		}
     }
