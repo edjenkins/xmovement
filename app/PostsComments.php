@@ -28,6 +28,8 @@ trait PostsComments
 			$user_id = Auth::user()->id;
 		}
 
+		$currentUser = User::where('id', $user_id)->first();
+
 		$url = preg_replace("(^https?://)", "", $url);
 
 		$comment_target = CommentTarget::where('url', $url)->first();
@@ -41,7 +43,7 @@ trait PostsComments
 		if ($validator->fails() || $comment_target->locked)
 		{
 			Log::error('Validator failed or comment target was locked');
-				
+
 			return false;
 		}
 		else
