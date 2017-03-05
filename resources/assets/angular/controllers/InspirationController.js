@@ -50,7 +50,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-id', $scope.selected_inspiration.id);
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-type', 'Inspiration');
 
-			$scope.fetchComments(url);
+			fetchComments(url);
 
 			$('textarea').expanding();
         });
@@ -305,36 +305,36 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		return $sce.trustAsResourceUrl(url);
 	}
 
-	$scope.fetchComments = function(url) {
-
-		var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
-		var post_comment_container = discussion_wrapper.find('.post-comment-container');
-		var comments_container = discussion_wrapper.find('.comments-container');
-
-		comments_container.html('');
-
-		var data = {
-			url: url,
-			target_id: discussion_wrapper.attr('data-target-id'),
-			target_type: discussion_wrapper.attr('data-target-type'),
-			idea_id: discussion_wrapper.attr('data-idea-id')
-		};
-
-		DiscussionService.fetchComments(data).then(function(response) {
-
-			comments_container.html('');
-
-			$.each(response.data.comments, function(index, comment) {
-
-				comments_container.append(comment.view);
-			});
-
-			attachHandlers();
-
-			// Hide comment input if locked
-			post_comment_container.toggle(!response.data.comment_target.locked);
-		});
-	}
+	// $scope.fetchComments = function(url) {
+	//
+	// 	var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
+	// 	var post_comment_container = discussion_wrapper.find('.post-comment-container');
+	// 	var comments_container = discussion_wrapper.find('.comments-container');
+	//
+	// 	comments_container.html('');
+	//
+	// 	var data = {
+	// 		url: url,
+	// 		target_id: discussion_wrapper.attr('data-target-id'),
+	// 		target_type: discussion_wrapper.attr('data-target-type'),
+	// 		idea_id: discussion_wrapper.attr('data-idea-id')
+	// 	};
+	//
+	// 	DiscussionService.fetchComments(data).then(function(response) {
+	//
+	// 		comments_container.html('');
+	//
+	// 		$.each(response.data.comments, function(index, comment) {
+	//
+	// 			comments_container.append(comment.view);
+	// 		});
+	//
+	// 		attachHandlers();
+	//
+	// 		// Hide comment input if locked
+	// 		post_comment_container.toggle(!response.data.comment_target.locked);
+	// 	});
+	// }
 
 	$scope.loadInspirations('popular');
 	$scope.pageLoaded();

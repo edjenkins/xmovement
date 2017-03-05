@@ -227,6 +227,7 @@ Route::group(['middleware' => ['api']], function () {
 
 	// Discussion routes
 	Route::get('/api/comment/view', 'CommentController@view');
+	Route::get('/api/comment/fetch', 'CommentController@fetch');
 	Route::post('/api/comment/post', 'CommentController@post');
     Route::delete('/api/comment/destroy', 'CommentController@destroy');
 

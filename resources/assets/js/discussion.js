@@ -1,105 +1,16 @@
-window.app = {};
-
-console.log('Opening socket connection');
-
-app.BrainSocket = new BrainSocket(
-		new WebSocket(web_socket_url),
-		new BrainSocketPubSub()
-);
-
-app.BrainSocket.Event.listen('comment.posted',function(msg)
+function appendComment(comment)
 {
-	var url = window.location.href.replace(/^https?:\/\//,'');
-	
-	// Check comment is for current page
-	console.log('msg.client.user_id - ' + msg.client.user_id);
-	if (msg.client.user_id != current_user_id)
-	{
-		console.log('msg.client.data.url - ' + msg.client.data.url);
-		if (msg.client.data.url == url)
-		{
-			appendComment(msg.client);
-		}
-	}
-});
-
-// console.log(app.BrainSocket);
-
-function appendComment(object)
-{
-	if (object.data.in_reply_to_comment_id)
+	if (comment.in_reply_to_comment_id)
 	{
 		// This is a reply
-		$(object.view).hide().appendTo($('#comment-' + object.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
+		$(comment.view).hide().appendTo($('#comment-' + comment.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
 	}
 	else
 	{
-		$(object.view).hide().appendTo($('.discussion-wrapper').find('.comments-container')).slideDown(300);
+		$(comment.view).hide().appendTo($('.discussion-wrapper').find('.comments-container')).slideDown(300);
 	}
 	attachHandlers();
 }
-
-function startListening()
-{
-	setInterval(function() {
-
-		console.log('Checking for new comments...');
-		updateDiscussion();
-
-	}, 10000);
-}
-
-function updateDiscussion()
-{
-	fetchComments();
-}
-
-// function startListening()
-// {
-// 	if (discussionLoaded == true) return;
-//
-// 	discussionLoaded = true;
-//
-// 	var attr = $('.discussion-wrapper').attr('data-url');
-// 	// var target_id = $('.discussion-wrapper').attr('data-target-id');
-// 	// var target_type = $('.discussion-wrapper').attr('data-target-type');
-// 	// var idea_id = $('.discussion-wrapper').attr('data-idea-id');
-//
-// 	if (!(typeof attr !== typeof undefined && attr !== false))
-// 	{
-// 		var url = window.location.href.replace(/^https?:\/\//,'');
-//
-// 		$('.discussion-wrapper').attr('data-url', url);
-//
-// 		fetchComments();
-// 	}
-//
-// 	app.BrainSocket.Event.listen('comment.posted',function(msg)
-// 	{
-// 		var url = window.location.href.replace(/^https?:\/\//,'');
-//
-// 		// Check comment is for current page
-// 		console.log('msg.client.user_id - ' + msg.client.user_id);
-// 		if (msg.client.user_id != current_user_id)
-// 		{
-// 			console.log('msg.client.data.url - ' + msg.client.data.url);
-// 			if (msg.client.data.url == url)
-// 			{
-// 				appendComment(msg.client);
-// 			}
-// 		}
-// 	});
-//
-// 	app.BrainSocket.Event.listen('comment.error',function(msg)
-// 	{
-// 		if (msg.client.user_id == current_user_id)
-// 		{
-// 			alert(msg.client.errors[0]);
-// 		}
-//
-// 		attachHandlers();
-// 	});
-// }
 
 function attachHandlers()
 {
@@ -166,12 +77,14 @@ function attachHandlers()
 
 $(document).ready(function() {
 
-	startListening();
+	fetchComments();
 });
 
-function fetchComments() {
+function fetchComments(url) {
 
-	var url = window.location.href.replace(/^https?:\/\//,'');
+	console.log(url);
+
+	if (!url) { url = window.location.href.replace(/^https?:\/\//,''); }
 
 	console.log('Fetching comments for - ' + url);
 
@@ -237,9 +150,6 @@ function postComment(wrapper)
 	var url = window.location.href.replace(/^https?:\/\//,'');
 	var data = { url: url, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
 
-	// Perform standard request as a fallback
-	console.log('Attempting to post comment via AJAX');
-
 	$.ajaxSetup({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -257,10 +167,7 @@ function postComment(wrapper)
 
 			if (response.meta.success)
 			{
-				console.log(response);
 				appendComment(response);
-				console.log('Sending message');
-				app.BrainSocket.message('comment.posted', response);
 			}
 			else
 			{

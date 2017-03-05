@@ -87,6 +87,35 @@ class CommentController extends Controller
 		return Response::json($response);
 	}
 
+	public function fetch(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$comment_target_id = $request->comment_target_id;
+
+		$comment_target = CommentTarget::where('id', $comment_target_id)->first();
+
+		if ($comment_target)
+		{
+			$comments = $comment_target->comments;
+		}
+
+		$response->meta['success'] = true;
+
+		$response->data['comments'] = $comments;
+
+		$response->data['comment_target'] = $comment_target;
+
+		$authenticated_user = (Auth::user()) ? Auth::user() : null;
+
+		foreach ($comments as $index => $comment)
+		{
+			$comment['view'] = View::make('discussion.comment', ['comment' => $comment, 'authenticated_user' => $authenticated_user])->render();
+		}
+
+		return Response::json($response);
+	}
+
     public function vote(Request $request)
     {
         $response = new ResponseObject();
