@@ -199,54 +199,57 @@ function postComment(wrapper)
 	$('.post-reply-container').hide();
 
 	// Post message
-	var data = { url: window.location.href, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
-
-	console.log('data');
-	console.log(data);
-
-	app.BrainSocket.message('comment.posted', data);
+	var url = window.location.href.replace(/^https?:\/\//,'');
+	var data = { url: url, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
 
 	try {
+
 		app.BrainSocket.message('comment.posted', data);
+
 	} catch (e) {
+
 		console.log('Failed to post comment via BrainSocket');
-	} finally {
+
+		console.log(e);
 
 		// Perform standard request as a fallback
 
-		// $.ajaxSetup({
-	    //     headers: {
-	    //     	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-	    //     	'Content-type': 'application/json'
-	    //     }
-		// });
-		//
-	    // $.ajax({
-	    //     type:"POST",
-	    //     url: "/api/comment/post",
-	    //     dataType: "json",
-	    //     data:  JSON.stringify(data),
-	    //     processData: false,
-	    //     success: function(response) {
-		//
-	    //     	if (response.meta.success)
-	    //     	{
-		// 			console.log(response);
-		// 			appendComment(response);
-		// 		}
-	    //     	else
-	    //     	{
-	    //     		// Output errors
-	    //     		$.each(response.errors, function(index, value) {
-	    //     			alert(value);
-	    //     		})
-	    //     	}
-	    //     },
-	    //     error: function(response) {
-		// 		console.log(response);
-	    //     	alert('Something went wrong!');
-	    //     }
-	    // });
+		console.log('Attempting to post comment via AJAX');
+
+		$.ajaxSetup({
+	        headers: {
+	        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+	        	'Content-type': 'application/json'
+	        }
+		});
+
+	    $.ajax({
+	        type:"POST",
+	        url: "/api/comment/post",
+	        dataType: "json",
+	        data:  JSON.stringify(data),
+	        processData: false,
+	        success: function(response) {
+
+	        	if (response.meta.success)
+	        	{
+					console.log(response);
+					appendComment(response);
+				}
+	        	else
+	        	{
+	        		// Output errors
+	        		$.each(response.errors, function(index, value) {
+	        			alert(value);
+	        		})
+	        	}
+	        },
+	        error: function(response) {
+				console.log(response);
+	        	alert('Something went wrong!');
+	        }
+	    });
+
 	}
 }
 
