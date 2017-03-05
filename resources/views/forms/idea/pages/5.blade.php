@@ -3,7 +3,8 @@
 	<div class="form-page-content">
 
 		<!-- Check if user can set duration of idea -->
-		@if (DynamicConfig::fetchConfig('FIXED_IDEA_DURATION', 0) == 0)
+		<!-- DynamicConfig::fetchConfig('FIXED_IDEA_DURATION', 0) == 0 -->
+		@if (false)
 
 			<div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}" id="duration-slider-wrapper">
 
