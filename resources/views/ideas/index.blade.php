@@ -71,7 +71,7 @@
 
 	        <div class="row">
 
-				<div class="col-xs-12 col-sm-6 <% (sort_type == 'shortlist') ? 'col-md-4' : 'col-md-3' %>" ng-repeat="idea in ideas | orderBy:sort_order:true | filter:idea_search_term" ng-cloak>
+				<div class="col-xs-12 col-sm-4 <% (sort_type == 'shortlist') ? 'col-md-4' : 'col-md-3' %>" ng-repeat="idea in ideas | orderBy:sort_order:true | filter:idea_search_term" ng-cloak>
 
 					<div class="tile idea-tile">
 

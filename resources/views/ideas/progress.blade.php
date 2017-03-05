@@ -40,7 +40,8 @@
 			</div>
 		</div>
 	</a>
-	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? (  ($idea->progress_percentage() > $idea->tender_percentage()) ? $idea->tender_percentage() : $idea->progress_percentage()  ) : 100 }}%);"></div>
+	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? (  
+($idea->progress_percentage() > $idea->tender_percentage()) ? $idea->tender_percentage() : $idea->progress_percentage()  ) : ($idea->progress_percentage() > $idea->proposal_percentage()) ? $idea->proposal_percentage() : 100 }}%);"></div>
 
 	<!-- Tender -->
 	@if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))

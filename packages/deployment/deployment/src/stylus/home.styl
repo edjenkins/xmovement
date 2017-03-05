@@ -51,51 +51,55 @@
     padding 60px 0
 
 .design-container
-    background-color #EB703C
-    background-origin border-box
-    background-size 60%
-    background-position 120%
-    padding 180px 20px
+	background-color #EB703C
+	background-origin border-box
+	background-size 60%
+	background-position 120%
+	padding 180px 20px
     .text-container.text-left h1
         font-size 36px
-        margin 0
+		margin 0 !important
+		padding 0
         max-width 520px
-	@media(max-width: $screen-sm-max)
-		background-size 0
-		padding 100px 20px
-		.text-container.text-left h1
-			max-width auto
 
+@media(max-width: $screen-sm-max)
+	.design-container
+		background-image none !important
+		padding 50px 20px
+		.text-container.text-left
+			text-align center
+			h1
+				max-width 100%
 
 .featured-ideas-container
-    background #45B6F4 !important
-    padding 0 0 30px 0
-    &:before
-        content ''
-        background-color darken(#45B6F4, 10%)
-        height 30px
-        width 100%
-        position relative
-        z-index 1
-        top -15px
-        -ms-transform skewY(-0.5deg)
-        -webkit-transform skewY(-0.5deg)
-        transform skewY(-0.5deg)
+	background #45B6F4 !important
+	padding 0 0 30px 0
+	&:before
+		content ''
+		background-color darken(#45B6F4, 10%)
+		height 30px
+		width 100%
+		position relative
+		z-index 1
+		top -15px
+		-ms-transform skewY(-0.5deg)
+		-webkit-transform skewY(-0.5deg)
+		transform skewY(-0.5deg)
 	&:after
-        content ''
-        background-color #45B6F4
-        height 30px
-        width 100%
-        position relative
-        z-index 1
-        bottom -30px
-        -ms-transform skewY(-0.5deg)
-        -webkit-transform skewY(-0.5deg)
-        transform skewY(-0.5deg)
+		content ''
+		background-color #45B6F4
+		height 30px
+		width 100%
+		position relative
+		z-index 1
+		bottom -30px
+		-ms-transform skewY(-0.5deg)
+		-webkit-transform skewY(-0.5deg)
+		transform skewY(-0.5deg)
 	h2
-        color white
-        font-size 36px
-        padding-top 0
-        font-weight bold
+		color white
+		font-size 36px
+		padding-top 0
+		font-weight bold
 	.idea-tile
-        border none
+		border none
