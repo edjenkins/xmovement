@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
-use CustomBrainSocket\BrainSocket;
 use App\Jobs\SendCommentReplyEmail;
 
 use App\User;
