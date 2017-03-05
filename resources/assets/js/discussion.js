@@ -30,7 +30,7 @@ function startListening()
 		console.log('Checking for new comments...');
 		updateDiscussion();
 
-	}, 5000);
+	}, 10000);
 }
 
 function updateDiscussion()
@@ -192,7 +192,24 @@ function fetchComments() {
 
 			});
 
-			comments_container.html(comment_views);
+			if (comments_container.html() != comment_views)
+			{
+				comments_container.html(comment_views);
+			}
+
+			app.BrainSocket.Event.listen('comment.posted',function(msg)
+			{
+				// Check comment is for current page
+				console.log('msg.client.user_id - ' + msg.client.user_id);
+				if (msg.client.user_id != current_user_id)
+				{
+					console.log('msg.client.data.url - ' + msg.client.data.url);
+					if (msg.client.data.url == url)
+					{
+						appendComment(msg.client);
+					}
+				}
+			});
 
 			attachHandlers();
 		}
@@ -240,6 +257,8 @@ function postComment(wrapper)
 			{
 				console.log(response);
 				appendComment(response);
+				console.log('Sending message');
+				app.BrainSocket.message('comment.posted', response);
 			}
 			else
 			{
