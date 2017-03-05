@@ -41,6 +41,9 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		$scope.$apply(function() {
 
+			console.log('$scope.selected_inspiration');
+			console.log($scope.selected_inspiration);
+
 			$location.hash($scope.selected_inspiration.id);
 
 			var url = $location.absUrl();
@@ -71,6 +74,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		console.log('pageLoaded');
 
 		var inspiration_id = $location.hash();
+
 		if (inspiration_id) {
 			$scope.loadInspiration(inspiration_id);
 		}
@@ -111,7 +115,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			if (response.meta.success)
 			{
-				$scope.openInspirationModal(response.data.inspiration);
+				var inspiration = $scope.formatInspiration(response.data.inspiration);
+				$scope.openInspirationModal(inspiration);
 			}
 			else
 			{

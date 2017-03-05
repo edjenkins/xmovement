@@ -24,18 +24,18 @@
 
 			<div class="modal-body">
 
-				<div ng-show="selected_inspiration.type == 'video'" class="video-preview-wrapper embed-responsive embed-responsive-16by9">
+				<div ng-if="selected_inspiration.type == 'video'" class="video-preview-wrapper embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" ng-src="<% setIframeUrl(selected_inspiration.content.embed) %>"></iframe>
 				</div>
 
-				<div ng-show="selected_inspiration.type == 'photo'" class="photo-preview-wrapper" ng-style="{'padding-bottom': (( selected_inspiration.content.height / selected_inspiration.content.width) * 100) + '%', 'background-image': 'url(' + 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + selected_inspiration.content.thumbnail + ')'}" data-file-height="<% selected_inspiration.content.height %>" data-file-width="<% selected_inspiration.content.width %>"></div>
+				<div ng-if="selected_inspiration.type == 'photo'" class="photo-preview-wrapper" ng-style="{'padding-bottom': (( selected_inspiration.content.height / selected_inspiration.content.width) * 100) + '%', 'background-image': 'url(' + 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + selected_inspiration.content.thumbnail + ')'}" data-file-height="<% selected_inspiration.content.height %>" data-file-width="<% selected_inspiration.content.width %>"></div>
 
-				<div ng-show="selected_inspiration.type == 'file'" class="file-preview-wrapper">
+				<div ng-if="selected_inspiration.type == 'file'" class="file-preview-wrapper">
 					<i class="fa fa-file-text-o"></i>
 					<a target="_self" href="https://s3.amazonaws.com/xmovement/uploads/files/<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
 				</div>
 
-				<div ng-show="selected_inspiration.type == 'link'" class="link-preview-wrapper">
+				<div ng-if="selected_inspiration.type == 'link'" class="link-preview-wrapper">
 					<i class="fa fa-link"></i>
 					<a target="_self" href="<% selected_inspiration.content %>"><% selected_inspiration.content %></a>
 				</div>
