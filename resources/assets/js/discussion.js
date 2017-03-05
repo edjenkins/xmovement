@@ -1,11 +1,11 @@
-// window.app = {};
-//
-// console.log('Opening socket connection');
-//
-// app.BrainSocket = new BrainSocket(
-// 		new WebSocket(web_socket_url),
-// 		new BrainSocketPubSub()
-// );
+window.app = {};
+
+console.log('Opening socket connection');
+
+app.BrainSocket = new BrainSocket(
+		new WebSocket(web_socket_url),
+		new BrainSocketPubSub()
+);
 
 // console.log(app.BrainSocket);
 
