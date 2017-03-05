@@ -1,99 +1,101 @@
 .about-container
-        border none
+    border none
 
 .info-container
-        padding 50px 0
-        &:before
-                background-color darken(main-color, 10%)
+    padding 50px 0
+    &:before
+        background-color darken(main-color, 10%)
 
 #home-hero-container
-        padding 200px 20px 180px 20px
-        background-position calc(50% + 300px) !important
-        background-size 720px
-        background-origin content-box
+    padding 200px 20px 180px 20px
+    background-position calc(50% + 300px) !important
+    background-size 720px
+    background-origin content-box
+    .text-container
+        &.text-left h1
+            max-width 560px
+
+    @media(max-width: $screen-lg-max)
         .text-container
-                &.text-left h1
-                        max-width 560px
+            padding 0 10px
+            &.text-left h1
+                max-width 50%
 
-        @media(max-width: $screen-lg-max)
-                .text-container
-                        padding 0 10px
-                        &.text-left h1
-                                max-width 50%
+    @media(max-width: $screen-md-max)
+        background-size 100%
+        background-origin border-box
+        padding 170px 20px 600px 20px
+        background-position bottom center !important
+        .text-container.text-left h1
+            max-width 100%
 
-        @media(max-width: $screen-md-max)
-                background-size 100%
-                background-origin border-box
-                padding 170px 20px 600px 20px
-                background-position bottom center !important
-                .text-container.text-left h1
-                        max-width 100%
+    @media(max-width: $screen-sm-max)
+        padding 170px 20px 450px 20px
 
-        @media(max-width: $screen-sm-max)
-                padding 170px 20px 450px 20px
-
-        @media(max-width: $screen-xs-max)
-                padding 120px 10px 320px 10px
+    @media(max-width: $screen-xs-max)
+        padding 120px 10px 320px 10px
 
 .hero-container
-        .text-container
-                button
-                        background-color transparent
-                        border white 2px solid
-                        color white
-                        font-size 22px
-                        animate()
-                        &:hover
-                                background-color white
-                                color main-color
+    .text-container
+        button
+            background-color transparent
+            border white 2px solid
+            color white
+            font-size 22px
+            animate()
+            &:hover
+                background-color white
+                color main-color
 
 .about-container
-        padding 60px 0
+    padding 60px 0
 
 .design-container
-        background-color #EB703C
-        background-origin border-box
-        background-size 50%
-        background-position 100%
-        padding 180px 20px
-        @media(max-width: $screen-sm-max)
-                padding 100px 20px
-        .text-container
-                &.text-left
-                        h1
-                                font-size 36px
-                                margin 0
-                                max-width 520px
+    background-color #EB703C
+    background-origin border-box
+    background-size 60%
+    background-position 120%
+    padding 180px 20px
+    .text-container.text-left h1
+        font-size 36px
+        margin 0
+        max-width 520px
+	@media(max-width: $screen-sm-max)
+		background-size 0
+		padding 100px 20px
+		.text-container.text-left h1
+			max-width auto
+
 
 .featured-ideas-container
-        background #45B6F4 !important
-        padding 0 0 30px 0
-        &:before
-                content ''
-                background-color darken(#45B6F4, 10%)
-                height 30px
-                width 100%
-                position relative
-                z-index 1
-                top -15px
-                -ms-transform skewY(-0.5deg)
-                -webkit-transform skewY(-0.5deg)
-                transform skewY(-0.5deg)
-        &:after
-                content ''
-                background-color #45B6F4
-                height 30px
-                width 100%
-                position relative
-                z-index 1
-                bottom -30px
-                -ms-transform skewY(-0.5deg)
-                -webkit-transform skewY(-0.5deg)
-                transform skewY(-0.5deg)
-        h2
-                color white
-                font-size 36px
-                padding-top 0
-                font-weight bold
-        .idea-tile
-                border none
+    background #45B6F4 !important
+    padding 0 0 30px 0
+    &:before
+        content ''
+        background-color darken(#45B6F4, 10%)
+        height 30px
+        width 100%
+        position relative
+        z-index 1
+        top -15px
+        -ms-transform skewY(-0.5deg)
+        -webkit-transform skewY(-0.5deg)
+        transform skewY(-0.5deg)
+	&:after
+        content ''
+        background-color #45B6F4
+        height 30px
+        width 100%
+        position relative
+        z-index 1
+        bottom -30px
+        -ms-transform skewY(-0.5deg)
+        -webkit-transform skewY(-0.5deg)
+        transform skewY(-0.5deg)
+	h2
+        color white
+        font-size 36px
+        padding-top 0
+        font-weight bold
+	.idea-tile
+        border none
