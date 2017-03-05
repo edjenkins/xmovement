@@ -65,6 +65,12 @@
 
     @include('modals/auth')
 
+	@if ($info_dialogue = Session::get('info_dialogue'))
+
+		@include('modals/info', ['info_dialogue' => $info_dialogue])
+
+	@endif
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>

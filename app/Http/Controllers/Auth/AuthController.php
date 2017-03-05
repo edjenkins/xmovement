@@ -26,6 +26,7 @@ use URL;
 
 use App\User;
 use App\SocialProfile;
+use App\InfoDialogue;
 
 class AuthController extends Controller
 {
@@ -176,7 +177,10 @@ class AuthController extends Controller
 
         $this->dispatch($job);
 
-        return $user;
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
+
+		return $user;
     }
 
     /**
@@ -235,6 +239,9 @@ class AuthController extends Controller
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
+
+		$info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
 
         return $user;
     }
@@ -321,7 +328,10 @@ class AuthController extends Controller
 
         $this->dispatch($job);
 
-        return $user;
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
+
+		return $user;
     }
 
     /*
@@ -417,7 +427,10 @@ class AuthController extends Controller
 
         $this->dispatch($job);
 
-        return $user;
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
+
+		return $user;
     }
 
     public function login(Request $request)
