@@ -63,8 +63,8 @@
 		$propose_overlay_right = 100 - $idea->progress_percentage();
 	}
 	?>
-	
-	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ $propose_overlay_right }}%);"></div>
+
+	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: {{ $propose_overlay_right }}%;"></div>
 
 	<!-- Tender -->
 	@if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
