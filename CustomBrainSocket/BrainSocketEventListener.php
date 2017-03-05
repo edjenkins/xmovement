@@ -66,7 +66,7 @@ class BrainSocketEventListener extends \BrainSocket\BrainSocketEventListener imp
 		$url = json_decode($msg)->client->data->url;
 		$in_reply_to_comment_id = json_decode($msg)->client->data->in_reply_to_comment_id;
 
-		Log::error('$in_reply_to_comment_id - ' + $in_reply_to_comment_id);
+		Log::error('$in_reply_to_comment_id - ' . $in_reply_to_comment_id);
 
 		$in_reply_to_comment_id = ($in_reply_to_comment_id == 0) ? NULL : $in_reply_to_comment_id;
 
