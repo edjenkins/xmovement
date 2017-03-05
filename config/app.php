@@ -171,7 +171,6 @@ return [
 
 		BrainSocket\BrainSocketServiceProvider::class,
 		App\Providers\CustomBrainSocketServiceProvider::class,
-		Askedio\LaravelRatchet\Providers\LaravelRatchetServiceProvider::class,
 
 		// Auth
         Laravel\Socialite\SocialiteServiceProvider::class,
