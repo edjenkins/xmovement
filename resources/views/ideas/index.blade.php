@@ -67,11 +67,11 @@
 
 		</div>
 
-	    <div class="container ideas-container" ng-cloak>
+	    <div class="container ideas-container">
 
 	        <div class="row">
 
-				<div class="col-xs-12 col-sm-6 <% (sort_type == 'shortlist') ? 'col-md-4' : 'col-md-3' %>" ng-repeat="idea in ideas | orderBy:sort_order:true | filter:idea_search_term">
+				<div class="col-xs-12 col-sm-6 <% (sort_type == 'shortlist') ? 'col-md-4' : 'col-md-3' %>" ng-repeat="idea in ideas | orderBy:sort_order:true | filter:idea_search_term" ng-cloak>
 
 					<div class="tile idea-tile">
 
@@ -106,7 +106,7 @@
 
 					<span ng-show="loading_ideas">{{ trans('common.loading') }}</span>
 
-					<span ng-hide="loading_ideas">
+					<span ng-hide="loading_ideas" ng-cloak>
 						<span ng-show="idea_search_term.length > 0">
 							{{ trans('common.no_results_for_x') }} <% idea_search_term %>
 						</span>

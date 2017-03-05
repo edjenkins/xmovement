@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div ng-controller="InspirationController" ng-cloak>
+	<div ng-controller="InspirationController">
 
 		<div class="page-header">
 
@@ -12,7 +12,7 @@
 
 		<div class="white-controls-row">
 
-			<div class="container inspirations-container" ng-cloak>
+			<div class="container inspirations-container">
 
 				<div class="view-controls-container">
 
@@ -69,7 +69,7 @@
 
 				<div class="col-sm-4 col-md-3 col-sm-push-8 col-md-push-9">
 
-					<div class="side-panel inspirations-side-panel">
+					<div class="side-panel inspirations-side-panel" ng-cloak>
 
 						@include('inspirations/add')
 
@@ -95,7 +95,7 @@
 
 				</div>
 
-				<div ng-cloak isotope-container="isotope-container" id="isotopeContainer" isotope-container data-isotope='{ "transitionDuration": "0.2s" }' class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
+				<div isotope-container="isotope-container" id="isotopeContainer" isotope-container data-isotope='{ "transitionDuration": "0.2s" }' class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
 					<div ng-cloak isotope-item="isotope-item" class="tile inspiration-tile isotope-item images-loaded" ng-repeat="inspiration in inspirations track by $index" ng-if="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" ng-click="openInspirationModal(inspiration)">
 
