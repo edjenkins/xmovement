@@ -30,7 +30,7 @@ function startListening()
 		console.log('Checking for new comments...');
 		updateDiscussion();
 
-	}, 500);
+	}, 5000);
 }
 
 function updateDiscussion()
@@ -160,10 +160,8 @@ function fetchComments() {
 	console.log('Fetching comments for - ' + url);
 
 	var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
-	console.log(discussion_wrapper);
-	var comments_container = discussion_wrapper.find('.comments-container');
 
-	comments_container.html('');
+	var comments_container = discussion_wrapper.find('.comments-container');
 
 	var data = {
 		url: url,
@@ -174,18 +172,7 @@ function fetchComments() {
 
 	$.getJSON("/api/comment/view", data, function(response) {
 
-		console.log(response);
 		if (response) {
-
-			discussion_wrapper.find('.comments-container').html('');
-
-			$.each(response.data.comments, function(index, comment) {
-
-				comments_container.append(comment.view);
-
-			});
-
-			attachHandlers();
 
 			// Check if locked
 			if (response.data.comment_target.locked)
@@ -196,6 +183,18 @@ function fetchComments() {
 			{
 				discussion_wrapper.find('.post-comment-container').show();
 			}
+
+			var comment_views = '';
+
+			$.each(response.data.comments, function(index, comment) {
+
+				comment_views += comment.view;
+
+			});
+
+			comments_container.html(comment_views);
+
+			attachHandlers();
 		}
 	});
 }
