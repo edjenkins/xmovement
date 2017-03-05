@@ -7,6 +7,22 @@ app.BrainSocket = new BrainSocket(
 		new BrainSocketPubSub()
 );
 
+app.BrainSocket.Event.listen('comment.posted',function(msg)
+{
+	var url = window.location.href.replace(/^https?:\/\//,'');
+	
+	// Check comment is for current page
+	console.log('msg.client.user_id - ' + msg.client.user_id);
+	if (msg.client.user_id != current_user_id)
+	{
+		console.log('msg.client.data.url - ' + msg.client.data.url);
+		if (msg.client.data.url == url)
+		{
+			appendComment(msg.client);
+		}
+	}
+});
+
 // console.log(app.BrainSocket);
 
 function appendComment(object)
@@ -196,20 +212,6 @@ function fetchComments() {
 			{
 				comments_container.html(comment_views);
 			}
-
-			app.BrainSocket.Event.listen('comment.posted',function(msg)
-			{
-				// Check comment is for current page
-				console.log('msg.client.user_id - ' + msg.client.user_id);
-				if (msg.client.user_id != current_user_id)
-				{
-					console.log('msg.client.data.url - ' + msg.client.data.url);
-					if (msg.client.data.url == url)
-					{
-						appendComment(msg.client);
-					}
-				}
-			});
 
 			attachHandlers();
 		}
