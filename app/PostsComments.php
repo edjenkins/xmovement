@@ -40,6 +40,8 @@ trait PostsComments
 
 		if ($validator->fails() || $comment_target->locked)
 		{
+			Log::error('Validator failed or comment target was locked');
+				
 			return false;
 		}
 		else
