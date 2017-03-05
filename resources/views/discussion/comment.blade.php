@@ -41,9 +41,11 @@
 				</div>
 			</div>
 
-			<span class="comment-action-button reply-to-comment-button">
-				{{ trans('discussion.reply') }}
-			</span>
+			@if(!$comment->in_reply_to_comment_id)
+				<span class="comment-action-button reply-to-comment-button">
+					{{ trans('discussion.reply') }}
+				</span>
+			@endif
 
 			@if(Gate::forUser($authenticated_user)->allows('destroy', $comment))
 
