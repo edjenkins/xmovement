@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
+use CustomBrainSocket\BrainSocket;
 use App\Jobs\SendCommentReplyEmail;
 
 use App\User;
@@ -72,7 +73,7 @@ trait PostsComments
 				}
 			}
 
-			// $comment->comment_target = $comment_target;
+			BrainSocket::message('comment.posted', $comment);
 
 	        return $comment;
 		}
