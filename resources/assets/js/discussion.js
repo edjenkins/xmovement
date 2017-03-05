@@ -45,14 +45,17 @@ function startListening()
 
 	app.BrainSocket.Event.listen('comment.posted',function(msg)
 	{
-		console.log(msg);
-
 		var url = window.location.href.replace(/^https?:\/\//,'');
 
 		// Check comment is for current page
-		if (msg.client.data.url == url)
+		console.log('msg.client.user_id - ' + msg.client.user_id);
+		if (msg.client.user_id != current_user_id)
 		{
-			appendComment(msg.client);
+			console.log('msg.client.data.url - ' + msg.client.data.url);
+			if (msg.client.data.url == url)
+			{
+				appendComment(msg.client);
+			}
 		}
 	});
 
@@ -180,7 +183,6 @@ function fetchComments() {
 			}
 		}
 	});
-
 }
 
 function postComment(wrapper)
@@ -202,55 +204,42 @@ function postComment(wrapper)
 	var url = window.location.href.replace(/^https?:\/\//,'');
 	var data = { url: url, comment: comment, in_reply_to_comment_id: in_reply_to_comment_id };
 
-	try {
+	// Perform standard request as a fallback
+	console.log('Attempting to post comment via AJAX');
 
-		app.BrainSocket.message('comment.posted', data);
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+			'Content-type': 'application/json'
+		}
+	});
 
-	} catch (e) {
+	$.ajax({
+		type:"POST",
+		url: "/api/comment/post",
+		dataType: "json",
+		data:  JSON.stringify(data),
+		processData: false,
+		success: function(response) {
 
-		console.log('Failed to post comment via BrainSocket');
-
-		console.log(e);
-
-		// Perform standard request as a fallback
-
-		console.log('Attempting to post comment via AJAX');
-
-		$.ajaxSetup({
-	        headers: {
-	        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-	        	'Content-type': 'application/json'
-	        }
-		});
-
-	    $.ajax({
-	        type:"POST",
-	        url: "/api/comment/post",
-	        dataType: "json",
-	        data:  JSON.stringify(data),
-	        processData: false,
-	        success: function(response) {
-
-	        	if (response.meta.success)
-	        	{
-					console.log(response);
-					appendComment(response);
-				}
-	        	else
-	        	{
-	        		// Output errors
-	        		$.each(response.errors, function(index, value) {
-	        			alert(value);
-	        		})
-	        	}
-	        },
-	        error: function(response) {
+			if (response.meta.success)
+			{
 				console.log(response);
-	        	alert('Something went wrong!');
-	        }
-	    });
-
-	}
+				appendComment(response);
+			}
+			else
+			{
+				// Output errors
+				$.each(response.errors, function(index, value) {
+					alert(value);
+				})
+			}
+		},
+		error: function(response) {
+			console.log(response);
+			alert('Something went wrong!');
+		}
+	});
 }
 
 function destroyComment(delete_button)
