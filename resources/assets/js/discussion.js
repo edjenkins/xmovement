@@ -1,9 +1,9 @@
 function appendComment(comment)
 {
-	if (comment.in_reply_to_comment_id)
+	if (comment.data.in_reply_to_comment_id)
 	{
 		// This is a reply
-		$(comment.view).hide().appendTo($('#comment-' + comment.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
+		$(comment.view).hide().appendTo($('#comment-' + comment.data.in_reply_to_comment_id).children('.comment-replies')).slideDown(300);
 	}
 	else
 	{
@@ -164,6 +164,8 @@ function postComment(wrapper)
 		data:  JSON.stringify(data),
 		processData: false,
 		success: function(response) {
+
+			console.log(response);
 
 			if (response.meta.success)
 			{
