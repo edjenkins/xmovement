@@ -40,8 +40,31 @@
 			</div>
 		</div>
 	</a>
-	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false)) ? (  
-($idea->progress_percentage() > $idea->tender_percentage()) ? $idea->tender_percentage() : $idea->progress_percentage()  ) : ($idea->progress_percentage() > $idea->proposal_percentage()) ? $idea->proposal_percentage() : 100 }}%);"></div>
+
+	<?php
+	$propose_overlay_right = 0;
+
+	if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
+	{
+		// Tender phase enabled so calculate with that in mind
+		if ($idea->progress_percentage() > $idea->tender_percentage())
+		{
+			// Total progress has passed start of tender phase
+			$propose_overlay_right = 100 - $idea->tender_percentage();
+		}
+		else
+		{
+			$propose_overlay_right = 100 - $idea->progress_percentage();
+		}
+	}
+	else
+	{
+		// Tender phase not enabled so calculate with that in mind
+		$propose_overlay_right = 100 - $idea->progress_percentage();
+	}
+	?>
+	
+	<div class="ipb-dot ipb-milestone-dot ipb-progress-overlay" style="left: calc(5px + {{ $idea->proposal_percentage() }}%); right: calc(100% - {{ $propose_overlay_right }}%);"></div>
 
 	<!-- Tender -->
 	@if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
