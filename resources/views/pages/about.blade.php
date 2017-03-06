@@ -20,7 +20,7 @@
 
 			<div class="col-sm-4">
 				<div class="about-summary-tile animated fadeInUp">
-					<img src="{{ asset(env('S3_URL') . '/icons/support.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/support.svg') }}" />
 					<h3>
 						{{ trans('about.summary-first-title') }}
 					</h3>
@@ -32,7 +32,7 @@
 			</div>
 			<div class="col-sm-4">
 				<div class="about-summary-tile animated fadeInUp">
-					<img src="{{ asset(env('S3_URL') . '/icons/design.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/design.svg') }}" />
 					<h3>
 						{{ trans('about.summary-second-title') }}
 					</h3>
@@ -44,7 +44,7 @@
 			</div>
 			<div class="col-sm-4">
 				<div class="about-summary-tile animated fadeInUp">
-					<img src="{{ asset(env('S3_URL') . '/icons/propose.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/propose.svg') }}" />
 					<h3>
 						{{ trans('about.summary-third-title') }}
 					</h3>
@@ -61,6 +61,27 @@
 
 			<div class="col-md-12">
 
+				@if (DynamicConfig::fetchConfig('INSPIRATION_MODE_ENABLED', false))
+
+					<div class="about-phase-tile animated fadeIn">
+
+						<h3>
+							{{ trans('about.inspiration-phase-title') }}
+						</h3>
+
+						<p>
+							{{ trans('about.inspiration-phase-description') }}
+						</p>
+
+						<br />
+
+						<p>
+							{{ trans('about.inspiration-phase-detail') }}
+						</p>
+					</div>
+
+				@endif
+
 				<div class="about-phase-tile animated fadeIn">
 
 					<div class="phase-step-indicator">
@@ -68,17 +89,17 @@
 					</div>
 
 					<h3>
-						{{ trans('about.phase-first-title') }}
+						{{ trans('about.idea-phase-title') }}
 					</h3>
 
 					<p>
-						{{ trans('about.phase-first-description') }}
+						{{ trans('about.idea-phase-description') }}
 					</p>
 
 					<br />
 
 					<p>
-						{{ trans('about.phase-first-detail') }}
+						{{ trans('about.idea-phase-detail') }}
 					</p>
 				</div>
 
@@ -89,17 +110,17 @@
 					</div>
 
 					<h3>
-						{{ trans('about.phase-second-title') }}
+						{{ trans('about.design-phase-title') }}
 					</h3>
 
 					<p>
-						{{ trans('about.phase-second-description') }}
+						{{ trans('about.design-phase-description') }}
 					</p>
 
 					<br />
 
 					<p>
-						{{ trans('about.phase-second-detail') }}
+						{{ trans('about.design-phase-detail') }}
 					</p>
 				</div>
 
@@ -110,17 +131,17 @@
 					</div>
 
 					<h3>
-						{{ trans('about.phase-third-title') }}
+						{{ trans('about.proposal-phase-title') }}
 					</h3>
 
 					<p>
-						{{ trans('about.phase-third-description') }}
+						{{ trans('about.proposal-phase-description') }}
 					</p>
 
 					<br />
 
 					<p>
-						{{ trans('about.phase-third-detail') }}
+						{{ trans('about.proposal-phase-detail') }}
 					</p>
 				</div>
 

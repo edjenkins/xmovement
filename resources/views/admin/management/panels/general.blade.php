@@ -42,6 +42,7 @@
 				</tr>
 				<tr xm-config-setting xm-config="{type:'boolean',title:'Pre populate design tasks',key:'PRE_POPULATE_DESIGN_TASKS'}"></tr>
 				<tr xm-config-setting xm-config="{type:'boolean',title:'Allow users to pre populate design tasks',key:'ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS'}"></tr>
+				<tr xm-config-setting xm-config="{type:'boolean',title:'Lock explore phase',key:'EXPLORE_PHASE_LOCKED'}"></tr>
 			</table>
 
 		</div>

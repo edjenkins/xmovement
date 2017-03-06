@@ -24,7 +24,7 @@
 							</div>
 						</li>
 
-						<li class="module-control search-element" ng-init="translation_search_term = ''">
+						<li class="module-control search-element translation-search-element" ng-init="translation_search_term = ''">
 							<input type="text" ng-model="translation_search_term" placeholder="Search Translations">
 						</li>
 
