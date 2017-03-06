@@ -91,6 +91,10 @@
 
 				<div class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
+					<div class="inspiration-info-dialogue">
+						{{ trans('info.inspiration') }}
+					</div>
+
 					<div class="loader" ng-show="loading_inspirations">Loading...</div>
 
 				</div>

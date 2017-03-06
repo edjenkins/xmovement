@@ -19,6 +19,7 @@
 		background-size 200px
 		background-origin border-box
 		background-position right 400px
+		padding 160px 20px 140px 20px
 
 @media(max-width: $screen-lg-max)
 	.hero-container#home-hero-container
@@ -72,7 +73,7 @@
 	background-color #EB703C
 	background-origin border-box
 	background-size 60%
-	background-position 120%
+	background-position calc(50% + 440px)
 	padding 180px 20px
     .text-container.text-left h1
         font-size 36px
@@ -82,11 +83,12 @@
 
 @media(max-width: $screen-sm-max)
 	.design-container
-		background-image none !important
-		padding 50px 20px
+		background-position calc(100% + 40px) calc(100% + 40px)
+		padding 50px 20px 300px 20px
 		.text-container.text-left
 			text-align center
 			h1
+				margin 0 0 20px 0
 				max-width 100%
 
 .featured-ideas-container
