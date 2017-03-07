@@ -165,13 +165,19 @@ class AuthController extends Controller
             return $authUser;
         }
 
-        $user = User::create([
+        $values = [
             'shibboleth_id' => $shibbolethUser['shibboleth_id'],
             'name' => $shibbolethUser['name'],
 			'email' => $shibbolethUser['email'],
 			'bio' => $shibbolethUser['bio'],
-			'shibboleth_data' => $shibbolethUser['shibboleth_data'],
-        ]);
+			'shibboleth_data' => $shibbolethUser['shibboleth_data']
+        ];
+
+		$user = User::firstOrNew(['email' => $shibbolethUser['email']]);
+
+		$user->fill($values);
+
+		$user->save();
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
@@ -228,13 +234,19 @@ class AuthController extends Controller
 			}
 		}
 
-        $user = User::create([
+        $values = [
             'facebook_id' => $facebookUser->id,
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'avatar' => $filename,
             'token' => $facebookUser->token
-        ]);
+        ];
+
+		$user = User::firstOrNew(['email' => $facebookUser->email]);
+
+		$user->fill($values);
+
+		$user->save();
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
@@ -314,13 +326,19 @@ class AuthController extends Controller
 			}
 		}
 
-        $user = User::create([
-            'linkedin_id' => $linkedinUser->id,
+        $values = [
+            'facebook_id' => $linkedinUser->id,
             'name' => $linkedinUser->name,
             'email' => $linkedinUser->email,
             'avatar' => $filename,
             'token' => $linkedinUser->token
-        ]);
+        ];
+
+		$user = User::firstOrNew(['email' => $linkedinUser->email]);
+
+		$user->fill($values);
+
+		$user->save();
 
 		$this->fetchLinkedInProfile($linkedinUser, $user);
 
