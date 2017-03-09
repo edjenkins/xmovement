@@ -75,13 +75,13 @@
 
 						<div class="side-panel-box info-box">
 							<div class="side-panel-box-header">
-								Competition Guidelines
+								{{ trans(guidelines.guidelines) }}
 							</div>
 							<div class="side-panel-box-content">
 								<p>
-									Please be sure to read our simple competition guidelines before getting involved.
+									{{ trans(guidelines.please_read_our_guidelines) }}
 								</p>
-								<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">Read Guidelines</button></a>
+								<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">{{ trans(guidelines.read_guidelines) }}</button></a>
 							</div>
 						</div>
 
