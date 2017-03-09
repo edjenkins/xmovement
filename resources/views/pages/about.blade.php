@@ -4,7 +4,7 @@
 
 	<div class="about-page">
 
-	    <div class="container-fluid hero-container" id="about-hero-container" style="background-image:url('{{ getenv('APP_ABOUT_HEADER_IMG') }}')">
+	    <div class="container-fluid hero-container" id="about-hero-container" style="background-image: url('{{ getenv('APP_ABOUT_HEADER_IMG') }}')">
 	        <div class="black-overlay"></div>
 	        <div class="container">
 	            <div class="row">

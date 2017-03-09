@@ -7,27 +7,25 @@
         background-color darken(main-color, 10%)
 
 .hero-container#home-hero-container
-	background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-home.svg')
-	background-position calc(50% + 300px) center
-	background-size 600px
-	background-origin content-box
+	background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-home.svg'), url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/tessallation-yellow.svg')
+	background-repeat no-repeat, repeat
+	background-size 600px, 1000px
+	background-origin content-box, border-box
+	background-position calc(50% + 300px) center, center
 	padding 200px 20px 180px 20px
 	.text-container
 		padding 0
 
 @media(max-width: $screen-sm-max)
 	.hero-container#home-hero-container
-		background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-mini-robot.svg')
-		background-size 200px
-		background-origin border-box
-		background-position right bottom
+		background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-mini-robot.svg'), url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/tessallation-yellow.svg')
+		background-size 200px, 1000px
+		background-origin border-box, border-box
+		background-position right bottom, center
 		padding 160px 20px 140px 20px
 
 @media(max-width: $screen-xs-max)
 	.hero-container#home-hero-container
-		background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-mini-robot.svg')
-		background-size 200px
-		background-origin border-box
 		background-position right 360px
 		padding 160px 20px 200px 20px
 
@@ -74,19 +72,21 @@
 
 .design-container
 	background-color #EB703C
+	background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-home-2.svg')
+	background-repeat no-repeat
+	background-size 50%
 	background-origin border-box
-	background-size 60%
 	background-position calc(50% + 440px)
-	padding 180px 20px
+	padding 140px 20px
     .text-container.text-left h1
         font-size 36px
 		margin 0 !important
 		padding 0
-        max-width 520px
+        max-width 50%
 
 @media(max-width: $screen-sm-max)
 	.design-container
-		background-image none !important
+		background-image none
 		padding 50px 20px
 		.text-container.text-left
 			text-align center
