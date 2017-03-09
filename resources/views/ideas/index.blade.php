@@ -6,6 +6,12 @@
 
 		@if(DynamicConfig::fetchConfig('EXPLORE_PHASE_LOCKED', false))
 
+			<div class="page-header">
+
+		        <h2 class="main-title">{{ trans('common.comingsoon') }}</h2>
+
+			</div>
+
 			@include('deployment/components/ideas/comingsoon')
 
 		@else

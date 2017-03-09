@@ -12,21 +12,24 @@
 	background-size 600px
 	background-origin content-box
 	padding 200px 20px 180px 20px
+	.text-container
+		padding 0
 
 @media(max-width: $screen-sm-max)
 	.hero-container#home-hero-container
 		background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-mini-robot.svg')
 		background-size 200px
 		background-origin border-box
-		background-position right 400px
+		background-position right bottom
 		padding 160px 20px 140px 20px
 
-@media(max-width: $screen-lg-max)
+@media(max-width: $screen-xs-max)
 	.hero-container#home-hero-container
-		.text-container
-			padding 0
-			&.text-left h1
-				max-width 50%
+		background-image url('https://xmovement.s3.amazonaws.com/assets/c4d/images/headers/c4d-mini-robot.svg')
+		background-size 200px
+		background-origin border-box
+		background-position right 360px
+		padding 160px 20px 200px 20px
 
 #home-hero-container
     .text-container
@@ -67,7 +70,7 @@
     padding 30px 0 60px 0
 	.about-summary-tile
 		img
-			height 120px
+			height 160px
 
 .design-container
 	background-color #EB703C
@@ -83,20 +86,20 @@
 
 @media(max-width: $screen-sm-max)
 	.design-container
-		background-position calc(100% + 40px) calc(100% + 40px)
-		padding 50px 20px 300px 20px
+		background-image none !important
+		padding 50px 20px
 		.text-container.text-left
 			text-align center
 			h1
-				margin 0 0 20px 0
+				margin 0 0 40px 0
 				max-width 100%
 
 .featured-ideas-container
-	background #45B6F4 !important
+	background-color lighten(#359ACC, 10%) !important
 	padding 0 0 30px 0
 	&:before
 		content ''
-		background-color darken(#45B6F4, 10%)
+		background-color #359ACC
 		height 30px
 		width 100%
 		position relative
@@ -107,7 +110,7 @@
 		transform skewY(-0.5deg)
 	&:after
 		content ''
-		background-color #45B6F4
+		background-color lighten(#359ACC, 10%)
 		height 30px
 		width 100%
 		position relative
@@ -123,3 +126,20 @@
 		font-weight bold
 	.idea-tile
 		border none
+
+.hero-container.partners-container
+	background-color #359ACC
+	padding 40px 20px
+	ul.partners-logos
+		cleanlist()
+		display block
+		margin 0 auto
+		max-width 720px
+		text-align center
+		li
+			cleanlist()
+			display inline-block
+			padding 10px
+			img
+				max-width 200px
+				width 200px
