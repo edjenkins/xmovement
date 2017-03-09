@@ -49,4 +49,26 @@
 
 	</div>
 
+	<div class="col-md-6">
+
+		<div class="admin-tile">
+
+			<div class="admin-tile--label">Features</div>
+
+			<table class="table table-bordered">
+				<col />
+				<col width="100px" />
+				<tr>
+					<th>Feature</th>
+					<th class="state-table-header">State</th>
+				</tr>
+				<tr xm-config-setting xm-config="{type:'boolean',title:'Enable blog',key:'BLOG_ENABLED'}"></tr>
+			</table>
+
+		</div>
+
+	</div>
+
+	BLOG_ENABLED
+
 </div>

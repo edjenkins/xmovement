@@ -62,6 +62,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/admin/permissions/update', 'AdminController@updatePermissions');
 	Route::post('/admin/phases/update', 'AdminController@updatePhases');
 
+    // Blog routes
+    Route::get('/blog', 'BlogController@index');
+	Route::get('/blog/{blog_post}', 'BlogController@view');
+
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
 

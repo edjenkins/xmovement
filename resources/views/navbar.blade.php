@@ -41,6 +41,10 @@
 					@endif
 				@endforeach
 
+				@if (DynamicConfig::fetchConfig('BLOG_ENABLED', false))
+	                <li><a target="_self" href="{{ action('BlogController@index') }}">{{ trans('navbar.blog') }}</a></li>
+				@endif
+
                 @if (Auth::guest())
                     <li><a target="_self" href="{{ action('Auth\AuthController@showLoginForm') }}">{{ trans('navbar.login') }}</a></li>
                     <li><a target="_self" href="{{ action('Auth\AuthController@showRegistrationForm') }}">{{ trans('navbar.register') }}</a></li>
