@@ -38,4 +38,14 @@ class PageController extends Controller
 
 	    return view('deployment.pages.blog');
 	}
+
+	public function press(Request $request)
+	{
+		# META
+		MetaTag::set('title', Lang::get('meta.press_title'));
+		MetaTag::set('description', Lang::get('meta.press_description'));
+		# META
+
+	    return view('deployment.pages.press');
+	}
 }
