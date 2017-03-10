@@ -10,6 +10,7 @@ use App\Idea;
 use Auth;
 use Input;
 use Log;
+use MetaTag;
 use Redirect;
 use Response;
 use Session;
