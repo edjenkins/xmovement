@@ -9,6 +9,7 @@ use App\User;
 use App\Idea;
 use Auth;
 use Input;
+use Lang;
 use Log;
 use MetaTag;
 use Redirect;
