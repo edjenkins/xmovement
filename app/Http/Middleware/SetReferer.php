@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Lang;
 use Log;
 use Session;
 use URL;
@@ -20,8 +21,8 @@ class SetReferer
     public function handle($request, Closure $next)
     {
 		# DEFAULT META
-		MetaTag::set('title', env('APP_SITE_TITLE'));
-		MetaTag::set('description', env('APP_SITE_DESCRIPTION'));
+		MetaTag::set('title', Lang::get('meta.default_title'));
+		MetaTag::set('description', Lang::get('meta.default_description'));
 		MetaTag::set('image', env('APP_SITE_IMAGE'));
 		# DEFAULT META
 

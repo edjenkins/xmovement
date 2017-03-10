@@ -80,11 +80,21 @@ class UserController extends Controller
 			}
 		}
 
+		# META
+		MetaTag::set('title', $user->name);
+		MetaTag::set('description', Lang::get('meta.profile_description'));
+		# META
+
 	    return view('users.profile', ['user' => $user, 'supported_ideas' => $supported_ideas, 'created_ideas' => $created_ideas, 'viewing_own_profile' => $viewing_own_profile]);
 	}
 
     public function showDetails(Request $request)
 	{
+		# META
+		MetaTag::set('title', Lang::get('meta.user_details_title'));
+		MetaTag::set('description', Lang::get('meta.user_details_description'));
+		# META
+
 		$user = Auth::user();
 
 		if (!$user) {
