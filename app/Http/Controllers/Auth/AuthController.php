@@ -375,13 +375,18 @@ class AuthController extends Controller
      */
     public function getRedirectPath()
     {
-        if (Session::has('redirect'))
-        {
-			Session::flash('show_support', true);
-            return Session::pull('redirect');
-        }
+		// 	Session::flash('show_support', true);
 
-        return (!strlen(Auth::user()->bio)) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
+		if (!strlen(Auth::user()->bio))
+		{
+			// No bio
+			Session::set('temp_redirect', Session::pull('redirect'));
+			return action('UserController@showDetails');
+		}
+		else
+		{
+			return Session::pull('redirect');
+		}
     }
 
     protected function redirectPath()

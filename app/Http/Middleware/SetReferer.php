@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Log;
 use Session;
 use URL;
 
@@ -17,6 +18,8 @@ class SetReferer
      */
     public function handle($request, Closure $next)
     {
+		Log::info('Referer - ' . Session::get('redirect'));
+
 		if (!((strpos(URL::previous(), 'login') || strpos(URL::previous(), 'register') || strpos(URL::previous(), 'auth'))))
 		{
 			Session::set('redirect', URL::previous());

@@ -10,6 +10,7 @@ use App\Idea;
 use Auth;
 use Input;
 use Log;
+use Redirect;
 use Response;
 use Session;
 
@@ -130,6 +131,13 @@ class UserController extends Controller
 		Session::flash('flash_message', trans('flash_message.profile_updated'));
 		Session::flash('flash_type', 'flash-success');
 
-	    return redirect()->action('UserController@profile', $user->id);
+		if (Session::has('temp_redirect'))
+		{
+			return Redirect::to(Session::pull('temp_redirect'));
+		}
+		else
+		{
+			return Redirect::to(Session::pull('redirect'));
+		}
 	}
 }
