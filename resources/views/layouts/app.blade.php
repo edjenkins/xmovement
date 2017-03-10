@@ -71,6 +71,12 @@
 
 	@endif
 
+	<div id="outdated">
+	     <h6>Your browser is out-of-date!</h6>
+	     <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+	     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+	</div>
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
