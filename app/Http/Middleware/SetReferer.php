@@ -6,6 +6,7 @@ use Closure;
 use Log;
 use Session;
 use URL;
+use MetaTag;
 
 class SetReferer
 {
@@ -18,7 +19,11 @@ class SetReferer
      */
     public function handle($request, Closure $next)
     {
-		Log::info('Referer - ' . Session::get('redirect'));
+		# DEFAULT META
+		MetaTag::set('title', env('APP_SITE_TITLE'));
+		MetaTag::set('description', env('APP_SITE_DESCRIPTION'));
+		MetaTag::set('image', env('APP_SITE_IMAGE'));
+		# DEFAULT META
 
 		if (!((strpos(URL::previous(), 'login') || strpos(URL::previous(), 'register') || strpos(URL::previous(), 'auth'))))
 		{
