@@ -27,7 +27,7 @@ elixir(function(mix) {
 	], 'public/js/vendor.js');
 
 	mix.styles([
-		'./resources/assets/vendor/outdated-browser/outdatedbrowser/outdatedbrowser.css'
+		'./resources/assets/vendor/outdated-browser/outdatedbrowser/outdatedbrowser.css',
 		'./bower_components/jQuery-ui-Slider-Pips/dist/jquery-ui-slider-pips.css',
 		'./resources/assets/vendor/bootstrap-daterangepicker/daterangepicker.css',
 		'./resources/assets/vendor/easydropdown/easydropdown.css',
