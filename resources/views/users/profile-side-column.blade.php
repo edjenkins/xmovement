@@ -8,15 +8,17 @@
 		{{ $user->name }}
 	</h2>
 
-	@if($viewing_own_profile)
-		<form action="{{ action('MessagesController@sendQuote') }}" method="POST">
-			{!! csrf_field() !!}
+	@if ($viewing_own_profile)
+		@if (false)
+			<form action="{{ action('MessagesController@sendQuote') }}" method="POST">
+				{!! csrf_field() !!}
 
-			<button type="submit" class="contact-button">
-				{{ trans('profile.send_a_quote') }}
-			</button>
+				<button type="submit" class="contact-button">
+					{{ trans('profile.send_a_quote') }}
+				</button>
 
-		</form>
+			</form>
+		@endif
 	@else
 		<div class="contact-button" data-toggle="modal" data-target="#direct-message-modal">
 			{{ trans('profile.send_a_message') }}
