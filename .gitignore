@@ -26,8 +26,6 @@ resources/assets/stylus/deployment/*
 config/custom-pages.php
 config/design-tasks.php
 
-resources/assets/stylus/deployment/home.styl
-
 public/js/vendor.js
 
 public/js/vendor.js.map
@@ -37,9 +35,9 @@ public/js/vendor.js
 config/bugsnag.php
 
 resources/lang
-packages/deployment
 
-packages/deployment/deployment/composer.json
+packages/deployment/*
+resources/assets/stylus/deployment/*
 
 public/js/angular-dependencies.js
 
