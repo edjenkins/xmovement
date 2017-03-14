@@ -1,7 +1,7 @@
 @extends('layouts.app', ['bodyclasses' => 'transparent medium-grey'])
 
 @section('content')
-    <div class="container-fluid hero-container" id="terms-hero-container" style="background-image:url('{{ getenv('APP_TERMS_HEADER_IMG') }}')">
+    <div class="container-fluid hero-container shallow" id="terms-hero-container" style="background-image:url('{{ getenv('APP_TERMS_HEADER_IMG') }}')">
         <div class="black-overlay"></div>
         <div class="container">
             <div class="row">
@@ -95,7 +95,9 @@
 
 					<p><strong>SEVERABILITY.</strong> If any part of these Terms of Use shall be held or declared to be invalid or unenforceable for any reason by any court of competent jurisdiction, such provision shall be ineffective but shall not affect any other part of these Terms of Use.</p>
 
-					<p><strong>WAIVER; REMEDIES.</strong> The failure by us to partially or fully exercise any rights or the waiver of any breach of these Terms of Use by you, shall not prevent a subsequent exercise of such right by us or be deemed a waiver by us of any subsequent breach by you of the same or any other term of these Terms of Use. Our rights and remedies under these Terms of Use shall be cumulative, and the exercise of any such right or remedy shall not limit our right to exercise any other right or remedy. NOTICES. Any and all notices to be given by either one of us to the other pursuant to or in connection with these Terms of Use shall be deemed sufficiently given when forwarded by e-mail in each case addressed to you at the e-mail address you have given us or to us at the e-mail address displayed on the Service.</p>
+					<p><strong>WAIVER; REMEDIES.</strong> The failure by us to partially or fully exercise any rights or the waiver of any breach of these Terms of Use by you, shall not prevent a subsequent exercise of such right by us or be deemed a waiver by us of any subsequent breach by you of the same or any other term of these Terms of Use. Our rights and remedies under these Terms of Use shall be cumulative, and the exercise of any such right or remedy shall not limit our right to exercise any other right or remedy.</p>
+
+					<p><strong>NOTICES.</strong> Any and all notices to be given by either one of us to the other pursuant to or in connection with these Terms of Use shall be deemed sufficiently given when forwarded by e-mail in each case addressed to you at the e-mail address you have given us or to us at the e-mail address displayed on the Service.</p>
 
 					<p><strong>EFFECTIVE DATE.</strong> These Terms of Use were last updated on 28th July 2016.</p>
 
@@ -109,7 +111,7 @@
 
 					<p><strong>IF YOU DO NOT AGREE TO THIS PRIVACY POLICY YOU MAY NOT ACCESS OR OTHERWISE USE OUR SITE.</strong></p>
 
-					<p><strong>Personal Information that we collect:</strong> We do not collect personal information from you unless you voluntarily provide it to us, such as when you register for the Site or submit a posting to the Classifieds (defined below).</p>
+					<p><strong>Personal Information that we collect:</strong> We do not collect personal information from you unless you voluntarily provide it to us, such as when you register for the Site or submit a piece of content.</p>
 
 					<p><strong>Non-personal or Aggregate Information that we collect:</strong> We may collect non-personally identifiable information, such as IP host address, pages viewed, browser type, duration and frequency of visits or other data, and may aggregate any information collected in a manner which does not identify any individual (“Aggregate Information”). Aggregate Information obtained in connection with the Site may be intermingled with and used by us in conjunction with information obtained through sources other than the Site, including both offline and online sources. Aggregate Information may be shared by us with third parties by allowing them to link to and collect data from the Site. This data will be used for their benefit and for ours, for marketing advertising or other purposes, including analysis of the Site for purposes of improving your experience with the Site and academic publication.</p>
 

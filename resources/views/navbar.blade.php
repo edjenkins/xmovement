@@ -21,15 +21,17 @@
 
             <ul class="nav navbar-nav navbar-right">
 
+				<li><a target="_self" href="{{ action('PageController@about') }}">{{ trans('navbar.about') }}</a></li>
+
 				@if (DynamicConfig::fetchConfig('INSPIRATION_MODE_ENABLED', false))
 					<li><a target="_self" href="{{ action('InspirationController@index') }}">{{ trans('navbar.inspiration') }}</a></li>
 				@endif
 
+                <li><a target="_self" href="{{ action('IdeaController@index') }}">{{ trans('navbar.explore') }}</a></li>
+
 				@if (DynamicConfig::fetchConfig('CREATION_MODE_ENABLED', true))
 	                <li><a target="_self" href="{{ action('IdeaController@add') }}">{{ trans('navbar.create') }}</a></li>
 				@endif
-
-                <li><a target="_self" href="{{ action('IdeaController@index') }}">{{ trans('navbar.explore') }}</a></li>
 
 				@foreach (Config::get('custom-pages.pages', []) as $index => $custom_page)
 					@if($custom_page['nav'])
@@ -39,7 +41,9 @@
 					@endif
 				@endforeach
 
-                <li><a target="_self" href="{{ action('PageController@about') }}">{{ trans('navbar.about') }}</a></li>
+				@if (DynamicConfig::fetchConfig('BLOG_ENABLED', false))
+	                <li><a target="_self" href="{{ action('BlogController@index') }}">{{ trans('navbar.blog') }}</a></li>
+				@endif
 
                 @if (Auth::guest())
                     <li><a target="_self" href="{{ action('Auth\AuthController@showLoginForm') }}">{{ trans('navbar.login') }}</a></li>

@@ -26,6 +26,7 @@ use URL;
 
 use App\User;
 use App\SocialProfile;
+use App\InfoDialogue;
 
 class AuthController extends Controller
 {
@@ -164,19 +165,28 @@ class AuthController extends Controller
             return $authUser;
         }
 
-        $user = User::create([
+        $values = [
             'shibboleth_id' => $shibbolethUser['shibboleth_id'],
             'name' => $shibbolethUser['name'],
 			'email' => $shibbolethUser['email'],
 			'bio' => $shibbolethUser['bio'],
-			'shibboleth_data' => $shibbolethUser['shibboleth_data'],
-        ]);
+			'shibboleth_data' => $shibbolethUser['shibboleth_data']
+        ];
+
+		$user = User::firstOrNew(['email' => $shibbolethUser['email']]);
+
+		$user->fill($values);
+
+		$user->save();
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
 
-        return $user;
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
+
+		return $user;
     }
 
     /**
@@ -224,17 +234,26 @@ class AuthController extends Controller
 			}
 		}
 
-        $user = User::create([
+        $values = [
             'facebook_id' => $facebookUser->id,
             'name' => $facebookUser->name,
             'email' => $facebookUser->email,
             'avatar' => $filename,
             'token' => $facebookUser->token
-        ]);
+        ];
+
+		$user = User::firstOrNew(['email' => $facebookUser->email]);
+
+		$user->fill($values);
+
+		$user->save();
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
+
+		$info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
 
         return $user;
     }
@@ -307,13 +326,19 @@ class AuthController extends Controller
 			}
 		}
 
-        $user = User::create([
-            'linkedin_id' => $linkedinUser->id,
+        $values = [
+            'facebook_id' => $linkedinUser->id,
             'name' => $linkedinUser->name,
             'email' => $linkedinUser->email,
             'avatar' => $filename,
             'token' => $linkedinUser->token
-        ]);
+        ];
+
+		$user = User::firstOrNew(['email' => $linkedinUser->email]);
+
+		$user->fill($values);
+
+		$user->save();
 
 		$this->fetchLinkedInProfile($linkedinUser, $user);
 
@@ -321,7 +346,10 @@ class AuthController extends Controller
 
         $this->dispatch($job);
 
-        return $user;
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
+
+		return $user;
     }
 
     /*
@@ -347,13 +375,18 @@ class AuthController extends Controller
      */
     public function getRedirectPath()
     {
-        if (Session::has('redirect'))
-        {
-			Session::flash('show_support', true);
-            return Session::pull('redirect');
-        }
+		// 	Session::flash('show_support', true);
 
-        return (!strlen(Auth::user()->bio)) ? action('UserController@showDetails') : action('UserController@profile', Auth::user()->id);
+		if (!strlen(Auth::user()->bio))
+		{
+			// No bio
+			Session::set('temp_redirect', Session::pull('redirect'));
+			return action('UserController@showDetails');
+		}
+		else
+		{
+			return Session::pull('redirect');
+		}
     }
 
     protected function redirectPath()
@@ -417,7 +450,10 @@ class AuthController extends Controller
 
         $this->dispatch($job);
 
-        return $user;
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+		Session::flash('info_dialogue', $info_dialogue);
+
+		return $user;
     }
 
     public function login(Request $request)

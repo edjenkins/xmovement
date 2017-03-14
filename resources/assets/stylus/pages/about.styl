@@ -3,63 +3,65 @@
 	.black-overlay
 		background-color about-hero-overlay-color
 
-.about-summary-row
-	position relative
-	margin-top -30px
+.about-page
 
-.about-summary-tile
-	margin 0 auto 20px auto
-	max-width 500px
-	padding 20px
-	text-align center
-	white-panel()
-	for num in (1..5)
-		&:nth-child({num})
-			animation-delay((num * 0.2))
-	img
-		height 60px
-		margin-bottom 15px
-	h3, p
-		margin 0
-		padding 0
-	h3
-		color #555
-		margin 0 0 10px 0
-	p
-		color #999
-		font-size 1.1em
-
-.about-phase-row
-	.about-phase-tile
-		margin 60px auto
-		padding 30px
+	.about-summary-row
 		position relative
+		margin-top -30px
+
+	.about-summary-tile
+		margin 0 auto 20px auto
+		max-width 500px
+		padding 20px
 		text-align center
 		white-panel()
-		overflow visible
-		&:first-child
-			margin 40px auto 60px auto			
-		.phase-step-indicator
-			background-color main-color
-			border-radius 50%
-			color white
-			font-size 1.6em
-			position absolute
-			top -30px
-			left 50%
-			margin-left -30px
+		for num in (1..5)
+			&:nth-child({num})
+				animation-delay((num * 0.2))
+		img
 			height 60px
-			line-height 60px
-			width 60px
-			text-align center
+			margin-bottom 15px
 		h3, p
 			margin 0
 			padding 0
 		h3
-			color #444
-			margin 20px 0
+			color #555
+			margin 0 0 10px 0
 		p
-			color #666
+			color #999
 			font-size 1.1em
-			margin 0 auto;
-			max-width 960px
+
+	.about-phase-row
+		.about-phase-tile
+			margin 60px auto
+			padding 30px
+			position relative
+			text-align center
+			white-panel()
+			overflow visible
+			&:first-child
+				margin 40px auto 60px auto
+			.phase-step-indicator
+				background-color main-color
+				border-radius 50%
+				color white
+				font-size 1.6em
+				position absolute
+				top -30px
+				left 50%
+				margin-left -30px
+				height 60px
+				line-height 60px
+				width 60px
+				text-align center
+			h3, p
+				margin 0
+				padding 0
+			h3
+				color #444
+				margin 20px 0
+			p
+				color #666
+				font-size 1.1em
+				margin 0 auto;
+				max-width 960px

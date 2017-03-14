@@ -28,9 +28,9 @@
 
 		<div class="container">
 
-			<div class="col-md-4">
+			<div class="col-sm-4">
 				<div class="about-summary-tile">
-					<img src="{{ asset(env('S3_URL') . '/icons/support.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/support.svg') }}" />
 					<h3>
 						{{ trans('about.summary-first-title') }}
 					</h3>
@@ -40,9 +40,9 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-sm-4">
 				<div class="about-summary-tile">
-					<img src="{{ asset(env('S3_URL') . '/icons/design.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/design.svg') }}" />
 					<h3>
 						{{ trans('about.summary-second-title') }}
 					</h3>
@@ -52,9 +52,9 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-sm-4">
 				<div class="about-summary-tile">
-					<img src="{{ asset(env('S3_URL') . '/icons/propose.png') }}" />
+					<img src="{{ asset(env('S3_URL') . '/icons/propose.svg') }}" />
 					<h3>
 						{{ trans('about.summary-third-title') }}
 					</h3>

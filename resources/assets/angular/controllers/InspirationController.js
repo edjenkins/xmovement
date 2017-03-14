@@ -14,15 +14,13 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 	$scope.loading_inspirations = true;
 	$scope.inspirations = [];
 	$scope.selected_inspiration = {};
-	$scope.inspiration_form_data =
-	{
+
+	$scope.new_inspiration = {
 		photo: { type:'photo', description:'', content:'', category:'' },
 		video: { type:'video', description:'', content:'', category:'' },
 		file: { type:'file', description:'', content:'', category:'' },
 		link: { type:'link', description:'', content:'', category:'' }
 	};
-
-	$scope.new_inspiration = $scope.inspiration_form_data;
 
 	$scope.$on('imagesLoaded:loaded', function(event, element){
 		$scope.layoutGrid();
@@ -43,13 +41,21 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		$scope.$apply(function() {
 
+			console.log('$scope.selected_inspiration');
+			console.log($scope.selected_inspiration);
+
 			$location.hash($scope.selected_inspiration.id);
 
-			$('#inspiration-modal .discussion-wrapper').attr('data-url', $location.absUrl());
+			var url = $location.absUrl();
+			url = url.replace($location.protocol() + '://', '');
+
+			$('#inspiration-modal .discussion-wrapper').attr('data-url', url);
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-id', $scope.selected_inspiration.id);
 			$('#inspiration-modal .discussion-wrapper').attr('data-target-type', 'Inspiration');
 
-			$scope.fetchComments($location.absUrl());
+			fetchComments(url);
+
+			$('textarea').expanding();
         });
 	});
 
@@ -68,6 +74,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		console.log('pageLoaded');
 
 		var inspiration_id = $location.hash();
+
 		if (inspiration_id) {
 			$scope.loadInspiration(inspiration_id);
 		}
@@ -108,7 +115,8 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 			if (response.meta.success)
 			{
-				$scope.openInspirationModal(response.data.inspiration);
+				var inspiration = $scope.formatInspiration(response.data.inspiration);
+				$scope.openInspirationModal(inspiration);
 			}
 			else
 			{
@@ -117,7 +125,7 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		});
 	}
 
-	$scope.addInspiration = function(type) {
+	$scope.addInspiration = function(type, input_id) {
 
 		console.log("Adding inspiration");
 
@@ -125,12 +133,22 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 
 		switch (type) {
 			case 'photo':
-				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
 				$scope.new_inspiration['photo'].dimensions = [$('#dropzone-photo').attr('data-file-height'), $('#dropzone-photo').attr('data-file-width')];
+				$scope.new_inspiration['photo'].content = $('#dropzone-photo').val();
+				if ($('#dropzone-photo').val() == '')
+				{
+					alert('Please wait for upload to complete');
+					return false;
+				}
 				break;
 
 			case 'file':
 				$scope.new_inspiration['file'].content = $('#dropzone-file').val();
+				if ($('#dropzone-file').val() == '')
+				{
+					alert('Please wait for upload to complete');
+					return false;
+				}
 				break;
 
 			default:
@@ -143,16 +161,22 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 			{
 				var inspiration = response.data.inspiration;
 
-				// $scope.inspirations.push($scope.formatInspiration(inspiration));
 				$scope.inspirations.splice(0,0, $scope.formatInspiration(response.data.inspiration));
 
-				$scope.$apply(function() {
-					$scope.layoutGrid();
-					$scope.openInspirationModal(inspiration);
-				});
+				$scope.layoutGrid();
+				$scope.openInspirationModal(inspiration);
 
 				// Reset form
-				$scope.new_inspiration = $scope.inspiration_form_data;
+				$scope.new_inspiration = {
+					photo: { type:'photo', description:'', content:'', category:'' },
+					video: { type:'video', description:'', content:'', category:'' },
+					file: { type:'file', description:'', content:'', category:'' },
+					link: { type:'link', description:'', content:'', category:'' }
+				};
+
+				// Reset dropzones
+				$('.dropzone').each(function(index) { Dropzone.forElement('#' + $(this).attr('id')).removeAllFiles(); });
+
 			}
 		});
 	}
@@ -286,36 +310,36 @@ XMovement.controller('InspirationController', function($scope, $http, $rootScope
 		return $sce.trustAsResourceUrl(url);
 	}
 
-	$scope.fetchComments = function(url) {
-
-		var discussion_wrapper = $('.discussion-wrapper[data-url="' + url + '"]');
-		var post_comment_container = discussion_wrapper.find('.post-comment-container');
-		var comments_container = discussion_wrapper.find('.comments-container');
-
-		comments_container.html('');
-
-		var data = {
-			url: url,
-			target_id: discussion_wrapper.attr('data-target-id'),
-			target_type: discussion_wrapper.attr('data-target-type'),
-			idea_id: discussion_wrapper.attr('data-idea-id')
-		};
-
-		DiscussionService.fetchComments(data).then(function(response) {
-
-			comments_container.html('');
-
-			$.each(response.data.comments, function(index, comment) {
-
-				comments_container.append(comment.view);
-			});
-
-			attachHandlers();
-
-			// Hide comment input if locked
-			post_comment_container.toggle(!response.data.comment_target.locked);
-		});
-	}
+	// $scope.fetchComments = function(url) {
+	//
+	// 	var discussion_wrapper = $('.discussion-wrapper').filter('[data-url="' + url + '"]');
+	// 	var post_comment_container = discussion_wrapper.find('.post-comment-container');
+	// 	var comments_container = discussion_wrapper.find('.comments-container');
+	//
+	// 	comments_container.html('');
+	//
+	// 	var data = {
+	// 		url: url,
+	// 		target_id: discussion_wrapper.attr('data-target-id'),
+	// 		target_type: discussion_wrapper.attr('data-target-type'),
+	// 		idea_id: discussion_wrapper.attr('data-idea-id')
+	// 	};
+	//
+	// 	DiscussionService.fetchComments(data).then(function(response) {
+	//
+	// 		comments_container.html('');
+	//
+	// 		$.each(response.data.comments, function(index, comment) {
+	//
+	// 			comments_container.append(comment.view);
+	// 		});
+	//
+	// 		attachHandlers();
+	//
+	// 		// Hide comment input if locked
+	// 		post_comment_container.toggle(!response.data.comment_target.locked);
+	// 	});
+	// }
 
 	$scope.loadInspirations('popular');
 	$scope.pageLoaded();

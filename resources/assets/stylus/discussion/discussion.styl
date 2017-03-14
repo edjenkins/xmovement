@@ -9,6 +9,8 @@
 		padding 20px
 		padding-left 80px
 		position relative
+		@media(max-width: $screen-sm-max)
+			padding-left 20px
 		&.post-comment-container
 			display none
 		&.post-reply-container
@@ -26,6 +28,8 @@
 			position absolute
 			left 20px
 			top 20px
+			@media(max-width: $screen-sm-max)
+				display none
 		.comment-composer-wrapper
 			button.post-comment-button
 				background very-light-grey
@@ -37,6 +41,10 @@
 				right 28px
 				position absolute
 				animate()
+				.action-label
+					display block
+				.action-icon
+					display none
 				.idle-state
 					display block
 				.posting-state
@@ -54,6 +62,13 @@
 					cursor pointer
 					span
 						color white
+				@media(max-width: $screen-sm-max)
+					padding 0 10px
+					width auto
+					.action-label
+						display none
+					.action-icon
+						display block
 			textarea
 				background-color white
 				border border-color 1px solid
@@ -65,6 +80,8 @@
 				resize none
 				padding 10px 120px 10px 15px
 				width 100%
+				@media(max-width: $screen-sm-max)
+					padding-right 40px
 				&:active
 					outline 0
 

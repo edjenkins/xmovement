@@ -41,7 +41,7 @@ class LogActivity
 		}
 
 		$authenticated_user_id = (Auth::user()) ? Auth::user()->id : null;
-		
+
 		ActivityLog::create([
 			'user_id' => $authenticated_user_id,
 			'request' => $request,

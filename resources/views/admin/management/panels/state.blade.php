@@ -30,16 +30,18 @@
 					</div>
 				</li>
 
-				<!-- Min and max length of creation/design process -->
-				<li ng-class="{'selected':progression_type == 'user-defined'}">
-					<div class="inner-wrapper">
-						<h5>User Defined</h5>
-						<p class="progression-type-description">Progress through the phases after user defined durations.</p>
-						<button ng-click="setProgressionType('user-defined')" type="button">
-							<% (progression_type == 'user-defined') ? 'Selected' : 'Select' %>
-						</button>
-					</div>
-				</li>
+				@if (false)
+					<!-- Min and max length of creation/design process -->
+					<li ng-class="{'selected':progression_type == 'user-defined'}">
+						<div class="inner-wrapper">
+							<h5>User Defined</h5>
+							<p class="progression-type-description">Progress through the phases after user defined durations.</p>
+							<button ng-click="setProgressionType('user-defined')" type="button">
+								<% (progression_type == 'user-defined') ? 'Selected' : 'Select' %>
+							</button>
+						</div>
+					</li>
+				@endif
 
 				<div class="clearfloat"></div>
 

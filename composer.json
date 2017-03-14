@@ -16,7 +16,7 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "intervention/imagecache": "^2.3",
         "gurzhii/laravel-sluggable-trait": "^1.0",
-        "torann/laravel-meta-tags": "^3.0",
+        "torann/laravel-meta-tags": "^3.0.3",
         "bugsnag/bugsnag-laravel": "^2.0",
         "artesaos/laravel-linkedin": "^1.1",
         "predis/predis": "~1.0",

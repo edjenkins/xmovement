@@ -30,8 +30,10 @@ class ReportController extends Controller
 	{
 		$response = new ResponseObject();
 
+		$user_id = (Auth::user()) ? Auth::user()->id : null;
+
 		$report = Report::create([
-			'user_id' => Auth::user()->id,
+			'user_id' => $user_id,
 			'reportable_id' => $request->reportable_id,
 			'reportable_type' => $request->reportable_type,
 		]);

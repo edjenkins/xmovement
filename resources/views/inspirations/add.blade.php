@@ -1,9 +1,9 @@
-@can('create', App\Inspiration::class)
-	<div class="side-panel-box submission-box">
+<div class="side-panel-box submission-box">
+	@can('create', App\Inspiration::class)
 		<div class="side-panel-box-header">
 			Add Inspiration
 		</div>
-		<div class="side-panel-box-content" ng-init="submission_type = 'photo'">
+		<div class="side-panel-box-content">
 			<ul class="submission-type-selector">
 				<li ng-class="{'selected' : (submission_type == 'photo')}" ng-click="submission_type = 'photo'" onclick="setTimeout(function() { $('textarea').expanding() }, 100)"><i class="fa fa-camera"></i></li>
 				<li ng-class="{'selected' : (submission_type == 'video')}" ng-click="submission_type = 'video'" onclick="setTimeout(function() { $('textarea').expanding() }, 100)"><i class="fa fa-video-camera"></i></li>
@@ -24,7 +24,7 @@
 						{{ $inspiration_category->name }}
 					</label>
 				@endforeach
-				<button ng-click="addInspiration('photo')" class="btn" type="button" name="button">Share Photo</button>
+				<button ng-click="addInspiration('photo', 'dropzone-photo')" class="btn" type="button" name="button">Share Photo</button>
 			</form>
 
 			<form class="" action="index.html" method="post" ng-show="submission_type == 'video'">
@@ -44,7 +44,7 @@
 				<div class="input-wrapper">
 					<textarea class="expanding" rows="1" ng-model="new_inspiration['file'].description" cols="40" placeholder="File Description"></textarea>
 				</div>
-				<button ng-click="addInspiration('file')" class="btn" type="button" name="button">Share File</button>
+				<button ng-click="addInspiration('file', 'dropzone-file')" class="btn" type="button" name="button">Share File</button>
 			</form>
 
 			<form class="" action="index.html" method="post" ng-show="submission_type == 'link'">
@@ -57,5 +57,9 @@
 				<button ng-click="addInspiration('link')" class="btn" type="button" name="button">Share Link</button>
 			</form>
 		</div>
-	</div>
-@endcan
+	@else
+		<div class="side-panel-box-content">
+			<a target="_self" href="{{ action('Auth\AuthController@showRegistrationForm') }}" target="_self"><button class="btn" type="button" name="button">Add Inspirations</button></a>
+		</div>
+	@endcan
+</div>

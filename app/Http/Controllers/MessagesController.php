@@ -39,6 +39,15 @@ class MessagesController extends Controller
 {
 	public function send(Request $request, User $user)
 	{
+		// TODO: Create policy for this action
+		if (Auth::guest())
+		{
+			Session::flash('flash_message', trans('flash_message.no_permission'));
+            Session::flash('flash_type', 'flash-danger');
+			
+			return redirect()->action('UserController@profile', $request->user_id);
+		}
+
 		// Check if users are being spammed
 		$direct_messages_count = Message::where([['user_id', $request->user_id], ['sender_id', Auth::user()->id], ['created_at', '>=', Carbon::now()->subHour()]])->count();
 

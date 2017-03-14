@@ -62,6 +62,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/admin/permissions/update', 'AdminController@updatePermissions');
 	Route::post('/admin/phases/update', 'AdminController@updatePhases');
 
+    // Blog routes
+    Route::get('/blog', 'BlogController@index');
+	Route::get('/blog/{blog_post}', 'BlogController@view');
+
 	// Translation routes
     Route::get('/translate', 'TranslationController@index');
 
@@ -231,6 +235,8 @@ Route::group(['middleware' => ['api']], function () {
 
 	// Discussion routes
 	Route::get('/api/comment/view', 'CommentController@view');
+	Route::get('/api/comment/fetch', 'CommentController@fetch');
+	Route::post('/api/comment/post', 'CommentController@post');
     Route::delete('/api/comment/destroy', 'CommentController@destroy');
 
 	// Report routes

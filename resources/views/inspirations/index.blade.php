@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<div ng-controller="InspirationController" ng-cloak>
+	<div ng-controller="InspirationController">
 
 		<div class="page-header">
 
@@ -12,7 +12,7 @@
 
 		<div class="white-controls-row">
 
-			<div class="container inspirations-container" ng-cloak>
+			<div class="container inspirations-container">
 
 				<div class="view-controls-container">
 
@@ -30,11 +30,13 @@
 
 		    				</li>
 
-						<li class="module-control" ng-click="loadInspirations('favourites')" ng-class="{'active':sort_type == 'favourites'}">
+						@unless (Auth::guest())
+							<li class="module-control" ng-click="loadInspirations('favourites')" ng-class="{'active':sort_type == 'favourites'}">
 
-							<button type="button">{{ trans('idea.sort_favourites') }}</button>
+								<button type="button">{{ trans('idea.sort_favourites') }}</button>
 
-	    				</li>
+		    				</li>
+						@endunless
 
 	    			</ul>
 
@@ -67,19 +69,19 @@
 
 				<div class="col-sm-4 col-md-3 col-sm-push-8 col-md-push-9">
 
-					<div class="side-panel inspirations-side-panel">
+					<div class="side-panel inspirations-side-panel" ng-cloak>
 
 						@include('inspirations/add')
 
 						<div class="side-panel-box info-box">
 							<div class="side-panel-box-header">
-								Competition Guidelines
+								{{ trans('guidelines.guidelines') }}
 							</div>
 							<div class="side-panel-box-content">
 								<p>
-									Please be sure to read our simple competition guidelines before getting involved.
+									{{ trans('guidelines.please_read_our_guidelines') }}
 								</p>
-								<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">Read Guidelines</button></a>
+								<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">{{ trans('guidelines.read_guidelines') }}</button></a>
 							</div>
 						</div>
 
@@ -89,13 +91,17 @@
 
 				<div class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
+					<div class="inspiration-info-dialogue">
+						{{ trans('info.inspiration') }}
+					</div>
+
 					<div class="loader" ng-show="loading_inspirations">Loading...</div>
 
 				</div>
 
-				<div ng-cloak isotope-container="isotope-container" id="isotopeContainer" isotope-container data-isotope='{ "transitionDuration": "0.2s" }' class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
+				<div isotope-container="isotope-container" id="isotopeContainer" isotope-container data-isotope='{ "animationOptions": { "duration": "0.15"} }' class="isotope col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
-					<div ng-cloak isotope-item="isotope-item" class="tile inspiration-tile isotope-item images-loaded" ng-repeat="inspiration in inspirations track by $index" ng-if="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" ng-click="openInspirationModal(inspiration)">
+					<div ng-cloak isotope-item="isotope-item" class="tile inspiration-tile isotope-item images-loaded animated fadeIn" ng-repeat="inspiration in inspirations track by $index" ng-if="(sort_type != 'favourites') || (inspiration.has_favourited && (sort_type == 'favourites'))" ng-click="openInspirationModal(inspiration)">
 
 						<div class="inspiration-categories">
 							<ul>
@@ -105,7 +111,7 @@
 							</ul>
 						</div>
 
-						<div ng-if="inspiration.type == 'photo'" class="photo-tile-image" style="padding-bottom: <%(( inspiration.content.height / inspiration.content.width) * 100) + '%' %>; background-image:url('<% (inspiration.content.thumbnail.indexOf('http') == 0) ? inspiration.content.thumbnail : 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content.thumbnail %>')" data-file-height="<% inspiration.content.height %>" data-file-width="<% inspiration.content.width %>"></div>
+						<div ng-if="inspiration.type == 'photo'" class="photo-tile-image" ng-style="{'padding-bottom': (( inspiration.content.height / inspiration.content.width) * 100) + '%', 'background-image': 'url(' + 'https://s3.amazonaws.com/xmovement/uploads/images/large/' + inspiration.content.thumbnail + ')'}" data-file-height="<% inspiration.content.height %>" data-file-width="<% inspiration.content.width %>"></div>
 
 						<div ng-if="inspiration.type == 'video'" class="video-tile-image" style="background-image:url('<% inspiration.content.thumbnail %>')">
 							<i class="fa fa-play"></i>
