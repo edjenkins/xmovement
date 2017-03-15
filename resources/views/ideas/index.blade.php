@@ -69,18 +69,6 @@
 
 			</div>
 
-			<div class="categories-container">
-
-				<ul class="category-pills">
-					<li ng-repeat="primary_category in primary_categories" ng-class="{'active': selected_primary_category == primary_category.id}" class="category-pill primary-category-pill" ng-click="setPrimaryCategory(primary_category.id)"><% primary_category.name %></li>
-				</ul>
-
-				<ul class="category-pills">
-					<li ng-repeat="secondary_category in secondary_categories" ng-class="{'active': selected_secondary_category == secondary_category.id}" ng-show="selected_primary_category == secondary_category.parent_id" class="category-pill secondary-category-pill" ng-click="setSecondaryCategory(secondary_category.id)"><% secondary_category.name %></li>
-				</ul>
-
-			</div>
-
 			<div class="container">
 
 				<div class="shortlist-info-box" ng-cloak ng-show="sort_type == 'shortlist'">
@@ -92,6 +80,18 @@
 			</div>
 
 		    <div class="container ideas-container">
+
+				<div class="categories-container">
+
+					<ul class="category-pills">
+						<li ng-repeat="primary_category in primary_categories" ng-class="{'active': selected_primary_category == primary_category.id}" class="category-pill primary-category-pill" ng-click="setPrimaryCategory(primary_category.id)"><% primary_category.name %></li>
+					</ul>
+
+					<ul class="category-pills">
+						<li ng-repeat="secondary_category in secondary_categories" ng-class="{'active': selected_secondary_category == secondary_category.id}" ng-show="selected_primary_category == secondary_category.parent_id" class="category-pill secondary-category-pill" ng-click="setSecondaryCategory(secondary_category.id)"><% secondary_category.name %></li>
+					</ul>
+
+				</div>
 
 		        <div class="row">
 

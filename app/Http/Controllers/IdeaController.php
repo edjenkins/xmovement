@@ -85,6 +85,28 @@ class IdeaController extends Controller
 
 		$response->meta['success'] = true;
 
+		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->with('subcategories')->get();
+		$response->data['primary_categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
+		$response->data['secondary_categories'] = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
+
+		return Response::json($response);
+	}
+
+	public function api_categories_add(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$idea_category = IdeaCategory::create([
+			'name' => $request->name,
+			'enabled' => true,
+			'parent_id' => $request->parent_id
+		]);
+
+		Log::info($idea_category);
+
+		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->with('subcategories')->get();
 		$response->data['primary_categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
 		$response->data['secondary_categories'] = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
 

@@ -63,12 +63,11 @@
 					<th class="state-table-header">State</th>
 				</tr>
 				<tr xm-config-setting xm-config="{type:'boolean',title:'Enable blog',key:'BLOG_ENABLED'}"></tr>
+				<tr xm-config-setting xm-config="{type:'boolean',title:'Enable categories',key:'CATEGORIES_ENABLED'}"></tr>
 			</table>
 
 		</div>
 
 	</div>
-
-	BLOG_ENABLED
 
 </div>

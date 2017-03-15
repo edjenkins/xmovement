@@ -1,4 +1,4 @@
-XMovement.controller('AdminController', function($scope, $http, $rootScope, $localStorage, $sessionStorage, AdminService, UserService) {
+XMovement.controller('AdminController', function($scope, $http, $rootScope, $localStorage, $sessionStorage, AdminService, UserService, CategoryService) {
 
 	$scope.current_view = '';
 
@@ -6,6 +6,50 @@ XMovement.controller('AdminController', function($scope, $http, $rootScope, $loc
 	$scope.original_user_search_results = [];
 
 	$scope.admins = [];
+	$scope.idea_categories = [];
+
+	$scope.getCategories = function() {
+
+		console.log("Loading categories");
+
+		$scope.loading_categories = true;
+
+		CategoryService.getIdeaCategories().then(function(response) {
+
+			console.log(response);
+
+			$scope.idea_categories = response.data.categories;
+			$scope.primary_categories = response.data.primary_categories;
+			$scope.secondary_categories = response.data.secondary_categories;
+
+			$scope.loading_categories = false;
+
+		});
+	}
+
+	$scope.addCategory = function(new_category) {
+
+		console.log("Adding new category");
+
+		CategoryService.addIdeaCategory(new_category).then(function(response) {
+
+			console.log(response);
+
+			$scope.idea_categories = response.data.categories;
+			$scope.primary_categories = response.data.primary_categories;
+			$scope.secondary_categories = response.data.secondary_categories;
+
+			$scope.loading_categories = false;
+
+		});
+
+		// // Add category
+		// $scope.idea_categories.push(angular.copy(new_category));
+
+		// new_category = {};
+		//
+		// console.log($scope.idea_categories);
+	}
 
 	$scope.fetchAdmins = function() {
 
@@ -106,4 +150,5 @@ XMovement.controller('AdminController', function($scope, $http, $rootScope, $loc
 	}
 
 	$scope.fetchAdmins();
+	$scope.getCategories();
 });

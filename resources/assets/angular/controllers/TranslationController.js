@@ -21,9 +21,9 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 	$scope.findTranslations = function($event) {
 
-		console.log("Finding translations");
+		console.log("Scraping translations");
 
-		$($event.target).html('Finding..');
+		$($event.target).html('Scraping..');
 
 		$timeout(function () {
 
@@ -31,9 +31,9 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 				console.log(response);
 
-				$($event.target).html('Find');
+				$($event.target).html('Scrape');
 
-				alert('Find complete');
+				alert('Scrape complete');
 
 			});
 
@@ -87,9 +87,9 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 	$scope.exportAllTranslations = function($event) {
 
-		console.log('Exporting all translations');
+		console.log('Updating all translations');
 
-		$($event.target).html('Exporting..');
+		$($event.target).html('Updating..');
 
 		$timeout(function () {
 
@@ -97,9 +97,9 @@ XMovement.controller('TranslationController', function($scope, $http, $rootScope
 
 				console.log(response);
 
-				$($event.target).html('Export');
+				$($event.target).html('Update');
 
-				alert('Export complete');
+				alert('Update complete');
 
 			});
 

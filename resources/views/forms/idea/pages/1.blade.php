@@ -16,49 +16,53 @@
 
 		</div>
 
-		<div class="form-group{{ $errors->has('parent_category') ? ' has-error' : '' }}">
+		@if(DynamicConfig::fetchConfig('CATEGORIES_ENABLED', false))
 
-			<label>Primary Category</label>
+			<div class="form-group{{ $errors->has('parent_category') ? ' has-error' : '' }}">
 
-			<input type="hidden" name="primary_category" id="primary-category-field" value="{{ isset($idea) ? old('primary_category', $idea->primary_category) : old('primary_category') }}">
+				<label>Primary Category</label>
 
-			<ul class="category-pills">
-				@foreach ($primary_categories as $primary_category)
+				<input type="hidden" name="primary_category" id="primary-category-field" value="{{ isset($idea) ? old('primary_category', $idea->primary_category) : old('primary_category') }}">
 
-					<li class="category-pill primary-category-pill {{ ($primary_category == (isset($idea) ? old('primary_category', $idea->primary_category) : old('primary_category')) ? 'active' : '') }}" data-primary-category-id="{{ $primary_category->id }}">{{ $primary_category->name }}</li>
+				<ul class="category-pills">
+					@foreach ($primary_categories as $primary_category)
 
-				@endforeach
-			</ul>
+						<li class="category-pill primary-category-pill {{ ($primary_category == (isset($idea) ? old('primary_category', $idea->primary_category) : old('primary_category')) ? 'active' : '') }}" data-primary-category-id="{{ $primary_category->id }}">{{ $primary_category->name }}</li>
 
-			@if ($errors->has('primary_category'))
-				<span class="help-block">
-					<strong>{{ $errors->first('primary_category') }}</strong>
-				</span>
-			@endif
+					@endforeach
+				</ul>
 
-		</div>
+				@if ($errors->has('primary_category'))
+					<span class="help-block">
+						<strong>{{ $errors->first('primary_category') }}</strong>
+					</span>
+				@endif
 
-		<div class="form-group{{ $errors->has('secondary_category') ? ' has-error' : '' }}">
+			</div>
 
-			<label>Secondary Category</label>
+			<div class="form-group{{ $errors->has('secondary_category') ? ' has-error' : '' }}">
 
-			<input type="hidden" name="secondary_category" id="secondary-category-field" value="{{ isset($idea) ? old('secondary_category', $idea->secondary_category) : old('secondary_category') }}">
+				<label>Secondary Category</label>
 
-			<ul class="category-pills">
-				@foreach ($secondary_categories as $secondary_category)
+				<input type="hidden" name="secondary_category" id="secondary-category-field" value="{{ isset($idea) ? old('secondary_category', $idea->secondary_category) : old('secondary_category') }}">
 
-					<li class="category-pill secondary-category-pill {{ ($secondary_category == (isset($idea) ? old('secondary_category', $idea->secondary_category) : old('secondary_category')) ? 'active' : '') }}" data-secondary-category-id="{{ $secondary_category->id }}">{{ $secondary_category->name }}</li>
+				<ul class="category-pills">
+					@foreach ($secondary_categories as $secondary_category)
 
-				@endforeach
-			</ul>
+						<li class="category-pill secondary-category-pill {{ ($secondary_category == (isset($idea) ? old('secondary_category', $idea->secondary_category) : old('secondary_category')) ? 'active' : '') }}" data-secondary-category-id="{{ $secondary_category->id }}">{{ $secondary_category->name }}</li>
 
-			@if ($errors->has('secondary_category'))
-				<span class="help-block">
-					<strong>{{ $errors->first('secondary_category') }}</strong>
-				</span>
-			@endif
+					@endforeach
+				</ul>
 
-		</div>
+				@if ($errors->has('secondary_category'))
+					<span class="help-block">
+						<strong>{{ $errors->first('secondary_category') }}</strong>
+					</span>
+				@endif
+
+			</div>
+
+		@endif
 
 		<div class="form-group">
 			<div class="btn btn-primary step-button" onClick="showStep('next')">{{ trans('idea_form.next_step') }}</div>

@@ -30,6 +30,12 @@
 								<button type="button">{{ trans('admin.view_state') }}</button>
 
 		    				</li>
+
+							<li class="module-control" ng-class="{'active' : (current_view == 'categories')}" ng-click="setCurrentView('categories')">
+
+								<button type="button">{{ trans('admin.view_categories') }}</button>
+
+		    				</li>
 						@endcan
 
 	    			</ul>
@@ -47,6 +53,7 @@
 			@can('manage_platform', Auth::user())
 				@include('admin/management/panels/general')
 				@include('admin/management/panels/state')
+				@include('admin/management/panels/categories')
 			@endcan
 
         </div>

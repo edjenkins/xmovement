@@ -164,8 +164,22 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'PROCESS_START_DATE',
 				'value' => '2017-02-01T00:00:00.000Z',
 				'type' => 'timestamp'
+			),
+			array(
+				'key' => 'BLOG_ENABLED',
+				'value' => false,
+				'type' => 'boolean'
+			),
+			array(
+				'key' => 'CATEGORIES_ENABLED',
+				'value' => false,
+				'type' => 'boolean'
+			),
+			array(
+				'key' => 'EXPLORE_PHASE_LOCKED',
+				'value' => false,
+				'type' => 'boolean'
 			)
-
 		);
 
 		foreach ($configs as $config)

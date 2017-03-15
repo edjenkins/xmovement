@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class IdeaCategory extends Model
 {
     /**
@@ -20,5 +21,10 @@ class IdeaCategory extends Model
     public function ideas()
     {
         return $this->belongsToMany('App\Idea');
+    }
+
+    public function subcategories()
+    {
+        return $this->hasMany('App\IdeaCategory', 'parent_id', 'id');
     }
 }

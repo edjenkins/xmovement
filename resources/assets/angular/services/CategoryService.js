@@ -8,5 +8,14 @@ XMovement.service('CategoryService', function($http, $q) {
 				defer.reject(err);
 			});
 			return defer.promise;
+		},
+		'addIdeaCategory': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/categories/idea/add', body).then(function successCallback(response) {
+				defer.resolve(response.data);
+			}, function errorCallback(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
 		}
 	}})

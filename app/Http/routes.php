@@ -208,6 +208,7 @@ Route::group(['middleware' => ['api']], function () {
 
 	// Category routes
 	Route::get('/api/categories/idea', 'IdeaController@api_categories');
+	Route::post('/api/categories/idea/add', 'IdeaController@api_categories_add');
 
 	// Idea routes
 	Route::get('/api/ideas', 'IdeaController@api_index');

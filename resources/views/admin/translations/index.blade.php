@@ -34,19 +34,19 @@
 
 						<li class="module-control" ng-click="findTranslations($event)">
 
-							<button type="button">Find</button>
+							<button type="button" alt="Scrape platform files for new strings">Scrape</button>
 
 	    				</li>
 
 						<li class="module-control" ng-click="importTranslations($event)">
 
-							<button type="button">Import</button>
+							<button type="button" alt="Import strings from files into database">Import</button>
 
 	    				</li>
 
 						<li class="module-control" ng-click="exportAllTranslations($event)">
 
-							<button type="button">Export</button>
+							<button type="button" alt="Write changes in the database to the platform's files">Update</button>
 
 	    				</li>
 
