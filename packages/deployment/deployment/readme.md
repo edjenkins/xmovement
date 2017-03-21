@@ -1,1 +1,0 @@
-composer dump-autoload && php artisan vendor:publish --force && php artisan migrate:refresh --seed

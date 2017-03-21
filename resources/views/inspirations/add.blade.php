@@ -59,7 +59,7 @@
 		</div>
 	@else
 		<div class="side-panel-box-content">
-			<a target="_self" href="{{ action('Auth\AuthController@showRegistrationForm') }}" target="_self"><button class="btn" type="button" name="button">Add Inspirations</button></a>
+			<a target="_self" href="{{ action('Auth\AuthController@showRegistrationForm') }}" target="_self"><button class="btn" type="button" name="button">Add Inspiration</button></a>
 		</div>
 	@endcan
 </div>
