@@ -18,6 +18,8 @@ class IdeaCategory extends Model
 		'parent_id'
     ];
 
+	protected $appends = ['ideas_count'];
+
     public function ideas()
     {
         return $this->belongsToMany('App\Idea');
@@ -26,5 +28,10 @@ class IdeaCategory extends Model
     public function subcategories()
     {
         return $this->hasMany('App\IdeaCategory', 'parent_id', 'id');
+    }
+
+    public function getIdeasCountAttribute()
+    {
+		return $this->ideas()->count();
     }
 }

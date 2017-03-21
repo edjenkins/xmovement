@@ -1,10 +1,9 @@
 XMovement.controller('ExploreController', function($scope, $http, $rootScope, ExploreService, CategoryService) {
 
+	$scope.category_id = undefined;
+
 	$scope.loading_ideas = true;
 	$scope.loading_categories = true;
-
-	$scope.selected_primary_category = undefined;
-	$scope.selected_secondary_category = undefined;
 
 	$scope.primary_categories = [];
 	$scope.secondary_categories = [];
@@ -54,7 +53,7 @@ XMovement.controller('ExploreController', function($scope, $http, $rootScope, Ex
 				$scope.sort_order = 'supporters';
 		}
 
-		ExploreService.getIdeas({'sort_type': sort_type}).then(function(response) {
+		ExploreService.getIdeas({'sort_type': sort_type, 'category_id': $scope.category_id}).then(function(response) {
 
 			$scope.ideas = response.data.ideas;
 
@@ -63,32 +62,12 @@ XMovement.controller('ExploreController', function($scope, $http, $rootScope, Ex
 		});
 	}
 
-	$scope.getCategories = function() {
+	$scope.$on('CategoryPicker::categorySelected', function(event, data) {
 
-		console.log("Loading categories");
+		$scope.category_id = (data) ? data.id : undefined;
 
-		$scope.loading_categories = true;
+		$scope.getIdeas($scope.sort_type);
 
-		CategoryService.getIdeaCategories().then(function(response) {
+    });
 
-			console.log(response);
-
-			$scope.primary_categories = response.data.primary_categories;
-			$scope.secondary_categories = response.data.secondary_categories;
-
-			$scope.loading_categories = false;
-
-		});
-	}
-
-	$scope.setPrimaryCategory = function(category) {
-		$scope.selected_primary_category = category;
-	}
-
-	$scope.setSecondaryCategory = function(category) {
-		$scope.selected_secondary_category = category;
-	}
-
-	// Init
-	$scope.getCategories();
 });

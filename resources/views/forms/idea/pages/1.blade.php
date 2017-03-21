@@ -1,4 +1,4 @@
-<div class="form-page animated visible" id="form-page-1" data-title="{{ trans('idea_form.name_your_idea') }}">
+<div class="form-page animated visible" id="form-page-1" data-title="{{ trans('idea_form.name_your_idea') }}" ng-controller="CreateIdeaController">
 
 	<div class="form-page-content">
 
@@ -18,45 +18,17 @@
 
 		@if(DynamicConfig::fetchConfig('CATEGORIES_ENABLED', false))
 
-			<div class="form-group{{ $errors->has('parent_category') ? ' has-error' : '' }}">
+			<div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
 
-				<label>Primary Category</label>
+				<label>{{ trans('idea_form.category_label') }}</label>
 
-				<input type="hidden" name="primary_category" id="primary-category-field" value="{{ isset($idea) ? old('primary_category', $idea->primary_category) : old('primary_category') }}">
+				<div class="category-picker-wrapper">
+					<category-picker category="{{ isset($idea) ? $idea->category : NULL }}"></category-picker>
+				</div>
 
-				<ul class="category-pills">
-					@foreach ($primary_categories as $primary_category)
-
-						<li class="category-pill primary-category-pill {{ ($primary_category == (isset($idea) ? old('primary_category', $idea->primary_category) : old('primary_category')) ? 'active' : '') }}" data-primary-category-id="{{ $primary_category->id }}">{{ $primary_category->name }}</li>
-
-					@endforeach
-				</ul>
-
-				@if ($errors->has('primary_category'))
+				@if ($errors->has('category'))
 					<span class="help-block">
-						<strong>{{ $errors->first('primary_category') }}</strong>
-					</span>
-				@endif
-
-			</div>
-
-			<div class="form-group{{ $errors->has('secondary_category') ? ' has-error' : '' }}">
-
-				<label>Secondary Category</label>
-
-				<input type="hidden" name="secondary_category" id="secondary-category-field" value="{{ isset($idea) ? old('secondary_category', $idea->secondary_category) : old('secondary_category') }}">
-
-				<ul class="category-pills">
-					@foreach ($secondary_categories as $secondary_category)
-
-						<li class="category-pill secondary-category-pill {{ ($secondary_category == (isset($idea) ? old('secondary_category', $idea->secondary_category) : old('secondary_category')) ? 'active' : '') }}" data-secondary-category-id="{{ $secondary_category->id }}">{{ $secondary_category->name }}</li>
-
-					@endforeach
-				</ul>
-
-				@if ($errors->has('secondary_category'))
-					<span class="help-block">
-						<strong>{{ $errors->first('secondary_category') }}</strong>
+						<strong>{{ $errors->first('category') }}</strong>
 					</span>
 				@endif
 
@@ -71,27 +43,3 @@
 	</div>
 
 </div>
-
-
-<script type="text/javascript">
-
-	var primary_category = $('#primary-category-field').val();
-	var secondary_category = $('#secondary-category-field').val();
-
-	$('ul.category-pills li.primary-category-pill').on('click', function() {
-
-		$('ul.category-pills li.primary-category-pill').removeClass('active');
-		$(this).addClass('active');
-
-		$('#primary-category-field').val($(this).attr('data-primary-category-id'));
-	});
-
-	$('ul.category-pills li.secondary-category-pill').on('click', function() {
-
-		$('ul.category-pills li.secondary-category-pill').removeClass('active');
-		$(this).addClass('active');
-
-		$('#secondary-category-field').val($(this).attr('data-secondary-category-id'));
-	});
-
-</script>

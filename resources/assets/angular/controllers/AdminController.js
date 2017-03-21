@@ -41,14 +41,43 @@ XMovement.controller('AdminController', function($scope, $http, $rootScope, $loc
 
 			$scope.loading_categories = false;
 
+			$scope.new_category = {};
+
 		});
+	}
 
-		// // Add category
-		// $scope.idea_categories.push(angular.copy(new_category));
+	$scope.deleteCategory = function(idea_category_id) {
 
-		// new_category = {};
-		//
-		// console.log($scope.idea_categories);
+		console.log("Deleting category - " + idea_category_id);
+
+		CategoryService.deleteIdeaCategory({id: idea_category_id}).then(function(response) {
+
+			console.log(response);
+
+			$scope.idea_categories = response.data.categories;
+			$scope.primary_categories = response.data.primary_categories;
+			$scope.secondary_categories = response.data.secondary_categories;
+
+			$scope.loading_categories = false;
+
+		});
+	}
+
+	$scope.updateCategory = function(idea_category_id, idea_category_name) {
+
+		console.log("Updating category - " + idea_category_id);
+
+		CategoryService.updateIdeaCategory({id: idea_category_id, name: idea_category_name, parent_id: 0}).then(function(response) {
+
+			console.log(response);
+
+			$scope.idea_categories = response.data.categories;
+			$scope.primary_categories = response.data.primary_categories;
+			$scope.secondary_categories = response.data.secondary_categories;
+
+			$scope.loading_categories = false;
+
+		});
 	}
 
 	$scope.fetchAdmins = function() {

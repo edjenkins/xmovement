@@ -54,24 +54,22 @@ class IdeaController extends Controller
 		$response->meta['success'] = true;
 
 		$sort_type = $request->sort_type;
+		$category_id = $request->category_id;
 
-		switch ($sort_type) {
-
-			case 'shortlist':
-				$ideas = Idea::where('shortlisted', true)->with('user')->orderBy('created_at', 'desc')->get();
-				break;
-
-			case 'recent':
+		if ($sort_type == 'shortlist')
+		{
+			$ideas = Idea::where('shortlisted', true)->with('user')->orderBy('created_at', 'desc')->get();
+		}
+		else
+		{
+			if ($category_id)
+			{
+				$ideas = Idea::where('visibility', 'public')->join('idea_idea_category', 'ideas.id', '=', 'idea_idea_category.idea_id')->where('idea_idea_category.idea_category_id', $category_id)->with('user')->orderBy('created_at', 'desc')->get();
+			}
+			else
+			{
 				$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
-				break;
-
-			case 'popular':
-				$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
-				break;
-
-			default:
-				$ideas = Idea::where('visibility', 'public')->with('user')->orderBy('created_at', 'desc')->get();
-				break;
+			}
 		}
 
 		$response->data['ideas'] = $ideas;
@@ -85,9 +83,9 @@ class IdeaController extends Controller
 
 		$response->meta['success'] = true;
 
-		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->with('subcategories')->get();
-		$response->data['primary_categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
-		$response->data['secondary_categories'] = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
+		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->orderBy('name', 'asc')->with(['subcategories' => function ($q) {
+			$q->orderBy('name', 'asc');
+		}])->get();
 
 		return Response::json($response);
 	}
@@ -101,10 +99,47 @@ class IdeaController extends Controller
 		$idea_category = IdeaCategory::create([
 			'name' => $request->name,
 			'enabled' => true,
-			'parent_id' => $request->parent_id
+			'parent_id' => ($request->parent_id) ? $request->parent_id : NULL
 		]);
 
-		Log::info($idea_category);
+		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->with(['subcategories' => function ($q) {
+			$q->orderBy('name', 'asc');
+		}])->get();
+
+		return Response::json($response);
+	}
+
+	public function api_categories_update(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$idea_category = IdeaCategory::find($request->id);
+
+		if ($request->name) { $idea_category->name = $request->name; }
+		if ($request->parent_id) { $idea_category->parent_id = $request->parent_id; }
+
+		$idea_category->save();
+
+		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->with('subcategories')->get();
+		$response->data['primary_categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
+		$response->data['secondary_categories'] = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
+
+		return Response::json($response);
+	}
+
+	public function api_categories_delete(Request $request)
+	{
+		$response = new ResponseObject();
+
+		$response->meta['success'] = true;
+
+		$idea_category = IdeaCategory::where([
+			'id' => $request->id
+		]);
+
+		$idea_category->delete();
 
 		$response->data['categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->with('subcategories')->get();
 		$response->data['primary_categories'] = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
@@ -162,10 +197,7 @@ class IdeaController extends Controller
 	{
 		if (Auth::check())
 		{
-			$primary_categories = IdeaCategory::whereNull('parent_id')->where('enabled', true)->get();
-			$secondary_categories = IdeaCategory::whereNotNull('parent_id')->where('enabled', true)->get();
-
-			return view('ideas.add', ['primary_categories' => $primary_categories, 'secondary_categories' => $secondary_categories]);
+			return view('ideas.add');
 		}
 		else
 		{
@@ -191,6 +223,7 @@ class IdeaController extends Controller
 		}
 		else
 		{
+			$idea = Idea::where('id', $idea->id)->with('categories')->first();
 			return view('ideas.edit', ['idea' => $idea]);
 		}
 	}
@@ -224,10 +257,7 @@ class IdeaController extends Controller
 		]);
 
 		// Update idea categories
-		Log::error($request->primary_category);
-		Log::error($request->secondary_category);
-		$idea->categories()->attach($request->primary_category);
-		$idea->categories()->attach($request->secondary_category);
+		$idea->attachCategories($request->category);
 
 		// Pre-populate design tasks with user questions
 		if (DynamicConfig::fetchConfig('ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS', false))
@@ -289,6 +319,9 @@ class IdeaController extends Controller
 			if ($request->visibility) { $idea->visibility = $request->visibility; }
 			if ($request->description) { $idea->description = $request->description; }
 			if ($request->photo) { $idea->photo = $request->photo; }
+
+			// Update idea categories
+			$idea->attachCategories($request->category);
 
 			$idea->save();
 

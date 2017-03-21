@@ -2,22 +2,29 @@
 
 @section('content')
 
-    <div class="page-header">
+	<div ng-controller="CreateIdeaController">
 
-        <h2 class="main-title" id="page-title">{{ $errors->isEmpty() ? trans('idea_form.name_your_idea') : trans('idea_form.create_idea') }}</h2>
+	    <div class="page-header">
 
-    </div>
+	        <h2 class="main-title" id="page-title">{{ $errors->isEmpty() ? trans('idea_form.name_your_idea') : trans('idea_form.create_idea') }}</h2>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+	    </div>
 
-                @include('forms/idea/add', ['editing' => false])
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-md-8 col-md-offset-2">
 
-            </div>
-        </div>
-    </div>
+	                @include('forms/idea/add', ['editing' => false])
+
+	            </div>
+	        </div>
+	    </div>
+
+	</div>
 
     <script src="/js/ideas/add.js"></script>
+
+	<script src="{{ URL::asset('js/angular-dependencies.js') }}"></script>
+	<script src="{{ URL::asset('js/angular.js') }}"></script>
 
 @endsection

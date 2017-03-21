@@ -350,21 +350,13 @@ ul.category-pills
 	cleanlist()
 	li.category-pill
 		cleanlist()
-		background-color border-color
+		border border-color 1px solid
 		color #888
 		border-radius 4px
 		display inline-block
 		margin 5px
 		padding 10px 15px
 		animate()
-		&:hover
-			cursor pointer
-			background-color darken(border-color, 10%)
-		&.active
-			background-color success-color
-			color white
-			&:hover
-				background-color darken(success-color, 10%)
 
 .video-container
 	margin 0 auto
@@ -379,3 +371,18 @@ ul.category-pills
 		left 0
 		width 100%
 		height 100%
+
+// Category picker
+.category-picker
+	button
+		background transparent
+		border border-color 1px solid
+		border-radius 6px
+		color #666
+		display block
+		font-size 1em
+		line-height 50px
+		margin 10px auto
+		padding 0 20px
+		text-decoration none
+		text-align center

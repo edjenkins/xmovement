@@ -71,29 +71,31 @@
 
 					<div class="side-panel inspirations-side-panel" ng-cloak>
 
+						<div class="inspiration-info-dialogue">
+							{{ trans('info.inspiration') }}
+						</div>
+
 						@include('inspirations/add')
 
-						<div class="side-panel-box info-box">
-							<div class="side-panel-box-header">
-								{{ trans('guidelines.guidelines') }}
+						@if(false)
+							<div class="side-panel-box info-box">
+								<div class="side-panel-box-header">
+									{{ trans('guidelines.guidelines') }}
+								</div>
+								<div class="side-panel-box-content">
+									<p>
+										{{ trans('guidelines.please_read_our_guidelines') }}
+									</p>
+									<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">{{ trans('guidelines.read_guidelines') }}</button></a>
+								</div>
 							</div>
-							<div class="side-panel-box-content">
-								<p>
-									{{ trans('guidelines.please_read_our_guidelines') }}
-								</p>
-								<a target="_self" href="/guidelines" target="_self"><button class="btn" type="button" name="button">{{ trans('guidelines.read_guidelines') }}</button></a>
-							</div>
-						</div>
+						@endif
 
 					</div>
 
 				</div>
 
 				<div class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
-
-					<div class="inspiration-info-dialogue">
-						{{ trans('info.inspiration') }}
-					</div>
 
 					<div class="loader" ng-show="loading_inspirations">Loading...</div>
 

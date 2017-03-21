@@ -17,5 +17,23 @@ XMovement.service('CategoryService', function($http, $q) {
 				defer.reject(err);
 			});
 			return defer.promise;
+		},
+		'updateIdeaCategory': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/categories/idea/update', body).then(function successCallback(response) {
+				defer.resolve(response.data);
+			}, function errorCallback(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
+		},
+		'deleteIdeaCategory': function(body) {
+			var defer = $q.defer();
+			$http.post('/api/categories/idea/delete', body).then(function successCallback(response) {
+				defer.resolve(response.data);
+			}, function errorCallback(err) {
+				defer.reject(err);
+			});
+			return defer.promise;
 		}
 	}})

@@ -99,3 +99,74 @@
 		color white
 		margin 0
 		padding 0
+
+
+
+// Categories
+
+.categories-overlay
+	background-color alpha(black, 0.95)//main-color
+	pointer-events none
+	opacity 0
+	overflow scroll
+	position fixed
+	top 0
+	bottom 0
+	right 0
+	left 0
+	z-index 9999
+	text-align left
+	animate()
+	.close-categories-overlay
+		color white
+		cursor pointer
+		position absolute
+		top 0
+		right 0
+		height 60px
+		line-height 60px
+		min-width 60px
+		padding 0 20px
+		z-index 9999
+	.categories-container
+		display none
+		padding 60px
+		@media(max-width: $screen-sm-max)
+			padding 20px
+		ul.primary-categories
+			cleanlist()
+			li.primary-category
+				cleanlist()
+				a
+					color white
+					display block
+					font-size 28px
+					font-weight normal
+					line-height 1em
+					padding 20px 10px 10px 10px
+					text-align left
+					&:hover
+						text-decoration none
+			li.secondary-category
+				cleanlist()
+				a
+					background-color alpha(white, 0.1)
+					border-radius 6px
+					color white
+					display inline-block
+					float left
+					line-height 1em
+					margin 5px
+					padding 8px 15px
+					text-align left
+					animate()
+					&:hover
+						background-color alpha(white, 0.5)
+						cursor pointer
+						text-decoration none
+
+	&.visible
+		opacity 1
+		pointer-events all
+		.categories-container
+			display block

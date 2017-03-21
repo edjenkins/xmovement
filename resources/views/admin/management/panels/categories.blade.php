@@ -31,8 +31,7 @@
 			<div class="admin-tile--label">Manage Categories</div>
 
 			<ul class="list-group" ng-repeat="category in idea_categories" ng-init="category.visible = false">
-				<li class="list-group-item" ng-class="{'2disabled':category.visible}">
-				    <!-- <span class="badge"><% category.subcategories.length %></span> -->
+				<li class="list-group-item">
 
 					<strong><% category.name %></strong><span> - <% category.id %></span>
 
@@ -41,12 +40,14 @@
 						<i class="dropdown-toggle fa fa-fw fa-ellipsis-h" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
 
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li><a href="#">Delete</a></li>
+							<li><a ng-click="new_category.parent_id = category.id">Add Child</a></li>
+							<li><a ng-click="deleteCategory(category.id)">Delete</a></li>
 						</ul>
 
 					</div>
 				</li>
 				<li ng-repeat="subcategory in category.subcategories" class="list-group-item">
+
 					<% subcategory.name %>
 
 					<div class="dropdown pull-right">
@@ -54,8 +55,8 @@
 						<i class="dropdown-toggle fa fa-fw fa-ellipsis-h" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
 
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li><a href="#">Make Parent</a></li>
-							<li><a href="#">Delete</a></li>
+							<li><a ng-click="updateCategory(subcategory.id, subcategory.name, 0)">Make Parent</a></li>
+							<li><a ng-click="deleteCategory(subcategory.id)">Delete</a></li>
 						</ul>
 
 					</div>

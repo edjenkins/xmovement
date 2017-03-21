@@ -12,7 +12,7 @@ class CreateIdeaIdeaCategoriesTable extends Migration
      */
     public function up()
     {
-		Schema::create('ideas_idea_categories', function (Blueprint $table) {
+		Schema::create('idea_idea_category', function (Blueprint $table) {
 			$table->integer('idea_id');
 			$table->integer('idea_category_id');
 		});
@@ -25,6 +25,6 @@ class CreateIdeaIdeaCategoriesTable extends Migration
      */
     public function down()
     {
-		Schema::drop('ideas_idea_categories');
+		Schema::drop('idea_idea_category');
     }
 }

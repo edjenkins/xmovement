@@ -35,7 +35,7 @@ class Idea extends Model
 		'proposals_during_design',
     ];
 
-	protected $appends = ['supporter_count', 'progress', 'latest_phase', 'supported'];
+	protected $appends = ['supporter_count', 'progress', 'latest_phase', 'supported', 'category'];
     protected $dates = ['deleted_at'];
 
 	use Sluggable;
@@ -142,6 +142,11 @@ class Idea extends Model
 		}
     }
 
+    public function getCategoryAttribute()
+    {
+		return $this->categories()->orderBy('idea_categories.parent_id', 'desc')->first();
+    }
+
     public function supporterCount()
     {
         return Supporter::where('idea_id', $this->id)->count();
@@ -212,6 +217,30 @@ class Idea extends Model
 			return 'Complete';
 		}
     }
+
+	public function attachCategories($category_id)
+	{
+		if ($category_id)
+		{
+			$this->categories()->detach();
+
+			$idea_category = IdeaCategory::where('id', $category_id)->first();
+
+			if ($idea_category)
+			{
+				$this->categories()->attach($idea_category);
+
+				Log::error('$idea_category->id');
+				Log::error($idea_category->id);
+
+				while ($idea_category->parent_id)
+				{
+					$idea_category = IdeaCategory::where('id', $idea_category->parent_id)->first();
+					$this->categories()->attach($idea_category->id);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Add a design task to an idea (pre-populate)
