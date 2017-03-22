@@ -30,18 +30,16 @@
 					</div>
 				</li>
 
-				@if (true)
-					<!-- Min and max length of creation/design process -->
-					<li ng-class="{'selected':progression_type == 'user-defined'}">
-						<div class="inner-wrapper">
-							<h5>User Defined</h5>
-							<p class="progression-type-description">Progress through the phases after user defined durations.</p>
-							<button ng-click="setProgressionType('user-defined')" type="button">
-								<% (progression_type == 'user-defined') ? 'Selected' : 'Select' %>
-							</button>
-						</div>
-					</li>
-				@endif
+				<!-- Selectable preset durations for creation/design process -->
+				<li ng-class="{'selected':progression_type == 'user-defined'}">
+					<div class="inner-wrapper">
+						<h5>User Defined</h5>
+						<p class="progression-type-description">Progress through the phases after user defined durations.</p>
+						<button ng-click="setProgressionType('user-defined')" type="button">
+							<% (progression_type == 'user-defined') ? 'Selected' : 'Select' %>
+						</button>
+					</div>
+				</li>
 
 				<div class="clearfloat"></div>
 
@@ -59,7 +57,7 @@
 
 			<div class="col-md-4">
 
-				<table class="table table-bordered">
+				<table class="table table-bordered table-with-margin">
 					<col />
 					<col width="100px" />
 					<tr>
@@ -75,7 +73,7 @@
 
 			<div class="col-md-4">
 
-				<table class="table table-bordered">
+				<table class="table table-bordered table-with-margin">
 					<col />
 					<col width="100px" />
 					<tr>
@@ -91,7 +89,7 @@
 
 			<div class="col-md-4">
 
-				<table class="table table-bordered">
+				<table class="table table-bordered table-with-margin">
 					<col />
 					<col width="100px" />
 					<tr>

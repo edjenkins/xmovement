@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 
+use Log;
 use File;
 use Image;
 use Input;
@@ -28,7 +29,16 @@ class UploadController extends Controller
 
 		if (isset($request->cc))
 		{
-			$file = Image::make($request->url);
+			if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on")
+			{
+				$image_url = strtolower($request->url);
+			}
+			else
+			{
+				$image_url = str_replace('https', 'http', strtolower($request->url));
+			}
+
+			$file = Image::make($image_url);
 		}
 		else
 		{

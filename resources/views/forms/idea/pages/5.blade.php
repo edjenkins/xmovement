@@ -2,32 +2,6 @@
 
 	<div class="form-page-content">
 
-		<!-- Check if user can set duration of idea -->
-		<!-- DynamicConfig::fetchConfig('FIXED_IDEA_DURATION', 0) == 0 -->
-		@if (false)
-
-			<div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}" id="duration-slider-wrapper">
-
-				<div class="slider-wrapper">
-
-					<label>{{ trans('idea_form.duration_label') }}</label>
-
-					<input type="hidden" name="duration" id="duration-slider" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}">
-
-					<div class="slider" id="idea-duration-slider" data-input-id="duration-slider" data-value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', 30) }}"></div>
-
-				</div>
-
-				@if ($errors->has('duration'))
-					<span class="help-block">
-						<strong>{{ $errors->first('duration') }}</strong>
-					</span>
-				@endif
-
-			</div>
-
-		@endif
-
 		<div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
 
 			<div class="toggle-switch-wrapper">
@@ -55,6 +29,41 @@
 			@endif
 
 		</div>
+
+		<!-- Check if user can set duration of idea -->
+		@if (DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed') == 'user-defined')
+
+			<div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}" id="duration-wrapper" ng-init="duration = 'short'">
+
+				<label>{{ trans('idea_form.duration_label') }}</label>
+
+				<input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', (DynamicConfig::fetchConfig('SHORT_SUPPORT_DURATION') + DynamicConfig::fetchConfig('SHORT_DESIGN_DURATION'))) }}">
+
+				<ul class="duration-selector">
+
+					<li ng-show="{{ DynamicConfig::fetchConfig('SHORT_DURATION_ENABLED') }}">
+						<button class="btn btn-default" ng-class="{'btn-primary':(duration == 'short')}" ng-click="duration = 'short'" type="button" name="button">Short ({{ (DynamicConfig::fetchConfig('SHORT_SUPPORT_DURATION') + DynamicConfig::fetchConfig('SHORT_DESIGN_DURATION')) }}d)</button>
+					</li>
+					<li ng-show="{{ DynamicConfig::fetchConfig('MEDIUM_DURATION_ENABLED') }}">
+						<button class="btn btn-default" ng-class="{'btn-primary':(duration == 'medium')}" ng-click="duration = 'medium'" type="button" name="button">Medium ({{ (DynamicConfig::fetchConfig('MEDIUM_SUPPORT_DURATION') + DynamicConfig::fetchConfig('MEDIUM_DESIGN_DURATION')) }}d)</button>
+					</li>
+					<li ng-show="{{ DynamicConfig::fetchConfig('LONG_DURATION_ENABLED') }}">
+						<button class="btn btn-default" ng-class="{'btn-primary':(duration == 'long')}" ng-click="duration = 'long'" type="button" name="button">Long ({{ (DynamicConfig::fetchConfig('LONG_SUPPORT_DURATION') + DynamicConfig::fetchConfig('LONG_DESIGN_DURATION')) }}d)</button>
+					</li>
+
+					<div class="clearfloat"></div>
+
+				</ul>
+
+				@if ($errors->has('duration'))
+					<span class="help-block">
+						<strong>{{ $errors->first('duration') }}</strong>
+					</span>
+				@endif
+
+			</div>
+
+		@endif
 
 		<div class="form-group">
 			<button class="btn btn-primary" type="submit">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
