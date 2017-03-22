@@ -110,6 +110,40 @@ class DynamicConfigSeeder extends Seeder
 			)
 		);
 
+		// Add user defined default phase durations
+		array_push($configs,
+			array(
+				'key' => 'SHORT_SUPPORT_DURATION',
+				'value' => 2,
+				'type' => 'integer'
+			),
+			array(
+				'key' => 'SHORT_DESIGN_DURATION',
+				'value' => 3,
+				'type' => 'integer'
+			),
+			array(
+				'key' => 'MEDIUM_SUPPORT_DURATION',
+				'value' => 5,
+				'type' => 'integer'
+			),
+			array(
+				'key' => 'MEDIUM_DESIGN_DURATION',
+				'value' => 10,
+				'type' => 'integer'
+			),
+			array(
+				'key' => 'LONG_SUPPORT_DURATION',
+				'value' => 14,
+				'type' => 'integer'
+			),
+			array(
+				'key' => 'LONG_DESIGN_DURATION',
+				'value' => 21,
+				'type' => 'integer'
+			),
+		);
+
 		// Add mode configs
 		array_push($configs,
 			array(
