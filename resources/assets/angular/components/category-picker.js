@@ -38,7 +38,8 @@ CategoryPickerController.$inject = ['$scope', '$rootScope', '$element', '$attrs'
 XMovement.component('categoryPicker', {
 	templateUrl: '/components/category-picker',
     bindings: {
-        category: '@'
+        category: '@',
+		populatedOnly : '@'
     },
 	controller: CategoryPickerController
 });

@@ -23,7 +23,7 @@
 				<label>{{ trans('idea_form.category_label') }}</label>
 
 				<div class="category-picker-wrapper">
-					<category-picker category="{{ isset($idea) ? $idea->category : NULL }}"></category-picker>
+					<category-picker populated-only="false" category="{{ isset($idea) ? $idea->category : NULL }}"></category-picker>
 				</div>
 
 				@if ($errors->has('category'))
