@@ -173,8 +173,6 @@
 						<th class="state-table-header">State</th>
 					</tr>
 					<tr xm-config-setting xm-config="{type:'boolean',title:'Limit Tendering to Shortlist',key:'TENDER_SHORTLIST_ONLY'}" xm-phase-timeline-ctrl="$ctrl"></tr>
-					<tr xm-config-setting xm-config="{type:'integer',title:'Minimum idea duration (in days)',key:'MIN_IDEA_DURATION'}"></tr>
-					<tr xm-config-setting xm-config="{type:'integer',title:'Maximum idea duration (in days)',key:'MAX_IDEA_DURATION'}"></tr>
 				</table>
 
 			</div>
