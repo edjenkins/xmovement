@@ -30,7 +30,7 @@
 					</div>
 				</li>
 
-				@if (false)
+				@if (true)
 					<!-- Min and max length of creation/design process -->
 					<li ng-class="{'selected':progression_type == 'user-defined'}">
 						<div class="inner-wrapper">
@@ -46,6 +46,66 @@
 				<div class="clearfloat"></div>
 
 			</ul>
+
+		</div>
+
+	</div>
+
+	<div class="col-md-12" ng-if="progression_type == 'user-defined'">
+
+		<div class="admin-tile">
+
+			<div class="admin-tile--label">Phase Durations</div>
+
+			<div class="col-md-4">
+
+				<table class="table table-bordered">
+					<col />
+					<col width="100px" />
+					<tr>
+						<th>Short</th>
+						<th class="state-table-header">Duration</th>
+					</tr>
+					<tr xm-config-setting xm-config="{type:'integer',title:'Support Duration',key:'SHORT_SUPPORT_DURATION'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<tr xm-config-setting xm-config="{type:'integer',title:'Design Duration',key:'SHORT_DESIGN_DURATION'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<tr xm-config-setting xm-config="{type:'boolean',title:'Enabled',key:'SHORT_DURATION_ENABLED'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+				</table>
+
+			</div>
+
+			<div class="col-md-4">
+
+				<table class="table table-bordered">
+					<col />
+					<col width="100px" />
+					<tr>
+						<th>Medium</th>
+						<th class="state-table-header">Duration</th>
+					</tr>
+					<tr xm-config-setting xm-config="{type:'integer',title:'Support Duration',key:'MEDIUM_SUPPORT_DURATION'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<tr xm-config-setting xm-config="{type:'integer',title:'Design Duration',key:'MEDIUM_DESIGN_DURATION'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<tr xm-config-setting xm-config="{type:'boolean',title:'Enabled',key:'MEDIUM_DURATION_ENABLED'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+				</table>
+
+			</div>
+
+			<div class="col-md-4">
+
+				<table class="table table-bordered">
+					<col />
+					<col width="100px" />
+					<tr>
+						<th>Long</th>
+						<th class="state-table-header">Duration</th>
+					</tr>
+					<tr xm-config-setting xm-config="{type:'integer',title:'Support Duration',key:'LONG_SUPPORT_DURATION'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<tr xm-config-setting xm-config="{type:'integer',title:'Design Duration',key:'LONG_DESIGN_DURATION'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<tr xm-config-setting xm-config="{type:'boolean',title:'Enabled',key:'LONG_DURATION_ENABLED'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+				</table>
+
+			</div>
+
+			<div class="clearfloat"></div>
 
 		</div>
 
