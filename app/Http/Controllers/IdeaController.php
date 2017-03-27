@@ -174,7 +174,7 @@ class IdeaController extends Controller
 			'description' => 'required|max:2000',
 			'photo' => 'required|max:255',
 			'visibility' => 'required',
-			'duration' => 'integer|between:3,21'
+			// 'duration' => 'integer|between:3,21'
 		]);
 
 		// Create the idea
