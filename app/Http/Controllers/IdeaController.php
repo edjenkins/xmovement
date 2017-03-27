@@ -223,7 +223,9 @@ class IdeaController extends Controller
 		$idea->supporters()->attach($request->user()->id); // TODO: Check this works
 
 		// Redirect to invite view
-		return redirect()->action('IdeaController@invite', $idea);
+		// return redirect()->action('IdeaController@invite', $idea);
+
+		return redirect()->action('IdeaController@view', $idea);
 	}
 
 	public function update(Request $request)
