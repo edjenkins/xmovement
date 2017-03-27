@@ -44,7 +44,7 @@
 
 	@include('google-analytics', ['trackingId' => getenv('APP_GA_TRACKING_ID')])
 
-    @include('facebook-sdk')
+    @include('facebook-sdk', ['facebookAppID' => getenv('FACEBOOK_APP_ID', '758108954295416')])
 
     @include('navbar')
 
