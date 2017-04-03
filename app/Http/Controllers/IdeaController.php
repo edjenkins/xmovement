@@ -241,7 +241,7 @@ class IdeaController extends Controller
 			'description' => 'required|max:2000',
 			'photo' => 'required|max:255',
 			'visibility' => 'required',
-			'duration' => 'integer|between:3,21'
+			// 'duration' => 'integer|between:3,21'
 		]);
 
 		// Create the idea
@@ -293,7 +293,9 @@ class IdeaController extends Controller
 		$idea->supporters()->attach($request->user()->id); // TODO: Check this works
 
 		// Redirect to invite view
-		return redirect()->action('IdeaController@invite', $idea);
+		// return redirect()->action('IdeaController@invite', $idea);
+
+		return redirect()->action('IdeaController@view', $idea);
 	}
 
 	public function update(Request $request)

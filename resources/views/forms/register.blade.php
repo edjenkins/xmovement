@@ -1,6 +1,40 @@
 <form class="auth-form" role="form" method="POST" action="{{ url('/register') }}">
     {!! csrf_field() !!}
 
+	@if (env('FACEBOOK_AUTH'))
+	    <div class="form-group">
+	        <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'facebook']) }}">
+	            <i class="fa fa-fw fa-facebook"></i>
+	            {{ trans('auth.facebook_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('LINKEDIN_AUTH'))
+	    <div class="form-group">
+			<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
+	            <i class="fa fa-fw fa-linkedin"></i>
+	            {{ trans('auth.linkedin_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('SHIBBOLETH_AUTH', true))
+	    <div class="form-group">
+			<a class="btn btn-shibboleth" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'shibboleth']) }}">
+	            <i class="fa fa-fw fa-university"></i>
+	            {{ trans('auth.shibboleth_login') }}
+	        </a>
+	    </div>
+	@endif
+
+	@if (env('STANDARD_AUTH', true) && (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true) || env('SHIBBOLETH_AUTH', true)))
+	    <div class="text-linethru">
+	        <div class="line"></div>
+	        <div class="text">{{ trans('common.or') }}</div>
+	    </div>
+	@endif
+
 	@if (env('STANDARD_AUTH', true))
 
 	    <input type="hidden" name="type" value="{{ $type }}">
@@ -76,43 +110,6 @@
 
 	    </div>
 
-	@endif
-	
-	@if (env('STANDARD_AUTH', true) && (env('FACEBOOK_AUTH', true) || env('LINKEDIN_AUTH', true) || env('SHIBBOLETH_AUTH', true)))
-	    <div class="text-linethru">
-	        <div class="line"></div>
-	        <div class="text">{{ trans('common.or') }}</div>
-	    </div>
-	@else
-		<p>{{ trans('auth.authenticate_with_a_provider') }}</p>
-		<br />
-	@endif
-
-	@if (env('FACEBOOK_AUTH'))
-	    <div class="form-group">
-	        <a class="btn btn-facebook" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'facebook']) }}">
-	            <i class="fa fa-fw fa-facebook"></i>
-	            {{ trans('auth.facebook_login') }}
-	        </a>
-	    </div>
-	@endif
-
-	@if (env('LINKEDIN_AUTH'))
-	    <div class="form-group">
-			<a class="btn btn-linkedin" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'linkedin']) }}">
-	            <i class="fa fa-fw fa-linkedin"></i>
-	            {{ trans('auth.linkedin_login') }}
-	        </a>
-	    </div>
-	@endif
-
-	@if (env('SHIBBOLETH_AUTH', true))
-	    <div class="form-group">
-			<a class="btn btn-shibboleth" href="{{ action('Auth\AuthController@redirectToProvider', ['provider' => 'shibboleth']) }}">
-	            <i class="fa fa-fw fa-university"></i>
-	            {{ trans('auth.shibboleth_login') }}
-	        </a>
-	    </div>
 	@endif
 
 </form>
