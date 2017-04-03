@@ -1,4 +1,4 @@
-XMovement
+XMovement Platform
 ============
 An open source framework from which crowd commissioning platforms can be developed.
 
