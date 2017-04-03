@@ -1,7 +1,6 @@
-[submodule "packages/xmovement-translations"]
+[submodule "translations"]
 	path = resources/lang
 	url = https://github.com/edjenkins/xmovement-translations.git
-
-[submodule "packages/xmovement-deployments"]
-  path = packages/deployment
-  url = https://github.com/edjenkins/xmovement-deployments.git
+[submodule "deployments"]
+	path = packages/deployment
+	url = https://github.com/edjenkins/xmovement-deployments.git
