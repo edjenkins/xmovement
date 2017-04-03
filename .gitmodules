@@ -1,7 +1,7 @@
 [submodule "packages/xmovement-translations"]
 	path = resources/lang
-	url = ssh://git@openlab.ncl.ac.uk:17150/edjenkins/xmovement-translations.git
+	url = ssh://git@github.com:edjenkins/xmovement-translations.git
 
 [submodule "packages/xmovement-deployments"]
   path = packages/deployment
-  url = ssh://git@openlab.ncl.ac.uk:17150/edjenkins/xmovement-deployments.git
+  url = ssh://git@github.com:edjenkins/xmovement-deployments.git
