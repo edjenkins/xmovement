@@ -1,6 +1,6 @@
 XMovement
 ============
-A core open source framework on which crowd commissioning platforms can be developed.
+An open source framework on which crowd commissioning platforms can be developed.
 
 License
 ----------------
