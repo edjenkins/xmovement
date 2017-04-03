@@ -141,7 +141,7 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'LONG_DESIGN_DURATION',
 				'value' => 21,
 				'type' => 'integer'
-			),
+			)
 		);
 
 		// Add mode configs
