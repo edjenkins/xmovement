@@ -37,7 +37,7 @@
 
 				<label>{{ trans('idea_form.duration_label') }}</label>
 
-				<input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('duration', $idea->duration) : old('duration', (DynamicConfig::fetchConfig('SHORT_SUPPORT_DURATION') + DynamicConfig::fetchConfig('SHORT_DESIGN_DURATION'))) }}">
+				<input type="text" class="form-control" name="duration" id="duration-input" ng-value="duration">
 
 				<ul class="duration-selector">
 
