@@ -1,78 +1,42 @@
 .idea-progress-bar
-	height 26px
-	margin 5px 15px 0 15px
+	border-radius 6px
+	margin 15px
+	overflow hidden
 	position relative
-	.ipb-line
-		border-radius 10px
-		height 16px
-		position absolute
-		top 15px
-		left 0px
-		right 0px
-		&.ipb-placeholder-line
-			background-color transparent
-		&.ipb-progress-line
-			background-color transparent
-			min-width 20px
-			transition(width 0.8s ease-out)
-	.ipb-dot
-		background-color border-color
-		border-radius 8px
-		height 16px
-		position absolute
-		left 0
-		top 15px
-		transition(all 0.2s ease-out)
-		&.ipb-progress-overlay
-			background-color main-color
-			pointer-events none
-		&.ipb-start-dot
-			left 0
-		&.ipb-end-dot
-			right 0
-		&:hover
-			cursor pointer
-		&.locked
-			background-color success-color
-		.ipb-label
-			opacity 0
+	.ipb-phase
+		background-color #d9d9d9
+		color #666
+		float left
+		height 40px
+		position relative
+		width calc(100% / 3)
+		animate()
+		i.fa-lock
+			margin-left 6px
+		i.fa-arrow-right
+			color white
+			font-size 2em
+			line-height 40px
 			position absolute
-			left 50%
-			margin-left -100px
 			text-align center
-			bottom 20px
-			width 200px
-			transition(all 0.2s linear)
-			.ipb-label-text
-				background #333
-				border-radius 4px
-				color white
-				display inline-block
-				padding 6px 10px
-				position relative
-				&:before
-					content ''
-					position absolute
-					border-style solid
-					border-width 6px 12px 0
-					border-color #333 transparent
-					display block
-					width 0
-					z-index 1
-					bottom -6px
-					left 50%
-					margin-left -12px
+			top 0
+			z-index 1
+			width 50px
+			&.left-arrow
+				left -25px
+			&.right-arrow
+				right -25px
+		&.ipb-open, &.ipb-locked
+			background-color main-color
+			color white
 		&:hover
-			cursor pointer
-			.ipb-label
-				opacity 1
-				bottom 26px
-.idea-tile
-	.idea-progress-bar
-		height 20px
-		margin 0 20px
-		width auto
-		.ipb-dot
-			height 16px
-			width 16px
-			top 11px
+			background-color darken(#d9d9d9, 10%)
+			text-decoration none
+			&.ipb-open, &.ipb-locked
+				background-color darken(main-color, 10%)
+		.ipb-label
+			text-align center
+			width 100%
+			.ipb-label-text
+				color inherit
+				line-height 40px

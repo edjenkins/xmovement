@@ -40,27 +40,7 @@
 
 		@endcan
 
-		@can('view_proposals', $idea)
-
-			<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
-
-		@else
-
-			@if ($idea->design_state == 'locked')
-
-				<a target="_self" href="{{ action('ProposeController@index', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.browse_proposals') }}</a>
-
-			@endif
-
-		@endcan
-
 	@endif
-	
-	@can('open_design_phase', $idea)
-
-		<div data-toggle="modal" data-target="#open-design-phase-modal" class="btn btn-primary action-button">{{ trans('idea.open_design_phase') }}</div>
-
-	@endcan
 
 	@can('edit', $idea)
 
