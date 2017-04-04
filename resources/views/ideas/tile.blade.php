@@ -9,7 +9,6 @@
 		</p>
 	</div>
 	<div class="tile-footer">
-		<div class="phase-progress" style="right:{{ (100 - $idea->progress) }}%"></div>
 		<p>
 			{{ $idea->latest_phase }}
 		</p>

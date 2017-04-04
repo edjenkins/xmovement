@@ -10,7 +10,7 @@
 
 	@else
 
-		@if ($idea->support_state == 'open')
+		@if ($idea->support_state() == 'open')
 
 			<div class="btn btn-primary support-button" data-toggle="modal" data-target="#auth-modal">{{ trans('idea.support_this_idea') }}</div>
 

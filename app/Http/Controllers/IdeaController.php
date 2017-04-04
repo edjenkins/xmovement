@@ -240,8 +240,7 @@ class IdeaController extends Controller
 			'name' => 'required|max:255',
 			'description' => 'required|max:2000',
 			'photo' => 'required|max:255',
-			'visibility' => 'required',
-			// 'duration' => 'integer|between:3,21'
+			'visibility' => 'required'
 		]);
 
 		// Create the idea

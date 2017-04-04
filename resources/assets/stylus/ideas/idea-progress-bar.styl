@@ -1,6 +1,6 @@
 .idea-progress-bar
 	border-radius 6px
-	margin 15px
+	margin 15px 15px 5px 15px
 	overflow hidden
 	position relative
 	.ipb-phase
@@ -12,8 +12,9 @@
 		width calc(100% / 3)
 		animate()
 		i.fa-lock
+			display none
 			margin-left 6px
-		i.fa-arrow-right
+		i.fa-long-arrow-right
 			color white
 			font-size 2em
 			line-height 40px
@@ -29,6 +30,9 @@
 		&.ipb-open, &.ipb-locked
 			background-color main-color
 			color white
+		&.ipb-locked
+			i.fa-lock
+				display inline-block
 		&:hover
 			background-color darken(#d9d9d9, 10%)
 			text-decoration none

@@ -52,68 +52,46 @@ class UpdateIdeaStates extends Command
 		{
 			// Check state
 
-			$now = Carbon::now();
-
-			$support_start = $idea->timescales('support', 'start');
-			$support_end = $idea->timescales('support', 'end');
-
-			$design_start = $idea->timescales('design', 'start');
-			$design_end = $idea->timescales('design', 'end');
-
-			$proposal_start = $idea->timescales('proposal', 'start');
-			$proposal_end = $idea->timescales('proposal', 'end');
-
-			$tender_start = $idea->timescales('tender', 'start');
-			$tender_end = $idea->timescales('tender', 'end');
-
 			/* Update states */
 
 			// Support state
-
-			if ((!$now->between($support_start, $support_end)) && ($idea->support_state == 'open'))
-			{
-				$idea->support_state = ($now->gt($support_end)) ? 'locked' : 'closed';
-			}
-			else if (($idea->support_state != 'open') && ($now->between($support_start, $support_end)))
-			{
-				$idea->support_state = 'open';
-			}
+			$idea->support_state = $idea->support_state();
 
 			// Design state
-
-			if ((!$now->between($design_start, $design_end)) && ($idea->design_state == 'open'))
+			if ($idea->design_state != $idea->design_state())
 			{
-				$idea->design_state = ($now->gt($design_end)) ? 'locked' : 'closed';
+				$idea->design_state = $idea->design_state();
 
-				// Lock discussion design tasks
-				CommentTarget::where('idea_id', $idea->id)->where('target_type', 'DesignTask')->update(['locked' => 1]);
-			}
-			else if (($idea->design_state != 'open') && ($now->between($design_start, $design_end)))
-			{
-				$idea->design_state = 'open';
-
-				// Unlock discussion design tasks
-				CommentTarget::where('idea_id', $idea->id)->where('target_type', 'DesignTask')->update(['locked' => 0]);
-
-				// Send design phase open email
-				foreach ($idea->get_supporters() as $index => $supporter)
+				if ($idea->design_state == 'open')
 				{
-					$job = (new SendDesignPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
-					$this->dispatch($job);
+					// Lock/Unlock discussion design tasks
+					CommentTarget::where('idea_id', $idea->id)->where('target_type', 'DesignTask')->update(['locked' => ($idea->design_state != 'open')]);
+
+					// Send design phase open email
+					foreach ($idea->get_supporters() as $index => $supporter)
+					{
+						$job = (new SendDesignPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
+					}
 				}
 			}
 
-			// Proposal state
-
-			if ((!$now->between($proposal_start, $proposal_end)) && ($idea->proposal_state == 'open'))
+			// Proposal state (Plan)
+			if ($idea->proposal_state != $idea->proposal_state())
 			{
-				$idea->proposal_state = ($now->gt($proposal_end)) ? 'locked' : 'closed';
+				$idea->proposal_state = $idea->proposal_state();
+
+				if ($idea->proposal_state == 'open')
+				{
+					// Send proposal phase open email
+					foreach ($idea->get_supporters() as $index => $supporter)
+					{
+						$job = (new SendProposalPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
+					}
+				}
 
 				if ($idea->proposal_state == 'locked') {
-
-					// Lock all states
-					$idea->support_state = 'locked';
-					$idea->design_state = 'locked';
 
 					// Get winning proposal
 					$proposal = $idea->winning_proposal();
@@ -134,48 +112,29 @@ class UpdateIdeaStates extends Command
 							$this->dispatch($job);
 						}
 					}
-
-				}
-			}
-			else if (($idea->proposal_state != 'open') && ($now->between($proposal_start, $proposal_end)))
-			{
-				$idea->proposal_state = 'open';
-				// Send proposal phase open email
-				foreach ($idea->get_supporters() as $index => $supporter)
-				{
-					$job = (new SendProposalPhaseOpenEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
-					$this->dispatch($job);
 				}
 			}
 
-			// Tender state
+			// Tender state (Plan)
 
-			if ($progression_type == 'fixed')
+			if ($idea->tender_state != $idea->tender_state())
 			{
-				if ((!$now->between($tender_start, $tender_end)) && ($idea->tender_state == 'open'))
-				{
-					$idea->tender_state = ($now->gt($tender_end)) ? 'locked' : 'closed';
-				}
-				else if (($idea->tender_state != 'open') && ($now->between($tender_start, $tender_end)))
-				{
-					$idea->tender_state = 'open';
+				$idea->tender_state = $idea->tender_state();
 
+				if ($idea->tender_state != 'open')
+				{
 					// TODO: Send tender phase open email
 				}
 			}
-			else
-			{
-				if ((!$now->gt($tender_start)) && ($idea->tender_state == 'open'))
-				{
-					$idea->tender_state = ($now->gt($tender_start)) ? 'locked' : 'closed';
-				}
-				else if (($idea->tender_state != 'open') && ($now->gt($tender_start)))
-				{
-					$idea->tender_state = 'open';
 
-					// TODO: Send tender phase open email
-				}
-			}
+
+
+
+
+
+
+
+
 
 			if (!DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
 			{

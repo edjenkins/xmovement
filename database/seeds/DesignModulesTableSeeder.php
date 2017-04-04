@@ -4,6 +4,9 @@ use Illuminate\Database\Seeder;
 use Faker\Generator;
 use Illuminate\Support\Facades\Lang;
 
+use App\DesignModule;
+use XMovement\Contribution\ContributionAvailableType;
+
 class DesignModulesTableSeeder extends Seeder
 {
     /**
@@ -58,16 +61,23 @@ class DesignModulesTableSeeder extends Seeder
 
 		foreach ($design_modules as $design_module)
 		{
-            DB::table('design_modules')->insert([
-                'name' => $design_module['name'],
-                'description' => $design_module['description'],
-				'class' => $design_module['class'],
-                'icon' => $design_module['icon'],
-                'available' => true,
-                'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
-                'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
-            ]);
-        }
+      $design_module_found = DesignModule::where('name', '=', $design_module['name'])->first();
+
+      if ($design_module_found === null)
+      {
+
+        DesignModule::firstOrCreate([
+          'name' => $design_module['name'],
+          'description' => $design_module['description'],
+          'class' => $design_module['class'],
+          'icon' => $design_module['icon'],
+          'available' => true,
+          'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+          'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+        ]);
+
+      }
+    }
 
         // Contribution design module
 		$contribution_available_types = array(
@@ -89,14 +99,22 @@ class DesignModulesTableSeeder extends Seeder
 			),
 		);
 
-		foreach ($contribution_available_types as $contribution_available_type)
+
+    foreach ($contribution_available_types as $contribution_available_type)
 		{
-            DB::table('xmovement_contribution_available_types')->insert([
-                'name' => $contribution_available_type['name'],
-                'description' => $contribution_available_type['description'],
-                'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
-                'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
-            ]);
-        }
+      $contribution_available_type_found = ContributionAvailableType::where('name', '=', $contribution_available_type['name'])->first();
+
+      if ($contribution_available_type_found === null)
+      {
+
+        ContributionAvailableType::firstOrCreate([
+          'name' => $contribution_available_type['name'],
+          'description' => $contribution_available_type['description'],
+          'created_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+          'updated_at' => $faker->dateTimeBetween($startDate = '-10 days', $endDate = '-6 days'),
+        ]);
+
+      }
     }
+  }
 }
