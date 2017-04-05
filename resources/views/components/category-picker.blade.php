@@ -14,7 +14,7 @@
 		<div class="categories-container">
 
 			<div class="close-categories-overlay" ng-click="$ctrl.selecting_category = false">
-				close
+				{{ trans('common.close') }}
 			</div>
 
 			<ul class="primary-categories">
@@ -27,20 +27,19 @@
 
 				<span ng-repeat="category in $ctrl.categories">
 
-					<li class="primary-category fadeIn animated">
+					<li class="primary-category fadeIn animated" ng-show="($ctrl.populatedOnly === 'false') || (category.ideas_count > 0)">
 						<a ng-click="$ctrl.setCategory(category)">
 							<% category.name %>
 						</a>
 					</li>
-					<li class="secondary-category fadeInUp animated">
+					<li class="secondary-category fadeInUp animated" ng-show="(($ctrl.populatedOnly === 'false') || (category.ideas_count > 0) && category.subcategories.length > 0)">
 						<a ng-click="$ctrl.setCategory(category)">
-							All
+							{{ trans('common.all') }}
 						</a>
 					</li>
-					<li class="secondary-category fadeInUp animated" ng-repeat="subcategory in category.subcategories">
+					<li class="secondary-category fadeInUp animated" ng-repeat="subcategory in category.subcategories" ng-show="($ctrl.populatedOnly === 'false') || (subcategory.ideas_count > 0)">
 						<a ng-click="$ctrl.setCategory(subcategory)">
 							<% subcategory.name %>
-							<span ng-show="subcategory.ideas_count > 0"> - <% subcategory.ideas_count %></span>
 						</a>
 					</li>
 
