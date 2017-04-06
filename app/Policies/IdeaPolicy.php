@@ -185,7 +185,7 @@ class IdeaPolicy
     public function add_proposal(User $user, Idea $idea)
     {
         $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
-		return ($is_existing_supporter && ($idea->proposal_state == 'open'));
+    		return (($is_existing_supporter && ($idea->proposal_state == 'open')) || $user->admin);
     }
 
     /**

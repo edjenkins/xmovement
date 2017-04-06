@@ -9,6 +9,13 @@
 	</span>
 </td>
 
+<td ng-class="{'state-enabled':user.admin, 'state-disabled':!user.admin}" class="state-table-cell">
+	<span ng-click="user.admin = !user.admin; configController.updatePermission($event, 'admin')">
+		<i ng-show="(user.admin == null)" class="fa fa-spinner fa-pulse"></i>
+		<i ng-show="(user.admin != null)" class="fa fa-lg fa-toggle-on" ng-class="{'fa-flip-horizontal':!user.admin}"></i>
+	</span>
+</td>
+
 <td ng-class="{'state-enabled':user.can_manage_admins, 'state-disabled':!user.can_manage_admins}" class="state-table-cell">
 	<span ng-click="user.can_manage_admins = !user.can_manage_admins; configController.updatePermission($event, 'can_manage_admins')">
 		<i ng-show="(user.can_manage_admins == null)" class="fa fa-spinner fa-pulse"></i>

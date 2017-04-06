@@ -22,7 +22,7 @@ class ProposalPolicy
      */
     public function edit(User $user, Proposal $proposal)
     {
-        return $user->id == $proposal->user_id;
+        return (($user->id == $proposal->user_id) || $user->admin);
     }
 
     /**
@@ -34,7 +34,7 @@ class ProposalPolicy
      */
     public function destroy(User $user, Proposal $proposal)
     {
-        return $user->id == $proposal->user_id;
+        return (($user->id == $proposal->user_id) || $user->admin);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProposalPolicy
     public function vote_on_proposals(User $user, Proposal $proposal)
     {
         $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $proposal->idea->id)->exists();
-		return ($is_existing_supporter && ($proposal->idea->proposal_state == 'open'));
+    		return ($is_existing_supporter && ($proposal->idea->proposal_state == 'open'));
     }
 
     /**

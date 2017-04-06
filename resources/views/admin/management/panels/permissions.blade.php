@@ -30,6 +30,7 @@
 						<tr>
 							<th>User</th>
 							<th class="state-table-header">Super Admin</th>
+							<th class="state-table-header">Admin</th>
 							<th class="state-table-header">Manage Admins</th>
 							<th class="state-table-header">Manage Platform</th>
 							<th class="state-table-header">Manage State</th>
@@ -56,6 +57,7 @@
 				<tr>
 					<th>User</th>
 					<th class="state-table-header">Super Admin</th>
+					<th class="state-table-header">Admin</th>
 					<th class="state-table-header">Manage Admins</th>
 					<th class="state-table-header">Manage Platform</th>
 					<th class="state-table-header">Manage State</th>
