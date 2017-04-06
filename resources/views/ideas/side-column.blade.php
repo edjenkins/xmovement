@@ -35,18 +35,32 @@
 
 		@if ($idea->design_state == 'closed')
 
-			<div class="info-tile">
-				<div class="info-tile-content">
-					<p>
-						<i class="fa fa-info"></i>
-						{{ trans('idea.design_area_opens', ['time' => $idea->designPhaseOpens()]) }}
-					</p>
+			@if ((DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $idea->supporterCount()) > 0)
+
+				<div class="info-tile">
+					<div class="info-tile-content">
+						<p>
+							<i class="fa fa-info"></i>
+							<p>{{ (DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $idea->supporterCount()) }}</p>
+							{{ trans('idea.x_supporters_needed_to_progress', ['supporter_count' => (DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $idea->supporterCount())]) }}
+						</p>
+					</div>
 				</div>
-			</div>
 
-		@endif
+			@else
 
-		@if ($idea->proposal_state == 'closed')
+				<div class="info-tile">
+					<div class="info-tile-content">
+						<p>
+							<i class="fa fa-info"></i>
+							{{ trans('idea.design_area_opens', ['time' => $idea->designPhaseOpens()]) }}
+						</p>
+					</div>
+				</div>
+
+			@endif
+
+		@elseif ($idea->proposal_state == 'closed')
 
 			<div class="info-tile">
 				<div class="info-tile-content">

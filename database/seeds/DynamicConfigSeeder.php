@@ -195,6 +195,11 @@ class DynamicConfigSeeder extends Seeder
 				'type' => 'boolean'
 			),
 			array(
+				'key' => 'MIN_SUPPORTER_COUNT',
+				'value' => 0,
+				'type' => 'integer'
+			),
+			array(
 				'key' => 'PROCESS_START_DATE',
 				'value' => '2017-02-01T00:00:00.000Z',
 				'type' => 'timestamp'

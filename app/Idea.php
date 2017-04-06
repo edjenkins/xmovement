@@ -407,7 +407,19 @@ class Idea extends Model
 
       if (!Carbon::now()->between($support_start, $support_end))
 			{
-				return (Carbon::now()->gt($support_end)) ? 'locked' : 'closed';
+        if (Carbon::now()->gt($support_end))
+        {
+          if ((DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $this->supporterCount()) > 0)
+          {
+            // Not enough supporters
+            return 'failed';
+          }
+          else
+          {
+            // Enough supporters!
+            return 'locked';
+          }
+        }
 			}
       return 'open';
     }
@@ -417,19 +429,19 @@ class Idea extends Model
       $design_start = $this->timescales('design', 'start');
       $design_end = $this->timescales('design', 'end');
 
+      $state = '';
+
       if (!Carbon::now()->between($design_start, $design_end))
 			{
-				return (Carbon::now()->gt($design_end)) ? 'locked' : 'closed';
+				$state = (Carbon::now()->gt($design_end)) ? 'locked' : 'closed';
 			}
-      return 'open';
-    }
+      else
+      {
+        $state = 'open';
+      }
 
-    function plan_state()
-    {
-      $design_start = $this->timescales('design', 'start');
-      $design_end = $this->timescales('design', 'end');
-
-      return (Carbon::now()->gt($design_end)) ? 'open' : 'closed';
+      // Check support phase was successful
+      return ($this->support_state() == 'failed') ? 'closed' : $state;
     }
 
     function proposal_state()
@@ -437,11 +449,19 @@ class Idea extends Model
       $proposal_start = $this->timescales('proposal', 'start');
       $proposal_end = $this->timescales('proposal', 'end');
 
+      $state = '';
+
       if (!Carbon::now()->between($proposal_start, $proposal_end))
 			{
-				return (Carbon::now()->gt($proposal_end)) ? 'locked' : 'closed';
+				$state = (Carbon::now()->gt($proposal_end)) ? 'locked' : 'closed';
 			}
-      return 'open';
+      else
+      {
+        $state = 'open';
+      }
+
+      // Check support phase was successful
+      return ($this->support_state() == 'failed') ? 'closed' : $state;
     }
 
     function tender_state()
@@ -449,10 +469,38 @@ class Idea extends Model
       $tender_start = $this->timescales('tender', 'start');
       $tender_end = $this->timescales('tender', 'end');
 
+      $state = '';
+
       if (!Carbon::now()->between($tender_start, $tender_end))
 			{
-				return (Carbon::now()->gt($tender_end)) ? 'locked' : 'closed';
+				$state = (Carbon::now()->gt($tender_end)) ? 'locked' : 'closed';
 			}
-      return 'open';
+      else
+      {
+        $state = 'open';
+      }
+
+      // Check support phase was successful
+      return ($this->support_state() == 'failed') ? 'closed' : $state;
+    }
+
+    function plan_state()
+    {
+      $design_start = $this->timescales('design', 'start');
+      $design_end = $this->timescales('design', 'end');
+
+      $state = '';
+
+      if (!Carbon::now()->gt($design_end))
+      {
+        $state = 'closed';
+      }
+      else
+      {
+        $state = 'open';
+      }
+
+      // Check support phase was successful
+      return ($this->support_state() == 'failed') ? 'closed' : $state;
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 
 use Illuminate\Console\Command;
 
+use App\Jobs\SendSupportPhaseFailedEmail;
 use App\Jobs\SendDesignPhaseOpenEmail;
 use App\Jobs\SendProposalPhaseOpenEmail;
 use App\Jobs\SendProposalPhaseCompleteEmail;
@@ -48,14 +49,26 @@ class UpdateIdeaStates extends Command
 
 		$ideas = Idea::all();
 
+		/* Update states */
 		foreach ($ideas as $index => $idea)
 		{
-			// Check state
-
-			/* Update states */
-
 			// Support state
-			$idea->support_state = $idea->support_state();
+			if ($idea->support_state != $idea->support_state())
+			{
+				$idea->support_state = $idea->support_state();
+
+				if ($idea->support_state == 'failed')
+				{
+					// Idea isn't going to progress (lack of support)
+
+					// Send idea failed email
+					foreach ($idea->get_supporters() as $index => $supporter)
+					{
+						$job = (new SendSupportPhaseFailedEmail($supporter->user, $idea))->delay(5)->onQueue('emails');
+						$this->dispatch($job);
+					}
+				}
+			}
 
 			// Design state
 			if ($idea->design_state != $idea->design_state())

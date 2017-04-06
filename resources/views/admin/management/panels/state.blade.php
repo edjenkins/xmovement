@@ -170,7 +170,8 @@
 						<th>Setting</th>
 						<th class="state-table-header">State</th>
 					</tr>
-					<tr xm-config-setting xm-config="{type:'boolean',title:'Limit Tendering to Shortlist',key:'TENDER_SHORTLIST_ONLY'}" xm-phase-timeline-ctrl="$ctrl"></tr>
+					<!-- <tr xm-config-setting xm-config="{type:'boolean',title:'Limit Tendering to Shortlist',key:'TENDER_SHORTLIST_ONLY'}" xm-phase-timeline-ctrl="$ctrl"></tr> -->
+					<tr xm-config-setting xm-config="{type:'integer',title:'Minimum supporter count to progress',key:'MIN_SUPPORTER_COUNT'}" xm-phase-timeline-ctrl="$ctrl"></tr>
 				</table>
 
 			</div>
