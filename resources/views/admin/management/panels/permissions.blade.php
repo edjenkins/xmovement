@@ -32,6 +32,8 @@
 							<th class="state-table-header">Super Admin</th>
 							<th class="state-table-header">Manage Admins</th>
 							<th class="state-table-header">Manage Platform</th>
+							<th class="state-table-header">Manage State</th>
+							<th class="state-table-header">Manage Categories</th>
 							<th class="state-table-header">Translate Platform</th>
 							<th class="state-table-header">View Analytics</th>
 						</tr>
@@ -56,6 +58,8 @@
 					<th class="state-table-header">Super Admin</th>
 					<th class="state-table-header">Manage Admins</th>
 					<th class="state-table-header">Manage Platform</th>
+					<th class="state-table-header">Manage State</th>
+					<th class="state-table-header">Manage Categories</th>
 					<th class="state-table-header">Translate Platform</th>
 					<th class="state-table-header">View Analytics</th>
 				</tr>

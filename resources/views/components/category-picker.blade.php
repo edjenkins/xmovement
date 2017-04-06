@@ -27,7 +27,7 @@
 
 				<span ng-repeat="category in $ctrl.categories">
 
-					<li class="primary-category fadeIn animated" ng-show="($ctrl.populatedOnly === 'false') || (category.ideas_count > 0)">
+					<li class="primary-category fadeIn animated" ng-show="($ctrl.populatedOnly == 'false') || (category.ideas_count > 0)">
 						<a ng-click="$ctrl.setCategory(category)">
 							<% category.name %>
 						</a>

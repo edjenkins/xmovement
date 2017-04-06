@@ -10,8 +10,8 @@
             </button>
 
             <a target="_self" class="navbar-brand" href="{{ url('/') }}">
-				<img class="logo-color" src="{{ asset(env('S3_URL') . '/logos/logo.svg') }}" alt="{{ trans('common.brand') }}" />
-				<img class="logo-white" src="{{ asset(env('S3_URL') . '/logos/logo-white.svg') }}" alt="{{ trans('common.brand') }}" />
+        				<img class="logo-color" src="{{ asset(env('S3_URL') . '/logos/logo.svg') }}" alt="{{ trans('common.brand') }}" />
+        				<img class="logo-white" src="{{ asset(env('S3_URL') . '/logos/logo-white.svg') }}" alt="{{ trans('common.brand') }}" />
             </a>
 
             <div class="clearfix"></div>
@@ -63,7 +63,7 @@
 							@can('view_analytics', Auth::user())
 								<li><a target="_self" href="{{ action('AnalyticsController@index') }}"></i>{{ trans('navbar.analytics') }}</a></li>
 							@endcan
-							@can('manage_platform', Auth::user())
+							@can('view_management_tools', Auth::user())
 								<li><a target="_self" href="{{ action('AdminController@managePlatform') }}"></i>{{ trans('navbar.manage_platform') }}</a></li>
 							@endcan
 							@can('manage_admins', Auth::user())

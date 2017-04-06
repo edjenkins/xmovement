@@ -23,6 +23,20 @@
 	</span>
 </td>
 
+<td ng-class="{'state-enabled':user.can_manage_state, 'state-disabled':!user.can_manage_state}" class="state-table-cell">
+	<span ng-click="user.can_manage_state = !user.can_manage_state; configController.updatePermission($event, 'can_manage_state')">
+		<i ng-show="(user.can_manage_state == null)" class="fa fa-spinner fa-pulse"></i>
+		<i ng-show="(user.can_manage_state != null)" class="fa fa-lg fa-toggle-on" ng-class="{'fa-flip-horizontal':!user.can_manage_state}"></i>
+	</span>
+</td>
+
+<td ng-class="{'state-enabled':user.can_manage_categories, 'state-disabled':!user.can_manage_categories}" class="state-table-cell">
+	<span ng-click="user.can_manage_categories = !user.can_manage_categories; configController.updatePermission($event, 'can_manage_categories')">
+		<i ng-show="(user.can_manage_categories == null)" class="fa fa-spinner fa-pulse"></i>
+		<i ng-show="(user.can_manage_categories != null)" class="fa fa-lg fa-toggle-on" ng-class="{'fa-flip-horizontal':!user.can_manage_categories}"></i>
+	</span>
+</td>
+
 <td ng-class="{'state-enabled':user.can_translate, 'state-disabled':!user.can_translate}" class="state-table-cell">
 	<span ng-click="user.can_translate = !user.can_translate; configController.updatePermission($event, 'can_translate')">
 		<i ng-show="(user.can_translate == null)" class="fa fa-spinner fa-pulse"></i>

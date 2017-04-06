@@ -48,7 +48,7 @@ class AdminController extends Controller
 		MetaTag::set('description', Lang::get('meta.admin_description'));
 		# META
 
-		if (Gate::denies('manage_platform', Auth::user()))
+		if (Gate::denies('view_management_tools', Auth::user()))
 		{
 			Session::flash('flash_message', trans('flash_message.no_permission'));
             Session::flash('flash_type', 'flash-danger');
@@ -85,7 +85,7 @@ class AdminController extends Controller
 	{
 		$response = new ResponseObject();
 
-		if (Gate::denies('manage_platform', Auth::user()))
+		if (Gate::denies('update_config', Auth::user()))
 		{
             array_push($response->errors, trans('flash_message.no_permission'));
 		}
@@ -103,7 +103,7 @@ class AdminController extends Controller
 	{
 		$response = new ResponseObject();
 
-		if (Gate::denies('manage_platform', Auth::user()))
+		if (Gate::denies('update_config', Auth::user()))
 		{
             array_push($response->errors, trans('flash_message.no_permission'));
 		}

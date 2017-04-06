@@ -12,9 +12,9 @@
 
         <div class="container admin-container" ng-switch="current_view">
 
-			@can('manage_admins', Auth::user())
-				@include('admin/management/panels/permissions')
-			@endcan
+						@can('manage_admins', Auth::user())
+							@include('admin/management/panels/permissions')
+						@endcan
 
         </div>
 

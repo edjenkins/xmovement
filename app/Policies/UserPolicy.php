@@ -24,7 +24,7 @@ class UserPolicy
         return $user->can_view_analytics;
     }
 
-	/**
+  	/**
      * Determine if the given user can translate the platform.
      *
      * @param  User  $user
@@ -41,9 +41,53 @@ class UserPolicy
      * @param  User  $user
      * @return bool
      */
+    public function view_management_tools(User $user)
+    {
+        return ($user->can_manage_platform || $user->can_manage_state || $user->can_manage_categories);
+    }
+
+    /**
+     * Determine if the given user can update the config for the platform.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function update_config(User $user)
+    {
+        return ($user->can_manage_platform || $user->can_manage_state);
+    }
+
+    /**
+     * Determine if the given user can manage the platform.
+     *
+     * @param  User  $user
+     * @return bool
+     */
     public function manage_platform(User $user)
     {
         return $user->can_manage_platform;
+    }
+
+  	/**
+     * Determine if the given user can manage the state of the platform's phases.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function manage_state(User $user)
+    {
+        return $user->can_manage_state;
+    }
+
+    /**
+     * Determine if the given user can manage the categories.
+     *
+     * @param  User  $user
+     * @return bool
+     */
+    public function manage_categories(User $user)
+    {
+        return $user->can_manage_categories;
     }
 
     /**

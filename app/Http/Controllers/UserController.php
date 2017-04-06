@@ -54,6 +54,7 @@ class UserController extends Controller
 		$response->data['users'] = User::where('super_admin', true)
 		->orWhere('can_manage_admins', true)
 		->orWhere('can_manage_platform', true)
+		->orWhere('can_manage_categories', true)
 		->orWhere('can_translate', true)
 		->orWhere('can_view_analytics', true)
 		->select('id', 'name', 'avatar')->orderBy('name')->get();

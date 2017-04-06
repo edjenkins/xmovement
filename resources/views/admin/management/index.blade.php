@@ -24,13 +24,17 @@
 								<button type="button">{{ trans('admin.view_general') }}</button>
 
 		    				</li>
+						@endcan
 
+						@can('manage_state', Auth::user())
 							<li class="module-control" ng-class="{'active' : (current_view == 'state')}" ng-click="setCurrentView('state')">
 
 								<button type="button">{{ trans('admin.view_state') }}</button>
 
 		    				</li>
+						@endcan
 
+						@can('manage_categories', Auth::user())
 							<li class="module-control" ng-class="{'active' : (current_view == 'categories')}" ng-click="setCurrentView('categories')">
 
 								<button type="button">{{ trans('admin.view_categories') }}</button>
@@ -52,7 +56,13 @@
 
 			@can('manage_platform', Auth::user())
 				@include('admin/management/panels/general')
+			@endcan
+
+			@can('manage_state', Auth::user())
 				@include('admin/management/panels/state')
+			@endcan
+
+			@can('manage_categories', Auth::user())
 				@include('admin/management/panels/categories')
 			@endcan
 
