@@ -1,5 +1,11 @@
 <div class="action-buttons">
 
+	@can('accessToolkit', $idea)
+
+		<a target="_self" href="{{ action('IdeaController@view', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.access_toolkit') }}</a>
+
+	@endcan
+
 	@if (Auth::check())
 
 		@can('support', $idea)

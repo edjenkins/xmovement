@@ -198,6 +198,10 @@ class Idea extends Model
   		{
   			return 'Support Phase';
   		}
+  		else if ($this->support_state() == 'failed')
+  		{
+  			return 'Failed';
+  		}
 
       return 'Complete';
     }

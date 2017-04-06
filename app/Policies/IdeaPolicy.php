@@ -27,6 +27,18 @@ class IdeaPolicy
     }
 
     /**
+     * Determine if the given user can access the toolkit.
+     *
+     * @param  User  $user
+     * @param  Idea  $idea
+     * @return bool
+     */
+    public function accessToolkit(User $user, Idea $idea)
+    {
+        return (($user->id == $idea->user_id) || $user->admin);
+    }
+
+    /**
      * Determine if the given user can edit the given idea.
      *
      * @param  User  $user
@@ -123,7 +135,7 @@ class IdeaPolicy
      */
     public function postUpdate(User $user, Idea $idea)
     {
-        return ($user->id == $idea->user_id);
+        return (($user->id == $idea->user_id) || $user->admin);
     }
 
     /**
@@ -135,7 +147,7 @@ class IdeaPolicy
      */
     public function destroyUpdate(User $user, Idea $idea)
     {
-        return ($user->id == $idea->user_id);
+        return (($user->id == $idea->user_id) || $user->admin);
     }
 
 

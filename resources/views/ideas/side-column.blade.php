@@ -41,7 +41,6 @@
 					<div class="info-tile-content">
 						<p>
 							<i class="fa fa-info"></i>
-							<p>{{ (DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $idea->supporterCount()) }}</p>
 							{{ trans('idea.x_supporters_needed_to_progress', ['supporter_count' => (DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $idea->supporterCount())]) }}
 						</p>
 					</div>

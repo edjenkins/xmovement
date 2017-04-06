@@ -14,7 +14,7 @@ use App\User;
 use App\Idea;
 
 
-class SendSupportPhaseFailedEmailEmail extends Job implements ShouldQueue
+class SendSupportPhaseFailedEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
