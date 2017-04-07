@@ -352,6 +352,14 @@ class Idea extends Model
 
     		$design_start = Carbon::createFromTimestamp(strtotime("+" . $this->userDefinedDuration('support') . " days", $process_start_date));
     		$design_end = Carbon::createFromTimestamp(strtotime("+" . ($this->userDefinedDuration('support') + $this->userDefinedDuration('design')) . " days", $process_start_date));
+
+        $proposal_phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
+    		$proposal_start = Carbon::createFromTimestamp(strtotime("+" . ($this->userDefinedDuration('support') + $this->userDefinedDuration('design')) . " days", $process_start_date));
+    		$proposal_end = Carbon::createFromTimestamp(strtotime("+" . ($this->userDefinedDuration('support') + $this->userDefinedDuration('design')) . " days", $process_start_date));
+
+    		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+    		$tender_start = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->start . " days", $process_start_date));
+    		$tender_end = Carbon::createFromTimestamp(strtotime("+" . 999 . " days", $process_start_date));
       }
       else
       {
@@ -362,15 +370,15 @@ class Idea extends Model
         $design_phase = json_decode(DynamicConfig::fetchConfig('DESIGN_PHASE'));
     		$design_start = Carbon::createFromTimestamp(strtotime("+" . $design_phase->start . " days", $process_start_date));
     		$design_end = Carbon::createFromTimestamp(strtotime("+" . $design_phase->end . " days", $process_start_date));
+
+        $proposal_phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
+    		$proposal_start = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->start . " days", $process_start_date));
+    		$proposal_end = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->end . " days", $process_start_date));
+
+    		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
+    		$tender_start = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->start . " days", $process_start_date));
+    		$tender_end = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->end . " days", $process_start_date));
       }
-
-  		$proposal_phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
-  		$proposal_start = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->start . " days", $process_start_date));
-  		$proposal_end = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->end . " days", $process_start_date));
-
-  		$tender_phase = json_decode(DynamicConfig::fetchConfig('TENDER_PHASE'));
-  		$tender_start = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->start . " days", $process_start_date));
-  		$tender_end = Carbon::createFromTimestamp(strtotime("+" . $tender_phase->end . " days", $process_start_date));
 
   		switch ($phase) {
   			case 'inspiration':
