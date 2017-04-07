@@ -33,7 +33,7 @@
 
 		@include('action-button')
 
-		@if ($idea->design_state == 'closed')
+		@if (($idea->design_state == 'closed') && ($idea->support_state != 'failed'))
 
 			@if ((DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $idea->supporterCount()) > 0)
 
@@ -59,7 +59,7 @@
 
 			@endif
 
-		@elseif ($idea->proposal_state == 'closed')
+		@elseif (($idea->proposal_state == 'closed') && ($idea->support_state != 'failed'))
 
 			<div class="info-tile">
 				<div class="info-tile-content">

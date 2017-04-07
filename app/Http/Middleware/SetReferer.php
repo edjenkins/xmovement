@@ -28,7 +28,7 @@ class SetReferer
 
 		if (!((strpos(URL::previous(), 'login') || strpos(URL::previous(), 'register') || strpos(URL::previous(), 'auth'))))
 		{
-			Session::set('redirect', URL::previous());
+			// Session::set('redirect', URL::previous());
 		}
 
         return $next($request);

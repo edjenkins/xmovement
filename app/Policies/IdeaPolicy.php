@@ -35,7 +35,7 @@ class IdeaPolicy
      */
     public function accessToolkit(User $user, Idea $idea)
     {
-        return (($user->id == $idea->user_id) || $user->admin);
+        return ((($user->id == $idea->user_id) || $user->admin) && ($idea->plan_state() == 'open'));
     }
 
     /**
@@ -47,7 +47,7 @@ class IdeaPolicy
      */
     public function edit(User $user, Idea $idea)
     {
-        return $user->id == $idea->user_id;
+        return (($user->id == $idea->user_id) || $user->admin);
     }
 
     /**
@@ -59,7 +59,7 @@ class IdeaPolicy
      */
     public function destroy(User $user, Idea $idea)
     {
-        return $user->id == $idea->user_id;
+        return (($user->id == $idea->user_id) || $user->admin);
     }
 
     /**
@@ -71,7 +71,7 @@ class IdeaPolicy
      */
     public function support(User $user, Idea $idea)
     {
-		$is_not_existing_supporter = !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+    		$is_not_existing_supporter = !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
         return ($is_not_existing_supporter && ($idea->support_state == 'open'));
     }
 
@@ -160,7 +160,7 @@ class IdeaPolicy
      */
     public function lockDesignTask(User $user, Idea $idea)
     {
-        return $idea->user_id == $user->id;
+        return (($user->id == $idea->user_id) || $user->admin);
     }
 
     /**

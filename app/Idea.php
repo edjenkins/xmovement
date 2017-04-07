@@ -330,6 +330,11 @@ class Idea extends Model
   		return Carbon::parse($this->timescales('proposal', 'end'))->diffForHumans(null, true);
   	}
 
+    public function userDefinedDuration($phase)
+    {
+      return json_decode(DynamicConfig::fetchConfig(strtoupper($this->duration) . '_' . strtoupper($phase) . '_DURATION'));
+    }
+
   	public function timescales($phase, $point)
   	{
   		$progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
@@ -340,13 +345,24 @@ class Idea extends Model
   		$inspiration_start = Carbon::createFromTimestamp(strtotime("+" . $inspiration_phase->start . " days", $process_start_date));
   		$inspiration_end = Carbon::createFromTimestamp(strtotime("+" . $inspiration_phase->end . " days", $process_start_date));
 
-  		$support_phase = json_decode(DynamicConfig::fetchConfig('SUPPORT_PHASE'));
-  		$support_start = Carbon::createFromTimestamp(strtotime("+" . $support_phase->start . " days", $process_start_date));
-  		$support_end = Carbon::createFromTimestamp(strtotime("+" . $support_phase->end . " days", $process_start_date));
+      if ($progression_type == 'user-defined')
+      {
+    		$support_start = Carbon::createFromTimestamp(strtotime("+" . 0 . " days", $process_start_date));
+    		$support_end = Carbon::createFromTimestamp(strtotime("+" . $this->userDefinedDuration('support') . " days", $process_start_date));
 
-  		$design_phase = json_decode(DynamicConfig::fetchConfig('DESIGN_PHASE'));
-  		$design_start = Carbon::createFromTimestamp(strtotime("+" . $design_phase->start . " days", $process_start_date));
-  		$design_end = Carbon::createFromTimestamp(strtotime("+" . $design_phase->end . " days", $process_start_date));
+    		$design_start = Carbon::createFromTimestamp(strtotime("+" . $this->userDefinedDuration('support') . " days", $process_start_date));
+    		$design_end = Carbon::createFromTimestamp(strtotime("+" . ($this->userDefinedDuration('support') + $this->userDefinedDuration('design')) . " days", $process_start_date));
+      }
+      else
+      {
+        $support_phase = json_decode(DynamicConfig::fetchConfig('SUPPORT_PHASE'));
+        $support_start = Carbon::createFromTimestamp(strtotime("+" . $support_phase->start . " days", $process_start_date));
+        $support_end = Carbon::createFromTimestamp(strtotime("+" . $support_phase->end . " days", $process_start_date));
+
+        $design_phase = json_decode(DynamicConfig::fetchConfig('DESIGN_PHASE'));
+    		$design_start = Carbon::createFromTimestamp(strtotime("+" . $design_phase->start . " days", $process_start_date));
+    		$design_end = Carbon::createFromTimestamp(strtotime("+" . $design_phase->end . " days", $process_start_date));
+      }
 
   		$proposal_phase = json_decode(DynamicConfig::fetchConfig('PLAN_PHASE'));
   		$proposal_start = Carbon::createFromTimestamp(strtotime("+" . $proposal_phase->start . " days", $process_start_date));
