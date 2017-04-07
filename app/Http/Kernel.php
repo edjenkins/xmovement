@@ -30,8 +30,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\LogActivity::class,
-			\App\Http\Middleware\SetLocale::class,
-			\App\Http\Middleware\SetReferer::class,
+      			\App\Http\Middleware\SetLocale::class,
+      			\App\Http\Middleware\SetReferer::class,
         ],
 
         'api' => [
@@ -41,7 +41,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\LogActivity::class,
-			\App\Http\Middleware\SetLocale::class,
+      			\App\Http\Middleware\SetLocale::class,
             'throttle:60,1',
         ],
     ];
