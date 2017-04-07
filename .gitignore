@@ -13,6 +13,7 @@ public/js/vendor.js.map
 storage/framework/views/*
 /public/css/**
 /public/js/**
+!/public/js/vendor
 public/img/uploads/**
 public/img/brand/**
 public/uploads/**
