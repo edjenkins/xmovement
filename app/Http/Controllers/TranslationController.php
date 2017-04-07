@@ -35,7 +35,7 @@ class TranslationController extends Controller
 
         $this->manager = $manager;
     }
-	
+
 	public function api_index(Request $request)
 	{
 		$response = new ResponseObject();
@@ -50,7 +50,7 @@ class TranslationController extends Controller
 		{
 			$response->meta['success'] = true;
 
-			$this->manager->importTranslations($request->override);
+			// $this->manager->importTranslations($request->override);
 
 			$response->data['translations'] = $this->manager->fetchTranslations();
 

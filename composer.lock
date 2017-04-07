@@ -65,16 +65,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.25.3",
+            "version": "3.25.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c5d85fbaaea30e598eab4ff07c4213787b00b080"
+                "reference": "6874b16a262b4e368a25a6991461fce11cff4415"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c5d85fbaaea30e598eab4ff07c4213787b00b080",
-                "reference": "c5d85fbaaea30e598eab4ff07c4213787b00b080",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6874b16a262b4e368a25a6991461fce11cff4415",
+                "reference": "6874b16a262b4e368a25a6991461fce11cff4415",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +141,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-04 20:52:10"
+            "time": "2017-04-06 20:54:52"
         },
         {
             "name": "brainboxlabs/brain-socket",
@@ -196,16 +196,16 @@
         },
         {
             "name": "bugsnag/bugsnag",
-            "version": "v3.4.0",
+            "version": "v3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bugsnag/bugsnag-php.git",
-                "reference": "c3b05a18f9116ac7cb4984fd7ee0614fe4490176"
+                "reference": "ba743434ab6bfbbd2a7f9bc0572bf82628e9fdc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bugsnag/bugsnag-php/zipball/c3b05a18f9116ac7cb4984fd7ee0614fe4490176",
-                "reference": "c3b05a18f9116ac7cb4984fd7ee0614fe4490176",
+                "url": "https://api.github.com/repos/bugsnag/bugsnag-php/zipball/ba743434ab6bfbbd2a7f9bc0572bf82628e9fdc1",
+                "reference": "ba743434ab6bfbbd2a7f9bc0572bf82628e9fdc1",
                 "shasum": ""
             },
             "require": {
@@ -249,24 +249,24 @@
                 "logging",
                 "tracking"
             ],
-            "time": "2016-09-05 15:23:22"
+            "time": "2017-04-06 17:03:50"
         },
         {
             "name": "bugsnag/bugsnag-laravel",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bugsnag/bugsnag-laravel.git",
-                "reference": "b067bef4e2d87b92d4d554d511b7b262af17586d"
+                "reference": "e8aee99936694bae40d0d7713afeeb882b11383a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bugsnag/bugsnag-laravel/zipball/b067bef4e2d87b92d4d554d511b7b262af17586d",
-                "reference": "b067bef4e2d87b92d4d554d511b7b262af17586d",
+                "url": "https://api.github.com/repos/bugsnag/bugsnag-laravel/zipball/e8aee99936694bae40d0d7713afeeb882b11383a",
+                "reference": "e8aee99936694bae40d0d7713afeeb882b11383a",
                 "shasum": ""
             },
             "require": {
-                "bugsnag/bugsnag": "^3.4",
+                "bugsnag/bugsnag": "^3.5",
                 "bugsnag/bugsnag-psr-logger": "^1.1",
                 "illuminate/contracts": "^5.0",
                 "illuminate/support": "^5.0",
@@ -308,7 +308,7 @@
                 "logging",
                 "tracking"
             ],
-            "time": "2016-09-08 08:33:45"
+            "time": "2017-04-06 17:24:56"
         },
         {
             "name": "bugsnag/bugsnag-psr-logger",
