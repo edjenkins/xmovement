@@ -235,6 +235,7 @@ class Idea extends Model
 		switch ($xmovement_task_type) {
 			case 'Poll':
 				if (!DynamicConfig::fetchConfig('XMOVEMENT_POLL')) { return; }
+        $proposal_interactivity = true;
 				$xmovement_task_id = \XMovement\Poll\Poll::create([
 					'user_id' => $this->user_id,
 					'contribution_type' => 'text',
@@ -244,6 +245,7 @@ class Idea extends Model
 
 			case 'Discussion':
 				if (!DynamicConfig::fetchConfig('XMOVEMENT_DISCUSSION')) { return; }
+        $proposal_interactivity = false;
 				$xmovement_task_id = \XMovement\Discussion\Discussion::create([
 					'user_id' => $this->user_id,
 				])->id;
@@ -257,7 +259,7 @@ class Idea extends Model
 			'description' => $description,
 			'xmovement_task_id' => $xmovement_task_id,
 			'xmovement_task_type' => $xmovement_task_type,
-			'proposal_interactivity' => false,
+			'proposal_interactivity' => $proposal_interactivity,
 			'pinned' => true,
 			'locked' => false,
 			'pre_populated' => true,
