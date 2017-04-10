@@ -481,6 +481,8 @@ class Idea extends Model
 
     function tender_state()
     {
+      $progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
+
       $state = 'open';
 
       if (!Carbon::now()->between($this->timescales('tender', 'start'), $this->timescales('tender', 'end')))
