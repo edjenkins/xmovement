@@ -30,8 +30,8 @@ class SetReferer
   		{
         if (strpos(URL::previous(), $_SERVER['HTTP_HOST']))
         {
-          Log::info('Setting redirect to - ' . URL::previous());
-          Session::set('redirect', URL::previous());
+        //   Log::info('Setting redirect to - ' . URL::previous());
+        //   Session::set('redirect', URL::previous());
         }
         else
         {

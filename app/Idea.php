@@ -218,9 +218,6 @@ class Idea extends Model
 			{
 				$this->categories()->attach($idea_category);
 
-				Log::error('$idea_category->id');
-				Log::error($idea_category->id);
-
 				while ($idea_category->parent_id)
 				{
 					$idea_category = IdeaCategory::where('id', $idea_category->parent_id)->first();
