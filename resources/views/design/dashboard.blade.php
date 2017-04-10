@@ -95,7 +95,11 @@
 								{{ trans('design.add_design_task') }}
 							</a>
 
-						@endcan
+						@else
+
+              <p>{{ trans('design.design_phase_closed') }}</p>
+
+            @endcan
 
 					@endif
 

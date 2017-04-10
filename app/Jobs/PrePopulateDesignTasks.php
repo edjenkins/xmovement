@@ -48,7 +48,11 @@ class PrePopulateDesignTasks extends Job implements ShouldQueue
       // Populate options
       foreach ($poll['options'] as $option_index => $poll_option)
   		{
-        \XMovement\Poll\Poll::addOption($poll_option);
+        \XMovement\Poll\PollOption::create([
+            'xmovement_poll_id' => $design_task->xmovement_task_id,
+            'user_id' => Auth::user()->id,
+            'value' => $poll_option
+        ]);
       }
 		}
 

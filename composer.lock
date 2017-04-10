@@ -9,29 +9,31 @@
     "packages": [
         {
             "name": "artesaos/laravel-linkedin",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artesaos/laravel-linkedin.git",
-                "reference": "663cf1d9cad52972b4baf06bd3c81aeb0f46952f"
+                "reference": "109127be9570659631e45c4a93a850a000db60fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artesaos/laravel-linkedin/zipball/663cf1d9cad52972b4baf06bd3c81aeb0f46952f",
-                "reference": "663cf1d9cad52972b4baf06bd3c81aeb0f46952f",
+                "url": "https://api.github.com/repos/artesaos/laravel-linkedin/zipball/109127be9570659631e45c4a93a850a000db60fb",
+                "reference": "109127be9570659631e45c4a93a850a000db60fb",
                 "shasum": ""
             },
             "require": {
-                "happyr/linkedin-api-client": "0.7.*",
+                "guzzlehttp/psr7": "^1.4",
+                "happyr/linkedin-api-client": "~1.0",
                 "illuminate/contracts": "~5.0",
-                "illuminate/database": "~5.0",
                 "illuminate/http": "~5.0",
                 "illuminate/support": "~5.0",
                 "php": ">=5.5.9",
-                "php-http/guzzle6-adapter": "^1.1"
+                "php-http/curl-client": "^1.7",
+                "php-http/guzzle6-adapter": "^1.1",
+                "php-http/message": "^1.5"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.0",
+                "orchestra/testbench": "~3.4@dev",
                 "phpunit/phpunit": "~5.0"
             },
             "type": "library",
@@ -61,20 +63,20 @@
                 "rest",
                 "sdk"
             ],
-            "time": "2016-09-20 23:22:26"
+            "time": "2017-04-08 13:16:20"
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.25.5",
+            "version": "3.25.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6874b16a262b4e368a25a6991461fce11cff4415"
+                "reference": "fe98140a4811abbe9104477b167dc3c7f9a8391b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6874b16a262b4e368a25a6991461fce11cff4415",
-                "reference": "6874b16a262b4e368a25a6991461fce11cff4415",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fe98140a4811abbe9104477b167dc3c7f9a8391b",
+                "reference": "fe98140a4811abbe9104477b167dc3c7f9a8391b",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +143,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2017-04-06 20:54:52"
+            "time": "2017-04-07 20:21:45"
         },
         {
             "name": "brainboxlabs/brain-socket",
@@ -1197,16 +1199,16 @@
         },
         {
             "name": "giggsey/locale",
-            "version": "1.2",
+            "version": "1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/Locale.git",
-                "reference": "640911276e24729c276ea6206a4e0318474d24f5"
+                "reference": "e6eb1883c1452df7734a03fb183a2ec5175c16f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/Locale/zipball/640911276e24729c276ea6206a4e0318474d24f5",
-                "reference": "640911276e24729c276ea6206a4e0318474d24f5",
+                "url": "https://api.github.com/repos/giggsey/Locale/zipball/e6eb1883c1452df7734a03fb183a2ec5175c16f2",
+                "reference": "e6eb1883c1452df7734a03fb183a2ec5175c16f2",
                 "shasum": ""
             },
             "require": {
@@ -1242,7 +1244,7 @@
                 }
             ],
             "description": "Locale functions required by libphonenumber-for-php",
-            "time": "2017-03-21 16:08:07"
+            "time": "2017-04-07 18:45:42"
         },
         {
             "name": "google/recaptcha",
@@ -1718,16 +1720,16 @@
         },
         {
             "name": "happyr/linkedin-api-client",
-            "version": "0.7.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Happyr/LinkedIn-API-client.git",
-                "reference": "7af5503b6ac28a0dca30eacdbb6c229af884611e"
+                "reference": "792745ae1d53847bcecfe485d695f6888f03453a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Happyr/LinkedIn-API-client/zipball/7af5503b6ac28a0dca30eacdbb6c229af884611e",
-                "reference": "7af5503b6ac28a0dca30eacdbb6c229af884611e",
+                "url": "https://api.github.com/repos/Happyr/LinkedIn-API-client/zipball/792745ae1d53847bcecfe485d695f6888f03453a",
+                "reference": "792745ae1d53847bcecfe485d695f6888f03453a",
                 "shasum": ""
             },
             "require": {
@@ -1735,7 +1737,6 @@
                 "php-http/client-implementation": "^1.0",
                 "php-http/discovery": "^1.0",
                 "php-http/httplug": "^1.0",
-                "php-http/message": "^1.0",
                 "php-http/message-factory": "^1.0"
             },
             "require-dev": {
@@ -1748,7 +1749,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -1775,7 +1776,7 @@
                 "oauth",
                 "sdk"
             ],
-            "time": "2016-07-18 14:06:42"
+            "time": "2016-08-15 10:35:57"
         },
         {
             "name": "intervention/image",
@@ -2864,6 +2865,62 @@
                 "random"
             ],
             "time": "2017-03-13 16:22:52"
+        },
+        {
+            "name": "php-http/curl-client",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/curl-client.git",
+                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/curl-client/zipball/0972ad0d7d37032a52077a5cbe27cf370f2007d8",
+                "reference": "0972ad0d7d37032a52077a5cbe27cf370f2007d8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": "^5.5 || ^7.0",
+                "php-http/discovery": "^1.0",
+                "php-http/httplug": "^1.0",
+                "php-http/message": "^1.2",
+                "php-http/message-factory": "^1.0.2"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "1.0",
+                "php-http/client-implementation": "1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^1.0",
+                "php-http/client-integration-tests": "^0.5.1",
+                "phpunit/phpunit": "^4.8.27",
+                "zendframework/zend-diactoros": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Http\\Client\\Curl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Михаил Красильников",
+                    "email": "m.krasilnikov@yandex.ru"
+                }
+            ],
+            "description": "cURL client for PHP-HTTP",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "curl",
+                "http"
+            ],
+            "time": "2017-02-09 15:18:33"
         },
         {
             "name": "php-http/discovery",
