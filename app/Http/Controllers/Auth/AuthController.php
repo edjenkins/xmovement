@@ -201,6 +201,14 @@ class AuthController extends Controller
             return $authUser;
         }
 
+        // Check if email was passed
+        if (!$facebookUser->email)
+        {
+          Session::flash('flash_message', trans('flash_message.email_required'));
+          Session::flash('flash_type', 'flash-danger');
+          return redirect('/login');
+        }
+
 		$extension = 'jpg';
 
 	    $filename = sha1(time() . time()) . ".{$extension}";
