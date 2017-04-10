@@ -49,7 +49,14 @@ class AuthController extends Controller
 		}
 		else
 		{
-			return Socialite::driver($request->provider)->redirect();
+			if (Session::pull('reauth'))
+			{
+				return Socialite::driver($request->provider)->with(['auth_type' => 'reauthenticate'])->redirect();
+			}
+			else
+			{
+				return Socialite::driver($request->provider)->redirect();
+			}
 		}
     }
 
@@ -130,7 +137,10 @@ class AuthController extends Controller
               {
                 Session::flash('flash_message', trans('flash_message.email_required'));
                 Session::flash('flash_type', 'flash-danger');
-                return redirect('/login');
+
+				Session::set('reauth', true);
+
+				return redirect('/login');
               }
 	        } catch (Exception $e) {
 	            return Redirect::to('auth/' . $request->provider);
