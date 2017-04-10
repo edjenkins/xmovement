@@ -429,43 +429,33 @@ class Idea extends Model
 
     function support_state()
     {
-      $support_start = $this->timescales('support', 'start');
-      $support_end = $this->timescales('support', 'end');
+      $state = 'open';
 
-      if (!Carbon::now()->between($support_start, $support_end))
+      if (!Carbon::now()->between($this->timescales('support', 'start'), $this->timescales('support', 'end')))
 			{
-        if (Carbon::now()->gt($support_end))
+        if (Carbon::now()->gt($this->timescales('support', 'end')))
         {
           if ((DynamicConfig::fetchConfig('MIN_SUPPORTER_COUNT', 0) - $this->supporterCount()) > 0)
           {
-            // Not enough supporters
-            return 'failed';
+            $state = 'failed'; // Not enough supporters
           }
           else
           {
-            // Enough supporters!
-            return 'locked';
+            $state = 'locked'; // Enough supporters!
           }
         }
 			}
-      return 'open';
+      return $state;
     }
 
     function design_state()
     {
-      $design_start = $this->timescales('design', 'start');
-      $design_end = $this->timescales('design', 'end');
+      $state = 'open';
 
-      $state = '';
-
-      if (!Carbon::now()->between($design_start, $design_end))
+      if (!Carbon::now()->between($this->timescales('design', 'start'), $this->timescales('design', 'end')))
 			{
-				$state = (Carbon::now()->gt($design_end)) ? 'locked' : 'closed';
+				$state = (Carbon::now()->gt($this->timescales('design', 'end'))) ? 'locked' : 'closed';
 			}
-      else
-      {
-        $state = 'open';
-      }
 
       // Check support phase was successful
       return ($this->support_state() == 'failed') ? 'closed' : $state;
@@ -473,19 +463,17 @@ class Idea extends Model
 
     function proposal_state()
     {
-      $proposal_start = $this->timescales('proposal', 'start');
-      $proposal_end = $this->timescales('proposal', 'end');
+      $progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
 
-      $state = '';
+      $state = 'open';
 
-      if (!Carbon::now()->between($proposal_start, $proposal_end))
+      if (!Carbon::now()->between($this->timescales('proposal', 'start'), $this->timescales('proposal', 'end')))
 			{
-				$state = (Carbon::now()->gt($proposal_end)) ? 'locked' : 'closed';
+        if (!($progression_type == 'user-defined' && Carbon::now()->gt($design_end = $this->timescales('design', 'end'))))
+        {
+          $state = (Carbon::now()->gt($this->timescales('proposal', 'end'))) ? 'locked' : 'closed';
+        }
 			}
-      else
-      {
-        $state = 'open';
-      }
 
       // Check support phase was successful
       return ($this->support_state() == 'failed') ? 'closed' : $state;
@@ -493,19 +481,15 @@ class Idea extends Model
 
     function tender_state()
     {
-      $tender_start = $this->timescales('tender', 'start');
-      $tender_end = $this->timescales('tender', 'end');
+      $state = 'open';
 
-      $state = '';
-
-      if (!Carbon::now()->between($tender_start, $tender_end))
+      if (!Carbon::now()->between($this->timescales('tender', 'start'), $this->timescales('tender', 'end')))
 			{
-				$state = (Carbon::now()->gt($tender_end)) ? 'locked' : 'closed';
+        if (!($progression_type == 'user-defined' && Carbon::now()->gt($design_end = $this->timescales('design', 'end'))))
+        {
+          $state = (Carbon::now()->gt($this->timescales('tender', 'end'))) ? 'locked' : 'closed';
+        }
 			}
-      else
-      {
-        $state = 'open';
-      }
 
       // Check support phase was successful
       return ($this->support_state() == 'failed') ? 'closed' : $state;
@@ -513,18 +497,11 @@ class Idea extends Model
 
     function plan_state()
     {
-      $design_start = $this->timescales('design', 'start');
-      $design_end = $this->timescales('design', 'end');
+      $state = 'open';
 
-      $state = '';
-
-      if (!Carbon::now()->gt($design_end))
+      if (Carbon::now()->lt($this->timescales('design', 'end')))
       {
         $state = 'closed';
-      }
-      else
-      {
-        $state = 'open';
       }
 
       // Check support phase was successful
