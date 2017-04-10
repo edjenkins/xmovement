@@ -124,6 +124,14 @@ class AuthController extends Controller
 		{
 			try {
 	            $user = Socialite::driver($request->provider)->user();
+
+              // Check if email was passed
+              if (!$user->email)
+              {
+                Session::flash('flash_message', trans('flash_message.email_required'));
+                Session::flash('flash_type', 'flash-danger');
+                return redirect('/login');
+              }
 	        } catch (Exception $e) {
 	            return Redirect::to('auth/' . $request->provider);
 	        }
@@ -199,14 +207,6 @@ class AuthController extends Controller
     {
         if ($authUser = User::where('facebook_id', $facebookUser->id)->first()) {
             return $authUser;
-        }
-
-        // Check if email was passed
-        if (!$facebookUser->email)
-        {
-          Session::flash('flash_message', trans('flash_message.email_required'));
-          Session::flash('flash_type', 'flash-danger');
-          return redirect('/login');
         }
 
 		$extension = 'jpg';
