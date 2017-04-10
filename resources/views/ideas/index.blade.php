@@ -52,7 +52,7 @@
 
 							<li class="module-control" ng-if="sort_type != 'shortlist'">
 
-								<category-picker populated-only="true"></category-picker>
+								<category-picker populated-only="false"></category-picker>
 
 							</li>
 
