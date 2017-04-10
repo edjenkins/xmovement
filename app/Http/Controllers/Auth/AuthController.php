@@ -51,7 +51,7 @@ class AuthController extends Controller
 		{
 			if (Session::pull('reauth'))
 			{
-				return Socialite::driver($request->provider)->with(['auth_type' => 'reauthenticate'])->redirect();
+				return Socialite::driver($request->provider)->with(['auth_type' => 'rerequest'])->redirect();
 			}
 			else
 			{
