@@ -327,7 +327,7 @@ class AuthController extends Controller
 		}
 
         $values = [
-            'facebook_id' => $linkedinUser->id,
+            'linkedin_id' => $linkedinUser->id,
             'name' => $linkedinUser->name,
             'email' => $linkedinUser->email,
             'avatar' => $filename,
