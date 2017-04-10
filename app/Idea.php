@@ -265,6 +265,8 @@ class Idea extends Model
 			'locked' => false,
 			'pre_populated' => true,
 		]);
+
+    return $design_task;
 	}
 
     /**
