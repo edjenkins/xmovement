@@ -32,7 +32,7 @@
 							<% category.name %>
 						</a>
 					</li>
-					<li class="secondary-category fadeInUp animated" ng-show="(($ctrl.populatedOnly === 'false') || (category.ideas_count > 0) && category.subcategories.length > 0)">
+					<li class="secondary-category fadeInUp animated" ng-show="((($ctrl.populatedOnly == 'false') || (category.ideas_count > 0)) && category.subcategories.length > 0)">
 						<a ng-click="$ctrl.setCategory(category)">
 							{{ trans('common.all') }}
 						</a>
