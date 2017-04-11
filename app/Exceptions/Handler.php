@@ -47,15 +47,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-		if ($e instanceof ModelNotFoundException)
-		{
-			Session::flash('flash_message', trans('flash_message.page_not_found'));
+        if ($e instanceof ModelNotFoundException) {
+            Session::flash('flash_message', trans('flash_message.page_not_found'));
             Session::flash('flash_type', 'flash-danger');
 
-			// return redirect()->action('PageController@home');
-		}
+            return redirect()->action('PageController@home');
+        }
 
-		Log::error($e);
+        Log::error($e);
 
         return parent::render($request, $e);
     }

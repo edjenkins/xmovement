@@ -30,7 +30,7 @@ use App\InfoDialogue;
 
 class AuthController extends Controller
 {
-	use AuthenticatesAndRegistersUsers;
+    use AuthenticatesAndRegistersUsers;
 
     /**
      * Redirect the user to the authentication page.
@@ -41,23 +41,17 @@ class AuthController extends Controller
     {
         Session::reflash();
 
-		if ($request->provider == 'shibboleth')
-		{
-			$callback_url = URL::action('Auth\AuthController@handleProviderCallback', ['provider' => 'shibboleth']);
+        if ($request->provider == 'shibboleth') {
+            $callback_url = URL::action('Auth\AuthController@handleProviderCallback', ['provider' => 'shibboleth']);
 
-			return Redirect::to('https://gateway.eventmovement.co.uk/shibboleth.php?callback_url=' . $callback_url . '&laravel_session=' . $request->cookie('laravel_session'));
-		}
-		else
-		{
-			if (Session::pull('reauth'))
-			{
-				return Socialite::driver($request->provider)->with(['auth_type' => 'rerequest'])->redirect();
-			}
-			else
-			{
-				return Socialite::driver($request->provider)->redirect();
-			}
-		}
+            return Redirect::to('https://gateway.eventmovement.co.uk/shibboleth.php?callback_url=' . $callback_url . '&laravel_session=' . $request->cookie('laravel_session'));
+        } else {
+            if (Session::pull('reauth')) {
+                return Socialite::driver($request->provider)->with(['auth_type' => 'rerequest'])->redirect();
+            } else {
+                return Socialite::driver($request->provider)->redirect();
+            }
+        }
     }
 
     /**
@@ -67,100 +61,79 @@ class AuthController extends Controller
      */
     public function handleProviderCallback(Request $request)
     {
-		// Shibboleth auth
-		if ($request->provider == 'shibboleth')
-		{
-			$session_id = $request->cookie('laravel_session');
+        // Shibboleth auth
+        if ($request->provider == 'shibboleth') {
+            $session_id = $request->cookie('laravel_session');
 
-			if (!Redis::exists($session_id . 'SHIB-PERSISTENT-ID'))
-			{
-				return Redirect::to('auth/' . $request->provider);
-			}
+            if (!Redis::exists($session_id . 'SHIB-PERSISTENT-ID')) {
+                return Redirect::to('auth/' . $request->provider);
+            }
 
-			$shib_data = Redis::get($session_id . 'SHIB-DATA');
+            $shib_data = Redis::get($session_id . 'SHIB-DATA');
 
-			$shib_data = json_decode($shib_data);
+            $shib_data = json_decode($shib_data);
 
-			$bio = NULL;
+            $bio = null;
 
-			if ($shib_data->stafforstudent == 'student')
-			{
-				// coursetitle/awardtitle
-				if (property_exists($shib_data, 'coursetitle'))
-				{
-					$bio = $shib_data->coursetitle;
-				}
-				else if (property_exists($shib_data, 'awardtitle'))
-				{
-					$bio = $shib_data->awardtitle;
-				}
+            if ($shib_data->stafforstudent == 'student') {
+                // coursetitle/awardtitle
+                if (property_exists($shib_data, 'coursetitle')) {
+                    $bio = $shib_data->coursetitle;
+                } elseif (property_exists($shib_data, 'awardtitle')) {
+                    $bio = $shib_data->awardtitle;
+                }
+            } elseif ($shib_data->stafforstudent == 'staff') {
+                // dept, position
+                if (property_exists($shib_data, 'position') && property_exists($shib_data, 'dept')) {
+                    $bio = $shib_data->position . ', ' . $shib_data->dept;
+                } elseif (property_exists($shib_data, 'position')) {
+                    $bio = $shib_data->position;
+                } elseif (property_exists($shib_data, 'dept')) {
+                    $bio = $shib_data->dept;
+                }
+            }
 
-			}
-			else if ($shib_data->stafforstudent == 'staff')
-			{
-				// dept, position
-				if (property_exists($shib_data, 'position') && property_exists($shib_data, 'dept'))
-				{
-					$bio = $shib_data->position . ', ' . $shib_data->dept;
-				}
-				else if (property_exists($shib_data, 'position'))
-				{
-					$bio = $shib_data->position;
-				}
-				else if (property_exists($shib_data, 'dept'))
-				{
-					$bio = $shib_data->dept;
-				}
-			}
+            $user = [
+                'shibboleth_id' => Redis::get($session_id . 'SHIB-PERSISTENT-ID'),
+                'name' => Redis::get($session_id . 'SHIB-NAME'),
+                'email' => Redis::get($session_id . 'SHIB-EMAIL'),
+                'bio' => $bio,
+                'shibboleth_data' => Redis::get($session_id . 'SHIB-DATA')
+            ];
 
-			$user = [
-				'shibboleth_id' => Redis::get($session_id . 'SHIB-PERSISTENT-ID'),
-				'name' => Redis::get($session_id . 'SHIB-NAME'),
-				'email' => Redis::get($session_id . 'SHIB-EMAIL'),
-				'bio' => $bio,
-				'shibboleth_data' => Redis::get($session_id . 'SHIB-DATA')
-			];
+            // Remove objects from redis
+            Redis::del($session_id . 'SHIB-PERSISTENT-ID');
+            Redis::del($session_id . 'SHIB-NAME');
+            Redis::del($session_id . 'SHIB-EMAIL');
+            Redis::del($session_id . 'SHIB-DATA');
+        } else {
+            $user = Socialite::driver($request->provider)->user();
 
-			// Remove objects from redis
-			Redis::del($session_id . 'SHIB-PERSISTENT-ID');
-			Redis::del($session_id . 'SHIB-NAME');
-			Redis::del($session_id . 'SHIB-EMAIL');
-			Redis::del($session_id . 'SHIB-DATA');
-		}
-		else
-		{
-			try {
-	            $user = Socialite::driver($request->provider)->user();
+						// Check if email was passed
+						if (!$user->email) {
+								Session::flash('flash_message', trans('flash_message.email_required'));
+								Session::flash('flash_type', 'flash-danger');
 
-              // Check if email was passed
-              if (!$user->email)
-              {
-                Session::flash('flash_message', trans('flash_message.email_required'));
-                Session::flash('flash_type', 'flash-danger');
+								Session::set('reauth', true);
 
-				Session::set('reauth', true);
-
-				return redirect('/login');
-              }
-	        } catch (Exception $e) {
-	            return Redirect::to('auth/' . $request->provider);
-	        }
-		}
+								return redirect('/login');
+						}
+        }
 
         switch ($request->provider) {
-        	case 'shibboleth':
-        		$authUser = $this->findOrCreateShibbolethUser($user);
-        		break;
-        	case 'facebook':
-        		$authUser = $this->findOrCreateFacebookUser($user);
-        		break;
-        	case 'linkedin':
-        		$authUser = $this->findOrCreateLinkedinUser($user);
-        		break;
+            case 'shibboleth':
+                $authUser = $this->findOrCreateShibbolethUser($user);
+                break;
+            case 'facebook':
+                $authUser = $this->findOrCreateFacebookUser($user);
+                break;
+            case 'linkedin':
+                $authUser = $this->findOrCreateLinkedinUser($user);
+                break;
 
-        	default:
-        		# code...
-        		break;
+            default:
+                # code...
+                break;
         }
 
         Auth::login($authUser, true);
@@ -178,7 +151,7 @@ class AuthController extends Controller
     {
         if ($authUser = User::where('shibboleth_id', $shibbolethUser['shibboleth_id'])->first()) {
 
-			// TODO: If bio not set then update
+            // TODO: If bio not set then update
 
             return $authUser;
         }
@@ -186,25 +159,25 @@ class AuthController extends Controller
         $values = [
             'shibboleth_id' => $shibbolethUser['shibboleth_id'],
             'name' => $shibbolethUser['name'],
-			'email' => $shibbolethUser['email'],
-			'bio' => $shibbolethUser['bio'],
-			'shibboleth_data' => $shibbolethUser['shibboleth_data']
+            'email' => $shibbolethUser['email'],
+            'bio' => $shibbolethUser['bio'],
+            'shibboleth_data' => $shibbolethUser['shibboleth_data']
         ];
 
-		$user = User::firstOrNew(['email' => $shibbolethUser['email']]);
+        $user = User::firstOrNew(['email' => $shibbolethUser['email']]);
 
-		$user->fill($values);
+        $user->fill($values);
 
-		$user->save();
+        $user->save();
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
 
         $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
-		Session::flash('info_dialogue', $info_dialogue);
+        Session::flash('info_dialogue', $info_dialogue);
 
-		return $user;
+        return $user;
     }
 
     /**
@@ -219,38 +192,35 @@ class AuthController extends Controller
             return $authUser;
         }
 
-		$extension = 'jpg';
+        $extension = 'jpg';
 
-	    $filename = sha1(time() . time()) . ".{$extension}";
+        $filename = sha1(time() . time()) . ".{$extension}";
 
-		$image_sizes = [
-			['name' => 'large', 'size' => 1280],
-			['name' => 'medium', 'size' => 960],
-			['name' => 'small', 'size' => 480],
-			['name' => 'thumb', 'size' => 240],
-		];
+        $image_sizes = [
+            ['name' => 'large', 'size' => 1280],
+            ['name' => 'medium', 'size' => 960],
+            ['name' => 'small', 'size' => 480],
+            ['name' => 'thumb', 'size' => 240],
+        ];
 
-		// Save image sizes
-		foreach ($image_sizes as $index => $size)
-		{
-			$img = Image::make(file_get_contents($facebookUser->avatar_original));
+        // Save image sizes
+        foreach ($image_sizes as $index => $size) {
+            $img = Image::make(file_get_contents($facebookUser->avatar_original));
 
-			$img->resize($size['size'], null, function ($constraint) {
-			    $constraint->aspectRatio();
-			});
+            $img->resize($size['size'], null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
 
-			$img = $img->stream();
+            $img = $img->stream();
 
-			$path = 'uploads/images/' . $size['name'] . '/';
+            $path = 'uploads/images/' . $size['name'] . '/';
 
-	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
-			{
-	        	Log::error('Failed to save user avatar from Facebook - ' . $facebookUser->email);
-	        }
-			else {
-				Log::error('Saved to - ' . $path.$filename);
-			}
-		}
+            if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public')) {
+                Log::error('Failed to save user avatar from Facebook - ' . $facebookUser->email);
+            } else {
+                Log::error('Saved to - ' . $path.$filename);
+            }
+        }
 
         $values = [
             'facebook_id' => $facebookUser->id,
@@ -260,18 +230,18 @@ class AuthController extends Controller
             'token' => $facebookUser->token
         ];
 
-		$user = User::firstOrNew(['email' => $facebookUser->email]);
+        $user = User::firstOrNew(['email' => $facebookUser->email]);
 
-		$user->fill($values);
+        $user->fill($values);
 
-		$user->save();
+        $user->save();
 
         $job = (new SendWelcomeEmail($user, false))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
 
-		$info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
-		Session::flash('info_dialogue', $info_dialogue);
+        $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
+        Session::flash('info_dialogue', $info_dialogue);
 
         return $user;
     }
@@ -284,17 +254,17 @@ class AuthController extends Controller
      */
     private function fetchLinkedInProfile($linkedinUser, $user)
     {
-		// Save the users profile
-		LinkedIn::setAccessToken($linkedinUser->token);
-		$linkedinProfile = LinkedIn::get('v1/people/~:(id,num-connections,picture-url,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)))');
+        // Save the users profile
+        LinkedIn::setAccessToken($linkedinUser->token);
+        $linkedinProfile = LinkedIn::get('v1/people/~:(id,num-connections,picture-url,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)))');
 
-		SocialProfile::create([
-			'user_id' => $user->id,
+        SocialProfile::create([
+            'user_id' => $user->id,
             'identifier' => $linkedinUser->id,
             'provider' => 'linkedin',
             'profile' => json_encode($linkedinProfile)
         ]);
-	}
+    }
 
     /**
      * Return user if exists; create and return if doesn't
@@ -305,44 +275,40 @@ class AuthController extends Controller
     private function findOrCreateLinkedinUser($linkedinUser)
     {
         if ($user = User::where('linkedin_id', $linkedinUser->id)->first()) {
-
-			$this->fetchLinkedInProfile($linkedinUser, $user);
+            // $this->fetchLinkedInProfile($linkedinUser, $user);
 
             return $user;
         }
 
-		$extension = 'jpg';
+        $extension = 'jpg';
 
-	    $filename = sha1(time() . time()) . ".{$extension}";
+        $filename = sha1(time() . time()) . ".{$extension}";
 
-		$image_sizes = [
-			['name' => 'large', 'size' => 1280],
-			['name' => 'medium', 'size' => 960],
-			['name' => 'small', 'size' => 480],
-			['name' => 'thumb', 'size' => 240],
-		];
+        $image_sizes = [
+            ['name' => 'large', 'size' => 1280],
+            ['name' => 'medium', 'size' => 960],
+            ['name' => 'small', 'size' => 480],
+            ['name' => 'thumb', 'size' => 240],
+        ];
 
-		// Save image sizes
-		foreach ($image_sizes as $index => $size)
-		{
-			$img = Image::make(file_get_contents($linkedinUser->avatar_original));
+        // Save image sizes
+        foreach ($image_sizes as $index => $size) {
+            $img = Image::make(file_get_contents($linkedinUser->avatar_original));
 
-			$img->resize($size['size'], null, function ($constraint) {
-			    $constraint->aspectRatio();
-			});
+            $img->resize($size['size'], null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
 
-			$img = $img->stream();
+            $img = $img->stream();
 
-			$path = 'uploads/images/' . $size['name'] . '/';
+            $path = 'uploads/images/' . $size['name'] . '/';
 
-	        if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public'))
-			{
-	        	Log::error('Failed to save user avatar from Linkedin - ' . $linkedinUser->email);
-	        }
-			else {
-				Log::error('Saved to - ' . $path.$filename);
-			}
-		}
+            if (!Storage::disk('s3')->put($path.$filename, $img->__toString(), 'public')) {
+                Log::error('Failed to save user avatar from Linkedin - ' . $linkedinUser->email);
+            } else {
+                Log::error('Saved to - ' . $path.$filename);
+            }
+        }
 
         $values = [
             'linkedin_id' => $linkedinUser->id,
@@ -352,22 +318,22 @@ class AuthController extends Controller
             'token' => $linkedinUser->token
         ];
 
-		$user = User::firstOrNew(['email' => $linkedinUser->email]);
+        $user = User::firstOrNew(['email' => $linkedinUser->email]);
 
-		$user->fill($values);
+        $user->fill($values);
 
-		$user->save();
+        $user->save();
 
-		$this->fetchLinkedInProfile($linkedinUser, $user);
+        // $this->fetchLinkedInProfile($linkedinUser, $user);
 
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
 
         $this->dispatch($job);
 
         $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
-		Session::flash('info_dialogue', $info_dialogue);
+        Session::flash('info_dialogue', $info_dialogue);
 
-		return $user;
+        return $user;
     }
 
     /*
@@ -381,9 +347,11 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins {
+    use AuthenticatesAndRegistersUsers;
+    use ThrottlesLogins {
         AuthenticatesAndRegistersUsers::login as parentLogin;
-        AuthenticatesAndRegistersUsers::register as parentRegister;
+
+    AuthenticatesAndRegistersUsers::register as parentRegister;
     }
 
     /**
@@ -393,18 +361,15 @@ class AuthController extends Controller
      */
     public function getRedirectPath()
     {
-		// 	Session::flash('show_support', true);
+        // 	Session::flash('show_support', true);
 
-		if (!strlen(Auth::user()->bio))
-		{
-			// No bio
-			Session::set('temp_redirect', Session::pull('redirect'));
-			return action('UserController@showDetails');
-		}
-		else
-		{
-			return Session::pull('redirect');
-		}
+        if (!strlen(Auth::user()->bio)) {
+            // No bio
+            Session::set('temp_redirect', Session::pull('redirect'));
+            return action('UserController@showDetails');
+        } else {
+            return Session::pull('redirect');
+        }
     }
 
     protected function redirectPath()
@@ -430,16 +395,13 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        if ($data['type'] == 'quick')
-        {
+        if ($data['type'] == 'quick') {
             $validator = Validator::make($data, [
             'name' => 'required|max:50',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
             ]);
-        }
-        else
-        {
+        } else {
             $validator = Validator::make($data, [
             'name' => 'required|max:50',
             'email' => 'required|email|max:255|unique:users',
@@ -469,44 +431,38 @@ class AuthController extends Controller
         $this->dispatch($job);
 
         $info_dialogue = InfoDialogue::where('key', 'new_registration')->first();
-		Session::flash('info_dialogue', $info_dialogue);
+        Session::flash('info_dialogue', $info_dialogue);
 
-		return $user;
+        return $user;
     }
 
     public function login(Request $request)
     {
-		if (env('STANDARD_AUTH', true))
-		{
-	        Session::flash('show_support', true);
-	        Session::flash('auth_type', 'login');
+        if (env('STANDARD_AUTH', true)) {
+            Session::flash('show_support', true);
+            Session::flash('auth_type', 'login');
 
-	        return $this->parentLogin($request);
-		}
-		else
-		{
-			Session::flash('flash_message', trans('flash_message.no_permission'));
+            return $this->parentLogin($request);
+        } else {
+            Session::flash('flash_message', trans('flash_message.no_permission'));
             Session::flash('flash_type', 'flash-danger');
 
-			return redirect('/');
-		}
+            return redirect('/');
+        }
     }
 
     public function register(Request $request)
     {
-		if (env('STANDARD_AUTH', true))
-		{
-	        Session::flash('show_support', true);
-	        Session::flash('auth_type', 'register');
+        if (env('STANDARD_AUTH', true)) {
+            Session::flash('show_support', true);
+            Session::flash('auth_type', 'register');
 
-	        return $this->parentRegister($request);
-		}
-		else
-		{
-			Session::flash('flash_message', trans('flash_message.no_permission'));
+            return $this->parentRegister($request);
+        } else {
+            Session::flash('flash_message', trans('flash_message.no_permission'));
             Session::flash('flash_type', 'flash-danger');
 
-			return redirect('/');
-		}
+            return redirect('/');
+        }
     }
 }

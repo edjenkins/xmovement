@@ -20,11 +20,11 @@ class SetReferer
      */
     public function handle($request, Closure $next)
     {
-  		# DEFAULT META
-  		MetaTag::set('title', Lang::get('meta.default_title'));
-  		MetaTag::set('description', Lang::get('meta.default_description'));
-  		MetaTag::set('image', env('APP_SITE_IMAGE'));
-  		# DEFAULT META
+        # DEFAULT META
+        MetaTag::set('title', Lang::get('meta.default_title'));
+        MetaTag::set('description', Lang::get('meta.default_description'));
+        MetaTag::set('image', env('APP_SITE_IMAGE'));
+        # DEFAULT META
 
   		if (!((strpos(URL::previous(), 'login') || strpos(URL::previous(), 'register') || strpos(URL::previous(), 'auth'))))
   		{
@@ -33,12 +33,7 @@ class SetReferer
           Log::info('Setting redirect to - ' . URL::previous());
           Session::set('redirect', URL::previous());
         }
-        else
-        {
-          Log::info('Referer is external - ' . $_SERVER['HTTP_HOST'] . ' - ' . URL::previous());
-        }
-  		}
 
-      return $next($request);
+        return $next($request);
     }
 }
