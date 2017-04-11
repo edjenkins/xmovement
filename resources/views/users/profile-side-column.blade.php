@@ -8,7 +8,7 @@
 		{{ $user->name }}
 	</h2>
 
-	@if ($viewing_own_profile)
+	@if ($viewing_own_profile && ($user->id == 1))
 		<form action="{{ action('MessagesController@sendQuote') }}" method="POST">
 			{!! csrf_field() !!}
 
