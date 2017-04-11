@@ -39,7 +39,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider(Request $request)
     {
-        // Session::reflash();
+        Session::reflash();
 
         if ($request->provider == 'shibboleth') {
             $callback_url = URL::action('Auth\AuthController@handleProviderCallback', ['provider' => 'shibboleth']);
@@ -107,12 +107,8 @@ class AuthController extends Controller
             Redis::del($session_id . 'SHIB-EMAIL');
             Redis::del($session_id . 'SHIB-DATA');
         } else {
-            try {
-                $user = Socialite::driver($request->provider)->user();
-            } catch (Exception $e) {
-                return Redirect::to('auth/' . $request->provider);
-            }
-
+            $user = Socialite::driver($request->provider)->user();
+						
 						// Check if email was passed
 						if (!$user->email) {
 								Session::flash('flash_message', trans('flash_message.email_required'));
@@ -366,7 +362,7 @@ class AuthController extends Controller
     public function getRedirectPath()
     {
         // 	Session::flash('show_support', true);
-				return action('UserController@showDetails');
+
         if (!strlen(Auth::user()->bio)) {
             // No bio
             Session::set('temp_redirect', Session::pull('redirect'));
