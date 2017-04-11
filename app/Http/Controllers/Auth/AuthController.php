@@ -108,7 +108,7 @@ class AuthController extends Controller
             Redis::del($session_id . 'SHIB-DATA');
         } else {
             $user = Socialite::driver($request->provider)->user();
-						
+
 						// Check if email was passed
 						if (!$user->email) {
 								Session::flash('flash_message', trans('flash_message.email_required'));
@@ -275,7 +275,7 @@ class AuthController extends Controller
     private function findOrCreateLinkedinUser($linkedinUser)
     {
         if ($user = User::where('linkedin_id', $linkedinUser->id)->first()) {
-            $this->fetchLinkedInProfile($linkedinUser, $user);
+            // $this->fetchLinkedInProfile($linkedinUser, $user);
 
             return $user;
         }
@@ -324,7 +324,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        $this->fetchLinkedInProfile($linkedinUser, $user);
+        // $this->fetchLinkedInProfile($linkedinUser, $user);
 
         $job = (new SendWelcomeEmail($user, true))->delay(30)->onQueue('emails');
 
