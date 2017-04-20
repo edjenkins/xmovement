@@ -43,7 +43,7 @@
 						@include('ideas/progress')
 
 		    			<p class="idea-description">
-		    				{{ $idea->description }}
+		    				{!! nl2br($idea->description) !!}
 		    			</p>
 
 						<ul class="category-pills">
