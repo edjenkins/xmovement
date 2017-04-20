@@ -36,7 +36,7 @@ trait PostsComments
 
 		// Validate comment
 		$validator = Validator::make(['text' => $text, 'url' => $url], [
-			'text' => 'required|between:2,500',
+			'text' => 'required|between:2,10000',
 			'url' => 'required',
 		]);
 
