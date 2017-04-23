@@ -47,7 +47,13 @@ $(document).ready(function() {
 
 	$('#add-content').click(function() {
 		text_index++;
-		$('.proposal-preview').append('<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-' + text_index + '"><i data-text-index="' + text_index + '" class="fa fa-trash-o"></i><textarea class="expanding" name="name" placeholder="Justify your choices with added text..." rows="8" cols="40"></textarea></li>');
+
+		var new_item = `<li class="proposal-item proposal-text-container sortable" data-proposal-item-type="text" id="proposal-text-${text_index}">
+			<i data-text-index="${text_index}" class="fa fa-trash-o"></i>
+			<textarea class="expanding" name="name" placeholder="Justify your decisions with added text..." rows="8" cols="40"></textarea>
+			</li>`;
+
+		$('.proposal-preview').append(new_item);
 		initSortable();
 		attachHandlers();
 	});
@@ -58,6 +64,7 @@ function setOrder()
 {
 	var orderedIds = $("#sortable").sortable("toArray");
 
+	console.log('orderedIds');
 	console.log(orderedIds);
 
 	// Loop through order and build proposal
@@ -79,6 +86,9 @@ function setOrder()
 				var design_task_id = item.attr('data-design-task-id');
 				var design_task_xmovement_task_type = item.attr('data-design-task-xmovement-task-type');
 				proposal.push({type:proposal_item_type, text:item.children('textarea').val()});
+				break;
+			case 'file':
+				proposal.push({type:proposal_item_type, url:$('#proposal-file').val()});
 				break;
 			default:
 

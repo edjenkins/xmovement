@@ -1,1 +1,1 @@
-@include('propose/tile', ['proposal' => $proposal, 'index' => 0])
+@include('proposal/tile', ['proposal' => $proposal, 'index' => 0])

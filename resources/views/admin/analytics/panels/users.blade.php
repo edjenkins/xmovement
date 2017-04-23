@@ -41,7 +41,7 @@
 				<td colspan="8" ng-show="user.visible_detail_row == 'proposals'">
 					<ul>
 						<li ng-repeat="proposal in user.proposals">
-							<a target="_blank" href="/propose/view/<% proposal.id %>">
+							<a target="_blank" href="/proposal/view/<% proposal.id %>">
 								<% proposal.description %>
 							</a>
 						</li>

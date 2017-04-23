@@ -24,7 +24,7 @@
 				<td colspan="<% headers.ideas.length %>" ng-show="idea.visible_detail_row == 'proposals'">
 					<ul>
 						<li ng-repeat="proposal in idea.proposals">
-							<a target="_blank" href="/propose/view/<% proposal.id %>">
+							<a target="_blank" href="/proposal/view/<% proposal.id %>">
 								<% proposal.description %>
 							</a>
 						</li>

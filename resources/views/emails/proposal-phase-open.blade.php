@@ -10,7 +10,7 @@
 
 		@include('emails/components/line', ['text' => trans('proposal_phase_open_email.line_2', ['idea_name' => $idea->name])])
 
-		@include('emails/components/link', ['text' => trans('emails.view_proposals_page'), 'url' => action('ProposeController@index', $idea)])
+		@include('emails/components/link', ['text' => trans('emails.view_proposals_page'), 'url' => action('ProposalController@index', $idea)])
 
 		@include('emails/components/line', ['text' => trans('proposal_phase_open_email.line_3', ['supporter_count' => $idea->supporterCount()])])
 

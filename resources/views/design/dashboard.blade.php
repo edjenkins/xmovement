@@ -43,7 +43,7 @@
 
 							<li class="module-control">
 
-								<a target="_self" href="{{ action('ProposeController@index', $idea) }}">
+								<a target="_self" href="{{ action('ProposalController@index', $idea) }}">
 
 									{{ trans('design.view_proposals') }}
 

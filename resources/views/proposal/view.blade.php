@@ -21,7 +21,7 @@
 
 					<li class="module-control">
 
-						<a target="_self" href="{{ action('ProposeController@index', $proposal->idea) }}">
+						<a target="_self" href="{{ action('ProposalController@index', $proposal->idea) }}">
 
 							<i class="fa fa-chevron-left"></i>
 
@@ -39,7 +39,7 @@
 
 						<li class="module-control">
 
-							<form action="{{ action('ProposeController@destroy', $proposal) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
+							<form action="{{ action('ProposalController@destroy', $proposal) }}" method="POST" onsubmit="return confirm('Do you really want to delete this?');">
 								{!! csrf_field() !!}
 								{!! method_field('DELETE') !!}
 
@@ -114,11 +114,29 @@
 							<li class="proposal-item">
 
 								<p>
-									{{ $proposal_item->text }}
+									{!! nl2br($proposal_item->text) !!}
 								</p>
 
 								<div class="clearfloat"></div>
 							</li>
+
+						@endif
+
+						@if ($proposal_item->type == 'file')
+
+							@unless ($proposal_item->url === '')
+
+								<li class="proposal-item">
+
+									<a href="{{ ResourceImage::getFile($proposal_item->url) }}" target="_blank" class="btn btn-primary">
+										<i class="fa fa-file-pdf-o fa-fw"></i>
+										{{ trans('proposals.view_proopsal_document') }}
+									</a>
+
+									<div class="clearfloat"></div>
+								</li>
+
+							@endunless
 
 						@endif
 
@@ -163,6 +181,6 @@
 
     </div>
 
-	<script src="/js/propose/vote.js"></script>
+	<script src="/js/proposal/vote.js"></script>
 
 @endsection
