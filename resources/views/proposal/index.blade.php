@@ -49,7 +49,7 @@
 
 						<li class="module-control">
 
-							<a target="_self" href="{{ action('ProposeController@add', $idea) }}">
+							<a target="_self" href="{{ action('ProposalController@add', $idea) }}">
 
 		    					<i class="fa fa-plus"></i>
 
@@ -77,7 +77,7 @@
 
 			@can('add_proposal', $idea)
 
-				<a target="_self" href="{{ action('ProposeController@add', $idea) }}" class="action-panel">
+				<a target="_self" href="{{ action('ProposalController@add', $idea) }}" class="action-panel">
 					{{ trans('proposals.add_proposal') }}
 				</a>
 
@@ -87,7 +87,7 @@
 
 			@foreach ($proposals as $index => $proposal)
 				<div class="col-xs-12 col-sm-6 col-md-4">
-					@include('propose/tile', ['proposal' => $proposal, 'index' => $index])
+					@include('proposal/tile', ['proposal' => $proposal, 'index' => $index])
 				</div>
 			@endforeach
 
@@ -95,6 +95,6 @@
 
     </div>
 
-	<script src="/js/propose/vote.js"></script>
+	<script src="/js/proposal/vote.js"></script>
 
 @endsection

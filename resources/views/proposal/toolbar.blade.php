@@ -10,7 +10,7 @@
 		@endforeach
 	</ul>
 
-	<form action="{{ action('ProposeController@previous') }}" method="POST">
+	<form action="{{ action('ProposalController@previous') }}" method="POST">
 		{!! csrf_field() !!}
 		<input type="hidden" name="current_task" value="{{ $design_task->id }}">
 		<button class="previous-button pull-left" type="submit">
@@ -18,7 +18,7 @@
 		</button>
 	</form>
 
-	<form action="{{ action('ProposeController@next') }}" method="POST">
+	<form action="{{ action('ProposalController@next') }}" method="POST">
 		{!! csrf_field() !!}
 		<input type="hidden" name="current_task" value="{{ $design_task->id }}">
 		<input type="hidden" name="selected_contributions" id="selected_contributions" data-original-values="{{ array_key_exists($design_task->id, $contributions) ? ltrim(implode(',', array_slice($contributions[$design_task->id], 0, count($contributions[$design_task->id]))),',') : '' }}" value="">

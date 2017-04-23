@@ -13,12 +13,11 @@
 
 	<div class="proposal-toolbar colorful">
 
-		<form action="{{ action('ProposeController@previous') }}" method="POST">
-			{!! csrf_field() !!}
-			<button class="previous-button pull-left" type="submit">
-				{{ trans('proposals.previous') }}
+		<a target="_self" href="{{ action('ProposalController@index', $idea) }}">
+			<button class="next-button pull-left">
+				{{ trans('proposals.cancel') }}
 			</button>
-		</form>
+		</a>
 
 		<div class="clearfloat"></div>
 
@@ -30,7 +29,7 @@
 			<div class="col-md-8 col-md-offset-2">
 
 	    		<div class="column main-column proposal-preview-column">
-					<form action="{{ action('ProposeController@submit', $idea) }}" method="POST" onsubmit="return confirm('{{ trans('proposals.submit_confirmation') }}');">
+					<form action="{{ action('ProposalController@submit', $idea) }}" method="POST" onsubmit="setOrder(); return confirm('{{ trans('proposals.submit_confirmation') }}');">
 						{!! csrf_field() !!}
 						<input type="hidden" name="proposal" id="proposal-input" value="">
 
@@ -54,28 +53,12 @@
 								<input type="text" name="description" placeholder="{{ trans('proposals.description_placeholder') }}" />
 							</li>
 
-							@foreach($design_tasks as $index => $design_task)
+							<li class="proposal-item upload-container proposal-file-container sortable" data-proposal-item-type="file" id="proposal-file-1">
 
-								<li class="proposal-item sortable" id="proposal-item-id-{{ $index }}" data-proposal-item-type="task" data-design-task-id="{{ $design_task->id }}" data-design-task-xmovement-task-type="{{ $design_task->xmovement_task_type }}" data-design-task-contribution-ids="{{ json_encode($design_task->contribution_ids) }}">
+								<h3>{{ trans('proposals.upload_document') }}</h3>
+								@include('dropzone', ['type' => 'file', 'cc' => false, 'input_id' => 'proposal-file', 'dropzone_id' => 1])
 
-									<i class="fa fa-trash-o"></i>
-
-									<a target="_blank" href="{{ $design_task->getLink() }}">
-										<i class="fa fa-external-link"></i>
-									</a>
-
-									<i class="fa fa-pencil"></i>
-
-									<span class="name-header">{{ $design_task->name }}</span>
-
-									<?php echo $design_task->xmovement_task->renderProposalOutput($design_task); ?>
-
-									<textarea class="proposal-item-details" name="name" placeholder="Justify this decision.." rows="8" cols="40"></textarea>
-
-									<div class="clearfloat"></div>
-								</li>
-
-							@endforeach
+							</li>
 
 						</ul>
 
@@ -96,6 +79,6 @@
 	    </div>
 	</div>
 
-	<script src="/js/propose/review.js"></script>
+	<script src="/js/proposal/add.js"></script>
 
 @endsection

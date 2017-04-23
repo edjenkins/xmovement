@@ -25,7 +25,7 @@
 		</a>
 
 		<!-- Plan -->
-		<a class="ipb-phase {{ ($idea->plan_state() == 'open') ? 'ipb-open' : '' }} {{ ($idea->plan_state() == 'locked') ? 'ipb-locked' : '' }}" target="_self" href="{{ action('ProposeController@index', $idea) }}">
+		<a class="ipb-phase {{ ($idea->plan_state() == 'open') ? 'ipb-open' : '' }} {{ ($idea->plan_state() == 'locked') ? 'ipb-locked' : '' }}" target="_self" href="{{ action('ProposalController@index', $idea) }}">
 			<div class="ipb-label">
 				<span class="ipb-label-text">
 					<i class="fa fa-fw fa-lock"></i>

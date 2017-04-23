@@ -25,7 +25,7 @@
 
 	<div class="tile-footer">
 
-		<a target="_self" href="{{ action('ProposeController@view', $proposal->id) }}">
+		<a target="_self" href="{{ action('ProposalController@view', $proposal->id) }}">
 			{{ trans('proposals.view_proposal') }}
 		</a>
 
