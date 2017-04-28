@@ -2,7 +2,7 @@
 
 @section('content')
 
-	@include('emails/components/header', ['text' => trans('contact_email.header', ['name' => $sender->name])])
+	@include('emails/components/header', ['text' => trans('contact_email.header', ['name' => $name])])
 
 	@include('emails/components/wrapper-start')
 
