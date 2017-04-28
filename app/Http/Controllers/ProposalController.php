@@ -158,7 +158,7 @@ class ProposalController extends Controller
 
     public function submit(Request $request)
     {
-        $idea = Idea::find($request->session()->get('proposal.idea_id'));
+        $idea = Idea::find($request->idea_id);
 
         if (Gate::denies('add_proposal', $idea)) {
             Session::flash('flash_message', trans('flash_message.no_permission'));

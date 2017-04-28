@@ -31,7 +31,8 @@
 	    		<div class="column main-column proposal-preview-column">
 					<form action="{{ action('ProposalController@submit', $idea) }}" method="POST" onsubmit="setOrder(); return confirm('{{ trans('proposals.submit_confirmation') }}');">
 						{!! csrf_field() !!}
-						<input type="hidden" name="proposal" id="proposal-input" value="">
+            <input type="hidden" name="idea_id" value="{{ $idea->id }}">
+            <input type="hidden" name="proposal" id="proposal-input" value="">
 
 						<ul class="proposal-preview" id="sortable">
 
