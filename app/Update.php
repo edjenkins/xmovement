@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Update extends Model
 {
@@ -12,6 +13,8 @@ class Update extends Model
 	   'updateable_id',
 	   'text',
 	];
+
+  use SoftDeletes;
 
     public function updateable()
     {
