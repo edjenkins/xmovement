@@ -25,6 +25,25 @@
 
 		</div>
 
+		<div class="admin-tile">
+
+			<div class="admin-tile--label">Engagement Options</div>
+
+			<table class="table table-bordered">
+				<col />
+				<col width="100px" />
+				<tr>
+					<th>Engagement</th>
+					<th class="state-table-header">Enabled</th>
+				</tr>
+				<tr xm-config-setting xm-config="{type:'boolean',title:'Allow anyone to design ideas',key:'UNRESTRICTED_DESIGN'}"></tr>
+				<tr xm-config-setting xm-config="{type:'boolean',title:'Allow anyone to submit proposals',key:'UNRESTRICTED_PROPOSAL'}"></tr>
+			</table>
+
+			<p class="text-muted">Please contact deployment administrator to activate modules.</p>
+
+		</div>
+
 	</div>
 
 	<div class="col-md-6">

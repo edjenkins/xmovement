@@ -218,6 +218,17 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'EXPLORE_PHASE_LOCKED',
 				'value' => false,
 				'type' => 'boolean'
+			),
+
+			array(
+				'key' => 'UNRESTRICTED_DESIGN',
+				'value' => false,
+				'type' => 'boolean'
+			),
+			array(
+				'key' => 'UNRESTRICTED_PROPOSAL',
+				'value' => false,
+				'type' => 'boolean'
 			)
 		);
 

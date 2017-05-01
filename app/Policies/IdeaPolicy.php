@@ -6,6 +6,7 @@ use App\Idea;
 use App\User;
 use App\Supporter;
 use App\DesignTask;
+use DynamicConfig;
 use Log;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -71,7 +72,7 @@ class IdeaPolicy
      */
     public function support(User $user, Idea $idea)
     {
-    		$is_not_existing_supporter = !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        $is_not_existing_supporter = !Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
         return ($is_not_existing_supporter && ($idea->support_state == 'open'));
     }
 
@@ -84,7 +85,7 @@ class IdeaPolicy
      */
     public function design(User $user, Idea $idea)
     {
-		return ($idea->design_state != 'closed');
+        return ($idea->design_state != 'closed');
     }
 
     /**
@@ -96,8 +97,8 @@ class IdeaPolicy
      */
     public function contribute(User $user, Idea $idea)
     {
-    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
-        return ($idea->design_state == "open" && $is_existing_supporter);
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        return ($idea->design_state == "open" && ($is_existing_supporter || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false)));
     }
 
     /**
@@ -109,8 +110,8 @@ class IdeaPolicy
      */
     public function open_design_phase(User $user, Idea $idea)
     {
-		return false; // TODO: Prevent opening of design phase early
-    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
+        return false; // TODO: Prevent opening of design phase early
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
         return ($idea->design_state == "closed" && $is_existing_supporter && ($user->id == $idea->user_id));
     }
 
@@ -123,7 +124,7 @@ class IdeaPolicy
      */
     public function pinDesignTask(User $user, Idea $idea)
     {
-        return ($user->id == $idea->user_id);
+        return (($user->id == $idea->user_id) || $user->admin);
     }
 
     /**
@@ -172,7 +173,7 @@ class IdeaPolicy
      */
     public function design_after_support(User $user, Idea $idea)
     {
-		return ($idea->design_state == 'open');
+        return (($idea->design_state == 'open') || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false));
     }
 
     /**
@@ -184,7 +185,7 @@ class IdeaPolicy
      */
     public function view_proposals(User $user, Idea $idea)
     {
-		return ($idea->proposal_state != 'closed');
+        return ($idea->proposal_state != 'closed');
     }
 
     /**
@@ -197,7 +198,7 @@ class IdeaPolicy
     public function add_proposal(User $user, Idea $idea)
     {
         $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $idea->id)->exists();
-    		return (($is_existing_supporter && ($idea->proposal_state == 'open')) || $user->admin);
+        return (($is_existing_supporter || $user->admin || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false)) && ($idea->proposal_state == 'open'));
     }
 
     /**
@@ -209,7 +210,7 @@ class IdeaPolicy
      */
     public function view_tenders(User $user, Idea $idea)
     {
-		return ($idea->tender_state != 'closed');
+        return ($idea->tender_state != 'closed');
     }
 
     /**
