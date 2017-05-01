@@ -431,6 +431,8 @@ class Idea extends Model
 
     function support_state()
     {
+      if ($this->freeze_state) { return $this->support_state; }
+
       $state = 'open';
 
       if (!Carbon::now()->between($this->timescales('support', 'start'), $this->timescales('support', 'end')))
@@ -452,6 +454,8 @@ class Idea extends Model
 
     function design_state()
     {
+      if ($this->freeze_state) { return $this->design_state; }
+
       $state = 'open';
 
       if (!Carbon::now()->between($this->timescales('design', 'start'), $this->timescales('design', 'end')))
@@ -465,6 +469,8 @@ class Idea extends Model
 
     function proposal_state()
     {
+      if ($this->freeze_state) { return $this->proposal_state; }
+
       $progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
 
       $state = 'open';
@@ -483,6 +489,8 @@ class Idea extends Model
 
     function tender_state()
     {
+      if ($this->freeze_state) { return $this->tender_state; }
+
       $progression_type = DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed');
 
       $state = 'open';
