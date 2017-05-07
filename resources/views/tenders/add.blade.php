@@ -67,6 +67,12 @@
 
 			<div class="col-sm-8 col-md-9 col-sm-pull-4 col-md-pull-3">
 
+				<div class="info-message tender-info-message">
+					<p>
+						{{ trans('tender.info_message') }}
+					</p>
+				</div>
+
 				<form class="auth-form team-form" role="form" method="POST" action="{{ action('TeamController@submit') }}">
 			        {!! csrf_field() !!}
 
@@ -165,17 +171,29 @@
 						@endif
 					</div>
 
-			        <div class="form-group{{ $errors->has('summary') ? ' has-error' : '' }}">
-			            <label class="control-label">{{ trans('tender.summary') }}</label>
+					<div class="form-group{{ $errors->has('private_document') ? ' has-error' : '' }}">
+						<label class="control-label">{{ trans('tender.private_document') }}</label>
 
-			            <textarea class="expanding" name="summary" rows="3" placeholder="{{ trans('tender.summary_placeholder') }}">{{ old('summary') }}</textarea>
+						@include('dropzone', ['type' => 'file', 'input_id' => 'private_document', 'value' => old('private_document'), 'dropzone_id' => 3])
 
-			            @if ($errors->has('summary'))
-			                <span class="help-block">
-			                    <strong>{{ $errors->first('summary') }}</strong>
-			                </span>
-			            @endif
-			        </div>
+						@if ($errors->has('private_document'))
+							<span class="help-block">
+								<strong>{{ $errors->first('private_document') }}</strong>
+							</span>
+						@endif
+					</div>
+
+	        <div class="form-group{{ $errors->has('summary') ? ' has-error' : '' }}">
+	            <label class="control-label">{{ trans('tender.summary') }}</label>
+
+	            <textarea class="expanding" name="summary" rows="3" placeholder="{{ trans('tender.summary_placeholder') }}">{{ old('summary') }}</textarea>
+
+	            @if ($errors->has('summary'))
+	                <span class="help-block">
+	                    <strong>{{ $errors->first('summary') }}</strong>
+	                </span>
+	            @endif
+	        </div>
 
 					@foreach ($tender_questions as $index => $question)
 
