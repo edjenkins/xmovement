@@ -1,4 +1,4 @@
-function CategoryPickerController($scope, $rootScope, $element, $attrs, CategoryService) {
+function CategoryPickerController($scope, $rootScope, $element, $attrs, $location, CategoryService) {
 
 	var ctrl = this;
 
@@ -12,9 +12,14 @@ function CategoryPickerController($scope, $rootScope, $element, $attrs, Category
 
 			ctrl.categories = response.data.categories;
 
-			console.log('ctrl.categories');
-			console.log(ctrl.categories);
-    	});
+			var result = _.find(ctrl.categories, function(o) {
+		    return o.id == $location.search()['category'];
+			});
+
+			if (result) {
+				ctrl.setCategory(result);
+			}
+  	});
 	};
 
 	ctrl.setCategory = function(category) {
@@ -33,7 +38,7 @@ function CategoryPickerController($scope, $rootScope, $element, $attrs, Category
 	ctrl.getCategories();
 
 }
-CategoryPickerController.$inject = ['$scope', '$rootScope', '$element', '$attrs', 'CategoryService'];
+CategoryPickerController.$inject = ['$scope', '$rootScope', '$element', '$attrs', '$location', 'CategoryService'];
 
 XMovement.component('categoryPicker', {
 	templateUrl: '/components/category-picker',
