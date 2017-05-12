@@ -1,45 +1,49 @@
-function CategoryPickerController($scope, $rootScope, $element, $attrs, CategoryService) {
+function CategoryPickerController($scope, $rootScope, $element, $attrs, $location, CategoryService) {
 
-	var ctrl = this;
+  var ctrl = this;
 
-	ctrl.categories = [];
-	ctrl.selected_category = undefined;
-	ctrl.selecting_category = false;
+  ctrl.categories = [];
+  ctrl.selected_category = undefined;
+  ctrl.selecting_category = false;
 
-	ctrl.getCategories = function() {
+  ctrl.getCategories = function() {
 
-		CategoryService.getIdeaCategories().then(function(response) {
+    CategoryService.getIdeaCategories().then(function(response) {
 
-			ctrl.categories = response.data.categories;
+      ctrl.categories = response.data.categories;
 
-			console.log('ctrl.categories');
-			console.log(ctrl.categories);
-    	});
-	};
+      console.log(ctrl.categories);
 
-	ctrl.setCategory = function(category) {
+      var result = _.find(ctrl.categories, function(o) {
+        return o.id == $location.search()['category'];
+      });
 
-		ctrl.selected_category = category;
-		ctrl.selecting_category = false;
+      console.log(result);
 
-		$rootScope.$broadcast('CategoryPicker::categorySelected', category);
-	}
+      if (result) {
+        ctrl.setCategory(result);
+      }
+    });
+  };
 
-	if (ctrl.category)
-	{
-		ctrl.setCategory(angular.fromJson(ctrl.category, true));
-	}
+  ctrl.setCategory = function(category) {
 
-	ctrl.getCategories();
+    ctrl.selected_category = category;
+    ctrl.selecting_category = false;
+
+    $rootScope.$broadcast('CategoryPicker::categorySelected', category);
+  }
+
+  ctrl.getCategories();
 
 }
-CategoryPickerController.$inject = ['$scope', '$rootScope', '$element', '$attrs', 'CategoryService'];
+CategoryPickerController.$inject = ['$scope', '$rootScope', '$element', '$attrs', '$location', 'CategoryService'];
 
 XMovement.component('categoryPicker', {
-	templateUrl: '/components/category-picker',
+  templateUrl: '/components/category-picker',
     bindings: {
         category: '@',
-		populatedOnly : '@'
+    populatedOnly : '@'
     },
-	controller: CategoryPickerController
+  controller: CategoryPickerController
 });
