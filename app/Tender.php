@@ -16,12 +16,21 @@ class Tender extends Model
      * @var array
      */
     protected $fillable = [
-        'idea_id', 'user_id', 'team_id', 'summary', 'document'
+        'idea_id', 'user_id', 'team_id', 'summary', 'document', 'private_document'
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'private_document'
     ];
 
     protected $dates = ['deleted_at'];
 
-	use SoftDeletes;
+    use SoftDeletes;
 
     public function team()
     {
@@ -40,13 +49,16 @@ class Tender extends Model
 
     public function questions()
     {
-		return $this->hasManyThrough(TenderQuestion::class, TenderQuestionAnswer::class, 'tender_id', 'id', 'id');
-		// return $this->hasManyThrough(TenderQuestion::class, TenderQuestionAnswer::class, 'tender_question_id', 'id');
+        return $this->hasManyThrough(TenderQuestion::class, TenderQuestionAnswer::class, 'tender_id', 'id', 'id');
     }
 
     public function answers()
     {
-        return $this->hasMany(TenderQuestionAnswer::class, 'tender_id');
+        return $this->hasMany(TenderQuestionAnswer::class, 'tender_id')->whereHas('question', function($q)
+        {
+            $q->where('public', '=', true);
+
+        });
     }
 
     public function updates()

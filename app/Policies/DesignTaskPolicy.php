@@ -6,6 +6,7 @@ use App\Idea;
 use App\User;
 use App\Supporter;
 use App\DesignTask;
+use DynamicConfig;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -35,7 +36,7 @@ class DesignTaskPolicy
     public function flag(User $user, DesignTask $design_task)
     {
 		return false; // TODO: Add flag functionality
-		$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
+		$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists() || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false);
         return $is_existing_supporter;
     }
 
@@ -48,7 +49,7 @@ class DesignTaskPolicy
      */
     public function contribute(User $user, DesignTask $design_task)
     {
-    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
+    	$is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists() || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false);
         return ((!$design_task["locked"] || ($user->id == $design_task->user_id)) && $is_existing_supporter && ($design_task->idea->design_state == 'open'));
     }
 
@@ -61,7 +62,7 @@ class DesignTaskPolicy
      */
     public function vote_on_design_submissions(User $user, DesignTask $design_task)
     {
-        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists() || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false);
 		return ($is_existing_supporter && ($design_task->idea->design_state == 'open'));
     }
 
@@ -74,7 +75,7 @@ class DesignTaskPolicy
      */
     public function vote_on_design_tasks(User $user, DesignTask $design_task)
     {
-        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists();
+        $is_existing_supporter = Supporter::where('user_id', $user->id)->where('idea_id', $design_task->idea->id)->exists() || DynamicConfig::fetchConfig('UNRESTRICTED_DESIGN', false);
 		return ($is_existing_supporter && ($design_task->idea->design_state == 'open'));
     }
 
