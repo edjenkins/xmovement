@@ -77,7 +77,7 @@
 
 			<div class="container">
 
-				<div class="info-message shortlist-info-message" ng-cloak ng-show="sort_type == 'shortlist'">
+				<div class="shortlist-info-box" ng-cloak ng-show="sort_type == 'shortlist'">
 					<p>
 						{{ trans('idea.shortlist_message') }}
 					</p>

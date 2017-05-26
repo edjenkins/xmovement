@@ -213,7 +213,7 @@
 
 									<a ng-click="openQuestionModal(answer)">
 										<i class="fa fa-fw fa-comment"></i>
-										View Comments
+										X Comments
 									</a>
 
 								</li>

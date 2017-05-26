@@ -14,12 +14,6 @@
 
 		@endcan
 
-		@if (DynamicConfig::fetchConfig('TENDER_PHASE_ENABLED', false))
-			@unless($idea->tender_state() == 'closed')
-				<a target="_self" href="{{ action('TenderController@add', $idea) }}" class="btn btn-primary action-button">{{ trans('idea.submit_tender') }}</a>
-			@endunless
-		@endif
-
 	@else
 
 		@if ($idea->support_state() == 'open')

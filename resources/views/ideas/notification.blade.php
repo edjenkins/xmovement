@@ -1,4 +1,4 @@
-@if ($idea->tender_state() == 'open')
+@if ($idea->tender_state == 'open')
 
 	<div class="notification">
 		<p>
@@ -6,7 +6,7 @@
 		</p>
 	</div>
 
-@elseif ($idea->proposal_state() == 'open')
+@elseif ($idea->proposal_state == 'open')
 
 	<div class="notification">
 		<p>
@@ -14,7 +14,7 @@
 		</p>
 	</div>
 
-@elseif ($idea->design_state() == 'open')
+@elseif ($idea->design_state == 'open')
 
 		<div class="notification">
 			<p>
