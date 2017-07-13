@@ -40,7 +40,9 @@
 
 						@include('ideas/notification')
 
-						@include('ideas/progress')
+            @if (DynamicConfig::fetchConfig('PROGRESS_BAR_ENABLED', true))
+  						@include('ideas/progress')
+            @endif
 
 		    			<p class="idea-description">
 		    				{!! nl2br($idea->description) !!}

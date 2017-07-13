@@ -8,9 +8,11 @@
 			{{ str_limit($idea->description, $limit = 150, $end = '...') }}
 		</p>
 	</div>
-	<div class="tile-footer">
-		<p>
-			{{ $idea->latest_phase }}
-		</p>
-	</div>
+  @if(DynamicConfig::fetchConfig('IDEA_TILE_PHASE_ENABLED', true))
+  	<div class="tile-footer">
+  		<p>
+  			{{ $idea->latest_phase }}
+  		</p>
+  	</div>
+  @endif
 </div>

@@ -36,6 +36,7 @@ class IdeaPolicy
      */
     public function accessToolkit(User $user, Idea $idea)
     {
+        return false;
         return ((($user->id == $idea->user_id) || $user->admin) && ($idea->plan_state() == 'open'));
     }
 
@@ -235,7 +236,11 @@ class IdeaPolicy
     public function before($user, $ability)
     {
         if ($user->isSuperAdmin()) {
+          if ($ability === 'accessToolkit' || $ability === 'support') {
+
+          } else {
             return true;
+          }
         }
     }
 }

@@ -50,11 +50,13 @@
 			    				</li>
 							@endif
 
-							<li class="module-control" ng-if="sort_type != 'shortlist'">
+              @if(DynamicConfig::fetchConfig('CATEGORIES_ENABLED', false))
+  							<li class="module-control" ng-if="sort_type != 'shortlist'">
 
-								<category-picker populated-only="false"></category-picker>
+  								<category-picker populated-only="false"></category-picker>
 
-							</li>
+  							</li>
+              @endif
 
 							<li class="module-control search-element pull-right" ng-class="{'open':search_open}">
 								<div class="search-bar" ng-init="idea_search_term = ''">
@@ -110,11 +112,13 @@
 									<% idea.description | cut:true:100:'...' %>
 								</p>
 							</div>
-							<div class="tile-footer">
-								<p>
-									<% idea.latest_phase %>
-								</p>
-							</div>
+              @if(DynamicConfig::fetchConfig('IDEA_TILE_PHASE_ENABLED', true))
+  							<div class="tile-footer">
+  								<p>
+  									<% idea.latest_phase %>
+  								</p>
+  							</div>
+              @endif
 						</div>
 
 		            </div>

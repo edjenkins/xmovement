@@ -229,7 +229,17 @@ class DynamicConfigSeeder extends Seeder
 				'key' => 'UNRESTRICTED_PROPOSAL',
 				'value' => false,
 				'type' => 'boolean'
-			)
+			),
+			array(
+				'key' => 'PROGRESS_BAR_ENABLED',
+				'value' => true,
+				'type' => 'boolean'
+			),
+			array(
+				'key' => 'IDEA_TILE_PHASE_ENABLED',
+				'value' => true,
+				'type' => 'boolean'
+			),
 		);
 
 		foreach ($configs as $config)
