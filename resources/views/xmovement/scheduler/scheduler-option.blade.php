@@ -15,7 +15,7 @@
 			@can('vote_on_design_submissions', $design_task)
 				@unless ($proposal_mode)
 					<div class="vote-button vote-up {{ ($schedulerOption->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="scheduler" data-votable-id="{{ $schedulerOption['id'] }}" title="Vote up">
-						<i class="fa fa-2x fa-angle-up"></i>
+						<i class="fa fa-lg fa-thumbs-up"></i>
 					</div>
 				@endunless
 			@endcan
@@ -30,7 +30,7 @@
 			@can('vote_on_design_submissions', $design_task)
 				@unless ($proposal_mode)
 					<div class="vote-button vote-down {{ ($schedulerOption->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="scheduler" data-votable-id="{{ $schedulerOption['id'] }}" title="Vote down">
-						<i class="fa fa-2x fa-angle-down"></i>
+						<i class="fa fa-lg fa-thumbs-down"></i>
 					</div>
 				@endunless
 			@endcan

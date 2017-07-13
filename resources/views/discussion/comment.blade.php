@@ -30,13 +30,13 @@
 			<div class="comment-vote-container {{ ($comment->voteCount() == 0) ? '' : (($comment->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 				<div class="vote-controls">
 					<div class="vote-button vote-up {{ ($comment->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="comment" data-votable-id="{{ $comment['id'] }}">
-						<i class="fa fa-2x fa-angle-up"></i>
+						<i class="fa fa-lg fa-thumbs-up"></i>
 					</div>
 					<div class="vote-count">
 						{{ $comment->voteCount() }}
 					</div>
 					<div class="vote-button vote-down {{ ($comment->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="comment" data-votable-id="{{ $comment['id'] }}">
-						<i class="fa fa-2x fa-angle-down"></i>
+						<i class="fa fa-lg fa-thumbs-down"></i>
 					</div>
 				</div>
 			</div>
