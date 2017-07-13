@@ -192,9 +192,7 @@ return [
         XMovement\External\ExternalServiceProvider::class,
         XMovement\Scheduler\SchedulerServiceProvider::class,
 
-		Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
-
-    Modelizer\Selenium\SeleniumServiceProvider::class
+		Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class
     ],
 
     /*
