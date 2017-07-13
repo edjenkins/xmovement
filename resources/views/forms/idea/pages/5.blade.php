@@ -66,7 +66,7 @@
 		@endif
 
 		<div class="form-group">
-			<button class="btn btn-primary" type="submit">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
+			<button class="btn btn-primary" type="submit" name="submit-idea">{{ ($editing) ? trans('idea_form.save_changes') : trans('idea_form.create_idea') }}</button>
 		</div>
 
 		<a class="step-button muted-link" onClick="showStep('previous')">{{ trans('idea_form.previous_step') }}</a>

@@ -17,7 +17,7 @@ class DynamicConfigSeeder extends Seeder
 		array_push($configs,
 			array(
 				'key' => 'XMOVEMENT_SCHEDULER',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
@@ -27,17 +27,17 @@ class DynamicConfigSeeder extends Seeder
 			),
 			array(
 				'key' => 'XMOVEMENT_REQUIREMENT',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
 				'key' => 'XMOVEMENT_CONTRIBUTION',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
 				'key' => 'XMOVEMENT_EXTERNAL',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
@@ -90,7 +90,7 @@ class DynamicConfigSeeder extends Seeder
 		array_push($configs,
 			array(
 				'key' => 'INSPIRATION_PHASE_ENABLED',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
@@ -100,12 +100,12 @@ class DynamicConfigSeeder extends Seeder
 			),
 			array(
 				'key' => 'SHORTLIST_PHASE_ENABLED',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
 				'key' => 'TENDER_PHASE_ENABLED',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			)
 		);
@@ -148,7 +148,7 @@ class DynamicConfigSeeder extends Seeder
 		array_push($configs,
 			array(
 				'key' => 'INSPIRATION_MODE_ENABLED',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
@@ -158,7 +158,7 @@ class DynamicConfigSeeder extends Seeder
 			),
 			array(
 				'key' => 'SHORTLIST_MODE_ENABLED',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			)
 		);
@@ -167,12 +167,12 @@ class DynamicConfigSeeder extends Seeder
 		array_push($configs,
 			array(
 				'key' => 'PRE_POPULATE_DESIGN_TASKS',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			),
 			array(
 				'key' => 'ALLOW_USER_TO_PRE_POPULATE_DESIGN_TASKS',
-				'value' => true,
+				'value' => false,
 				'type' => 'boolean'
 			)
 		);

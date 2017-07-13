@@ -33,17 +33,17 @@ use App\User;
 use App\Supporter;
 use App\DesignTask;
 
-class ResponseObject {
-
-	public $meta = array();
-	public $errors = array();
-	public $data = array();
-
-	public function __construct()
-	{
-		$this->meta['success'] = false;
-	}
-}
+// class ResponseObject {
+//
+// 	public $meta = array();
+// 	public $errors = array();
+// 	public $data = array();
+//
+// 	public function __construct()
+// 	{
+// 		$this->meta['success'] = false;
+// 	}
+// }
 
 class IdeaController extends Controller
 {
