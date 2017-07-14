@@ -281,7 +281,7 @@ class IdeaController extends Controller
     if (DynamicConfig::fetchConfig('PRE_POPULATE_DESIGN_TASKS', false))
     {
           $job = (new PrePopulateDesignTasks($idea))->onQueue('emails');
-          $this->dispatch($job);
+          $job->handle();
     }
 
     // Send user an email to tell them the idea was created
