@@ -291,6 +291,13 @@ class IdeaController extends Controller
     // Set creator as a supporter
     $idea->supporters()->attach($request->user()->id); // TODO: Check this works
 
+    // Set states
+    $idea->support_state = $idea->support_state();
+    $idea->design_state = $idea->design_state();
+    $idea->proposal_state = $idea->proposal_state();
+    $idea->tender_state = $idea->tender_state();
+    $idea->save();
+
     // Redirect to invite view
     // return redirect()->action('IdeaController@invite', $idea);
 
