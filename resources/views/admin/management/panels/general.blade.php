@@ -100,6 +100,7 @@
 				</tr>
 				<tr xm-config-setting xm-config="{type:'boolean',title:'Show progress bar on idea page',key:'PROGRESS_BAR_ENABLED'}"></tr>
 				<tr xm-config-setting xm-config="{type:'boolean',title:'Show current phase on idea tile',key:'IDEA_TILE_PHASE_ENABLED'}"></tr>
+				<tr xm-config-setting xm-config="{type:'boolean',title:'Allow idea creators to send updates to supporters',key:'IDEA_UPDATES_ENABLED'}"></tr>
 			</table>
 
 		</div>

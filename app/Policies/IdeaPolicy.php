@@ -137,7 +137,7 @@ class IdeaPolicy
      */
     public function postUpdate(User $user, Idea $idea)
     {
-        return (($user->id == $idea->user_id) || $user->admin);
+        return ((($user->id == $idea->user_id) && (DynamicConfig::fetchConfig('IDEA_UPDATES_ENABLED', false))) || $user->admin) ;
     }
 
     /**
@@ -236,7 +236,7 @@ class IdeaPolicy
     public function before($user, $ability)
     {
         if ($user->isSuperAdmin()) {
-          if ($ability === 'accessToolkit' || $ability === 'support') {
+          if ($ability === 'accessToolkit' || $ability === 'support' || $ability === 'postUpdate') {
 
           } else {
             return true;
