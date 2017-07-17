@@ -2,33 +2,45 @@
 
 	<div class="form-page-content">
 
-		<div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
+    <!-- Check if user can set visibility of idea -->
+		@if (DynamicConfig::fetchConfig('ALLOW_USER_VISIBILITY_CONFIGURATION', false))
 
-			<div class="toggle-switch-wrapper">
+  		<div class="form-group{{ $errors->has('visibility') ? ' has-error' : '' }}">
 
-				<label>{{ trans('idea_form.visibility_label') }}</label>
+  			<div class="toggle-switch-wrapper">
 
-				<label class="toggle-switch">
+  				<label>{{ trans('idea_form.visibility_label') }}</label>
 
-					<input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('visibility', $idea->visibility) : old('visibility', 'public') }}">
-					@if (isset($idea))
-						<div class="toggle-button{{ (old('visibility', $idea->visibility) == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
-					@else
-						<div class="toggle-button{{ (old('visibility', 'public') == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
-					@endif
-				</label>
+  				<label class="toggle-switch">
 
-				<div class="clearfloat"></div>
+  					<input type="hidden" class="form-control" name="visibility" id="visibility-input" value="{{ isset($idea) ? old('visibility', $idea->visibility) : old('visibility', 'public') }}">
+  					@if (isset($idea))
+  						<div class="toggle-button{{ (old('visibility', $idea->visibility) == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
+  					@else
+  						<div class="toggle-button{{ (old('visibility', 'public') == 'public') ? ' checked' : '' }}" id="visibility-toggle-button" onClick="$(this).toggleClass('checked'); $('#visibility-input').attr('value', $(this).hasClass('checked') ? 'public' : 'private');"></div>
+  					@endif
+  				</label>
 
-			</div>
+  				<div class="clearfloat"></div>
 
-			@if ($errors->has('visibility'))
-				<span class="help-block">
-					<strong>{{ $errors->first('visibility') }}</strong>
-				</span>
-			@endif
+  			</div>
 
-		</div>
+  			@if ($errors->has('visibility'))
+  				<span class="help-block">
+  					<strong>{{ $errors->first('visibility') }}</strong>
+  				</span>
+  			@endif
+
+  		</div>
+    @else
+
+  		<div class="form-group">
+
+        <label>{{ trans('idea_form.visibility_toggle_disabled_label') }}</label>
+
+      </div>
+
+    @endif
 
 		<!-- Check if user can set duration of idea -->
 		@if (DynamicConfig::fetchConfig('PROGRESSION_TYPE', 'fixed') == 'user-defined')

@@ -245,6 +245,11 @@ class DynamicConfigSeeder extends Seeder
         'value' => true,
         'type' => 'boolean'
       ),
+      array(
+        'key' => 'ALLOW_USER_VISIBILITY_CONFIGURATION',
+        'value' => false,
+        'type' => 'boolean'
+      ),
     );
 
     foreach ($configs as $config)

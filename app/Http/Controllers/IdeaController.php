@@ -239,8 +239,7 @@ class IdeaController extends Controller
     $this->validate($request, [
       'name' => 'required|max:255',
       'description' => 'required|max:2000',
-      'photo' => 'required|max:255',
-      'visibility' => 'required'
+      'photo' => 'required|max:255'
     ]);
 
     // Create the idea
@@ -248,7 +247,7 @@ class IdeaController extends Controller
       'name' => $request->name,
       'description' => $request->description,
       'photo' => $request->photo,
-      'visibility' => $request->visibility,
+      'visibility' => ($request->visibility) ? $request->visibility : true,
       'support_state' => 'open',
       'design_state' => ($request->design_during_support) ? 'open' : 'closed',
       'proposal_state' => 'closed',
