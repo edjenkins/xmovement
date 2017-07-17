@@ -247,7 +247,7 @@ class IdeaController extends Controller
       'name' => $request->name,
       'description' => $request->description,
       'photo' => $request->photo,
-      'visibility' => ($request->visibility) ? $request->visibility : true,
+      'visibility' => ($request->visibility) ? $request->visibility : 'public',
       'support_state' => 'open',
       'design_state' => ($request->design_during_support) ? 'open' : 'closed',
       'proposal_state' => 'closed',
