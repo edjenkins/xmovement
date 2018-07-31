@@ -148,7 +148,7 @@
 							<div class="vote-controls">
 								@can('vote_on_proposals', $proposal)
 									<div class="vote-button vote-up {{ ($proposal->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
-										<i class="fa fa-2x fa-angle-up"></i>
+										<i class="fa fa-lg fa-thumbs-up"></i>
 									</div>
 								@endcan
 								<div class="vote-count">
@@ -156,7 +156,7 @@
 								</div>
 								@can('vote_on_proposals', $proposal)
 									<div class="vote-button vote-down {{ ($proposal->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="proposal" data-votable-id="{{ $proposal['id'] }}">
-										<i class="fa fa-2x fa-angle-down"></i>
+										<i class="fa fa-lg fa-thumbs-down"></i>
 									</div>
 								@endcan
 								<div class="clearfloat"></div>

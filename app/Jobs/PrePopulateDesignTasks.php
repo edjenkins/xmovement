@@ -38,30 +38,39 @@ class PrePopulateDesignTasks extends Job implements ShouldQueue
      */
     public function handle()
     {
-  		Log::info('Populating design tasks for - ' . $this->idea->name);
+      Log::info('Populating design tasks for - ' . $this->idea->name);
 
-  		// Populate polls
-  		foreach (Config::get('design-tasks.polls') as $index => $poll)
-  		{
-  			$design_task = $this->idea->addDesignTask($poll['name'], $poll['description'], 'Poll');
+      // Populate polls
+      if (Config::get('design-tasks.polls'))
+      {
+        foreach (Config::get('design-tasks.polls') as $index => $poll)
+        {
+          $design_task = $this->idea->addDesignTask($poll['name'], $poll['description'], 'Poll');
 
-        // Populate options
-        foreach ($poll['options'] as $option_index => $poll_option)
-    		{
-          \XMovement\Poll\PollOption::create([
-            'xmovement_poll_id' => $design_task->xmovement_task_id,
-            'user_id' => 1,
-            'value' => $poll_option
-          ]);
+          if (array_key_exists('options', $poll)) {
+
+            // Populate options
+            foreach ($poll['options'] as $option_index => $poll_option)
+            {
+              \XMovement\Poll\PollOption::create([
+                'xmovement_poll_id' => $design_task->xmovement_task_id,
+                'user_id' => 1,
+                'value' => $poll_option
+              ]);
+            }
+          }
         }
-  		}
+      }
 
-  		// Populate discussions
-  		foreach (Config::get('design-tasks.discussions') as $index => $discussion)
-  		{
-  			$this->idea->addDesignTask($discussion['name'], $discussion['description'], 'Discussion');
-  		}
+      // Populate discussions
+      if (Config::get('design-tasks.discussions'))
+      {
+        foreach (Config::get('design-tasks.discussions') as $index => $discussion)
+        {
+          $this->idea->addDesignTask($discussion['name'], $discussion['description'], 'Discussion');
+        }
+      }
 
-  		Log::info('Design tasks populated');
+      Log::info('Design tasks populated');
     }
 }

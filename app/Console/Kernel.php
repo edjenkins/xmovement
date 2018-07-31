@@ -29,12 +29,12 @@ class Kernel extends ConsoleKernel
 		$schedule->command('update-idea-states')->everyMinute()->withoutOverlapping();
 
 		// Send support phase update emails (at 11am every 3 days)
-		$schedule->command('support-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
+		// $schedule->command('support-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
 
 		// Send design phase update emails (at 11am every 3 days)
-		$schedule->command('design-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
+		// $schedule->command('design-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
 
 		// Send proposal phase update emails (at 11am every 3 days)
-		$schedule->command('proposal-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
+		// $schedule->command('proposal-phase-updates')->cron('0 11 */3 * *')->withoutOverlapping();
     }
 }

@@ -1,73 +1,76 @@
-XMovement.controller('ExploreController', function($scope, $http, $rootScope, ExploreService, CategoryService) {
+XMovement.controller('ExploreController', function($scope, $http, $rootScope, $location, ExploreService, CategoryService) {
 
-	$scope.category_id = undefined;
+  $scope.category_id = undefined;
 
-	$scope.loading_ideas = true;
-	$scope.loading_categories = true;
+  $scope.loading_ideas = true;
+  $scope.loading_categories = true;
 
-	$scope.primary_categories = [];
-	$scope.secondary_categories = [];
+  $scope.primary_categories = [];
+  $scope.secondary_categories = [];
 
-	$scope.ideas = [];
+  $scope.ideas = [];
 
-	$scope.$watch('sort_type', function() {
+  $scope.category_id = $location.search()['category'];
 
-		$scope.getIdeas($scope.sort_type);
+  $scope.$watch('sort_type', function() {
 
-	}, true);
+    $scope.getIdeas($scope.sort_type);
 
-	$scope.setSortType = function(sort_type) {
+  }, true);
 
-		if ($scope.sort_type != sort_type)
-		{
-			$scope.ideas = [];
-			$scope.sort_type = sort_type;
-		}
+  $scope.setSortType = function(sort_type) {
 
-		$scope.getIdeas($scope.sort_type);
-	}
+    if ($scope.sort_type != sort_type) {
+      $scope.ideas = [];
+      $scope.sort_type = sort_type;
+    }
 
-	$scope.filterIdeas = function(category_id) {
+    $scope.getIdeas($scope.sort_type);
+  }
 
-		$scope.category_filter = category_id;
-	}
+  $scope.filterIdeas = function(category_id) {
 
-	$scope.getIdeas = function(sort_type) {
+    $scope.category_filter = category_id;
+  }
 
-		console.log("Loading ideas");
+  $scope.getIdeas = function(sort_type) {
 
-		$scope.loading_ideas = true;
+    console.log("Loading ideas");
 
-		switch (sort_type)
-		{
-			case 'shortlist':
-				$scope.sort_order = 'supporters';
-				break;
-			case 'recent':
-				$scope.sort_order = 'created_at';
-				break;
-			case 'popular':
-				$scope.sort_order = 'supporters';
-				break;
-			default:
-				$scope.sort_order = 'supporters';
-		}
+    $scope.loading_ideas = true;
 
-		ExploreService.getIdeas({'sort_type': sort_type, 'category_id': $scope.category_id}).then(function(response) {
+    switch (sort_type) {
+      case 'shortlist':
+        $scope.sort_order = 'supporters';
+        break;
+      case 'recent':
+        $scope.sort_order = 'created_at';
+        break;
+      case 'popular':
+        $scope.sort_order = 'supporters';
+        break;
+      default:
+        $scope.sort_order = 'supporters';
+    }
 
-			$scope.ideas = response.data.ideas;
+    ExploreService.getIdeas({
+      'sort_type': sort_type,
+      'category_id': $scope.category_id
+    }).then(function(response) {
 
-			$scope.loading_ideas = false;
+      $scope.ideas = response.data.ideas;
 
-		});
-	}
-
-	$scope.$on('CategoryPicker::categorySelected', function(event, data) {
-
-		$scope.category_id = (data) ? data.id : undefined;
-
-		$scope.getIdeas($scope.sort_type);
+      $scope.loading_ideas = false;
 
     });
+  }
+
+  $scope.$on('CategoryPicker::categorySelected', function(event, data) {
+
+    $scope.category_id = (data) ? data.id : undefined;
+
+    $scope.getIdeas($scope.sort_type);
+
+  });
 
 });

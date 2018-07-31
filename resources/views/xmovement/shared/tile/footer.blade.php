@@ -14,13 +14,13 @@
 			<div class="design-task-vote-container {{ ($design_task->voteCount() == 0) ? '' : (($design_task->voteCount() > 0) ? 'positive-vote' : 'negative-vote') }}">
 				<div class="vote-controls">
 					<div class="vote-button vote-up {{ ($design_task->userVote() > 0) ? 'voted' : '' }}" data-vote-direction="up" data-votable-type="design_task" data-votable-id="{{ $design_task['id'] }}">
-						<i class="fa fa-2x fa-angle-up"></i>
+						<i class="fa fa-lg fa-thumbs-up"></i>
 					</div>
 					<div class="vote-count">
 						{{ $design_task->voteCount() }}
 					</div>
 					<div class="vote-button vote-down {{ ($design_task->userVote() < 0) ? 'voted' : '' }}" data-vote-direction="down" data-votable-type="design_task" data-votable-id="{{ $design_task['id'] }}">
-						<i class="fa fa-2x fa-angle-down"></i>
+						<i class="fa fa-lg fa-thumbs-down"></i>
 					</div>
 				</div>
 			</div>

@@ -28,9 +28,11 @@ class SetReferer
 
 
         if (!((strpos(URL::previous(), 'login') || strpos(URL::previous(), 'register') || strpos(URL::previous(), 'auth')))) {
-            if (strpos(URL::previous(), $_SERVER['HTTP_HOST'])) {
-                Log::info('Setting redirect to - ' . URL::previous());
-                Session::set('redirect', URL::previous());
+            if (isset($_SERVER['HTTP_HOST'])) {
+              if (strpos(URL::previous(), $_SERVER['HTTP_HOST'])) {
+                  Log::info('Setting redirect to - ' . URL::previous());
+                  Session::set('redirect', URL::previous());
+              }
             }
         }
 
