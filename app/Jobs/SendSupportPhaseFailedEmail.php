@@ -13,7 +13,6 @@ use Mail;
 use App\User;
 use App\Idea;
 
-
 class SendSupportPhaseFailedEmail extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
