@@ -16,6 +16,8 @@ class Update extends Model
 
     use SoftDeletes;
 
+  use SoftDeletes;
+
     public function updateable()
     {
         return $this->morphTo();
