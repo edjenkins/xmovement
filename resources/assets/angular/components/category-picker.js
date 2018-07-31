@@ -43,7 +43,7 @@ XMovement.component('categoryPicker', {
   templateUrl: '/components/category-picker',
     bindings: {
         category: '@',
-    populatedOnly : '@'
+		populatedOnly : '@'
     },
   controller: CategoryPickerController
 });
